@@ -431,16 +431,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 139d6c6916244667a27f7e0641da4d4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _forwardSpeed: 600
-  _horizontalSpeed: 15
-  _rotationSpeed: 90
+  _forwardSpeed: 15
   _jumpForce: 100
-  _gravity: 25
+  _gravity: 150
   _rigidbody: {fileID: 3091394142338031550}
   _layerMask:
     serializedVersion: 2
     m_Bits: 1
   _legPosition: {fileID: 3819741035120981584}
+  _maxRotationAngle: 45
 --- !u!54 &3091394142338031550
 Rigidbody:
   m_ObjectHideFlags: 0

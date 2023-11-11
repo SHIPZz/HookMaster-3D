@@ -18,7 +18,7 @@ namespace CodeBase.Gameplay.PlayerSystem
 
         public void FixedUpdate()
         {
-            if (_rigidbody.velocity.z > 0.1f && _rigidbody.velocity.y < 1f)
+            if (_rigidbody.position.sqrMagnitude > 0.1f && _rigidbody.position.y < 0.1f)
             {
                 _playerAnimator.SetSpeed(1f);
                 return;
