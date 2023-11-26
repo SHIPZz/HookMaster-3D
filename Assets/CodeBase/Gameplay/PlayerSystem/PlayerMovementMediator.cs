@@ -19,12 +19,12 @@ namespace CodeBase.Gameplay.PlayerSystem
 
         public void Initialize()
         {
-            _playerInput.Pressed += _playerMovement.SetMovement;
+            _playerInput.MovementPressed += _playerMovement.SetMovement;
         }
 
         public void Dispose()
         {
-            _playerInput.Pressed -= _playerMovement.SetMovement;
+            _playerInput.MovementPressed -= _playerMovement.SetMovement;
         }
     }
 }

@@ -1,0 +1,5622 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &161850
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461850}
+  m_Layer: 0
+  m_Name: RightHandMiddle3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161852
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461852}
+  m_Layer: 0
+  m_Name: RightArm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161854
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461854}
+  m_Layer: 0
+  m_Name: LeftEyelidUpper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161856
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461856}
+  m_Layer: 0
+  m_Name: RightHandIndex3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161858
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461858}
+  m_Layer: 0
+  m_Name: RightHandPinky2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161860
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461860}
+  m_Layer: 0
+  m_Name: LeftHandIndex1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161862
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461862}
+  m_Layer: 0
+  m_Name: LeftLipLower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161864
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461864}
+  - 33: {fileID: 3361850}
+  - 23: {fileID: 2361850}
+  m_Layer: 0
+  m_Name: Le_Eye_Mesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161866
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461866}
+  m_Layer: 0
+  m_Name: LeftCheek
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161868
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461868}
+  m_Layer: 0
+  m_Name: RightHandMiddle2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161870
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461870}
+  m_Layer: 0
+  m_Name: Hips
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161872
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461872}
+  m_Layer: 0
+  m_Name: LeftArm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161874
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461874}
+  m_Layer: 0
+  m_Name: RightHandRing3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161876
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461876}
+  m_Layer: 0
+  m_Name: LeftNostril
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161878
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461878}
+  m_Layer: 0
+  m_Name: RightHand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161880
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461880}
+  m_Layer: 0
+  m_Name: LeftLipCorner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161882
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461882}
+  m_Layer: 0
+  m_Name: Neck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161884
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461884}
+  m_Layer: 0
+  m_Name: RightHandRing2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161886
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461886}
+  m_Layer: 0
+  m_Name: Chest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161888
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461888}
+  m_Layer: 0
+  m_Name: LeftFoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161890
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461890}
+  m_Layer: 0
+  m_Name: LeftLipUpper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161892
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461892}
+  m_Layer: 0
+  m_Name: RightLeg
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161894
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461894}
+  m_Layer: 0
+  m_Name: RightLipLower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161896
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461896}
+  m_Layer: 0
+  m_Name: RightHandPinky1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161898
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461898}
+  m_Layer: 0
+  m_Name: TongueBack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161900
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461900}
+  m_Layer: 0
+  m_Name: RightHandThumb1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161902
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461902}
+  m_Layer: 0
+  m_Name: LeftEye
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161904
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461904}
+  m_Layer: 0
+  m_Name: RightHandIndex1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161906
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461906}
+  m_Layer: 0
+  m_Name: LeftHandPinky2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161908
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461908}
+  m_Layer: 0
+  m_Name: RightFoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161910
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461910}
+  m_Layer: 0
+  m_Name: LeftInnerBrow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161912
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461912}
+  m_Layer: 0
+  m_Name: LeftToes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161914
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461914}
+  m_Layer: 0
+  m_Name: LeftForeArm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161916
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461916}
+  m_Layer: 0
+  m_Name: RightToes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161918
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461918}
+  m_Layer: 0
+  m_Name: LeftHandPinky1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161920
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461920}
+  m_Layer: 0
+  m_Name: LeftHandIndex2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161922
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461922}
+  m_Layer: 0
+  m_Name: RightUpLeg
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161924
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461924}
+  - 95: {fileID: 9561850}
+  - 114: {fileID: 11461850}
+  m_Layer: 0
+  m_Name: Human
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161926
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461926}
+  - 137: {fileID: 13761850}
+  m_Layer: 0
+  m_Name: Unity_Body_Mesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161928
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461928}
+  m_Layer: 0
+  m_Name: RightInnerBrow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161930
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461930}
+  m_Layer: 0
+  m_Name: LeftUpLeg
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161932
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461932}
+  m_Layer: 0
+  m_Name: RightHandIndex2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161934
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461934}
+  m_Layer: 0
+  m_Name: LeftHand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161936
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461936}
+  m_Layer: 0
+  m_Name: LeftHandMiddle2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161938
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461938}
+  m_Layer: 0
+  m_Name: LeftLeg
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161940
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461940}
+  - 137: {fileID: 13761852}
+  m_Layer: 0
+  m_Name: Tounge_Mesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161942
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461942}
+  m_Layer: 0
+  m_Name: RightShoulder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161944
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461944}
+  m_Layer: 0
+  m_Name: LeftHandMiddle3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161946
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461946}
+  m_Layer: 0
+  m_Name: RightNostril
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161948
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461948}
+  m_Layer: 0
+  m_Name: RightForeArm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161950
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461950}
+  m_Layer: 0
+  m_Name: Head
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161952
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461952}
+  m_Layer: 0
+  m_Name: RightLipUpper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161954
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461954}
+  - 137: {fileID: 13761854}
+  m_Layer: 0
+  m_Name: Lw_Teeth_Mesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161956
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461956}
+  m_Layer: 0
+  m_Name: LeftHandRing1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161958
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461958}
+  m_Layer: 0
+  m_Name: LeftEyelidLower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161960
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461960}
+  m_Layer: 0
+  m_Name: TongueTip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161962
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461962}
+  m_Layer: 0
+  m_Name: RightCheek
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161964
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461964}
+  m_Layer: 0
+  m_Name: LeftHandMiddle1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161966
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461966}
+  m_Layer: 0
+  m_Name: RightLipCorner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161968
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461968}
+  m_Layer: 0
+  m_Name: LeftShoulder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161970
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461970}
+  m_Layer: 0
+  m_Name: Geo_grp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161972
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461972}
+  m_Layer: 0
+  m_Name: RightHandThumb2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161974
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461974}
+  m_Layer: 0
+  m_Name: LeftHandRing3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161976
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461976}
+  m_Layer: 0
+  m_Name: JawEND
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161978
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461978}
+  m_Layer: 0
+  m_Name: LeftHandRing2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161980
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461980}
+  m_Layer: 0
+  m_Name: RightHandThumb3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161982
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461982}
+  m_Layer: 0
+  m_Name: RightEyelidLower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161984
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461984}
+  m_Layer: 0
+  m_Name: LeftHandThumb2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161986
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461986}
+  m_Layer: 0
+  m_Name: RightHandPinky3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161988
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461988}
+  m_Layer: 0
+  m_Name: LeftHandThumb1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161990
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461990}
+  m_Layer: 0
+  m_Name: RightHandMiddle1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161992
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461992}
+  - 137: {fileID: 13761856}
+  m_Layer: 0
+  m_Name: Up_Teeth_Mesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161994
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461994}
+  m_Layer: 0
+  m_Name: Jaw
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161996
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461996}
+  m_Layer: 0
+  m_Name: LeftHandThumb3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &161998
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 461998}
+  m_Layer: 0
+  m_Name: RightIOuterBrow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &162000
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 462000}
+  m_Layer: 0
+  m_Name: Spine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &162002
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 462002}
+  m_Layer: 0
+  m_Name: RightHandRing1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &162004
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 462004}
+  m_Layer: 0
+  m_Name: RightEye
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &162006
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 462006}
+  m_Layer: 0
+  m_Name: LeftHandIndex3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &162008
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 462008}
+  m_Layer: 0
+  m_Name: RightEyelidUpper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &162010
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 462010}
+  - 33: {fileID: 3361852}
+  - 23: {fileID: 2361852}
+  m_Layer: 0
+  m_Name: Ri_Eye_Mesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &162012
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 462012}
+  m_Layer: 0
+  m_Name: LeftIOuterBrow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &162014
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 462014}
+  m_Layer: 0
+  m_Name: LeftHandPinky3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &162016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 462016}
+  m_Layer: 0
+  m_Name: Reference
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &461850
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161850}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: .0330724716, y: -.00754753686, z: .00168984616}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461868}
+  m_RootOrder: 0
+--- !u!4 &461852
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161852}
+  m_LocalRotation: {x: .21105206, y: .974394083, z: -.0173116997, w: .0755877346}
+  m_LocalPosition: {x: -.0835755169, y: .0360957012, z: -5.15574072e-08}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461948}
+  m_Father: {fileID: 461942}
+  m_RootOrder: 0
+--- !u!4 &461854
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161854}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -.0344068967, y: .10060814, z: .0802053064}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461950}
+  m_RootOrder: 4
+--- !u!4 &461856
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161856}
+  m_LocalRotation: {x: -3.46944695e-18, y: 1.40129846e-43, z: -3.46944695e-18, w: 1}
+  m_LocalPosition: {x: .0252250377, y: -.00496646529, z: .0110121462}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461932}
+  m_RootOrder: 0
+--- !u!4 &461858
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161858}
+  m_LocalRotation: {x: -.000170628467, y: -.00966134761, z: -.00536240125, w: .999938965}
+  m_LocalPosition: {x: .0285308417, y: -.001397143, z: -.0116237961}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461986}
+  m_Father: {fileID: 461896}
+  m_RootOrder: 0
+--- !u!4 &461860
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161860}
+  m_LocalRotation: {x: -.00211892044, y: .0802574381, z: .0175381862, w: .996617615}
+  m_LocalPosition: {x: -.0751257986, y: -.00784140453, z: .0326526426}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461920}
+  m_Father: {fileID: 461934}
+  m_RootOrder: 0
+--- !u!4 &461862
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161862}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -.0142508168, y: -.0216887593, z: .0822406337}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461994}
+  m_RootOrder: 2
+--- !u!4 &461864
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161864}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -.00168411608, y: .000405807485, z: .00531818997}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461902}
+  m_RootOrder: 0
+--- !u!4 &461866
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161866}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -.0542440265, y: .0337019488, z: .0594304018}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461950}
+  m_RootOrder: 1
+--- !u!4 &461868
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161868}
+  m_LocalRotation: {x: -.00145348674, y: -.0264088325, z: .0570813417, w: .998019159}
+  m_LocalPosition: {x: .0438090637, y: .000194188149, z: .00645493623}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461850}
+  m_Father: {fileID: 461990}
+  m_RootOrder: 0
+--- !u!4 &461870
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161870}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: .963793993, z: -.0235067774}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461930}
+  - {fileID: 461922}
+  - {fileID: 462000}
+  m_Father: {fileID: 462016}
+  m_RootOrder: 0
+--- !u!4 &461872
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161872}
+  m_LocalRotation: {x: .00946439244, y: .0436917022, z: -.223042458, w: .973783135}
+  m_LocalPosition: {x: -.0835747719, y: .036097575, z: 2.88657976e-17}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461914}
+  m_Father: {fileID: 461968}
+  m_RootOrder: 0
+--- !u!4 &461874
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161874}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: .0295006037, y: -.00769293541, z: -.00462225592}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461884}
+  m_RootOrder: 0
+--- !u!4 &461876
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161876}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -.0178999994, y: .0263128281, z: .0908674002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461950}
+  m_RootOrder: 8
+--- !u!4 &461878
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161878}
+  m_LocalRotation: {x: 0, y: 0, z: .0214136913, w: .999770701}
+  m_LocalPosition: {x: .245373696, y: .0216417722, z: .00555046508}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461904}
+  - {fileID: 461990}
+  - {fileID: 461896}
+  - {fileID: 462002}
+  - {fileID: 461900}
+  m_Father: {fileID: 461948}
+  m_RootOrder: 0
+--- !u!4 &461880
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161880}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -.032843262, y: -.01657876, z: .0661217645}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461994}
+  m_RootOrder: 1
+--- !u!4 &461882
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161882}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: .235723898, z: -.0324132554}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461950}
+  m_Father: {fileID: 461886}
+  m_RootOrder: 1
+--- !u!4 &461884
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161884}
+  m_LocalRotation: {x: -.00157919095, y: -.0221169833, z: .0554940253, w: .998212814}
+  m_LocalPosition: {x: .0428871848, y: -.00137538207, z: -.00494585792}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461874}
+  m_Father: {fileID: 462002}
+  m_RootOrder: 0
+--- !u!4 &461886
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161886}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: .162540287, z: .0218507219}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461968}
+  - {fileID: 461882}
+  - {fileID: 461942}
+  m_Father: {fileID: 462000}
+  m_RootOrder: 0
+--- !u!4 &461888
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161888}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -.00515299942, y: -.423155904, z: -.0120320888}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461912}
+  m_Father: {fileID: 461938}
+  m_RootOrder: 0
+--- !u!4 &461890
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161890}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -.0145013221, y: -.00511181122, z: .094618842}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461950}
+  m_RootOrder: 7
+--- !u!4 &461892
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161892}
+  m_LocalRotation: {x: -1.2100202e-09, y: 1.97746286e-09, z: -1.14354826e-09, w: 1}
+  m_LocalPosition: {x: .0205504671, y: -.409130007, z: .00717136543}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461908}
+  m_Father: {fileID: 461922}
+  m_RootOrder: 0
+--- !u!4 &461894
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161894}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: .0142508168, y: -.0216887593, z: .0822387859}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461994}
+  m_RootOrder: 4
+--- !u!4 &461896
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161896}
+  m_LocalRotation: {x: .000947935798, y: -.0904072002, z: .0333630852, w: .995345473}
+  m_LocalPosition: {x: .0668033436, y: -.00199410878, z: -.0307561457}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461858}
+  m_Father: {fileID: 461878}
+  m_RootOrder: 2
+--- !u!4 &461898
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161898}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: -.022869369, z: .0100954091}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461960}
+  m_Father: {fileID: 461994}
+  m_RootOrder: 5
+--- !u!4 &461900
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161900}
+  m_LocalRotation: {x: .000123995618, y: -.00563636655, z: .0219935421, w: .99974221}
+  m_LocalPosition: {x: .0146849155, y: -.0111049423, z: .0258580949}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461972}
+  m_Father: {fileID: 461878}
+  m_RootOrder: 4
+--- !u!4 &461902
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161902}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -.0208482333, y: .0825027004, z: .0554274321}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461864}
+  m_Father: {fileID: 461950}
+  m_RootOrder: 2
+--- !u!4 &461904
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161904}
+  m_LocalRotation: {x: -.00211892044, y: .0802574381, z: .0175381862, w: .996617615}
+  m_LocalPosition: {x: .0747694969, y: -.00124305359, z: .0343444981}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461932}
+  m_Father: {fileID: 461878}
+  m_RootOrder: 0
+--- !u!4 &461906
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161906}
+  m_LocalRotation: {x: -.000170628467, y: -.00966134761, z: -.00536240125, w: .999938965}
+  m_LocalPosition: {x: -.0308054481, y: -3.0874573e-05, z: -.0014480775}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 462014}
+  m_Father: {fileID: 461918}
+  m_RootOrder: 0
+--- !u!4 &461908
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161908}
+  m_LocalRotation: {x: -1.5253752e-08, y: 1.77564963e-09, z: -6.08544534e-11, w: 1}
+  m_LocalPosition: {x: .00515299942, y: -.423155904, z: -.0120320888}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461916}
+  m_Father: {fileID: 461892}
+  m_RootOrder: 0
+--- !u!4 &461910
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161910}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -.0120626912, y: .118765265, z: .0934668258}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461950}
+  m_RootOrder: 5
+--- !u!4 &461912
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161912}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -.00748699997, y: -.0731673017, z: .145427123}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461888}
+  m_RootOrder: 0
+--- !u!4 &461914
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161914}
+  m_LocalRotation: {x: -.000616519479, y: .0220786259, z: -.016070243, w: .999626935}
+  m_LocalPosition: {x: -.254049301, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461934}
+  m_Father: {fileID: 461872}
+  m_RootOrder: 0
+--- !u!4 &461916
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161916}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: .00748699997, y: -.0731673017, z: .145427495}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461908}
+  m_RootOrder: 0
+--- !u!4 &461918
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161918}
+  m_LocalRotation: {x: .000947935798, y: -.0904072002, z: .0333630852, w: .995345473}
+  m_LocalPosition: {x: -.0656599477, y: -.00782510638, z: -.0322512463}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461906}
+  m_Father: {fileID: 461934}
+  m_RootOrder: 2
+--- !u!4 &461920
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161920}
+  m_LocalRotation: {x: .000658526376, y: .0156148067, z: .0509195141, w: .998580456}
+  m_LocalPosition: {x: -.03979728, y: 4.98084046e-05, z: .00118575036}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 462006}
+  m_Father: {fileID: 461860}
+  m_RootOrder: 0
+--- !u!4 &461922
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161922}
+  m_LocalRotation: {x: 3.96184916e-08, y: -1.70970482e-09, z: -4.65135874e-10, w: 1}
+  m_LocalPosition: {x: .0754495338, y: -.0456639901, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461892}
+  m_Father: {fileID: 461870}
+  m_RootOrder: 1
+--- !u!4 &461924
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161924}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -4.37113883e-08}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461970}
+  - {fileID: 462016}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!4 &461926
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161926}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461970}
+  m_RootOrder: 2
+--- !u!4 &461928
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161928}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: .0120626874, y: .118765265, z: .0934668258}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461950}
+  m_RootOrder: 13
+--- !u!4 &461930
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161930}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -.0754494965, y: -.0456640199, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461938}
+  m_Father: {fileID: 461870}
+  m_RootOrder: 0
+--- !u!4 &461932
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161932}
+  m_LocalRotation: {x: .000658526376, y: .0156148067, z: .0509195141, w: .998580456}
+  m_LocalPosition: {x: .0370584019, y: .00072612107, z: .0145388944}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461856}
+  m_Father: {fileID: 461904}
+  m_RootOrder: 0
+--- !u!4 &461934
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161934}
+  m_LocalRotation: {x: 0, y: 0, z: -.0214135535, w: .999770701}
+  m_LocalPosition: {x: -.24638927, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461860}
+  - {fileID: 461964}
+  - {fileID: 461918}
+  - {fileID: 461956}
+  - {fileID: 461988}
+  m_Father: {fileID: 461914}
+  m_RootOrder: 0
+--- !u!4 &461936
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161936}
+  m_LocalRotation: {x: -.00145348674, y: -.0264088325, z: .0570813417, w: .998019159}
+  m_LocalPosition: {x: -.0442804359, y: 4.79887422e-06, z: -.000425400125}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461944}
+  m_Father: {fileID: 461964}
+  m_RootOrder: 0
+--- !u!4 &461938
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161938}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -.0205504987, y: -.409129977, z: .00717136543}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461888}
+  m_Father: {fileID: 461930}
+  m_RootOrder: 0
+--- !u!4 &461940
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161940}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461970}
+  m_RootOrder: 1
+--- !u!4 &461942
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161942}
+  m_LocalRotation: {x: .228671968, y: .971582174, z: -.0140056796, w: -.0595073737}
+  m_LocalPosition: {x: .0383285098, y: .192176744, z: -.017063085}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461852}
+  m_Father: {fileID: 461886}
+  m_RootOrder: 2
+--- !u!4 &461944
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161944}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -.0339648277, y: -1.21979289e-08, z: 3.75648268e-09}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461936}
+  m_RootOrder: 0
+--- !u!4 &461946
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161946}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: .0178999994, y: .0263089053, z: .0908706188}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461950}
+  m_RootOrder: 16
+--- !u!4 &461948
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161948}
+  m_LocalRotation: {x: -.000616519479, y: .0220786259, z: -.016070243, w: .999626935}
+  m_LocalPosition: {x: .253428251, y: .00601135287, z: -.0167045239}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461878}
+  m_Father: {fileID: 461852}
+  m_RootOrder: 0
+--- !u!4 &461950
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161950}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: .106355801, z: .0113267815}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461994}
+  - {fileID: 461866}
+  - {fileID: 461902}
+  - {fileID: 461958}
+  - {fileID: 461854}
+  - {fileID: 461910}
+  - {fileID: 462012}
+  - {fileID: 461890}
+  - {fileID: 461876}
+  - {fileID: 461962}
+  - {fileID: 462004}
+  - {fileID: 461982}
+  - {fileID: 462008}
+  - {fileID: 461928}
+  - {fileID: 461998}
+  - {fileID: 461952}
+  - {fileID: 461946}
+  m_Father: {fileID: 461882}
+  m_RootOrder: 0
+--- !u!4 &461952
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161952}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: .0145013221, y: -.00510717137, z: .094617404}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461950}
+  m_RootOrder: 15
+--- !u!4 &461954
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161954}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461970}
+  m_RootOrder: 0
+--- !u!4 &461956
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161956}
+  m_LocalRotation: {x: .000302014727, y: -.0213824529, z: .0298566725, w: .999325454}
+  m_LocalPosition: {x: -.0703021064, y: -.00374530931, z: -.0114117917}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461978}
+  m_Father: {fileID: 461934}
+  m_RootOrder: 3
+--- !u!4 &461958
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161958}
+  m_LocalRotation: {x: -.0348994955, y: 0, z: -0, w: .999390841}
+  m_LocalPosition: {x: -.0356189571, y: .0650736615, z: .076234743}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461950}
+  m_RootOrder: 3
+--- !u!4 &461960
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161960}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: -.000409444125, z: .0282272995}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461898}
+  m_RootOrder: 0
+--- !u!4 &461962
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161962}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: .0542399958, y: .033702828, z: .0594273992}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461950}
+  m_RootOrder: 9
+--- !u!4 &461964
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161964}
+  m_LocalRotation: {x: -.000768873375, y: .0333210826, z: .020907538, w: .999225736}
+  m_LocalPosition: {x: -.0760238245, y: -.00188513438, z: .0101412293}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461936}
+  m_Father: {fileID: 461934}
+  m_RootOrder: 1
+--- !u!4 &461966
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161966}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: .0328399986, y: -.01657876, z: .0661187842}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461994}
+  m_RootOrder: 3
+--- !u!4 &461968
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161968}
+  m_LocalRotation: {x: -.0140067115, y: -.0595068261, z: .228689924, w: .971577942}
+  m_LocalPosition: {x: -.0382435061, y: .192178085, z: -.017063085}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461872}
+  m_Father: {fileID: 461886}
+  m_RootOrder: 0
+--- !u!4 &461970
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161970}
+  m_LocalRotation: {x: 0, y: -0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461954}
+  - {fileID: 461940}
+  - {fileID: 461926}
+  - {fileID: 461992}
+  m_Father: {fileID: 461924}
+  m_RootOrder: 0
+--- !u!4 &461972
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161972}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: .0163739994, y: -.00528999977, z: .0234913602}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461980}
+  m_Father: {fileID: 461900}
+  m_RootOrder: 0
+--- !u!4 &461974
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161974}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -.0308355652, y: 7.71049682e-11, z: -1.64932707e-08}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461978}
+  m_RootOrder: 0
+--- !u!4 &461976
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161976}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: -.0482887588, z: .071851708}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461994}
+  m_RootOrder: 0
+--- !u!4 &461978
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161978}
+  m_LocalRotation: {x: -.00157919095, y: -.0221169833, z: .0554940253, w: .998212814}
+  m_LocalPosition: {x: -.0431354567, y: -2.08823076e-05, z: -.00223517837}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461974}
+  m_Father: {fileID: 461956}
+  m_RootOrder: 0
+--- !u!4 &461980
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161980}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: .0254599992, y: -.00763999997, z: .0208330005}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461972}
+  m_RootOrder: 0
+--- !u!4 &461982
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161982}
+  m_LocalRotation: {x: -.0348994955, y: 0, z: -0, w: .999390841}
+  m_LocalPosition: {x: .0356200002, y: .065072827, z: .0762374029}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461950}
+  m_RootOrder: 11
+--- !u!4 &461984
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161984}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -.0163739994, y: -.00528999977, z: .0234914087}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461996}
+  m_Father: {fileID: 461988}
+  m_RootOrder: 0
+--- !u!4 &461986
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161986}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: .0214268602, y: -.000553508929, z: -.00851660781}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461858}
+  m_RootOrder: 0
+--- !u!4 &461988
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161988}
+  m_LocalRotation: {x: .000123995618, y: -.00563636655, z: .0219935421, w: .99974221}
+  m_LocalPosition: {x: -.0142312413, y: -.0123778246, z: .0255316682}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461984}
+  m_Father: {fileID: 461934}
+  m_RootOrder: 4
+--- !u!4 &461990
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161990}
+  m_LocalRotation: {x: -.000768873375, y: .0333210826, z: .020907538, w: .999225736}
+  m_LocalPosition: {x: .0756476447, y: .00479140272, z: .0118531818}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461868}
+  m_Father: {fileID: 461878}
+  m_RootOrder: 1
+--- !u!4 &461992
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161992}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461970}
+  m_RootOrder: 3
+--- !u!4 &461994
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161994}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: .0111267585, z: .0103275431}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461976}
+  - {fileID: 461880}
+  - {fileID: 461862}
+  - {fileID: 461966}
+  - {fileID: 461894}
+  - {fileID: 461898}
+  m_Father: {fileID: 461950}
+  m_RootOrder: 0
+--- !u!4 &461996
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161996}
+  m_LocalRotation: {x: 2.94405424e-08, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: -.0254599992, y: -.00763999997, z: .0208330005}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461984}
+  m_RootOrder: 0
+--- !u!4 &461998
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161998}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: .0550400019, y: .114822827, z: .061777398}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461950}
+  m_RootOrder: 14
+--- !u!4 &462000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162000}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: .0922631845, z: .0157713313}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461886}
+  m_Father: {fileID: 461870}
+  m_RootOrder: 2
+--- !u!4 &462002
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162002}
+  m_LocalRotation: {x: .000302014727, y: -.0213824529, z: .0298566725, w: .999325454}
+  m_LocalPosition: {x: .0705984756, y: .00245709647, z: -.00982145779}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461884}
+  m_Father: {fileID: 461878}
+  m_RootOrder: 3
+--- !u!4 &462004
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162004}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: .020849999, y: .082502827, z: .0554273985}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 462010}
+  m_Father: {fileID: 461950}
+  m_RootOrder: 10
+--- !u!4 &462006
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162006}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -.0279684775, y: -6.28122399e-09, z: -5.17186614e-08}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461920}
+  m_RootOrder: 0
+--- !u!4 &462008
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162008}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: .0344099998, y: .100612827, z: .0802073926}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461950}
+  m_RootOrder: 12
+--- !u!4 &462010
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162010}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: .00166187854, y: .000383453356, z: .00531667331}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 462004}
+  m_RootOrder: 0
+--- !u!4 &462012
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162012}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -.0550398715, y: .114825293, z: .061777398}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461950}
+  m_RootOrder: 6
+--- !u!4 &462014
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162014}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -.0230640266, y: -6.40258077e-06, z: 1.8332095e-08}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 461906}
+  m_RootOrder: 0
+--- !u!4 &462016
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162016}
+  m_LocalRotation: {x: 0, y: -0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 461870}
+  m_Father: {fileID: 461924}
+  m_RootOrder: 1
+--- !u!23 &2361850
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161864}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 2100000, guid: f6a3ff1f4ec8aca4abcbed80dd7db3e5, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!23 &2361852
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162010}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 2100000, guid: f6a3ff1f4ec8aca4abcbed80dd7db3e5, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!33 &3361850
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161864}
+  m_Mesh: {fileID: 4300004, guid: 26ced4bae7bc41449973bf750d9a6d0b, type: 3}
+--- !u!33 &3361852
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162010}
+  m_Mesh: {fileID: 4300006, guid: 26ced4bae7bc41449973bf750d9a6d0b, type: 3}
+--- !u!95 &9561850
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161924}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 26ced4bae7bc41449973bf750d9a6d0b, type: 3}
+  m_Controller: {fileID: 9100000, guid: abf61c9e8ae07e9419605a0f4e70ccae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11461850
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ddf5c9bfed36f9479de52357f7f1547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _GUID: 
+  _RootTransform: {fileID: 461870}
+  Bones:
+  - _GUID: 
+    _Name: 48697073
+    _Transform: {fileID: 461870}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -0, y: .963793993, z: -.0235067774}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: -.963793993
+      e32: .0235067774
+      e33: 1
+    _BoneForward: {x: .85551399, y: -.517779708, z: 0}
+    _BoneUp: {x: .517779708, y: .85551399, z: 0}
+    _BoneRight: {x: 0, y: 0, z: -.85551399}
+    _ToBoneForward: {x: .190056577, y: .681086242, z: -.190056577, w: .681086302}
+    _IsDirty: 0
+    _Length: .0881919712
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: -1
+    SerializationChildIndexes: 010000000500000009000000
+    _ToBoneForwardInv: {x: -.190056577, y: -.681086242, z: .190056577, w: .681086302}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c65667455704c6567
+    _Transform: {fileID: 461930}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -.0754494965, y: -.0456640199, z: 0}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: .0754494965
+      e31: .0456640124
+      e32: 0
+      e33: 1
+    _BoneForward: {x: -.0501588024, y: -.998587906, z: .0175036043}
+    _BoneUp: {x: .000878094288, y: .0174815636, z: .999846816}
+    _BoneRight: {x: .998587906, y: -.0501588024, z: 0}
+    _ToBoneForward: {x: .700670362, y: -.0175861567, z: -.0178967193, w: .713043869}
+    _IsDirty: 0
+    _Length: .40970853
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 0
+    SerializationChildIndexes: 02000000
+    _ToBoneForwardInv: {x: -.700670362, y: .0175861567, z: .0178967193, w: .713043869}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c6566744c6567
+    _Transform: {fileID: 461938}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -.0205504987, y: -.409129977, z: .00717136543}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: .0205504969
+      e31: .409129977
+      e32: -.0071713645
+      e33: 1
+    _BoneForward: {x: -.0121715805, y: -.999521971, z: -.0284205899}
+    _BoneUp: {x: -.000346063287, y: -.0284184832, z: .999596059}
+    _BoneRight: {x: .999521971, y: -.0121715805, z: 0}
+    _ToBoneForward: {x: .717071295, y: -.00436587073, z: -.00424350379, w: .696973264}
+    _IsDirty: 0
+    _Length: .423358291
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 1
+    SerializationChildIndexes: 03000000
+    _ToBoneForwardInv: {x: -.717071295, y: .00436587073, z: .00424350379, w: .696973264}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c656674466f6f74
+    _Transform: {fileID: 461888}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -.00515299942, y: -.423155904, z: -.0120320888}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: .00515300035
+      e31: .423155904
+      e32: .0120320879
+      e33: 1
+    _BoneForward: {x: -.0459419787, y: -.448967487, z: .89236623}
+    _BoneUp: {x: -.0230837669, y: .893548071, z: .448373675}
+    _BoneRight: {x: .89236623, y: -0, z: .0459419787}
+    _ToBoneForward: {x: .230631217, y: -.0250223801, z: .00593290199, w: .972701371}
+    _IsDirty: 0
+    _Length: .16296798
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 2
+    SerializationChildIndexes: 04000000
+    _ToBoneForwardInv: {x: -.230631217, y: .0250223801, z: -.00593290199, w: .972701371}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c656674546f6573
+    _Transform: {fileID: 461912}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -.00748699997, y: -.0731673017, z: .145427123}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: .00748699903
+      e31: .0731673017
+      e32: -.145427123
+      e33: 1
+    _BoneForward: {x: -.0459419787, y: -.448967487, z: .89236623}
+    _BoneUp: {x: -.0230837669, y: .893548071, z: .448373675}
+    _BoneRight: {x: .89236623, y: -0, z: .0459419787}
+    _ToBoneForward: {x: .230631217, y: -.0250223801, z: .00593290199, w: .972701371}
+    _IsDirty: 0
+    _Length: .0325935967
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 3
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: -.230631217, y: .0250223801, z: -.00593290199, w: .972701371}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 526967687455704c6567
+    _Transform: {fileID: 461922}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: .0754495338, y: -.0456639901, z: 0}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: -.0754495338
+      e31: .0456640124
+      e32: 0
+      e33: 1
+    _BoneForward: {x: .0501588024, y: -.998587906, z: .0175035764}
+    _BoneUp: {x: -.000878092891, y: .0174815357, z: .999846816}
+    _BoneRight: {x: .998587906, y: .0501588024, z: -0}
+    _ToBoneForward: {x: .700670421, y: .0175861586, z: .0178967193, w: .713043809}
+    _IsDirty: 0
+    _Length: .40970853
+    _Weight: 1
+    _Swing: {x: -.700670421, y: -.0175861586, z: -.0178967193, w: .713043809}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 0
+    SerializationChildIndexes: 06000000
+    _ToBoneForwardInv: {x: -.700670421, y: -.0175861586, z: -.0178967193, w: .713043809}
+    _TargetSwing: {x: -.700670421, y: -.0175861586, z: -.0178967193, w: .713043809}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 52696768744c6567
+    _Transform: {fileID: 461892}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: .0205504671, y: -.409130007, z: .00717136543}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: -.0205504671
+      e31: .409130037
+      e32: -.0071713645
+      e33: 1
+    _BoneForward: {x: .012171586, y: -.999521971, z: -.0284205507}
+    _BoneUp: {x: .000346062967, y: -.0284184441, z: .999596059}
+    _BoneRight: {x: .999521971, y: .012171586, z: -0}
+    _ToBoneForward: {x: .717071295, y: .00436587259, z: .00424350612, w: .696973264}
+    _IsDirty: 0
+    _Length: .423358291
+    _Weight: 1
+    _Swing: {x: -.717071295, y: -.00436587259, z: -.00424350612, w: .696973264}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 5
+    SerializationChildIndexes: 07000000
+    _ToBoneForwardInv: {x: -.717071295, y: -.00436587259, z: -.00424350612, w: .696973264}
+    _TargetSwing: {x: -.717071295, y: -.00436587259, z: -.00424350612, w: .696973264}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 5269676874466f6f74
+    _Transform: {fileID: 461908}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: .00515299942, y: -.423155904, z: -.0120320888}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: -.00515300035
+      e31: .423155904
+      e32: .0120320879
+      e33: 1
+    _BoneForward: {x: .0459417291, y: -.448966593, z: .892366707}
+    _BoneUp: {x: .0230835825, y: .893548548, z: .448372781}
+    _BoneRight: {x: .892366707, y: 0, z: -.0459417291}
+    _ToBoneForward: {x: .230630711, y: .025022231, z: -.00593285356, w: .97270149}
+    _IsDirty: 0
+    _Length: .162968308
+    _Weight: 1
+    _Swing: {x: -.230630711, y: -.025022231, z: .00593285356, w: .97270149}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 6
+    SerializationChildIndexes: 08000000
+    _ToBoneForwardInv: {x: -.230630711, y: -.025022231, z: .00593285356, w: .97270149}
+    _TargetSwing: {x: -.230630711, y: -.025022231, z: .00593285356, w: .97270149}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 5269676874546f6573
+    _Transform: {fileID: 461916}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: .00748699997, y: -.0731673017, z: .145427495}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: -.00748699903
+      e31: .0731673017
+      e32: -.145427495
+      e33: 1
+    _BoneForward: {x: .0459417291, y: -.448966593, z: .892366707}
+    _BoneUp: {x: .0230835825, y: .893548548, z: .448372781}
+    _BoneRight: {x: .892366707, y: 0, z: -.0459417291}
+    _ToBoneForward: {x: .230630711, y: .025022231, z: -.00593285356, w: .97270149}
+    _IsDirty: 0
+    _Length: .0325936638
+    _Weight: 1
+    _Swing: {x: -.230630711, y: -.025022231, z: .00593285356, w: .97270149}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 7
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: -.230630711, y: -.025022231, z: .00593285356, w: .97270149}
+    _TargetSwing: {x: -.230630711, y: -.025022231, z: .00593285356, w: .97270149}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 5370696e65
+    _Transform: {fileID: 462000}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -0, y: .0922631845, z: .0157713313}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: -.0922632217
+      e32: -.0157713313
+      e33: 1
+    _BoneForward: {x: -1.16477024e-08, y: .991084576, z: .133234188}
+    _BoneUp: {x: 1.56583224e-09, y: -.133234188, z: .991084576}
+    _BoneRight: {x: -.991084576, y: -1.16477024e-08, z: 0}
+    _ToBoneForward: {x: -3.86843624e-09, y: .658318281, z: .752739727, w: -4.42327952e-09}
+    _IsDirty: 0
+    _Length: .164002344
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 0
+    SerializationChildIndexes: 0a000000
+    _ToBoneForwardInv: {x: 3.86843624e-09, y: -.658318281, z: -.752739727, w: -4.42327952e-09}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4368657374
+    _Transform: {fileID: 461886}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -0, y: .162540287, z: .0218507219}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: -.162540317
+      e32: -.0218507219
+      e33: 1
+    _BoneForward: {x: .00013649129, y: .994291723, z: -.106695488}
+    _BoneUp: {x: 1.46466118e-05, y: .106695488, z: .994291723}
+    _BoneRight: {x: -.994291723, y: .00013649129, z: 0}
+    _ToBoneForward: {x: 5.10575774e-05, y: .743873537, z: .668320477, w: 4.58718096e-05}
+    _IsDirty: 0
+    _Length: .207879573
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 9
+    SerializationChildIndexes: 0b0000001e0000003a000000
+    _ToBoneForwardInv: {x: -5.10575774e-05, y: -.743873537, z: -.668320477, w: 4.58718096e-05}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c65667453686f756c646572
+    _Transform: {fileID: 461968}
+    _BindRotation: {x: -.0140067115, y: -.0595068261, z: .228689924, w: .971577942}
+    _BindPosition: {x: -.0382435061, y: .192178085, z: -.017063085}
+    _BindMatrix:
+      e00: .888319731
+      e01: -.442713171
+      e02: -.122037426
+      e03: 0
+      e10: .446047157
+      e11: .895009458
+      e12: 1.86264515e-09
+      e13: 0
+      e20: .109224647
+      e21: -.0544344485
+      e22: .992525518
+      e23: 0
+      e30: -.0498843342
+      e31: -.189860955
+      e32: .0122684082
+      e33: 1
+    _BoneForward: {x: -.918028831, y: .396513849, z: -8.6421025e-08}
+    _BoneUp: {x: .396513849, y: .918028772, z: -4.72568074e-09}
+    _BoneRight: {x: -7.73476359e-08, y: 3.85478529e-08, z: .998508334}
+    _ToBoneForward: {x: -.143153131, y: -.69246465, z: -.143153116, w: .69246453}
+    _IsDirty: 0
+    _Length: .0910371244
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 10
+    SerializationChildIndexes: 0c000000
+    _ToBoneForwardInv: {x: .143153131, y: .69246465, z: .143153116, w: .69246453}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c65667441726d
+    _Transform: {fileID: 461872}
+    _BindRotation: {x: .00946439244, y: .0436917022, z: -.223042458, w: .973783135}
+    _BindPosition: {x: -.0835747719, y: .036097575, z: 2.88657976e-17}
+    _BindMatrix:
+      e00: .896686196
+      e01: .435217023
+      e02: .0808705613
+      e03: 0
+      e10: -.433562934
+      e11: .900324941
+      e12: -.0379227437
+      e13: 0
+      e20: -.0893144086
+      e21: -.00105768011
+      e22: .996002913
+      e23: 0
+      e30: .0905909315
+      e31: .00387354614
+      e32: .0081276577
+      e33: 1
+    _BoneForward: {x: -1.00000012, y: 4.60796514e-07, z: 1.06104654e-08}
+    _BoneUp: {x: 4.60818029e-07, y: .999997735, z: .00213102321}
+    _BoneRight: {x: 9.62778923e-09, y: -.0021308721, z: .999926805}
+    _ToBoneForward: {x: .000753268017, y: -.707106411, z: -.000753593864, w: .707106352}
+    _IsDirty: 0
+    _Length: .254049391
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 11
+    SerializationChildIndexes: 0d000000
+    _ToBoneForwardInv: {x: -.000753268017, y: .707106411, z: .000753593864, w: .707106352}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c656674466f726541726d
+    _Transform: {fileID: 461914}
+    _BindRotation: {x: -.000616519421, y: .022078624, z: -.0160702411, w: .999626875}
+    _BindPosition: {x: -.254049301, y: 0, z: 0}
+    _BindMatrix:
+      e00: .998508573
+      e01: .0321013071
+      e02: .0441605896
+      e03: 0
+      e10: -.0321556777
+      e11: .99948287
+      e12: .000522967195
+      e13: 0
+      e20: -.0441209488
+      e21: -.00194219197
+      e22: .999024272
+      e23: 0
+      e30: .253670424
+      e31: .0081553096
+      e32: .0112189651
+      e33: 1
+    _BoneForward: {x: -1.00000012, y: -3.42091283e-07, z: -2.21354455e-08}
+    _BoneUp: {x: -3.42159893e-07, y: .999994934, z: .00317883189}
+    _BoneRight: {x: -2.10435278e-08, y: -.00317817437, z: .999788105}
+    _ToBoneForward: {x: .00112400926, y: -.707105935, z: -.00112376735, w: .707105935}
+    _IsDirty: 0
+    _Length: .24638924
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 12
+    SerializationChildIndexes: 0e000000
+    _ToBoneForwardInv: {x: -.00112400926, y: .707105935, z: .00112376735, w: .707105935}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c65667448616e64
+    _Transform: {fileID: 461934}
+    _BindRotation: {x: 0, y: 0, z: -.0214135535, w: .999770701}
+    _BindPosition: {x: -.24638927, y: 0, z: 0}
+    _BindMatrix:
+      e00: .999082923
+      e01: .0428173244
+      e02: 3.64060737e-09
+      e03: 0
+      e10: -.0428172611
+      e11: .999083161
+      e12: 6.30303187e-09
+      e13: 0
+      e20: 3.42306161e-09
+      e21: 6.34421404e-09
+      e22: 1
+      e23: 0
+      e30: .246163368
+      e31: .0105496095
+      e32: -1.96572314e-09
+      e33: 1
+    _BoneForward: {x: -.990543008, y: -.110691927, z: .0810680166}
+    _BoneUp: {x: -.110484704, y: .993852794, z: .00705124065}
+    _BoneRight: {x: .0812576786, y: .00196997589, z: .995550275}
+    _ToBoneForward: {x: .0400916561, y: -.676652551, z: .0382916927, w: .734212399}
+    _IsDirty: 0
+    _Length: .0608440079
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 13
+    SerializationChildIndexes: 0f0000001200000015000000180000001b000000
+    _ToBoneForwardInv: {x: -.0400916561, y: .676652551, z: -.0382916927, w: .734212399}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c65667448616e64496e64657831
+    _Transform: {fileID: 461860}
+    _BindRotation: {x: -.00211892044, y: .0802574381, z: .0175381862, w: .996617615}
+    _BindPosition: {x: -.0751257986, y: -.00784140453, z: .0326526426}
+    _BindMatrix:
+      e00: .98650223
+      e01: -.0352978259
+      e02: .159897611
+      e03: 0
+      e10: .0346176401
+      e11: .999376059
+      e12: .00703865709
+      e13: 0
+      e20: -.160046279
+      e21: -.0014083609
+      e22: .987108529
+      e23: 0
+      e30: .0796092376
+      e31: .00523055252
+      e32: -.0201640557
+      e33: 1
+    _BoneForward: {x: -.999556005, y: .0012523561, z: .0297813043}
+    _BoneUp: {x: .00122873357, y: .999998927, z: -.000811475271}
+    _BoneRight: {x: .0297693424, y: .000774185057, z: .999121964}
+    _ToBoneForward: {x: -.000719045929, y: -.69649756, z: -.000158249066, w: .717558801}
+    _IsDirty: 0
+    _Length: .0398149937
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 14
+    SerializationChildIndexes: 10000000
+    _ToBoneForwardInv: {x: .000719045929, y: .69649756, z: .000158249066, w: .717558801}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c65667448616e64496e64657832
+    _Transform: {fileID: 461920}
+    _BindRotation: {x: .000658526376, y: .0156148067, z: .0509195141, w: .998580456}
+    _BindPosition: {x: -.03979728, y: 4.98084046e-05, z: .00118575036}
+    _BindMatrix:
+      e00: .994326711
+      e01: -.101673864
+      e02: .0312523134
+      e03: 0
+      e10: .10171508
+      e11: .9948138
+      e12: .000275024591
+      e13: 0
+      e20: -.0311182439
+      e21: .00290539372
+      e22: .99951154
+      e23: 0
+      e30: .0396033861
+      e31: -.00409957208
+      e32: 5.85964553e-05
+      e33: 1
+    _BoneForward: {x: -1, y: -1.28688919e-06, z: -1.46443722e-06}
+    _BoneUp: {x: -1.28609474e-06, y: .999999881, z: -.000542412512}
+    _BoneRight: {x: -1.46116213e-06, y: .000540941663, z: .997288227}
+    _ToBoneForward: {x: -.000191316954, y: -.707107306, z: .000192226638, w: .707106292}
+    _IsDirty: 0
+    _Length: .0279684551
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 15
+    SerializationChildIndexes: 11000000
+    _ToBoneForwardInv: {x: .000191316954, y: .707107306, z: -.000192226638, w: .707106292}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c65667448616e64496e64657833
+    _Transform: {fileID: 462006}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -.0279684775, y: -6.28122399e-09, z: -5.17186614e-08}
+    _BindMatrix:
+      e00: 1
+      e01: 5.50439054e-08
+      e02: -2.85145578e-08
+      e03: 0
+      e10: 5.50439054e-08
+      e11: 1.00000024
+      e12: 1.52105777e-08
+      e13: 0
+      e20: -2.85145578e-08
+      e21: 1.52105777e-08
+      e22: 1.00000012
+      e23: 0
+      e30: .0279685035
+      e31: -1.77931867e-07
+      e32: 6.37803623e-08
+      e33: 1
+    _BoneForward: {x: -1, y: -1.28688919e-06, z: -1.46443722e-06}
+    _BoneUp: {x: -1.28609474e-06, y: .999999881, z: -.000542406866}
+    _BoneRight: {x: -1.46116213e-06, y: .000540936075, z: .997288227}
+    _ToBoneForward: {x: -.000191314961, y: -.707107306, z: .000192224645, w: .707106292}
+    _IsDirty: 0
+    _Length: .00559369102
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 16
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: .000191314961, y: .707107306, z: -.000192224645, w: .707106292}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c65667448616e644d6964646c6531
+    _Transform: {fileID: 461964}
+    _BindRotation: {x: -.000768873375, y: .0333210826, z: .020907538, w: .999225736}
+    _BindPosition: {x: -.0760238245, y: -.00188513438, z: .0101412293}
+    _BindMatrix:
+      e00: .996905148
+      e01: -.0418339074
+      e02: .0665584207
+      e03: 0
+      e10: .0417314991
+      e11: .999124765
+      e12: .00292988797
+      e13: 0
+      e20: -.0666227117
+      e21: -.000143226367
+      e22: .997778296
+      e23: 0
+      e30: .0765428767
+      e31: -.00129556202
+      e32: -.00505314721
+      e33: 1
+    _BoneForward: {x: -.999954343, y: .000110202425, z: -.00960632879}
+    _BoneUp: {x: 9.00234081e-05, y: .999997795, z: .0021009983}
+    _BoneRight: {x: -.00960429944, y: -.002099548, z: .999718964}
+    _ToBoneForward: {x: .000707258354, y: -.710494697, z: -.000778049696, w: .703701794}
+    _IsDirty: 0
+    _Length: .0442825779
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 14
+    SerializationChildIndexes: 13000000
+    _ToBoneForwardInv: {x: -.000707258354, y: .710494697, z: .000778049696, w: .703701794}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c65667448616e644d6964646c6532
+    _Transform: {fileID: 461936}
+    _BindRotation: {x: -.00145348674, y: -.0264088325, z: .0570813417, w: .998019159}
+    _BindPosition: {x: -.0442804359, y: 4.79887422e-06, z: -.000425400125}
+    _BindMatrix:
+      e00: .992088675
+      e01: -.113859728
+      e02: -.0528789684
+      e03: 0
+      e10: .114013381
+      e11: .993479371
+      e12: -.000113682428
+      e13: 0
+      e20: .0525471196
+      e21: -.00591611117
+      e22: .998601019
+      e23: 0
+      e30: .0439519063
+      e31: -.00504914066
+      e32: -.00191669923
+      e33: 1
+    _BoneForward: {x: -1.0000006, y: -2.15323348e-06, z: -3.48653685e-07}
+    _BoneUp: {x: -2.15424302e-06, y: .999995708, z: .00292633777}
+    _BoneRight: {x: -3.40875175e-07, y: -.0029137237, z: .99568516}
+    _ToBoneForward: {x: .00103537925, y: -.707106173, z: -.0010338563, w: .707105875}
+    _IsDirty: 0
+    _Length: .0339647457
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 18
+    SerializationChildIndexes: 14000000
+    _ToBoneForwardInv: {x: -.00103537925, y: .707106173, z: .0010338563, w: .707105875}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c65667448616e644d6964646c6533
+    _Transform: {fileID: 461944}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -.0339648277, y: -1.21979289e-08, z: 3.75648268e-09}
+    _BindMatrix:
+      e00: 1.00000012
+      e01: 5.6478946e-08
+      e02: 5.82742787e-09
+      e03: 0
+      e10: 5.6478946e-08
+      e11: 1.00000012
+      e12: 4.5955364e-09
+      e13: 0
+      e20: 5.82742787e-09
+      e21: 4.5955364e-09
+      e22: 1
+      e23: 0
+      e30: .0339648128
+      e31: -1.36331792e-07
+      e32: -4.32174385e-09
+      e33: 1
+    _BoneForward: {x: -1.0000006, y: -2.15323348e-06, z: -3.48653685e-07}
+    _BoneUp: {x: -2.15424302e-06, y: .999995708, z: .00292634126}
+    _BoneRight: {x: -3.40875147e-07, y: -.00291372719, z: .99568516}
+    _ToBoneForward: {x: .00103538041, y: -.707106173, z: -.00103385758, w: .707105875}
+    _IsDirty: 0
+    _Length: .00679294905
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 19
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: -.00103538041, y: .707106173, z: .00103385758, w: .707105875}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c65667448616e6450696e6b7931
+    _Transform: {fileID: 461918}
+    _BindRotation: {x: .000947935798, y: -.0904072002, z: .0333630852, w: .995345473}
+    _BindPosition: {x: -.0656599477, y: -.00782510638, z: -.0322512463}
+    _BindMatrix:
+      e00: .981426835
+      e01: -.0665869638
+      e02: -.179909527
+      e03: 0
+      e10: .0662442297
+      e11: .997772276
+      e12: -.00791957323
+      e13: 0
+      e20: .180036053
+      e21: -.00414547278
+      e22: .98365128
+      e23: 0
+      e30: .0707653239
+      e31: .00330173061
+      e32: .0198491383
+      e33: 1
+    _BoneForward: {x: -.998896897, y: -.00100321777, z: -.0469563827}
+    _BoneUp: {x: -.0013003496, y: .999979317, z: .0062977206}
+    _BoneRight: {x: -.0469482429, y: -.00635171821, z: .998859406}
+    _ToBoneForward: {x: .00264410581, y: -.723513126, z: -.00182944303, w: .690303147}
+    _IsDirty: 0
+    _Length: .0308393445
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 14
+    SerializationChildIndexes: 16000000
+    _ToBoneForwardInv: {x: -.00264410581, y: .723513126, z: .00182944303, w: .690303147}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c65667448616e6450696e6b7932
+    _Transform: {fileID: 461906}
+    _BindRotation: {x: -.000170628467, y: -.00966134761, z: -.00536240125, w: .999938965}
+    _BindPosition: {x: -.0308054481, y: -3.0874573e-05, z: -.0014480775}
+    _BindMatrix:
+      e00: .99975574
+      e01: .0107274847
+      e02: -.019319661
+      e03: 0
+      e10: -.0107208136
+      e11: .99994272
+      e12: .000444851728
+      e13: 0
+      e20: .0193233751
+      e21: -.00023761917
+      e22: .999813318
+      e23: 0
+      e30: .0308257379
+      e31: .000360678096
+      e32: .000852638681
+      e33: 1
+    _BoneForward: {x: -1.00000048, y: -.000278854452, z: 3.95272906e-07}
+    _BoneUp: {x: -.000278844876, y: .99997592, z: .00693322672}
+    _BoneRight: {x: 2.32858815e-06, y: -.00693312194, z: .99996084}
+    _ToBoneForward: {x: .00254986947, y: -.70710206, z: -.00235269172, w: .707103014}
+    _IsDirty: 0
+    _Length: .0230639279
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 21
+    SerializationChildIndexes: 17000000
+    _ToBoneForwardInv: {x: -.00254986947, y: .70710206, z: .00235269172, w: .707103014}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c65667448616e6450696e6b7933
+    _Transform: {fileID: 462014}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -.0230640266, y: -6.40258077e-06, z: 1.8332095e-08}
+    _BindMatrix:
+      e00: .999999881
+      e01: 3.66919473e-08
+      e02: 3.43511495e-08
+      e03: 0
+      e10: 3.66919473e-08
+      e11: 1.00000024
+      e12: 9.10256384e-11
+      e13: 0
+      e20: 3.43511495e-08
+      e21: 9.10256384e-11
+      e22: 1.00000012
+      e23: 0
+      e30: .023064198
+      e31: 6.17700971e-06
+      e32: -5.08053439e-08
+      e33: 1
+    _BoneForward: {x: -1.00000048, y: -.000278854452, z: 3.95272906e-07}
+    _BoneUp: {x: -.000278844876, y: .99997592, z: .00693322485}
+    _BoneRight: {x: 2.3285877e-06, y: -.00693312008, z: .99996084}
+    _ToBoneForward: {x: .00254986878, y: -.70710206, z: -.00235269102, w: .707103014}
+    _IsDirty: 0
+    _Length: .00461278576
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 22
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: -.00254986878, y: .70710206, z: .00235269102, w: .707103014}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c65667448616e6452696e6731
+    _Transform: {fileID: 461956}
+    _BindRotation: {x: .000302014727, y: -.0213824529, z: .0298566725, w: .999325454}
+    _BindPosition: {x: -.0703021064, y: -.00374530931, z: -.0114117917}
+    _BindMatrix:
+      e00: .997302711
+      e01: -.059685953
+      e02: -.0427180156
+      e03: 0
+      e10: .0596601926
+      e11: .998217165
+      e12: -.00188043504
+      e13: 0
+      e20: .042754095
+      e21: -.000673189876
+      e22: .999085486
+      e23: 0
+      e30: .07082396
+      e31: -.000465279241
+      e32: .0083911363
+      e33: 1
+    _BoneForward: {x: -.998660505, y: -.000483566721, z: -.0517485552}
+    _BoneUp: {x: -.000698200718, y: .999991238, z: .00412964169}
+    _BoneRight: {x: -.0517459288, y: -.00416022679, z: .998648703}
+    _ToBoneForward: {x: .00167493138, y: -.725169957, z: -.00125697267, w: .688566744}
+    _IsDirty: 0
+    _Length: .043193087
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 14
+    SerializationChildIndexes: 19000000
+    _ToBoneForwardInv: {x: -.00167493138, y: .725169957, z: .00125697267, w: .688566744}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c65667448616e6452696e6732
+    _Transform: {fileID: 461978}
+    _BindRotation: {x: -.00157919095, y: -.0221169833, z: .0554940253, w: .998212814}
+    _BindPosition: {x: -.0431354567, y: -2.08823076e-05, z: -.00223517837}
+    _BindMatrix:
+      e00: .992862523
+      e01: -.110719785
+      e02: -.0443301797
+      e03: 0
+      e10: .110859618
+      e11: .993836045
+      e12: .000698018877
+      e13: 0
+      e20: .043979656
+      e21: -.0056074555
+      e22: .999016821
+      e23: 0
+      e30: .0429282859
+      e31: -.00476799067
+      e32: .000320780498
+      e33: 1
+    _BoneForward: {x: -1.00000036, y: 3.52531538e-06, z: -5.07249524e-07}
+    _BoneUp: {x: 3.5228054e-06, y: .999988198, z: .00486354763}
+    _BoneRight: {x: -5.21335096e-07, y: -.00483522424, z: .994164705}
+    _ToBoneForward: {x: .00171828282, y: -.707104862, z: -.00172077469, w: .707104504}
+    _IsDirty: 0
+    _Length: .030835636
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 24
+    SerializationChildIndexes: 1a000000
+    _ToBoneForwardInv: {x: -.00171828282, y: .707104862, z: .00172077469, w: .707104504}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c65667448616e6452696e6733
+    _Transform: {fileID: 461974}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -.0308355652, y: 7.71049682e-11, z: -1.64932707e-08}
+    _BindMatrix:
+      e00: 1.00000012
+      e01: 7.0694675e-08
+      e02: 9.40588851e-09
+      e03: 0
+      e10: 7.0694675e-08
+      e11: 1.00000024
+      e12: 1.15769994e-09
+      e13: 0
+      e20: 9.40588851e-09
+      e21: 1.15769994e-09
+      e22: 1.00000012
+      e23: 0
+      e30: .0308356676
+      e31: -2.68805337e-07
+      e32: 4.30434488e-09
+      e33: 1
+    _BoneForward: {x: -1.00000036, y: 3.52531538e-06, z: -5.07249524e-07}
+    _BoneUp: {x: 3.5228054e-06, y: .999988198, z: .00486354996}
+    _BoneRight: {x: -5.21335096e-07, y: -.00483522657, z: .994164705}
+    _ToBoneForward: {x: .00171828363, y: -.707104862, z: -.00172077562, w: .707104504}
+    _IsDirty: 0
+    _Length: .00616712729
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 25
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: -.00171828363, y: .707104862, z: .00172077562, w: .707104504}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c65667448616e645468756d6231
+    _Transform: {fileID: 461988}
+    _BindRotation: {x: .000123995618, y: -.00563636655, z: .0219935421, w: .99974221}
+    _BindPosition: {x: -.0142312413, y: -.0123778246, z: .0255316682}
+    _BindMatrix:
+      e00: .998969018
+      e01: -.0439771153
+      e02: -.0112643698
+      e03: 0
+      e10: .0439743847
+      e11: .999032736
+      e12: -.000495848712
+      e13: 0
+      e20: .0112752849
+      e21: 6.38303943e-09
+      e22: .999936461
+      e23: 0
+      e30: .0144730471
+      e31: .0117398426
+      e32: -.0256964918
+      e33: 1
+    _BoneForward: {x: -.562304437, y: -.181667402, z: .806728661}
+    _BoneUp: {x: -.115327254, y: .983264148, z: .141036287}
+    _BoneRight: {x: .807192743, y: .0135369832, z: .565676332}
+    _ToBoneForward: {x: .0849356502, y: -.299034655, z: .033968538, w: .949847579}
+    _IsDirty: 0
+    _Length: .0291193537
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 14
+    SerializationChildIndexes: 1c000000
+    _ToBoneForwardInv: {x: -.0849356502, y: .299034655, z: -.033968538, w: .949847579}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c65667448616e645468756d6232
+    _Transform: {fileID: 461984}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -.0163739994, y: -.00528999977, z: .0234914087}
+    _BindMatrix:
+      e00: 1
+      e01: 3.73126134e-08
+      e02: 2.39687004e-09
+      e03: 0
+      e10: 3.73126134e-08
+      e11: 1.00000024
+      e12: 6.00179328e-09
+      e13: 0
+      e20: 2.39687004e-09
+      e21: 6.00179328e-09
+      e22: 1.00000012
+      e23: 0
+      e30: .0163740162
+      e31: .00528981164
+      e32: -.0234914124
+      e33: 1
+    _BoneForward: {x: -.753863811, y: -.226216301, z: .616859794}
+    _BoneUp: {x: -.18121779, y: .97403115, z: .135732934}
+    _BoneRight: {x: .617511034, y: .00925155822, z: .758052409}
+    _ToBoneForward: {x: .100815065, y: -.42591843, z: .0531107076, w: .897557318}
+    _IsDirty: 0
+    _Length: .0337726772
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 27
+    SerializationChildIndexes: 1d000000
+    _ToBoneForwardInv: {x: -.100815065, y: .42591843, z: -.0531107076, w: .897557318}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c65667448616e645468756d6233
+    _Transform: {fileID: 461996}
+    _BindRotation: {x: 2.94405424e-08, y: 0, z: -0, w: 1}
+    _BindPosition: {x: -.0254599992, y: -.00763999997, z: .0208330005}
+    _BindMatrix:
+      e00: 1
+      e01: 3.73185358e-08
+      e02: 2.39711939e-09
+      e03: 0
+      e10: 3.73126134e-08
+      e11: 1.00000024
+      e12: -5.2914821e-08
+      e13: 0
+      e20: 2.39687004e-09
+      e21: 6.490761e-08
+      e22: 1.00000012
+      e23: 0
+      e30: .0254600234
+      e31: .00763977785
+      e32: -.0208330024
+      e33: 1
+    _BoneForward: {x: -.753863811, y: -.226216301, z: .616859794}
+    _BoneUp: {x: -.181217819, y: .97403115, z: .135732889}
+    _BoneRight: {x: .617510974, y: .00925160293, z: .758052409}
+    _ToBoneForward: {x: .10081505, y: -.42591843, z: .0531107336, w: .897557318}
+    _IsDirty: 0
+    _Length: .00675453572
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 28
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: -.10081505, y: .42591843, z: -.0531107336, w: .897557318}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4e65636b
+    _Transform: {fileID: 461882}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -0, y: .235723898, z: -.0324132554}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: -.235723853
+      e32: .0324132554
+      e33: 1
+    _BoneForward: {x: -9.2580974e-09, y: .994376719, z: .105900295}
+    _BoneUp: {x: 9.85979742e-10, y: -.105900295, z: .994376719}
+    _BoneRight: {x: -.994376719, y: -9.2580974e-09, z: 0}
+    _ToBoneForward: {x: -3.11256798e-09, y: .668617964, z: .74360615, w: -3.46165541e-09}
+    _IsDirty: 0
+    _Length: .106957115
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 10
+    SerializationChildIndexes: 1f000000
+    _ToBoneForwardInv: {x: 3.11256798e-09, y: -.668617964, z: -.74360615, w: -3.46165541e-09}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 48656164
+    _Transform: {fileID: 461950}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -0, y: .106355801, z: .0113267815}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: -.106355786
+      e32: -.0113267815
+      e33: 1
+    _BoneForward: {x: -2.53240046e-06, y: .660020173, z: .751247823}
+    _BoneUp: {x: 2.22487893e-06, y: .751247883, z: -.660020173}
+    _BoneRight: {x: .751247823, y: -0, z: 2.53240046e-06}
+    _ToBoneForward: {x: -.352669924, y: -1.57716806e-06, z: -5.94412029e-07, w: .935747802}
+    _IsDirty: 0
+    _Length: .0966539234
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 30
+    SerializationChildIndexes: 2000000028000000290000002b0000002c0000002d0000002e0000002f000000300000003100000032000000340000003500000036000000370000003800000039000000
+    _ToBoneForwardInv: {x: .352669924, y: 1.57716806e-06, z: 5.94412029e-07, w: .935747802}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4a6177
+    _Transform: {fileID: 461994}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -0, y: .0111267585, z: .0103275431}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: -.0111267567
+      e32: -.0103275431
+      e33: 1
+    _BoneForward: {x: -1.06400121e-05, y: -.363373011, z: .931643724}
+    _BoneUp: {x: -4.14996975e-06, y: .931643724, z: .363373011}
+    _BoneRight: {x: .931643724, y: -0, z: 1.06400121e-05}
+    _ToBoneForward: {x: .184873298, y: -5.61191155e-06, z: 1.05569018e-06, w: .982762396}
+    _IsDirty: 0
+    _Length: .0677417591
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 31
+    SerializationChildIndexes: 210000002200000023000000240000002500000026000000
+    _ToBoneForwardInv: {x: -.184873298, y: 5.61191155e-06, z: -1.05569018e-06, w: .982762396}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4a6177454e44
+    _Transform: {fileID: 461976}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -0, y: -.0482887588, z: .071851708}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: .048288703
+      e32: -.071851708
+      e33: 1
+    _BoneForward: {x: -1.06400121e-05, y: -.363373011, z: .931643724}
+    _BoneUp: {x: -4.14996975e-06, y: .931643724, z: .363373011}
+    _BoneRight: {x: .931643724, y: -0, z: 1.06400121e-05}
+    _ToBoneForward: {x: .184873298, y: -5.61191155e-06, z: 1.05569018e-06, w: .982762396}
+    _IsDirty: 0
+    _Length: .0135483518
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 32
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: -.184873298, y: 5.61191155e-06, z: -1.05569018e-06, w: .982762396}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c6566744c6970436f726e6572
+    _Transform: {fileID: 461880}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -.032843262, y: -.01657876, z: .0661217645}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: .032843262
+      e31: .0165787935
+      e32: -.0661217645
+      e33: 1
+    _BoneForward: {x: -1.06400121e-05, y: -.363373011, z: .931643724}
+    _BoneUp: {x: -4.14996975e-06, y: .931643724, z: .363373011}
+    _BoneRight: {x: .931643724, y: -0, z: 1.06400121e-05}
+    _ToBoneForward: {x: .184873298, y: -5.61191155e-06, z: 1.05569018e-06, w: .982762396}
+    _IsDirty: 0
+    _Length: .0135483518
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 32
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: -.184873298, y: 5.61191155e-06, z: -1.05569018e-06, w: .982762396}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c6566744c69704c6f776572
+    _Transform: {fileID: 461862}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -.0142508168, y: -.0216887593, z: .0822406337}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: .0142508168
+      e31: .0216888189
+      e32: -.0822406337
+      e33: 1
+    _BoneForward: {x: -1.06400121e-05, y: -.363373011, z: .931643724}
+    _BoneUp: {x: -4.14996975e-06, y: .931643724, z: .363373011}
+    _BoneRight: {x: .931643724, y: -0, z: 1.06400121e-05}
+    _ToBoneForward: {x: .184873298, y: -5.61191155e-06, z: 1.05569018e-06, w: .982762396}
+    _IsDirty: 0
+    _Length: .0135483518
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 32
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: -.184873298, y: 5.61191155e-06, z: -1.05569018e-06, w: .982762396}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 52696768744c6970436f726e6572
+    _Transform: {fileID: 461966}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: .0328399986, y: -.01657876, z: .0661187842}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: -.0328399986
+      e31: .0165787935
+      e32: -.0661187842
+      e33: 1
+    _BoneForward: {x: -1.06400121e-05, y: -.363373011, z: .931643724}
+    _BoneUp: {x: -4.14996975e-06, y: .931643724, z: .363373011}
+    _BoneRight: {x: .931643724, y: -0, z: 1.06400121e-05}
+    _ToBoneForward: {x: .184873298, y: -5.61191155e-06, z: 1.05569018e-06, w: .982762396}
+    _IsDirty: 0
+    _Length: .0135483518
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 32
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: -.184873298, y: 5.61191155e-06, z: -1.05569018e-06, w: .982762396}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 52696768744c69704c6f776572
+    _Transform: {fileID: 461894}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: .0142508168, y: -.0216887593, z: .0822387859}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: -.0142508168
+      e31: .0216888189
+      e32: -.0822387859
+      e33: 1
+    _BoneForward: {x: -1.06400121e-05, y: -.363373011, z: .931643724}
+    _BoneUp: {x: -4.14996975e-06, y: .931643724, z: .363373011}
+    _BoneRight: {x: .931643724, y: -0, z: 1.06400121e-05}
+    _ToBoneForward: {x: .184873298, y: -5.61191155e-06, z: 1.05569018e-06, w: .982762396}
+    _IsDirty: 0
+    _Length: .0135483518
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 32
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: -.184873298, y: 5.61191155e-06, z: -1.05569018e-06, w: .982762396}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 546f6e6775654261636b
+    _Transform: {fileID: 461898}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -0, y: -.022869369, z: .0100954091}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: .0228693485
+      e32: -.0100954091
+      e33: 1
+    _BoneForward: {x: -8.74135822e-08, y: -.0145051368, z: .999894798}
+    _BoneUp: {x: -1.26807942e-09, y: .999894798, z: .0145051368}
+    _BoneRight: {x: .999894798, y: -0, z: 8.74135822e-08}
+    _ToBoneForward: {x: .0072527593, y: -4.37102408e-08, z: 3.17028209e-10, w: .999973714}
+    _IsDirty: 0
+    _Length: .0282302685
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 32
+    SerializationChildIndexes: 27000000
+    _ToBoneForwardInv: {x: -.0072527593, y: 4.37102408e-08, z: -3.17028209e-10, w: .999973714}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 546f6e677565546970
+    _Transform: {fileID: 461960}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -0, y: -.000409444125, z: .0282272995}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: .00040948391
+      e32: -.0282272995
+      e33: 1
+    _BoneForward: {x: -8.74135822e-08, y: -.0145051368, z: .999894798}
+    _BoneUp: {x: -1.26807942e-09, y: .999894798, z: .0145051368}
+    _BoneRight: {x: .999894798, y: -0, z: 8.74135822e-08}
+    _ToBoneForward: {x: .0072527593, y: -4.37102408e-08, z: 3.17028209e-10, w: .999973714}
+    _IsDirty: 0
+    _Length: .0056460537
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 38
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: -.0072527593, y: 4.37102408e-08, z: -3.17028209e-10, w: .999973714}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c656674436865656b
+    _Transform: {fileID: 461866}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -.0542440265, y: .0337019488, z: .0594304018}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: .0542440265
+      e31: -.0337018967
+      e32: -.0594304018
+      e33: 1
+    _BoneForward: {x: -2.53240046e-06, y: .660020173, z: .751247823}
+    _BoneUp: {x: 2.22487893e-06, y: .751247883, z: -.660020173}
+    _BoneRight: {x: .751247823, y: -0, z: 2.53240046e-06}
+    _ToBoneForward: {x: -.352669924, y: -1.57716806e-06, z: -5.94412029e-07, w: .935747802}
+    _IsDirty: 0
+    _Length: .0193307847
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 31
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: .352669924, y: 1.57716806e-06, z: 5.94412029e-07, w: .935747802}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c656674457965
+    _Transform: {fileID: 461902}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -.0208482333, y: .0825027004, z: .0554274321}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: .0208482333
+      e31: -.0825027227
+      e32: -.0554274321
+      e33: 1
+    _BoneForward: {x: -.30111149, y: .0725497752, z: .950825095}
+    _BoneUp: {x: .0219032913, y: .997364759, z: -.0691644102}
+    _BoneRight: {x: .950825095, y: -0, z: .30111149}
+    _ToBoneForward: {x: -.0358728655, y: -.15264529, z: -.0055444967, w: .987614214}
+    _IsDirty: 0
+    _Length: .00559324166
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 31
+    SerializationChildIndexes: 2a000000
+    _ToBoneForwardInv: {x: .0358728655, y: .15264529, z: .0055444967, w: .987614214}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c655f4579655f4d657368
+    _Transform: {fileID: 461864}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -.00168411608, y: .000405807485, z: .00531818997}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: .0016841162
+      e31: -.000405788422
+      e32: -.0053181909
+      e33: 1
+    _BoneForward: {x: -.30111149, y: .0725497752, z: .950825095}
+    _BoneUp: {x: .0219032913, y: .997364759, z: -.0691644102}
+    _BoneRight: {x: .950825095, y: -0, z: .30111149}
+    _ToBoneForward: {x: -.0358728655, y: -.15264529, z: -.0055444967, w: .987614214}
+    _IsDirty: 0
+    _Length: .00111864833
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 41
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: .0358728655, y: .15264529, z: .0055444967, w: .987614214}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c6566744579656c69644c6f776572
+    _Transform: {fileID: 461958}
+    _BindRotation: {x: -.0348994955, y: 0, z: -0, w: .999390841}
+    _BindPosition: {x: -.0356189571, y: .0650736615, z: .076234743}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: .997564077
+      e12: .0697564706
+      e13: 0
+      e20: 0
+      e21: -.0697564706
+      e22: .997564077
+      e23: 0
+      e30: .0356189571
+      e31: -.0595972091
+      e32: -.0805883482
+      e33: 1
+    _BoneForward: {x: -2.53240046e-06, y: .660020173, z: .751247823}
+    _BoneUp: {x: 2.55918599e-06, y: .751247823, z: -.660020232}
+    _BoneRight: {x: .703377187, y: -1.76651312e-07, z: 2.52623181e-06}
+    _ToBoneForward: {x: -.352669924, y: -1.63611799e-06, z: -7.50825507e-07, w: .935747802}
+    _IsDirty: 0
+    _Length: .0193307847
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 31
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: .352669924, y: 1.63611799e-06, z: 7.50825507e-07, w: .935747802}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c6566744579656c69645570706572
+    _Transform: {fileID: 461854}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -.0344068967, y: .10060814, z: .0802053064}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: .0344068967
+      e31: -.10060811
+      e32: -.0802053064
+      e33: 1
+    _BoneForward: {x: -2.53240046e-06, y: .660020173, z: .751247823}
+    _BoneUp: {x: 2.22487893e-06, y: .751247883, z: -.660020173}
+    _BoneRight: {x: .751247823, y: -0, z: 2.53240046e-06}
+    _ToBoneForward: {x: -.352669924, y: -1.57716806e-06, z: -5.94412029e-07, w: .935747802}
+    _IsDirty: 0
+    _Length: .0193307847
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 31
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: .352669924, y: 1.57716806e-06, z: 5.94412029e-07, w: .935747802}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c656674496e6e657242726f77
+    _Transform: {fileID: 461910}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -.0120626912, y: .118765265, z: .0934668258}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: .0120626912
+      e31: -.118765235
+      e32: -.0934668258
+      e33: 1
+    _BoneForward: {x: -2.53240046e-06, y: .660020173, z: .751247823}
+    _BoneUp: {x: 2.22487893e-06, y: .751247883, z: -.660020173}
+    _BoneRight: {x: .751247823, y: -0, z: 2.53240046e-06}
+    _ToBoneForward: {x: -.352669924, y: -1.57716806e-06, z: -5.94412029e-07, w: .935747802}
+    _IsDirty: 0
+    _Length: .0193307847
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 31
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: .352669924, y: 1.57716806e-06, z: 5.94412029e-07, w: .935747802}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c656674494f7574657242726f77
+    _Transform: {fileID: 462012}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -.0550398715, y: .114825293, z: .061777398}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: .0550398715
+      e31: -.114825249
+      e32: -.061777398
+      e33: 1
+    _BoneForward: {x: -2.53240046e-06, y: .660020173, z: .751247823}
+    _BoneUp: {x: 2.22487893e-06, y: .751247883, z: -.660020173}
+    _BoneRight: {x: .751247823, y: -0, z: 2.53240046e-06}
+    _ToBoneForward: {x: -.352669924, y: -1.57716806e-06, z: -5.94412029e-07, w: .935747802}
+    _IsDirty: 0
+    _Length: .0193307847
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 31
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: .352669924, y: 1.57716806e-06, z: 5.94412029e-07, w: .935747802}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c6566744c69705570706572
+    _Transform: {fileID: 461890}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -.0145013221, y: -.00511181122, z: .094618842}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: .0145013221
+      e31: .00511181355
+      e32: -.094618842
+      e33: 1
+    _BoneForward: {x: -2.53240046e-06, y: .660020173, z: .751247823}
+    _BoneUp: {x: 2.22487893e-06, y: .751247883, z: -.660020173}
+    _BoneRight: {x: .751247823, y: -0, z: 2.53240046e-06}
+    _ToBoneForward: {x: -.352669924, y: -1.57716806e-06, z: -5.94412029e-07, w: .935747802}
+    _IsDirty: 0
+    _Length: .0193307847
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 31
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: .352669924, y: 1.57716806e-06, z: 5.94412029e-07, w: .935747802}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 4c6566744e6f737472696c
+    _Transform: {fileID: 461876}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: -.0178999994, y: .0263128281, z: .0908674002}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: .0178999994
+      e31: -.0263128281
+      e32: -.0908674002
+      e33: 1
+    _BoneForward: {x: -2.53240046e-06, y: .660020173, z: .751247823}
+    _BoneUp: {x: 2.22487893e-06, y: .751247883, z: -.660020173}
+    _BoneRight: {x: .751247823, y: -0, z: 2.53240046e-06}
+    _ToBoneForward: {x: -.352669924, y: -1.57716806e-06, z: -5.94412029e-07, w: .935747802}
+    _IsDirty: 0
+    _Length: .0193307847
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 31
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: .352669924, y: 1.57716806e-06, z: 5.94412029e-07, w: .935747802}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 5269676874436865656b
+    _Transform: {fileID: 461962}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: .0542399958, y: .033702828, z: .0594273992}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: -.0542399958
+      e31: -.0337028503
+      e32: -.0594273992
+      e33: 1
+    _BoneForward: {x: -2.53240046e-06, y: .660020173, z: .751247823}
+    _BoneUp: {x: 2.22487893e-06, y: .751247883, z: -.660020173}
+    _BoneRight: {x: .751247823, y: -0, z: 2.53240046e-06}
+    _ToBoneForward: {x: -.352669924, y: -1.57716806e-06, z: -5.94412029e-07, w: .935747802}
+    _IsDirty: 0
+    _Length: .0193307847
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 31
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: .352669924, y: 1.57716806e-06, z: 5.94412029e-07, w: .935747802}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 5269676874457965
+    _Transform: {fileID: 462004}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: .020849999, y: .082502827, z: .0554273985}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: -.020849999
+      e31: -.0825028419
+      e32: -.0554273985
+      e33: 1
+    _BoneForward: {x: .297661424, y: .0687042549, z: .952196062}
+    _BoneUp: {x: -.020499045, y: .997637033, z: -.0655748695}
+    _BoneRight: {x: .952196062, y: 0, z: -.297661424}
+    _ToBoneForward: {x: -.0339787826, y: .150822416, z: .00518719945, w: .98796314}
+    _IsDirty: 0
+    _Length: .00558357686
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 31
+    SerializationChildIndexes: 33000000
+    _ToBoneForwardInv: {x: .0339787826, y: -.150822416, z: -.00518719945, w: .98796314}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 52695f4579655f4d657368
+    _Transform: {fileID: 462010}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: .00166187854, y: .000383453356, z: .00531667331}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: -.00166187808
+      e31: -.000383496284
+      e32: -.00531667471
+      e33: 1
+    _BoneForward: {x: .297661424, y: .0687042549, z: .952196062}
+    _BoneUp: {x: -.020499045, y: .997637033, z: -.0655748695}
+    _BoneRight: {x: .952196062, y: 0, z: -.297661424}
+    _ToBoneForward: {x: -.0339787826, y: .150822416, z: .00518719945, w: .98796314}
+    _IsDirty: 0
+    _Length: .00111671537
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 50
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: .0339787826, y: -.150822416, z: -.00518719945, w: .98796314}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 52696768744579656c69644c6f776572
+    _Transform: {fileID: 461982}
+    _BindRotation: {x: -.0348994955, y: 0, z: -0, w: .999390841}
+    _BindPosition: {x: .0356200002, y: .065072827, z: .0762374029}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: .997564077
+      e12: .0697564706
+      e13: 0
+      e20: 0
+      e21: -.0697564706
+      e22: .997564077
+      e23: 0
+      e30: -.0356200002
+      e31: -.0595962554
+      e32: -.080590941
+      e33: 1
+    _BoneForward: {x: -2.53240046e-06, y: .660020173, z: .751247823}
+    _BoneUp: {x: 2.55918599e-06, y: .751247823, z: -.660020232}
+    _BoneRight: {x: .703377187, y: -1.76651312e-07, z: 2.52623181e-06}
+    _ToBoneForward: {x: -.352669924, y: -1.63611799e-06, z: -7.50825507e-07, w: .935747802}
+    _IsDirty: 0
+    _Length: .0193307847
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 31
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: .352669924, y: 1.63611799e-06, z: 7.50825507e-07, w: .935747802}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 52696768744579656c69645570706572
+    _Transform: {fileID: 462008}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: .0344099998, y: .100612827, z: .0802073926}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: -.0344099998
+      e31: -.100612879
+      e32: -.0802073926
+      e33: 1
+    _BoneForward: {x: -2.53240046e-06, y: .660020173, z: .751247823}
+    _BoneUp: {x: 2.22487893e-06, y: .751247883, z: -.660020173}
+    _BoneRight: {x: .751247823, y: -0, z: 2.53240046e-06}
+    _ToBoneForward: {x: -.352669924, y: -1.57716806e-06, z: -5.94412029e-07, w: .935747802}
+    _IsDirty: 0
+    _Length: .0193307847
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 31
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: .352669924, y: 1.57716806e-06, z: 5.94412029e-07, w: .935747802}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 5269676874496e6e657242726f77
+    _Transform: {fileID: 461928}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: .0120626874, y: .118765265, z: .0934668258}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: -.0120626874
+      e31: -.118765235
+      e32: -.0934668258
+      e33: 1
+    _BoneForward: {x: -2.53240046e-06, y: .660020173, z: .751247823}
+    _BoneUp: {x: 2.22487893e-06, y: .751247883, z: -.660020173}
+    _BoneRight: {x: .751247823, y: -0, z: 2.53240046e-06}
+    _ToBoneForward: {x: -.352669924, y: -1.57716806e-06, z: -5.94412029e-07, w: .935747802}
+    _IsDirty: 0
+    _Length: .0193307847
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 31
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: .352669924, y: 1.57716806e-06, z: 5.94412029e-07, w: .935747802}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 5269676874494f7574657242726f77
+    _Transform: {fileID: 461998}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: .0550400019, y: .114822827, z: .061777398}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: -.0550400019
+      e31: -.114822865
+      e32: -.061777398
+      e33: 1
+    _BoneForward: {x: -2.53240046e-06, y: .660020173, z: .751247823}
+    _BoneUp: {x: 2.22487893e-06, y: .751247883, z: -.660020173}
+    _BoneRight: {x: .751247823, y: -0, z: 2.53240046e-06}
+    _ToBoneForward: {x: -.352669924, y: -1.57716806e-06, z: -5.94412029e-07, w: .935747802}
+    _IsDirty: 0
+    _Length: .0193307847
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 31
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: .352669924, y: 1.57716806e-06, z: 5.94412029e-07, w: .935747802}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 52696768744c69705570706572
+    _Transform: {fileID: 461952}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: .0145013221, y: -.00510717137, z: .094617404}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: -.0145013221
+      e31: .00510716438
+      e32: -.094617404
+      e33: 1
+    _BoneForward: {x: -2.53240046e-06, y: .660020173, z: .751247823}
+    _BoneUp: {x: 2.22487893e-06, y: .751247883, z: -.660020173}
+    _BoneRight: {x: .751247823, y: -0, z: 2.53240046e-06}
+    _ToBoneForward: {x: -.352669924, y: -1.57716806e-06, z: -5.94412029e-07, w: .935747802}
+    _IsDirty: 0
+    _Length: .0193307847
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 31
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: .352669924, y: 1.57716806e-06, z: 5.94412029e-07, w: .935747802}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 52696768744e6f737472696c
+    _Transform: {fileID: 461946}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: .0178999994, y: .0263089053, z: .0908706188}
+    _BindMatrix:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: -.0178999994
+      e31: -.0263088942
+      e32: -.0908706188
+      e33: 1
+    _BoneForward: {x: -2.53240046e-06, y: .660020173, z: .751247823}
+    _BoneUp: {x: 2.22487893e-06, y: .751247883, z: -.660020173}
+    _BoneRight: {x: .751247823, y: -0, z: 2.53240046e-06}
+    _ToBoneForward: {x: -.352669924, y: -1.57716806e-06, z: -5.94412029e-07, w: .935747802}
+    _IsDirty: 0
+    _Length: .0193307847
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 31
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: .352669924, y: 1.57716806e-06, z: 5.94412029e-07, w: .935747802}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 526967687453686f756c646572
+    _Transform: {fileID: 461942}
+    _BindRotation: {x: .228671968, y: .971582174, z: -.0140056796, w: -.0595073737}
+    _BindPosition: {x: .0383285098, y: .192176744, z: -.017063085}
+    _BindMatrix:
+      e00: -.888336182
+      e01: .442680329
+      e02: -.122038022
+      e03: 0
+      e10: .446014076
+      e11: .895025969
+      e12: 0
+      e13: 0
+      e20: .109227195
+      e21: -.0544306748
+      e22: -.992525578
+      e23: 0
+      e30: -.0498011671
+      e31: -.189899191
+      e32: -.0122580128
+      e33: 1
+    _BoneForward: {x: -.918037117, y: .396494448, z: -6.79957395e-07}
+    _BoneUp: {x: .396494448, y: .918037117, z: -3.90360739e-08}
+    _BoneRight: {x: -6.07841002e-07, y: 3.04980546e-07, z: .998509169}
+    _ToBoneForward: {x: -.143145859, y: -.692466319, z: -.14314574, w: .692465842}
+    _IsDirty: 0
+    _Length: .0910372883
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 10
+    SerializationChildIndexes: 3b000000
+    _ToBoneForwardInv: {x: .143145859, y: .692466319, z: .14314574, w: .692465842}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 526967687441726d
+    _Transform: {fileID: 461852}
+    _BindRotation: {x: .21105206, y: .974394083, z: -.0173116997, w: .0755877346}
+    _BindPosition: {x: -.0835755169, y: .0360957012, z: -5.15574072e-08}
+    _BindMatrix:
+      e00: -.899487376
+      e01: .413912922
+      e02: .139997169
+      e03: 0
+      e10: .4086788
+      e11: .910314679
+      e12: -.0656427518
+      e13: 0
+      e20: -.154611871
+      e21: -.00183093199
+      e22: -.987973869
+      e23: 0
+      e30: -.0899266675
+      e31: .00173444918
+      e32: .0140697043
+      e33: 1
+    _BoneForward: {x: .997555315, y: .0236620046, z: -.0657530576}
+    _BoneUp: {x: -.0235218145, y: .999719143, z: .00290551782}
+    _BoneRight: {x: -.0657986701, y: .00135168748, z: -.997760892}
+    _ToBoneForward: {x: -.00759305432, y: .729944408, z: .00909916032, w: .68340379}
+    _IsDirty: 0
+    _Length: .254049391
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 58
+    SerializationChildIndexes: 3c000000
+    _ToBoneForwardInv: {x: .00759305432, y: -.729944408, z: -.00909916032, w: .68340379}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 5269676874466f726541726d
+    _Transform: {fileID: 461948}
+    _BindRotation: {x: -.000616519421, y: .022078624, z: -.0160702411, w: .999626875}
+    _BindPosition: {x: .253428251, y: .00601135287, z: -.0167045239}
+    _BindMatrix:
+      e00: .99850893
+      e01: .0321012512
+      e02: .044160597
+      e03: 0
+      e10: -.0321557373
+      e11: .999482751
+      e12: .000522956485
+      e13: 0
+      e20: -.0441209674
+      e21: -.00194220047
+      e22: .99902451
+      e23: 0
+      e30: -.253593981
+      e31: -.0141761014
+      e32: .00549354032
+      e33: 1
+    _BoneForward: {x: .995880306, y: .0878360718, z: .0225272533}
+    _BoneUp: {x: -.0879072323, y: .996126294, z: .00218689651}
+    _BoneRight: {x: .022243306, y: .00415733689, z: -.999537468}
+    _ToBoneForward: {x: -.0299765822, y: .698453844, z: .03222223, w: .714300632}
+    _IsDirty: 0
+    _Length: .246388882
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 59
+    SerializationChildIndexes: 3d000000
+    _ToBoneForwardInv: {x: .0299765822, y: -.698453844, z: -.03222223, w: .714300632}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 526967687448616e64
+    _Transform: {fileID: 461878}
+    _BindRotation: {x: 0, y: 0, z: .0214136913, w: .999770701}
+    _BindPosition: {x: .245373696, y: .0216417722, z: .00555046508}
+    _BindMatrix:
+      e00: .999083281
+      e01: -.0428175963
+      e02: 4.5513171e-09
+      e03: 0
+      e10: .0428175442
+      e11: .999082863
+      e12: -4.91719643e-09
+      e13: 0
+      e20: 4.10882528e-09
+      e21: -5.14257925e-09
+      e22: 1.00000024
+      e23: 0
+      e30: -.246075287
+      e31: -.0111158714
+      e32: -.00555046741
+      e33: 1
+    _BoneForward: {x: .994359076, y: -.023318341, z: .103472285}
+    _BoneUp: {x: .0226535518, y: .999714553, z: .00759545993}
+    _BoneRight: {x: .103501581, y: .00520265428, z: -.993468106}
+    _ToBoneForward: {x: .0104049565, y: .669444323, z: -.0058716163, w: .742766201}
+    _IsDirty: 0
+    _Length: .0608437881
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 60
+    SerializationChildIndexes: 3e0000004100000044000000470000004a000000
+    _ToBoneForwardInv: {x: -.0104049565, y: -.669444323, z: .0058716163, w: .742766201}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 526967687448616e64496e64657831
+    _Transform: {fileID: 461904}
+    _BindRotation: {x: -.00211892044, y: .0802574381, z: .0175381862, w: .996617615}
+    _BindPosition: {x: .0747694969, y: -.00124305359, z: .0343444981}
+    _BindMatrix:
+      e00: .986502588
+      e01: -.035297893
+      e02: .159897685
+      e03: 0
+      e10: .034617573
+      e11: .99937582
+      e12: .00703863613
+      e13: 0
+      e20: -.160046309
+      e21: -.00140837242
+      e22: .987108827
+      e23: 0
+      e30: -.068220526
+      e31: .00392969046
+      e32: -.0458484478
+      e33: 1
+    _BoneForward: {x: .930765748, y: .0182373878, z: .36516121}
+    _BoneUp: {x: -.0176184401, y: .999832153, z: -.00502705714}
+    _BoneRight: {x: .365034938, y: .00175380532, z: -.930531442}
+    _ToBoneForward: {x: -.00703990273, y: .563355923, z: .005862338, w: .82616353}
+    _IsDirty: 0
+    _Length: .0398150086
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 61
+    SerializationChildIndexes: 3f000000
+    _ToBoneForwardInv: {x: .00703990273, y: -.563355923, z: -.005862338, w: .82616353}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 526967687448616e64496e64657832
+    _Transform: {fileID: 461932}
+    _BindRotation: {x: .000658526376, y: .0156148067, z: .0509195141, w: .998580456}
+    _BindPosition: {x: .0370584019, y: .00072612107, z: .0145388944}
+    _BindMatrix:
+      e00: .994327009
+      e01: -.101673976
+      e02: .0312523656
+      e03: 0
+      e10: .101714984
+      e11: .994813502
+      e12: .000274999707
+      e13: 0
+      e20: -.0311182272
+      e21: .00290536718
+      e22: .999511838
+      e23: 0
+      e30: -.0364695676
+      e31: .00300305034
+      e32: -.0156901125
+      e33: 1
+    _BoneForward: {x: .901908994, y: -.177576602, z: .393734366}
+    _BoneUp: {x: .178163111, y: .983364224, z: .0353933088}
+    _BoneRight: {x: .392396688, y: -.038123183, z: -.916038632}
+    _ToBoneForward: {x: .0639740601, y: .546845675, z: -.0650015697, w: .832251191}
+    _IsDirty: 0
+    _Length: .02796847
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 62
+    SerializationChildIndexes: 40000000
+    _ToBoneForwardInv: {x: -.0639740601, y: -.546845675, z: .0650015697, w: .832251191}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 526967687448616e64496e64657833
+    _Transform: {fileID: 461856}
+    _BindRotation: {x: -3.46944695e-18, y: 1.40129846e-43, z: -3.46944695e-18, w: 1}
+    _BindPosition: {x: .0252250377, y: -.00496646529, z: .0110121462}
+    _BindMatrix:
+      e00: 1.00000024
+      e01: -7.67625394e-08
+      e02: 5.21096888e-10
+      e03: 0
+      e10: -7.67625394e-08
+      e11: .99999994
+      e12: -1.49050656e-08
+      e13: 0
+      e20: 5.21096888e-10
+      e21: -1.49050656e-08
+      e22: 1.00000036
+      e23: 0
+      e30: -.0252250321
+      e31: .00496627064
+      e32: -.011012109
+      e33: 1
+    _BoneForward: {x: .901908994, y: -.177576602, z: .393734366}
+    _BoneUp: {x: .178163111, y: .983364224, z: .0353932939}
+    _BoneRight: {x: .392396659, y: -.0381231979, z: -.916038573}
+    _ToBoneForward: {x: .0639740527, y: .546845675, z: -.0650015771, w: .832251191}
+    _IsDirty: 0
+    _Length: .00559369428
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 63
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: -.0639740527, y: -.546845675, z: .0650015771, w: .832251191}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 526967687448616e644d6964646c6531
+    _Transform: {fileID: 461990}
+    _BindRotation: {x: -.000768873375, y: .0333210826, z: .020907538, w: .999225736}
+    _BindPosition: {x: .0756476447, y: .00479140272, z: .0118531818}
+    _BindMatrix:
+      e00: .996905446
+      e01: -.0418339856
+      e02: .0665584356
+      e03: 0
+      e10: .0417314284
+      e11: .999124587
+      e12: .00292987213
+      e13: 0
+      e20: -.0666227341
+      e21: -.000143237805
+      e22: .997778535
+      e23: 0
+      e30: -.0748237148
+      e31: -.00162109616
+      e32: -.0168758705
+      e33: 1
+    _BoneForward: {x: .989309609, y: .0043855207, z: .145767227}
+    _BoneUp: {x: -.00454698037, y: .999989331, z: .000774505432}
+    _BoneRight: {x: .145728499, y: .00142869528, z: -.989089787}
+    _ToBoneForward: {x: -.00119271711, y: .653540373, z: .0019738737, w: .756888151}
+    _IsDirty: 0
+    _Length: .0442823432
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 61
+    SerializationChildIndexes: 42000000
+    _ToBoneForwardInv: {x: .00119271711, y: -.653540373, z: -.0019738737, w: .756888151}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 526967687448616e644d6964646c6532
+    _Transform: {fileID: 461868}
+    _BindRotation: {x: -.00145348674, y: -.0264088325, z: .0570813417, w: .998019159}
+    _BindPosition: {x: .0438090637, y: .000194188149, z: .00645493623}
+    _BindMatrix:
+      e00: .992088735
+      e01: -.113859832
+      e02: -.052878987
+      e03: 0
+      e10: .114013277
+      e11: .993479311
+      e12: -.000113694485
+      e13: 0
+      e20: .0525471121
+      e21: -.00591612794
+      e22: .998601198
+      e23: 0
+      e30: -.04382376
+      e31: .00483315485
+      e32: -.00412930222
+      e33: 1
+    _BoneForward: {x: .973728061, y: -.222214535, z: .0497529507}
+    _BoneUp: {x: .222116649, y: .974990845, z: .00755571807}
+    _BoneRight: {x: .0499711968, y: -.00367781217, z: -.994425833}
+    _ToBoneForward: {x: .0797557011, y: .684662402, z: -.0783812255, w: .720231116}
+    _IsDirty: 0
+    _Length: .0339649767
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 65
+    SerializationChildIndexes: 43000000
+    _ToBoneForwardInv: {x: -.0797557011, y: -.684662402, z: .0783812255, w: .720231116}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 526967687448616e644d6964646c6533
+    _Transform: {fileID: 461850}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: .0330724716, y: -.00754753686, z: .00168984616}
+    _BindMatrix:
+      e00: 1.00000012
+      e01: -5.06231999e-08
+      e02: -6.00768724e-09
+      e03: 0
+      e10: -5.06231999e-08
+      e11: 1
+      e12: -6.39573328e-09
+      e13: 0
+      e20: -6.00768724e-09
+      e21: -6.39573328e-09
+      e22: 1.00000024
+      e23: 0
+      e30: -.0330724418
+      e31: .0075473045
+      e32: -.00168984255
+      e33: 1
+    _BoneForward: {x: .973728061, y: -.222214535, z: .0497529507}
+    _BoneUp: {x: .222116649, y: .974990845, z: .00755571574}
+    _BoneRight: {x: .0499711968, y: -.00367781473, z: -.994425833}
+    _ToBoneForward: {x: .0797557011, y: .684662402, z: -.0783812255, w: .720231116}
+    _IsDirty: 0
+    _Length: .00679299561
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 66
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: -.0797557011, y: -.684662402, z: .0783812255, w: .720231116}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 526967687448616e6450696e6b7931
+    _Transform: {fileID: 461896}
+    _BindRotation: {x: .000947935798, y: -.0904072002, z: .0333630852, w: .995345473}
+    _BindPosition: {x: .0668033436, y: -.00199410878, z: -.0307561457}
+    _BindMatrix:
+      e00: .981427252
+      e01: -.0665870532
+      e02: -.179909587
+      e03: 0
+      e10: .0662441552
+      e11: .997772038
+      e12: -.00791957136
+      e13: 0
+      e20: .180036098
+      e21: -.00414548535
+      e22: .983651459
+      e23: 0
+      e30: -.0598932095
+      e31: .00631025247
+      e32: .0422560759
+      e33: 1
+    _BoneForward: {x: .925140798, y: -.0453010462, z: -.376912564}
+    _BoneUp: {x: .047674451, y: .998858333, z: -.0030345174}
+    _BoneRight: {x: -.376613349, y: .0151614873, z: -.926228642}
+    _ToBoneForward: {x: .0189375971, y: .82951653, z: -.0145673882, w: .557970941}
+    _IsDirty: 0
+    _Length: .0308395643
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 61
+    SerializationChildIndexes: 45000000
+    _ToBoneForwardInv: {x: -.0189375971, y: -.82951653, z: .0145673882, w: .557970941}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 526967687448616e6450696e6b7932
+    _Transform: {fileID: 461858}
+    _BindRotation: {x: -.000170628467, y: -.00966134761, z: -.00536240125, w: .999938965}
+    _BindPosition: {x: .0285308417, y: -.001397143, z: -.0116237961}
+    _BindMatrix:
+      e00: .999756217
+      e01: .0107273888
+      e02: -.0193197038
+      e03: 0
+      e10: -.0107209105
+      e11: .999942482
+      e12: .000444858568
+      e13: 0
+      e20: .0193233322
+      e21: -.000237614659
+      e22: .999813437
+      e23: 0
+      e30: -.0283141434
+      e31: .00108825706
+      e32: .0121734301
+      e33: 1
+    _BoneForward: {x: .929016471, y: -.0240009464, z: -.369260192}
+    _BoneUp: {x: .0261906683, y: .999656558, z: .00091767055}
+    _BoneRight: {x: -.36910519, y: .0105235269, z: -.929310501}
+    _ToBoneForward: {x: .0110939732, y: .827349365, z: -.00697506638, w: .561534882}
+    _IsDirty: 0
+    _Length: .0230639223
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 68
+    SerializationChildIndexes: 46000000
+    _ToBoneForwardInv: {x: -.0110939732, y: -.827349365, z: .00697506638, w: .561534882}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 526967687448616e6450696e6b7933
+    _Transform: {fileID: 461986}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: .0214268602, y: -.000553508929, z: -.00851660781}
+    _BindMatrix:
+      e00: 1.00000036
+      e01: -5.51756685e-08
+      e02: -1.76808328e-08
+      e03: 0
+      e10: -5.51756685e-08
+      e11: 1.00000012
+      e12: 6.39983755e-09
+      e13: 0
+      e20: -1.76808328e-08
+      e21: 6.39983755e-09
+      e22: 1.00000012
+      e23: 0
+      e30: -.0214267299
+      e31: .000553467486
+      e32: .00851657987
+      e33: 1
+    _BoneForward: {x: .929016471, y: -.0240009464, z: -.369260192}
+    _BoneUp: {x: .0261906683, y: .999656558, z: .000917669677}
+    _BoneRight: {x: -.36910519, y: .010523526, z: -.929310501}
+    _ToBoneForward: {x: .0110939732, y: .827349365, z: -.00697506685, w: .561534882}
+    _IsDirty: 0
+    _Length: .00461278437
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 69
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: -.0110939732, y: -.827349365, z: .00697506685, w: .561534882}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 526967687448616e6452696e6731
+    _Transform: {fileID: 462002}
+    _BindRotation: {x: .000302014727, y: -.0213824529, z: .0298566725, w: .999325454}
+    _BindPosition: {x: .0705984756, y: .00245709647, z: -.00982145779}
+    _BindMatrix:
+      e00: .997303009
+      e01: -.0596860349
+      e02: -.0427180342
+      e03: 0
+      e10: .0596601143
+      e11: .998216987
+      e12: -.00188044331
+      e13: 0
+      e20: .0427541062
+      e21: -.000673201343
+      e22: .999085665
+      e23: 0
+      e30: -.070134677
+      e31: .00175409939
+      e32: .0128329182
+      e33: 1
+    _BoneForward: {x: .99291265, y: -.0318403505, z: -.11450506}
+    _BoneUp: {x: .0322965309, y: .999476075, z: .00213059015}
+    _BoneRight: {x: -.114376821, y: .00581358513, z: -.993417203}
+    _ToBoneForward: {x: .0127649158, y: .746384382, z: -.00995122455, w: .66531831}
+    _IsDirty: 0
+    _Length: .0431933142
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 61
+    SerializationChildIndexes: 48000000
+    _ToBoneForwardInv: {x: -.0127649158, y: -.746384382, z: .00995122455, w: .66531831}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 526967687448616e6452696e6732
+    _Transform: {fileID: 461884}
+    _BindRotation: {x: -.00157919095, y: -.0221169833, z: .0554940253, w: .998212814}
+    _BindPosition: {x: .0428871848, y: -.00137538207, z: -.00494585792}
+    _BindMatrix:
+      e00: .992862761
+      e01: -.110719912
+      e02: -.0443301946
+      e03: 0
+      e10: .110859483
+      e11: .993835807
+      e12: .000698015967
+      e13: 0
+      e20: .0439796522
+      e21: -.00560746295
+      e22: .999017
+      e23: 0
+      e30: -.0422110185
+      e31: .00608715834
+      e32: .00684313942
+      e33: 1
+    _BoneForward: {x: .956707597, y: -.249482051, z: -.149899632}
+    _BoneUp: {x: .250063956, y: .968109012, z: -.0152618913}
+    _BoneRight: {x: -.148060545, y: .0227502286, z: -.982833803}
+    _ToBoneForward: {x: .0906419456, y: .752817273, z: -.0879177079, w: .646003664}
+    _IsDirty: 0
+    _Length: .0308356397
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 71
+    SerializationChildIndexes: 49000000
+    _ToBoneForwardInv: {x: -.0906419456, y: -.752817273, z: .0879177079, w: .646003664}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 526967687448616e6452696e6733
+    _Transform: {fileID: 461874}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: .0295006037, y: -.00769293541, z: -.00462225592}
+    _BindMatrix:
+      e00: 1.00000024
+      e01: -8.64991492e-08
+      e02: -1.48115631e-09
+      e03: 0
+      e10: -8.64991492e-08
+      e11: .99999994
+      e12: -1.25268496e-09
+      e13: 0
+      e20: -1.48115631e-09
+      e21: -1.25268496e-09
+      e22: 1.00000036
+      e23: 0
+      e30: -.0295005478
+      e31: .0076924297
+      e32: .00462224381
+      e33: 1
+    _BoneForward: {x: .956707597, y: -.249482051, z: -.149899632}
+    _BoneUp: {x: .250063956, y: .968109012, z: -.0152618913}
+    _BoneRight: {x: -.148060545, y: .0227502286, z: -.982833803}
+    _ToBoneForward: {x: .0906419456, y: .752817273, z: -.0879177079, w: .646003664}
+    _IsDirty: 0
+    _Length: .00616712822
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 72
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: -.0906419456, y: -.752817273, z: .0879177079, w: .646003664}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 526967687448616e645468756d6231
+    _Transform: {fileID: 461900}
+    _BindRotation: {x: .000123995618, y: -.00563636655, z: .0219935421, w: .99974221}
+    _BindPosition: {x: .0146849155, y: -.0111049423, z: .0258580949}
+    _BindMatrix:
+      e00: .998969376
+      e01: -.0439771898
+      e02: -.0112643726
+      e03: 0
+      e10: .0439743139
+      e11: .999032497
+      e12: -.000495859364
+      e13: 0
+      e20: .0112752877
+      e21: -5.53944757e-09
+      e22: .9999367
+      e23: 0
+      e30: -.014472913
+      e31: .0117398193
+      e32: -.0256965421
+      e33: 1
+    _BoneForward: {x: .562306404, y: -.181665927, z: .806727469}
+    _BoneUp: {x: .115787275, y: .983256519, z: .140712053}
+    _BoneRight: {x: .807018399, y: -.0140802283, z: -.565679908}
+    _ToBoneForward: {x: .0848508105, y: .299059629, z: -.0342355259, w: .949837685}
+    _IsDirty: 0
+    _Length: .0291193333
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 61
+    SerializationChildIndexes: 4b000000
+    _ToBoneForwardInv: {x: -.0848508105, y: -.299059629, z: .0342355259, w: .949837685}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 526967687448616e645468756d6232
+    _Transform: {fileID: 461972}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: .0163739994, y: -.00528999977, z: .0234913602}
+    _BindMatrix:
+      e00: 1.00000024
+      e01: -4.42560655e-08
+      e02: 3.11919446e-09
+      e03: 0
+      e10: -4.42560655e-08
+      e11: 1
+      e12: -4.97330621e-09
+      e13: 0
+      e20: 3.11919446e-09
+      e21: -4.97330621e-09
+      e22: 1.00000024
+      e23: 0
+      e30: -.0163738839
+      e31: .00528983865
+      e32: -.0234913528
+      e33: 1
+    _BoneForward: {x: .753863633, y: -.226219863, z: .616858304}
+    _BoneUp: {x: .181704462, y: .974022806, z: .135141119}
+    _BoneRight: {x: .617292762, y: -.00997975189, z: -.758054495}
+    _ToBoneForward: {x: .100653574, y: .425957412, z: -.053455323, w: .897536457}
+    _IsDirty: 0
+    _Length: .0337727293
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 74
+    SerializationChildIndexes: 4c000000
+    _ToBoneForwardInv: {x: -.100653574, y: -.425957412, z: .053455323, w: .897536457}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  - _GUID: 
+    _Name: 526967687448616e645468756d6233
+    _Transform: {fileID: 461980}
+    _BindRotation: {x: 0, y: -0, z: -0, w: 1}
+    _BindPosition: {x: .0254599992, y: -.00763999997, z: .0208330005}
+    _BindMatrix:
+      e00: 1.00000024
+      e01: -4.42560655e-08
+      e02: 3.11919446e-09
+      e03: 0
+      e10: -4.42560655e-08
+      e11: 1
+      e12: -4.97330621e-09
+      e13: 0
+      e20: 3.11919446e-09
+      e21: -4.97330621e-09
+      e22: 1.00000024
+      e23: 0
+      e30: -.0254598986
+      e31: .00763985096
+      e32: -.0208329856
+      e33: 1
+    _BoneForward: {x: .753863633, y: -.226219863, z: .616858304}
+    _BoneUp: {x: .181704462, y: .974022806, z: .135141119}
+    _BoneRight: {x: .617292762, y: -.00997975189, z: -.758054495}
+    _ToBoneForward: {x: .100653574, y: .425957412, z: -.053455323, w: .897536457}
+    _IsDirty: 0
+    _Length: .00675454596
+    _Weight: 1
+    _Swing: {x: 0, y: 0, z: 0, w: 1}
+    _Twist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationParentIndex: 75
+    SerializationChildIndexes: 
+    _ToBoneForwardInv: {x: -.100653574, y: -.425957412, z: .053455323, w: .897536457}
+    _TargetSwing: {x: 0, y: 0, z: 0, w: 1}
+    _TargetTwist: {x: 0, y: 0, z: 0, w: 1}
+    SerializationJoint: 
+    _ShowDebug: 0
+  MotorDefinitions:
+  - 7b5f5f54797065203a20636f6d2e6f6f7469692e4f626a656374732e426f6e65436f6e74726f6c6c6572732e466f6f74506c6163656d656e744d6f746f722c20417373656d626c792d4353686172702c2056657273696f6e3d302e302e302e302c2043756c747572653d6e65757472616c2c205075626c69634b6579546f6b656e3d6e756c6c2c205f497352696768744c6567203a20547275652c205f55736542696e64526f746174696f6e203a2046616c73652c205f557365506c616e654e6f726d616c203a2046616c73652c205f416c6c6f774c6567457874656e73696f6e203a2046616c73652c205f526f74617465466f6f74546f47726f756e64203a20547275652c205f526f74617465466f6f745265717569726573426f7468203a20547275652c205f466f6f74546f65416e676c65203a20302c205f466f6f74546f6544697374616e6365203a20302c205f52617963617374537461727444697374616e6365203a20302e352c205f52617963617374457874656e73696f6e44697374616e6365203a20302e30322c205f426f6e65496e666f203a205b7b5f5f54797065203a20636f6d2e6f6f7469692e4f626a656374732e426f6e65436f6e74726f6c6c6572732e466f6f74506c6163656d656e744d6f746f722b466f6f74506c6163656d656e744d6f746f72426f6e652c20417373656d626c792d4353686172702c2056657273696f6e3d302e302e302e302c2043756c747572653d6e65757472616c2c205075626c69634b6579546f6b656e3d6e756c6c2c2042656e6441786973203a2022282d312c20302c203029222c205477697374203a20302c20526f746174696f6e203a2022282d302e3031373839363638392c202d302e37313330343338312c20302e37303036373034322c20302e303137353836313929222c20526f746174696f6e546172676574203a202228302e3031373839363638392c20302e37313330343338312c202d302e37303036373034322c202d302e303137353836313929222c20526f746174696f6e4c657270203a20302e312c20576569676874203a20317d2c7b5f5f54797065203a20636f6d2e6f6f7469692e4f626a656374732e426f6e65436f6e74726f6c6c6572732e466f6f74506c6163656d656e744d6f746f722b466f6f74506c6163656d656e744d6f746f72426f6e652c20417373656d626c792d4353686172702c2056657273696f6e3d302e302e302e302c2043756c747572653d6e65757472616c2c205075626c69634b6579546f6b656e3d6e756c6c2c2042656e6441786973203a202228312c20302c203029222c205477697374203a20302c20526f746174696f6e203a2022282d302e303034323433343734392c202d302e36393639373332362c20302e37313730373132392c20302e3030343336353930323929222c20526f746174696f6e546172676574203a202228302e303034323433343734392c20302e36393639373332362c202d302e37313730373132392c202d302e3030343336353930323929222c20526f746174696f6e4c657270203a20302e312c20576569676874203a20317d2c7b5f5f54797065203a20636f6d2e6f6f7469692e4f626a656374732e426f6e65436f6e74726f6c6c6572732e466f6f74506c6163656d656e744d6f746f722b466f6f74506c6163656d656e744d6f746f72426f6e652c20417373656d626c792d4353686172702c2056657273696f6e3d302e302e302e302c2043756c747572653d6e65757472616c2c205075626c69634b6579546f6b656e3d6e756c6c2c2042656e6441786973203a202228312c20302c203029222c205477697374203a20302c20526f746174696f6e203a202228302e303035393332383633382c202d302e39373237303134392c20302e32333036333037312c20302e30323530323232373429222c20526f746174696f6e546172676574203a2022282d302e303035393332383633382c20302e39373237303134392c202d302e32333036333037312c202d302e30323530323232373429222c20526f746174696f6e4c657270203a20302e312c20576569676874203a20317d2c7b5f5f54797065203a20636f6d2e6f6f7469692e4f626a656374732e426f6e65436f6e74726f6c6c6572732e466f6f74506c6163656d656e744d6f746f722b466f6f74506c6163656d656e744d6f746f72426f6e652c20417373656d626c792d4353686172702c2056657273696f6e3d302e302e302e302c2043756c747572653d6e65757472616c2c205075626c69634b6579546f6b656e3d6e756c6c2c2042656e6441786973203a202228312c20302c203029222c205477697374203a20302c20526f746174696f6e203a202228302c20302c20302c203129222c20526f746174696f6e546172676574203a202228302c20302c20302c203129222c20526f746174696f6e4c657270203a20302e312c20576569676874203a20317d5d2c205f4170706c794c696d697473203a20547275652c2053657269616c697a6174696f6e426f6e65496e6465786573203a205b352c362c372c385d2c205f4973456e61626c6564203a20547275652c205f4973456469746f72456e61626c6564203a2046616c73652c205f49734465627567456e61626c6564203a2046616c73652c205f49734669786564557064617465456e61626c6564203a2046616c73652c205f4669786564557064617465465053203a2036302c205f576569676874203a20312c205f47554944203a2022222c205f4e616d65203a2022227d
+  EditorShowBones: 1
+  EditorShowBoneLimits: 1
+  EditorAutoScaleHandles: 1
+  EditorShowSelectedBones: 1
+  EditorForceBoxColliders: 1
+  EditorLastTime: 6588.15039
+  EditorDeltaTime: .0166599993
+--- !u!137 &13761850
+SkinnedMeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161926}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 2100000, guid: d70f8d6751394eb4a872991a3ec1ae0e, type: 2}
+  - {fileID: 2100000, guid: 155183ffc2521c047920fef5849358ef, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_Mesh: {fileID: 4300008, guid: 26ced4bae7bc41449973bf750d9a6d0b, type: 3}
+  m_Bones:
+  - {fileID: 461870}
+  - {fileID: 462000}
+  - {fileID: 461886}
+  - {fileID: 461882}
+  - {fileID: 461950}
+  - {fileID: 461902}
+  - {fileID: 462004}
+  - {fileID: 461994}
+  - {fileID: 461898}
+  - {fileID: 461960}
+  - {fileID: 461862}
+  - {fileID: 461976}
+  - {fileID: 461894}
+  - {fileID: 461966}
+  - {fileID: 461880}
+  - {fileID: 461890}
+  - {fileID: 461876}
+  - {fileID: 461866}
+  - {fileID: 461854}
+  - {fileID: 461958}
+  - {fileID: 461910}
+  - {fileID: 462012}
+  - {fileID: 461928}
+  - {fileID: 461998}
+  - {fileID: 462008}
+  - {fileID: 461982}
+  - {fileID: 461962}
+  - {fileID: 461946}
+  - {fileID: 461952}
+  - {fileID: 461942}
+  - {fileID: 461852}
+  - {fileID: 461948}
+  - {fileID: 461878}
+  - {fileID: 461900}
+  - {fileID: 461972}
+  - {fileID: 461980}
+  - {fileID: 461904}
+  - {fileID: 461932}
+  - {fileID: 461856}
+  - {fileID: 461990}
+  - {fileID: 461868}
+  - {fileID: 461850}
+  - {fileID: 462002}
+  - {fileID: 461884}
+  - {fileID: 461874}
+  - {fileID: 461896}
+  - {fileID: 461858}
+  - {fileID: 461986}
+  - {fileID: 461968}
+  - {fileID: 461872}
+  - {fileID: 461914}
+  - {fileID: 461934}
+  - {fileID: 461988}
+  - {fileID: 461984}
+  - {fileID: 461996}
+  - {fileID: 461860}
+  - {fileID: 461920}
+  - {fileID: 462006}
+  - {fileID: 461964}
+  - {fileID: 461936}
+  - {fileID: 461944}
+  - {fileID: 461956}
+  - {fileID: 461978}
+  - {fileID: 461974}
+  - {fileID: 461918}
+  - {fileID: 461906}
+  - {fileID: 462014}
+  - {fileID: 461922}
+  - {fileID: 461892}
+  - {fileID: 461908}
+  - {fileID: 461916}
+  - {fileID: 461930}
+  - {fileID: 461938}
+  - {fileID: 461888}
+  - {fileID: 461912}
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 461870}
+  m_AABB:
+    m_Center: {x: .000666677952, y: -.100056082, z: .0549937077}
+    m_Extent: {x: .814079762, y: .864130616, z: .141355291}
+  m_DirtyAABB: 0
+--- !u!137 &13761852
+SkinnedMeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161940}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 2100000, guid: f6a3ff1f4ec8aca4abcbed80dd7db3e5, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_Mesh: {fileID: 4300014, guid: 26ced4bae7bc41449973bf750d9a6d0b, type: 3}
+  m_Bones:
+  - {fileID: 461898}
+  - {fileID: 461960}
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 461898}
+  m_AABB:
+    m_Center: {x: -5.58793545e-08, y: .00148701668, z: .0305328891}
+    m_Extent: {x: .027372513, y: .00973463058, z: .031023398}
+  m_DirtyAABB: 0
+--- !u!137 &13761854
+SkinnedMeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161954}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 2100000, guid: f6a3ff1f4ec8aca4abcbed80dd7db3e5, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_Mesh: {fileID: 4300012, guid: 26ced4bae7bc41449973bf750d9a6d0b, type: 3}
+  m_Bones:
+  - {fileID: 461994}
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 461994}
+  m_AABB:
+    m_Center: {x: 0, y: -.0278462768, z: .0504983477}
+    m_Extent: {x: .0358250998, y: .00827437639, z: .0246418603}
+  m_DirtyAABB: 0
+--- !u!137 &13761856
+SkinnedMeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161992}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 2100000, guid: f6a3ff1f4ec8aca4abcbed80dd7db3e5, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_Mesh: {fileID: 4300010, guid: 26ced4bae7bc41449973bf750d9a6d0b, type: 3}
+  m_Bones:
+  - {fileID: 461950}
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 461950}
+  m_AABB:
+    m_Center: {x: 0, y: -.00179219246, z: .0587870702}
+    m_Extent: {x: .035529051, y: .00823318958, z: .024382636}
+  m_DirtyAABB: 0
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 161924}
+  m_IsPrefabParent: 1

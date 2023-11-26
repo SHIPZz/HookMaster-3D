@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e53a0d2f607a4530b67b66ec116d3b0e, type: 3}
+  m_Name: StretchedRope
+  m_EditorClassIdentifier: 
+  Speed: 170
+  Damage: 25
+  WeaponTypeId: 0
+  WeaponPrefab: {fileID: 5828789095555488790, guid: 19cf917dbe21c0c4c89ccc7628042691, type: 3}
+  BulletPrefab: {fileID: 2362305119090888433, guid: a235a236cdf6b6543a4cb894a4300ea2, type: 3}
