@@ -1,4 +1,5 @@
 ﻿using CodeBase.Constant;
+using CodeBase.Gameplay.Camera;
 using CodeBase.Services.Providers.Asset;
 using Zenject;
 

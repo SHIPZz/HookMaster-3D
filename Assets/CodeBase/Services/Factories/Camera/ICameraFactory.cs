@@ -1,4 +1,6 @@
-﻿namespace CodeBase.Services.Factories.Camera
+﻿using CodeBase.Gameplay.Camera;
+
+namespace CodeBase.Services.Factories.Camera
 {
     public interface ICameraFactory
     {

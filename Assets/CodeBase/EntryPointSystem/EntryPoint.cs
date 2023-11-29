@@ -1,4 +1,5 @@
 ﻿using CodeBase.Enums;
+using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.PlayerSystem;
 using CodeBase.Services.Factories.Camera;
 using CodeBase.Services.Factories.Player;

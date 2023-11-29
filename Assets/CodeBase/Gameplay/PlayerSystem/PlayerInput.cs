@@ -17,16 +17,17 @@ namespace CodeBase.Gameplay.PlayerSystem
 
         public void Tick()
         {
-            var horizontalInput = SimpleInput.GetAxisRaw("Horizontal");
-            var verticalInput = SimpleInput.GetAxisRaw("Vertical");
-
-            MovementPressed?.Invoke(new Vector3(horizontalInput, 0, verticalInput));
-
             // if(!_inputService.PlayerInputActions.UI.Click.WasReleasedThisFrame())
             //     return;
             //
             // Vector2 pointPosition = _inputService.PointPosition();
             // MousePressed?.Invoke(pointPosition);
+            
+            var horizontalInput = SimpleInput.GetAxisRaw("Horizontal");
+            var verticalInput = SimpleInput.GetAxisRaw("Vertical");
+
+            MovementPressed?.Invoke(new Vector3(horizontalInput, 0, verticalInput));
+
         }
     }
 }

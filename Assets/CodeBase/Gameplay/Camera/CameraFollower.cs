@@ -1,21 +1,24 @@
 using UnityEngine;
 
-public class CameraFollower : MonoBehaviour
+namespace CodeBase.Gameplay.Camera
 {
-    [SerializeField] private Vector3 _offset;
-    [SerializeField] private float _speed = 3f;
-    private Transform _target;
-
-    private void LateUpdate()
+    public class CameraFollower : MonoBehaviour
     {
-        if(_target == null)
-            return;
+        [SerializeField] private Vector3 _offset;
+        [SerializeField] private float _speed = 3f;
+        private Transform _target;
+
+        private void LateUpdate()
+        {
+            if(_target == null)
+                return;
         
-        transform.position = _target.position + _offset * _speed;
-    }
+            transform.position = _target.position + _offset * _speed;
+        }
 
-    public void SetTarget(Transform playerTransform)
-    {
-        _target = playerTransform;
+        public void SetTarget(Transform playerTransform)
+        {
+            _target = playerTransform;
+        }
     }
 }

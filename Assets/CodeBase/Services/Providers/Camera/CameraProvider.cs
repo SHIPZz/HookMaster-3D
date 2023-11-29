@@ -1,4 +1,6 @@
-﻿namespace CodeBase.Services.Providers.Camera
+﻿using CodeBase.Gameplay.Camera;
+
+namespace CodeBase.Services.Providers.Camera
 {
     public class CameraProvider
     {
