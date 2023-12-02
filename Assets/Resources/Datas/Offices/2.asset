@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb507d2e7e687843b6c0529e64a33b3, type: 3}
-  m_Name: FirstOffice
+  m_Name: 2
   m_EditorClassIdentifier: 
   MinSalary: 10000
   MaxSalary: 20000
   MinProfit: 10000
   MaxProfit: 20000
-  QualificationType: 1
+  QualificationType: 2

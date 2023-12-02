@@ -4,6 +4,8 @@ namespace CodeBase.Services.EmployeeHirer
 {
     public class HireEmployeeFacade
     {
-        private TableProvider _tableProvider;
+        private TableService _tableService;
+        
+        
     }
 }

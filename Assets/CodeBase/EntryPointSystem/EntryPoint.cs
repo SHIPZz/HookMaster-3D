@@ -38,7 +38,7 @@ namespace CodeBase.EntryPointSystem
 
         public void Initialize()
         {
-            Player player = _playerFactory.Create(PlayerTypeId.Wolverine, _locationProvider.Locations[LocationTypeId.PlayerSpawnPoint]);
+            Player player = _playerFactory.Create(PlayerTypeId.Wolverine, _locationProvider.PlayerSpawnPoint);
             InitializeCamera(player);
             _playerProvider.Player = player;
             _weaponFactory.Create(WeaponTypeId.DefaultStretchingRope, player.transform, player.transform.position);

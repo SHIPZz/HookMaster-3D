@@ -6,6 +6,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
     {
         public int QualificationType;
         public int Salary;
+        public int Profit;
         public string Name;
 
     }

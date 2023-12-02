@@ -1,37 +1,30 @@
-﻿using System;
-using System.Linq;
-using CodeBase.Gameplay.EmployeeSystem;
+﻿using System.Linq;
 using CodeBase.Gameplay.TableSystem;
+using CodeBase.Services.Factories.Employee;
 using CodeBase.Services.Providers.EmployeeProvider;
 using CodeBase.Services.Providers.Tables;
-using UnityEngine;
 
 namespace CodeBase.Services.EmployeeHirer
 {
     public class EmployeeHirerService
     {
         private readonly EmployeeProvider _employeeProvider;
-        private readonly TableProvider _tableProvider;
-        
-        public EmployeeHirerService(EmployeeProvider employeeProvider, TableProvider tableProvider)
+        private readonly TableService _tableService;
+        private readonly IEmployeeFactory _employeeFactory;
+
+        public EmployeeHirerService(EmployeeProvider employeeProvider, TableService tableService, IEmployeeFactory employeeFactory)
         {
-            _tableProvider = tableProvider;
+            _employeeFactory = employeeFactory;
+            _tableService = tableService;
             _employeeProvider = employeeProvider;
         }
 
-        public void TryHire(string name)
+        public void Hire(PotentialEmployeeData potentialEmployeeData)
         {
-            foreach (Employee employee in _employeeProvider.Employees)
-            {
-                if (employee.Name != name) 
-                    continue;
+            Table freeTable = _tableService.Tables.FirstOrDefault(x => x.IsFree);
+            freeTable.SetCondition(false);
 
-                foreach (Table table in _tableProvider.Tables.Where(table => table.IsFree))
-                {
-                    employee.GetComponent<EmployeeMovement>().SetTarget(table.transform.position);
-                    return;
-                }
-            }
+            _employeeFactory.Create(potentialEmployeeData, freeTable.transform.position);
         }
     }
 }

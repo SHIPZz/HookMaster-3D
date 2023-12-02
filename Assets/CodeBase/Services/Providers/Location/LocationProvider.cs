@@ -6,8 +6,10 @@ using UnityEngine;
 
 namespace CodeBase.Services.Providers.Location
 {
-    public class LocationProvider : SerializedMonoBehaviour
+    public class LocationProvider : MonoBehaviour
     {
-        [OdinSerialize] public Dictionary<LocationTypeId, Transform> Locations;
-    }
+        public Transform PlayerSpawnPoint;
+        public Transform EmployeeSpawnPoint;
+        public Transform UIParent;
+}
 }

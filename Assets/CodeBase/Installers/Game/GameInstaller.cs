@@ -5,6 +5,7 @@ using CodeBase.Services.Factories.Bullet;
 using CodeBase.Services.Factories.Camera;
 using CodeBase.Services.Factories.Employee;
 using CodeBase.Services.Factories.Player;
+using CodeBase.Services.Factories.UI;
 using CodeBase.Services.Factories.Weapon;
 using CodeBase.Services.Providers.Asset;
 using CodeBase.Services.Providers.Camera;
@@ -12,6 +13,7 @@ using CodeBase.Services.Providers.EmployeeProvider;
 using CodeBase.Services.Providers.Location;
 using CodeBase.Services.Providers.Player;
 using CodeBase.Services.Providers.Tables;
+using CodeBase.Services.Window;
 using UnityEngine;
 using Zenject;
 
@@ -20,7 +22,7 @@ namespace CodeBase.Installers.Game
     public class GameInstaller : MonoInstaller
     {
         [SerializeField] private LocationProvider _locationProvider;
-        [SerializeField] private TableProvider _tableProvider;
+        [SerializeField] private TableService tableService;
         
         public override void InstallBindings()
         {
@@ -29,7 +31,11 @@ namespace CodeBase.Installers.Game
             BindFactories();
             BindProviders();
             BindEmployeeHirerService();
+            BindWindowService();
         }
+
+        private void BindWindowService() => 
+            Container.Bind<WindowService>().AsSingle();
 
         private void BindEmployeeHirerService() => 
             Container.Bind<EmployeeHirerService>().AsSingle();
@@ -41,7 +47,7 @@ namespace CodeBase.Installers.Game
         {
             Container.Bind<IAssetProvider>().To<AssetProvider>().AsSingle();
             Container.BindInstance(_locationProvider);
-            Container.BindInstance(_tableProvider);
+            Container.BindInstance(tableService);
             Container.Bind<CameraProvider>().AsSingle();
             Container.Bind<PlayerProvider>().AsSingle();
             Container.Bind<EmployeeProvider>().AsSingle();
@@ -54,6 +60,7 @@ namespace CodeBase.Installers.Game
             Container.Bind<IBulletFactory>().To<BulletFactory>().AsSingle();
             Container.Bind<IWeaponFactory>().To<WeaponFactory>().AsSingle();
             Container.Bind<IEmployeeFactory>().To<EmployeeFactory>().AsSingle();
+            Container.Bind<UIFactory>().AsSingle();
         }
 
         private void BindStaticDataServices()
@@ -61,6 +68,7 @@ namespace CodeBase.Installers.Game
             Container.Bind<PlayerStaticDataService>().AsSingle();
             Container.Bind<WeaponStaticDataService>().AsSingle();
             Container.Bind<OfficeStaticDataService>().AsSingle();
+            Container.Bind<UIStaticDataService>().AsSingle();
         }
     }
 }

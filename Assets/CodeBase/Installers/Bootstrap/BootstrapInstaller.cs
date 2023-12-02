@@ -1,5 +1,7 @@
-﻿using CodeBase.Services.Coroutine;
+﻿using CodeBase.Cheats;
+using CodeBase.Services.Coroutine;
 using CodeBase.Services.Input;
+using CodeBase.Services.SaveSystem;
 using Zenject;
 
 namespace CodeBase.Installers.Bootstrap
@@ -10,6 +12,14 @@ namespace CodeBase.Installers.Bootstrap
         {
             BindInputService();
             BindCoroutineRunner();
+            BindSaveSystem();
+            Container.BindInterfacesAndSelfTo<Cheat>().AsSingle();
+        }
+
+        private void BindSaveSystem()
+        {
+            Container.Bind<ISaveSystem>().To<PlayerPrefsSaveSystem>()
+                .AsSingle();
         }
 
         private void BindCoroutineRunner()
