@@ -36,16 +36,16 @@ namespace CodeBase.Services.Factories.UI
             var saveSystem = _diContainer.Resolve<ISaveSystem>();
             CodeBase.Data.WorldData worldData = await saveSystem.Load();
             PotentialEmployeeData potentialEmployeeData = worldData.PotentialEmployeeList
-                .SkipWhile(potentialEmployee => potentialEmployee == worldData.LastPotentialEmployeeData)
+                .SkipWhile(potentialEmployee => potentialEmployee.Equals(worldData.LastPotentialEmployeeData))
                 .FirstOrDefault();
             
-            if (potentialEmployeeData == null)
-            {
-                potentialEmployeeData = await employeeFactory.Create();
+            potentialEmployeeData ??= await employeeFactory.Create();
+
+            if (!worldData.PotentialEmployeeList.Contains(potentialEmployeeData))
                 worldData.PotentialEmployeeList.Add(potentialEmployeeData);
-                worldData.LastPotentialEmployeeData = potentialEmployeeData;
-                saveSystem.Save(worldData);
-            }
+            
+            worldData.LastPotentialEmployeeData = potentialEmployeeData;
+            saveSystem.Save(worldData);
 
             var employeeViewPrefab = _assetProvider.Get<EmployeeView>(AssetPath.EmployeeView);
             var employeeView = _diContainer.InstantiatePrefabForComponent<EmployeeView>(employeeViewPrefab, parent);

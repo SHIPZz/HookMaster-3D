@@ -32,11 +32,8 @@ namespace CodeBase.UI
             _tableService.AllTablesBusy += OnAllTablesBusy;
         }
 
-        private async void OnDestroy()
+        private void OnDestroy()
         {
-            WorldData worldData = await _saveSystem.Load();
-            worldData.LastPotentialEmployeeData = null; 
-            _saveSystem.Save(worldData);
             Destroyed?.Invoke();
         }
 

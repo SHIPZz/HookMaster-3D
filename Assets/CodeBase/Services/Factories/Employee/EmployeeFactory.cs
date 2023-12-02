@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CodeBase.Constant;
 using CodeBase.Gameplay.EmployeeSystem;
@@ -10,6 +11,7 @@ using CodeBase.SO.Employee;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace CodeBase.Services.Factories.Employee
 {
@@ -50,6 +52,7 @@ namespace CodeBase.Services.Factories.Employee
                 QualificationType = qualificationType,
                 Salary = Random.Range(officeSO.MinSalary, officeSO.MaxSalary),
                 Profit = Random.Range(officeSO.MinProfit, officeSO.MaxSalary),
+                Guid = Guid.NewGuid()
             };
 
             return potentialEmployeeData;
@@ -69,6 +72,7 @@ namespace CodeBase.Services.Factories.Employee
             employee.QualificationType = potentialEmployeeData.QualificationType;
             employee.Salary = potentialEmployeeData.Salary;
             employee.Profit = potentialEmployeeData.Profit;
+            employee.Guid = potentialEmployeeData.Guid;
             employee.GetComponent<EmployeeMovement>().SetTarget(targetPosition);
             return employee;
         }
