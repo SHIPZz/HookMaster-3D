@@ -12,8 +12,10 @@ namespace CodeBase.Services.WorldData
         public WorldDataService(ISaveSystem saveSystem) => 
             _saveSystem = saveSystem;
 
-        public async UniTask Load() => 
+        public async UniTask Load()
+        {
             WorldData = await _saveSystem.Load();
+        }
 
         public void Save() => 
             _saveSystem.Save(WorldData);

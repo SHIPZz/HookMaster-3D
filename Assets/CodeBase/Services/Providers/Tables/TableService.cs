@@ -24,36 +24,37 @@ namespace CodeBase.Services.Providers.Tables
             _worldDataService = worldDataService;
         }
 
-        public void Init(List<Guid> busyTables)
+        public void Init(List<string> busyTables)
         {
             foreach (Table table in Tables)
             {
-                table.ConditionChanged += OnTableConditionChanged;
                 print(busyTables.Count);
-                bool isFree = !busyTables.Contains(table.Guid);
+                bool isFree = busyTables.Contains(table.Id);
 
-                table.SetCondition(isFree);
-                table.IsFree = isFree;
-
-                print(isFree);
+                table.SetCondition(!isFree);
             }
 
             AvailableTableCount = Tables.Count(x => x.IsFree);
+            Tables.ForEach(x => x.ConditionChanged += OnTableConditionChanged);
             AllTableCount = Tables.Count;
         }
-        
+
         private void OnDisable() =>
             Tables.ForEach(x => x.ConditionChanged -= OnTableConditionChanged);
 
-        private void OnTableConditionChanged(bool isBusy, Guid id)
+        private void OnTableConditionChanged(bool isBusy, string id)
         {
             AvailableTableCount = Tables.Count(x => x.IsFree);
 
             if (AvailableTableCount == 0)
                 AllTablesBusy?.Invoke();
 
-            _worldDataService.WorldData.TableData.BusyTables.Add(id);
-            _worldDataService.Save();
+            if (!_worldDataService.WorldData.TableData.BusyTableIds.Contains(id))
+            {
+                _worldDataService.WorldData.TableData.BusyTableIds.Add(id);
+                _worldDataService.Save();
+            }
+
             TableConditionChanged?.Invoke();
         }
     }

@@ -6,6 +6,7 @@ namespace CodeBase.Services.TriggerObserve
     public class TriggerObserver : MonoBehaviour
     {
         public event Action<Collider> TriggerEntered;
+        public event Action<Collider> TriggerExited;
         public event Action<Collision> CollisionEntered;
 
         private void OnTriggerEnter(Collider other)
@@ -15,12 +16,11 @@ namespace CodeBase.Services.TriggerObserve
 
         private void OnTriggerExit(Collider other)
         {
-            TriggerEntered?.Invoke(other);
+            TriggerExited?.Invoke(other);
         }
 
         private void OnCollisionEnter(Collision other)
         {
-            print(other.gameObject.name);
             CollisionEntered?.Invoke(other);
         }
     }

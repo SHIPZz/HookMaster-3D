@@ -8,8 +8,11 @@ namespace CodeBase.UI
     {
         [SerializeField] protected Button _closeButton;
 
-        private void Awake() =>
-            _closeButton.onClick.AddListener(Close);
+        private void Awake()
+        {
+            if (_closeButton != null)
+                _closeButton.onClick.AddListener(Close);
+        }
 
         public abstract void Open();
         public abstract void Close();

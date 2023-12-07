@@ -63,7 +63,7 @@ namespace CodeBase.EntryPointSystem
         }
 
         private void InitTableService() =>
-            _tableService.Init(_worldDataService.WorldData.TableData.BusyTables);
+            _tableService.Init(_worldDataService.WorldData.TableData.BusyTableIds);
 
         private void InitEmployees()
         {
@@ -71,8 +71,7 @@ namespace CodeBase.EntryPointSystem
 
             foreach (EmployeeData employeeData in playerData.PurchasedEmployees)
             {
-                Table targetTable = _tableService.Tables.FirstOrDefault(x => x.Guid == employeeData.TableId);
-                Debug.Log(targetTable.gameObject.name);
+                Table targetTable = _tableService.Tables.FirstOrDefault(x => x.Id == employeeData.TableId);
                 Employee targetEmployee = _employeeFactory.Create(employeeData, targetTable.transform.position);
                 _employeeProvider.Employees.Add(targetEmployee);
             }

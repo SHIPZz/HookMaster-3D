@@ -43,7 +43,7 @@ namespace CodeBase.Services.Employee
 
             Gameplay.EmployeeSystem.Employee employee =  _employeeFactory.Create(employeeData, freeTable.transform.position);
             employee.gameObject.SetActive(false);
-            employee.Table = freeTable;
+            employee.TableId = freeTable.Id;
             _employeeProvider.Employees.Add(employee);
             
             _worldDataService.WorldData.PlayerData.PurchasedEmployees.Add(employee.ToEmployeeData());

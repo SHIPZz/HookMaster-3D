@@ -63,5 +63,13 @@ namespace CodeBase.Services.Factories.UI
                 _diContainer.InstantiatePrefabForComponent<EmployeeWindow>(windowPrefab, _locationProvider.UIParent);
             return employeeWindow;
         }
+
+        public WindowBase CreateEmployeeWorkWindow()
+        {
+            WindowBase windowPrefab = _uiStaticDataService.Get<EmployeeWorkWindow>();
+            var employeeWindow =
+                _diContainer.InstantiatePrefabForComponent<EmployeeWorkWindow>(windowPrefab, _locationProvider.UIParent);
+            return employeeWindow;
+        }
     }
 }

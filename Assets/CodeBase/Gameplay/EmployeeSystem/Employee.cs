@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using CodeBase.Gameplay.TableSystem;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.EmployeeSystem
@@ -15,8 +14,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
         public int Salary;
         public int Profit;
         public string Name;
-        public Table Table;
-        public Guid TableId;
+        public string TableId;
         public bool IsWorking { get; private set; }
 
         public void StartWorking()

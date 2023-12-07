@@ -7,22 +7,21 @@ namespace CodeBase.Gameplay.TableSystem
     {
         public bool IsFree;
 
-        public Guid Guid { get; private set; }
+        public string Id;
+        
+        public event Action<bool, string> ConditionChanged;
 
-        public event Action<bool, Guid> ConditionChanged;
-
-        private void Awake()
+        [ContextMenu("CreateGuid")]
+        public void CreateGuid()
         {
-            if (Guid.Equals(Guid.Empty))
-            {
-                Guid = new Guid();
-            }
+            var guid = Guid.NewGuid();
+            Id = guid.ToString();
         }
 
         public void SetCondition(bool isFree)
         {
             IsFree = isFree;
-            ConditionChanged?.Invoke(IsFree, Guid);
+            ConditionChanged?.Invoke(IsFree, Id);
         }
     }
 }

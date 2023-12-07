@@ -11,6 +11,6 @@ namespace CodeBase.Data
         public int QualificationType;
         public int Salary;
         public int Profit;
-        public Guid TableId;
+        public string TableId;
     }
 }

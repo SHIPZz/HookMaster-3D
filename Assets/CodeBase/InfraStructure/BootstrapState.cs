@@ -25,7 +25,7 @@ namespace CodeBase.InfraStructure
 
         public async void Enter()
         {
-            await _worldDataService.Load();
+             await _worldDataService.Load();
 
             while (!_worldTimeService.GotTime)
             {

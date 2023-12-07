@@ -64,7 +64,7 @@ namespace CodeBase.Services.Factories.Employee
             var employeePrefab = _assetProvider.Get<Gameplay.EmployeeSystem.Employee>(AssetPath.Employee);
 
             var employee = _diContainer.InstantiatePrefabForComponent<Gameplay.EmployeeSystem.Employee>(employeePrefab,
-                _locationProvider.PlayerSpawnPoint.position,
+                _locationProvider.EmployeeSpawnPoint.position,
                 Quaternion.identity,
                 null);
 
