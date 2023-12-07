@@ -9,7 +9,7 @@ namespace CodeBase.Gameplay.TableSystem
 
         public Guid Guid { get; private set; }
 
-        public event Action<bool> ConditionChanged;
+        public event Action<bool, Guid> ConditionChanged;
 
         private void Awake()
         {
@@ -22,7 +22,7 @@ namespace CodeBase.Gameplay.TableSystem
         public void SetCondition(bool isFree)
         {
             IsFree = isFree;
-            ConditionChanged?.Invoke(IsFree);
+            ConditionChanged?.Invoke(IsFree, Guid);
         }
     }
 }

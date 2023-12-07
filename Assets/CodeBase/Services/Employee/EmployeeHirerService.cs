@@ -47,7 +47,6 @@ namespace CodeBase.Services.Employee
             _employeeProvider.Employees.Add(employee);
             
             _worldDataService.WorldData.PlayerData.PurchasedEmployees.Add(employee.ToEmployeeData());
-            _worldDataService.WorldData.TableData.BusyTables.Add(freeTable.Guid);
             _worldDataService.WorldData.PotentialEmployeeList.Remove(employeeData);
             _worldDataService.Save();
         }
