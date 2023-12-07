@@ -33,8 +33,6 @@ namespace CodeBase.Services.Profit
             {
                 playerData.Money += targetProfit;
             }
-
-            Debug.Log(timeDifference);
         }
     }
 }

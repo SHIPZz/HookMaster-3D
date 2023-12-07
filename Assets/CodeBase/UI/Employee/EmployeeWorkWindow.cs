@@ -11,6 +11,8 @@ public class EmployeeWorkWindow : WindowBase
     [SerializeField] private Button _invokeEmployeeWorkButton;
     private EmployeeProvider _employeeProvider;
     private Employee _lastTargetEmployee;
+    
+    public Button InvokeEmployeeWorkButton => _invokeEmployeeWorkButton;
 
     [Inject]
     private void Construct(EmployeeProvider employeeProvider) => 
@@ -31,7 +33,6 @@ public class EmployeeWorkWindow : WindowBase
 
     public void SetLastTargetEmployee(Employee employee)
     {
-        _invokeEmployeeWorkButton.transform.position = employee.transform.position;
         _lastTargetEmployee = employee;
     }
 

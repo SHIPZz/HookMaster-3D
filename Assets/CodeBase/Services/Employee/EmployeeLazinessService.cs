@@ -1,5 +1,6 @@
 ﻿using CodeBase.Services.Providers.EmployeeProvider;
 using CodeBase.Services.Time;
+using UnityEngine;
 using Zenject;
 
 namespace CodeBase.Services.Employee
@@ -10,7 +11,7 @@ namespace CodeBase.Services.Employee
         private readonly WorldTimeService _worldTimeService;
         private readonly EmployeeProvider _employeeProvider;
 
-        public EmployeeLazinessService(WorldTimeService worldTimeService, 
+        public EmployeeLazinessService(WorldTimeService worldTimeService,
             EmployeeProvider employeeProvider)
         {
             _employeeProvider = employeeProvider;
@@ -22,6 +23,10 @@ namespace CodeBase.Services.Employee
             if (_worldTimeService.GetTimeDifferenceByDay() >= LazinessInvokeDay)
             {
                 _employeeProvider.Employees.ForEach(x => x.StopWorking());
+            }
+            else
+            {
+                _employeeProvider.Employees.ForEach(x => x.StartWorking());
             }
         }
     }

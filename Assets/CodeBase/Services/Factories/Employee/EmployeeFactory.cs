@@ -73,7 +73,7 @@ namespace CodeBase.Services.Factories.Employee
             employee.Salary = employeeData.Salary;
             employee.Profit = employeeData.Profit;
             employee.Guid = employeeData.Guid;
-            employee.GetComponent<EmployeeMovement>().SetTarget(targetPosition);
+            employee.transform.position = targetPosition;
             return employee;
         }
     }

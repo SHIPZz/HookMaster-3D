@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using CodeBase.Data;
+using CodeBase.Extensions;
 using CodeBase.Services.Coroutine;
 using CodeBase.Services.WorldData;
 using UnityEngine;
@@ -38,8 +39,8 @@ namespace CodeBase.Services.Time
         public int GetTimeDifferenceByDay()
         {
             WorldTimeData worldTimeData = _worldDataService.WorldData.WorldTimeData;
-            
-            TimeSpan timeDifference = worldTimeData.CurrentTime - worldTimeData.LastVisitedTime;
+
+            TimeSpan timeDifference = worldTimeData.CurrentTime.ToDateTime() - worldTimeData.LastVisitedTime.ToDateTime();
             
             return timeDifference.Days;
         }
@@ -49,8 +50,11 @@ namespace CodeBase.Services.Time
             if (!GotTime)
                 return;
             
-            WorldTimeData worldTimeData = _worldDataService.WorldData.WorldTimeData;
-            worldTimeData.LastVisitedTime = worldTimeData.CurrentTime;
+            _worldDataService.WorldData.WorldTimeData.LastVisitedTime =
+                _worldDataService.WorldData.WorldTimeData.CurrentTime;
+
+            _worldDataService.WorldData.WorldTimeData.LastVisitedTime.Day = 6;
+            
             _worldDataService.Save();
         }
 
@@ -71,7 +75,8 @@ namespace CodeBase.Services.Time
                     WorldTimeApiResponse response =
                         JsonUtility.FromJson<WorldTimeApiResponse>(webRequest.downloadHandler.text);
                     DateTime worldDateTime = DateTime.Parse(response.utc_datetime);
-                    _worldDataService.WorldData.WorldTimeData.CurrentTime = worldDateTime;
+
+                    _worldDataService.WorldData.WorldTimeData.CurrentTime = worldDateTime.ToDate();
                     _worldDataService.Save();
                     GotTime = true;
                     Debug.Log("World Time: " + worldDateTime);
