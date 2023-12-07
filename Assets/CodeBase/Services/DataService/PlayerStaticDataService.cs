@@ -4,7 +4,7 @@ using CodeBase.Enums;
 using CodeBase.SO.Player;
 using UnityEngine;
 
-namespace CodeBase.Services.Data
+namespace CodeBase.Services.DataService
 {
     public class PlayerStaticDataService
     {

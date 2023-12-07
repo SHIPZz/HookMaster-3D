@@ -1,12 +1,15 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using CodeBase.Constant;
-using CodeBase.Services.Data;
+using CodeBase.Data;
+using CodeBase.Services.DataService;
 using CodeBase.Services.Factories.Employee;
 using CodeBase.Services.Providers.Asset;
 using CodeBase.Services.Providers.Location;
-using CodeBase.Services.SaveSystem;
+using CodeBase.Services.WorldData;
 using CodeBase.UI;
-using Cysharp.Threading.Tasks;
+using CodeBase.UI.Employee;
 using UnityEngine;
 using Zenject;
 
@@ -30,27 +33,27 @@ namespace CodeBase.Services.Factories.UI
             _uiStaticDataService = uiStaticDataService;
         }
 
-        public async UniTask<EmployeeView> CreateEmployeeView(Transform parent)
+        public EmployeeView CreateEmployeeView(Transform parent)
         {
             var employeeFactory = _diContainer.Resolve<IEmployeeFactory>();
-            var saveSystem = _diContainer.Resolve<ISaveSystem>();
-            CodeBase.Data.WorldData worldData = await saveSystem.Load();
-            PotentialEmployeeData potentialEmployeeData = worldData.PotentialEmployeeList
-                .SkipWhile(potentialEmployee => potentialEmployee.Equals(worldData.LastPotentialEmployeeData))
-                .FirstOrDefault();
-            
-            potentialEmployeeData ??= await employeeFactory.Create();
-
-            if (!worldData.PotentialEmployeeList.Contains(potentialEmployeeData))
-                worldData.PotentialEmployeeList.Add(potentialEmployeeData);
-            
-            worldData.LastPotentialEmployeeData = potentialEmployeeData;
-            saveSystem.Save(worldData);
+            var worldDataService = _diContainer.Resolve<IWorldDataService>();
+            CodeBase.Data.WorldData worldData = worldDataService.WorldData;
+            EmployeeData employeeData = employeeFactory.Create();
 
             var employeeViewPrefab = _assetProvider.Get<EmployeeView>(AssetPath.EmployeeView);
             var employeeView = _diContainer.InstantiatePrefabForComponent<EmployeeView>(employeeViewPrefab, parent);
-            employeeView.SetInfo(potentialEmployeeData);
+            employeeView.SetInfo(employeeData);
+
+            worldData.PotentialEmployeeList.Add(employeeData);
+            worldDataService.Save();
+
             return employeeView;
+        }
+
+        public EmployeeView CreateDefaultEmployeeView(Transform parent)
+        {
+            var employeeViewPrefab = _assetProvider.Get<EmployeeView>(AssetPath.EmployeeView);
+            return _diContainer.InstantiatePrefabForComponent<EmployeeView>(employeeViewPrefab, parent);
         }
 
         public EmployeeWindow CreateEmployeeWindow()

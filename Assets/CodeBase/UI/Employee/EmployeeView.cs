@@ -1,31 +1,26 @@
-﻿using System;
-using System.Linq;
-using CodeBase.Services.EmployeeHirer;
-using CodeBase.Services.Providers.Tables;
+﻿using CodeBase.Data;
+using CodeBase.Services.Employee;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace CodeBase.UI
+namespace CodeBase.UI.Employee
 {
     [RequireComponent(typeof(Button))]
     public class EmployeeView : MonoBehaviour
     {
-        [SerializeField] private string _name;
         [SerializeField] private TMP_Text _nameText;
         [SerializeField] private TMP_Text _salaryText;
         [SerializeField] private TMP_Text _qualificationTypeText;
         [SerializeField] private TMP_Text _profitText;
         [SerializeField] private Button _hireButton;
-        private PotentialEmployeeData _potentialEmployeeData;
+        private EmployeeData _employeeData;
         private EmployeeHirerService _employeeHirerService;
 
         [Inject]
-        private void Construct(EmployeeHirerService employeeHirerService)
-        {
+        private void Construct(EmployeeHirerService employeeHirerService) => 
             _employeeHirerService = employeeHirerService;
-        }
 
         private void OnEnable() =>
             _hireButton.onClick.AddListener(OnButtonClicked);
@@ -33,18 +28,19 @@ namespace CodeBase.UI
         private void OnDisable() =>
             _hireButton.onClick.RemoveListener(OnButtonClicked);
 
-        public void SetInfo(PotentialEmployeeData potentialEmployeeData)
+        public void SetInfo(EmployeeData employeeData)
         {
-            _potentialEmployeeData = potentialEmployeeData;
-            _nameText.text = potentialEmployeeData.Name;
-            _salaryText.text = $"Salary: {potentialEmployeeData.Salary}";
-            _qualificationTypeText.text = $"Qualification: {potentialEmployeeData.QualificationType}";
-            _profitText.text = $"Profit: {potentialEmployeeData.Profit}";
+            _employeeData = employeeData;
+            _nameText.text = employeeData.Name;
+            _salaryText.text = $"Salary: {employeeData.Salary}";
+            _qualificationTypeText.text = $"Qualification: {employeeData.QualificationType}";
+            _profitText.text = $"Profit: {employeeData.Profit}";
         }
 
         private void OnButtonClicked()
         {
-            _employeeHirerService.Hire(_potentialEmployeeData);
+            _employeeHirerService.SetEmployee(_employeeData);
+            gameObject.SetActive(false);
         }
     }
 }

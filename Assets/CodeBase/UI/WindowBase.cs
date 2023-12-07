@@ -9,7 +9,7 @@ namespace CodeBase.UI
         [SerializeField] protected Button _closeButton;
 
         private void Awake() =>
-            _closeButton.onClick.AddListener(() => Destroy(gameObject));
+            _closeButton.onClick.AddListener(Close);
 
         public abstract void Open();
         public abstract void Close();

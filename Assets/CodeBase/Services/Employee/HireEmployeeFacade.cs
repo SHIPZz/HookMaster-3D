@@ -1,6 +1,6 @@
 ﻿using CodeBase.Services.Providers.Tables;
 
-namespace CodeBase.Services.EmployeeHirer
+namespace CodeBase.Services.Employee
 {
     public class HireEmployeeFacade
     {

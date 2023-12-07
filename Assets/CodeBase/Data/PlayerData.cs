@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CodeBase.Enums;
+using CodeBase.Gameplay.EmployeeSystem;
 
 namespace CodeBase.Data
 {
@@ -9,6 +10,6 @@ namespace CodeBase.Data
     {
         public int QualificationType = 1;
         public int Money;
-        public List<PlayerTypeId> PurchasedPlayers = new() { PlayerTypeId.Wolverine };
+        public List<EmployeeData> PurchasedEmployees = new();
     }
 }

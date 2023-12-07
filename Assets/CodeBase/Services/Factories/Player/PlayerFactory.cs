@@ -1,5 +1,5 @@
 ﻿using CodeBase.Enums;
-using CodeBase.Services.Data;
+using CodeBase.Services.DataService;
 using UnityEngine;
 using Zenject;
 

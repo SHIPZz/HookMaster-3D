@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CodeBase.SO.Office;
 using UnityEngine;
 
-namespace CodeBase.Services.Data
+namespace CodeBase.Services.DataService
 {
     public class OfficeStaticDataService
     {

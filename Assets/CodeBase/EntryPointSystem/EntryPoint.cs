@@ -1,12 +1,20 @@
-﻿using CodeBase.Enums;
+﻿using System.Linq;
+using CodeBase.Data;
+using CodeBase.Enums;
+using CodeBase.Extensions;
 using CodeBase.Gameplay.Camera;
+using CodeBase.Gameplay.EmployeeSystem;
 using CodeBase.Gameplay.PlayerSystem;
+using CodeBase.Gameplay.TableSystem;
 using CodeBase.Services.Factories.Camera;
+using CodeBase.Services.Factories.Employee;
 using CodeBase.Services.Factories.Player;
-using CodeBase.Services.Factories.Weapon;
 using CodeBase.Services.Providers.Camera;
+using CodeBase.Services.Providers.EmployeeProvider;
 using CodeBase.Services.Providers.Location;
 using CodeBase.Services.Providers.Player;
+using CodeBase.Services.Providers.Tables;
+using CodeBase.Services.WorldData;
 using UnityEngine;
 using Zenject;
 
@@ -19,16 +27,25 @@ namespace CodeBase.EntryPointSystem
         private readonly ICameraFactory _cameraFactory;
         private readonly CameraProvider _cameraProvider;
         private readonly PlayerProvider _playerProvider;
-        private IWeaponFactory _weaponFactory;
+        private readonly EmployeeProvider _employeeProvider;
+        private readonly IEmployeeFactory _employeeFactory;
+        private readonly IWorldDataService _worldDataService;
+        private readonly TableService _tableService;
 
-        public EntryPoint(LocationProvider locationProvider, 
+        public EntryPoint(LocationProvider locationProvider,
             IPlayerFactory playerFactory,
-            ICameraFactory cameraFactory, 
+            ICameraFactory cameraFactory,
             CameraProvider cameraProvider,
             PlayerProvider playerProvider,
-            IWeaponFactory weaponFactory)
+            EmployeeProvider employeeProvider,
+            IEmployeeFactory employeeFactory,
+            IWorldDataService worldDataService,
+            TableService tableService)
         {
-            _weaponFactory = weaponFactory;
+            _tableService = tableService;
+            _worldDataService = worldDataService;
+            _employeeFactory = employeeFactory;
+            _employeeProvider = employeeProvider;
             _playerProvider = playerProvider;
             _cameraProvider = cameraProvider;
             _locationProvider = locationProvider;
@@ -40,8 +57,25 @@ namespace CodeBase.EntryPointSystem
         {
             Player player = _playerFactory.Create(PlayerTypeId.Wolverine, _locationProvider.PlayerSpawnPoint);
             InitializeCamera(player);
+            InitEmployees();
+            InitTableService();
             _playerProvider.Player = player;
-            _weaponFactory.Create(WeaponTypeId.DefaultStretchingRope, player.transform, player.transform.position);
+        }
+
+        private void InitTableService() =>
+            _tableService.Init(_worldDataService.WorldData.TableData.BusyTables);
+
+        private void InitEmployees()
+        {
+            PlayerData playerData = _worldDataService.WorldData.PlayerData;
+
+            foreach (EmployeeData employeeData in playerData.PurchasedEmployees)
+            {
+                Table targetTable = _tableService.Tables.FirstOrDefault(x => x.Guid == employeeData.TableId);
+                Debug.Log(targetTable.gameObject.name);
+                Employee targetEmployee = _employeeFactory.Create(employeeData, targetTable.transform.position);
+                _employeeProvider.Employees.Add(targetEmployee);
+            }
         }
 
         private void InitializeCamera(Player player)

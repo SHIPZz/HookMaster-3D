@@ -1,4 +1,5 @@
 ﻿using CodeBase.Services.Window;
+using CodeBase.UI.Employee;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;

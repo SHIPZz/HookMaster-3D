@@ -4,7 +4,7 @@ using System.Linq;
 using CodeBase.UI;
 using UnityEngine;
 
-namespace CodeBase.Services.Data
+namespace CodeBase.Services.DataService
 {
     public class UIStaticDataService
     {

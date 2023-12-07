@@ -1,6 +1,7 @@
-﻿using CodeBase.InfraStructure;
-
-public interface IPayloadedState<TPayload> : IExit
+﻿namespace CodeBase.InfraStructure
 {
-    void Enter(TPayload payload);
+    public interface IPayloadedState<TPayload> : IExit
+    {
+        void Enter(TPayload payload);
+    }
 }

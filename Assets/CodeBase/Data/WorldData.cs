@@ -7,7 +7,8 @@ namespace CodeBase.Data
     public class WorldData
     {
         public PlayerData PlayerData = new();
-        public List<PotentialEmployeeData> PotentialEmployeeList = new();
-        public PotentialEmployeeData LastPotentialEmployeeData;
+        public List<EmployeeData> PotentialEmployeeList = new();
+        public WorldTimeData WorldTimeData = new();
+        public TableData TableData = new();
     }
 }

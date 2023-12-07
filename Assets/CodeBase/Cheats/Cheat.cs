@@ -11,6 +11,7 @@ namespace CodeBase.Cheats
             {
                 PlayerPrefs.DeleteAll();
                 PlayerPrefs.Save();
+                Debug.Log("clear");
             }
         }
     }

@@ -5,16 +5,24 @@ namespace CodeBase.Gameplay.TableSystem
 {
     public class Table : MonoBehaviour
     {
-        [SerializeField] private bool _isFree = true;
+        public bool IsFree;
 
-        public bool IsFree => _isFree;
-        
+        public Guid Guid { get; private set; }
+
         public event Action<bool> ConditionChanged;
+
+        private void Awake()
+        {
+            if (Guid.Equals(Guid.Empty))
+            {
+                Guid = new Guid();
+            }
+        }
 
         public void SetCondition(bool isFree)
         {
-            _isFree = isFree;
-            ConditionChanged?.Invoke(_isFree);
+            IsFree = isFree;
+            ConditionChanged?.Invoke(IsFree);
         }
     }
 }

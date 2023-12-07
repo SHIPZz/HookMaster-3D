@@ -8,8 +8,7 @@ namespace CodeBase.InfraStructure
 {
     public class LoadingCurtain : MonoBehaviour, ILoadingCurtain
     {
-        private const float CloseDuration = 1f;
-
+        [SerializeField] private float _closeDuration =1f;
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private Slider _loadingSlider;
         private Canvas _canvas;
@@ -22,24 +21,24 @@ namespace CodeBase.InfraStructure
             DontDestroyOnLoad(this);
         }
 
-        private void OnDisable() =>
-            _loadingSlider.value = 0;
+        // private void OnDisable() =>
+        //     _loadingSlider.value = 0;
 
         public void Show(float loadSliderDuration)
         {
-            _loadingSlider.value = 0;
+            // _loadingSlider.value = 0;
             _canvas.enabled = true;
-            _loadingSlider.DOValue(_loadingSlider.maxValue, loadSliderDuration).SetUpdate(true);
+            // _loadingSlider.DOValue(_loadingSlider.maxValue, loadSliderDuration).SetUpdate(true);
             _canvasGroup.alpha = 1;
         }
 
         public async void Hide()
         {
-            while (Mathf.Approximately(_loadingSlider.value, _loadingSlider.maxValue) == false)
-                await UniTask.Yield();
+            // while (Mathf.Approximately(_loadingSlider.value, _loadingSlider.maxValue) == false)
+            //     await UniTask.Yield();
 
             _canvasGroup
-                .DOFade(0, CloseDuration).SetUpdate(true)
+                .DOFade(0, _closeDuration).SetUpdate(true)
                 .OnComplete(() =>
                 {
                     _canvas.enabled = false;

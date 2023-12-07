@@ -1,6 +1,6 @@
 ﻿using CodeBase.EntryPointSystem;
-using CodeBase.Services.Data;
-using CodeBase.Services.EmployeeHirer;
+using CodeBase.Services.DataService;
+using CodeBase.Services.Employee;
 using CodeBase.Services.Factories.Bullet;
 using CodeBase.Services.Factories.Camera;
 using CodeBase.Services.Factories.Employee;
@@ -32,7 +32,13 @@ namespace CodeBase.Installers.Game
             BindProviders();
             BindEmployeeHirerService();
             BindWindowService();
+            BindEmployeeLazinessService();
         }
+
+        private void BindEmployeeLazinessService() =>
+            Container
+                .BindInterfacesAndSelfTo<EmployeeLazinessService>()
+                .AsSingle();
 
         private void BindWindowService() => 
             Container.Bind<WindowService>().AsSingle();

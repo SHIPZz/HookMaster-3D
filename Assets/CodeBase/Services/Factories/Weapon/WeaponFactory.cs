@@ -1,6 +1,6 @@
 ﻿using CodeBase.Enums;
 using CodeBase.Gameplay.WeaponSystem;
-using CodeBase.Services.Data;
+using CodeBase.Services.DataService;
 using UnityEngine;
 using Zenject;
 
