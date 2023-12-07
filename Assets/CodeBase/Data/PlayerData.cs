@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using CodeBase.Enums;
-using CodeBase.Gameplay.EmployeeSystem;
 
 namespace CodeBase.Data
 {

@@ -1,4 +1,5 @@
 ﻿using CodeBase.EntryPointSystem;
+using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.DataService;
 using CodeBase.Services.Employee;
 using CodeBase.Services.Factories.Bullet;
@@ -33,7 +34,13 @@ namespace CodeBase.Installers.Game
             BindEmployeeHirerService();
             BindWindowService();
             BindEmployeeLazinessService();
+            BindWalletService();
         }
+
+        private void BindWalletService() =>
+            Container
+                .Bind<WalletService>()
+                .AsSingle();
 
         private void BindEmployeeLazinessService() =>
             Container
