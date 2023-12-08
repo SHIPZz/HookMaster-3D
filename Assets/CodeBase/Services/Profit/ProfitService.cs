@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using CodeBase.Data;
 using CodeBase.Services.Time;
 using CodeBase.Services.WorldData;
-using UnityEngine;
 
 namespace CodeBase.Services.Profit
 {
@@ -28,11 +26,18 @@ namespace CodeBase.Services.Profit
             if (timeDifference == 0)
                 return;
             
+            if(_worldTimeService.GetTimeDifferenceByDaysBetweenProfitAndCurrentTime() == 0)
+                return;
+            
             foreach (int targetProfit in playerData.PurchasedEmployees.Select(employee =>
                          employee.Profit * AdditionalProfit))
             {
                 playerData.Money += targetProfit;
             }
+
+            _worldDataService.WorldData.WorldTimeData.LastEarnedProfitTime =
+                _worldDataService.WorldData.WorldTimeData.CurrentTime;
+            _worldDataService.Save();
         }
     }
 }

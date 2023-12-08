@@ -40,21 +40,35 @@ namespace CodeBase.Services.Time
         {
             WorldTimeData worldTimeData = _worldDataService.WorldData.WorldTimeData;
 
-            TimeSpan timeDifference = worldTimeData.CurrentTime.ToDateTime() - worldTimeData.LastVisitedTime.ToDateTime();
-            
+            TimeSpan timeDifference =
+                worldTimeData.CurrentTime.ToDateTime() - worldTimeData.LastVisitedTime.ToDateTime();
+
             return timeDifference.Days;
         }
 
+        public int GetTimeDifferenceByDaysBetweenProfitAndCurrentTime()
+        {
+            WorldTimeData worldTimeData = _worldDataService.WorldData.WorldTimeData;
+
+            if (worldTimeData.LastEarnedProfitTime.Year == 0)
+                worldTimeData.LastEarnedProfitTime = _worldDataService.WorldData.WorldTimeData.CurrentTime;
+
+            TimeSpan timeDifference =
+                worldTimeData.CurrentTime.ToDateTime() - worldTimeData.LastEarnedProfitTime.ToDateTime();
+
+            return timeDifference.Days;
+        }
+        
         private void SaveLastVisitedTime()
         {
             if (!GotTime)
                 return;
-            
+
             _worldDataService.WorldData.WorldTimeData.LastVisitedTime =
                 _worldDataService.WorldData.WorldTimeData.CurrentTime;
 
             _worldDataService.WorldData.WorldTimeData.LastVisitedTime.Day = 6;
-            
+
             _worldDataService.Save();
         }
 
@@ -72,8 +86,7 @@ namespace CodeBase.Services.Time
             {
                 try
                 {
-                    WorldTimeApiResponse response =
-                        JsonUtility.FromJson<WorldTimeApiResponse>(webRequest.downloadHandler.text);
+                    WorldTimeApiResponse response = JsonUtility.FromJson<WorldTimeApiResponse>(webRequest.downloadHandler.text);
                     DateTime worldDateTime = DateTime.Parse(response.utc_datetime);
 
                     _worldDataService.WorldData.WorldTimeData.CurrentTime = worldDateTime.ToDate();

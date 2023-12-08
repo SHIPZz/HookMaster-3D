@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine;
 
 namespace CodeBase.Data
 {
@@ -8,13 +7,6 @@ namespace CodeBase.Data
     {
         public Date CurrentTime = new();
         public Date LastVisitedTime = new();
-    }
-
-    [Serializable]
-    public class Date
-    {
-        public int Year;
-        public int Month;
-        public int Day;
+        public Date LastEarnedProfitTime = new();
     }
 }
