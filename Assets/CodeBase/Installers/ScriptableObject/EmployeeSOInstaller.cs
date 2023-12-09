@@ -4,8 +4,8 @@ using Zenject;
 
 namespace CodeBase.Installers.ScriptableObject
 {
-    [CreateAssetMenu(fileName = nameof(EmployeeNameSOInstaller), menuName = "Installers/EmployeeNameSOInstaller")]
-    public class EmployeeNameSOInstaller : ScriptableObjectInstaller
+    [CreateAssetMenu(fileName = nameof(EmployeeSOInstaller), menuName = "Installers/EmployeeSOInstaller")]
+    public class EmployeeSOInstaller : ScriptableObjectInstaller
     {
         [SerializeField] private EmployeeNameSO _employeeNameSo;
 

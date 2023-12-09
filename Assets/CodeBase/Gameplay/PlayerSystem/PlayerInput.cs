@@ -26,6 +26,9 @@ namespace CodeBase.Gameplay.PlayerSystem
             var horizontalInput = SimpleInput.GetAxisRaw("Horizontal");
             var verticalInput = SimpleInput.GetAxisRaw("Vertical");
 
+            // var horizontalInput = UltimateJoystick.GetHorizontalAxisRaw("Movement");
+            // var verticalInput = UltimateJoystick.GetVerticalAxis("Movement");
+
             MovementPressed?.Invoke(new Vector3(horizontalInput, 0, verticalInput));
 
         }

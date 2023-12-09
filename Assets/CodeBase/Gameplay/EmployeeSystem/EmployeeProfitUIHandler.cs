@@ -1,4 +1,5 @@
 ﻿using System;
+using CodeBase.Enums;
 using CodeBase.Services.Profit;
 using CodeBase.Services.Providers.Camera;
 using DG.Tweening;
@@ -22,7 +23,8 @@ namespace CodeBase.Gameplay.EmployeeSystem
         private Vector2 _initialTextAnchoredPosition;
 
         [Inject]
-        private void Construct(ProfitService profitService, CameraProvider cameraProvider)
+        private void Construct(ProfitService profitService, 
+            CameraProvider cameraProvider, [Inject(Id = ColorTypeId.Money)] Color moneyColor)
         {
             _cameraProvider = cameraProvider;
             _profitService = profitService;
@@ -43,13 +45,16 @@ namespace CodeBase.Gameplay.EmployeeSystem
             if (_employee.Guid != employeeId)
                 return;
 
-            _profitText.text = minuteProfit.ToString();
+            _profitText.enabled = true;
+            _profitText.text = $"{minuteProfit}$";
+            _profitTextRectTransform.rotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
             _profitTextRectTransform.DOAnchorPosY(_initialTextAnchoredPosition.y, 0f);
             _canvasGroup.DOFade(1, 0.5f);
-            _profitTextRectTransform.rotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
+            
             _profitTextRectTransform
                 .DOAnchorPosY(_initialTextAnchoredPosition.y + _additionalAnchoredPositionY, 2f)
-                .OnComplete(()=> _canvasGroup.DOFade(0, 0.5f));
+                .OnComplete(()=> _canvasGroup.DOFade(0, 0.5f)
+                    .OnComplete(() => _profitText.enabled = false));
             
         }
     }
