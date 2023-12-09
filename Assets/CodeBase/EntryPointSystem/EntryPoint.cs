@@ -11,6 +11,7 @@ using CodeBase.Services.EmployeeSalary;
 using CodeBase.Services.Factories.Camera;
 using CodeBase.Services.Factories.Employee;
 using CodeBase.Services.Factories.Player;
+using CodeBase.Services.Profit;
 using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.Providers.EmployeeProvider;
 using CodeBase.Services.Providers.Location;
@@ -35,6 +36,7 @@ namespace CodeBase.EntryPointSystem
         private readonly TableService _tableService;
         private readonly WalletService _walletService;
         private readonly EmployeeSalaryService _employeeSalaryService;
+        private readonly ProfitService _profitService;
 
         public EntryPoint(LocationProvider locationProvider,
             IPlayerFactory playerFactory,
@@ -46,8 +48,10 @@ namespace CodeBase.EntryPointSystem
             IWorldDataService worldDataService,
             TableService tableService,
             WalletService walletService,
-            EmployeeSalaryService employeeSalaryService)
+            EmployeeSalaryService employeeSalaryService,
+            ProfitService profitService)
         {
+            _profitService = profitService;
             _employeeSalaryService = employeeSalaryService;
             _walletService = walletService;
             _tableService = tableService;
@@ -69,6 +73,7 @@ namespace CodeBase.EntryPointSystem
             InitTableService();
             _walletService.Init();
             _employeeSalaryService.Init();
+            _profitService.Init();
             _playerProvider.Player = player;
         }
 

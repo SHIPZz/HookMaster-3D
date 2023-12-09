@@ -1,5 +1,4 @@
-﻿using CodeBase.Gameplay.PlayerSystem;
-using CodeBase.Services.Providers.Camera;
+﻿using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.TriggerObserve;
 using CodeBase.Services.Window;
 using DG.Tweening;
@@ -61,7 +60,9 @@ namespace CodeBase.Gameplay.EmployeeSystem
             _tween = _canvasGroup.DOFade(0, _appearDuration).OnComplete(() => _canvas.enabled = false);
             _moveTween?.Kill(true);
             _moveTween =
-                _buttonRectTransform.DOAnchorPosY(_initialButtonAnchoredPosition.y - _downPositionY, _downDuration);
+                _buttonRectTransform.DOAnchorPosY(_initialButtonAnchoredPosition.y - _downPositionY, _downDuration)
+                    .OnComplete(() => _employeeWorkWindow.InvokeEmployeeWorkButton.gameObject.SetActive(false));
+            
             _windowService.Close<EmployeeWorkWindow>();
         }
 
@@ -71,6 +72,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
                 return;
 
             _canvas.enabled = true;
+            _employeeWorkWindow.InvokeEmployeeWorkButton.gameObject.SetActive(true);
             _tween?.Kill(true);
             _tween = _canvasGroup.DOFade(1, _appearDuration);
             _moveTween?.Kill(true);

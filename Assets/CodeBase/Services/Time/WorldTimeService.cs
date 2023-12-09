@@ -70,7 +70,7 @@ namespace CodeBase.Services.Time
             return timeDifference.Days;
         }
 
-        public int GetTimeDifferenceByHoursBetweenSalaryPaymentAndCurrentTime()
+        public int GetTimeDifferenceByDaysBetweenSalaryPaymentAndCurrentTime()
         {
             WorldTimeData worldTimeData = _worldDataService.WorldData.WorldTimeData;
 
@@ -79,7 +79,7 @@ namespace CodeBase.Services.Time
 
             TimeSpan timeDifference = worldTimeData.CurrentTime.ToDateTime() - worldTimeData.LastSalaryPaymentTime.ToDateTime();
             Debug.Log(worldTimeData.LastSalaryPaymentTime.ToDateTime() + "last salary payment");
-            return timeDifference.Hours;
+            return timeDifference.Days;
         }
         
         private void SaveLastVisitedTime()

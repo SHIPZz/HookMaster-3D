@@ -10,14 +10,11 @@ namespace CodeBase.InfraStructure
         private readonly IWorldDataService _worldDataService;
         private readonly IGameStateMachine _gameStateMachine;
         private readonly WorldTimeService _worldTimeService;
-        private readonly ProfitService _profitService;
 
         public BootstrapState(IWorldDataService worldDataService, 
             IGameStateMachine gameStateMachine,
-            WorldTimeService worldTimeService,
-            ProfitService profitService)
+            WorldTimeService worldTimeService)
         {
-            _profitService = profitService;
             _worldTimeService = worldTimeService;
             _gameStateMachine = gameStateMachine;
             _worldDataService = worldDataService;
@@ -31,8 +28,6 @@ namespace CodeBase.InfraStructure
             {
                 await UniTask.Yield();
             }
-            
-            _profitService.Init();
             
             _gameStateMachine.ChangeState<LevelLoadState>();
         }

@@ -9,6 +9,7 @@ using CodeBase.Services.Factories.Employee;
 using CodeBase.Services.Factories.Player;
 using CodeBase.Services.Factories.UI;
 using CodeBase.Services.Factories.Weapon;
+using CodeBase.Services.Profit;
 using CodeBase.Services.Providers.Asset;
 using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.Providers.EmployeeProvider;
@@ -37,6 +38,14 @@ namespace CodeBase.Installers.Game
             BindEmployeeLazinessService();
             BindWalletService();
             BindEmployeeSalaryService();
+            BindProfitService();
+        }
+        
+        private void BindProfitService()
+        {
+            Container
+                .Bind<ProfitService>()
+                .AsSingle();
         }
 
         private void BindEmployeeSalaryService() =>

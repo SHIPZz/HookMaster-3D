@@ -13,7 +13,7 @@ namespace CodeBase.Services.Providers.Tables
         public List<Table> Tables;
         private IWorldDataService _worldDataService;
         public int AvailableTableCount { get; private set; }
-        public int AllTableCount { get; private set; }
+        public int AllTableCount => Tables.Count;
 
         public event Action AllTablesBusy;
         public event Action TableConditionChanged;
@@ -36,7 +36,6 @@ namespace CodeBase.Services.Providers.Tables
 
             AvailableTableCount = Tables.Count(x => x.IsFree);
             Tables.ForEach(x => x.ConditionChanged += OnTableConditionChanged);
-            AllTableCount = Tables.Count;
         }
 
         private void OnDisable() =>

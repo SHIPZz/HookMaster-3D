@@ -26,16 +26,14 @@ namespace CodeBase.Installers.Bootstrap
             BindWorldDataService();
             BindWorldTimeService();
             BindCheats();
-            BindProfitService();
             Container.BindInterfacesTo<BootstrapInstaller>()
                 .FromInstance(this);
         }
 
-        private void BindProfitService()
+        public void Initialize()
         {
-            Container
-                .Bind<ProfitService>()
-                .AsSingle();
+            var gameStateMachine = Container.Resolve<IGameStateMachine>();
+            gameStateMachine.ChangeState<BootstrapState>();
         }
 
         private void BindCheats() => 
@@ -65,12 +63,6 @@ namespace CodeBase.Installers.Bootstrap
         private void BindLoadingCurtain() =>
             Container.Bind<ILoadingCurtain>()
                 .FromInstance(_loadingCurtain);
-
-        public void Initialize()
-        {
-            var gameStateMachine = Container.Resolve<IGameStateMachine>();
-            gameStateMachine.ChangeState<BootstrapState>();
-        }
 
         private void BindSaveSystem() =>
             Container.Bind<ISaveSystem>().To<PlayerPrefsSaveSystem>()
