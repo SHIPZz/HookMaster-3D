@@ -25,19 +25,16 @@ namespace CodeBase.Services.Profit
 
             if (timeDifference == 0)
                 return;
-            
-            if(_worldTimeService.GetTimeDifferenceByDaysBetweenProfitAndCurrentTime() == 0)
-                return;
-            
-            foreach (int targetProfit in playerData.PurchasedEmployees.Select(employee =>
-                         employee.Profit * AdditionalProfit))
-            {
-                playerData.Money += targetProfit;
-            }
 
-            _worldDataService.WorldData.WorldTimeData.LastEarnedProfitTime =
-                _worldDataService.WorldData.WorldTimeData.CurrentTime;
-            _worldDataService.Save();
+            int profitTimeDifference = _worldTimeService.GetTimeDifferenceByDaysBetweenProfitAndCurrentTime();
+
+            if (profitTimeDifference == 0)
+                return;
+
+            foreach (int targetProfit in playerData.PurchasedEmployees.Select(employee => employee.Profit * AdditionalProfit))
+                playerData.Money += targetProfit;
+
+            _worldTimeService.SaveLastProfitEarnedTime();
         }
     }
 }

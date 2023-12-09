@@ -7,6 +7,7 @@ using CodeBase.Gameplay.EmployeeSystem;
 using CodeBase.Gameplay.PlayerSystem;
 using CodeBase.Gameplay.TableSystem;
 using CodeBase.Gameplay.Wallet;
+using CodeBase.Services.EmployeeSalary;
 using CodeBase.Services.Factories.Camera;
 using CodeBase.Services.Factories.Employee;
 using CodeBase.Services.Factories.Player;
@@ -32,7 +33,8 @@ namespace CodeBase.EntryPointSystem
         private readonly IEmployeeFactory _employeeFactory;
         private readonly IWorldDataService _worldDataService;
         private readonly TableService _tableService;
-        private WalletService _walletService;
+        private readonly WalletService _walletService;
+        private readonly EmployeeSalaryService _employeeSalaryService;
 
         public EntryPoint(LocationProvider locationProvider,
             IPlayerFactory playerFactory,
@@ -43,8 +45,10 @@ namespace CodeBase.EntryPointSystem
             IEmployeeFactory employeeFactory,
             IWorldDataService worldDataService,
             TableService tableService,
-            WalletService walletService)
+            WalletService walletService,
+            EmployeeSalaryService employeeSalaryService)
         {
+            _employeeSalaryService = employeeSalaryService;
             _walletService = walletService;
             _tableService = tableService;
             _worldDataService = worldDataService;
@@ -64,6 +68,7 @@ namespace CodeBase.EntryPointSystem
             InitEmployees();
             InitTableService();
             _walletService.Init();
+            _employeeSalaryService.Init();
             _playerProvider.Player = player;
         }
 

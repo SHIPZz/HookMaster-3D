@@ -5,8 +5,10 @@ namespace CodeBase.Data
     [Serializable]
     public class WorldTimeData
     {
-        public Date CurrentTime = new();
-        public Date LastVisitedTime = new();
-        public Date LastEarnedProfitTime = new();
+        public long CurrentTime;
+        public long LastVisitedTime;
+        public long LastEarnedProfitTime;
+        public long LastSalaryPaymentTime;
+
     }
 }

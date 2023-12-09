@@ -33,6 +33,7 @@ namespace CodeBase.Services.Employee
             foreach (Gameplay.EmployeeSystem.Employee employee in _employeeProvider.Employees.Where(employee => !employee.gameObject.activeSelf))
             {
                 employee.gameObject.SetActive(true);
+                employee.StartWorking();
             }
         }
 

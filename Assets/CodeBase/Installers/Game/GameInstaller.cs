@@ -2,6 +2,7 @@
 using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.DataService;
 using CodeBase.Services.Employee;
+using CodeBase.Services.EmployeeSalary;
 using CodeBase.Services.Factories.Bullet;
 using CodeBase.Services.Factories.Camera;
 using CodeBase.Services.Factories.Employee;
@@ -35,7 +36,13 @@ namespace CodeBase.Installers.Game
             BindWindowService();
             BindEmployeeLazinessService();
             BindWalletService();
+            BindEmployeeSalaryService();
         }
+
+        private void BindEmployeeSalaryService() =>
+            Container
+                .Bind<EmployeeSalaryService>()
+                .AsSingle();
 
         private void BindWalletService() =>
             Container

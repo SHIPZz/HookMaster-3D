@@ -23,10 +23,21 @@ namespace CodeBase.Gameplay.EmployeeSystem
             _meshRenderer.material = _materials[1];
         }
 
+        public void DecreaseSalary(int amount)
+        {
+            
+            Salary -= amount;
+        }
+
         public void StopWorking()
         {
             IsWorking = false;
             _meshRenderer.material = _materials[0];
+        }
+
+        public void AddSalary(int salary)
+        {
+            Salary += salary;
         }
     }
 }
