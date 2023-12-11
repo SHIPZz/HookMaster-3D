@@ -67,7 +67,7 @@ namespace CodeBase.EntryPointSystem
 
         public void Initialize()
         {
-            Player player = _playerFactory.Create(PlayerTypeId.Wolverine, _locationProvider.PlayerSpawnPoint);
+            Player player = _playerFactory.Create(CharacterTypeId.Boss, _locationProvider.PlayerSpawnPoint);
             InitializeCamera(player);
             InitEmployees();
             InitTableService();
@@ -87,6 +87,10 @@ namespace CodeBase.EntryPointSystem
             foreach (EmployeeData employeeData in playerData.PurchasedEmployees)
             {
                 Table targetTable = _tableService.Tables.FirstOrDefault(x => x.Id == employeeData.TableId);
+                
+                if(targetTable == null)
+                    continue;
+                
                 Employee targetEmployee = _employeeFactory.Create(employeeData, targetTable.transform.position);
                 _employeeProvider.Employees.Add(targetEmployee);
             }

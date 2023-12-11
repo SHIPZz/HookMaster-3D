@@ -6,7 +6,7 @@ namespace CodeBase.SO.Player
     [CreateAssetMenu(fileName = "PlayerSO", menuName = "Gameplay/PlayerSO")]
     public class PlayerSO : ScriptableObject
     {
-        public PlayerTypeId PlayerTypeId;
+        public CharacterTypeId characterTypeId;
         public Gameplay.PlayerSystem.Player Prefab;
     }
 }

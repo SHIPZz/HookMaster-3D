@@ -16,9 +16,9 @@ namespace CodeBase.Services.Factories.Player
             _diContainer = diContainer;
         }
         
-        public Gameplay.PlayerSystem.Player Create(PlayerTypeId playerTypeId, Transform spawnPoint)
+        public Gameplay.PlayerSystem.Player Create(CharacterTypeId characterTypeId, Transform spawnPoint)
         {
-            Gameplay.PlayerSystem.Player playerPrefab = _playerStaticDataService.Get(playerTypeId).Prefab;
+            Gameplay.PlayerSystem.Player playerPrefab = _playerStaticDataService.Get(characterTypeId).Prefab;
             
             return _diContainer.InstantiatePrefabForComponent<Gameplay.PlayerSystem.Player>(playerPrefab,
                 spawnPoint.position, Quaternion.identity, null);

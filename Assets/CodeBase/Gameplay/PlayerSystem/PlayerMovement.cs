@@ -22,9 +22,7 @@ namespace CodeBase.Gameplay.PlayerSystem
             _rigidbody.velocity = _normalizedDirection * _speed * Time.deltaTime;
         }
 
-        public void SetMovement(Vector3 normalizedDirection)
-        {
-            _normalizedDirection = normalizedDirection;
-        }
+        public void SetMovement(Vector3 movementDirection) => 
+            _normalizedDirection = movementDirection.normalized;
     }
 }

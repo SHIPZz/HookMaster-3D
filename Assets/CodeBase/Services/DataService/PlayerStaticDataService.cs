@@ -8,15 +8,15 @@ namespace CodeBase.Services.DataService
 {
     public class PlayerStaticDataService
     {
-        private readonly Dictionary<PlayerTypeId, PlayerSO> _playerDatas;
+        private readonly Dictionary<CharacterTypeId, PlayerSO> _playerDatas;
 
         public PlayerStaticDataService()
         {
             _playerDatas = Resources.LoadAll<PlayerSO>("Datas/Player")
-                .ToDictionary(x => x.PlayerTypeId, x => x);
+                .ToDictionary(x => x.characterTypeId, x => x);
         }
 
-        public PlayerSO Get(PlayerTypeId playerTypeId) =>
-            _playerDatas[playerTypeId];
+        public PlayerSO Get(CharacterTypeId characterTypeId) =>
+            _playerDatas[characterTypeId];
     }
 }

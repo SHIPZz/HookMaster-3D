@@ -8,9 +8,6 @@ namespace CodeBase.Installers.GameObjects
     [RequireComponent(typeof(GameObjectContext))]
     public class PlayerInstaller : MonoInstaller, IInitializable
     {
-        [SerializeField] private Transform _rightHand;
-        [SerializeField] private LineRenderer _lineRenderer;
-        
         private PlayerProvider _playerProvider;
 
         [Inject]
@@ -24,8 +21,6 @@ namespace CodeBase.Installers.GameObjects
             Container.Bind<Animator>().FromInstance(GetComponent<Animator>());
             Container.Bind<Rigidbody>().FromInstance(GetComponent<Rigidbody>());
             Container.Bind<PlayerAnimator>().AsSingle();
-            Container.BindInstance(_lineRenderer);
-            Container.BindInstance(_rightHand);
             Container.BindInterfacesAndSelfTo<PlayerInput>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerMovementMediator>().AsSingle();
             Container.Bind<AnimOnMoving>().FromInstance(GetComponent<AnimOnMoving>());
@@ -36,7 +31,6 @@ namespace CodeBase.Installers.GameObjects
         public void Initialize()
         {
             _playerProvider.PlayerInput = Container.Resolve<PlayerInput>();
-            _playerProvider.RightHand = _rightHand;
         }
     }
 }

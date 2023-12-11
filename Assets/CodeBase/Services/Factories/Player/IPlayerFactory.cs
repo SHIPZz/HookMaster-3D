@@ -5,6 +5,6 @@ namespace CodeBase.Services.Factories.Player
 {
     public interface IPlayerFactory
     {
-        Gameplay.PlayerSystem.Player Create(PlayerTypeId playerTypeId, Transform spawnPoint);
+        Gameplay.PlayerSystem.Player Create(CharacterTypeId characterTypeId, Transform spawnPoint);
     }
 }
