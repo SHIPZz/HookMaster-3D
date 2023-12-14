@@ -1,54 +1,61 @@
 ﻿using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.TriggerObserve;
+using CodeBase.Services.Window;
 using CodeBase.UI.UpgradeEmployee;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace CodeBase.Gameplay.EmployeeSystem
 {
     public class UpgradeEmployeeUIHandler : MonoBehaviour
     {
-        [SerializeField] private UpgradeEmployeeWindow _upgradeEmployeeWindow;
         [SerializeField] private TriggerObserver _triggerObserver;
-        [SerializeField] private CanvasGroup _canvasGroup;
-        [SerializeField] private float _canvasFadeDuration = 0.5f;
-        [SerializeField] private float _canvasNotFadeDuration = 0.2f;
-        [SerializeField] private RectTransform _upgradeWindowRectTransform;
         [SerializeField] private float _upPositionY = 2f;
         [SerializeField] private float _downPositionY = 5f;
         [SerializeField] private float _upPositionDuration = 0.5f;
         [SerializeField] private float _downPositionDuration = 0.2f;
         [SerializeField] private Employee _employee;
+        [SerializeField] private Button _upgradeButton;
+        [SerializeField] private RectTransformAnimator _rectTransformAnimator;
+        [SerializeField] private CanvasAnimator _canvasAnimator;
 
-        private Tween _canvasFadeTween;
         private Tween _movePositionTween;
         private Vector2 _initialAnchoredPosition;
         private CameraProvider _cameraProvider;
+        private WindowService _windowService;
 
         [Inject]
-        private void Construct(CameraProvider cameraProvider)
+        private void Construct(CameraProvider cameraProvider, WindowService windowService)
         {
+            _windowService = windowService;
             _cameraProvider = cameraProvider;
         }
 
         private void Awake()
         {
-            _initialAnchoredPosition = _upgradeWindowRectTransform.anchoredPosition;
-            _upgradeEmployeeWindow.gameObject.SetActive(false);
-            _canvasGroup.interactable = false;
+            _upgradeButton.gameObject.SetActive(false);
         }
 
         private void OnEnable()
         {
             _triggerObserver.TriggerEntered += OnPlayerEntered;
             _triggerObserver.TriggerExited += OnPlayerExited;
+            _upgradeButton.onClick.AddListener(OnUpgradeButtonClicked);
         }
 
         private void OnDisable()
         {
+            _upgradeButton.onClick.RemoveListener(OnUpgradeButtonClicked);
             _triggerObserver.TriggerEntered -= OnPlayerEntered;
             _triggerObserver.TriggerExited -= OnPlayerExited;
+        }
+
+        private void OnUpgradeButtonClicked()
+        {
+           var upgradeWindow =  _windowService.OpenAndGet<UpgradeEmployeeWindow>();
+           upgradeWindow.Init(_employee);
         }
 
         private void OnPlayerExited(Collider obj)
@@ -56,32 +63,22 @@ namespace CodeBase.Gameplay.EmployeeSystem
             if (!_employee.IsWorking)
                 return;
 
-            _canvasFadeTween?.Kill(true);
-            _canvasFadeTween = _canvasGroup.DOFade(0f, _canvasNotFadeDuration);
-            _movePositionTween?.Kill(true);
-
-            _movePositionTween =
-                _upgradeWindowRectTransform.DOAnchorPosY(
-                        _upgradeWindowRectTransform.anchoredPosition.y - _downPositionY,
-                        _downPositionDuration)
-                    .OnComplete(_upgradeEmployeeWindow.Close);
+            _upgradeButton.gameObject.SetActive(false);
+            _canvasAnimator.FadeOutCanvas();
+            _rectTransformAnimator.MoveAnchoredPositionY(-_downPositionY, _downPositionDuration,
+                () => _upgradeButton.gameObject.SetActive(false));
         }
 
         private void OnPlayerEntered(Collider obj)
         {
             if (!_employee.IsWorking)
                 return;
-            
-            _upgradeEmployeeWindow.Open();
-            _canvasGroup.interactable = true;
-            _upgradeWindowRectTransform.anchoredPosition = _initialAnchoredPosition;
-            _canvasFadeTween?.Kill(true);
-            _canvasFadeTween = _canvasGroup.DOFade(1f, _canvasFadeDuration);
-            _movePositionTween?.Kill(true);
-            _upgradeWindowRectTransform.rotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
-            _movePositionTween =
-                _upgradeWindowRectTransform.DOAnchorPosY(_initialAnchoredPosition.y + _upPositionY,
-                    _upPositionDuration);
+
+            _upgradeButton.gameObject.SetActive(true);
+            _rectTransformAnimator.SetInitialPosition();
+            _canvasAnimator.FadeInCanvas();
+            _rectTransformAnimator.MoveAnchoredPositionY(_upPositionY, _upPositionDuration);
+            _rectTransformAnimator.SetRotation(Quaternion.LookRotation(_cameraProvider.Camera.transform.forward));
         }
     }
 }
