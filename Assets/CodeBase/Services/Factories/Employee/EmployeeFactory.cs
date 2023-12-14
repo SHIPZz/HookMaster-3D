@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Gameplay.EmployeeSystem;
+using CodeBase.Gameplay.TableSystem;
 using CodeBase.Services.DataService;
 using CodeBase.Services.Providers.Asset;
 using CodeBase.Services.Providers.Location;
@@ -59,7 +60,7 @@ namespace CodeBase.Services.Factories.Employee
         }
 
         public Gameplay.EmployeeSystem.Employee Create(EmployeeData employeeData,
-            Vector3 targetPosition)
+            Table targetTable)
         {
             var employeePrefab = _assetProvider.Get<Gameplay.EmployeeSystem.Employee>(AssetPath.Employee);
 
@@ -73,14 +74,14 @@ namespace CodeBase.Services.Factories.Employee
             employee.Salary = employeeData.Salary;
             employee.Profit = employeeData.Profit;
             employee.Guid = employeeData.Guid;
-            employee.transform.position = targetPosition;
+            employee.GetComponent<EmployeeMovement>().SetTable(targetTable);
             return employee;
         }
     }
 
     public interface IEmployeeFactory
     {
-        Gameplay.EmployeeSystem.Employee Create(EmployeeData employeeData, Vector3 targetPosition);
+        Gameplay.EmployeeSystem.Employee Create(EmployeeData employeeData, Table targetTable);
 
         EmployeeData Create();
     }

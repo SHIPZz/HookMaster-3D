@@ -6,6 +6,7 @@ namespace CodeBase.Gameplay.TableSystem
     public class Table : MonoBehaviour
     {
         public bool IsFree;
+        public Transform Chair;
 
         public string Id;
         

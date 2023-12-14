@@ -28,7 +28,6 @@ namespace CodeBase.Services.Providers.Tables
         {
             foreach (Table table in Tables)
             {
-                print(busyTables.Count);
                 bool isFree = busyTables.Contains(table.Id);
 
                 table.SetCondition(!isFree);

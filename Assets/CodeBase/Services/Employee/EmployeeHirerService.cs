@@ -33,7 +33,6 @@ namespace CodeBase.Services.Employee
             foreach (Gameplay.EmployeeSystem.Employee employee in _employeeProvider.Employees.Where(employee => !employee.gameObject.activeSelf))
             {
                 employee.gameObject.SetActive(true);
-                employee.StartWorking();
             }
         }
 
@@ -42,7 +41,7 @@ namespace CodeBase.Services.Employee
             Table freeTable = _tableService.Tables.FirstOrDefault(x => x.IsFree);
             freeTable.SetCondition(false);
 
-            Gameplay.EmployeeSystem.Employee employee =  _employeeFactory.Create(employeeData, freeTable.transform.position);
+            Gameplay.EmployeeSystem.Employee employee =  _employeeFactory.Create(employeeData, freeTable);
             employee.gameObject.SetActive(false);
             employee.TableId = freeTable.Id;
             _employeeProvider.Employees.Add(employee);

@@ -10,6 +10,8 @@ namespace CodeBase.Gameplay.Wallet
         private const int MaxMoney = 100000000;
         private readonly IWorldDataService _worldDataService;
         public event Action<int> MoneyChanged;
+        
+        public int CurrentMoney { get; private set; }
 
         public WalletService(IWorldDataService worldDataService) => 
             _worldDataService = worldDataService;
@@ -17,6 +19,7 @@ namespace CodeBase.Gameplay.Wallet
         public void Init()
         {
             PlayerData playerData = _worldDataService.WorldData.PlayerData;
+            CurrentMoney = playerData.Money;
             MoneyChanged?.Invoke(playerData.Money);
         }
         
@@ -30,6 +33,7 @@ namespace CodeBase.Gameplay.Wallet
         {
             PlayerData playerData = _worldDataService.WorldData.PlayerData;
             playerData.Money = Mathf.Clamp(playerData.Money + money, 0, MaxMoney);
+            CurrentMoney = playerData.Money;
             MoneyChanged?.Invoke(playerData.Money);
             _worldDataService.Save();
         }

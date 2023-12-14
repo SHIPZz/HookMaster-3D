@@ -6,7 +6,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
 {
     public class Employee : MonoBehaviour
     {
-        [SerializeField] private MeshRenderer _meshRenderer;
+        [SerializeField] private SkinnedMeshRenderer _meshRenderer;
         [SerializeField] private List<Material> _materials;
 
         public Guid Guid;
@@ -20,7 +20,6 @@ namespace CodeBase.Gameplay.EmployeeSystem
         public void StartWorking()
         {
             IsWorking = true;
-            _meshRenderer.material = _materials[1];
         }
 
         public void DecreaseSalary(int amount)
@@ -32,7 +31,6 @@ namespace CodeBase.Gameplay.EmployeeSystem
         public void StopWorking()
         {
             IsWorking = false;
-            _meshRenderer.material = _materials[0];
         }
 
         public void AddSalary(int salary)

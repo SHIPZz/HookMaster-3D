@@ -15,6 +15,10 @@ namespace CodeBase.UI
         }
 
         public abstract void Open();
-        public abstract void Close();
+
+        public virtual void Close()
+        {
+            Destroy(gameObject);
+        }
     }
 }

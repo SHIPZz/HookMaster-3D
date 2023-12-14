@@ -4,7 +4,9 @@ using CodeBase.Gameplay.TableSystem;
 using CodeBase.Services.Employee;
 using CodeBase.Services.Factories.UI;
 using CodeBase.Services.Providers.Tables;
+using CodeBase.Services.Window;
 using CodeBase.Services.WorldData;
+using CodeBase.UI.Hud;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -21,13 +23,16 @@ namespace CodeBase.UI.Employee
         private UIFactory _uiFactory;
         private EmployeeHirerService _employeeHirerService;
         private IWorldDataService _worldDataService;
+        private WindowService _windowService;
 
         [Inject]
         private void Construct(TableService tableService,
             UIFactory uiFactory,
             EmployeeHirerService employeeHirerService,
-            IWorldDataService worldDataService)
+            IWorldDataService worldDataService,
+            WindowService windowService)
         {
+            _windowService = windowService;
             _worldDataService = worldDataService;
             _employeeHirerService = employeeHirerService;
             _uiFactory = uiFactory;
@@ -44,6 +49,8 @@ namespace CodeBase.UI.Employee
 
         public override void Open()
         {
+            _tableCountText.text = $"{_tableService.AvailableTableCount}/{_tableService.AllTableCount}";
+            
             if (!HasFreeTables())
             {
                 _noAvailableEmployeesText.gameObject.SetActive(true);
@@ -53,13 +60,13 @@ namespace CodeBase.UI.Employee
             SetEmployeeViews();
 
             _parent.gameObject.SetActive(true);
-            _tableCountText.text = $"{_tableService.AvailableTableCount}/{_tableService.AllTableCount}";
             _noAvailableEmployeesText.gameObject.SetActive(false);
         }
 
         public override void Close()
         {
             _employeeHirerService.ActivateCreatedEmployees();
+            _windowService.Open<HudWindow>();
             Destroy(gameObject);
         }
 

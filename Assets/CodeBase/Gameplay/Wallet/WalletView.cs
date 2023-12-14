@@ -1,8 +1,5 @@
-﻿using System;
-using CodeBase.Enums;
+﻿using CodeBase.Enums;
 using DG.Tweening;
-using DG.Tweening.Core;
-using DG.Tweening.Plugins.Options;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
@@ -40,6 +37,7 @@ namespace CodeBase.Gameplay.Wallet
         {
             _walletService.MoneyChanged += SetMoney;
             _moneyText.color = _moneyColor;
+            _moneyText.text = $"{_walletService.CurrentMoney}$";
         }
 
         private void OnDisable() =>

@@ -20,14 +20,10 @@ namespace CodeBase.Services.Employee
 
         public void Initialize()
         {
-            if (_worldTimeService.GetTimeDifferenceByDay() >= LazinessInvokeDay)
-            {
-                _employeeProvider.Employees.ForEach(x => x.StopWorking());
-            }
-            else
-            {
-                _employeeProvider.Employees.ForEach(x => x.StartWorking());
-            }
+            if (_worldTimeService.GetTimeDifferenceByDay() < LazinessInvokeDay)
+                return;
+            
+            _employeeProvider.Employees.ForEach(x => x.StopWorking());
         }
     }
 }

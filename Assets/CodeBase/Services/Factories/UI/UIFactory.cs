@@ -10,6 +10,7 @@ using CodeBase.Services.Providers.Location;
 using CodeBase.Services.WorldData;
 using CodeBase.UI;
 using CodeBase.UI.Employee;
+using CodeBase.UI.Hud;
 using UnityEngine;
 using Zenject;
 
@@ -56,20 +57,14 @@ namespace CodeBase.Services.Factories.UI
             return _diContainer.InstantiatePrefabForComponent<EmployeeView>(employeeViewPrefab, parent);
         }
 
-        public EmployeeWindow CreateEmployeeWindow()
+        public T CreateWindow<T>() where T : WindowBase
         {
-            WindowBase windowPrefab = _uiStaticDataService.Get<EmployeeWindow>();
+            WindowBase windowPrefab = _uiStaticDataService.Get<T>();
             var employeeWindow =
-                _diContainer.InstantiatePrefabForComponent<EmployeeWindow>(windowPrefab, _locationProvider.UIParent);
+                _diContainer.InstantiatePrefabForComponent<T>(windowPrefab, _locationProvider.UIParent);
             return employeeWindow;
         }
-
-        public WindowBase CreateEmployeeWorkWindow()
-        {
-            WindowBase windowPrefab = _uiStaticDataService.Get<EmployeeWorkWindow>();
-            var employeeWindow =
-                _diContainer.InstantiatePrefabForComponent<EmployeeWorkWindow>(windowPrefab, _locationProvider.UIParent);
-            return employeeWindow;
-        }
+        
+        
     }
 }

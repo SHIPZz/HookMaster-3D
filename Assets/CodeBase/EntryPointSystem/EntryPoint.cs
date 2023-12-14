@@ -17,7 +17,9 @@ using CodeBase.Services.Providers.EmployeeProvider;
 using CodeBase.Services.Providers.Location;
 using CodeBase.Services.Providers.Player;
 using CodeBase.Services.Providers.Tables;
+using CodeBase.Services.Window;
 using CodeBase.Services.WorldData;
+using CodeBase.UI.Hud;
 using UnityEngine;
 using Zenject;
 
@@ -37,6 +39,8 @@ namespace CodeBase.EntryPointSystem
         private readonly WalletService _walletService;
         private readonly EmployeeSalaryService _employeeSalaryService;
         private readonly ProfitService _profitService;
+        private readonly WindowService _windowService;
+        private int _targetFrameRate;
 
         public EntryPoint(LocationProvider locationProvider,
             IPlayerFactory playerFactory,
@@ -49,8 +53,10 @@ namespace CodeBase.EntryPointSystem
             TableService tableService,
             WalletService walletService,
             EmployeeSalaryService employeeSalaryService,
-            ProfitService profitService)
+            ProfitService profitService,
+            WindowService windowService)
         {
+            _windowService = windowService;
             _profitService = profitService;
             _employeeSalaryService = employeeSalaryService;
             _walletService = walletService;
@@ -73,8 +79,13 @@ namespace CodeBase.EntryPointSystem
             InitTableService();
             _walletService.Init();
             _employeeSalaryService.Init();
+            
+            float refreshRate = Screen.currentResolution.refreshRate;
+            
+            Application.targetFrameRate = Mathf.RoundToInt(refreshRate);
             _profitService.Init();
             _playerProvider.Player = player;
+            _windowService.Open<HudWindow>();
         }
 
         private void InitTableService() =>
@@ -91,7 +102,7 @@ namespace CodeBase.EntryPointSystem
                 if(targetTable == null)
                     continue;
                 
-                Employee targetEmployee = _employeeFactory.Create(employeeData, targetTable.transform.position);
+                Employee targetEmployee = _employeeFactory.Create(employeeData, targetTable);
                 _employeeProvider.Employees.Add(targetEmployee);
             }
         }

@@ -16,9 +16,12 @@ namespace CodeBase.Gameplay.EmployeeSystem
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private RectTransform _buttonRectTransform;
         [SerializeField] private float _downPositionY = 2f;
+        [SerializeField] private float _upPositionY = 3f;
         [SerializeField] private float _appearDuration = 0.1f;
         [SerializeField] private float _downDuration = 0.5f;
         [SerializeField] private float _upDuration = 0.25f;
+        [SerializeField] private EmployeeMovement _employeeMovement;
+        [SerializeField] private UpgradeEmployeeUIHandler _upgradeEmployeeUIHandler;
 
         private WindowService _windowService;
         private Tween _tween;
@@ -53,7 +56,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
 
         private void OnPlayerExited(Collider obj)
         {
-            if (_employee.IsWorking)
+            if (_employee.IsWorking || _employeeMovement.IsMovingToTable)
                 return;
 
             _tween?.Kill(true);
@@ -68,7 +71,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
 
         private void OnPlayerEntered(Collider obj)
         {
-            if (_employee.IsWorking)
+            if (_employee.IsWorking || _employeeMovement.IsMovingToTable)
                 return;
 
             _canvas.enabled = true;
@@ -76,7 +79,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
             _tween?.Kill(true);
             _tween = _canvasGroup.DOFade(1, _appearDuration);
             _moveTween?.Kill(true);
-            _moveTween = _buttonRectTransform.DOAnchorPosY(_initialButtonAnchoredPosition.y, _upDuration);
+            _moveTween = _buttonRectTransform.DOAnchorPosY(_initialButtonAnchoredPosition.y + _upPositionY, _upDuration);
             _employeeWorkWindow.InvokeEmployeeWorkButton.transform.rotation =
                 Quaternion.LookRotation(_cameraProvider.Camera.transform.forward,
                     _cameraProvider.Camera.transform.up);

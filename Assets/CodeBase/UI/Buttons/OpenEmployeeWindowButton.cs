@@ -1,5 +1,6 @@
 ﻿using CodeBase.Services.Window;
 using CodeBase.UI.Employee;
+using CodeBase.UI.Hud;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -22,7 +23,10 @@ namespace CodeBase.UI.Buttons
         private void OnDisable() =>
             _openButton.onClick.RemoveListener(Open);
 
-        private void Open() =>
+        private void Open()
+        {
+            _windowService.Close<HudWindow>();
             _windowService.Open<EmployeeWindow>();
+        }
     }
 }

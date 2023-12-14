@@ -1,6 +1,7 @@
 using System.Linq;
 using CodeBase.Gameplay.EmployeeSystem;
 using CodeBase.Services.Providers.EmployeeProvider;
+using CodeBase.Services.Window;
 using CodeBase.UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,10 +40,5 @@ public class EmployeeWorkWindow : WindowBase
     public override void Open()
     {
         
-    }
-
-    public override void Close()
-    {
-        Destroy(gameObject);
     }
 }

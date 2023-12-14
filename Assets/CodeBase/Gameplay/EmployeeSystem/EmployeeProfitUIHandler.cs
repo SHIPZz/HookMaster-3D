@@ -15,7 +15,6 @@ namespace CodeBase.Gameplay.EmployeeSystem
         [SerializeField] private Employee _employee;
         [SerializeField] private TMP_Text _profitText;
         [SerializeField] private RectTransform _profitTextRectTransform;
-        [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private float _additionalAnchoredPositionY = 3f;
 
         private ProfitService _profitService;
@@ -46,15 +45,20 @@ namespace CodeBase.Gameplay.EmployeeSystem
                 return;
 
             _profitText.enabled = true;
+            _profitText.transform.position = _employee.transform.position;
             _profitText.text = $"{minuteProfit}$";
             _profitTextRectTransform.rotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
             _profitTextRectTransform.DOAnchorPosY(_initialTextAnchoredPosition.y, 0f);
-            _canvasGroup.DOFade(1, 0.5f);
+            _profitText.DOFade(1f, 0.5f);
             
             _profitTextRectTransform
                 .DOAnchorPosY(_initialTextAnchoredPosition.y + _additionalAnchoredPositionY, 2f)
-                .OnComplete(()=> _canvasGroup.DOFade(0, 0.5f)
-                    .OnComplete(() => _profitText.enabled = false));
+                .OnComplete(()=> _profitText.DOFade(0, 0.5f)
+                    .OnComplete(() =>
+                    {
+                        _profitTextRectTransform.anchoredPosition = _initialTextAnchoredPosition;
+                        _profitText.enabled = false;
+                    }));
             
         }
     }
