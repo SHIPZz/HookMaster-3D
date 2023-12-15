@@ -41,7 +41,9 @@ namespace CodeBase.Gameplay.EmployeeSystem
         {
             _triggerObserver.TriggerEntered -= OnPlayerEntered;
             _triggerObserver.TriggerExited -= OnPlayerExited;
-            _invokeWorkButton.onClick.RemoveListener(OnInvokeClicked);
+
+            if (_invokeWorkButton != null)
+                _invokeWorkButton.onClick.RemoveListener(OnInvokeClicked);
         }
 
         private void OnPlayerExited(Collider obj)

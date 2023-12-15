@@ -10,7 +10,6 @@ namespace SimpleInputNamespace
 		public override void SetMaterialDirty() { return; }
 		public override void SetVerticesDirty() { return; }
 
-		public override bool raycastTarget { get; set; } = false;
 
 		protected override void OnPopulateMesh( VertexHelper vh )
 		{

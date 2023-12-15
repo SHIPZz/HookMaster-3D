@@ -80,9 +80,8 @@ namespace CodeBase.EntryPointSystem
             _walletService.Init();
             _employeeSalaryService.Init();
             
-            float refreshRate = Screen.currentResolution.refreshRate;
-            
-            Application.targetFrameRate = Mathf.RoundToInt(refreshRate);
+            RefreshRate refreshRate = Screen.currentResolution.refreshRateRatio;
+            Application.targetFrameRate = Mathf.RoundToInt((float)refreshRate.value);
             _profitService.Init();
             _playerProvider.Player = player;
             _windowService.Open<HudWindow>();

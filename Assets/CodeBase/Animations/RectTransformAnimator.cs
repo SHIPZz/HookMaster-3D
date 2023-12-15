@@ -7,7 +7,7 @@ using UnityEngine;
 public class RectTransformAnimator : MonoBehaviour
 {
     [SerializeField] private RectTransform _targetRectTransform;
-    
+
     private Tween _movePositionTween;
     private Vector2 _initialAnchoredPosition;
 
@@ -18,12 +18,12 @@ public class RectTransformAnimator : MonoBehaviour
 
     public void SetAnchoredPosition(Vector2 anchoredPosition) =>
         _targetRectTransform.anchoredPosition = anchoredPosition;
-    
+
     public void MoveAnchoredPositionY(float positionY, float duration, [CanBeNull] Action onCompleted = null)
     {
         _movePositionTween?.Kill(true);
 
-        _targetRectTransform.DOAnchorPosY( _initialAnchoredPosition.y + positionY, duration)
+        _movePositionTween = _targetRectTransform.DOAnchorPosY(_initialAnchoredPosition.y + positionY, duration)
             .OnComplete(() => onCompleted?.Invoke());
     }
 
@@ -33,7 +33,7 @@ public class RectTransformAnimator : MonoBehaviour
 
         _movePositionTween = _targetRectTransform.DOAnchorPos(targetPosition, duration);
     }
-    
+
     public void FadeText(TMP_Text text, float targetAlpha, float duration, [CanBeNull] Action onCompleted = null)
     {
         text.DOFade(targetAlpha, duration)

@@ -42,7 +42,9 @@ namespace CodeBase.Gameplay.EmployeeSystem
 
         private void OnDisable()
         {
-            _upgradeButton.onClick.RemoveListener(OnUpgradeButtonClicked);
+            if (_upgradeButton != null)
+                _upgradeButton.onClick.RemoveListener(OnUpgradeButtonClicked);
+            
             _triggerObserver.TriggerEntered -= OnPlayerEntered;
             _triggerObserver.TriggerExited -= OnPlayerExited;
         }
@@ -74,10 +76,10 @@ namespace CodeBase.Gameplay.EmployeeSystem
             _floatingButtonService.ShowFloatingButton(_upPositionY, _upPositionDuration, targetRotation,
                 AssetPath.UpgradeEmployeeButton,
                 _employee.transform);
-            
-            if(_upgradeButton != null)
+
+            if (_upgradeButton != null)
                 return;
-            
+
             _upgradeButton = _floatingButtonService.Get();
             _upgradeButton.onClick.AddListener(OnUpgradeButtonClicked);
         }
