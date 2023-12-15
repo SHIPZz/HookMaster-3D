@@ -1,8 +1,10 @@
-﻿using CodeBase.Services.Providers.Camera;
+﻿using CodeBase.Constant;
+using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.TriggerObserve;
+using CodeBase.Services.UI;
 using CodeBase.Services.Window;
-using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace CodeBase.Gameplay.EmployeeSystem
@@ -11,35 +13,22 @@ namespace CodeBase.Gameplay.EmployeeSystem
     {
         [SerializeField] private TriggerObserver _triggerObserver;
         [SerializeField] private Employee _employee;
-        [SerializeField] private Canvas _canvas;
-        [SerializeField] private EmployeeWorkWindow _employeeWorkWindow;
-        [SerializeField] private CanvasGroup _canvasGroup;
-        [SerializeField] private RectTransform _buttonRectTransform;
         [SerializeField] private float _downPositionY = 2f;
         [SerializeField] private float _upPositionY = 3f;
-        [SerializeField] private float _appearDuration = 0.1f;
         [SerializeField] private float _downDuration = 0.5f;
         [SerializeField] private float _upDuration = 0.25f;
         [SerializeField] private EmployeeMovement _employeeMovement;
-        [SerializeField] private UpgradeEmployeeUIHandler _upgradeEmployeeUIHandler;
 
-        private WindowService _windowService;
-        private Tween _tween;
-        private Tween _moveTween;
         private CameraProvider _cameraProvider;
-        private Vector2 _initialButtonAnchoredPosition;
+        private FloatingButtonService _floatingButtonService;
+        private Button _invokeWorkButton;
 
         [Inject]
-        private void Construct(WindowService windowService, CameraProvider cameraProvider)
+        private void Construct(CameraProvider cameraProvider,
+            FloatingButtonService floatingButtonService)
         {
+            _floatingButtonService = floatingButtonService;
             _cameraProvider = cameraProvider;
-            _windowService = windowService;
-        }
-
-        private void Awake()
-        {
-            _initialButtonAnchoredPosition = _buttonRectTransform.anchoredPosition;
-            _buttonRectTransform.DOAnchorPosY(_initialButtonAnchoredPosition.y - _downPositionY, 0f);
         }
 
         private void OnEnable()
@@ -52,6 +41,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
         {
             _triggerObserver.TriggerEntered -= OnPlayerEntered;
             _triggerObserver.TriggerExited -= OnPlayerExited;
+            _invokeWorkButton.onClick.RemoveListener(OnInvokeClicked);
         }
 
         private void OnPlayerExited(Collider obj)
@@ -59,14 +49,9 @@ namespace CodeBase.Gameplay.EmployeeSystem
             if (_employee.IsWorking || _employeeMovement.IsMovingToTable)
                 return;
 
-            _tween?.Kill(true);
-            _tween = _canvasGroup.DOFade(0, _appearDuration).OnComplete(() => _canvas.enabled = false);
-            _moveTween?.Kill(true);
-            _moveTween =
-                _buttonRectTransform.DOAnchorPosY(_initialButtonAnchoredPosition.y - _downPositionY, _downDuration)
-                    .OnComplete(() => _employeeWorkWindow.InvokeEmployeeWorkButton.gameObject.SetActive(false));
-            
-            _windowService.Close<EmployeeWorkWindow>();
+            Quaternion targetRotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
+            _floatingButtonService.ShowFloatingButton(-_downPositionY, _downDuration, targetRotation,
+                AssetPath.InvokeEmployeeWorkButton, _employee.transform);
         }
 
         private void OnPlayerEntered(Collider obj)
@@ -74,17 +59,20 @@ namespace CodeBase.Gameplay.EmployeeSystem
             if (_employee.IsWorking || _employeeMovement.IsMovingToTable)
                 return;
 
-            _canvas.enabled = true;
-            _employeeWorkWindow.InvokeEmployeeWorkButton.gameObject.SetActive(true);
-            _tween?.Kill(true);
-            _tween = _canvasGroup.DOFade(1, _appearDuration);
-            _moveTween?.Kill(true);
-            _moveTween = _buttonRectTransform.DOAnchorPosY(_initialButtonAnchoredPosition.y + _upPositionY, _upDuration);
-            _employeeWorkWindow.InvokeEmployeeWorkButton.transform.rotation =
-                Quaternion.LookRotation(_cameraProvider.Camera.transform.forward,
-                    _cameraProvider.Camera.transform.up);
+            Quaternion targetRotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
+            _floatingButtonService.ShowFloatingButton(_upPositionY, _upDuration, targetRotation,
+                AssetPath.InvokeEmployeeWorkButton, _employee.transform);
 
-            _employeeWorkWindow.SetLastTargetEmployee(_employee);
+            if (_invokeWorkButton == null)
+                return;
+
+            _invokeWorkButton = _floatingButtonService.Get();
+            _invokeWorkButton.onClick.AddListener(OnInvokeClicked);
+        }
+
+        private void OnInvokeClicked()
+        {
+            _employee.StartWorking();
         }
     }
 }

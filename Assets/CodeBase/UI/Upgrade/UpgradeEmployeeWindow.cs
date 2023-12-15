@@ -12,6 +12,7 @@ namespace CodeBase.UI.UpgradeEmployee
         [SerializeField] private TMP_Text _profitText;
         [SerializeField] private TMP_Text _salaryText;
         [SerializeField] private Button _upgradeButton;
+        [SerializeField] private CanvasAnimator _canvasAnimator;
 
         private Gameplay.EmployeeSystem.Employee _employee;
 
@@ -21,12 +22,18 @@ namespace CodeBase.UI.UpgradeEmployee
         private void OnDisable() => 
             _upgradeButton.onClick.RemoveListener(OnUpgradeButtonClicked);
 
-        private void OnUpgradeButtonClicked() { }
-
         public override void Open()
         {
             gameObject.SetActive(true);
+            _canvasAnimator.FadeInCanvas();
         }
+
+        public override void Close()
+        {
+            _canvasAnimator.FadeOutCanvas(base.Close);
+        }
+
+        private void OnUpgradeButtonClicked() { }
 
         public void Init(Gameplay.EmployeeSystem.Employee employee)
         {

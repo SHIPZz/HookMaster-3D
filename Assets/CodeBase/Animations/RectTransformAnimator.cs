@@ -1,6 +1,7 @@
 ﻿using System;
 using DG.Tweening;
 using JetBrains.Annotations;
+using TMPro;
 using UnityEngine;
 
 public class RectTransformAnimator : MonoBehaviour
@@ -15,6 +16,9 @@ public class RectTransformAnimator : MonoBehaviour
         _initialAnchoredPosition = _targetRectTransform.anchoredPosition;
     }
 
+    public void SetAnchoredPosition(Vector2 anchoredPosition) =>
+        _targetRectTransform.anchoredPosition = anchoredPosition;
+    
     public void MoveAnchoredPositionY(float positionY, float duration, [CanBeNull] Action onCompleted = null)
     {
         _movePositionTween?.Kill(true);
@@ -28,6 +32,12 @@ public class RectTransformAnimator : MonoBehaviour
         _movePositionTween?.Kill(true);
 
         _movePositionTween = _targetRectTransform.DOAnchorPos(targetPosition, duration);
+    }
+    
+    public void FadeText(TMP_Text text, float targetAlpha, float duration, [CanBeNull] Action onCompleted = null)
+    {
+        text.DOFade(targetAlpha, duration)
+            .OnComplete(() => onCompleted?.Invoke());
     }
 
     public void SetInitialPosition()

@@ -1,10 +1,10 @@
 ﻿using System;
+using CodeBase.Constant;
 using CodeBase.Enums;
 using CodeBase.Services.Profit;
 using CodeBase.Services.Providers.Camera;
-using DG.Tweening;
+using CodeBase.Services.UI;
 using Sirenix.OdinInspector;
-using TMPro;
 using UnityEngine;
 using Zenject;
 
@@ -13,29 +13,30 @@ namespace CodeBase.Gameplay.EmployeeSystem
     public class EmployeeProfitUIHandler : MonoBehaviour
     {
         [SerializeField] private Employee _employee;
-        [SerializeField] private TMP_Text _profitText;
-        [SerializeField] private RectTransform _profitTextRectTransform;
         [SerializeField] private float _additionalAnchoredPositionY = 3f;
+        [SerializeField] private float _fadeInDuration = 0.5f;
+        [SerializeField] private float _fadeOutDuration = 0.5f;
+        [SerializeField] private float _moveTextDuration = 1f;
 
         private ProfitService _profitService;
         private CameraProvider _cameraProvider;
         private Vector2 _initialTextAnchoredPosition;
+        private FloatingTextService _floatingTextService;
 
         [Inject]
-        private void Construct(ProfitService profitService, 
-            CameraProvider cameraProvider, [Inject(Id = ColorTypeId.Money)] Color moneyColor)
+        private void Construct(ProfitService profitService,
+            CameraProvider cameraProvider, [Inject(Id = ColorTypeId.Money)] Color moneyColor,
+            FloatingTextService floatingTextService)
         {
+            _floatingTextService = floatingTextService;
             _cameraProvider = cameraProvider;
             _profitService = profitService;
         }
 
-        private void Awake() => 
-            _initialTextAnchoredPosition = _profitTextRectTransform.anchoredPosition;
-
-        private void OnEnable() => 
+        private void OnEnable() =>
             _profitService.ProfitGot += OnProfitGot;
 
-        private void OnDisable() => 
+        private void OnDisable() =>
             _profitService.ProfitGot -= OnProfitGot;
 
         [Button]
@@ -43,23 +44,14 @@ namespace CodeBase.Gameplay.EmployeeSystem
         {
             if (_employee.Guid != employeeId)
                 return;
-
-            _profitText.enabled = true;
-            _profitText.transform.position = _employee.transform.position;
-            _profitText.text = $"{minuteProfit}$";
-            _profitTextRectTransform.rotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
-            _profitTextRectTransform.DOAnchorPosY(_initialTextAnchoredPosition.y, 0f);
-            _profitText.DOFade(1f, 0.5f);
             
-            _profitTextRectTransform
-                .DOAnchorPosY(_initialTextAnchoredPosition.y + _additionalAnchoredPositionY, 2f)
-                .OnComplete(()=> _profitText.DOFade(0, 0.5f)
-                    .OnComplete(() =>
-                    {
-                        _profitTextRectTransform.anchoredPosition = _initialTextAnchoredPosition;
-                        _profitText.enabled = false;
-                    }));
-            
+            _floatingTextService
+                .ShowFloatingText($"{minuteProfit}$", 
+                     _additionalAnchoredPositionY,
+                    _moveTextDuration, _fadeInDuration, _fadeOutDuration,
+                    Quaternion.LookRotation(_cameraProvider.Camera.transform.forward),
+                    AssetPath.ProfitText, _employee.transform);
         }
+
     }
 }

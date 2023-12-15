@@ -1,4 +1,6 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class CanvasAnimator : MonoBehaviour
@@ -14,18 +16,22 @@ public class CanvasAnimator : MonoBehaviour
         _canvasGroup.alpha = 0f;
     }
 
-    public void FadeInCanvas()
+    public void FadeInCanvas([CanBeNull] Action onCompleted = null)
     {
         _fadeTween?.Kill(true);
         _canvasGroup.interactable = true;
         _fadeTween = _canvasGroup.DOFade(1f, _fadeInDuration);
     }
 
-    public void FadeOutCanvas()
+    public void FadeOutCanvas([CanBeNull] Action onCompleted = null)
     {
         _fadeTween?.Kill(true);
 
         _fadeTween = _canvasGroup.DOFade(0f, _fadeOutDuration)
-            .OnComplete(() => _canvasGroup.interactable = false);
+            .OnComplete(() =>
+            {
+                _canvasGroup.interactable = false;
+                onCompleted?.Invoke();
+            });
     }
 }

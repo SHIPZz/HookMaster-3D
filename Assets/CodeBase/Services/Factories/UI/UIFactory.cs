@@ -11,8 +11,10 @@ using CodeBase.Services.WorldData;
 using CodeBase.UI;
 using CodeBase.UI.Employee;
 using CodeBase.UI.Hud;
+using TMPro;
 using UnityEngine;
 using Zenject;
+using Object = UnityEngine.Object;
 
 namespace CodeBase.Services.Factories.UI
 {
@@ -65,6 +67,16 @@ namespace CodeBase.Services.Factories.UI
             return employeeWindow;
         }
         
-        
+        public TMP_Text CreateText(string path, Transform parent)
+        {
+            var targetText = _assetProvider.Get<TMP_Text>(path);
+            return  _diContainer.InstantiatePrefabForComponent<TMP_Text>(targetText, parent);
+        }
+
+        public T CreateElement<T>(string path, Transform parent) where T : Object
+        {
+            var targetElement = _assetProvider.Get<T>(path);
+            return  _diContainer.InstantiatePrefabForComponent<T>(targetElement, parent);
+        }
     }
 }

@@ -18,6 +18,7 @@ namespace CodeBase.UI.Employee
         [SerializeField] private Transform _parent;
         [SerializeField] private TMP_Text _noAvailableEmployeesText;
         [SerializeField] private TMP_Text _tableCountText;
+        [SerializeField] private CanvasAnimator _canvasAnimator;
 
         private TableService _tableService;
         private UIFactory _uiFactory;
@@ -49,6 +50,7 @@ namespace CodeBase.UI.Employee
 
         public override void Open()
         {
+            _canvasAnimator.FadeInCanvas();
             _tableCountText.text = $"{_tableService.AvailableTableCount}/{_tableService.AllTableCount}";
             
             if (!HasFreeTables())
@@ -67,7 +69,7 @@ namespace CodeBase.UI.Employee
         {
             _employeeHirerService.ActivateCreatedEmployees();
             _windowService.Open<HudWindow>();
-            Destroy(gameObject);
+            _canvasAnimator.FadeOutCanvas(base.Close);
         }
 
         private void OnTableConditionChanged()

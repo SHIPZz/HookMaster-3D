@@ -11,6 +11,7 @@ namespace CodeBase.UI.Hud
     public class HudWindow : WindowBase
     {
         [SerializeField] private TMP_Text _timeText;
+        [SerializeField] private CanvasAnimator _canvasAnimator;
         private IWorldDataService _worldDataService;
 
         [Inject]
@@ -28,7 +29,12 @@ namespace CodeBase.UI.Hud
         
         public override void Open()
         {
-            
+            _canvasAnimator.FadeInCanvas();
+        }
+
+        public override void Close()
+        {
+            _canvasAnimator.FadeOutCanvas(base.Close);
         }
     }
 }
