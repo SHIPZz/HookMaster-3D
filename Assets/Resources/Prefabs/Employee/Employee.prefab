@@ -878,11 +878,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8471766784474058297}
-  - component: {fileID: 4502785755618551958}
   - component: {fileID: 2314452740354886419}
   - component: {fileID: 289451349065049623}
   m_Layer: 11
-  m_Name: 'EmployeeWorkUIHandler '
+  m_Name: TriggerObserver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -903,25 +902,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7397020913024244221}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4502785755618551958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3685682699290981036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6cce92e51104954a2e47410e80c8eca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _triggerObserver: {fileID: 289451349065049623}
-  _employee: {fileID: 6927033697138036074}
-  _downPositionY: 5
-  _upPositionY: 3
-  _downDuration: 0.25
-  _upDuration: 0.5
-  _employeeMovement: {fileID: 2069976906094230257}
 --- !u!65 &2314452740354886419
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1615,6 +1595,57 @@ Transform:
   - {fileID: 5499638482188526167}
   m_Father: {fileID: 8999967680227169689}
   m_LocalEulerAnglesHint: {x: -0.3851517, y: -178.45789, z: -169.91333}
+--- !u!1 &6621159995414503686
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6890406722900272141}
+  - component: {fileID: 1294546664225419735}
+  m_Layer: 10
+  m_Name: EmployeeWorkUIHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6890406722900272141
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6621159995414503686}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7397020913024244221}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1294546664225419735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6621159995414503686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6cce92e51104954a2e47410e80c8eca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _triggerObserver: {fileID: 289451349065049623}
+  _employee: {fileID: 6927033697138036074}
+  _downPositionY: 5
+  _upPositionY: 3
+  _downDuration: 0.25
+  _upDuration: 0.5
+  _employeeMovement: {fileID: 2069976906094230257}
 --- !u!1 &6720066068029056099
 GameObject:
   m_ObjectHideFlags: 0
@@ -1625,7 +1656,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2898322891449221387}
   - component: {fileID: 3391416538511321640}
-  - component: {fileID: 1989405320265957755}
   m_Layer: 10
   m_Name: UpgradeEmployeeUIHandler
   m_TagString: Untagged
@@ -1666,21 +1696,6 @@ MonoBehaviour:
   _upPositionDuration: 0.5
   _downPositionDuration: 0.2
   _employee: {fileID: 6927033697138036074}
---- !u!114 &1989405320265957755
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6720066068029056099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7368902ea1d34cefb36a88a2aba978a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _canvasGroup: {fileID: 0}
-  _fadeInDuration: 0.5
-  _fadeOutDuration: 0.25
 --- !u!1 &7081449495740127898
 GameObject:
   m_ObjectHideFlags: 0
@@ -1972,6 +1987,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1443541614317727509}
+  - {fileID: 6890406722900272141}
   - {fileID: 2898322891449221387}
   - {fileID: 8471766784474058297}
   - {fileID: 7239403700292205203}
