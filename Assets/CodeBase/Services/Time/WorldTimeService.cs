@@ -55,6 +55,15 @@ namespace CodeBase.Services.Time
             }
         }
 
+        public void UpdateWorldTime()
+        {
+            if(_worldTimeCoroutine != null)
+                _coroutineRunner.StopCoroutine(GetWorldTimeCoroutine());
+            
+            TimeUpdated = false;
+            _worldTimeCoroutine = _coroutineRunner.StartCoroutine(GetWorldTimeCoroutine());
+        }
+
         public void SaveLastSalaryPaymentTime()
         {
             _worldDataService.WorldData.WorldTimeData.LastSalaryPaymentTime =  _worldDataService.WorldData.WorldTimeData.CurrentTime;

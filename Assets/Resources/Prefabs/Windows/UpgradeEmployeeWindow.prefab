@@ -157,7 +157,7 @@ MonoBehaviour:
   _nameText: {fileID: 6565715383016166242}
   _profitText: {fileID: 7757014401846428788}
   _salaryText: {fileID: 5034177133097169010}
-  _upgradeButton: {fileID: 7482389350523618922}
+  _openSpeedUpWindowButton: {fileID: 3267880439283089458}
   _canvasAnimator: {fileID: -8964320187992629577}
 --- !u!225 &470952370875641419
 CanvasGroup:
@@ -407,11 +407,10 @@ GameObject:
   - component: {fileID: 983879652845488001}
   - component: {fileID: 3916639891184101239}
   - component: {fileID: 7330947143516449199}
-  - component: {fileID: 7482389350523618922}
   - component: {fileID: 1014319447040572757}
   - component: {fileID: 3267880439283089458}
   m_Layer: 5
-  m_Name: UpgradeBtn
+  m_Name: SpeedUpBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -476,7 +475,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7482389350523618922
+--- !u!114 &1014319447040572757
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -485,7 +484,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 2219761711949838876}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 94f7c6babaaf436eb5e0e2a5212d7677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetAnchoredScale: {x: 240, y: 110}
+  _animationDuration: 0.2
+--- !u!114 &3267880439283089458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2219761711949838876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 881bc7053fef4a769fb81a65140893fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -520,33 +533,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1014319447040572757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2219761711949838876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94f7c6babaaf436eb5e0e2a5212d7677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _targetAnchoredScale: {x: 240, y: 110}
-  _animationDuration: 0.2
---- !u!114 &3267880439283089458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2219761711949838876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 881bc7053fef4a769fb81a65140893fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OpenButton: {fileID: 7482389350523618922}
 --- !u!1 &2726321029428807543
 GameObject:
   m_ObjectHideFlags: 0

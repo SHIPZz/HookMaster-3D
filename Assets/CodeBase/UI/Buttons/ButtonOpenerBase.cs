@@ -1,25 +1,22 @@
 ﻿using CodeBase.Services.Window;
-using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
 namespace CodeBase.UI.Buttons
 {
-    public abstract class ButtonOpenerBase : MonoBehaviour
+    public abstract class ButtonOpenerBase : Button
     {
-        [SerializeField] protected Button OpenButton;
-        
         protected WindowService WindowService;
 
         [Inject]
         private void Construct(WindowService windowService) =>
             WindowService = windowService;
 
-        protected virtual void Awake() =>
-            OpenButton.onClick.AddListener(Open);
+        protected override void Awake() => 
+            onClick.AddListener(Open);
 
-        protected virtual void OnDisable() =>
-            OpenButton.onClick.RemoveListener(Open);
+        protected override void OnDisable() =>
+            onClick.RemoveListener(Open);
 
         protected abstract void Open();
     }

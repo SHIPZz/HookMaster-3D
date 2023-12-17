@@ -10,5 +10,6 @@ namespace CodeBase.Data
         public List<EmployeeData> PotentialEmployeeList = new();
         public WorldTimeData WorldTimeData = new();
         public TableData TableData = new();
+        public List<UpgradeEmployeeData> UpgradeEmployeeDatas = new();
     }
 }

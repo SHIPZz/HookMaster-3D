@@ -1,4 +1,6 @@
 ﻿using System;
+using CodeBase.Extensions;
+using CodeBase.UI.Buttons;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,16 +13,10 @@ namespace CodeBase.UI.UpgradeEmployee
         [SerializeField] private TMP_Text _nameText;
         [SerializeField] private TMP_Text _profitText;
         [SerializeField] private TMP_Text _salaryText;
-        [SerializeField] private Button _upgradeButton;
+        [SerializeField] private OpenSpeedUpWindowButton _openSpeedUpWindowButton;
         [SerializeField] private CanvasAnimator _canvasAnimator;
 
         private Gameplay.EmployeeSystem.Employee _employee;
-
-        private void OnEnable() => 
-            _upgradeButton.onClick.AddListener(OnUpgradeButtonClicked);
-
-        private void OnDisable() => 
-            _upgradeButton.onClick.RemoveListener(OnUpgradeButtonClicked);
 
         public override void Open()
         {
@@ -31,11 +27,10 @@ namespace CodeBase.UI.UpgradeEmployee
         public override void Close() => 
             _canvasAnimator.FadeOutCanvas(base.Close);
 
-        private void OnUpgradeButtonClicked() { }
-
         public void Init(Gameplay.EmployeeSystem.Employee employee)
         {
             _employee = employee;
+            _openSpeedUpWindowButton.SetEmployeeData(_employee.ToEmployeeData());
             _profitText.text = $"Profit: {_employee.Profit}";
             _qualificationTypeText.text = $"Qualification type: {_employee.QualificationType}";
             _nameText.text = $"Name: {_employee.Name}";

@@ -29,6 +29,7 @@ namespace CodeBase.UI.Hud
         
         public override void Open()
         {
+            print("open");
             _canvasAnimator.FadeInCanvas();
         }
 
