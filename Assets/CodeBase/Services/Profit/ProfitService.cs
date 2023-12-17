@@ -58,6 +58,10 @@ namespace CodeBase.Services.Profit
             foreach (EmployeeData employeeData in playerData.PurchasedEmployees)
             {
                 int totalProfit = (employeeData.Profit / MinutesInDay) * timeDifferenceByMinutes;
+                
+                if(totalProfit == 0)
+                    return;
+                
                 _walletService.Add(totalProfit);
                 ProfitGot?.Invoke(employeeData.Guid, totalProfit);
             }

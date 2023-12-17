@@ -32,7 +32,7 @@ namespace CodeBase.UI.Buttons
                                                             new UpgradeEmployeeData { EmployeeData = _employeeData};
             print(targetUpgradeEmployeeData);
             _worldDataService.Save();
-            speedUpWindow.SetInfo(targetUpgradeEmployeeData);
+            speedUpWindow.Init(targetUpgradeEmployeeData);
             speedUpWindow.Open();
         }
     }

@@ -7,7 +7,7 @@ namespace CodeBase.Data
     {
         public EmployeeData EmployeeData;
         public long RemainingUpdateTime;
-        public float LastSavedTime;
+        public float LastUpgradeTime = 3600f;
         public long LastUpgradeWindowOpenedTime;
     }
 }

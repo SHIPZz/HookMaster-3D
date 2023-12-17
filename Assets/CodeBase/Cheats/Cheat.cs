@@ -22,6 +22,7 @@ namespace CodeBase.Cheats
                 worldData.TableData.BusyTableIds.Clear();
                 worldData.PotentialEmployeeList.Clear();
                 worldData.PlayerData.PurchasedEmployees.Clear();
+                worldData.UpgradeEmployeeDatas.Clear();
                 worldData.PlayerData.Money = 0;
                 PlayerPrefs.DeleteKey("DataKey");
                 PlayerPrefs.Save();

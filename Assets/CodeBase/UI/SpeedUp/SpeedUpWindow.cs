@@ -37,7 +37,12 @@ namespace CodeBase.UI.SpeedUp
             _worldDataService = worldDataService;
         }
 
-        public async UniTaskVoid SetInfo(UpgradeEmployeeData upgradeEmployeeData)
+        private void OnDisable()
+        {
+            SaveLastUpgradeTime();
+        }
+
+        public async UniTaskVoid Init(UpgradeEmployeeData upgradeEmployeeData)
         {
             _upgradeEmployeeData = upgradeEmployeeData;
 
@@ -55,30 +60,43 @@ namespace CodeBase.UI.SpeedUp
             TimeSpan timePassed = _worldDataService.WorldData.WorldTimeData.CurrentTime.ToDateTime() -
                                   _upgradeEmployeeData.LastUpgradeWindowOpenedTime.ToDateTime();
 
-            _totalTime = _upgradeEmployeeData.LastSavedTime;
-            _totalTime -=  (float)timePassed.TotalSeconds;
+            print(_upgradeEmployeeData.LastUpgradeTime + " LAST UPGRADE TIME");
+            
+
+            _totalTime = _upgradeEmployeeData.LastUpgradeTime;
+            var passedSeconds = (float)timePassed.TotalSeconds;
+            _totalTime -= Mathf.Abs(passedSeconds);
             print(timePassed.TotalSeconds + " TotalSeconds");
-            print(_totalTime + " _totalTime");
-            print(_upgradeEmployeeData.LastUpgradeWindowOpenedTime.ToDateTime() + " LastUpgradeWindowOpenedTime");
-            print(_worldDataService.WorldData.WorldTimeData.CurrentTime.ToDateTime() + " CurrentTime");
+            print(passedSeconds + " TotalSeconds FLOAT");
+            // print(_totalTime + " _totalTime");
+            // print(_upgradeEmployeeData.LastUpgradeWindowOpenedTime.ToDateTime() + " LastUpgradeWindowOpenedTime");
+            // print(_worldDataService.WorldData.WorldTimeData.CurrentTime.ToDateTime() + " CurrentTime");
+
+            if (_timeCoroutine != null)
+                StopCoroutine(StartDecreaseTimeCoroutine());
+
+            _timeCoroutine = StartCoroutine(StartDecreaseTimeCoroutine());
         }
 
         public override void Open()
         {
-            if (_timeCoroutine != null)
-                StopCoroutine(StartDecreaseTimeCoroutine());
-            
             _canvasAnimator.FadeInCanvas();
-            _timeCoroutine = StartCoroutine(StartDecreaseTimeCoroutine());
         }
 
         public override void Close()
         {
             _canvasAnimator.FadeOutCanvas(base.Close);
             print(_upgradeEmployeeData.EmployeeData.Name);
-            _upgradeEmployeeData.LastSavedTime = _totalTime;
+            SaveLastUpgradeTime();
+        }
+
+        private void SaveLastUpgradeTime()
+        {
+            print(_totalTime + " TOTAL TIME SAVED");
+            _upgradeEmployeeData.LastUpgradeTime = _totalTime;
             _upgradeEmployeeData.LastUpgradeWindowOpenedTime = _worldDataService.WorldData.WorldTimeData.CurrentTime;
-            _worldDataService.WorldData.UpgradeEmployeeDatas.RemoveAll(x => x.EmployeeData.Guid == _upgradeEmployeeData.EmployeeData.Guid);
+            _worldDataService.WorldData.UpgradeEmployeeDatas.RemoveAll(x =>
+                x.EmployeeData.Guid == _upgradeEmployeeData.EmployeeData.Guid);
             _worldDataService.WorldData.UpgradeEmployeeDatas.Add(_upgradeEmployeeData);
 
             _worldDataService.Save();
@@ -86,25 +104,26 @@ namespace CodeBase.UI.SpeedUp
 
         private IEnumerator StartDecreaseTimeCoroutine()
         {
-            while (_remainingTimeSlider.value != _remainingTimeSlider.maxValue)
+            while (_totalTime != 0)
             {
                 _totalTime -= Time.deltaTime;
-                
-                _remainingTimeSlider.value =
-                    Mathf.Lerp(_remainingTimeSlider.value,
-                        Mathf.Abs(_totalTime) % TimeConstantValue.SecondsInHour / TimeConstantValue.SecondsInMinute,
-                        15 * Time.deltaTime);
 
-                int minutes = Mathf.FloorToInt((Mathf.Abs(_totalTime) % TimeConstantValue.SecondsInHour) / TimeConstantValue.SecondsInMinute);
+                float targetValue = Mathf.Abs(_totalTime) % TimeConstantValue.SecondsInHour / TimeConstantValue.SecondsInMinute;
+
+                _remainingTimeSlider.value = Mathf.Lerp(_remainingTimeSlider.value, -targetValue, 15 * Time.deltaTime);
+
+                int minutes = Mathf.FloorToInt(Mathf.Abs(_totalTime) % TimeConstantValue.SecondsInHour /
+                                               TimeConstantValue.SecondsInMinute);
                 int seconds = Mathf.FloorToInt(Mathf.Abs(_totalTime) % TimeConstantValue.SecondsInMinute);
 
 
                 _remainingTimeText.text = $"{minutes}m {seconds}s";
+                _skipDiamondText.text = $"{minutes}m";
+                _skipTicketText.text = $"{minutes}m";
                 yield return null;
             }
 
             _remainingTimeSlider.value = _remainingTimeSlider.maxValue;
         }
-
     }
 }

@@ -76,9 +76,6 @@ namespace CodeBase.Services.Time
 
             TimeSpan timeDifference = worldTimeData.CurrentTime.ToDateTime() - worldTimeData.LastVisitedTime.ToDateTime();
             
-            Debug.Log(worldTimeData.CurrentTime.ToDateTime() + " CurrentTime");
-            Debug.Log(worldTimeData.LastVisitedTime.ToDateTime() + " LastVisitedTime");
-
             return timeDifference.TotalMinutes;
         }
 
