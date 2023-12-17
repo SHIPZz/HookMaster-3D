@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 
 namespace CodeBase.InfraStructure
 {
@@ -6,6 +7,6 @@ namespace CodeBase.InfraStructure
     {
         event Action Closed;
         void Show(float sliderDuration);
-        void Hide();
+        UniTaskVoid Hide();
     }
 }

@@ -16,8 +16,10 @@ namespace CodeBase.Services.Time
 
         private readonly ICoroutineRunner _coroutineRunner;
         private readonly IWorldDataService _worldDataService;
+        private UnityEngine.Coroutine _worldTimeCoroutine;
 
         public bool GotTime { get; private set; }
+        public bool TimeUpdated { get; private set; }
 
         public WorldTimeService(IWorldDataService worldDataService, ICoroutineRunner coroutineRunner)
         {
@@ -27,19 +29,48 @@ namespace CodeBase.Services.Time
 
         public void Initialize()
         {
-            _coroutineRunner.StartCoroutine(GetWorldTime());
-            Application.quitting += SaveLastVisitedTime;
+          _worldTimeCoroutine =  _coroutineRunner.StartCoroutine(GetWorldTimeCoroutine());
+            Application.focusChanged += OnFocusCnanged;
         }
 
         public void Dispose()
         {
-            Application.quitting -= SaveLastVisitedTime;
+            Application.focusChanged -= OnFocusCnanged;
+        }
+
+        private void OnFocusCnanged(bool hasFocus)
+        {
+            if(_worldTimeCoroutine != null)
+                _coroutineRunner.StopCoroutine(GetWorldTimeCoroutine());
+
+            switch (hasFocus)
+            {
+                case true:
+                    _coroutineRunner.StartCoroutine(GetWorldTimeCoroutine());
+                    break;
+                case false:
+                    Debug.Log("save");
+                    SaveLastVisitedTime();
+                    break;
+            }
         }
 
         public void SaveLastSalaryPaymentTime()
         {
             _worldDataService.WorldData.WorldTimeData.LastSalaryPaymentTime =  _worldDataService.WorldData.WorldTimeData.CurrentTime;
             _worldDataService.Save();
+        }
+
+        public double GetTimeDifferenceByMinutes()
+        {
+            WorldTimeData worldTimeData = _worldDataService.WorldData.WorldTimeData;
+
+            TimeSpan timeDifference = worldTimeData.CurrentTime.ToDateTime() - worldTimeData.LastVisitedTime.ToDateTime();
+            
+            Debug.Log(worldTimeData.CurrentTime.ToDateTime() + " CurrentTime");
+            Debug.Log(worldTimeData.LastVisitedTime.ToDateTime() + " LastVisitedTime");
+
+            return timeDifference.TotalMinutes;
         }
 
         public void SaveLastProfitEarnedTime()
@@ -88,11 +119,11 @@ namespace CodeBase.Services.Time
                 return;
 
             _worldDataService.WorldData.WorldTimeData.LastVisitedTime = _worldDataService.WorldData.WorldTimeData.CurrentTime;
-            
+            TimeUpdated = false;
             _worldDataService.Save();
         }
 
-        private IEnumerator GetWorldTime()
+        private IEnumerator GetWorldTimeCoroutine()
         {
             using UnityWebRequest webRequest = UnityWebRequest.Get(ApiUrl);
 
@@ -112,6 +143,7 @@ namespace CodeBase.Services.Time
                     _worldDataService.WorldData.WorldTimeData.CurrentTime = worldDateTime.ToUnixTime();
                     _worldDataService.Save();
                     GotTime = true;
+                    TimeUpdated = true;
                     Debug.Log("World Time: " + worldDateTime.ToUnixTime().ToDateTime());
                 }
                 catch (Exception e)

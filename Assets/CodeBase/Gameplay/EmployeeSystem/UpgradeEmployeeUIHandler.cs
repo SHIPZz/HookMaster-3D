@@ -64,7 +64,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
             Quaternion targetRotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
             _floatingButtonService.ShowFloatingButton(-_downPositionY, _downPositionDuration, targetRotation,
                 AssetPath.UpgradeEmployeeButton,
-                _employee.transform);
+                _employee.transform,false);
         }
 
         private void OnPlayerEntered(Collider obj)
@@ -75,7 +75,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
             Quaternion targetRotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
             _floatingButtonService.ShowFloatingButton(_upPositionY, _upPositionDuration, targetRotation,
                 AssetPath.UpgradeEmployeeButton,
-                _employee.transform);
+                _employee.transform, true);
 
             if (_upgradeButton != null)
                 return;

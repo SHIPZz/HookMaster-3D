@@ -9,7 +9,7 @@ namespace CodeBase.Extensions
 
         public static long ToUnixTime(this DateTime dateTime) => 
             dateTime.ToDateTimeOffset(TimeSpan.Zero).ToUnixTimeSeconds();
-
+        
         public static DateTimeOffset ToDateTimeOffset(this DateTime dateTime) => 
             dateTime.ToDateTimeOffset(TimeSpan.Zero);
 

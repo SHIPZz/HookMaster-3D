@@ -25,7 +25,7 @@ namespace CodeBase.Installers.Game
 
         private void BindUIService()
         {
-            Container.BindInterfacesAndSelfTo<UIService>().AsSingle();
+            Container.Bind<UIService>().AsSingle();
         }
     }
 }

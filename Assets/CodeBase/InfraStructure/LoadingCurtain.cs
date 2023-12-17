@@ -18,24 +18,25 @@ namespace CodeBase.InfraStructure
         private void Awake()
         {
             _canvas = _canvasGroup.GetComponent<Canvas>();
+            _loadingSlider.value = 0;
             DontDestroyOnLoad(this);
         }
 
-        // private void OnDisable() =>
-        //     _loadingSlider.value = 0;
+        private void OnDisable() =>
+            _loadingSlider.value = 0;
 
         public void Show(float loadSliderDuration)
         {
-            // _loadingSlider.value = 0;
+            _loadingSlider.value = 0;
             _canvas.enabled = true;
-            // _loadingSlider.DOValue(_loadingSlider.maxValue, loadSliderDuration).SetUpdate(true);
+            _loadingSlider.DOValue(_loadingSlider.maxValue, loadSliderDuration).SetUpdate(true);
             _canvasGroup.alpha = 1;
         }
 
-        public async void Hide()
+        public async UniTaskVoid Hide()
         {
-            // while (Mathf.Approximately(_loadingSlider.value, _loadingSlider.maxValue) == false)
-            //     await UniTask.Yield();
+            while (Mathf.Approximately(_loadingSlider.value, _loadingSlider.maxValue) == false)
+                await UniTask.Yield();
 
             _canvasGroup
                 .DOFade(0, _closeDuration).SetUpdate(true)

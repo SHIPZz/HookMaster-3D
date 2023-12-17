@@ -25,7 +25,8 @@ namespace CodeBase.Gameplay.EmployeeSystem
 
         [Inject]
         private void Construct(ProfitService profitService,
-            CameraProvider cameraProvider, [Inject(Id = ColorTypeId.Money)] Color moneyColor,
+            CameraProvider cameraProvider,
+            [Inject(Id = ColorTypeId.Money)] Color moneyColor,
             FloatingTextService floatingTextService)
         {
             _floatingTextService = floatingTextService;

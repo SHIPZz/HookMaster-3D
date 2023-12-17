@@ -1,32 +1,14 @@
-﻿using CodeBase.Services.Window;
-using CodeBase.UI.Employee;
+﻿using CodeBase.UI.Employee;
 using CodeBase.UI.Hud;
-using UnityEngine;
-using UnityEngine.UI;
-using Zenject;
 
 namespace CodeBase.UI.Buttons
 {
-    public class OpenEmployeeWindowButton : MonoBehaviour
+    public class OpenEmployeeWindowButton : ButtonOpenerBase
     {
-        [SerializeField] private Button _openButton;
-        
-        private WindowService _windowService;
-
-        [Inject]
-        private void Construct(WindowService windowService) =>
-            _windowService = windowService;
-
-        private void Awake() =>
-            _openButton.onClick.AddListener(Open);
-
-        private void OnDisable() =>
-            _openButton.onClick.RemoveListener(Open);
-
-        private void Open()
+        protected override void Open()
         {
-            _windowService.Close<HudWindow>();
-            _windowService.Open<EmployeeWindow>();
+            WindowService.Close<HudWindow>();
+            WindowService.Open<EmployeeWindow>();
         }
     }
 }

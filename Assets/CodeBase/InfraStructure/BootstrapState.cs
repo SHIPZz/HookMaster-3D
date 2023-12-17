@@ -11,7 +11,7 @@ namespace CodeBase.InfraStructure
         private readonly IGameStateMachine _gameStateMachine;
         private readonly WorldTimeService _worldTimeService;
 
-        public BootstrapState(IWorldDataService worldDataService, 
+        public BootstrapState(IWorldDataService worldDataService,
             IGameStateMachine gameStateMachine,
             WorldTimeService worldTimeService)
         {
@@ -20,15 +20,15 @@ namespace CodeBase.InfraStructure
             _worldDataService = worldDataService;
         }
 
-        public async void Enter()
+        public async UniTaskVoid Enter()
         {
-             await _worldDataService.Load();
+            await _worldDataService.Load();
 
             while (!_worldTimeService.GotTime)
             {
                 await UniTask.Yield();
             }
-            
+
             _gameStateMachine.ChangeState<LevelLoadState>();
         }
     }

@@ -6,16 +6,16 @@ namespace CodeBase.InfraStructure
 {
     public class LevelLoadState : IState, IEnter
     {
-        private ILoadingCurtain _loadingCurtain;
+        private readonly ILoadingCurtain _loadingCurtain;
 
         public LevelLoadState(ILoadingCurtain loadingCurtain)
         {
             _loadingCurtain = loadingCurtain;
         }
 
-        public async void Enter()
+        public async UniTaskVoid Enter()
         {
-            _loadingCurtain.Show(0);
+            _loadingCurtain.Show(1f);
 
             AsyncOperation asyncOperation =  SceneManager.LoadSceneAsync(sceneBuildIndex: 1);
 

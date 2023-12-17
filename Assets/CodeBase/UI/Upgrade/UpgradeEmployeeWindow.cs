@@ -28,10 +28,8 @@ namespace CodeBase.UI.UpgradeEmployee
             _canvasAnimator.FadeInCanvas();
         }
 
-        public override void Close()
-        {
+        public override void Close() => 
             _canvasAnimator.FadeOutCanvas(base.Close);
-        }
 
         private void OnUpgradeButtonClicked() { }
 

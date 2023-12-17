@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Enums;
 using CodeBase.Extensions;
@@ -11,12 +12,14 @@ using CodeBase.Services.EmployeeSalary;
 using CodeBase.Services.Factories.Camera;
 using CodeBase.Services.Factories.Employee;
 using CodeBase.Services.Factories.Player;
+using CodeBase.Services.Factories.UI;
 using CodeBase.Services.Profit;
 using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.Providers.EmployeeProvider;
 using CodeBase.Services.Providers.Location;
 using CodeBase.Services.Providers.Player;
 using CodeBase.Services.Providers.Tables;
+using CodeBase.Services.UI;
 using CodeBase.Services.Window;
 using CodeBase.Services.WorldData;
 using CodeBase.UI.Hud;
@@ -39,7 +42,7 @@ namespace CodeBase.EntryPointSystem
         private readonly WalletService _walletService;
         private readonly EmployeeSalaryService _employeeSalaryService;
         private readonly ProfitService _profitService;
-        private readonly WindowService _windowService;
+        private readonly UIService _uiService;
         private int _targetFrameRate;
 
         public EntryPoint(LocationProvider locationProvider,
@@ -54,9 +57,9 @@ namespace CodeBase.EntryPointSystem
             WalletService walletService,
             EmployeeSalaryService employeeSalaryService,
             ProfitService profitService,
-            WindowService windowService)
+            UIService uiService)
         {
-            _windowService = windowService;
+            _uiService = uiService;
             _profitService = profitService;
             _employeeSalaryService = employeeSalaryService;
             _walletService = walletService;
@@ -77,14 +80,35 @@ namespace CodeBase.EntryPointSystem
             InitializeCamera(player);
             InitEmployees();
             InitTableService();
+            SetRefreshRate();
+            InitWalletService();
+            InitEmployeeSalaryService();
+            InitProfitService();
+            InitUIService();
+            InitPlayerProvider(player);
+        }
+
+        private void InitPlayerProvider(Player player)
+        {
+            _playerProvider.Player = player;
+        }
+
+        private void InitWalletService() => 
             _walletService.Init();
+
+        private void InitEmployeeSalaryService() => 
             _employeeSalaryService.Init();
-            
+
+        private void InitProfitService() => 
+            _profitService.Init();
+
+        private void InitUIService() => 
+            _uiService.Init(_cameraProvider.Camera);
+
+        private void SetRefreshRate()
+        {
             RefreshRate refreshRate = Screen.currentResolution.refreshRateRatio;
             Application.targetFrameRate = Mathf.RoundToInt((float)refreshRate.value);
-            _profitService.Init();
-            _playerProvider.Player = player;
-            _windowService.Open<HudWindow>();
         }
 
         private void InitTableService() =>
@@ -97,10 +121,10 @@ namespace CodeBase.EntryPointSystem
             foreach (EmployeeData employeeData in playerData.PurchasedEmployees)
             {
                 Table targetTable = _tableService.Tables.FirstOrDefault(x => x.Id == employeeData.TableId);
-                
-                if(targetTable == null)
+
+                if (targetTable == null)
                     continue;
-                
+
                 Employee targetEmployee = _employeeFactory.Create(employeeData, targetTable);
                 _employeeProvider.Employees.Add(targetEmployee);
             }

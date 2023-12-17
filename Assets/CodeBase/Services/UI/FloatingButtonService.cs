@@ -20,7 +20,8 @@ namespace CodeBase.Services.UI
         public void ShowFloatingButton(float additionalAnchoredPositionY,
             float duration,
             Quaternion rotation,
-            string path, Transform target)
+            string path, Transform target,
+            bool isFadeInCanvas)
         {
             if (_targetButton == null)
                 _targetButton = _uiFactory.CreateElement<Button>(path, target);
@@ -29,13 +30,11 @@ namespace CodeBase.Services.UI
             var rectTransformAnimator = _targetButton.GetComponent<RectTransformAnimator>();
             var canvasAnimator = _targetButton.GetComponent<CanvasAnimator>();
             rectTransformAnimator.SetInitialPosition();
-            ConfigureRectTransformAnimator(rectTransformAnimator,canvasAnimator);
+            ConfigureRectTransformAnimator(rectTransformAnimator, canvasAnimator);
+            rectTransformAnimator.MoveAnchoredPositionY(additionalAnchoredPositionY, duration);
 
-            rectTransformAnimator.MoveAnchoredPositionY(additionalAnchoredPositionY, duration,
-                () =>
-                {
-                    HandleFadeOut(rectTransformAnimator, canvasAnimator);
-                });
+            if (!isFadeInCanvas)
+                HandleFadeOut(rectTransformAnimator, canvasAnimator);
         }
 
         private void ConfigureButton(Quaternion rotation)
@@ -44,7 +43,8 @@ namespace CodeBase.Services.UI
             _targetButton.transform.rotation = rotation;
         }
 
-        private void ConfigureRectTransformAnimator(RectTransformAnimator rectTransformAnimator, CanvasAnimator canvasAnimator)
+        private void ConfigureRectTransformAnimator(RectTransformAnimator rectTransformAnimator,
+            CanvasAnimator canvasAnimator)
         {
             rectTransformAnimator.SetInitialPosition();
             rectTransformAnimator.SetRotation(rectTransformAnimator.transform.rotation);
@@ -54,7 +54,7 @@ namespace CodeBase.Services.UI
 
         private void HandleFadeOut(RectTransformAnimator rectTransformAnimator, CanvasAnimator canvasAnimator)
         {
-            canvasAnimator.FadeInCanvas(() =>
+            canvasAnimator.FadeOutCanvas(() =>
             {
                 rectTransformAnimator.SetInitialPosition();
                 _targetButton.gameObject.SetActive(false);

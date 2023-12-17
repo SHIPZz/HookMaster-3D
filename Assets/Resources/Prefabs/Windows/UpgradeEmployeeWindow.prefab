@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: 6641573226269585297}
   - component: {fileID: 7650096663841115308}
   - component: {fileID: -8964320187992629577}
+  - component: {fileID: 4379198916219539229}
   m_Layer: 5
   m_Name: UpgradeEmployeeWindow
   m_TagString: Untagged
@@ -248,6 +249,18 @@ MonoBehaviour:
   _canvasGroup: {fileID: 470952370875641419}
   _fadeInDuration: 0.5
   _fadeOutDuration: 0.25
+--- !u!114 &4379198916219539229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120373099407976385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a7007839bb249af9f4628adcf46c735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1248778660214714799
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,6 +409,7 @@ GameObject:
   - component: {fileID: 7330947143516449199}
   - component: {fileID: 7482389350523618922}
   - component: {fileID: 1014319447040572757}
+  - component: {fileID: 3267880439283089458}
   m_Layer: 5
   m_Name: UpgradeBtn
   m_TagString: Untagged
@@ -520,6 +534,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetAnchoredScale: {x: 240, y: 110}
   _animationDuration: 0.2
+--- !u!114 &3267880439283089458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2219761711949838876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 881bc7053fef4a769fb81a65140893fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OpenButton: {fileID: 7482389350523618922}
 --- !u!1 &2726321029428807543
 GameObject:
   m_ObjectHideFlags: 0

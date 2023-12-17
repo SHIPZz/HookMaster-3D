@@ -44,7 +44,7 @@ namespace CodeBase.Installers.Game
         private void BindProfitService()
         {
             Container
-                .Bind<ProfitService>()
+                .BindInterfacesAndSelfTo<ProfitService>()
                 .AsSingle();
         }
 

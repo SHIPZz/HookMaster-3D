@@ -1708,6 +1708,7 @@ GameObject:
   - component: {fileID: 8119726922412793982}
   - component: {fileID: 3966774186985969399}
   - component: {fileID: -8105156644447894440}
+  - component: {fileID: 2210820786772367533}
   m_Layer: 5
   m_Name: EmployeeWindow
   m_TagString: Untagged
@@ -1851,6 +1852,18 @@ MonoBehaviour:
   _canvasGroup: {fileID: 3966774186985969399}
   _fadeInDuration: 0.5
   _fadeOutDuration: 0.25
+--- !u!114 &2210820786772367533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6411437202508695134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a7007839bb249af9f4628adcf46c735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6666630706792186348
 GameObject:
   m_ObjectHideFlags: 0

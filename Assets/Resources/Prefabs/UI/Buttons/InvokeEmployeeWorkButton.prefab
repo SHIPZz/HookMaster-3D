@@ -152,6 +152,7 @@ GameObject:
   - component: {fileID: 4013929789501924876}
   - component: {fileID: 5614852880106262182}
   - component: {fileID: 958792878403840040}
+  - component: {fileID: -8846602065019737939}
   m_Layer: 10
   m_Name: InvokeEmployeeWorkButton
   m_TagString: Untagged
@@ -308,7 +309,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 73768109
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!225 &4013929789501924876
@@ -355,3 +356,15 @@ MonoBehaviour:
   _canvasGroup: {fileID: 4013929789501924876}
   _fadeInDuration: 0.5
   _fadeOutDuration: 0.25
+--- !u!114 &-8846602065019737939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4189635603506067103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a7007839bb249af9f4628adcf46c735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

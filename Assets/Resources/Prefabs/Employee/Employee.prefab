@@ -1641,9 +1641,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _triggerObserver: {fileID: 289451349065049623}
   _employee: {fileID: 6927033697138036074}
-  _downPositionY: 5
+  _downPositionY: 1
   _upPositionY: 3
-  _downDuration: 0.25
+  _downDuration: 0.4
   _upDuration: 0.5
   _employeeMovement: {fileID: 2069976906094230257}
 --- !u!1 &6720066068029056099
@@ -1692,9 +1692,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _triggerObserver: {fileID: 289451349065049623}
   _upPositionY: 3
-  _downPositionY: 5
+  _downPositionY: 1
   _upPositionDuration: 0.5
-  _downPositionDuration: 0.2
+  _downPositionDuration: 0.4
   _employee: {fileID: 6927033697138036074}
 --- !u!1 &7081449495740127898
 GameObject:
