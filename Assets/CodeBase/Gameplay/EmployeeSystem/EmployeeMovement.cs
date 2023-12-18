@@ -33,7 +33,12 @@ namespace CodeBase.Gameplay.EmployeeSystem
             
             if (_navMeshAgent.remainingDistance == 0 || !(_navMeshAgent.remainingDistance < _remainingDistance)) 
                 return;
-            
+
+            Sit();
+        }
+
+        public void Sit()
+        {
             _employeeAnimator.SetSitTyping(true);
             _navMeshAgent.enabled = false;
             transform.rotation = Quaternion.LookRotation(_targetTable.transform.forward);

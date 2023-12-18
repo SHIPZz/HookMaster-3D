@@ -22,7 +22,7 @@ namespace CodeBase.Animations
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            _tween?.Kill(true); 
+            _tween?.Kill(true);
             _tween = _targetRectTransform.DOSizeDelta(_targetAnchoredScale, _animationDuration);
         }
 

@@ -56,6 +56,8 @@ namespace CodeBase.Services.Factories.Employee
                 Guid = Guid.NewGuid(),
             };
 
+            potentialEmployeeData.Id = potentialEmployeeData.Guid.ToString();
+
             return potentialEmployeeData;
         }
 
@@ -74,7 +76,17 @@ namespace CodeBase.Services.Factories.Employee
             employee.Salary = employeeData.Salary;
             employee.Profit = employeeData.Profit;
             employee.Guid = employeeData.Guid;
-            employee.GetComponent<EmployeeMovement>().SetTable(targetTable);
+            employee.Id = employeeData.Id;
+            employee.IsWorking = employeeData.IsWorking;
+
+            EmployeeMovement employeeMovement = employee.GetComponent<EmployeeMovement>();
+
+            employeeMovement.SetTable(targetTable);
+
+            if (employeeData.IsWorking)
+                employeeMovement.Sit();
+
+
             return employee;
         }
     }

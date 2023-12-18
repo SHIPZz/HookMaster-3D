@@ -38,7 +38,6 @@ namespace CodeBase.Services.Profit
             PlayerData playerData = _worldDataService.WorldData.PlayerData;
             _coroutineRunner.StartCoroutine(GetProfitEveryMinuteCoroutine(playerData));
             var timeDifferenceByMinutes = (int)_worldTimeService.GetTimeDifferenceByMinutes();
-            Debug.Log(timeDifferenceByMinutes + " time difference");
 
             ReceiveProfit(playerData, timeDifferenceByMinutes);
         }
@@ -92,7 +91,6 @@ namespace CodeBase.Services.Profit
                 await UniTask.Yield();
             }
             
-            Debug.Log( (int)_worldTimeService.GetTimeDifferenceByMinutes() + " TIME DIFFERENCE");
             ReceiveProfit(_worldDataService.WorldData.PlayerData,
                 (int)_worldTimeService.GetTimeDifferenceByMinutes());
         }

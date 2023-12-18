@@ -14,7 +14,9 @@ namespace CodeBase.Extensions
                 Name = employee.Name,
                 Salary = employee.Salary,
                 QualificationType = employee.QualificationType,
-                TableId = employee.TableId
+                TableId = employee.TableId,
+                Id = employee.Id,
+                IsWorking = employee.IsWorking
             };
             
             return potentialEmployeeData;

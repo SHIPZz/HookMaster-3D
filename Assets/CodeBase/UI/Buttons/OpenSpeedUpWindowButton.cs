@@ -28,11 +28,11 @@ namespace CodeBase.UI.Buttons
 
             UpgradeEmployeeData targetUpgradeEmployeeData = _worldDataService.WorldData
                 .UpgradeEmployeeDatas
-                .FirstOrDefault(x => x.EmployeeData.Guid == _employeeData.Guid) ??
+                .FirstOrDefault(x => x.EmployeeData.Id == _employeeData.Id) ??
                                                             new UpgradeEmployeeData { EmployeeData = _employeeData};
-            print(targetUpgradeEmployeeData);
-            _worldDataService.Save();
-            speedUpWindow.Init(targetUpgradeEmployeeData);
+            print($"{targetUpgradeEmployeeData.EmployeeData.Name} + {targetUpgradeEmployeeData.LastUpgradeTime}");
+            
+            speedUpWindow.Init(targetUpgradeEmployeeData, targetUpgradeEmployeeData.LastUpgradeTime, targetUpgradeEmployeeData.LastUpgradeWindowOpenedTime);
             speedUpWindow.Open();
         }
     }

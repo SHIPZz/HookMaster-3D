@@ -19,7 +19,7 @@ namespace CodeBase.Services.Time
         private UnityEngine.Coroutine _worldTimeCoroutine;
 
         public bool GotTime { get; private set; }
-        public bool TimeUpdated { get; private set; }
+        public bool TimeUpdated;
 
         public WorldTimeService(IWorldDataService worldDataService, ICoroutineRunner coroutineRunner)
         {
