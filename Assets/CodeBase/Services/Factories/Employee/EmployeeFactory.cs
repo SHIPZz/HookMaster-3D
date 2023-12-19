@@ -77,15 +77,11 @@ namespace CodeBase.Services.Factories.Employee
             employee.Profit = employeeData.Profit;
             employee.Guid = employeeData.Guid;
             employee.Id = employeeData.Id;
-            employee.IsWorking = employeeData.IsWorking;
 
             EmployeeMovement employeeMovement = employee.GetComponent<EmployeeMovement>();
 
             employeeMovement.SetTable(targetTable);
-
-            if (employeeData.IsWorking)
-                employeeMovement.Sit();
-
+            employeeMovement.Sit(employeeData.IsWorking);
 
             return employee;
         }

@@ -2,7 +2,6 @@
 using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.TriggerObserve;
 using CodeBase.Services.UI;
-using CodeBase.Services.Window;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -40,8 +39,8 @@ namespace CodeBase.Gameplay.EmployeeSystem
         {
             _triggerObserver.TriggerEntered -= OnPlayerEntered;
             _triggerObserver.TriggerExited -= OnPlayerExited;
-
-            if (_invokeWorkButton != null)
+            
+            if(_invokeWorkButton != null)
                 _invokeWorkButton.onClick.RemoveListener(OnInvokeClicked);
         }
 
@@ -64,14 +63,16 @@ namespace CodeBase.Gameplay.EmployeeSystem
             _floatingButtonService.ShowFloatingButton(_upPositionY, _upDuration, targetRotation,
                 AssetPath.InvokeEmployeeWorkButton, _employee.transform, true);
 
-            if (_invokeWorkButton == null)
-                return;
-
             _invokeWorkButton = _floatingButtonService.Get();
             _invokeWorkButton.onClick.AddListener(OnInvokeClicked);
         }
 
-        private void OnInvokeClicked() => 
+        private void OnInvokeClicked()
+        {
             _employee.StartWorking();
+            Quaternion targetRotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
+            _floatingButtonService.ShowFloatingButton(-_downPositionY, _downDuration, targetRotation,
+                AssetPath.InvokeEmployeeWorkButton, _employee.transform, false);
+        }
     }
 }

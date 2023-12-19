@@ -29,7 +29,7 @@ namespace CodeBase.Services.Time
 
         public void Initialize()
         {
-          _worldTimeCoroutine =  _coroutineRunner.StartCoroutine(GetWorldTimeCoroutine());
+            _worldTimeCoroutine = _coroutineRunner.StartCoroutine(GetWorldTimeCoroutine());
             Application.focusChanged += OnFocusCnanged;
         }
 
@@ -40,7 +40,7 @@ namespace CodeBase.Services.Time
 
         private void OnFocusCnanged(bool hasFocus)
         {
-            if(_worldTimeCoroutine != null)
+            if (_worldTimeCoroutine != null)
                 _coroutineRunner.StopCoroutine(GetWorldTimeCoroutine());
 
             switch (hasFocus)
@@ -57,31 +57,34 @@ namespace CodeBase.Services.Time
 
         public void UpdateWorldTime()
         {
-            if(_worldTimeCoroutine != null)
+            if (_worldTimeCoroutine != null)
                 _coroutineRunner.StopCoroutine(GetWorldTimeCoroutine());
-            
+
             TimeUpdated = false;
             _worldTimeCoroutine = _coroutineRunner.StartCoroutine(GetWorldTimeCoroutine());
         }
 
         public void SaveLastSalaryPaymentTime()
         {
-            _worldDataService.WorldData.WorldTimeData.LastSalaryPaymentTime =  _worldDataService.WorldData.WorldTimeData.CurrentTime;
+            _worldDataService.WorldData.WorldTimeData.LastSalaryPaymentTime =
+                _worldDataService.WorldData.WorldTimeData.CurrentTime;
             _worldDataService.Save();
         }
 
-        public double GetTimeDifferenceByMinutes()
-        {
-            WorldTimeData worldTimeData = _worldDataService.WorldData.WorldTimeData;
-
-            TimeSpan timeDifference = worldTimeData.CurrentTime.ToDateTime() - worldTimeData.LastVisitedTime.ToDateTime();
-            
-            return timeDifference.TotalMinutes;
-        }
+        // public double GetTimeDifferenceByMinutes()
+        // {
+        //     WorldTimeData worldTimeData = _worldDataService.WorldData.WorldTimeData;
+        //
+        //     TimeSpan timeDifference =
+        //         worldTimeData.CurrentTime.ToDateTime() - worldTimeData.LastVisitedTime.ToDateTime();
+        //
+        //     return timeDifference.TotalMinutes;
+        // }
 
         public void SaveLastProfitEarnedTime()
         {
-            _worldDataService.WorldData.WorldTimeData.LastEarnedProfitTime = _worldDataService.WorldData.WorldTimeData.CurrentTime;
+            _worldDataService.WorldData.WorldTimeData.LastEarnedProfitTime =
+                _worldDataService.WorldData.WorldTimeData.CurrentTime;
             _worldDataService.Save();
         }
 
@@ -89,22 +92,45 @@ namespace CodeBase.Services.Time
         {
             WorldTimeData worldTimeData = _worldDataService.WorldData.WorldTimeData;
 
-            TimeSpan timeDifference = worldTimeData.CurrentTime.ToDateTime() - worldTimeData.LastVisitedTime.ToDateTime();
+            TimeSpan timeDifference =
+                worldTimeData.CurrentTime.ToDateTime() - worldTimeData.LastVisitedTime.ToDateTime();
 
             return timeDifference.Days;
         }
 
-        public int GetTimeDifferenceByDaysBetweenProfitAndCurrentTime()
+        public int GetTimeDifferenceByLastLazinessDays()
+        {
+            WorldTimeData worldTimeData = _worldDataService.WorldData.WorldTimeData;
+
+            if (worldTimeData.LastLazyDay == 0)
+                worldTimeData.LastEarnedProfitTime = _worldDataService.WorldData.WorldTimeData.CurrentTime;
+
+            var a = new DateTime(2023, 12, 22);
+
+            TimeSpan timeDifference = a - worldTimeData.LastLazyDay.ToDateTime();
+
+            return timeDifference.Days;
+        }
+
+        public void SaveLastLazyDay()
+        {
+            _worldDataService.WorldData.WorldTimeData.LastLazyDay =
+                _worldDataService.WorldData.WorldTimeData.CurrentTime;
+            _worldDataService.Save();
+        }
+
+        public int GetTimeDifferenceByMinutesBetweenProfitAndCurrentTime()
         {
             WorldTimeData worldTimeData = _worldDataService.WorldData.WorldTimeData;
 
             if (worldTimeData.LastEarnedProfitTime == 0)
                 worldTimeData.LastEarnedProfitTime = _worldDataService.WorldData.WorldTimeData.CurrentTime;
 
-            TimeSpan timeDifference = worldTimeData.CurrentTime.ToDateTime() - worldTimeData.LastEarnedProfitTime.ToDateTime();
+            TimeSpan timeDifference =
+                worldTimeData.CurrentTime.ToDateTime() - worldTimeData.LastEarnedProfitTime.ToDateTime();
 
             Debug.Log(worldTimeData.LastEarnedProfitTime.ToDateTime() + "last profit payment");
-            return timeDifference.Days;
+            return (int)timeDifference.TotalMinutes;
         }
 
         public int GetTimeDifferenceByDaysBetweenSalaryPaymentAndCurrentTime()
@@ -114,17 +140,18 @@ namespace CodeBase.Services.Time
             if (worldTimeData.LastSalaryPaymentTime == 0)
                 worldTimeData.LastSalaryPaymentTime = _worldDataService.WorldData.WorldTimeData.CurrentTime;
 
-            TimeSpan timeDifference = worldTimeData.CurrentTime.ToDateTime() - worldTimeData.LastSalaryPaymentTime.ToDateTime();
-            Debug.Log(worldTimeData.LastSalaryPaymentTime.ToDateTime() + "last salary payment");
+            TimeSpan timeDifference = worldTimeData.CurrentTime.ToDateTime() -
+                                      worldTimeData.LastSalaryPaymentTime.ToDateTime();
             return timeDifference.Days;
         }
-        
+
         private void SaveLastVisitedTime()
         {
             if (!GotTime)
                 return;
 
-            _worldDataService.WorldData.WorldTimeData.LastVisitedTime = _worldDataService.WorldData.WorldTimeData.CurrentTime;
+            _worldDataService.WorldData.WorldTimeData.LastVisitedTime =
+                _worldDataService.WorldData.WorldTimeData.CurrentTime;
             TimeUpdated = false;
             _worldDataService.Save();
         }
@@ -143,7 +170,8 @@ namespace CodeBase.Services.Time
             {
                 try
                 {
-                    WorldTimeApiResponse response = JsonUtility.FromJson<WorldTimeApiResponse>(webRequest.downloadHandler.text);
+                    WorldTimeApiResponse response =
+                        JsonUtility.FromJson<WorldTimeApiResponse>(webRequest.downloadHandler.text);
                     DateTime worldDateTime = DateTime.Parse(response.utc_datetime);
 
                     _worldDataService.WorldData.WorldTimeData.CurrentTime = worldDateTime.ToUnixTime();

@@ -9,6 +9,7 @@ namespace CodeBase.Data
         public long LastVisitedTime;
         public long LastEarnedProfitTime;
         public long LastSalaryPaymentTime;
+        public long LastLazyDay;
 
     }
 }

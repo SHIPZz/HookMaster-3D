@@ -37,7 +37,7 @@ namespace CodeBase.Services.Profit
         {
             PlayerData playerData = _worldDataService.WorldData.PlayerData;
             _coroutineRunner.StartCoroutine(GetProfitEveryMinuteCoroutine(playerData));
-            var timeDifferenceByMinutes = (int)_worldTimeService.GetTimeDifferenceByMinutes();
+            int timeDifferenceByMinutes = _worldTimeService.GetTimeDifferenceByMinutesBetweenProfitAndCurrentTime();
 
             ReceiveProfit(playerData, timeDifferenceByMinutes);
         }
@@ -62,6 +62,8 @@ namespace CodeBase.Services.Profit
                     return;
                 
                 _walletService.Add(totalProfit);
+                _worldTimeService.SaveLastProfitEarnedTime();
+                Debug.Log("target profit" +  totalProfit);
                 ProfitGot?.Invoke(employeeData.Guid, totalProfit);
             }
         }
@@ -77,6 +79,7 @@ namespace CodeBase.Services.Profit
                     int minuteProfit = employeeData.Profit / MinutesInDay;
                     _walletService.Add(minuteProfit);
                     ProfitGot?.Invoke(employeeData.Guid, minuteProfit);
+                    _worldTimeService.SaveLastProfitEarnedTime();
                 }
             }
         }
@@ -86,13 +89,12 @@ namespace CodeBase.Services.Profit
             if (!hasFocus)
                 return;
 
-            while (!_worldTimeService.TimeUpdated)
-            {
+            while (!_worldTimeService.TimeUpdated) 
                 await UniTask.Yield();
-            }
-            
+
+            Debug.Log("receieve profit");
             ReceiveProfit(_worldDataService.WorldData.PlayerData,
-                (int)_worldTimeService.GetTimeDifferenceByMinutes());
+                _worldTimeService.GetTimeDifferenceByMinutesBetweenProfitAndCurrentTime());
         }
     }
 }

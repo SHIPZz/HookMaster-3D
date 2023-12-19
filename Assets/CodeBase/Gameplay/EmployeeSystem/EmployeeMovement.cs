@@ -9,12 +9,14 @@ namespace CodeBase.Gameplay.EmployeeSystem
     {
         [SerializeField] private float _remainingDistance = 0.1f;
         [SerializeField] private Employee _employee;
-        
+
         private NavMeshAgent _navMeshAgent;
         private Table _targetTable;
         private EmployeeAnimator _employeeAnimator;
-        
+
         public bool IsMovingToTable { get; private set; }
+
+        public bool IsBlocked;
 
         [Inject]
         private void Construct(NavMeshAgent navMeshAgent, EmployeeAnimator employeeAnimator)
@@ -30,20 +32,23 @@ namespace CodeBase.Gameplay.EmployeeSystem
 
             _navMeshAgent.SetDestination(_targetTable.transform.position);
             IsMovingToTable = true;
-            
-            if (_navMeshAgent.remainingDistance == 0 || !(_navMeshAgent.remainingDistance < _remainingDistance)) 
-                return;
 
-            Sit();
+            if (_navMeshAgent.remainingDistance == 0 || !(_navMeshAgent.remainingDistance < _remainingDistance))
+                return;
+            
+            if (_employee.IsWorking)
+                Sit(true);
         }
 
-        public void Sit()
+        public void Sit(bool isWorking)
         {
             _employeeAnimator.SetSitTyping(true);
             _navMeshAgent.enabled = false;
             transform.rotation = Quaternion.LookRotation(_targetTable.transform.forward);
             transform.position = _targetTable.Chair.position;
-            _employee.StartWorking();
+
+            if (isWorking)
+                _employee.StartWorking();
         }
 
         public void SetTable(Table target) =>
