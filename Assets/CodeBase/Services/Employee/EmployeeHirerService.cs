@@ -15,14 +15,14 @@ namespace CodeBase.Services.Employee
         private readonly EmployeeProvider _employeeProvider;
         private readonly TableService _tableService;
         private readonly IEmployeeFactory _employeeFactory;
-        private readonly IWorldDataService _worldDataService;
+        private readonly EmployeeDataService _employeeDataService;
 
         public EmployeeHirerService(EmployeeProvider employeeProvider, 
             TableService tableService,
             IEmployeeFactory employeeFactory,
-            IWorldDataService worldDataService)
+            EmployeeDataService employeeDataService)
         {
-            _worldDataService = worldDataService;
+            _employeeDataService = employeeDataService;
             _employeeFactory = employeeFactory;
             _tableService = tableService;
             _employeeProvider = employeeProvider;
@@ -39,16 +39,14 @@ namespace CodeBase.Services.Employee
         public void SetEmployee(EmployeeData employeeData)
         {
             Table freeTable = _tableService.Tables.FirstOrDefault(x => x.IsFree);
-            freeTable.SetCondition(false);
+            freeTable.SetIsFree(false);
 
             Gameplay.EmployeeSystem.Employee employee =  _employeeFactory.Create(employeeData, freeTable);
             employee.gameObject.SetActive(false);
             employee.TableId = freeTable.Id;
             _employeeProvider.Employees.Add(employee);
             
-            _worldDataService.WorldData.PlayerData.PurchasedEmployees.Add(employee.ToEmployeeData());
-            _worldDataService.WorldData.PotentialEmployeeList.Remove(employeeData);
-            _worldDataService.Save();
+            _employeeDataService.SavePurchasedEmployee(employee.ToEmployeeData());
         }
     }
 }

@@ -4,6 +4,7 @@ using CodeBase.Data;
 using CodeBase.Extensions;
 using CodeBase.Services.Coroutine;
 using CodeBase.Services.WorldData;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 using Zenject;
@@ -55,13 +56,19 @@ namespace CodeBase.Services.Time
             }
         }
 
-        public void UpdateWorldTime()
+        public async UniTask UpdateWorldTime()
         {
             if (_worldTimeCoroutine != null)
                 _coroutineRunner.StopCoroutine(GetWorldTimeCoroutine());
 
-            TimeUpdated = false;
             _worldTimeCoroutine = _coroutineRunner.StartCoroutine(GetWorldTimeCoroutine());
+
+            while (!TimeUpdated)
+            {
+                await UniTask.Yield();
+            }
+
+            TimeUpdated = false;
         }
 
         public void SaveLastSalaryPaymentTime()
@@ -105,9 +112,7 @@ namespace CodeBase.Services.Time
             if (worldTimeData.LastLazyDay == 0)
                 worldTimeData.LastEarnedProfitTime = _worldDataService.WorldData.WorldTimeData.CurrentTime;
 
-            var a = new DateTime(2023, 12, 22);
-
-            TimeSpan timeDifference = a - worldTimeData.LastLazyDay.ToDateTime();
+            TimeSpan timeDifference = worldTimeData.CurrentTime.ToDateTime() - worldTimeData.LastLazyDay.ToDateTime();
 
             return timeDifference.Days;
         }
@@ -140,8 +145,7 @@ namespace CodeBase.Services.Time
             if (worldTimeData.LastSalaryPaymentTime == 0)
                 worldTimeData.LastSalaryPaymentTime = _worldDataService.WorldData.WorldTimeData.CurrentTime;
 
-            TimeSpan timeDifference = worldTimeData.CurrentTime.ToDateTime() -
-                                      worldTimeData.LastSalaryPaymentTime.ToDateTime();
+            TimeSpan timeDifference = worldTimeData.CurrentTime.ToDateTime() - worldTimeData.LastSalaryPaymentTime.ToDateTime();
             return timeDifference.Days;
         }
 

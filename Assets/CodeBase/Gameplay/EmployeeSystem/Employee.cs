@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CodeBase.Data;
 using CodeBase.Extensions;
+using CodeBase.Services.Employee;
 using CodeBase.Services.WorldData;
 using UnityEngine;
 using Zenject;
@@ -21,17 +22,18 @@ namespace CodeBase.Gameplay.EmployeeSystem
         public string Name;
         public string TableId;
         public bool IsWorking;
-        private IWorldDataService _worldDataService;
+        private EmployeeDataService _employeeDataService;
 
         [Inject]
-        private void Construct(IWorldDataService worldDataService)
+        private void Construct( EmployeeDataService employeeDataService)
         {
-            _worldDataService = worldDataService;
+            _employeeDataService = employeeDataService;
         }
 
         public void StartWorking()
         {
             IsWorking = true;
+            _employeeDataService.OverwritePurchasedEmployeeData(this.ToEmployeeData());
         }
 
         public void DecreaseSalary(int amount)

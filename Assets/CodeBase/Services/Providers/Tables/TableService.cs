@@ -30,7 +30,7 @@ namespace CodeBase.Services.Providers.Tables
             {
                 bool isFree = busyTables.Contains(table.Id);
 
-                table.SetCondition(!isFree);
+                table.SetIsFree(!isFree);
             }
 
             AvailableTableCount = Tables.Count(x => x.IsFree);

@@ -8,7 +8,7 @@ using CodeBase.Gameplay.EmployeeSystem;
 using CodeBase.Gameplay.PlayerSystem;
 using CodeBase.Gameplay.TableSystem;
 using CodeBase.Gameplay.Wallet;
-using CodeBase.Services.EmployeeSalary;
+using CodeBase.Services.Employee;
 using CodeBase.Services.Factories.Camera;
 using CodeBase.Services.Factories.Employee;
 using CodeBase.Services.Factories.Player;
@@ -78,8 +78,8 @@ namespace CodeBase.EntryPointSystem
         {
             Player player = _playerFactory.Create(CharacterTypeId.Boss, _locationProvider.PlayerSpawnPoint);
             InitializeCamera(player);
-            InitEmployees();
             InitTableService();
+            InitEmployees();
             SetRefreshRate();
             InitWalletService();
             InitEmployeeSalaryService();
@@ -117,14 +117,18 @@ namespace CodeBase.EntryPointSystem
         private void InitEmployees()
         {
             PlayerData playerData = _worldDataService.WorldData.PlayerData;
+            
+            Debug.Log(playerData.PurchasedEmployees.Count);
 
             foreach (EmployeeData employeeData in playerData.PurchasedEmployees)
             {
+                Debug.Log(_tableService.Tables.Count());
                 Table targetTable = _tableService.Tables.FirstOrDefault(x => x.Id == employeeData.TableId);
 
                 if (targetTable == null)
                     continue;
 
+                Debug.Log(employeeData.Name);
                 Employee targetEmployee = _employeeFactory.Create(employeeData, targetTable);
                 _employeeProvider.Employees.Add(targetEmployee);
             }

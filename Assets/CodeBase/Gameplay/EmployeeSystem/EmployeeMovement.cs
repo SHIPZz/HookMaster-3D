@@ -36,19 +36,16 @@ namespace CodeBase.Gameplay.EmployeeSystem
             if (_navMeshAgent.remainingDistance == 0 || !(_navMeshAgent.remainingDistance < _remainingDistance))
                 return;
             
-            if (_employee.IsWorking)
-                Sit(true);
+            SitAndWork();
         }
 
-        public void Sit(bool isWorking)
+        public void SitAndWork()
         {
             _employeeAnimator.SetSitTyping(true);
             _navMeshAgent.enabled = false;
             transform.rotation = Quaternion.LookRotation(_targetTable.transform.forward);
             transform.position = _targetTable.Chair.position;
-
-            if (isWorking)
-                _employee.StartWorking();
+            _employee.StartWorking();
         }
 
         public void SetTable(Table target) =>

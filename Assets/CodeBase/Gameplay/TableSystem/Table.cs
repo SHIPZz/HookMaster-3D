@@ -19,7 +19,7 @@ namespace CodeBase.Gameplay.TableSystem
             Id = guid.ToString();
         }
 
-        public void SetCondition(bool isFree)
+        public void SetIsFree(bool isFree)
         {
             IsFree = isFree;
             ConditionChanged?.Invoke(IsFree, Id);

@@ -29,7 +29,6 @@ namespace CodeBase.Services.UI
             ConfigureButton(rotation);
             var rectTransformAnimator = _targetButton.GetComponent<RectTransformAnimator>();
             var canvasAnimator = _targetButton.GetComponent<CanvasAnimator>();
-            rectTransformAnimator.SetInitialPosition();
             ConfigureRectTransformAnimator(rectTransformAnimator, canvasAnimator);
             rectTransformAnimator.MoveAnchoredPositionY(additionalAnchoredPositionY, duration);
 

@@ -207,9 +207,9 @@ namespace SimpleInputNamespace
 				return;
 
 			if( joystickHeld )
-				opacity = Mathf.Min( 1f, opacity + Time.unscaledDeltaTime * 4f );
+				opacity = Mathf.Min( 1f, opacity + Time.unscaledDeltaTime * 4 );
 			else
-				opacity = Mathf.Max( 0f, opacity - Time.unscaledDeltaTime * 4f );
+				opacity = Mathf.Max( 0f, opacity - Time.unscaledDeltaTime * 15 );
 
 			Color c = thumb.color;
 			c.a = opacity;

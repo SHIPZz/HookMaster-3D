@@ -1,9 +1,8 @@
 ﻿using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.Providers.EmployeeProvider;
 using CodeBase.Services.Time;
-using UnityEngine;
 
-namespace CodeBase.Services.EmployeeSalary
+namespace CodeBase.Services.Employee
 {
     public class EmployeeSalaryService
     {

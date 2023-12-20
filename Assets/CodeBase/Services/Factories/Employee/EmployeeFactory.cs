@@ -75,13 +75,15 @@ namespace CodeBase.Services.Factories.Employee
             employee.QualificationType = employeeData.QualificationType;
             employee.Salary = employeeData.Salary;
             employee.Profit = employeeData.Profit;
+            employee.TableId = targetTable.Id;
             employee.Guid = employeeData.Guid;
             employee.Id = employeeData.Id;
 
             EmployeeMovement employeeMovement = employee.GetComponent<EmployeeMovement>();
-
             employeeMovement.SetTable(targetTable);
-            employeeMovement.Sit(employeeData.IsWorking);
+
+            if (employeeData.IsWorking)
+                employeeMovement.SitAndWork();
 
             return employee;
         }

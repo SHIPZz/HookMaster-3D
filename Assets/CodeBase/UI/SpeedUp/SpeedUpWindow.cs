@@ -3,6 +3,7 @@ using System.Collections;
 using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Extensions;
+using CodeBase.Services.Employee;
 using CodeBase.Services.Time;
 using CodeBase.Services.WorldData;
 using Cysharp.Threading.Tasks;
@@ -38,10 +39,13 @@ namespace CodeBase.UI.SpeedUp
         private IWorldDataService _worldDataService;
         private Coroutine _timeCoroutine;
         private WorldTimeService _worldTimeService;
+        private EmployeeDataService _employeeDataService;
 
         [Inject]
-        private void Construct(IWorldDataService worldDataService, WorldTimeService worldTimeService)
+        private void Construct(IWorldDataService worldDataService,
+            WorldTimeService worldTimeService, EmployeeDataService employeeDataService)
         {
+            _employeeDataService = employeeDataService;
             _worldTimeService = worldTimeService;
             _worldDataService = worldDataService;
         }
@@ -55,7 +59,8 @@ namespace CodeBase.UI.SpeedUp
         public override void Close() =>
             _canvasAnimator.FadeOutCanvas(base.Close);
 
-        public async UniTaskVoid Init(UpgradeEmployeeData upgradeEmployeeData, float lastEmployeeUpgradeTime,long lastUpgradeWindowOpenedTime)
+        public async UniTaskVoid Init(UpgradeEmployeeData upgradeEmployeeData, float lastEmployeeUpgradeTime,
+            long lastUpgradeWindowOpenedTime)
         {
             _upgradeEmployeeData = upgradeEmployeeData;
 
@@ -65,9 +70,8 @@ namespace CodeBase.UI.SpeedUp
             {
                 _totalTime = lastEmployeeUpgradeTime;
             }
-            
-            
-            await UpdateWorldTimeData();
+
+            await _worldTimeService.UpdateWorldTime();
 
 
             TimeSpan timePassed = _worldDataService.WorldData.WorldTimeData.CurrentTime.ToDateTime() -
@@ -75,8 +79,6 @@ namespace CodeBase.UI.SpeedUp
 
             var passedSeconds = (float)timePassed.TotalSeconds;
             var passedMinutes = timePassed.TotalMinutes;
-
-            // TryToCloseAdItem(passedMinutes);
 
             if (_upgradeEmployeeData.UpgradeStarted && TryToSetCompleted(passedMinutes, UpgradeCompletedMinutes))
                 return;
@@ -87,25 +89,13 @@ namespace CodeBase.UI.SpeedUp
             if (_timeCoroutine != null)
                 StopCoroutine(StartDecreaseTimeCoroutine());
 
-            if (_totalTime >= 3600f && _upgradeEmployeeData.UpgradeStarted)
+            if (_totalTime >= TimeConstantValue.SecondsInHour && _upgradeEmployeeData.UpgradeStarted)
             {
                 SetCompleted();
                 return;
             }
 
             _timeCoroutine = StartCoroutine(StartDecreaseTimeCoroutine());
-        }
-
-        private async UniTask UpdateWorldTimeData()
-        {
-            _worldTimeService.UpdateWorldTime();
-
-            while (!_worldTimeService.TimeUpdated)
-            {
-                await UniTask.Yield();
-            }
-
-            _worldTimeService.TimeUpdated = false;
         }
 
         private void TrySetLastUpgradeWindowOpenedTime()
@@ -147,12 +137,8 @@ namespace CodeBase.UI.SpeedUp
         private void SaveLastUpgradeTime()
         {
             _upgradeEmployeeData.LastUpgradeTime = Mathf.Abs(_totalTime);
-            print(_totalTime + " TOTAL TIME ABS SAVED");
             _upgradeEmployeeData.LastUpgradeWindowOpenedTime = _worldDataService.WorldData.WorldTimeData.CurrentTime;
-            _worldDataService.WorldData.UpgradeEmployeeDatas.RemoveAll(x =>
-                x.EmployeeData.Id == _upgradeEmployeeData.EmployeeData.Id);
-            _worldDataService.WorldData.UpgradeEmployeeDatas.Add(_upgradeEmployeeData);
-
+            _employeeDataService.SaveUpgradeEmployeeData(_upgradeEmployeeData);
             _worldDataService.Save();
         }
 

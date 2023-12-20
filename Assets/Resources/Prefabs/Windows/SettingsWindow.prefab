@@ -627,6 +627,8 @@ GameObject:
   - component: {fileID: 7823720170280270864}
   - component: {fileID: 3884072040691951407}
   - component: {fileID: 7749421467547512319}
+  - component: {fileID: 1684383684730869251}
+  - component: {fileID: 7575243558481129468}
   m_Layer: 5
   m_Name: Switch_On
   m_TagString: Untagged
@@ -734,12 +736,43 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 3884072040691951407}
   toggleTransition: 1
-  graphic: {fileID: 7771084599672531941}
+  graphic: {fileID: 0}
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!114 &1684383684730869251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829301144674396329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88fd7953d4d040c6a4f58d19a23b68b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _handle: {fileID: 7771084599672531941}
+  _offPosition: {x: -50, y: 0}
+  _initialPosition: {x: 50, y: 0}
+  _rectTransformAnimator: {fileID: 7575243558481129468}
+  _onDuration: 0.5
+  _offDuration: 0.3
+--- !u!114 &7575243558481129468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829301144674396329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d29fb9f2d4874c65a97e4f7c75848877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetRectTransform: {fileID: 2637103985644907193}
 --- !u!1 &832327325106864090
 GameObject:
   m_ObjectHideFlags: 0
