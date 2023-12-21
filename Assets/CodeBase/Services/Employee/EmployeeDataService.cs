@@ -21,10 +21,8 @@ namespace CodeBase.Services.Employee
 
             int targetIndex = purchasedEmployees.FindIndex(x => x.Id == employeeData.Id);
 
-            if (targetIndex != -1)
-            {
+            if (targetIndex != -1) 
                 purchasedEmployees[targetIndex] = employeeData;
-            }
 
             _worldDataService.WorldData.PlayerData.PurchasedEmployees = purchasedEmployees;
             _worldDataService.Save();

@@ -61,6 +61,8 @@ sysinfo.txt
 *.unitypackage
 *.app
 
+Assets/ImportResources/Gamemaster Audio - Pro Sound Collection
+
 # Crashlytics generated file
 crashlytics-build.properties
 

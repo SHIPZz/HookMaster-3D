@@ -16,10 +16,29 @@ namespace CodeBase.Extensions
                 QualificationType = employee.QualificationType,
                 TableId = employee.TableId,
                 Id = employee.Id,
-                IsWorking = employee.IsWorking
+                IsWorking = employee.IsWorking,
+                IsUpgrading = employee.IsUpgrading
             };
             
             return potentialEmployeeData;
+        }
+
+        public static EmployeeData ToEmployeeData(this UpgradeEmployeeData upgradeEmployeeData)
+        {
+            var employeeData = new EmployeeData
+            {
+                Guid = upgradeEmployeeData.EmployeeData.Guid,
+                Profit = upgradeEmployeeData.EmployeeData.Profit,
+                Name = upgradeEmployeeData.EmployeeData.Name,
+                Salary = upgradeEmployeeData.EmployeeData.Salary,
+                QualificationType = upgradeEmployeeData.EmployeeData.QualificationType,
+                TableId = upgradeEmployeeData.EmployeeData.TableId,
+                Id = upgradeEmployeeData.EmployeeData.Id,
+                IsWorking = upgradeEmployeeData.EmployeeData.IsWorking,
+                IsUpgrading = upgradeEmployeeData.EmployeeData.IsUpgrading
+            };
+
+            return employeeData;
         }
     }
 }

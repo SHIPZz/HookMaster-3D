@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CodeBase.Constant;
 using CodeBase.UI;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace CodeBase.Services.DataService
 
         public UIStaticDataService()
         {
-            _windows = Resources.LoadAll<WindowBase>("Prefabs/Windows")
+            _windows = Resources.LoadAll<WindowBase>(AssetPath.Windows)
                 .ToDictionary(x => x.GetType(), x => x);
         }
 

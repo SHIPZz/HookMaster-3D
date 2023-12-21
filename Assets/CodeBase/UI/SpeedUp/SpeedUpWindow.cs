@@ -18,12 +18,10 @@ namespace CodeBase.UI.SpeedUp
     {
         private const float CloseAdItemMinutes = 15;
         private const float UpgradeCompletedMinutes = 60;
-        private const float PassedMinutesToCloseAdItem = 45;
         private const float InitialSliderValue = -60f;
 
         [SerializeField] private CanvasAnimator _canvasAnimator;
         [SerializeField] private TMP_Text _remainingTimeText;
-        [SerializeField] private TMP_Text _skipAdText;
         [SerializeField] private TMP_Text _skipTicketText;
         [SerializeField] private TMP_Text _skipDiamondText;
         [SerializeField] private Slider _remainingTimeSlider;
@@ -31,6 +29,7 @@ namespace CodeBase.UI.SpeedUp
         [SerializeField] private GameObject _skipTicketItem;
         [SerializeField] private GameObject _skipDiamondItem;
         [SerializeField] private GameObject _completedItem;
+        [SerializeField] private float _sliderFillSpeed = 15f;
 
         private float _totalTime = 3600f;
         private float _initialSliderValue;
@@ -66,14 +65,11 @@ namespace CodeBase.UI.SpeedUp
 
             _remainingTimeSlider.value = InitialSliderValue;
 
-            if (_upgradeEmployeeData.LastUpgradeTime != 0)
-            {
+            if (_upgradeEmployeeData.LastUpgradeTime != 0) 
                 _totalTime = lastEmployeeUpgradeTime;
-            }
 
             await _worldTimeService.UpdateWorldTime();
-
-
+            
             TimeSpan timePassed = _worldDataService.WorldData.WorldTimeData.CurrentTime.ToDateTime() -
                                   lastUpgradeWindowOpenedTime.ToDateTime();
 
@@ -98,12 +94,6 @@ namespace CodeBase.UI.SpeedUp
             _timeCoroutine = StartCoroutine(StartDecreaseTimeCoroutine());
         }
 
-        private void TrySetLastUpgradeWindowOpenedTime()
-        {
-            print(_upgradeEmployeeData.LastUpgradeTime + " LAST EMPLOYEE UPGRADE TIME");
-            _totalTime = _upgradeEmployeeData.LastUpgradeTime;
-        }
-
         private bool TryToSetCompleted(double passedMinutes, float targetCompletedValue)
         {
             if (passedMinutes >= targetCompletedValue)
@@ -115,14 +105,6 @@ namespace CodeBase.UI.SpeedUp
             return false;
         }
 
-        private void TryToCloseAdItem(double passedMinutes)
-        {
-            if (passedMinutes >= PassedMinutesToCloseAdItem)
-            {
-                _skipAdItem.SetActive(false);
-            }
-        }
-
         private void SetCompleted()
         {
             _skipAdItem.SetActive(false);
@@ -131,15 +113,15 @@ namespace CodeBase.UI.SpeedUp
             _completedItem.SetActive(true);
             _upgradeEmployeeData.Completed = true;
             _remainingTimeText.text = "Completed";
-            _worldDataService.Save();
+            SaveLastUpgradeTime();
         }
 
         private void SaveLastUpgradeTime()
         {
             _upgradeEmployeeData.LastUpgradeTime = Mathf.Abs(_totalTime);
+            print(Mathf.Abs(_totalTime));
             _upgradeEmployeeData.LastUpgradeWindowOpenedTime = _worldDataService.WorldData.WorldTimeData.CurrentTime;
             _employeeDataService.SaveUpgradeEmployeeData(_upgradeEmployeeData);
-            _worldDataService.Save();
         }
 
         private IEnumerator StartDecreaseTimeCoroutine()
@@ -155,7 +137,7 @@ namespace CodeBase.UI.SpeedUp
 
                 _remainingTimeSlider.value = Mathf.Lerp(_remainingTimeSlider.value, -Mathf.FloorToInt(
                     Mathf.Abs(_totalTime) % TimeConstantValue.SecondsInHour /
-                    TimeConstantValue.SecondsInMinute), 15 * Time.deltaTime);
+                    TimeConstantValue.SecondsInMinute), _sliderFillSpeed * Time.deltaTime);
                 int seconds = Mathf.FloorToInt(Mathf.Abs(_totalTime) % TimeConstantValue.SecondsInMinute);
 
                 if (NeedCloseAdItem(minutes))

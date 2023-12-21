@@ -21,7 +21,7 @@ namespace CodeBase.Services.UI
             float duration,
             Quaternion rotation,
             string path, Transform target,
-            bool isFadeInCanvas)
+            bool isFadeInCanvas, bool setInitialPosition)
         {
             if (_targetButton == null)
                 _targetButton = _uiFactory.CreateElement<Button>(path, target);
@@ -29,11 +29,15 @@ namespace CodeBase.Services.UI
             ConfigureButton(rotation);
             var rectTransformAnimator = _targetButton.GetComponent<RectTransformAnimator>();
             var canvasAnimator = _targetButton.GetComponent<CanvasAnimator>();
+            
+            if(setInitialPosition)
+                rectTransformAnimator.SetInitialPosition();
+            
             ConfigureRectTransformAnimator(rectTransformAnimator, canvasAnimator);
             rectTransformAnimator.MoveAnchoredPositionY(additionalAnchoredPositionY, duration);
 
             if (!isFadeInCanvas)
-                HandleFadeOut(rectTransformAnimator, canvasAnimator);
+                HandleFadeOut( canvasAnimator);
         }
 
         private void ConfigureButton(Quaternion rotation)
@@ -45,19 +49,14 @@ namespace CodeBase.Services.UI
         private void ConfigureRectTransformAnimator(RectTransformAnimator rectTransformAnimator,
             CanvasAnimator canvasAnimator)
         {
-            rectTransformAnimator.SetInitialPosition();
             rectTransformAnimator.SetRotation(rectTransformAnimator.transform.rotation);
 
             canvasAnimator.FadeInCanvas();
         }
 
-        private void HandleFadeOut(RectTransformAnimator rectTransformAnimator, CanvasAnimator canvasAnimator)
+        private void HandleFadeOut( CanvasAnimator canvasAnimator)
         {
-            canvasAnimator.FadeOutCanvas(() =>
-            {
-                rectTransformAnimator.SetInitialPosition();
-                _targetButton.gameObject.SetActive(false);
-            });
+            canvasAnimator.FadeOutCanvas(() => _targetButton.gameObject.SetActive(false));
         }
     }
 }

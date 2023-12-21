@@ -4,7 +4,6 @@ using CodeBase.Services.TriggerObserve;
 using CodeBase.Services.UI;
 using CodeBase.Services.Window;
 using CodeBase.UI.UpgradeEmployee;
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -58,24 +57,27 @@ namespace CodeBase.Gameplay.EmployeeSystem
 
         private void OnPlayerExited(Collider obj)
         {
-            if (!_employee.IsWorking)
+            if (!_employee.IsWorking || _employee.IsUpgrading)
                 return;
-
+            
+            if(!_floatingButtonService.Get().gameObject.activeSelf)
+                return;
+            
             Quaternion targetRotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
             _floatingButtonService.ShowFloatingButton(-_downPositionY, _downPositionDuration, targetRotation,
                 AssetPath.UpgradeEmployeeButton,
-                _employee.transform,false);
+                _employee.transform,false, false);
         }
 
         private void OnPlayerEntered(Collider obj)
         {
-            if (!_employee.IsWorking)
+            if (!_employee.IsWorking || _employee.IsUpgrading)
                 return;
 
             Quaternion targetRotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
             _floatingButtonService.ShowFloatingButton(_upPositionY, _upPositionDuration, targetRotation,
                 AssetPath.UpgradeEmployeeButton,
-                _employee.transform, true);
+                _employee.transform, true, true);
 
             if (_upgradeButton != null)
                 return;

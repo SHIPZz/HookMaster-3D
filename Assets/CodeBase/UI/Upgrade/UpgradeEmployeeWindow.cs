@@ -1,9 +1,7 @@
-﻿using System;
-using CodeBase.Extensions;
+﻿using CodeBase.Extensions;
 using CodeBase.UI.Buttons;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace CodeBase.UI.UpgradeEmployee
 {

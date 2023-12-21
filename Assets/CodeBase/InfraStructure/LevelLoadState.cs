@@ -19,11 +19,9 @@ namespace CodeBase.InfraStructure
 
             AsyncOperation asyncOperation =  SceneManager.LoadSceneAsync(sceneBuildIndex: 1);
 
-            while (asyncOperation.isDone == false)
-            {
+            while (asyncOperation.isDone == false) 
                 await UniTask.Yield();
-            }
-            
+
             _loadingCurtain.Hide();
         }
     }

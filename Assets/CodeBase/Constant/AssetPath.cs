@@ -10,5 +10,8 @@
         public const string FloatingTextCanvas = "Prefabs/UI/Canvases/FloatingTextCanvas";
         public const string JoystickCanvas = "Prefabs/UI/Canvases/JoystickCanvas";
         public const string InvokeEmployeeWorkButton = "Prefabs/UI/Buttons/InvokeEmployeeWorkButton";
+        public const string Windows = "Prefabs/UI/Windows";
+        public const string Sounds = "Prefabs/UI/Sound";
+        public const string AudioMixer = "Prefabs/UI/AudioMixers/Mixer";
     }
 }

@@ -3,6 +3,7 @@ using CodeBase.InfraStructure;
 using CodeBase.Services.Coroutine;
 using CodeBase.Services.Input;
 using CodeBase.Services.Profit;
+using CodeBase.Services.Saves;
 using CodeBase.Services.SaveSystem;
 using CodeBase.Services.Time;
 using CodeBase.Services.WorldData;
@@ -26,8 +27,15 @@ namespace CodeBase.Installers.Bootstrap
             BindWorldDataService();
             BindWorldTimeService();
             BindCheats();
+            BindSaveEvents();
             Container.BindInterfacesTo<BootstrapInstaller>()
                 .FromInstance(this);
+        }
+
+        private void BindSaveEvents()
+        {
+            Container.Bind<SaveOnEveryMinute>().AsSingle();
+            Container.Bind<SaveFacade>().AsSingle();
         }
 
         public void Initialize()

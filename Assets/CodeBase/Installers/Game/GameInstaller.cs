@@ -15,6 +15,7 @@ using CodeBase.Services.Providers.EmployeeProvider;
 using CodeBase.Services.Providers.Location;
 using CodeBase.Services.Providers.Player;
 using CodeBase.Services.Providers.Tables;
+using CodeBase.Services.Sound;
 using CodeBase.Services.Window;
 using UnityEngine;
 using Zenject;
@@ -39,6 +40,12 @@ namespace CodeBase.Installers.Game
             BindEmployeeSalaryService();
             BindProfitService();
             BindEmployeeDataService();
+            BindSoundService();
+        }
+
+        private void BindSoundService()
+        {
+            Container.Bind<SoundService>().AsSingle();
         }
 
         private void BindEmployeeDataService() =>

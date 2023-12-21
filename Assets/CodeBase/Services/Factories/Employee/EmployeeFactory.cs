@@ -46,16 +46,18 @@ namespace CodeBase.Services.Factories.Employee
 
             int qualificationType = worldData.PlayerData.QualificationType;
             OfficeSO officeSO = _officeStaticDataService.Get(qualificationType);
+            var targetName = _employeeNames[Random.Range(0, _employeeNames.Count)];
 
             var potentialEmployeeData = new EmployeeData
             {
-                Name = _employeeNames[Random.Range(0, _employeeNames.Count)],
+                Name =  targetName,
                 QualificationType = qualificationType,
                 Salary = Random.Range(officeSO.MinSalary, officeSO.MaxSalary),
                 Profit = Random.Range(officeSO.MinProfit, officeSO.MaxSalary),
                 Guid = Guid.NewGuid(),
             };
 
+            _employeeNames.Remove(targetName);
             potentialEmployeeData.Id = potentialEmployeeData.Guid.ToString();
 
             return potentialEmployeeData;

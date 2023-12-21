@@ -23,6 +23,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
         public string TableId;
         public bool IsWorking;
         private EmployeeDataService _employeeDataService;
+        public bool IsUpgrading;
 
         [Inject]
         private void Construct( EmployeeDataService employeeDataService)

@@ -31,7 +31,7 @@ namespace CodeBase.UI.Buttons
                 .FirstOrDefault(x => x.EmployeeData.Id == _employeeData.Id) ??
                                                             new UpgradeEmployeeData { EmployeeData = _employeeData};
             print($"{targetUpgradeEmployeeData.EmployeeData.Name} + {targetUpgradeEmployeeData.LastUpgradeTime}");
-            
+
             speedUpWindow.Init(targetUpgradeEmployeeData, targetUpgradeEmployeeData.LastUpgradeTime, targetUpgradeEmployeeData.LastUpgradeWindowOpenedTime);
             speedUpWindow.Open();
         }

@@ -78,31 +78,11 @@ namespace CodeBase.Services.Time
             _worldDataService.Save();
         }
 
-        // public double GetTimeDifferenceByMinutes()
-        // {
-        //     WorldTimeData worldTimeData = _worldDataService.WorldData.WorldTimeData;
-        //
-        //     TimeSpan timeDifference =
-        //         worldTimeData.CurrentTime.ToDateTime() - worldTimeData.LastVisitedTime.ToDateTime();
-        //
-        //     return timeDifference.TotalMinutes;
-        // }
-
         public void SaveLastProfitEarnedTime()
         {
             _worldDataService.WorldData.WorldTimeData.LastEarnedProfitTime =
                 _worldDataService.WorldData.WorldTimeData.CurrentTime;
             _worldDataService.Save();
-        }
-
-        public int GetTimeDifferenceByDay()
-        {
-            WorldTimeData worldTimeData = _worldDataService.WorldData.WorldTimeData;
-
-            TimeSpan timeDifference =
-                worldTimeData.CurrentTime.ToDateTime() - worldTimeData.LastVisitedTime.ToDateTime();
-
-            return timeDifference.Days;
         }
 
         public int GetTimeDifferenceByLastLazinessDays()

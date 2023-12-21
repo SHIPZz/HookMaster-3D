@@ -51,7 +51,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
 
             Quaternion targetRotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
             _floatingButtonService.ShowFloatingButton(-_downPositionY, _downDuration, targetRotation,
-                AssetPath.InvokeEmployeeWorkButton, _employee.transform, false);
+                AssetPath.InvokeEmployeeWorkButton, _employee.transform, false, false);
         }
 
         private void OnPlayerEntered(Collider obj)
@@ -61,7 +61,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
 
             Quaternion targetRotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
             _floatingButtonService.ShowFloatingButton(_upPositionY, _upDuration, targetRotation,
-                AssetPath.InvokeEmployeeWorkButton, _employee.transform, true);
+                AssetPath.InvokeEmployeeWorkButton, _employee.transform, true, true);
 
             _invokeWorkButton = _floatingButtonService.Get();
             _invokeWorkButton.onClick.AddListener(OnInvokeClicked);
@@ -72,7 +72,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
             _employee.StartWorking();
             Quaternion targetRotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
             _floatingButtonService.ShowFloatingButton(-_downPositionY, _downDuration, targetRotation,
-                AssetPath.InvokeEmployeeWorkButton, _employee.transform, false);
+                AssetPath.InvokeEmployeeWorkButton, _employee.transform, false, false);
         }
     }
 }
