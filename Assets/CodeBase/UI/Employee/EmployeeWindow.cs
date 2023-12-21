@@ -52,7 +52,7 @@ namespace CodeBase.UI.Employee
         {
             _canvasAnimator.FadeInCanvas();
             _tableCountText.text = $"{_tableService.AvailableTableCount}/{_tableService.AllTableCount}";
-            
+
             if (!HasFreeTables())
             {
                 _noAvailableEmployeesText.gameObject.SetActive(true);
@@ -96,6 +96,7 @@ namespace CodeBase.UI.Employee
                 return;
             }
 
+            print(_worldDataService.WorldData.PotentialEmployeeList.Count);
             foreach (EmployeeData potentialEmployeeData in _worldDataService.WorldData.PotentialEmployeeList)
             {
                 EmployeeView employeeView = _uiFactory.CreateDefaultEmployeeView(_parent);
@@ -103,7 +104,7 @@ namespace CodeBase.UI.Employee
             }
         }
 
-        private bool HasFreeTables() => 
+        private bool HasFreeTables() =>
             _tableService.Tables.Any(x => x.IsFree);
     }
 }

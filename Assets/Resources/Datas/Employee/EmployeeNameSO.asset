@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: EmployeeNameSO
   m_EditorClassIdentifier: 
   Names:
-  - John
+  - Bogdan
   - Kenan
+  - Jason
   - Mason
-  - William
-  - Ethan
+  - Oliver
+  - Tony
+  - Peter

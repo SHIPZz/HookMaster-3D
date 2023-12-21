@@ -2511,6 +2511,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8285549929291217245}
   - component: {fileID: 6123778847749717735}
+  - component: {fileID: 4324092273561905416}
   m_Layer: 5
   m_Name: Slider_On
   m_TagString: Untagged
@@ -2583,13 +2584,38 @@ MonoBehaviour:
   m_FillRect: {fileID: 2851903397392987376}
   m_HandleRect: {fileID: 4148094689987043259}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -60
+  m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: 0.594
+  m_Value: -15
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4324092273561905416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2836275815636526877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df6140eb1d14e10a56644e278db6035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _slider: {fileID: 6123778847749717735}
+  _mixerTypeId: 3
+  _mixerParameter: 0
+  _initialValue: -15
 --- !u!1 &2840715130976436653
 GameObject:
   m_ObjectHideFlags: 0
@@ -2676,7 +2702,7 @@ MonoBehaviour:
   m_MinValue: -80
   m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: -44.2
+  m_Value: -20
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2704,7 +2730,7 @@ MonoBehaviour:
   _slider: {fileID: 3860264592391239111}
   _mixerTypeId: 2
   _mixerParameter: 1
-  _initialValue: -40
+  _initialValue: -20
 --- !u!1 &2842721096730219399
 GameObject:
   m_ObjectHideFlags: 0

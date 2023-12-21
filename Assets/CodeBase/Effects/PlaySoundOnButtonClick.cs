@@ -10,19 +10,12 @@ namespace CodeBase.Effects
     {
         [SerializeField] private AudioSource _audioSource;
         [SerializeField] private Button _button;
-        [SerializeField] private bool _playOnDestroy;
 
         private void OnEnable() =>
             _button.onClick.AddListener(Play);
 
         private void OnDisable() =>
             _button.onClick.RemoveListener(Play);
-
-        private void OnDestroy()
-        {
-            if (_playOnDestroy)
-                Play();
-        }
         
         public void Play()
         {

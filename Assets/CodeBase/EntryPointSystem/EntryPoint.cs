@@ -1,9 +1,7 @@
-﻿using System.Linq;
-using CodeBase.Constant;
-using CodeBase.Data;
+﻿ using System.Linq;
+ using CodeBase.Data;
 using CodeBase.Enums;
-using CodeBase.Extensions;
-using CodeBase.Gameplay.Camera;
+ using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.EmployeeSystem;
 using CodeBase.Gameplay.PlayerSystem;
 using CodeBase.Gameplay.TableSystem;
@@ -12,18 +10,15 @@ using CodeBase.Services.Employee;
 using CodeBase.Services.Factories.Camera;
 using CodeBase.Services.Factories.Employee;
 using CodeBase.Services.Factories.Player;
-using CodeBase.Services.Factories.UI;
-using CodeBase.Services.Profit;
+ using CodeBase.Services.Profit;
 using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.Providers.EmployeeProvider;
 using CodeBase.Services.Providers.Location;
 using CodeBase.Services.Providers.Player;
 using CodeBase.Services.Providers.Tables;
 using CodeBase.Services.UI;
-using CodeBase.Services.Window;
-using CodeBase.Services.WorldData;
-using CodeBase.UI.Hud;
-using UnityEngine;
+ using CodeBase.Services.WorldData;
+ using UnityEngine;
 using Zenject;
 
 namespace CodeBase.EntryPointSystem
@@ -43,7 +38,6 @@ namespace CodeBase.EntryPointSystem
         private readonly EmployeeSalaryService _employeeSalaryService;
         private readonly ProfitService _profitService;
         private readonly UIService _uiService;
-        private int _targetFrameRate;
 
         public EntryPoint(LocationProvider locationProvider,
             IPlayerFactory playerFactory,
@@ -118,17 +112,13 @@ namespace CodeBase.EntryPointSystem
         {
             PlayerData playerData = _worldDataService.WorldData.PlayerData;
             
-            Debug.Log(playerData.PurchasedEmployees.Count);
-
             foreach (EmployeeData employeeData in playerData.PurchasedEmployees)
             {
-                Debug.Log(_tableService.Tables.Count());
                 Table targetTable = _tableService.Tables.FirstOrDefault(x => x.Id == employeeData.TableId);
 
                 if (targetTable == null)
                     continue;
 
-                Debug.Log(employeeData.Name);
                 Employee targetEmployee = _employeeFactory.Create(employeeData, targetTable);
                 _employeeProvider.Employees.Add(targetEmployee);
             }

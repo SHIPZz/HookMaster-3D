@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using CodeBase.Enums;
 using CodeBase.Services.Sound;
 using Sirenix.OdinInspector;
-using Sirenix.Serialization;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -17,26 +14,30 @@ namespace CodeBase.UI.SoundSlider
         [SerializeField] private Slider _slider;
         [SerializeField] private MixerTypeId _mixerTypeId;
         [SerializeField] private MixerTypeId _mixerParameter;
-        [SerializeField] private float _initialValue;
 
-        private SoundService _soundService;
+        private SettingsService _settingsService;
         private AudioMixerGroup _audioMixerGroup;
 
         [Inject]
-        private void Construct(SoundService soundService) => 
-            _soundService = soundService;
+        private void Construct(SettingsService settingsService) =>
+            _settingsService = settingsService;
 
         private void Awake()
         {
-            _audioMixerGroup = _soundService.Get(Enum.GetName(typeof(MixerTypeId), _mixerTypeId));
-            SetValue(_initialValue);
+            _audioMixerGroup = _settingsService.Get(Enum.GetName(typeof(MixerTypeId), _mixerTypeId));
+            var targetVolume = _settingsService.GetTargetVolume(_mixerParameter);
+            _slider.value = targetVolume;
+            _audioMixerGroup.audioMixer.SetFloat(Enum.GetName(typeof(MixerTypeId), _mixerParameter), targetVolume);
         }
 
-        private void OnEnable() => 
+        private void OnEnable() =>
             _slider.onValueChanged.AddListener(ChangeVolume);
 
-        private void OnDisable() =>
+        private void OnDisable() => 
             _slider.onValueChanged.RemoveListener(ChangeVolume);
+
+        private void OnDestroy() => 
+            _settingsService.SetSoundSettings(_slider.value, _mixerParameter);
 
         private void ChangeVolume(float volume) =>
             SetValue(volume);

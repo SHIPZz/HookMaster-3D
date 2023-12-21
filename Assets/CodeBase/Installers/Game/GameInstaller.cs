@@ -45,7 +45,7 @@ namespace CodeBase.Installers.Game
 
         private void BindSoundService()
         {
-            Container.Bind<SoundService>().AsSingle();
+            Container.Bind<SettingsService>().AsSingle();
         }
 
         private void BindEmployeeDataService() =>

@@ -20,10 +20,11 @@ namespace CodeBase.Services.Factories.Employee
     {
         private readonly IAssetProvider _assetProvider;
         private readonly DiContainer _diContainer;
-        private readonly List<string> _employeeNames;
         private readonly OfficeStaticDataService _officeStaticDataService;
         private readonly LocationProvider _locationProvider;
         private readonly IWorldDataService _worldDataService;
+        
+        private readonly List<string> _employeeNames = new();
 
         public EmployeeFactory(IAssetProvider assetProvider,
             DiContainer diContainer,
@@ -35,9 +36,10 @@ namespace CodeBase.Services.Factories.Employee
             _worldDataService = worldDataService;
             _locationProvider = locationProvider;
             _officeStaticDataService = officeStaticDataService;
-            _employeeNames = employeeNameSo.Names;
             _diContainer = diContainer;
             _assetProvider = assetProvider;
+            
+            FillNames(employeeNameSo);
         }
 
         public EmployeeData Create()
@@ -46,6 +48,8 @@ namespace CodeBase.Services.Factories.Employee
 
             int qualificationType = worldData.PlayerData.QualificationType;
             OfficeSO officeSO = _officeStaticDataService.Get(qualificationType);
+
+            
             var targetName = _employeeNames[Random.Range(0, _employeeNames.Count)];
 
             var potentialEmployeeData = new EmployeeData
@@ -88,6 +92,14 @@ namespace CodeBase.Services.Factories.Employee
                 employeeMovement.SitAndWork();
 
             return employee;
+        }
+
+        private void FillNames(EmployeeNameSO employeeNameSo)
+        {
+            foreach (var name in employeeNameSo.Names)
+            {
+                _employeeNames.Add(name);
+            }
         }
     }
 

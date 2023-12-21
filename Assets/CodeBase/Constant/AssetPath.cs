@@ -3,7 +3,7 @@
     public static class AssetPath
     {
         public const string Camera = "Prefabs/Camera";
-        public const string EmployeeView = "Prefabs/Employee/EmployeeView";
+        public const string EmployeeView = "Prefabs/UI/Views/EmployeeView";
         public const string Employee = "Prefabs/Employee/Employee";
         public const string ProfitText = "Prefabs/UI/Texts/ProfitText";
         public const string UpgradeEmployeeButton = "Prefabs/UI/Buttons/UpgradeEmployeeButton";

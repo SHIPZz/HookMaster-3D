@@ -31,7 +31,7 @@ namespace CodeBase.Services.Employee
         public void SavePurchasedEmployee(EmployeeData purchasedEmployee)
         {
             _worldDataService.WorldData.PlayerData.PurchasedEmployees.Add(purchasedEmployee);
-            _worldDataService.WorldData.PotentialEmployeeList.Remove(purchasedEmployee);
+            _worldDataService.WorldData.PotentialEmployeeList.RemoveAll(x => x.Id == purchasedEmployee.Id);
             _worldDataService.Save();
         }
 
