@@ -60,7 +60,10 @@ namespace CodeBase.Gameplay.EmployeeSystem
             if (!_employee.IsWorking || _employee.IsUpgrading)
                 return;
             
-            if(!_floatingButtonService.Get().gameObject.activeSelf)
+            if(_upgradeButton == null)
+                return;
+            
+            if(!_upgradeButton.gameObject.activeSelf)
                 return;
             
             Quaternion targetRotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);

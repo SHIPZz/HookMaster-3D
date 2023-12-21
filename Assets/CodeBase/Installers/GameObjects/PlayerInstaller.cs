@@ -1,4 +1,5 @@
 ﻿using CodeBase.Gameplay.PlayerSystem;
+using CodeBase.Services.Player;
 using CodeBase.Services.Providers.Player;
 using UnityEngine;
 using Zenject;
@@ -9,10 +10,12 @@ namespace CodeBase.Installers.GameObjects
     public class PlayerInstaller : MonoInstaller, IInitializable
     {
         private PlayerProvider _playerProvider;
+        private PlayerAnimationService _playerAnimationService;
 
         [Inject]
-        private void Construct(PlayerProvider playerProvider)
+        private void Construct(PlayerProvider playerProvider, PlayerAnimationService playerAnimationService)
         {
+            _playerAnimationService = playerAnimationService;
             _playerProvider = playerProvider;
         }
         
@@ -31,6 +34,7 @@ namespace CodeBase.Installers.GameObjects
         public void Initialize()
         {
             _playerProvider.PlayerInput = Container.Resolve<PlayerInput>();
+            _playerAnimationService.SetPlayerAnimator(Container.Resolve<PlayerAnimator>());
         }
     }
 }

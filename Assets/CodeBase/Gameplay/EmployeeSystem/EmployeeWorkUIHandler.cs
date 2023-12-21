@@ -1,4 +1,5 @@
 ﻿using CodeBase.Constant;
+using CodeBase.Services.Player;
 using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.TriggerObserve;
 using CodeBase.Services.UI;
@@ -21,10 +22,13 @@ namespace CodeBase.Gameplay.EmployeeSystem
         private CameraProvider _cameraProvider;
         private FloatingButtonService _floatingButtonService;
         private Button _invokeWorkButton;
+        private PlayerAnimationService _playerAnimationService;
 
         [Inject]
-        private void Construct(CameraProvider cameraProvider, FloatingButtonService floatingButtonService)
+        private void Construct(CameraProvider cameraProvider, FloatingButtonService floatingButtonService,
+            PlayerAnimationService playerAnimationService)
         {
+            _playerAnimationService = playerAnimationService;
             _floatingButtonService = floatingButtonService;
             _cameraProvider = cameraProvider;
         }
@@ -39,8 +43,8 @@ namespace CodeBase.Gameplay.EmployeeSystem
         {
             _triggerObserver.TriggerEntered -= OnPlayerEntered;
             _triggerObserver.TriggerExited -= OnPlayerExited;
-            
-            if(_invokeWorkButton != null)
+
+            if (_invokeWorkButton != null)
                 _invokeWorkButton.onClick.RemoveListener(OnInvokeClicked);
         }
 
@@ -63,13 +67,16 @@ namespace CodeBase.Gameplay.EmployeeSystem
             _floatingButtonService.ShowFloatingButton(_upPositionY, _upDuration, targetRotation,
                 AssetPath.InvokeEmployeeWorkButton, _employee.transform, true, true);
 
-            _invokeWorkButton = _floatingButtonService.Get();
+            if (_invokeWorkButton == null)
+                _invokeWorkButton = _floatingButtonService.Get();
+
             _invokeWorkButton.onClick.AddListener(OnInvokeClicked);
         }
 
         private void OnInvokeClicked()
         {
             _employee.StartWorking();
+            _playerAnimationService.PlayPunchAnimation();
             Quaternion targetRotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
             _floatingButtonService.ShowFloatingButton(-_downPositionY, _downDuration, targetRotation,
                 AssetPath.InvokeEmployeeWorkButton, _employee.transform, false, false);

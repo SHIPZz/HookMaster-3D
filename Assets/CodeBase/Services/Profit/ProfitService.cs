@@ -63,7 +63,6 @@ namespace CodeBase.Services.Profit
                 
                 _walletService.Add(totalProfit);
                 _worldTimeService.SaveLastProfitEarnedTime();
-                Debug.Log("target profit" +  totalProfit);
                 ProfitGot?.Invoke(employeeData.Guid, totalProfit);
             }
         }
@@ -92,7 +91,6 @@ namespace CodeBase.Services.Profit
             while (!_worldTimeService.TimeUpdated) 
                 await UniTask.Yield();
 
-            Debug.Log("receieve profit");
             ReceiveProfit(_worldDataService.WorldData.PlayerData,
                 _worldTimeService.GetTimeDifferenceByMinutesBetweenProfitAndCurrentTime());
         }

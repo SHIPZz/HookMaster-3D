@@ -8,6 +8,7 @@ using CodeBase.Services.Factories.Employee;
 using CodeBase.Services.Factories.Player;
 using CodeBase.Services.Factories.UI;
 using CodeBase.Services.Factories.Weapon;
+using CodeBase.Services.Player;
 using CodeBase.Services.Profit;
 using CodeBase.Services.Providers.Asset;
 using CodeBase.Services.Providers.Camera;
@@ -41,12 +42,16 @@ namespace CodeBase.Installers.Game
             BindProfitService();
             BindEmployeeDataService();
             BindSoundService();
+            BindPlayerAnimationService();
         }
 
-        private void BindSoundService()
-        {
+        private void BindPlayerAnimationService() =>
+            Container
+                .Bind<PlayerAnimationService>()
+                .AsSingle();
+
+        private void BindSoundService() => 
             Container.Bind<SettingsService>().AsSingle();
-        }
 
         private void BindEmployeeDataService() =>
             Container
