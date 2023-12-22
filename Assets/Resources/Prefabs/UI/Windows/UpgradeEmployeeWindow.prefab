@@ -157,7 +157,7 @@ MonoBehaviour:
   _nameText: {fileID: 6565715383016166242}
   _profitText: {fileID: 7757014401846428788}
   _salaryText: {fileID: 5034177133097169010}
-  _openSpeedUpWindowButton: {fileID: 3267880439283089458}
+  _openProgressEmployeeWindowButton: {fileID: 3267880439283089458}
   _canvasAnimator: {fileID: -8964320187992629577}
 --- !u!225 &470952370875641419
 CanvasGroup:
@@ -524,7 +524,7 @@ GameObject:
   - component: {fileID: 7495802090161072144}
   - component: {fileID: 232579963887756388}
   m_Layer: 5
-  m_Name: SpeedUpBtn
+  m_Name: OpenProgressEmploeeWindowButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

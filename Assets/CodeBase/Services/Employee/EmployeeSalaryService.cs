@@ -7,16 +7,16 @@ namespace CodeBase.Services.Employee
     public class EmployeeSalaryService
     {
         private readonly WalletService _walletService;
-        private readonly EmployeeProvider _employeeProvider;
+        private readonly EmployeeService _employeeService;
         private readonly WorldTimeService _worldTimeService;
 
         public EmployeeSalaryService(WalletService walletService, 
-            EmployeeProvider employeeProvider,
+            EmployeeService employeeService,
             WorldTimeService worldTimeService)
         {
             _worldTimeService = worldTimeService;
             _walletService = walletService;
-            _employeeProvider = employeeProvider;
+            _employeeService = employeeService;
         }
 
         public void Init()
@@ -26,7 +26,7 @@ namespace CodeBase.Services.Employee
             if (passedDays == 0)
                 return;
             
-            _employeeProvider.Employees.ForEach(x => _walletService.Decrease(x.Salary * passedDays));
+            _employeeService.Employees.ForEach(x => _walletService.Decrease(x.Salary * passedDays));
             _worldTimeService.SaveLastSalaryPaymentTime();
         }
     }

@@ -12,12 +12,12 @@ namespace CodeBase.Services.Employee
 {
     public class EmployeeHirerService
     {
-        private readonly EmployeeProvider _employeeProvider;
+        private readonly EmployeeService _employeeService;
         private readonly TableService _tableService;
         private readonly IEmployeeFactory _employeeFactory;
         private readonly EmployeeDataService _employeeDataService;
 
-        public EmployeeHirerService(EmployeeProvider employeeProvider, 
+        public EmployeeHirerService(EmployeeService employeeService, 
             TableService tableService,
             IEmployeeFactory employeeFactory,
             EmployeeDataService employeeDataService)
@@ -25,12 +25,12 @@ namespace CodeBase.Services.Employee
             _employeeDataService = employeeDataService;
             _employeeFactory = employeeFactory;
             _tableService = tableService;
-            _employeeProvider = employeeProvider;
+            _employeeService = employeeService;
         }
 
         public void ActivateCreatedEmployees()
         {
-            foreach (Gameplay.EmployeeSystem.Employee employee in _employeeProvider.Employees.Where(employee => !employee.gameObject.activeSelf))
+            foreach (Gameplay.EmployeeSystem.Employee employee in _employeeService.Employees.Where(employee => !employee.gameObject.activeSelf))
             {
                 employee.gameObject.SetActive(true);
             }
@@ -44,7 +44,7 @@ namespace CodeBase.Services.Employee
             Gameplay.EmployeeSystem.Employee employee =  _employeeFactory.Create(employeeData, freeTable);
             employee.gameObject.SetActive(false);
             employee.TableId = freeTable.Id;
-            _employeeProvider.Employees.Add(employee);
+            _employeeService.Employees.Add(employee);
             
             _employeeDataService.SavePurchasedEmployee(employee.ToEmployeeData());
         }

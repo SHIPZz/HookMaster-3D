@@ -11,7 +11,7 @@ namespace CodeBase.UI.UpgradeEmployee
         [SerializeField] private TMP_Text _nameText;
         [SerializeField] private TMP_Text _profitText;
         [SerializeField] private TMP_Text _salaryText;
-        [SerializeField] private OpenSpeedUpWindowButton _openSpeedUpWindowButton;
+        [SerializeField] private OpenProgressEmployeeWindowButton _openProgressEmployeeWindowButton;
         [SerializeField] private CanvasAnimator _canvasAnimator;
 
         private Gameplay.EmployeeSystem.Employee _employee;
@@ -28,7 +28,7 @@ namespace CodeBase.UI.UpgradeEmployee
         public void Init(Gameplay.EmployeeSystem.Employee employee)
         {
             _employee = employee;
-            _openSpeedUpWindowButton.SetEmployeeData(_employee.ToEmployeeData());
+            _openProgressEmployeeWindowButton.SetEmployeeData(_employee.ToEmployeeData());
             _profitText.text = $"Profit: {_employee.Profit}";
             _qualificationTypeText.text = $"Qualification type: {_employee.QualificationType}";
             _nameText.text = $"Name: {_employee.Name}";

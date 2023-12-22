@@ -96,7 +96,7 @@ namespace CodeBase.Installers.Game
             Container.BindInstance(tableService);
             Container.Bind<CameraProvider>().AsSingle();
             Container.Bind<PlayerProvider>().AsSingle();
-            Container.Bind<EmployeeProvider>().AsSingle();
+            Container.Bind<EmployeeService>().AsSingle();
         }
 
         private void BindFactories()

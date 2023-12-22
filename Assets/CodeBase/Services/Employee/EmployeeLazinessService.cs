@@ -9,12 +9,12 @@ namespace CodeBase.Services.Employee
     {
         private const int LazinessInvokeDay = 1;
         private readonly WorldTimeService _worldTimeService;
-        private readonly EmployeeProvider _employeeProvider;
+        private readonly EmployeeService _employeeService;
 
         public EmployeeLazinessService(WorldTimeService worldTimeService,
-            EmployeeProvider employeeProvider)
+            EmployeeService employeeService)
         {
-            _employeeProvider = employeeProvider;
+            _employeeService = employeeService;
             _worldTimeService = worldTimeService;
         }
 
@@ -23,7 +23,7 @@ namespace CodeBase.Services.Employee
             if (_worldTimeService.GetTimeDifferenceByLastLazinessDays() < LazinessInvokeDay)
                 return;
 
-            _employeeProvider.Employees.ForEach(x => x.StopWorking());
+            _employeeService.Employees.ForEach(x => x.StopWorking());
             _worldTimeService.SaveLastLazyDay();
         }
     }

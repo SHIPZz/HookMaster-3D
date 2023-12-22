@@ -10,12 +10,12 @@ namespace CodeBase.EmployeeSpawners
     public class EmployeeSpawner : MonoBehaviour
     {
         private IEmployeeFactory _employeeFactory;
-        private EmployeeProvider _employeeProvider;
+        private EmployeeService _employeeService;
 
         [Inject]
-        private void Construct(IEmployeeFactory employeeFactory, EmployeeProvider employeeProvider)
+        private void Construct(IEmployeeFactory employeeFactory, EmployeeService employeeService)
         {
-            _employeeProvider = employeeProvider;
+            _employeeService = employeeService;
             _employeeFactory = employeeFactory;
         }
 

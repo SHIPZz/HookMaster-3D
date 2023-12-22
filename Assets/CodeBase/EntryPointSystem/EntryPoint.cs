@@ -30,7 +30,7 @@ namespace CodeBase.EntryPointSystem
         private readonly ICameraFactory _cameraFactory;
         private readonly CameraProvider _cameraProvider;
         private readonly PlayerProvider _playerProvider;
-        private readonly EmployeeProvider _employeeProvider;
+        private readonly EmployeeService _employeeService;
         private readonly IEmployeeFactory _employeeFactory;
         private readonly IWorldDataService _worldDataService;
         private readonly TableService _tableService;
@@ -44,7 +44,7 @@ namespace CodeBase.EntryPointSystem
             ICameraFactory cameraFactory,
             CameraProvider cameraProvider,
             PlayerProvider playerProvider,
-            EmployeeProvider employeeProvider,
+            EmployeeService employeeService,
             IEmployeeFactory employeeFactory,
             IWorldDataService worldDataService,
             TableService tableService,
@@ -60,7 +60,7 @@ namespace CodeBase.EntryPointSystem
             _tableService = tableService;
             _worldDataService = worldDataService;
             _employeeFactory = employeeFactory;
-            _employeeProvider = employeeProvider;
+            _employeeService = employeeService;
             _playerProvider = playerProvider;
             _cameraProvider = cameraProvider;
             _locationProvider = locationProvider;
@@ -120,7 +120,7 @@ namespace CodeBase.EntryPointSystem
                     continue;
 
                 Employee targetEmployee = _employeeFactory.Create(employeeData, targetTable);
-                _employeeProvider.Employees.Add(targetEmployee);
+                _employeeService.Employees.Add(targetEmployee);
             }
         }
 
