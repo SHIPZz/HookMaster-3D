@@ -29,6 +29,9 @@ namespace CodeBase.Gameplay.Wallet
         public void Decrease(int money) => 
             SetMoneyToData(-money);
 
+        public bool HasEnoughMoney(int money) => 
+            CurrentMoney - money >= 0;
+
         private void SetMoneyToData(int money)
         {
             PlayerData playerData = _worldDataService.WorldData.PlayerData;

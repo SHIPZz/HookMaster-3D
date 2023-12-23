@@ -25,6 +25,7 @@ namespace CodeBase.UI
         [SerializeField] private float _sliderFillSpeed = 15f;
         [SerializeField] private TMP_Text _remainingText;
         [SerializeField] private SkipProgressButton _skipProgressButton;
+        [SerializeField] private TMP_Text _upgradingText;
         
         private UpgradeEmployeeData _upgradeEmployeeData;
         private EmployeeDataService _employeeDataService;
@@ -56,6 +57,13 @@ namespace CodeBase.UI
         {
             _upgradeEmployeeData = upgradeEmployeeData;
             transform.rotation = targetRotation;
+
+            if (_upgradeEmployeeData.Completed)
+            {
+                SetCompleted();
+                return;
+            }
+            
             _skipProgressButton.SetEmployeeData(upgradeEmployeeData.EmployeeData);
 
             _slider.value = InitialSliderValue;
@@ -104,7 +112,9 @@ namespace CodeBase.UI
         {
             _upgradeEmployeeData.Completed = true;
             _remainingText.text = "Completed";
-            SaveLastUpgradeTime();
+            _upgradingText.text = "I become better!";
+            _skipProgressButton.gameObject.SetActive(false);
+            _slider.value = _slider.maxValue;
         }
         
         private void SaveLastUpgradeTime()
@@ -116,6 +126,7 @@ namespace CodeBase.UI
         
         private IEnumerator StartDecreaseTimeCoroutine()
         {
+            _employeeDataService.TryAddUpgradeEmployeeData(_upgradeEmployeeData);
             _upgradeEmployeeData.UpgradeStarted = true;
 
             while (Math.Abs(_slider.value - _slider.maxValue) > 0.1f)

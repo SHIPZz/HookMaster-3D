@@ -44,7 +44,7 @@ namespace CodeBase.Installers.Game
             BindSoundService();
             BindPlayerAnimationService();
         }
-
+        
         private void BindPlayerAnimationService() =>
             Container
                 .Bind<PlayerAnimationService>()

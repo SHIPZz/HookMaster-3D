@@ -20,7 +20,7 @@ namespace CodeBase.Services.Profit
         private readonly WalletService _walletService;
         private readonly WorldTimeService _worldTimeService;
 
-        public event Action<Guid, int> ProfitGot;
+        public event Action<string, int> ProfitGot;
 
         public ProfitService(IWorldDataService worldDataService,
             ICoroutineRunner coroutineRunner,
@@ -63,7 +63,7 @@ namespace CodeBase.Services.Profit
                 
                 _walletService.Add(totalProfit);
                 _worldTimeService.SaveLastProfitEarnedTime();
-                ProfitGot?.Invoke(employeeData.Guid, totalProfit);
+                ProfitGot?.Invoke(employeeData.Id, totalProfit);
             }
         }
 
@@ -77,7 +77,7 @@ namespace CodeBase.Services.Profit
                 {
                     int minuteProfit = employeeData.Profit / MinutesInDay;
                     _walletService.Add(minuteProfit);
-                    ProfitGot?.Invoke(employeeData.Guid, minuteProfit);
+                    ProfitGot?.Invoke(employeeData.Id, minuteProfit);
                     _worldTimeService.SaveLastProfitEarnedTime();
                 }
             }

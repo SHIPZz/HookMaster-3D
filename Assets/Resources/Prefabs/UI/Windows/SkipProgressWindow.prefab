@@ -290,7 +290,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!225 &3006367117086988917
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -336,6 +336,7 @@ MonoBehaviour:
   _sliderFillSpeed: 15
   _remainingText: {fileID: 9115230617020908893}
   _skipProgressButton: {fileID: 7290521848873573689}
+  _upgradingText: {fileID: 3458053425520426099}
 --- !u!114 &1919714136937133588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -848,7 +849,7 @@ GameObject:
   - component: {fileID: 3292205798516235321}
   - component: {fileID: 3458053425520426099}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: UpgradingText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1060,7 +1061,7 @@ GameObject:
   - component: {fileID: 1995250442156796369}
   - component: {fileID: 119012150799468452}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: SkipText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

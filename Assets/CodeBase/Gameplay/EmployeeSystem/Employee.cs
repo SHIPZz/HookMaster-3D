@@ -14,6 +14,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
         [SerializeField] private SkinnedMeshRenderer _meshRenderer;
         [SerializeField] private List<Material> _materials;
 
+        public SkipEmployeeProgressUIHandler SkipEmployeeProgressUIHandler;
         public Guid Guid;
         public string Id;
         public int QualificationType;
@@ -26,7 +27,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
         public bool IsUpgrading;
 
         [Inject]
-        private void Construct( EmployeeDataService employeeDataService)
+        private void Construct(EmployeeDataService employeeDataService)
         {
             _employeeDataService = employeeDataService;
         }
@@ -37,19 +38,16 @@ namespace CodeBase.Gameplay.EmployeeSystem
             _employeeDataService.OverwritePurchasedEmployeeData(this.ToEmployeeData());
         }
 
-        public void DecreaseSalary(int amount)
+        public void SetUpgrading(bool isUpgrading)
         {
-            Salary -= amount;
+            IsUpgrading = isUpgrading;
+            _employeeDataService.OverwritePurchasedEmployeeData(this.ToEmployeeData());
         }
 
         public void StopWorking()
         {
             IsWorking = false;
-        }
-
-        public void AddSalary(int salary)
-        {
-            Salary += salary;
+            _employeeDataService.OverwritePurchasedEmployeeData(this.ToEmployeeData());
         }
     }
 }

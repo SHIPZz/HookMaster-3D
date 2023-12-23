@@ -19,10 +19,12 @@ namespace CodeBase.UI.SoundSlider
         private AudioMixerGroup _audioMixerGroup;
 
         [Inject]
-        private void Construct(SettingsService settingsService) =>
+        private void Construct(SettingsService settingsService)
+        {
             _settingsService = settingsService;
+        }
 
-        private void Awake()
+        private void Start()
         {
             _audioMixerGroup = _settingsService.Get(Enum.GetName(typeof(MixerTypeId), _mixerTypeId));
             var targetVolume = _settingsService.GetTargetVolume(_mixerParameter);

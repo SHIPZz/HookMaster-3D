@@ -15,7 +15,7 @@ namespace CodeBase.Services.Employee
             _worldDataService = worldDataService;
         }
 
-        public EmployeeData Get(string id) => 
+        public EmployeeData Get(string id) =>
             _worldDataService.WorldData.PlayerData.PurchasedEmployees.FirstOrDefault(x => x.Id == id);
 
         public UpgradeEmployeeData GetUpgradeEmployeeData(string id)
@@ -24,8 +24,28 @@ namespace CodeBase.Services.Employee
                 .UpgradeEmployeeDatas
                 .FirstOrDefault(x =>
                     x.EmployeeData.Id == id);
-            
-            return targetUpgradeEmployeeData ?? new();
+
+            if (targetUpgradeEmployeeData == null)
+            {
+                EmployeeData employeeData =
+                    _worldDataService.WorldData.PlayerData.PurchasedEmployees.FirstOrDefault(x => x.Id == id);
+
+                targetUpgradeEmployeeData = new()
+                {
+                    EmployeeData = employeeData
+                };
+            }
+
+            return targetUpgradeEmployeeData;
+        }
+
+        public void TryAddUpgradeEmployeeData(UpgradeEmployeeData upgradeEmployeeData)
+        {
+            if (_worldDataService.WorldData.UpgradeEmployeeDatas
+                    .Count(x => x.EmployeeData.Id == upgradeEmployeeData.EmployeeData.Id) == 0)
+            {
+                _worldDataService.WorldData.UpgradeEmployeeDatas.Add(upgradeEmployeeData);
+            }
         }
 
         public void OverwritePurchasedEmployeeData(EmployeeData employeeData)
@@ -52,7 +72,7 @@ namespace CodeBase.Services.Employee
         {
             List<UpgradeEmployeeData> upgradeEmployeeDatas = _worldDataService.WorldData.UpgradeEmployeeDatas;
 
-            if (upgradeEmployeeDatas.Contains(upgradeEmployeeData))
+            if (upgradeEmployeeDatas.Count(x => x.EmployeeData.Id == upgradeEmployeeData.EmployeeData.Id) > 0)
                 upgradeEmployeeDatas.RemoveAll(x =>
                     x.EmployeeData.Id == upgradeEmployeeData.EmployeeData.Id);
 

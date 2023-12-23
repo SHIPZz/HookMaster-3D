@@ -1,4 +1,5 @@
 ﻿using CodeBase.Data;
+using CodeBase.Extensions;
 using CodeBase.Services.Employee;
 using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.TriggerObserve;
@@ -14,7 +15,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
         [SerializeField] private TriggerObserver _triggerObserver;
         [SerializeField] private Employee _employee;
         [SerializeField] private Vector3 _offset;
-        
+
         private WindowService _windowService;
         private SkipProgressSliderWindow _skipProgressWindow;
         private CameraProvider _cameraProvider;
@@ -55,19 +56,22 @@ namespace CodeBase.Gameplay.EmployeeSystem
             if (!_employee.IsUpgrading)
                 return;
 
-            _skipProgressWindow = _windowService.Get<SkipProgressSliderWindow>();
-
-            Quaternion targetRotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
-
             UpgradeEmployeeData targetUpgradeEmployeeData = _employeeDataService.GetUpgradeEmployeeData(_employee.Id);
 
+            ActivateWindow(targetUpgradeEmployeeData);
+        }
+
+        public void ActivateWindow(UpgradeEmployeeData targetUpgradeEmployeeData)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
+            _skipProgressWindow = _windowService.Get<SkipProgressSliderWindow>();
             _skipProgressWindow.transform.SetParent(_employee.transform);
-            _skipProgressWindow.Init(targetUpgradeEmployeeData, 
-                targetUpgradeEmployeeData.LastUpgradeTime, 
-                targetUpgradeEmployeeData.LastUpgradeWindowOpenedTime,targetRotation);
+            _skipProgressWindow.Init(targetUpgradeEmployeeData,
+                targetUpgradeEmployeeData.LastUpgradeTime,
+                targetUpgradeEmployeeData.LastUpgradeWindowOpenedTime, targetRotation);
 
             _skipProgressWindow.transform.position = transform.position + _offset;
-            
+
             _skipProgressWindow.Open();
         }
     }

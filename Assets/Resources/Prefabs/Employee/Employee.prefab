@@ -2079,6 +2079,7 @@ MonoBehaviour:
   _materials:
   - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 2100000, guid: 8f4cc0ab4d6d85f4ea468f16219910a1, type: 2}
+  SkipEmployeeProgressUIHandler: {fileID: 4058113525806600960}
   Id: 
   QualificationType: 1
   Salary: 10174

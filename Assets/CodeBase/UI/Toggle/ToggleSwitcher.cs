@@ -1,5 +1,4 @@
-﻿using System;
-using CodeBase.Enums;
+﻿using CodeBase.Enums;
 using CodeBase.Services.Sound;
 using DG.Tweening;
 using UnityEngine;
@@ -27,11 +26,13 @@ namespace CodeBase.UI.Toggle
             _settingsService = settingsService;
         }
 
-        private void Awake()
-        {
+        private void Awake() => 
             _toggle = GetComponent<UnityEngine.UI.Toggle>();
+
+        private void Start()
+        {
             _toggle.isOn = _settingsService.GetTargetToggleValue(_toggleTypeId);
-            OnValueChanged(_toggle.isOn);
+            MoveHandleWithAnim(_toggle.isOn, false);
         }
 
         private void OnEnable() =>
@@ -45,13 +46,27 @@ namespace CodeBase.UI.Toggle
             _tween?.Kill(true);
             _settingsService.SetToggleSetting(_toggle.isOn, _toggleTypeId);
 
-            if (isOn)
+            MoveHandleWithAnim(isOn, true);
+        }
+
+        private void MoveHandleWithAnim(bool isOn, bool withAnim)
+        {
+            if (!withAnim)
             {
-                _rectTransformAnimator.MoveRectTransform(_initialPosition, _onDuration);
+                MoveHandle(isOn, 0f);
                 return;
             }
 
-            _rectTransformAnimator.MoveRectTransform(_offPosition, _offDuration);
+            float duration = isOn ? _onDuration : _offDuration;
+            Vector3 targetPosition = isOn ? _initialPosition : _offPosition;
+
+            _rectTransformAnimator.MoveRectTransform(targetPosition, duration);
+        }
+
+        private void MoveHandle(bool isOn, float duration)
+        {
+            Vector3 targetPosition = isOn ? _initialPosition : _offPosition;
+            _rectTransformAnimator.MoveRectTransform(targetPosition, duration);
         }
     }
 }

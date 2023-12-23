@@ -11,8 +11,11 @@ namespace CodeBase.Services.Providers.EmployeeProvider
         {
             foreach (Gameplay.EmployeeSystem.Employee employee in Employees.Where(employee => employee.Id == id))
             {
-                employee.IsUpgrading = isUpgrading;
+                employee.SetUpgrading(isUpgrading);
             }
         }
+
+        public Gameplay.EmployeeSystem.Employee Get(string id) => 
+            Employees.FirstOrDefault(x => x.Id == id);
     }
 }

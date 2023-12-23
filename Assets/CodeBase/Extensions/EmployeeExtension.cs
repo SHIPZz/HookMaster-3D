@@ -23,6 +23,16 @@ namespace CodeBase.Extensions
             return potentialEmployeeData;
         }
 
+        public static UpgradeEmployeeData ToUpgradeEmployeeData(this EmployeeData employeeData)
+        {
+            var upgradeEmployeeData = new UpgradeEmployeeData
+            {
+                EmployeeData = employeeData
+            };
+            
+            return upgradeEmployeeData;
+        }
+
         public static EmployeeData ToEmployeeData(this UpgradeEmployeeData upgradeEmployeeData)
         {
             var employeeData = new EmployeeData
