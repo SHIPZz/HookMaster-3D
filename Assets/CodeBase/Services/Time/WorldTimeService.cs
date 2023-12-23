@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Extensions;
 using CodeBase.Services.Coroutine;
@@ -114,11 +115,14 @@ namespace CodeBase.Services.Time
             TimeSpan timeDifference =
                 worldTimeData.CurrentTime.ToDateTime() - worldTimeData.LastEarnedProfitTime.ToDateTime();
 
-            Debug.Log(worldTimeData.LastEarnedProfitTime.ToDateTime() + "last profit payment");
-            return (int)timeDifference.TotalMinutes;
+            int passedMinutes = (int)timeDifference.TotalMinutes;
+            
+            passedMinutes = Mathf.Clamp(passedMinutes, 0,TimeConstantValue.MinutesInTwoHour);
+
+            return passedMinutes;
         }
 
-        public int GetTimeDifferenceByDaysBetweenSalaryPaymentAndCurrentTime()
+        public int GetTimeDifferenceByMinutesBetweenSalaryPaymentAndCurrentTime()
         {
             WorldTimeData worldTimeData = _worldDataService.WorldData.WorldTimeData;
 
@@ -126,7 +130,7 @@ namespace CodeBase.Services.Time
                 worldTimeData.LastSalaryPaymentTime = _worldDataService.WorldData.WorldTimeData.CurrentTime;
 
             TimeSpan timeDifference = worldTimeData.CurrentTime.ToDateTime() - worldTimeData.LastSalaryPaymentTime.ToDateTime();
-            return timeDifference.Days;
+            return (int)timeDifference.TotalMinutes;
         }
 
         private void SaveLastVisitedTime()

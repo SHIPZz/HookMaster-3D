@@ -1,6 +1,9 @@
-﻿using CodeBase.Gameplay.Wallet;
+﻿using System.Linq;
+using CodeBase.Constant;
+using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.Providers.EmployeeProvider;
 using CodeBase.Services.Time;
+using UnityEngine;
 
 namespace CodeBase.Services.Employee
 {
@@ -21,12 +24,22 @@ namespace CodeBase.Services.Employee
 
         public void Init()
         {
-            int passedDays = _worldTimeService.GetTimeDifferenceByDaysBetweenSalaryPaymentAndCurrentTime();
+            int passedMinutes = _worldTimeService.GetTimeDifferenceByMinutesBetweenSalaryPaymentAndCurrentTime();
 
-            if (passedDays == 0)
+            if (passedMinutes < TimeConstantValue.MinutesInTwoHour)
                 return;
-            
-            _employeeService.Employees.ForEach(x => _walletService.Decrease(x.Salary * passedDays));
+
+            foreach (Gameplay.EmployeeSystem.Employee employee in _employeeService.Employees)
+            {
+                var targetSalary = employee.Salary / TimeConstantValue.MinutesInDay;
+                
+                if (targetSalary == 0)
+                    return;
+
+                Debug.Log(targetSalary + " target salary");
+                _walletService.Decrease(targetSalary);
+            }
+
             _worldTimeService.SaveLastSalaryPaymentTime();
         }
     }

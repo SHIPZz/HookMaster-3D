@@ -1,7 +1,7 @@
-﻿ using System.Linq;
- using CodeBase.Data;
+﻿using System.Linq;
+using CodeBase.Data;
 using CodeBase.Enums;
- using CodeBase.Gameplay.Camera;
+using CodeBase.Gameplay.Camera;
 using CodeBase.Gameplay.EmployeeSystem;
 using CodeBase.Gameplay.PlayerSystem;
 using CodeBase.Gameplay.TableSystem;
@@ -10,15 +10,15 @@ using CodeBase.Services.Employee;
 using CodeBase.Services.Factories.Camera;
 using CodeBase.Services.Factories.Employee;
 using CodeBase.Services.Factories.Player;
- using CodeBase.Services.Profit;
+using CodeBase.Services.Profit;
 using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.Providers.EmployeeProvider;
 using CodeBase.Services.Providers.Location;
 using CodeBase.Services.Providers.Player;
 using CodeBase.Services.Providers.Tables;
 using CodeBase.Services.UI;
- using CodeBase.Services.WorldData;
- using UnityEngine;
+using CodeBase.Services.WorldData;
+using UnityEngine;
 using Zenject;
 
 namespace CodeBase.EntryPointSystem
@@ -87,16 +87,16 @@ namespace CodeBase.EntryPointSystem
             _playerProvider.Player = player;
         }
 
-        private void InitWalletService() => 
+        private void InitWalletService() =>
             _walletService.Init();
 
-        private void InitEmployeeSalaryService() => 
+        private void InitEmployeeSalaryService() =>
             _employeeSalaryService.Init();
 
-        private void InitProfitService() => 
+        private void InitProfitService() =>
             _profitService.Init();
 
-        private void InitUIService() => 
+        private void InitUIService() =>
             _uiService.Init(_cameraProvider.Camera);
 
         private void SetRefreshRate()
@@ -111,7 +111,7 @@ namespace CodeBase.EntryPointSystem
         private void InitEmployees()
         {
             PlayerData playerData = _worldDataService.WorldData.PlayerData;
-            
+
             foreach (EmployeeData employeeData in playerData.PurchasedEmployees)
             {
                 Table targetTable = _tableService.Tables.FirstOrDefault(x => x.Id == employeeData.TableId);

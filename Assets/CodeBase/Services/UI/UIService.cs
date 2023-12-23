@@ -3,6 +3,7 @@ using CodeBase.Services.Factories.UI;
 using CodeBase.Services.Providers.Location;
 using CodeBase.Services.Window;
 using CodeBase.UI.Hud;
+using CodeBase.UI.OfflineReward;
 using UnityEngine;
 using Zenject;
 
@@ -15,6 +16,8 @@ namespace CodeBase.Services.UI
         private readonly LocationProvider _locationProvider;
         private readonly WindowService _windowService;
 
+        private bool _blockHud;
+
         public UIService(UIFactory uiFactory, UIProvider uiProvider, LocationProvider locationProvider,
             WindowService windowService)
         {
@@ -24,6 +27,15 @@ namespace CodeBase.Services.UI
             _uiProvider = uiProvider;
         }
 
+        public void OpenOfflineRewardWindow(int totalEarnedProfit, int timeDifference)
+        {
+            var offlineRewardWindow = _windowService.Get<OfflineRewardWindow>();
+            offlineRewardWindow.Init(totalEarnedProfit,timeDifference);
+            offlineRewardWindow.Open();
+            _blockHud = true;
+            _windowService.Close<HudWindow>();
+        }
+
         public void Init(Camera camera)
         {
             var joystickCanvas = _uiFactory.CreateElement<Canvas>(AssetPath.JoystickCanvas, _locationProvider.UIParent);
@@ -31,7 +43,9 @@ namespace CodeBase.Services.UI
             joystickCanvas.planeDistance = 1;
             joystickCanvas.sortingLayerName = "JoystickUILayer";
             joystickCanvas.gameObject.SetActive(true);
-            _windowService.Open<HudWindow>();
+
+            if (_blockHud == false)
+                _windowService.Open<HudWindow>();
         }
     }
 }

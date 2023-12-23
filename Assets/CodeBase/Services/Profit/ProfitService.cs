@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections;
+using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.Coroutine;
 using CodeBase.Services.Time;
+using CodeBase.Services.UI;
 using CodeBase.Services.WorldData;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -13,20 +15,24 @@ namespace CodeBase.Services.Profit
 {
     public class ProfitService : IInitializable, IDisposable
     {
-        private const int MinutesInDay = 1440;
         private readonly IWorldDataService _worldDataService;
         private readonly WaitForSecondsRealtime _waitMinute = new(60f);
         private readonly ICoroutineRunner _coroutineRunner;
         private readonly WalletService _walletService;
         private readonly WorldTimeService _worldTimeService;
+        private readonly UIService _uiService;
+
+        private int _totalEarnedProfit;
 
         public event Action<string, int> ProfitGot;
 
         public ProfitService(IWorldDataService worldDataService,
             ICoroutineRunner coroutineRunner,
             WalletService walletService,
-            WorldTimeService worldTimeService)
+            WorldTimeService worldTimeService,
+            UIService uiService)
         {
+            _uiService = uiService;
             _worldTimeService = worldTimeService;
             _walletService = walletService;
             _coroutineRunner = coroutineRunner;
@@ -38,8 +44,13 @@ namespace CodeBase.Services.Profit
             PlayerData playerData = _worldDataService.WorldData.PlayerData;
             _coroutineRunner.StartCoroutine(GetProfitEveryMinuteCoroutine(playerData));
             int timeDifferenceByMinutes = _worldTimeService.GetTimeDifferenceByMinutesBetweenProfitAndCurrentTime();
-
+            
             ReceiveProfit(playerData, timeDifferenceByMinutes);
+
+            if (_totalEarnedProfit == 0)
+                return;
+            
+            _uiService.OpenOfflineRewardWindow(_totalEarnedProfit, timeDifferenceByMinutes);
         }
 
         public void Initialize()
@@ -56,13 +67,14 @@ namespace CodeBase.Services.Profit
         {
             foreach (EmployeeData employeeData in playerData.PurchasedEmployees)
             {
-                int totalProfit = (employeeData.Profit / MinutesInDay) * timeDifferenceByMinutes;
-                
-                if(totalProfit == 0)
+                int totalProfit = (employeeData.Profit / TimeConstantValue.MinutesInDay) * timeDifferenceByMinutes;
+
+                if (totalProfit == 0)
                     return;
-                
+
                 _walletService.Add(totalProfit);
                 _worldTimeService.SaveLastProfitEarnedTime();
+                _totalEarnedProfit += totalProfit;
                 ProfitGot?.Invoke(employeeData.Id, totalProfit);
             }
         }
@@ -75,7 +87,7 @@ namespace CodeBase.Services.Profit
 
                 foreach (EmployeeData employeeData in playerData.PurchasedEmployees)
                 {
-                    int minuteProfit = employeeData.Profit / MinutesInDay;
+                    int minuteProfit = employeeData.Profit / TimeConstantValue.MinutesInDay;
                     _walletService.Add(minuteProfit);
                     ProfitGot?.Invoke(employeeData.Id, minuteProfit);
                     _worldTimeService.SaveLastProfitEarnedTime();
@@ -88,7 +100,7 @@ namespace CodeBase.Services.Profit
             if (!hasFocus)
                 return;
 
-            while (!_worldTimeService.TimeUpdated) 
+            while (!_worldTimeService.TimeUpdated)
                 await UniTask.Yield();
 
             ReceiveProfit(_worldDataService.WorldData.PlayerData,
