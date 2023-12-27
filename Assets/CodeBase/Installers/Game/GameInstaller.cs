@@ -4,6 +4,7 @@ using CodeBase.Services.DataService;
 using CodeBase.Services.Employee;
 using CodeBase.Services.Factories.Bullet;
 using CodeBase.Services.Factories.Camera;
+using CodeBase.Services.Factories.Effect;
 using CodeBase.Services.Factories.Employee;
 using CodeBase.Services.Factories.Player;
 using CodeBase.Services.Factories.UI;
@@ -43,8 +44,16 @@ namespace CodeBase.Installers.Game
             BindEmployeeDataService();
             BindSoundService();
             BindPlayerAnimationService();
+            BindEffectPool();
         }
-        
+
+        private void BindEffectPool()
+        {
+            Container
+                .Bind<EffectPool>()
+                .AsTransient();
+        }
+
         private void BindPlayerAnimationService() =>
             Container
                 .Bind<PlayerAnimationService>()
@@ -106,6 +115,7 @@ namespace CodeBase.Installers.Game
             Container.Bind<IBulletFactory>().To<BulletFactory>().AsSingle();
             Container.Bind<IWeaponFactory>().To<WeaponFactory>().AsSingle();
             Container.Bind<IEmployeeFactory>().To<EmployeeFactory>().AsSingle();
+            Container.Bind<IEffectFactory>().To<EffectFactory>().AsSingle();
             Container.Bind<UIFactory>().AsSingle();
         }
 
@@ -115,6 +125,7 @@ namespace CodeBase.Installers.Game
             Container.Bind<WeaponStaticDataService>().AsSingle();
             Container.Bind<OfficeStaticDataService>().AsSingle();
             Container.Bind<UIStaticDataService>().AsSingle();
+            Container.Bind<EffectStaticDataService>().AsSingle();
         }
     }
 }

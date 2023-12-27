@@ -16,6 +16,8 @@ namespace CodeBase.Gameplay.Wallet
         [SerializeField] private float _defaultScale = 1f;
         [SerializeField] private float _colorFadeDuration = 1f;
         [SerializeField] private float _colorDefaultFadeDuration = 0.5f;
+        [SerializeField] private AudioSource _moneySound;
+
 
         private WalletService _walletService;
         private Color _moneyColor;
@@ -46,11 +48,11 @@ namespace CodeBase.Gameplay.Wallet
         [Button]
         private void SetMoney(int money)
         {
+            _moneySound.Play();
             _moneyText.text = money.ToString();
             _tweenColor?.Kill(true);
             _tweenColor = _moneyText.DOColor(Color.white, _colorFadeDuration)
                 .OnComplete(()=> _moneyText.DOColor(_moneyColor, _colorDefaultFadeDuration));
-            
             _tween?.Kill(true);
             _tween = _moneyTextRectTransform.DOScale(_targetScale, _increaseScaleDuration)
                 .OnComplete(() => _moneyTextRectTransform.DOScale(_defaultScale, _decreaseScaleDuration));

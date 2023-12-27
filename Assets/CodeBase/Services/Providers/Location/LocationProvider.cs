@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using CodeBase.Enums;
-using Sirenix.OdinInspector;
-using Sirenix.Serialization;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace CodeBase.Services.Providers.Location
 {
@@ -11,5 +7,6 @@ namespace CodeBase.Services.Providers.Location
         public Transform PlayerSpawnPoint;
         public Transform EmployeeSpawnPoint;
         public Transform UIParent;
-}
+        public Transform EffectParent;
+    }
 }

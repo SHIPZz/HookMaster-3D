@@ -13,5 +13,6 @@
         public const string Windows = "Prefabs/UI/Windows";
         public const string Sounds = "Prefabs/UI/Sound";
         public const string AudioMixer = "Prefabs/UI/AudioMixers/Mixer";
+        public const string EffectView = "Prefabs/Effects";
     }
 }
