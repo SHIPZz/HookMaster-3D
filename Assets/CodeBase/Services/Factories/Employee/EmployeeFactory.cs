@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CodeBase.Constant;
 using CodeBase.Data;
+using CodeBase.Extensions;
 using CodeBase.Gameplay.EmployeeSystem;
 using CodeBase.Gameplay.TableSystem;
 using CodeBase.Services.DataService;
@@ -77,14 +78,14 @@ namespace CodeBase.Services.Factories.Employee
                 Quaternion.identity,
                 null);
 
-            employee.Name = employeeData.Name;
-            employee.QualificationType = employeeData.QualificationType;
-            employee.Salary = employeeData.Salary;
-            employee.Profit = employeeData.Profit;
-            employee.TableId = targetTable.Id;
-            employee.Guid = employeeData.Guid;
-            employee.Id = employeeData.Id;
-            employee.IsUpgrading = employeeData.IsUpgrading;
+            employee.SetName(employeeData.Name)
+                .SetQualificationType(employeeData.QualificationType)
+                .SetProfit(employeeData.Profit)
+                .SetSalary(employeeData.Salary)
+                .SetGuid(employeeData.Guid)
+                .SetId(employeeData.Id)
+                .SetTableId(employeeData.TableId)
+                .SetIsUpgrading(employeeData.IsUpgrading);
 
             EmployeeMovement employeeMovement = employee.GetComponent<EmployeeMovement>();
             employeeMovement.SetTable(targetTable);

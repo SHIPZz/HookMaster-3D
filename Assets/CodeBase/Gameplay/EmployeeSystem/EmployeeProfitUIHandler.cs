@@ -46,7 +46,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
             _profitService.ProfitGot -= OnProfitGot;
 
         [Button]
-        private void OnProfitGot(string employeeId, int minuteProfit)
+        private void OnProfitGot(string employeeId, float minuteProfit)
         {
             if (_employee.Id != employeeId)
                 return;

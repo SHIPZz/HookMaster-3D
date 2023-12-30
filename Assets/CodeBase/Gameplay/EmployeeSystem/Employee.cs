@@ -18,13 +18,13 @@ namespace CodeBase.Gameplay.EmployeeSystem
         public Guid Guid;
         public string Id;
         public int QualificationType;
-        public int Salary;
-        public int Profit;
+        public float Salary;
+        public float Profit;
         public string Name;
         public string TableId;
         public bool IsWorking;
-        private EmployeeDataService _employeeDataService;
         public bool IsUpgrading;
+        private EmployeeDataService _employeeDataService;
 
         [Inject]
         private void Construct(EmployeeDataService employeeDataService)

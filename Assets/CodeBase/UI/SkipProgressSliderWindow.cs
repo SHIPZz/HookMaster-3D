@@ -9,6 +9,7 @@ using CodeBase.Services.WorldData;
 using CodeBase.UI.Buttons;
 using Cysharp.Threading.Tasks;
 using TMPro;
+using UnityEditor.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -26,6 +27,7 @@ namespace CodeBase.UI
         [SerializeField] private TMP_Text _remainingText;
         [SerializeField] private SkipProgressButton _skipProgressButton;
         [SerializeField] private TMP_Text _upgradingText;
+        [SerializeField] private ClaimUpgradeButton _claimUpgradeButton;
         
         private UpgradeEmployeeData _upgradeEmployeeData;
         private EmployeeDataService _employeeDataService;
@@ -64,7 +66,7 @@ namespace CodeBase.UI
                 return;
             }
             
-            _skipProgressButton.SetEmployeeData(upgradeEmployeeData.EmployeeData);
+            InitButtons(upgradeEmployeeData);
 
             _slider.value = InitialSliderValue;
 
@@ -97,6 +99,12 @@ namespace CodeBase.UI
             _timeCoroutine = StartCoroutine(StartDecreaseTimeCoroutine());
         }
 
+        private void InitButtons(UpgradeEmployeeData upgradeEmployeeData)
+        {
+            _skipProgressButton.SetEmployeeData(upgradeEmployeeData.EmployeeData);
+            _claimUpgradeButton.SetEmployeeData(upgradeEmployeeData.EmployeeData);
+        }
+
         private bool TryToSetCompleted(double passedMinutes, float targetCompletedValue)
         {
             if (passedMinutes >= targetCompletedValue)
@@ -114,6 +122,7 @@ namespace CodeBase.UI
             _remainingText.text = "Completed";
             _upgradingText.text = "I become better!";
             _skipProgressButton.gameObject.SetActive(false);
+            _claimUpgradeButton.gameObject.SetActive(true);
             _slider.value = _slider.maxValue;
         }
         
@@ -146,7 +155,7 @@ namespace CodeBase.UI
             }
 
             _slider.value = _slider.maxValue;
-            TryToSetCompleted(_slider.value, 0);
+            SetCompleted();
         }
     }
 }

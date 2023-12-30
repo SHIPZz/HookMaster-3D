@@ -1,4 +1,5 @@
-﻿using CodeBase.Data;
+﻿using System;
+using CodeBase.Data;
 using CodeBase.Gameplay.EmployeeSystem;
 
 namespace CodeBase.Extensions
@@ -32,7 +33,73 @@ namespace CodeBase.Extensions
 
             return upgradeEmployeeData;
         }
+        
+        public static Employee SetName(this Employee employee, string name)
+        {
+            employee.Name = name;
+            return employee;
+        }
+        
+        public static Employee SetGuid(this Employee employee, Guid guid)
+        {
+            employee.Guid = guid;
+            return employee;
+        }
 
+        public static Employee SetId(this Employee employee, string id)
+        {
+            employee.Id = id;
+            return employee;
+        }
+        
+        public static Employee SetIsUpgrading(this Employee employee, bool isUpgrading)
+        {
+            employee.IsUpgrading = isUpgrading;
+            return employee;
+        }
+
+        public static Employee SetTableId(this Employee employee, string id)
+        {
+            employee.TableId = id;
+            return employee;
+        }
+        
+        public static Employee SetSalary(this Employee employee, float salary)
+        {
+            employee.Salary = salary;
+            return employee;
+        }
+        
+        public static Employee SetProfit(this Employee employee, float profit)
+        {
+            employee.Profit = profit;
+            return employee;
+        }
+
+        public static Employee SetQualificationType(this Employee employee, int qualificationType)
+        {
+            employee.QualificationType = qualificationType;
+            return employee;
+        }
+
+        public static EmployeeData SetSalary(this EmployeeData employeeData, float salary)
+        {
+            employeeData.Salary = salary;
+            return employeeData;
+        }
+        
+        public static EmployeeData SetProfit(this EmployeeData employeeData, float profit)
+        {
+            employeeData.Profit = profit;
+            return employeeData;
+        }
+
+        public static EmployeeData SetQualificationType(this EmployeeData employeeData, int qualificationType)
+        {
+            employeeData.QualificationType = qualificationType;
+            return employeeData;
+        }
+        
         public static UpgradeEmployeeData SetUpgradeCost(this UpgradeEmployeeData upgradeEmployeeData, float price)
         {
             upgradeEmployeeData.UpgradeCost = price;

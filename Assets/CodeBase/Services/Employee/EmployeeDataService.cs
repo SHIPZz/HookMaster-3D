@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Constant;
 using CodeBase.Data;
@@ -28,6 +29,22 @@ namespace CodeBase.Services.Employee
 
             targetUpgradeEmployeeData.SetUpgradeCost(newUpgradeCost);
             SaveUpgradeEmployeeData(targetUpgradeEmployeeData);
+        }
+
+        public void UpdateEmployeeData(EmployeeData employeeData, Action<EmployeeData> onCompleted = null)
+        {
+            var targetSalary = employeeData.Salary *
+                               _worldDataService.WorldData.PlayerData.QualificationType
+                               + MultiplyValueConstants.AdditionalSalary;
+
+            var targetProfit = employeeData.Profit *
+                               _worldDataService.WorldData.PlayerData.QualificationType
+                               + MultiplyValueConstants.AdditionalProfit;
+
+            employeeData.SetProfit(targetProfit).SetSalary(targetSalary);
+            
+            OverwritePurchasedEmployeeData(employeeData);
+            onCompleted?.Invoke(employeeData);
         }
 
         public UpgradeEmployeeData GetUpgradeEmployeeData(string id)

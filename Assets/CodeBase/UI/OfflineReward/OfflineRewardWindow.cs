@@ -23,7 +23,7 @@ namespace CodeBase.UI.OfflineReward
             _windowService = windowService;
         }
 
-        public void Init(int totalProfit, int timeDifference)
+        public void Init(float totalProfit, int timeDifference)
         {
             _rewardedMoneyText.text = $"{totalProfit}$";
             _passedTimeSlider.value = timeDifference;

@@ -22,9 +22,9 @@ namespace CodeBase.Services.Profit
         private readonly WorldTimeService _worldTimeService;
         private readonly UIService _uiService;
 
-        private int _totalEarnedProfit;
+        private float _totalEarnedProfit;
 
-        public event Action<string, int> ProfitGot;
+        public event Action<string, float> ProfitGot;
 
         public ProfitService(IWorldDataService worldDataService,
             ICoroutineRunner coroutineRunner,
@@ -67,7 +67,7 @@ namespace CodeBase.Services.Profit
         {
             foreach (EmployeeData employeeData in playerData.PurchasedEmployees)
             {
-                int totalProfit = (employeeData.Profit / TimeConstantValue.MinutesInDay) * timeDifferenceByMinutes;
+                float totalProfit = (employeeData.Profit / TimeConstantValue.MinutesInDay) * timeDifferenceByMinutes;
 
                 if (totalProfit == 0)
                     return;
@@ -87,7 +87,7 @@ namespace CodeBase.Services.Profit
 
                 foreach (EmployeeData employeeData in playerData.PurchasedEmployees)
                 {
-                    int minuteProfit = employeeData.Profit / TimeConstantValue.MinutesInDay;
+                    float minuteProfit = employeeData.Profit / TimeConstantValue.MinutesInDay;
                     _walletService.Add(minuteProfit);
                     ProfitGot?.Invoke(employeeData.Id, minuteProfit);
                     _worldTimeService.SaveLastProfitEarnedTime();

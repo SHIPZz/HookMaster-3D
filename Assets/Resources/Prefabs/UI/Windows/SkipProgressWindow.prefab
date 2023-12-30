@@ -290,7 +290,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!225 &3006367117086988917
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -337,6 +337,7 @@ MonoBehaviour:
   _remainingText: {fileID: 9115230617020908893}
   _skipProgressButton: {fileID: 7290521848873573689}
   _upgradingText: {fileID: 3458053425520426099}
+  _claimUpgradeButton: {fileID: 529999843343757468}
 --- !u!114 &1919714136937133588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,7 +516,7 @@ GameObject:
   - component: {fileID: 4089886187205327829}
   - component: {fileID: 4760072686799167396}
   - component: {fileID: 3092379578104703512}
-  - component: {fileID: 5209816732767023431}
+  - component: {fileID: 529999843343757468}
   m_Layer: 5
   m_Name: ClaimUpgradeButton
   m_TagString: Untagged
@@ -717,8 +718,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 4760072686799167396}
-  _button: {fileID: 5209816732767023431}
---- !u!114 &5209816732767023431
+  _button: {fileID: 529999843343757468}
+--- !u!114 &529999843343757468
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -727,7 +728,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2621880074900532051}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 64c529fd2d5b41b09fd7ffd0100eb184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:

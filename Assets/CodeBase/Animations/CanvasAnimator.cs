@@ -6,7 +6,7 @@ using UnityEngine;
 public class CanvasAnimator : MonoBehaviour
 {
     [SerializeField] private CanvasGroup _canvasGroup;
-    [SerializeField] private float _fadeInDuration = 0.5f;
+    [SerializeField] private float _fadeInDuration = 0.3f;
     [SerializeField] private float _fadeOutDuration = 0.25f;
 
     private Tween _fadeTween;

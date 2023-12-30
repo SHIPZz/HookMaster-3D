@@ -27,7 +27,7 @@ namespace CodeBase.Services.UI
             _uiProvider = uiProvider;
         }
 
-        public void OpenOfflineRewardWindow(int totalEarnedProfit, int timeDifference)
+        public void OpenOfflineRewardWindow(float totalEarnedProfit, int timeDifference)
         {
             var offlineRewardWindow = _windowService.Get<OfflineRewardWindow>();
             offlineRewardWindow.Init(totalEarnedProfit,timeDifference);
