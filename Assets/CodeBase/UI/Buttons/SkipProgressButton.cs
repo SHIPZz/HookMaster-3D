@@ -1,6 +1,7 @@
 ﻿using CodeBase.Data;
 using CodeBase.Services.Employee;
 using CodeBase.UI.SpeedUp;
+using UnityEngine;
 using Zenject;
 
 namespace CodeBase.UI.Buttons
@@ -19,6 +20,7 @@ namespace CodeBase.UI.Buttons
         public void SetEmployeeData(EmployeeData employeeData)
         {
             _employeeData = employeeData;
+            Debug.Log(employeeData.Name);
         }
 
         protected override void Open()
@@ -28,8 +30,7 @@ namespace CodeBase.UI.Buttons
             UpgradeEmployeeData targetUpgradeEmployeeData =
                 _employeeDataService.GetUpgradeEmployeeData(_employeeData.Id);
 
-            speedUpWindow.Init(targetUpgradeEmployeeData, targetUpgradeEmployeeData.LastUpgradeTime,
-                targetUpgradeEmployeeData.LastUpgradeWindowOpenedTime);
+            speedUpWindow.Init(targetUpgradeEmployeeData, targetUpgradeEmployeeData.LastUpgradeTime);
             speedUpWindow.Open();
             WindowService.Close<SkipProgressSliderWindow>();
         }

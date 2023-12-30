@@ -15,10 +15,8 @@ namespace CodeBase.UI.Hud
         private IWorldDataService _worldDataService;
 
         [Inject]
-        private void Construct(IWorldDataService worldDataService)
-        {
+        private void Construct(IWorldDataService worldDataService) => 
             _worldDataService = worldDataService;
-        }
 
         private void OnEnable()
         {
@@ -27,14 +25,10 @@ namespace CodeBase.UI.Hud
             _timeText.text = formattedTime;
         }
         
-        public override void Open()
-        {
+        public override void Open() => 
             _canvasAnimator.FadeInCanvas();
-        }
 
-        public override void Close()
-        {
+        public override void Close() => 
             _canvasAnimator.FadeOutCanvas(base.Close);
-        }
     }
 }

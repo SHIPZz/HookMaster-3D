@@ -4,9 +4,7 @@ using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Extensions;
 using CodeBase.Services.Employee;
-using CodeBase.Services.Time;
 using CodeBase.Services.WorldData;
-using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,7 +15,6 @@ namespace CodeBase.UI.SpeedUp
     public class SpeedUpWindow : WindowBase
     {
         private const float CloseAdItemMinutes = 15;
-        private const float UpgradeCompletedMinutes = 60;
         private const float InitialSliderValue = -60f;
 
         [SerializeField] private CanvasAnimator _canvasAnimator;
@@ -37,15 +34,12 @@ namespace CodeBase.UI.SpeedUp
         private UpgradeEmployeeData _upgradeEmployeeData;
         private IWorldDataService _worldDataService;
         private Coroutine _timeCoroutine;
-        private WorldTimeService _worldTimeService;
         private EmployeeDataService _employeeDataService;
 
         [Inject]
-        private void Construct(IWorldDataService worldDataService,
-            WorldTimeService worldTimeService, EmployeeDataService employeeDataService)
+        private void Construct(IWorldDataService worldDataService, EmployeeDataService employeeDataService)
         {
             _employeeDataService = employeeDataService;
-            _worldTimeService = worldTimeService;
             _worldDataService = worldDataService;
         }
 
@@ -58,8 +52,7 @@ namespace CodeBase.UI.SpeedUp
         public override void Close() =>
             _canvasAnimator.FadeOutCanvas(base.Close);
 
-        public async UniTaskVoid Init(UpgradeEmployeeData upgradeEmployeeData, float lastEmployeeUpgradeTime,
-            long lastUpgradeWindowOpenedTime)
+        public void Init(UpgradeEmployeeData upgradeEmployeeData, float lastEmployeeUpgradeTime)
         {
             _upgradeEmployeeData = upgradeEmployeeData;
 
@@ -68,28 +61,8 @@ namespace CodeBase.UI.SpeedUp
             if (_upgradeEmployeeData.LastUpgradeTime != 0) 
                 _totalTime = lastEmployeeUpgradeTime;
 
-            await _worldTimeService.UpdateWorldTime();
-            
-            TimeSpan timePassed = _worldDataService.WorldData.WorldTimeData.CurrentTime.ToDateTime() -
-                                  lastUpgradeWindowOpenedTime.ToDateTime();
-
-            var passedSeconds = (float)timePassed.TotalSeconds;
-            var passedMinutes = timePassed.TotalMinutes;
-
-            if (_upgradeEmployeeData.UpgradeStarted && TryToSetCompleted(passedMinutes, UpgradeCompletedMinutes))
-                return;
-
-            if (_upgradeEmployeeData.UpgradeStarted)
-                _totalTime -= Mathf.Abs(passedSeconds);
-
             if (_timeCoroutine != null)
                 StopCoroutine(StartDecreaseTimeCoroutine());
-
-            if (_totalTime >= TimeConstantValue.SecondsInHour && _upgradeEmployeeData.UpgradeStarted)
-            {
-                SetCompleted();
-                return;
-            }
 
             _timeCoroutine = StartCoroutine(StartDecreaseTimeCoroutine());
         }
@@ -111,6 +84,7 @@ namespace CodeBase.UI.SpeedUp
             _skipDiamondItem.SetActive(false);
             _skipTicketItem.SetActive(false);
             _completedItem.SetActive(true);
+            _upgradeEmployeeData.SetCompleted(true);
             _upgradeEmployeeData.Completed = true;
             _remainingTimeText.text = "Completed";
             SaveLastUpgradeTime();
@@ -118,14 +92,15 @@ namespace CodeBase.UI.SpeedUp
 
         private void SaveLastUpgradeTime()
         {
-            _upgradeEmployeeData.LastUpgradeTime = Mathf.Abs(_totalTime);
-            _upgradeEmployeeData.LastUpgradeWindowOpenedTime = _worldDataService.WorldData.WorldTimeData.CurrentTime;
+            _upgradeEmployeeData
+                .SetLastUpgradeTime(Mathf.Abs(_totalTime))
+                .SetLastUpgradeWindowOpenedTime(_worldDataService.WorldData.WorldTimeData.CurrentTime);
             _employeeDataService.SaveUpgradeEmployeeData(_upgradeEmployeeData);
         }
 
         private IEnumerator StartDecreaseTimeCoroutine()
         {
-            _upgradeEmployeeData.UpgradeStarted = true;
+            _upgradeEmployeeData.SetUpgradeStarted(true);
 
             while (Math.Abs(_remainingTimeSlider.value - _remainingTimeSlider.maxValue) > 0.1f)
             {

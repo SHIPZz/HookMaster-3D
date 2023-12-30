@@ -19,7 +19,7 @@ namespace CodeBase.Extensions
                 IsWorking = employee.IsWorking,
                 IsUpgrading = employee.IsUpgrading
             };
-            
+
             return potentialEmployeeData;
         }
 
@@ -29,7 +29,43 @@ namespace CodeBase.Extensions
             {
                 EmployeeData = employeeData
             };
-            
+
+            return upgradeEmployeeData;
+        }
+
+        public static UpgradeEmployeeData SetUpgradeCost(this UpgradeEmployeeData upgradeEmployeeData, float price)
+        {
+            upgradeEmployeeData.UpgradeCost = price;
+            return upgradeEmployeeData;
+        }
+
+        public static UpgradeEmployeeData SetCompleted(this UpgradeEmployeeData upgradeEmployeeData, bool isCompleted)
+        {
+            upgradeEmployeeData.Completed = isCompleted;
+            return upgradeEmployeeData;
+        }
+
+        public static UpgradeEmployeeData SetLastUpgradeTime(this UpgradeEmployeeData upgradeEmployeeData, float lastUpgradeTime)
+        {
+            upgradeEmployeeData.LastUpgradeTime = lastUpgradeTime;
+            return upgradeEmployeeData;
+        }
+
+        public static UpgradeEmployeeData SetUpgradeStarted(this UpgradeEmployeeData upgradeEmployeeData, bool isStarted)
+        {
+            upgradeEmployeeData.UpgradeStarted = isStarted;
+            return upgradeEmployeeData;
+        }
+
+        public static UpgradeEmployeeData SetEmployeeData(this UpgradeEmployeeData upgradeEmployeeData, EmployeeData employeeData)
+        {
+            upgradeEmployeeData.EmployeeData = employeeData;
+            return upgradeEmployeeData;
+        }
+
+        public static UpgradeEmployeeData SetLastUpgradeWindowOpenedTime(this UpgradeEmployeeData upgradeEmployeeData, long lastUpgradeWindowOpenedTime)
+        {
+            upgradeEmployeeData.LastUpgradeWindowOpenedTime = lastUpgradeWindowOpenedTime;
             return upgradeEmployeeData;
         }
 

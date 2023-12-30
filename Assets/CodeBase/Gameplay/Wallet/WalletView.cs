@@ -1,4 +1,5 @@
-﻿using CodeBase.Enums;
+﻿using System.Globalization;
+using CodeBase.Enums;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using TMPro;
@@ -32,7 +33,7 @@ namespace CodeBase.Gameplay.Wallet
             _walletService = walletService;
         }
 
-        private void Awake() =>
+        private void Awake() => 
             _moneyTextRectTransform = _moneyText.GetComponent<RectTransform>();
 
         public void OnEnable()
@@ -46,13 +47,13 @@ namespace CodeBase.Gameplay.Wallet
             _walletService.MoneyChanged -= SetMoney;
 
         [Button]
-        private void SetMoney(int money)
+        private void SetMoney(float money)
         {
             _moneySound.Play();
-            _moneyText.text = money.ToString();
+            _moneyText.text = money.ToString(CultureInfo.InvariantCulture);
             _tweenColor?.Kill(true);
             _tweenColor = _moneyText.DOColor(Color.white, _colorFadeDuration)
-                .OnComplete(()=> _moneyText.DOColor(_moneyColor, _colorDefaultFadeDuration));
+                .OnComplete(() => _moneyText.DOColor(_moneyColor, _colorDefaultFadeDuration));
             _tween?.Kill(true);
             _tween = _moneyTextRectTransform.DOScale(_targetScale, _increaseScaleDuration)
                 .OnComplete(() => _moneyTextRectTransform.DOScale(_defaultScale, _decreaseScaleDuration));

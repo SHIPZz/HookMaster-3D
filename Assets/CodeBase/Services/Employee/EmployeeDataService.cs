@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CodeBase.Constant;
 using CodeBase.Data;
+using CodeBase.Extensions;
 using CodeBase.Services.WorldData;
 using UnityEngine;
 
@@ -18,12 +20,19 @@ namespace CodeBase.Services.Employee
         public EmployeeData Get(string id) =>
             _worldDataService.WorldData.PlayerData.PurchasedEmployees.FirstOrDefault(x => x.Id == id);
 
+        public void RecountUpgradePriceEmployee(UpgradeEmployeeData targetUpgradeEmployeeData)
+        {
+            var newUpgradeCost = targetUpgradeEmployeeData.UpgradeCost *
+                                 _worldDataService.WorldData.PlayerData.QualificationType
+                                 + MultiplyValueConstants.AdditionalUpgradeCost;
+
+            targetUpgradeEmployeeData.SetUpgradeCost(newUpgradeCost);
+            SaveUpgradeEmployeeData(targetUpgradeEmployeeData);
+        }
+
         public UpgradeEmployeeData GetUpgradeEmployeeData(string id)
         {
-            UpgradeEmployeeData targetUpgradeEmployeeData = _worldDataService.WorldData
-                .UpgradeEmployeeDatas
-                .FirstOrDefault(x =>
-                    x.EmployeeData.Id == id);
+            UpgradeEmployeeData targetUpgradeEmployeeData = GetTargetUpgradeEmployeeData(id);
 
             if (targetUpgradeEmployeeData == null)
             {
@@ -38,7 +47,7 @@ namespace CodeBase.Services.Employee
 
             return targetUpgradeEmployeeData;
         }
-
+        
         public void TryAddUpgradeEmployeeData(UpgradeEmployeeData upgradeEmployeeData)
         {
             if (_worldDataService.WorldData.UpgradeEmployeeDatas
@@ -79,5 +88,11 @@ namespace CodeBase.Services.Employee
             _worldDataService.WorldData.UpgradeEmployeeDatas.Add(upgradeEmployeeData);
             _worldDataService.Save();
         }
+        
+        private UpgradeEmployeeData GetTargetUpgradeEmployeeData(string id) =>
+            _worldDataService.WorldData
+                .UpgradeEmployeeDatas
+                .FirstOrDefault(x =>
+                    x.EmployeeData.Id == id);
     }
 }
