@@ -7,7 +7,7 @@ namespace CodeBase.Data
     public class PlayerData
     {
         public int QualificationType = 1;
-        public float Money;
+        public int Money;
         public List<EmployeeData> PurchasedEmployees = new();
     }
 }

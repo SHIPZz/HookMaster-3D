@@ -23,25 +23,32 @@ namespace CodeBase.Services.Employee
 
         public void RecountUpgradePriceEmployee(UpgradeEmployeeData targetUpgradeEmployeeData)
         {
-            var newUpgradeCost = targetUpgradeEmployeeData.UpgradeCost *
+            var newUpgradeCost = targetUpgradeEmployeeData.UpgradeCost +
                                  _worldDataService.WorldData.PlayerData.QualificationType
-                                 + MultiplyValueConstants.AdditionalUpgradeCost;
+                                 * MultiplyValueConstants.AdditionalUpgradeCost;
 
             targetUpgradeEmployeeData.SetUpgradeCost(newUpgradeCost);
             SaveUpgradeEmployeeData(targetUpgradeEmployeeData);
         }
 
-        public void UpdateEmployeeData(EmployeeData employeeData, Action<EmployeeData> onCompleted = null)
+        public void UpgradeEmployeeData(EmployeeData employeeData, Action<EmployeeData> onCompleted = null)
         {
-            var targetSalary = employeeData.Salary *
+            var targetSalary = employeeData.Salary +
                                _worldDataService.WorldData.PlayerData.QualificationType
-                               + MultiplyValueConstants.AdditionalSalary;
+                               * MultiplyValueConstants.AdditionalSalary;
 
-            var targetProfit = employeeData.Profit *
+            var targetProfit = employeeData.Profit +
                                _worldDataService.WorldData.PlayerData.QualificationType
-                               + MultiplyValueConstants.AdditionalProfit;
+                               * MultiplyValueConstants.AdditionalProfit;
 
-            employeeData.SetProfit(targetProfit).SetSalary(targetSalary);
+            var targetQualificationType = employeeData.QualificationType;
+            targetQualificationType++;
+            
+            employeeData.SetProfit(targetProfit).SetSalary(targetSalary)
+                .SetIsUpgrading(false)
+                .SetQualificationType(targetQualificationType);
+            
+            ResetUpdatedUpgradedData(employeeData.Id);
             
             OverwritePurchasedEmployeeData(employeeData);
             onCompleted?.Invoke(employeeData);
@@ -103,6 +110,19 @@ namespace CodeBase.Services.Employee
                     x.EmployeeData.Id == upgradeEmployeeData.EmployeeData.Id);
 
             _worldDataService.WorldData.UpgradeEmployeeDatas.Add(upgradeEmployeeData);
+            _worldDataService.Save();
+        }
+
+        private void ResetUpdatedUpgradedData(string id)
+        {
+            List<UpgradeEmployeeData> upgradeEmployeeDatas = _worldDataService.WorldData.UpgradeEmployeeDatas;
+
+            var filteredList = upgradeEmployeeDatas.Where(upgradeEmployeeData => upgradeEmployeeData.EmployeeData.Id == id).ToList();
+
+            foreach (UpgradeEmployeeData upgradeEmployeeData in filteredList) 
+                upgradeEmployeeData.Reset();
+
+            _worldDataService.WorldData.UpgradeEmployeeDatas = filteredList;
             _worldDataService.Save();
         }
         

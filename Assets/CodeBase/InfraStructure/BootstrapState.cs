@@ -2,6 +2,7 @@
 using CodeBase.Services.Time;
 using CodeBase.Services.WorldData;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 
 namespace CodeBase.InfraStructure
 {
@@ -25,6 +26,11 @@ namespace CodeBase.InfraStructure
 
         public async UniTaskVoid Enter()
         {
+            DOTween.KillAll();
+            DOTween.Clear();
+            DOTween.Init();
+            
+            
             await _worldDataService.Load();
 
             while (!_worldTimeService.GotTime) 

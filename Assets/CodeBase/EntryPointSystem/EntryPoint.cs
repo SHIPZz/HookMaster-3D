@@ -119,7 +119,7 @@ namespace CodeBase.EntryPointSystem
                 if (targetTable == null)
                     continue;
 
-                Employee targetEmployee = _employeeFactory.Create(employeeData, targetTable);
+                Employee targetEmployee = _employeeFactory.Create(employeeData, targetTable, true);
                 _employeeService.Employees.Add(targetEmployee);
             }
         }

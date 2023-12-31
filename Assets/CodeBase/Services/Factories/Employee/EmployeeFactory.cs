@@ -69,7 +69,7 @@ namespace CodeBase.Services.Factories.Employee
         }
 
         public Gameplay.EmployeeSystem.Employee Create(EmployeeData employeeData,
-            Table targetTable)
+            Table targetTable, bool isSit)
         {
             var employeePrefab = _assetProvider.Get<Gameplay.EmployeeSystem.Employee>(AssetPath.Employee);
 
@@ -90,7 +90,7 @@ namespace CodeBase.Services.Factories.Employee
             EmployeeMovement employeeMovement = employee.GetComponent<EmployeeMovement>();
             employeeMovement.SetTable(targetTable);
 
-            if (employeeData.IsWorking)
+            if (isSit)
                 employeeMovement.SitAndWork();
 
             return employee;
@@ -107,7 +107,7 @@ namespace CodeBase.Services.Factories.Employee
 
     public interface IEmployeeFactory
     {
-        Gameplay.EmployeeSystem.Employee Create(EmployeeData employeeData, Table targetTable);
+        Gameplay.EmployeeSystem.Employee Create(EmployeeData employeeData, Table targetTable, bool isSit);
 
         EmployeeData Create();
     }

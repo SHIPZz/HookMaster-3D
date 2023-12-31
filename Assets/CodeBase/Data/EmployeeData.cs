@@ -9,8 +9,8 @@ namespace CodeBase.Data
         public string Id;
         public string Name;
         public int QualificationType;
-        public float Salary;
-        public float Profit;
+        public int Salary;
+        public int Profit;
         public bool IsWorking;
         public string TableId;
         public bool IsUpgrading;

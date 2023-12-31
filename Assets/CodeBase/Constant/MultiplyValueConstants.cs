@@ -2,8 +2,8 @@
 {
     public static class MultiplyValueConstants
     {
-        public const float AdditionalUpgradeCost = 1.5f;
-        public const float AdditionalProfit = 1.4f;
-        public const float AdditionalSalary = 1.2f;
+        public const int AdditionalUpgradeCost = 500;
+        public const int AdditionalProfit = 450;
+        public const int AdditionalSalary = 300;
     }
 }

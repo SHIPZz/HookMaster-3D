@@ -1,4 +1,5 @@
 ﻿using CodeBase.Data;
+using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.Employee;
 using CodeBase.Services.Providers.EmployeeProvider;
 using CodeBase.UI.UpgradeEmployee;
@@ -15,10 +16,13 @@ namespace CodeBase.UI.Buttons
         private EmployeeData _employeeData;
         private EmployeeService _employeeService;
         private EmployeeDataService _employeeDataService;
+        private WalletService _walletService;
+        private int _price;
 
         [Inject]
-        private void Construct(EmployeeDataService employeeDataService, EmployeeService employeeService)
+        private void Construct(EmployeeDataService employeeDataService, EmployeeService employeeService, WalletService walletService)
         {
+            _walletService = walletService;
             _employeeDataService = employeeDataService;
             _employeeService = employeeService;
         }
@@ -26,14 +30,18 @@ namespace CodeBase.UI.Buttons
         public void SetEmployeeData(EmployeeData employeeData) =>
             _employeeData = employeeData;
 
-        public void SetUpgradeCost(float price) => 
+        public void SetUpgradeCost(int price)
+        {
+            _price = price;
             _costText.text = $"{price}$";
+        }
 
         protected override void Open()
         {
             UpgradeEmployeeData upgradeEmployeeData = _employeeDataService.GetUpgradeEmployeeData(_employeeData.Id);
             _employeeService.SetUpgrade(_employeeData.Id, true);
             _employeeDataService.RecountUpgradePriceEmployee(upgradeEmployeeData);
+            _walletService.Decrease(_price);
             Gameplay.EmployeeSystem.Employee targetEmployee = _employeeService.Get(_employeeData.Id);
             targetEmployee.SkipEmployeeProgressUIHandler.ActivateWindow(upgradeEmployeeData);
             WindowService.Close<UpgradeEmployeeWindow>();

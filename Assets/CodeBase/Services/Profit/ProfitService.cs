@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Gameplay.Wallet;
@@ -15,6 +16,7 @@ namespace CodeBase.Services.Profit
 {
     public class ProfitService : IInitializable, IDisposable
     {
+        private const int OfflineReward = 2;
         private readonly IWorldDataService _worldDataService;
         private readonly WaitForSecondsRealtime _waitMinute = new(60f);
         private readonly ICoroutineRunner _coroutineRunner;
@@ -45,7 +47,7 @@ namespace CodeBase.Services.Profit
             _coroutineRunner.StartCoroutine(GetProfitEveryMinuteCoroutine(playerData));
             int timeDifferenceByMinutes = _worldTimeService.GetTimeDifferenceByMinutesBetweenProfitAndCurrentTime();
             
-            ReceiveProfit(playerData, timeDifferenceByMinutes);
+            ReceiveOfflineProfit(playerData, timeDifferenceByMinutes);
 
             if (_totalEarnedProfit == 0)
                 return;
@@ -63,11 +65,22 @@ namespace CodeBase.Services.Profit
             Application.focusChanged -= OnFocusChanged;
         }
 
+        private void ReceiveOfflineProfit(PlayerData playerData, int timeDifferenceByMinutes)
+        {
+            foreach (var totalProfit in playerData.PurchasedEmployees
+                         .Select(employeeData => employeeData.Profit / TimeConstantValue.MinutesInDay * timeDifferenceByMinutes / OfflineReward))
+            {
+                _walletService.Add(totalProfit);
+                _worldTimeService.SaveLastProfitEarnedTime();
+                _totalEarnedProfit += totalProfit;
+            }
+        }
+
         private void ReceiveProfit(PlayerData playerData, int timeDifferenceByMinutes)
         {
             foreach (EmployeeData employeeData in playerData.PurchasedEmployees)
             {
-                float totalProfit = (employeeData.Profit / TimeConstantValue.MinutesInDay) * timeDifferenceByMinutes;
+                int totalProfit = (employeeData.Profit / TimeConstantValue.MinutesInDay) * timeDifferenceByMinutes;
 
                 if (totalProfit == 0)
                     return;
@@ -87,7 +100,7 @@ namespace CodeBase.Services.Profit
 
                 foreach (EmployeeData employeeData in playerData.PurchasedEmployees)
                 {
-                    float minuteProfit = employeeData.Profit / TimeConstantValue.MinutesInDay;
+                    int minuteProfit = employeeData.Profit / TimeConstantValue.MinutesInDay;
                     _walletService.Add(minuteProfit);
                     ProfitGot?.Invoke(employeeData.Id, minuteProfit);
                     _worldTimeService.SaveLastProfitEarnedTime();

@@ -47,7 +47,7 @@ namespace CodeBase.Gameplay.Wallet
             _walletService.MoneyChanged -= SetMoney;
 
         [Button]
-        private void SetMoney(float money)
+        private void SetMoney(int money)
         {
             _moneySound.Play();
             _moneyText.text = money.ToString(CultureInfo.InvariantCulture);

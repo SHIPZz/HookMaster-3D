@@ -507,6 +507,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2493439201958953911}
   - {fileID: 3516855495285318812}
   - {fileID: 1149875903224269581}
   - {fileID: 7780998562540220991}
@@ -517,8 +518,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 14.989624, y: 336.2401}
-  m_SizeDelta: {x: -321.2069, y: -1728.2065}
+  m_AnchoredPosition: {x: -22.69983, y: 248.80054}
+  m_SizeDelta: {x: -185.5248, y: -1553.3274}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9003996759707337761
 CanvasRenderer:
@@ -667,8 +668,8 @@ RectTransform:
   - {fileID: 2740486615490686249}
   m_Father: {fileID: 5603983013618375436}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.628, y: 0.21666668}
-  m_AnchorMax: {x: 0.99200004, y: 0.8116667}
+  m_AnchorMin: {x: 0.55864614, y: 0.21666668}
+  m_AnchorMax: {x: 0.860118, y: 0.8116667}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1126,17 +1127,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7887976968169494692}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8344130045727572080}
+  m_Father: {fileID: 5603983013618375436}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 38, y: 36}
-  m_SizeDelta: {x: 80, y: 80}
+  m_AnchoredPosition: {x: 30.100006, y: 23.400024}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &2098992870661051485
 CanvasRenderer:
@@ -1395,8 +1396,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 80}
+  m_AnchoredPosition: {x: 15.1469, y: 0}
+  m_SizeDelta: {x: 384.5038, y: 80}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8328518455821191473
 CanvasRenderer:
@@ -1451,6 +1452,7 @@ GameObject:
   - component: {fileID: 5456491798596357395}
   - component: {fileID: 1604869123350809071}
   - component: {fileID: 8735416293423753079}
+  - component: {fileID: 8639359358549793369}
   m_Layer: 5
   m_Name: CompletedUpgradeWINDOW
   m_TagString: Untagged
@@ -1471,7 +1473,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5603983013618375436}
-  - {fileID: 2493439201958953911}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1501,7 +1502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _closeButton: {fileID: 5786287901272757976}
   _nameText: {fileID: 1559074251082936093}
-  _canvasAnimator: {fileID: 0}
+  _canvasAnimator: {fileID: 5456491798596357395}
   _oldProfitText: {fileID: 1135608793506124602}
   _oldSalaryText: {fileID: 5192114746358624145}
   _oldQualificationTypeText: {fileID: 6633086279298086552}
@@ -1581,6 +1582,23 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &8639359358549793369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9097390994239693956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 32759
 --- !u!1 &9165131922516971642
 GameObject:
   m_ObjectHideFlags: 0
@@ -1646,7 +1664,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: John
+  m_text: Name:John
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: beb6899c85f8d154c9751795e3da22d0, type: 2}
   m_sharedMaterial: {fileID: -7146977075746465331, guid: beb6899c85f8d154c9751795e3da22d0, type: 2}

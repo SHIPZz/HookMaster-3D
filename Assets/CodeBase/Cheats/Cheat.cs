@@ -16,6 +16,12 @@ namespace CodeBase.Cheats
 
         public void Tick()
         {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                _worldDataService.WorldData.PlayerData.Money = 30000;
+                _worldDataService.Save();
+            }
+            
             if (Input.GetKeyDown(KeyCode.F10))
             {
                 WorldData worldData = _worldDataService.WorldData;

@@ -301,9 +301,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moneyText: {fileID: 181214544813917522}
-  _targetScale: 3
-  _increaseScaleDuration: 0.7
-  _decreaseScaleDuration: 0.2
+  _targetScale: 2
+  _increaseScaleDuration: 1
+  _decreaseScaleDuration: 0.4
   _defaultScale: 1
   _colorFadeDuration: 0.4
   _colorDefaultFadeDuration: 0.3
