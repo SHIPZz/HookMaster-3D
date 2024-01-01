@@ -17,6 +17,7 @@ using CodeBase.Services.Providers.EmployeeProvider;
 using CodeBase.Services.Providers.Location;
 using CodeBase.Services.Providers.Player;
 using CodeBase.Services.Providers.Tables;
+using CodeBase.Services.Reward;
 using CodeBase.Services.Sound;
 using CodeBase.Services.Window;
 using UnityEngine;
@@ -45,6 +46,18 @@ namespace CodeBase.Installers.Game
             BindSoundService();
             BindPlayerAnimationService();
             BindEffectPool();
+            BindRewardService();
+            BindPlayerRewardService();
+        }
+
+        private void BindPlayerRewardService()
+        {
+            Container.BindInterfacesAndSelfTo<PlayerRewardService>().AsSingle();   
+        }
+
+        private void BindRewardService()
+        {
+            Container.Bind<RewardService>().AsSingle();
         }
 
         private void BindEffectPool()

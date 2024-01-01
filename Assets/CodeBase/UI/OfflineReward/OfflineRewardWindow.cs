@@ -14,12 +14,10 @@ namespace CodeBase.UI.OfflineReward
         [SerializeField] private Slider _passedTimeSlider;
         [SerializeField] private TMP_Text _rewardedMoneyText;
         private WindowService _windowService;
-        private WorldTimeService _worldTimeService;
 
         [Inject]
-        private void Construct(WindowService windowService, WorldTimeService worldTimeService)
+        private void Construct(WindowService windowService)
         {
-            _worldTimeService = worldTimeService;
             _windowService = windowService;
         }
 

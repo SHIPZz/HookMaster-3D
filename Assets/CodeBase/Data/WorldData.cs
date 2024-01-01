@@ -12,5 +12,6 @@ namespace CodeBase.Data
         public TableData TableData = new();
         public List<UpgradeEmployeeData> UpgradeEmployeeDatas = new();
         public SettingsData SettingsData = new();
+        public PlayerRewardData PlayerRewardData = new();
     }
 }

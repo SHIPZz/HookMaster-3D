@@ -1,15 +1,15 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using CodeBase.Services.Reward;
 using CodeBase.Services.TriggerObserve;
+using CodeBase.Services.Window;
 using CodeBase.UI;
 using CodeBase.UI.Roulette;
 using UnityEngine;
-using DG.Tweening;
-using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine.UI;
+using Zenject;
 using Random = UnityEngine.Random;
 
 public class CircleRouletteWindow : WindowBase
@@ -29,13 +29,20 @@ public class CircleRouletteWindow : WindowBase
 
     private Coroutine _rotateCoroutine;
     private RouletteItem _lastDroppedRouletteItem;
+    private RewardService _rewardService;
+    private WindowService _windowService;
+
+    [Inject]
+    private void Construct(RewardService rewardService, WindowService windowService)
+    {
+        _windowService = windowService;
+        _rewardService = rewardService;
+    }
 
     private void OnEnable()
     {
         _rotateButton.onClick.AddListener(Rotate);
         _arrowTrigger.TriggerEntered += SetLastDroppedObject;
-        _arrowTrigger.TriggerEntered += SetLastDroppedObject;
-        _rouletteItems.ForEach(x=>x.Init());
     }
 
     private void OnDisable()
@@ -44,15 +51,17 @@ public class CircleRouletteWindow : WindowBase
         _arrowTrigger.TriggerEntered -= SetLastDroppedObject;
     }
 
-    private void SetLastDroppedObject(Collider obj)
-    {
-        _lastDroppedRouletteItem = obj.GetComponent<RouletteItem>();
-    }
-
     public override void Open()
     {
+        _rouletteItems.ForEach(x => x.Init());
         _canvasAnimator.FadeInCanvas();
     }
+    
+    private void SetLastDroppedObject(Collider obj) =>
+        _lastDroppedRouletteItem = obj.GetComponent<RouletteItem>();
+
+    public override void Close() =>
+        _canvasAnimator.FadeOutCanvas(base.Close);
 
     private void Rotate()
     {
@@ -60,8 +69,8 @@ public class CircleRouletteWindow : WindowBase
         _rotateCountText.text = _rotateCount.ToString(CultureInfo.InvariantCulture);
 
         _rotateButton.interactable = false;
-        
-        if(_rotateCount == 0)
+
+        if (_rotateCount == 0)
             _rotateButton.gameObject.SetActive(false);
 
         if (_rotateCoroutine != null)
@@ -94,9 +103,20 @@ public class CircleRouletteWindow : WindowBase
             yield return null;
         }
 
-        
+        CompleteRotation(targetRotation);
+    }
+
+    private void CompleteRotation(Vector3 targetRotation)
+    {
+        _rewardService.AddRouletteReward(_lastDroppedRouletteItem);
         _target.localEulerAngles = targetRotation;
+
+        if (_rotateCount == 0)
+        {
+            _windowService.Open<RewardRouletteWindow>();
+            Close();
+        }
+
         _rotateButton.interactable = true;
-        print(_lastDroppedRouletteItem.RouletteItemTypeId);
     }
 }
