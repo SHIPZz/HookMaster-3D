@@ -11,7 +11,7 @@ namespace CodeBase.Services.CheckOuts
             if (!_walletService.HasEnoughMoney(price))
                 return false;
             
-            _walletService.Decrease(price);
+            _walletService.DecreaseMoney(price);
             return true;
         }
     }

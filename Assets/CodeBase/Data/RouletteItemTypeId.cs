@@ -1,4 +1,4 @@
-﻿namespace CodeBase.UI.Roulette
+﻿namespace CodeBase.Data
 {
     public enum RouletteItemTypeId
     {

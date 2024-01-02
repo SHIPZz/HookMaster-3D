@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Data;
 using CodeBase.Services.Reward;
 using CodeBase.Services.Window;
 using CodeBase.UI.Hud;

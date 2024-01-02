@@ -70,7 +70,7 @@ namespace CodeBase.Services.Profit
             foreach (var totalProfit in playerData.PurchasedEmployees
                          .Select(employeeData => employeeData.Profit / TimeConstantValue.MinutesInDay * timeDifferenceByMinutes / OfflineReward))
             {
-                _walletService.Add(totalProfit);
+                _walletService.AddMoney(totalProfit);
                 _worldTimeService.SaveLastProfitEarnedTime();
                 _totalEarnedProfit += totalProfit;
             }
@@ -85,7 +85,7 @@ namespace CodeBase.Services.Profit
                 if (totalProfit == 0)
                     return;
 
-                _walletService.Add(totalProfit);
+                _walletService.AddMoney(totalProfit);
                 _worldTimeService.SaveLastProfitEarnedTime();
                 _totalEarnedProfit += totalProfit;
                 ProfitGot?.Invoke(employeeData.Id, totalProfit);
@@ -101,7 +101,7 @@ namespace CodeBase.Services.Profit
                 foreach (EmployeeData employeeData in playerData.PurchasedEmployees)
                 {
                     int minuteProfit = employeeData.Profit / TimeConstantValue.MinutesInDay;
-                    _walletService.Add(minuteProfit);
+                    _walletService.AddMoney(minuteProfit);
                     ProfitGot?.Invoke(employeeData.Id, minuteProfit);
                     _worldTimeService.SaveLastProfitEarnedTime();
                 }
