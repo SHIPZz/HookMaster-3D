@@ -1,21 +1,32 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Data;
+using CodeBase.Gameplay.Wallet;
 using CodeBase.UI.Roulette;
 
 namespace CodeBase.Services.Reward
 {
     public class RewardService
     {
-        private Dictionary<RouletteItemTypeId, int> _rouletteRewards = new()
+        private Dictionary<ItemTypeId, int> _rouletteRewards = new()
         {
-            { RouletteItemTypeId.Money , 0},
-            { RouletteItemTypeId.Ticket , 0},
-            { RouletteItemTypeId.Diamond , 0},
+            { ItemTypeId.Money , 0},
+            { ItemTypeId.Ticket , 0},
+            { ItemTypeId.Diamond , 0},
         };
 
-        public IReadOnlyDictionary<RouletteItemTypeId, int> RouletteRewards => _rouletteRewards;
+        private WalletService _walletService;
 
-        public void AddRouletteReward(RouletteItem rouletteItem) => 
-            _rouletteRewards[rouletteItem.RouletteItemTypeId] = rouletteItem.Quantity;
+        public RewardService(WalletService walletService)
+        {
+            _walletService = walletService;
+        }
+
+        public IReadOnlyDictionary<ItemTypeId, int> RouletteRewards => _rouletteRewards;
+
+        public void AddRouletteReward(RouletteItem rouletteItem)
+        {
+            _rouletteRewards[rouletteItem.ItemTypeId] += rouletteItem.Quantity;
+            _walletService.Add(rouletteItem.ItemTypeId, rouletteItem.Quantity);
+        }
     }
 }

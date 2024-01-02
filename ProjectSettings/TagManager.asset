@@ -38,12 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: JoystickUILayer
     uniqueID: 3210617327
     locked: 0
   - name: WorldSpaceUI
     uniqueID: 73768109
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0

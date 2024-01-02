@@ -1,5 +1,6 @@
 ﻿using System;
 using CodeBase.Services.Providers.Camera;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -8,6 +9,7 @@ namespace CodeBase.Services.CanvasCameraSet
     [RequireComponent(typeof(Canvas))]
     public class CanvasCameraSetter : MonoBehaviour
     {
+        [SerializeField] private float _planeDistance = 100f;
         private Canvas _canvas;
         private CameraProvider _cameraProvider;
 
@@ -21,9 +23,15 @@ namespace CodeBase.Services.CanvasCameraSet
 
         // private void Awake() => 
 
-        private void OnEnable()
+        private async void OnEnable()
         {
+            while (_cameraProvider.Camera == null)
+            {
+                await UniTask.Yield();
+            }
+            
             _canvas.worldCamera = _cameraProvider.Camera;
+            _canvas.planeDistance = _planeDistance;
         }
     }
 }

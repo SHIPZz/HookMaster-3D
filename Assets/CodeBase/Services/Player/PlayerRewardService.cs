@@ -16,7 +16,8 @@ namespace CodeBase.Services.Player
 
         public void Initialize()
         {
-            CanPlayRouletteCircle = _worldDataService.WorldData.PlayerRewardData.CanPlayRouletteCircle;
+            // CanPlayRouletteCircle = _worldDataService.WorldData.PlayerRewardData.CanPlayRouletteCircle;
+            CanPlayRouletteCircle = true;
         }
 
         public void SetCanPlayRoulette(bool canPlay)

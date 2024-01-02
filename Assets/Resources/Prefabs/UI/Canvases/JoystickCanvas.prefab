@@ -88,7 +88,6 @@ GameObject:
   - component: {fileID: 4630955159563148931}
   - component: {fileID: 3845951086248585285}
   - component: {fileID: 4346285375658616970}
-  - component: {fileID: 5551855029221188255}
   m_Layer: 5
   m_Name: JoystickCanvas
   m_TagString: Untagged
@@ -193,18 +192,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &5551855029221188255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3004391313414408437}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a7007839bb249af9f4628adcf46c735, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3238374396129062494
 GameObject:
   m_ObjectHideFlags: 0

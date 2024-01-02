@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using CodeBase.Data;
 using CodeBase.Enums;
 using CodeBase.Services.WorldData;
@@ -10,6 +11,9 @@ namespace CodeBase.Gameplay.Wallet
     {
         private const int MaxValueCount = 100000000;
         private readonly IWorldDataService _worldDataService;
+
+        private Dictionary<ItemTypeId, Action<int>> _addAcitons = new();
+        private Dictionary<ItemTypeId, Action<int>> _removeAcitons = new();
 
         public int CurrentMoney { get; private set; }
         public int CurrentTickets { get; private set; }
@@ -24,6 +28,8 @@ namespace CodeBase.Gameplay.Wallet
 
         public void Init()
         {
+            FillDictionaries();
+
             PlayerData playerData = _worldDataService.WorldData.PlayerData;
             CurrentMoney = playerData.Money;
             CurrentTickets = playerData.Tickets;
@@ -33,23 +39,29 @@ namespace CodeBase.Gameplay.Wallet
             DiamondsChanged?.Invoke(playerData.Diamonds);
         }
 
-        public void AddDiamonds(int diamonds) =>
-            UpdateData(WalletValueTypeId.Diamond, diamonds, count => DiamondsChanged?.Invoke(count));
+        public void Add(ItemTypeId itemTypeId, int amount) => 
+            _addAcitons[itemTypeId]?.Invoke(amount);
 
-        public void DecreaseDiamonds(int diamonds)
-            => UpdateData(WalletValueTypeId.Diamond, -diamonds, count => DiamondsChanged?.Invoke(count));
+        public void Remove(ItemTypeId itemTypeId, int amount) =>
+            _removeAcitons[itemTypeId]?.Invoke(amount);
+
+        public void AddDiamonds(int diamonds) =>
+            UpdateData(ItemTypeId.Diamond, diamonds, count => DiamondsChanged?.Invoke(count));
+
+        public void RemoveDiamonds(int diamonds)
+            => UpdateData(ItemTypeId.Diamond, -diamonds, count => DiamondsChanged?.Invoke(count));
 
         public void AddTickets(int tickets) =>
-            UpdateData(WalletValueTypeId.Ticket, tickets, count => TicketCountChanged?.Invoke(count));
+            UpdateData(ItemTypeId.Ticket, tickets, count => TicketCountChanged?.Invoke(count));
 
-        public void DecreaseTickets(int tickets) =>
-            UpdateData(WalletValueTypeId.Ticket, -tickets, count => TicketCountChanged?.Invoke(count));
+        public void RemoveTickets(int tickets) =>
+            UpdateData(ItemTypeId.Ticket, -tickets, count => TicketCountChanged?.Invoke(count));
 
         public void AddMoney(int money) =>
-            UpdateData(WalletValueTypeId.Money, money, count => MoneyChanged?.Invoke(count));
+            UpdateData(ItemTypeId.Money, money, count => MoneyChanged?.Invoke(count));
 
-        public void DecreaseMoney(int money) =>
-            UpdateData(WalletValueTypeId.Money, -money, count => MoneyChanged?.Invoke(count));
+        public void RemoveMoney(int money) =>
+            UpdateData(ItemTypeId.Money, -money, count => MoneyChanged?.Invoke(count));
 
         public bool HasEnoughMoney(int money) =>
             HasEnoughCount(CurrentMoney, money);
@@ -63,25 +75,25 @@ namespace CodeBase.Gameplay.Wallet
         private bool HasEnoughCount(int target, int count) =>
             target - count >= 0;
 
-        private void UpdateData(WalletValueTypeId walletValueTypeId, int amount, Action<int> onComplete)
+        private void UpdateData(ItemTypeId itemTypeId, int amount, Action<int> onComplete)
         {
             PlayerData playerData = _worldDataService.WorldData.PlayerData;
 
-            switch (walletValueTypeId)
+            switch (itemTypeId)
             {
-                case WalletValueTypeId.Money:
+                case ItemTypeId.Money:
                     playerData.Money = Mathf.Clamp(playerData.Money + amount, 0, MaxValueCount);
                     CurrentMoney = playerData.Money;
                     onComplete?.Invoke(CurrentMoney);
                     break;
 
-                case WalletValueTypeId.Ticket:
+                case ItemTypeId.Ticket:
                     playerData.Tickets = Mathf.Clamp(playerData.Tickets + amount, 0, MaxValueCount);
                     CurrentTickets = playerData.Tickets;
                     onComplete?.Invoke(CurrentTickets);
                     break;
 
-                case WalletValueTypeId.Diamond:
+                case ItemTypeId.Diamond:
                     playerData.Diamonds = Mathf.Clamp(playerData.Diamonds + amount, 0, MaxValueCount);
                     CurrentDiamonds = playerData.Diamonds;
                     onComplete?.Invoke(CurrentDiamonds);
@@ -89,6 +101,17 @@ namespace CodeBase.Gameplay.Wallet
             }
             
             _worldDataService.Save();
+        }
+
+        private void FillDictionaries()
+        {
+            _addAcitons[ItemTypeId.Money] = AddMoney;
+            _addAcitons[ItemTypeId.Ticket] = AddTickets;
+            _addAcitons[ItemTypeId.Diamond] = AddDiamonds;
+
+            _removeAcitons[ItemTypeId.Money] = RemoveMoney;
+            _removeAcitons[ItemTypeId.Ticket] = RemoveTickets;
+            _removeAcitons[ItemTypeId.Diamond] = RemoveDiamonds;
         }
     }
 }

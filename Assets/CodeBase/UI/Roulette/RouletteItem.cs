@@ -10,7 +10,7 @@ namespace CodeBase.UI.Roulette
     public class RouletteItem : MonoBehaviour
     {
         [field: SerializeField] public int Quantity { get; private set; }
-        [field: SerializeField] public RouletteItemTypeId RouletteItemTypeId { get; private set; }
+        [field: SerializeField] public ItemTypeId ItemTypeId { get; private set; }
         
         [SerializeField] private TMP_Text _quantityText;
         [SerializeField] private int _minRandomValue;

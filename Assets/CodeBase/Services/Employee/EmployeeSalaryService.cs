@@ -37,7 +37,7 @@ namespace CodeBase.Services.Employee
                     return;
 
                 Debug.Log(targetSalary + " target salary");
-                _walletService.DecreaseMoney(targetSalary);
+                _walletService.RemoveMoney(targetSalary);
             }
 
             _worldTimeService.SaveLastSalaryPaymentTime();

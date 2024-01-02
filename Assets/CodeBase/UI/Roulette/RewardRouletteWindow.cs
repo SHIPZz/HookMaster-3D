@@ -30,11 +30,11 @@ namespace CodeBase.UI.Roulette
         {
             _canvasAnimator.FadeInCanvas();
 
-            IReadOnlyDictionary<RouletteItemTypeId, int> rouletteRewards = _rewardService.RouletteRewards;
+            IReadOnlyDictionary<ItemTypeId, int> rouletteRewards = _rewardService.RouletteRewards;
 
-            _moneyText.text = $"{rouletteRewards[RouletteItemTypeId.Money]}$";
-            _ticketText.text = $"{rouletteRewards[RouletteItemTypeId.Ticket]}";
-            _diamondText.text = $"{rouletteRewards[RouletteItemTypeId.Diamond]}";
+            _moneyText.text = $"{rouletteRewards[ItemTypeId.Money]}$";
+            _ticketText.text = $"{rouletteRewards[ItemTypeId.Ticket]}";
+            _diamondText.text = $"{rouletteRewards[ItemTypeId.Diamond]}";
         }
 
         public override void Close()

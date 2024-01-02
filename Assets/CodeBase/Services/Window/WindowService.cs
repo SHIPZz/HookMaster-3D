@@ -33,8 +33,21 @@ namespace CodeBase.Services.Window
         public T Get<T>() where T : WindowBase
         {
             WindowBase targetWindow = _uiFactory.CreateWindow<T>();
+
+            DestroyIfAlreadyHas<T>();
+            
             _createdWindows[typeof(T)] = targetWindow;
             return (T)targetWindow;
+        }
+
+        private void DestroyIfAlreadyHas<T>() where T : WindowBase
+        {
+            if (!_createdWindows.ContainsKey(typeof(T))) 
+                return;
+            
+            WindowBase createdWindow = _createdWindows[typeof(T)];
+            createdWindow.Close();
+            _createdWindows.Remove(typeof(T));
         }
 
         public void Close<T>() where T : WindowBase
