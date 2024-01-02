@@ -1,5 +1,4 @@
 ﻿using CodeBase.Services.WorldData;
-using UnityEngine;
 using Zenject;
 
 namespace CodeBase.Services.Player
