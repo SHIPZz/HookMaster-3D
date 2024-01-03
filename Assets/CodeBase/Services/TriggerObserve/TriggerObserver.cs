@@ -8,6 +8,7 @@ namespace CodeBase.Services.TriggerObserve
         public event Action<Collider> TriggerEntered;
         public event Action<Collider> TriggerExited;
         public event Action<Collision> CollisionEntered;
+        public event Action<Collision> CollisionExited;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -22,6 +23,11 @@ namespace CodeBase.Services.TriggerObserve
         private void OnCollisionEnter(Collision other)
         {
             CollisionEntered?.Invoke(other);
+        }
+
+        private void OnCollisionExit(Collision other)
+        {
+            CollisionExited?.Invoke(other);
         }
     }
 }

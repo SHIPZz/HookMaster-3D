@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Quantity>k__BackingField: 0
-  <RouletteItemTypeId>k__BackingField: 0
+  <ItemTypeId>k__BackingField: 0
   _quantityText: {fileID: 1133501952972810526}
   _minRandomValue: 150
   _maxRandomValue: 1000
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Quantity>k__BackingField: 0
-  <RouletteItemTypeId>k__BackingField: 0
+  <ItemTypeId>k__BackingField: 0
   _quantityText: {fileID: 8195661848470396946}
   _minRandomValue: 100
   _maxRandomValue: 900
@@ -584,6 +584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _planeDistance: 1
+  _sortingLayerTypeId: 1
 --- !u!1 &1105408418136425785
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,7 +793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Quantity>k__BackingField: 0
-  <RouletteItemTypeId>k__BackingField: 0
+  <ItemTypeId>k__BackingField: 0
   _quantityText: {fileID: 5297301631619866715}
   _minRandomValue: 150
   _maxRandomValue: 700
@@ -878,7 +879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Quantity>k__BackingField: 0
-  <RouletteItemTypeId>k__BackingField: 0
+  <ItemTypeId>k__BackingField: 0
   _quantityText: {fileID: 9016053804821501024}
   _minRandomValue: 1200
   _maxRandomValue: 2000
@@ -1083,7 +1084,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Quantity>k__BackingField: 0
-  <RouletteItemTypeId>k__BackingField: 0
+  <ItemTypeId>k__BackingField: 0
   _quantityText: {fileID: 954883359411791441}
   _minRandomValue: 800
   _maxRandomValue: 1500
@@ -2130,7 +2131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Quantity>k__BackingField: 0
-  <RouletteItemTypeId>k__BackingField: 0
+  <ItemTypeId>k__BackingField: 0
   _quantityText: {fileID: 3316260557820220689}
   _minRandomValue: 50
   _maxRandomValue: 300
@@ -3025,7 +3026,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Quantity>k__BackingField: 0
-  <RouletteItemTypeId>k__BackingField: 0
+  <ItemTypeId>k__BackingField: 0
   _quantityText: {fileID: 9005630032376437940}
   _minRandomValue: 500
   _maxRandomValue: 5
@@ -4074,7 +4075,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Quantity>k__BackingField: 0
-  <RouletteItemTypeId>k__BackingField: 0
+  <ItemTypeId>k__BackingField: 0
   _quantityText: {fileID: 4113711092981971639}
   _minRandomValue: 1000
   _maxRandomValue: 1200

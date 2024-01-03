@@ -339,6 +339,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7007839bb249af9f4628adcf46c735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _planeDistance: 100
+  _sortingLayerTypeId: 1
 --- !u!225 &5598824401181788334
 CanvasGroup:
   m_ObjectHideFlags: 0

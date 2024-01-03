@@ -24,9 +24,13 @@ namespace CodeBase.UI.Roulette
 
         private void OnEnable()
         {
-            if(!_playerRewardService.CanPlayRouletteCircle)
+            print("ENABLE");
+            if (!_playerRewardService.CanPlayRouletteCircle)
+            {
+                _buttonScaleAnim.UnScale();
                 _rouletteImageFadeAnim.FadeOut();
-            
+            }
+
             _triggerObserver.TriggerEntered += OnPlayerApproached;
             _triggerObserver.TriggerExited += OnPlayerExited;
             _playCircleRouletteButton.onClick.AddListener(OnPlayClicked);
@@ -51,7 +55,7 @@ namespace CodeBase.UI.Roulette
         {
             if (!_playerRewardService.CanPlayRouletteCircle)
                 return;
-            
+
             _rouletteImageFadeAnim.FadeOut();
             _buttonScaleAnim.ToScale();
         }

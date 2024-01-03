@@ -1456,6 +1456,7 @@ GameObject:
   - component: {fileID: 2733714267756847204}
   - component: {fileID: 1457539920748911448}
   - component: {fileID: 4841536728531981122}
+  - component: {fileID: -6740466379586658263}
   m_Layer: 5
   m_Name: SpeedUpWindow
   m_TagString: Untagged
@@ -1605,6 +1606,20 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
+--- !u!114 &-6740466379586658263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5201268335909062690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a7007839bb249af9f4628adcf46c735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _planeDistance: 100
+  _sortingLayerTypeId: 2
 --- !u!1 &5796886629229703327
 GameObject:
   m_ObjectHideFlags: 0
