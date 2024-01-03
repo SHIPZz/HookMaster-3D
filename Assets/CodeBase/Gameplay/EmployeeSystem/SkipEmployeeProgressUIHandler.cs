@@ -56,7 +56,6 @@ namespace CodeBase.Gameplay.EmployeeSystem
             if (!_employee.IsUpgrading)
                 return;
 
-            print(_employee.IsUpgrading);
             UpgradeEmployeeData targetUpgradeEmployeeData = _employeeDataService.GetUpgradeEmployeeData(_employee.Id);
 
             ActivateWindow(targetUpgradeEmployeeData);

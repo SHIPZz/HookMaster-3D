@@ -8,5 +8,6 @@ namespace CodeBase.Services.Providers.Location
         public Transform EmployeeSpawnPoint;
         public Transform UIParent;
         public Transform EffectParent;
+        public Transform AudioParent;
     }
 }

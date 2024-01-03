@@ -28,9 +28,9 @@ namespace CodeBase.UI.SpeedUp
         [SerializeField] private GameObject _completedItem;
         [SerializeField] private float _sliderFillSpeed = 15f;
 
-        private float _totalTime = 3600f;
         private float _initialSliderValue;
         private float _currentTime;
+        private float _totalTime;
         private UpgradeEmployeeData _upgradeEmployeeData;
         private IWorldDataService _worldDataService;
         private Coroutine _timeCoroutine;
@@ -52,14 +52,12 @@ namespace CodeBase.UI.SpeedUp
         public override void Close() =>
             _canvasAnimator.FadeOutCanvas(base.Close);
 
-        public void Init(UpgradeEmployeeData upgradeEmployeeData, float lastEmployeeUpgradeTime)
+        public void Init(UpgradeEmployeeData upgradeEmployeeData)
         {
             _upgradeEmployeeData = upgradeEmployeeData;
+            _totalTime = upgradeEmployeeData.LastUpgradeTime;
 
             _remainingTimeSlider.value = InitialSliderValue;
-
-            if (_upgradeEmployeeData.LastUpgradeTime != 0) 
-                _totalTime = lastEmployeeUpgradeTime;
 
             if (_timeCoroutine != null)
                 StopCoroutine(StartDecreaseTimeCoroutine());

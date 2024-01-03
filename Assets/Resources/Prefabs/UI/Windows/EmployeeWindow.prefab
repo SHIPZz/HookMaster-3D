@@ -1976,6 +1976,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7007839bb249af9f4628adcf46c735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _planeDistance: 100
+  _sortingLayerTypeId: 2
 --- !u!1 &6666630706792186348
 GameObject:
   m_ObjectHideFlags: 0

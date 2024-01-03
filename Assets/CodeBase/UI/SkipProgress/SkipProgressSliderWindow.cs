@@ -48,11 +48,11 @@ namespace CodeBase.UI
         public override void Open() => 
             _canvasAnimator.FadeInCanvas();
 
-        public override void Close() => 
-            _canvasAnimator.FadeOutCanvas(() => base.Close());
-
-        private void OnDestroy() => 
+        public override void Close()
+        {
             SaveLastUpgradeTime();
+            _canvasAnimator.FadeOutCanvas(() => base.Close());
+        }
 
         [Button]
         public void Set(float time)
@@ -98,7 +98,14 @@ namespace CodeBase.UI
 
             _timeCoroutine = StartCoroutine(StartDecreaseTimeCoroutine());
         }
-        
+
+
+        private void SaveLastUpgradeTime()
+        {
+            _upgradeEmployeeData.LastUpgradeTime = Mathf.Abs(_totalTime);
+            _upgradeEmployeeData.LastUpgradeWindowOpenedTime = _worldDataService.WorldData.WorldTimeData.CurrentTime;
+            _employeeDataService.SaveUpgradeEmployeeData(_upgradeEmployeeData);
+        }
 
         private bool TryToSetCompleted(double passedMinutes, float targetCompletedValue)
         {
@@ -110,7 +117,7 @@ namespace CodeBase.UI
 
             return false;
         }
-        
+
         private void SetCompleted()
         {
             _upgradeEmployeeData.SetCompleted(true);
@@ -121,14 +128,7 @@ namespace CodeBase.UI
             _claimUpgradeButton.SetEmployeeData(_upgradeEmployeeData.EmployeeData);
             _slider.value = _slider.maxValue;
         }
-        
-        private void SaveLastUpgradeTime()
-        {
-            _upgradeEmployeeData.LastUpgradeTime = Mathf.Abs(_totalTime);
-            _upgradeEmployeeData.LastUpgradeWindowOpenedTime = _worldDataService.WorldData.WorldTimeData.CurrentTime;
-            _employeeDataService.SaveUpgradeEmployeeData(_upgradeEmployeeData);
-        }
-        
+
         private IEnumerator StartDecreaseTimeCoroutine()
         {
             _employeeDataService.TryAddUpgradeEmployeeData(_upgradeEmployeeData);

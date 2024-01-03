@@ -12,27 +12,20 @@ namespace CodeBase.UI.Buttons
         private EmployeeDataService _employeeDataService;
 
         [Inject]
-        private void Construct(EmployeeDataService employeeDataService)
-        {
+        private void Construct(EmployeeDataService employeeDataService) => 
             _employeeDataService = employeeDataService;
-        }
 
-        public void SetEmployeeData(EmployeeData employeeData)
-        {
+        public void SetEmployeeData(EmployeeData employeeData) => 
             _employeeData = employeeData;
-            Debug.Log(employeeData.Name);
-        }
 
         protected override void Open()
         {
             var speedUpWindow = WindowService.Get<SpeedUpWindow>();
-
-            UpgradeEmployeeData targetUpgradeEmployeeData =
-                _employeeDataService.GetUpgradeEmployeeData(_employeeData.Id);
-
-            speedUpWindow.Init(targetUpgradeEmployeeData, targetUpgradeEmployeeData.LastUpgradeTime);
-            speedUpWindow.Open();
+            
             WindowService.Close<SkipProgressSliderWindow>();
+            UpgradeEmployeeData targetUpgradeEmployeeData = _employeeDataService.GetUpgradeEmployeeData(_employeeData.Id);
+            speedUpWindow.Init(targetUpgradeEmployeeData);
+            speedUpWindow.Open();
         }
     }
 }
