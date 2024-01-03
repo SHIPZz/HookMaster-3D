@@ -1,4 +1,5 @@
-﻿using CodeBase.Animations;
+﻿using System;
+using CodeBase.Animations;
 using CodeBase.Services.Player;
 using CodeBase.Services.TriggerObserve;
 using CodeBase.UI.Buttons;
@@ -24,16 +25,18 @@ namespace CodeBase.UI.Roulette
 
         private void OnEnable()
         {
-            print("ENABLE");
+            _triggerObserver.TriggerEntered += OnPlayerApproached;
+            _triggerObserver.TriggerExited += OnPlayerExited;
+            _playCircleRouletteButton.onClick.AddListener(OnPlayClicked);
+        }
+
+        private void Start()
+        {
             if (!_playerRewardService.CanPlayRouletteCircle)
             {
                 _buttonScaleAnim.UnScale();
                 _rouletteImageFadeAnim.FadeOut();
             }
-
-            _triggerObserver.TriggerEntered += OnPlayerApproached;
-            _triggerObserver.TriggerExited += OnPlayerExited;
-            _playCircleRouletteButton.onClick.AddListener(OnPlayClicked);
         }
 
         private void OnDisable()

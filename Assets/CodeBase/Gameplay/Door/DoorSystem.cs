@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using CodeBase.Services.TriggerObserve;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -17,8 +16,9 @@ namespace CodeBase.Gameplay.Door
         [SerializeField] private Vector3 _playerOffset;
         [SerializeField] private float _speed = 5;
         [SerializeField] private float _closeDelay = 2f;
+        [SerializeField] private float _openDistance = 0.2f;
 
-        private Tween _tween;
+        private bool _isMoving;
 
         private void OnEnable() =>
             _triggerObserver.CollisionEntered += OnPlayerEntered;
@@ -28,6 +28,9 @@ namespace CodeBase.Gameplay.Door
 
         private async void OnPlayerEntered(Collision player)
         {
+            if(_isMoving)
+                return;
+            
             var playerRigidBody = player.gameObject.GetComponent<Rigidbody>();
             Vector3 targetPosition = player.transform.position + _playerOffset;
 
@@ -38,21 +41,20 @@ namespace CodeBase.Gameplay.Door
                 await PushPlayerAwayToOpen(playerRigidBody, targetPosition);
             }
 
-            _tween?.Kill(true);
-            _tween = transform.DOLocalRotate(_openRotation, _openDuration);
+            _isMoving = true;
+            transform.DOLocalRotate(_openRotation, _openDuration).OnComplete(() => _isMoving =false);
 
             await UniTask.Delay(TimeSpan.FromSeconds(_closeDelay));
 
-            _tween?.Kill(true);
-            _tween = transform.DOLocalRotate(_closeRotation, _closeDuration);
+            _isMoving = true;
+            transform.DOLocalRotate(_closeRotation, _closeDuration).OnComplete(() => _isMoving =false);
         }
 
         private async UniTask PushPlayerAwayToOpen(Rigidbody playerRigidBody, Vector3 targetPosition)
         {
-            while (Vector3.Distance(playerRigidBody.position, targetPosition) > 0.5f)
+            while (Vector3.Distance(playerRigidBody.position, targetPosition) > _openDistance)
             {
-                playerRigidBody.position =
-                    Vector3.Lerp(playerRigidBody.position, targetPosition, _speed * Time.fixedDeltaTime);
+                playerRigidBody.position = Vector3.Lerp(playerRigidBody.position, targetPosition, _speed * Time.fixedDeltaTime);
                 await UniTask.WaitForFixedUpdate();
             }
         }
