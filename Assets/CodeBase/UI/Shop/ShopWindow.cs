@@ -30,8 +30,7 @@ namespace CodeBase.UI.Shop
         
         public override void Open()
         {
-            _shopTabViews.FirstOrDefault(x => x.WalletValueTypeId == WalletValueTypeId.Money)
-                ?.Init();
+            _shopTabViews.FirstOrDefault(x => x.WalletValueTypeId == WalletValueTypeId.Money)?.Init();
             
             _canvasAnimator.FadeInCanvas();
             _moneyText.text = $"{_walletService.CurrentMoney}";

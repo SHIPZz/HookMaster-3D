@@ -15,5 +15,6 @@
         public const string AudioMixer = "Prefabs/UI/AudioMixers/Mixer";
         public const string EffectView = "Prefabs/Effects";
         public const string ShopItemViews = "Prefabs/UI/ShopItemViews";
+        public const string ShopItems = "Prefabs/ShopItems";
     }
 }

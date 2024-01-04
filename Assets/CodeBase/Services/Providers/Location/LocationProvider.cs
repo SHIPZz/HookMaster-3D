@@ -9,5 +9,7 @@ namespace CodeBase.Services.Providers.Location
         public Transform UIParent;
         public Transform EffectParent;
         public Transform AudioParent;
+        public Transform CircleRouletteSpawnPoint;
+        public Transform MiningFarmSpawnPoint;
     }
 }

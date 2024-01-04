@@ -7,6 +7,7 @@ using CodeBase.Services.Factories.Camera;
 using CodeBase.Services.Factories.Effect;
 using CodeBase.Services.Factories.Employee;
 using CodeBase.Services.Factories.Player;
+using CodeBase.Services.Factories.ShopItems;
 using CodeBase.Services.Factories.UI;
 using CodeBase.Services.Factories.Weapon;
 using CodeBase.Services.Player;
@@ -48,6 +49,12 @@ namespace CodeBase.Installers.Game
             BindEffectPool();
             BindRewardService();
             BindPlayerRewardService();
+            BindShopItemFactory();
+        }
+
+        private void BindShopItemFactory()
+        {
+            Container.Bind<ShopItemFactory>().AsSingle();
         }
 
         private void BindPlayerRewardService()

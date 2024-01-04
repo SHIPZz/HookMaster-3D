@@ -225,6 +225,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <WalletValueTypeId>k__BackingField: 0
+  <ShopItemTypeId>k__BackingField: 0
+  _buyButton: {fileID: 6907901424694891613}
 --- !u!1 &5457876662106258832
 GameObject:
   m_ObjectHideFlags: 0
