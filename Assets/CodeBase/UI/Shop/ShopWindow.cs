@@ -1,4 +1,7 @@
-﻿using CodeBase.Gameplay.Wallet;
+﻿using System.Collections.Generic;
+using System.Linq;
+using CodeBase.Enums;
+using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.Window;
 using CodeBase.UI.Hud;
 using TMPro;
@@ -13,7 +16,8 @@ namespace CodeBase.UI.Shop
         [SerializeField] private TMP_Text _moneyText;
         [SerializeField] private TMP_Text _diamondText;
         [SerializeField] private TMP_Text _ticketText;
-        
+        [SerializeField] private List<ShopTabView> _shopTabViews;
+
         private WindowService _windowService;
         private WalletService _walletService;
 
@@ -26,6 +30,9 @@ namespace CodeBase.UI.Shop
         
         public override void Open()
         {
+            _shopTabViews.FirstOrDefault(x => x.WalletValueTypeId == WalletValueTypeId.Money)
+                ?.Init();
+            
             _canvasAnimator.FadeInCanvas();
             _moneyText.text = $"{_walletService.CurrentMoney}";
             _diamondText.text = $"{_walletService.CurrentDiamonds}";

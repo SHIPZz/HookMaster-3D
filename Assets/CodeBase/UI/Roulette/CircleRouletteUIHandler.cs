@@ -32,9 +32,10 @@ namespace CodeBase.UI.Roulette
 
         private void Start()
         {
+            _buttonScaleAnim.UnScale();
+            
             if (!_playerRewardService.CanPlayRouletteCircle)
             {
-                _buttonScaleAnim.UnScale();
                 _rouletteImageFadeAnim.FadeOut();
             }
         }

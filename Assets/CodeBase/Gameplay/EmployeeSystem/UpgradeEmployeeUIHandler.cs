@@ -66,8 +66,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
             if(!_upgradeButton.gameObject.activeSelf)
                 return;
             
-            Quaternion targetRotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
-            _floatingButtonService.ShowFloatingButton(-_downPositionY, _downPositionDuration, targetRotation,
+            _floatingButtonService.ShowFloatingButton(-_downPositionY, _downPositionDuration, Quaternion.identity, 
                 AssetPath.UpgradeEmployeeButton,
                 _employee.transform,false, false);
         }
@@ -77,8 +76,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
             if (!_employee.IsWorking || _employee.IsUpgrading)
                 return;
 
-            Quaternion targetRotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
-            _floatingButtonService.ShowFloatingButton(_upPositionY, _upPositionDuration, targetRotation,
+            _floatingButtonService.ShowFloatingButton(_upPositionY, _upPositionDuration, Quaternion.identity, 
                 AssetPath.UpgradeEmployeeButton,
                 _employee.transform, true, true);
 

@@ -19,18 +19,15 @@ namespace CodeBase.Gameplay.EmployeeSystem
         [SerializeField] private float _upDuration = 0.25f;
         [SerializeField] private EmployeeMovement _employeeMovement;
 
-        private CameraProvider _cameraProvider;
         private FloatingButtonService _floatingButtonService;
         private Button _invokeWorkButton;
         private PlayerAnimationService _playerAnimationService;
 
         [Inject]
-        private void Construct(CameraProvider cameraProvider, FloatingButtonService floatingButtonService,
-            PlayerAnimationService playerAnimationService)
+        private void Construct(FloatingButtonService floatingButtonService, PlayerAnimationService playerAnimationService)
         {
             _playerAnimationService = playerAnimationService;
             _floatingButtonService = floatingButtonService;
-            _cameraProvider = cameraProvider;
         }
 
         private void OnEnable()
@@ -53,8 +50,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
             if (_employee.IsWorking || _employeeMovement.IsMovingToTable)
                 return;
 
-            Quaternion targetRotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
-            _floatingButtonService.ShowFloatingButton(-_downPositionY, _downDuration, targetRotation,
+            _floatingButtonService.ShowFloatingButton(-_downPositionY, _downDuration, Quaternion.identity, 
                 AssetPath.InvokeEmployeeWorkButton, _employee.transform, false, false);
         }
 
@@ -63,8 +59,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
             if (_employee.IsWorking || _employeeMovement.IsMovingToTable)
                 return;
 
-            Quaternion targetRotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
-            _floatingButtonService.ShowFloatingButton(_upPositionY, _upDuration, targetRotation,
+            _floatingButtonService.ShowFloatingButton(_upPositionY, _upDuration, Quaternion.identity,
                 AssetPath.InvokeEmployeeWorkButton, _employee.transform, true, true);
 
             if (_invokeWorkButton == null)
@@ -77,8 +72,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
         {
             _employee.StartWorking();
             _playerAnimationService.PlayPunchAnimation();
-            Quaternion targetRotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
-            _floatingButtonService.ShowFloatingButton(-_downPositionY, _downDuration, targetRotation,
+            _floatingButtonService.ShowFloatingButton(-_downPositionY, _downDuration, Quaternion.identity, 
                 AssetPath.InvokeEmployeeWorkButton, _employee.transform, false, false);
         }
     }

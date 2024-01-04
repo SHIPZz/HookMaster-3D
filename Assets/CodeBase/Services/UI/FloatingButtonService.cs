@@ -29,21 +29,23 @@ namespace CodeBase.Services.UI
             ConfigureButton(rotation);
             var rectTransformAnimator = _targetButton.GetComponent<RectTransformAnimator>();
             var canvasAnimator = _targetButton.GetComponent<CanvasAnimator>();
-            
-            if(setInitialPosition)
+
+            if (setInitialPosition)
                 rectTransformAnimator.SetInitialPosition();
-            
+
             ConfigureRectTransformAnimator(rectTransformAnimator, canvasAnimator);
             rectTransformAnimator.MoveAnchoredPositionY(additionalAnchoredPositionY, duration);
 
             if (!isFadeInCanvas)
-                HandleFadeOut( canvasAnimator);
+                HandleFadeOut(canvasAnimator);
         }
 
         private void ConfigureButton(Quaternion rotation)
         {
             _targetButton.gameObject.SetActive(true);
-            _targetButton.transform.rotation = rotation;
+
+            if (rotation != Quaternion.identity)
+                _targetButton.transform.rotation = rotation;
         }
 
         private void ConfigureRectTransformAnimator(RectTransformAnimator rectTransformAnimator,
@@ -54,7 +56,7 @@ namespace CodeBase.Services.UI
             canvasAnimator.FadeInCanvas();
         }
 
-        private void HandleFadeOut( CanvasAnimator canvasAnimator)
+        private void HandleFadeOut(CanvasAnimator canvasAnimator)
         {
             canvasAnimator.FadeOutCanvas(() => _targetButton.gameObject.SetActive(false));
         }

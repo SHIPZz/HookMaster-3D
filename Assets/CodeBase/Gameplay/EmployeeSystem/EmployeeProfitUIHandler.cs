@@ -21,21 +21,18 @@ namespace CodeBase.Gameplay.EmployeeSystem
         [SerializeField] private float _pushEffectPoolDelay = 2f;
 
         private ProfitService _profitService;
-        private CameraProvider _cameraProvider;
         private Vector2 _initialTextAnchoredPosition;
         private FloatingTextService _floatingTextService;
         private EffectPool _effectPool;
 
         [Inject]
         private void Construct(ProfitService profitService,
-            CameraProvider cameraProvider,
             [Inject(Id = ColorTypeId.Money)] Color moneyColor,
             FloatingTextService floatingTextService,
             EffectPool effectPool)
         {
             _effectPool = effectPool;
             _floatingTextService = floatingTextService;
-            _cameraProvider = cameraProvider;
             _profitService = profitService;
         }
 
@@ -60,7 +57,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
                 .ShowFloatingText($"{minuteProfit}$",
                     _additionalAnchoredPositionY,
                     _moveTextDuration, _fadeInDuration, _fadeOutDuration,
-                    Quaternion.LookRotation(_cameraProvider.Camera.transform.forward),
+                    Quaternion.identity,
                     AssetPath.ProfitText, _employee.transform);
 
             DOTween.Sequence()

@@ -44,7 +44,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
 
         private void OnPlayerExited(Collider obj)
         {
-            if (!_employee.IsUpgrading)
+            if (!_employee.IsUpgrading || !_employee.IsWorking)
                 return;
 
             if (_skipProgressWindow != null)
@@ -53,7 +53,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
 
         private void OnPlayerEntered(Collider obj)
         {
-            if (!_employee.IsUpgrading)
+            if (!_employee.IsUpgrading || !_employee.IsWorking)
                 return;
 
             UpgradeEmployeeData targetUpgradeEmployeeData = _employeeDataService.GetUpgradeEmployeeData(_employee.Id);

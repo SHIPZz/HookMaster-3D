@@ -73,6 +73,11 @@ namespace CodeBase.Services.Factories.UI
             return  _diContainer.InstantiatePrefabForComponent<TMP_Text>(targetText, parent);
         }
 
+        public T CreateElement<T>(T go,  Transform parent) where T : Object
+        {
+            return  _diContainer.InstantiatePrefabForComponent<T>(go, parent);
+        }
+
         public T CreateElement<T>(string path, Transform parent) where T : Object
         {
             var targetElement = _assetProvider.Get<T>(path);

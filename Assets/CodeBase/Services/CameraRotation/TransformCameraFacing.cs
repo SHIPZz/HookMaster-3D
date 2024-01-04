@@ -13,13 +13,8 @@ namespace CodeBase.Services.CameraRotation
         private void Construct(CameraProvider cameraProvider) => 
             _cameraProvider = cameraProvider;
 
-        private async void OnEnable()
+        private void Start()
         {
-            while (_cameraProvider.Camera == null)
-            {
-                await UniTask.Yield();
-            }
-            
             transform.rotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
         }
     }

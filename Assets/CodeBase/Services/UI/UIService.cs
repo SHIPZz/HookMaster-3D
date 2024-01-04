@@ -1,4 +1,6 @@
-﻿using CodeBase.Constant;
+﻿using System;
+using CodeBase.Constant;
+using CodeBase.Enums;
 using CodeBase.Services.Factories.UI;
 using CodeBase.Services.Providers.Location;
 using CodeBase.Services.Window;
@@ -41,7 +43,7 @@ namespace CodeBase.Services.UI
             var joystickCanvas = _uiFactory.CreateElement<Canvas>(AssetPath.JoystickCanvas, _locationProvider.UIParent);
             joystickCanvas.worldCamera = camera;
             joystickCanvas.planeDistance = 1;
-            joystickCanvas.sortingLayerName = "JoystickUILayer";
+            joystickCanvas.sortingLayerName = Enum.GetName(typeof(SortingLayerTypeId), SortingLayerTypeId.JoystickUILayer);
             joystickCanvas.gameObject.SetActive(true);
 
             if (_blockHud == false)

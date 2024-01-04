@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 namespace CodeBase.Services.Providers.Asset
 {
@@ -8,6 +10,12 @@ namespace CodeBase.Services.Providers.Asset
         {
             var prefab = Resources.Load<GameObject>(path);
             return prefab.GetComponent<T>();
+        }
+
+        public List<T> GetAll<T>(string path) where T : Object
+        {
+            List<T> prefabs = Resources.LoadAll<T>(path).ToList();
+            return prefabs;
         }
     }
 }
