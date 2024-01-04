@@ -14,6 +14,7 @@ namespace CodeBase.Gameplay.Wallet
 
         private Dictionary<ItemTypeId, Action<int>> _addAcitons = new();
         private Dictionary<ItemTypeId, Action<int>> _removeAcitons = new();
+        private Dictionary<ItemTypeId, Func<int, bool>> _checkActions = new();
 
         public int CurrentMoney { get; private set; }
         public int CurrentTickets { get; private set; }
@@ -66,6 +67,9 @@ namespace CodeBase.Gameplay.Wallet
         public bool HasEnoughMoney(int money) =>
             HasEnoughCount(CurrentMoney, money);
 
+        public bool HasEnough(ItemTypeId itemTypeId, int amount) =>
+            _checkActions[itemTypeId].Invoke(amount);
+
         public bool HasEnoughDiamonds(int diamonds) =>
             HasEnoughCount(CurrentDiamonds, diamonds);
 
@@ -112,6 +116,10 @@ namespace CodeBase.Gameplay.Wallet
             _removeAcitons[ItemTypeId.Money] = RemoveMoney;
             _removeAcitons[ItemTypeId.Ticket] = RemoveTickets;
             _removeAcitons[ItemTypeId.Diamond] = RemoveDiamonds;
+
+            _checkActions[ItemTypeId.Diamond] = HasEnoughDiamonds;
+            _checkActions[ItemTypeId.Ticket] = HasEnoughTickets;
+            _checkActions[ItemTypeId.Money] = HasEnoughMoney;
         }
     }
 }

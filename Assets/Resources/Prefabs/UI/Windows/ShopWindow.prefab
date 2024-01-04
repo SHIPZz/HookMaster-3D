@@ -429,7 +429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9e08fc0af9e45bb96970ec362b6985e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <WalletValueTypeId>k__BackingField: 2
+  <ItemTypeId>k__BackingField: 1
   _parent: {fileID: 7750929832759801130}
 --- !u!1 &716867895867920949
 GameObject:
@@ -2420,7 +2420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9e08fc0af9e45bb96970ec362b6985e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <WalletValueTypeId>k__BackingField: 0
+  <ItemTypeId>k__BackingField: 0
   _parent: {fileID: 7750929832759801130}
 --- !u!1 &5042298743629474710
 GameObject:
@@ -3419,7 +3419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9e08fc0af9e45bb96970ec362b6985e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <WalletValueTypeId>k__BackingField: 1
+  <ItemTypeId>k__BackingField: 2
   _parent: {fileID: 7750929832759801130}
 --- !u!1 &7722610894093783368
 GameObject:

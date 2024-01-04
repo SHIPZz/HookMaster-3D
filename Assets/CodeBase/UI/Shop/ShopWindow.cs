@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CodeBase.Data;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.Window;
@@ -30,7 +31,7 @@ namespace CodeBase.UI.Shop
         
         public override void Open()
         {
-            _shopTabViews.FirstOrDefault(x => x.WalletValueTypeId == WalletValueTypeId.Money)?.Init();
+            _shopTabViews.FirstOrDefault(x => x.ItemTypeId == ItemTypeId.Money)?.Init();
             
             _canvasAnimator.FadeInCanvas();
             _moneyText.text = $"{_walletService.CurrentMoney}";

@@ -224,8 +224,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45e5cd15562f480d8cb9ec2311369de1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <WalletValueTypeId>k__BackingField: 0
+  <ItemTypeId>k__BackingField: 0
   <ShopItemTypeId>k__BackingField: 1
+  <Price>k__BackingField: 353232
   _buyButton: {fileID: 6668688690141075040}
 --- !u!1 &4972481454636463550
 GameObject:

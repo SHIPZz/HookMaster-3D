@@ -6,7 +6,6 @@ using CodeBase.Enums;
 using CodeBase.Services.Providers.Asset;
 using CodeBase.Services.Providers.Location;
 using CodeBase.UI.Shop;
-using Unity.Mathematics;
 using UnityEngine;
 using Zenject;
 
@@ -32,7 +31,6 @@ namespace CodeBase.Services.Factories.ShopItems
         {
             ShopItem prefab = _shopItemPrefabs[shopItemTypeId];
             
-
             return _createActions[shopItemTypeId]?.Invoke(prefab);
         }
 
