@@ -26,7 +26,7 @@ namespace CodeBase.Services.Reward
         public void AddRouletteReward(RouletteItem rouletteItem)
         {
             _rouletteRewards[rouletteItem.ItemTypeId] += rouletteItem.Quantity;
-            _walletService.Add(rouletteItem.ItemTypeId, rouletteItem.Quantity);
+            _walletService.Set(rouletteItem.ItemTypeId, rouletteItem.Quantity);
         }
     }
 }

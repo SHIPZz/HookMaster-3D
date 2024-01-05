@@ -24,15 +24,9 @@ namespace CodeBase.Cheats
             
             if (Input.GetKeyDown(KeyCode.F10))
             {
-                WorldData worldData = _worldDataService.WorldData;
-                worldData.TableData.BusyTableIds.Clear();
-                worldData.PotentialEmployeeList.Clear();
-                worldData.PlayerData.PurchasedEmployees.Clear();
-                worldData.UpgradeEmployeeDatas.Clear();
-                worldData.PlayerData.Money = 0;
-                PlayerPrefs.DeleteKey("DataKey");
+                PlayerPrefs.DeleteAll();
                 PlayerPrefs.Save();
-                _worldDataService.Save();
+                _worldDataService.Reset();
                 Debug.Log("clear");
             }
         }

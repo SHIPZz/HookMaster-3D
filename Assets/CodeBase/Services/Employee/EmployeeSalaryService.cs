@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using CodeBase.Constant;
+using CodeBase.Data;
 using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.Providers.EmployeeProvider;
 using CodeBase.Services.Time;
@@ -37,7 +38,7 @@ namespace CodeBase.Services.Employee
                     return;
 
                 Debug.Log(targetSalary + " target salary");
-                _walletService.RemoveMoney(targetSalary);
+                _walletService.Set(ItemTypeId.Money, -targetSalary);
             }
 
             _worldTimeService.SaveLastSalaryPaymentTime();

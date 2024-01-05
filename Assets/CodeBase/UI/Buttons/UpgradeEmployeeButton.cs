@@ -41,7 +41,7 @@ namespace CodeBase.UI.Buttons
             UpgradeEmployeeData upgradeEmployeeData = _employeeDataService.GetUpgradeEmployeeData(_employeeData.Id);
             _employeeService.SetUpgrade(_employeeData.Id, true);
             _employeeDataService.RecountUpgradePriceEmployee(upgradeEmployeeData);
-            _walletService.RemoveMoney(_price);
+            _walletService.Set(ItemTypeId.Money, -_price);
             Gameplay.EmployeeSystem.Employee targetEmployee = _employeeService.Get(_employeeData.Id);
             targetEmployee.SkipEmployeeProgressUIHandler.ActivateWindow(upgradeEmployeeData);
             WindowService.Close<UpgradeEmployeeWindow>();

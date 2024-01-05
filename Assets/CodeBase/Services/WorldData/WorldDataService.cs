@@ -17,6 +17,12 @@ namespace CodeBase.Services.WorldData
             WorldData = await _saveSystem.Load();
         }
 
+        public void Reset()
+        {
+            WorldData = new();
+            Save();
+        }
+
         public void Save() => 
             _saveSystem.Save(WorldData);
     }

@@ -16,6 +16,7 @@ using CodeBase.Services.Providers.EmployeeProvider;
 using CodeBase.Services.Providers.Location;
 using CodeBase.Services.Providers.Player;
 using CodeBase.Services.Providers.Tables;
+using CodeBase.Services.ShopItemData;
 using CodeBase.Services.UI;
 using CodeBase.Services.WorldData;
 using UnityEngine;
@@ -38,6 +39,7 @@ namespace CodeBase.EntryPointSystem
         private readonly EmployeeSalaryService _employeeSalaryService;
         private readonly ProfitService _profitService;
         private readonly UIService _uiService;
+        private readonly ShopItemService _shopItemService;
 
         public EntryPoint(LocationProvider locationProvider,
             IPlayerFactory playerFactory,
@@ -51,8 +53,10 @@ namespace CodeBase.EntryPointSystem
             WalletService walletService,
             EmployeeSalaryService employeeSalaryService,
             ProfitService profitService,
-            UIService uiService)
+            UIService uiService,
+            ShopItemService shopItemService)
         {
+            _shopItemService = shopItemService;
             _uiService = uiService;
             _profitService = profitService;
             _employeeSalaryService = employeeSalaryService;
@@ -80,12 +84,14 @@ namespace CodeBase.EntryPointSystem
             InitProfitService();
             InitUIService();
             InitPlayerProvider(player);
+            InitShopItemService();
         }
 
-        private void InitPlayerProvider(Player player)
-        {
+        private void InitShopItemService() => 
+            _shopItemService.Init();
+
+        private void InitPlayerProvider(Player player) => 
             _playerProvider.Player = player;
-        }
 
         private void InitWalletService() =>
             _walletService.Init();

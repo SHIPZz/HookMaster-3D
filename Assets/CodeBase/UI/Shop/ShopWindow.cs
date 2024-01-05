@@ -34,18 +34,34 @@ namespace CodeBase.UI.Shop
             _shopTabViews.FirstOrDefault(x => x.ItemTypeId == ItemTypeId.Money)?.Init();
             
             _canvasAnimator.FadeInCanvas();
-            _moneyText.text = $"{_walletService.CurrentMoney}";
-            _diamondText.text = $"{_walletService.CurrentDiamonds}";
-            _ticketText.text = $"{_walletService.CurrentTickets}";
+            _walletService.DiamondsChanged += SetDiamondCountText;
+            _walletService.MoneyChanged += SetMoneyCountText;
+            _walletService.TicketCountChanged += SetTicketCountText;
+            SetDiamondCountText(_walletService.CurrentDiamonds);
+            SetMoneyCountText(_walletService.CurrentMoney);
+            SetTicketCountText(_walletService.CurrentTickets);
         }
 
         public override void Close()
         {
+            _walletService.DiamondsChanged -= SetDiamondCountText;
+            _walletService.MoneyChanged -= SetMoneyCountText;
+            _walletService.TicketCountChanged -= SetTicketCountText;
+            
             _canvasAnimator.FadeOutCanvas(() =>
             {
                 _windowService.Open<HudWindow>();
                 base.Close();
             });
         }
+
+        private void SetDiamondCountText(int count) => 
+            _diamondText.text = $"{count}";
+
+        private void SetMoneyCountText(int count) => 
+            _moneyText.text = $"{count}$";
+
+        private void SetTicketCountText(int count) => 
+            _ticketText.text = $"{count}";
     }
 }

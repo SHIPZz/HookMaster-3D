@@ -12,10 +12,6 @@ namespace CodeBase.Gameplay.Wallet
         private const int MaxValueCount = 100000000;
         private readonly IWorldDataService _worldDataService;
 
-        private Dictionary<ItemTypeId, Action<int>> _addAcitons = new();
-        private Dictionary<ItemTypeId, Action<int>> _removeAcitons = new();
-        private Dictionary<ItemTypeId, Func<int, bool>> _checkActions = new();
-
         public int CurrentMoney { get; private set; }
         public int CurrentTickets { get; private set; }
         public int CurrentDiamonds { get; private set; }
@@ -29,8 +25,6 @@ namespace CodeBase.Gameplay.Wallet
 
         public void Init()
         {
-            FillDictionaries();
-
             PlayerData playerData = _worldDataService.WorldData.PlayerData;
             CurrentMoney = playerData.Money;
             CurrentTickets = playerData.Tickets;
@@ -40,44 +34,61 @@ namespace CodeBase.Gameplay.Wallet
             DiamondsChanged?.Invoke(playerData.Diamonds);
         }
 
-        public void Add(ItemTypeId itemTypeId, int amount) => 
-            _addAcitons[itemTypeId]?.Invoke(amount);
+        public void Set(ItemTypeId itemTypeId, int amount)
+        {
+            switch (itemTypeId)
+            {
+                case ItemTypeId.Money:
+                    SetMoney(amount);
+                    break;
 
-        public void Remove(ItemTypeId itemTypeId, int amount) =>
-            _removeAcitons[itemTypeId]?.Invoke(amount);
+                case ItemTypeId.Ticket:
+                    SetTickets(amount);
+                    break;
 
-        public void AddDiamonds(int diamonds) =>
-            UpdateData(ItemTypeId.Diamond, diamonds, count => DiamondsChanged?.Invoke(count));
+                case ItemTypeId.Diamond:
+                    SetDiamonds(amount);
+                    break;
+            }
+        }
 
-        public void RemoveDiamonds(int diamonds)
-            => UpdateData(ItemTypeId.Diamond, -diamonds, count => DiamondsChanged?.Invoke(count));
+        public bool HasEnough(ItemTypeId itemTypeId, int amount)
+        {
+            switch (itemTypeId)
+            {
+                case ItemTypeId.Money:
+                    return HasEnoughMoney(amount);
 
-        public void AddTickets(int tickets) =>
-            UpdateData(ItemTypeId.Ticket, tickets, count => TicketCountChanged?.Invoke(count));
+                case ItemTypeId.Ticket:
+                    return HasEnoughTickets(amount);
 
-        public void RemoveTickets(int tickets) =>
-            UpdateData(ItemTypeId.Ticket, -tickets, count => TicketCountChanged?.Invoke(count));
+                case ItemTypeId.Diamond:
+                    return HasEnoughDiamonds(amount);
+            }
 
-        public void AddMoney(int money) =>
-            UpdateData(ItemTypeId.Money, money, count => MoneyChanged?.Invoke(count));
+            return false;
+        }
 
-        public void RemoveMoney(int money) =>
-            UpdateData(ItemTypeId.Money, -money, count => MoneyChanged?.Invoke(count));
-
-        public bool HasEnoughMoney(int money) =>
+        private bool HasEnoughMoney(int money) =>
             HasEnoughCount(CurrentMoney, money);
 
-        public bool HasEnough(ItemTypeId itemTypeId, int amount) =>
-            _checkActions[itemTypeId].Invoke(amount);
-
-        public bool HasEnoughDiamonds(int diamonds) =>
+        private bool HasEnoughDiamonds(int diamonds) =>
             HasEnoughCount(CurrentDiamonds, diamonds);
 
-        public bool HasEnoughTickets(int tickets) =>
+        private bool HasEnoughTickets(int tickets) =>
             HasEnoughCount(CurrentTickets, tickets);
 
         private bool HasEnoughCount(int target, int count) =>
             target - count >= 0;
+
+        private void SetDiamonds(int diamonds) =>
+            UpdateData(ItemTypeId.Diamond, diamonds, count => DiamondsChanged?.Invoke(count));
+
+        private void SetTickets(int tickets) =>
+            UpdateData(ItemTypeId.Ticket, tickets, count => TicketCountChanged?.Invoke(count));
+
+        private void SetMoney(int money) =>
+            UpdateData(ItemTypeId.Money, money, count => MoneyChanged?.Invoke(count));
 
         private void UpdateData(ItemTypeId itemTypeId, int amount, Action<int> onComplete)
         {
@@ -103,23 +114,8 @@ namespace CodeBase.Gameplay.Wallet
                     onComplete?.Invoke(CurrentDiamonds);
                     break;
             }
-            
+
             _worldDataService.Save();
-        }
-
-        private void FillDictionaries()
-        {
-            _addAcitons[ItemTypeId.Money] = AddMoney;
-            _addAcitons[ItemTypeId.Ticket] = AddTickets;
-            _addAcitons[ItemTypeId.Diamond] = AddDiamonds;
-
-            _removeAcitons[ItemTypeId.Money] = RemoveMoney;
-            _removeAcitons[ItemTypeId.Ticket] = RemoveTickets;
-            _removeAcitons[ItemTypeId.Diamond] = RemoveDiamonds;
-
-            _checkActions[ItemTypeId.Diamond] = HasEnoughDiamonds;
-            _checkActions[ItemTypeId.Ticket] = HasEnoughTickets;
-            _checkActions[ItemTypeId.Money] = HasEnoughMoney;
         }
     }
 }

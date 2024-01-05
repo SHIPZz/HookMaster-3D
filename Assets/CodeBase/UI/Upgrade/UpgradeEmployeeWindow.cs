@@ -53,7 +53,7 @@ namespace CodeBase.UI.UpgradeEmployee
 
         private void InitUpgradeButton(UpgradeEmployeeData targetUpgradeEmployee)
         {
-            if (!_walletService.HasEnoughMoney(targetUpgradeEmployee.UpgradeCost))
+            if (!_walletService.HasEnough(ItemTypeId.Money, targetUpgradeEmployee.UpgradeCost))
                 _upgradeEmployeeButton.interactable = false;
             
             _upgradeEmployeeButton.SetEmployeeData(_employee.ToEmployeeData());

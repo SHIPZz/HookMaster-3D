@@ -1,6 +1,8 @@
 ﻿using CodeBase.Data;
 using CodeBase.Enums;
+using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.Factories.ShopItems;
+using CodeBase.Services.ShopItemData;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,15 +15,22 @@ namespace CodeBase.UI.Shop
         [field: SerializeField] public ItemTypeId ItemTypeId { get; private set; }
         [field: SerializeField] public ShopItemTypeId ShopItemTypeId { get; private set; }
         [field: SerializeField] public int Price { get; private set; }
-        
-        [SerializeField] public TMP_Text _priceText;
+
+        [SerializeField] private TMP_Text _priceText;
         [SerializeField] private Button _buyButton;
-        
+
         private ShopItemFactory _shopItemFactory;
+        private WalletService _walletService;
+        private ShopItemService _shopItemService;
 
         [Inject]
-        private void Construct(ShopItemFactory shopItemFactory) =>
+        private void Construct(ShopItemFactory shopItemFactory, WalletService walletService,
+            ShopItemService shopItemService)
+        {
+            _shopItemService = shopItemService;
+            _walletService = walletService;
             _shopItemFactory = shopItemFactory;
+        }
 
         private void OnEnable()
         {
@@ -34,7 +43,9 @@ namespace CodeBase.UI.Shop
 
         private void OnBuyButtonClicked()
         {
-            _shopItemFactory.Create(ShopItemTypeId);
+            ShopItem shopItem = _shopItemFactory.Create(ShopItemTypeId);
+            _shopItemService.Add(shopItem);
+            _walletService.Set(ItemTypeId, -Price);
             Destroy(gameObject);
         }
     }

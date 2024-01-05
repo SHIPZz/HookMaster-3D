@@ -7,5 +7,6 @@ namespace CodeBase.Services.WorldData
         UniTask Load();
         void Save();
         CodeBase.Data.WorldData WorldData { get; }
+        void Reset();
     }
 }

@@ -227,6 +227,7 @@ MonoBehaviour:
   <ItemTypeId>k__BackingField: 0
   <ShopItemTypeId>k__BackingField: 1
   <Price>k__BackingField: 353232
+  _priceText: {fileID: 4935812808109383445}
   _buyButton: {fileID: 6668688690141075040}
 --- !u!1 &4972481454636463550
 GameObject:
@@ -240,7 +241,7 @@ GameObject:
   - component: {fileID: 4377820089578296687}
   - component: {fileID: 3695776763343612775}
   m_Layer: 0
-  m_Name: RouletteImage
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -316,7 +317,7 @@ GameObject:
   - component: {fileID: 7206976111251807332}
   - component: {fileID: 4935812808109383445}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: PriceText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -432,7 +433,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -7.9734573, y: -11.960112, z: -7.702095, w: -9.302433}
+  m_margin: {x: -32.673035, y: -11.960112, z: -38.246185, w: -9.302433}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

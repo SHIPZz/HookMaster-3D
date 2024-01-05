@@ -10,6 +10,7 @@ using CodeBase.Services.Factories.Player;
 using CodeBase.Services.Factories.ShopItems;
 using CodeBase.Services.Factories.UI;
 using CodeBase.Services.Factories.Weapon;
+using CodeBase.Services.GOPool;
 using CodeBase.Services.Player;
 using CodeBase.Services.Profit;
 using CodeBase.Services.Providers.Asset;
@@ -19,6 +20,7 @@ using CodeBase.Services.Providers.Location;
 using CodeBase.Services.Providers.Player;
 using CodeBase.Services.Providers.Tables;
 using CodeBase.Services.Reward;
+using CodeBase.Services.ShopItemData;
 using CodeBase.Services.Sound;
 using CodeBase.Services.Window;
 using UnityEngine;
@@ -50,6 +52,12 @@ namespace CodeBase.Installers.Game
             BindRewardService();
             BindPlayerRewardService();
             BindShopItemFactory();
+            BindShopItemService();
+        }
+
+        private void BindShopItemService()
+        {
+            Container.Bind<ShopItemService>().AsSingle();   
         }
 
         private void BindShopItemFactory()

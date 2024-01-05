@@ -13,25 +13,25 @@ namespace CodeBase.Services.Factories.ShopItems
 {
     public class ShopItemFactory
     {
-        private readonly DiContainer _diContainer;
-        private Dictionary<ShopItemTypeId, Func<ShopItem, ShopItem>> _createActions;
-        private IAssetProvider _assetProvider;
+        private readonly IInstantiator _instantiator;
+        private readonly LocationProvider _locationProvider;
         private Dictionary<ShopItemTypeId, ShopItem> _shopItemPrefabs;
 
-        public ShopItemFactory(DiContainer diContainer, LocationProvider locationProvider, IAssetProvider assetProvider)
+        public ShopItemFactory(IInstantiator instantiator, LocationProvider locationProvider)
         {
-            _assetProvider = assetProvider;
-            _diContainer = diContainer;
+            _locationProvider = locationProvider;
+            _instantiator = instantiator;
 
             InitShopItemPrefabs();
-            InitCreateActions(locationProvider);
         }
 
         public ShopItem Create(ShopItemTypeId shopItemTypeId)
         {
             ShopItem prefab = _shopItemPrefabs[shopItemTypeId];
             
-            return _createActions[shopItemTypeId]?.Invoke(prefab);
+            return _instantiator.InstantiatePrefabForComponent<ShopItem>(prefab,
+                _locationProvider.CircleRouletteSpawnPoint.position, prefab.transform.rotation,
+                _locationProvider.CircleRouletteSpawnPoint);
         }
 
         private void InitShopItemPrefabs()
@@ -39,25 +39,6 @@ namespace CodeBase.Services.Factories.ShopItems
             _shopItemPrefabs = Resources.LoadAll<ShopItem>(AssetPath.ShopItems)
                 .ToDictionary(x => x.ShopItemTypeId, x => x);
         }
-
-        private void InitCreateActions(LocationProvider locationProvider)
-        {
-            _createActions = new()
-            {
-                {
-                    ShopItemTypeId.CircleRoulette, shopItem =>
-                        _diContainer.InstantiatePrefabForComponent<ShopItem>(shopItem,
-                            locationProvider.CircleRouletteSpawnPoint.position,shopItem.transform.rotation, 
-                            locationProvider.CircleRouletteSpawnPoint)
-                },
-
-                {
-                    ShopItemTypeId.MiningFarm, shopItem =>
-                        _diContainer.InstantiatePrefabForComponent<ShopItem>(shopItem,
-                            locationProvider.MiningFarmSpawnPoint.position,shopItem.transform.rotation,
-                            locationProvider.MiningFarmSpawnPoint)
-                }
-            };
-        }
+        
     }
 }

@@ -1,6 +1,7 @@
 ﻿using CodeBase.Constant;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Effects;
+using CodeBase.Services.GOPool;
 using CodeBase.Services.Profit;
 using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.UI;
