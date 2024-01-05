@@ -19,6 +19,7 @@ namespace CodeBase.Services.WorldData
 
         public void Reset()
         {
+            WorldData = null;
             WorldData = new();
             Save();
         }
