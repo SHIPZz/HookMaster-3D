@@ -1,36 +1,37 @@
 ﻿using CodeBase.Services.Factories.UI;
+using CodeBase.Services.GOPool;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Pool;
 
 namespace CodeBase.Services.UI
 {
     public class FloatingTextService
     {
         private Vector2 _initialTextAnchoredPosition;
-        private readonly UIFactory _uiFactory;
         private TMP_Text _targetText;
+        private readonly ObjectPool<TMP_Text, string, Transform> _textObjectPool;
 
         public FloatingTextService(UIFactory uiFactory)
         {
-            _uiFactory = uiFactory;
+            _textObjectPool = new ObjectPool<TMP_Text, string, Transform>(uiFactory.CreateElement<TMP_Text>, 10);
         }
 
-        public void ShowFloatingText(string text, float additionalAnchoredPositionY,
+        public void ShowFloatingText(string text, float targetAnchoredPositionY,
             float duration,
             float fadeInDuration,
             float fadeOutDuration,
             Quaternion rotation,
             string path, Transform target)
         {
-            if (_targetText == null)
-                _targetText = _uiFactory.CreateElement<TMP_Text>(path, target);
-
+            _targetText = _textObjectPool.Pop(path, target);
+            
             ConfigureText(rotation, text);
             var rectTransformAnimator = _targetText.GetComponent<RectTransformAnimator>();
             ConfigureRectTransformAnimator(rectTransformAnimator, fadeInDuration);
 
-            rectTransformAnimator.MoveAnchoredPositionY(additionalAnchoredPositionY, duration,
+            rectTransformAnimator.MoveAnchoredPositionY(targetAnchoredPositionY, duration,
                 () => HandleFadeOut(rectTransformAnimator, fadeOutDuration));
         }
 
@@ -55,6 +56,7 @@ namespace CodeBase.Services.UI
             rectTransformAnimator.FadeText(_targetText, 0f, fadeOutDuration, () =>
             {
                 rectTransformAnimator.SetInitialPosition();
+                _textObjectPool.Push(_targetText);
                 _targetText.gameObject.SetActive(false);
             });
         }

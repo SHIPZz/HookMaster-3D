@@ -6,7 +6,7 @@ using CodeBase.Services.Factories.Effect;
 
 namespace CodeBase.Services.GOPool
 {
-    public class EffectPool
+    public class EffectPool 
     {
         private readonly int _additionalSize = 2;
         private readonly Queue<EffectView> _objects = new Queue<EffectView>();
@@ -17,9 +17,6 @@ namespace CodeBase.Services.GOPool
         {
             _effectFactory = effectFactory;
         }
-
-        public List<EffectView> GetAll() =>
-            _objects.ToList();
 
         public EffectView Pop(EffectTypeId effectTypeId)
         {

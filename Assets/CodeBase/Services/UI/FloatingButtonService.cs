@@ -1,4 +1,5 @@
 ﻿using CodeBase.Services.Factories.UI;
+using CodeBase.Services.GOPool;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,10 +10,11 @@ namespace CodeBase.Services.UI
         private readonly UIFactory _uiFactory;
         private Button _targetButton;
         private Vector2 _initialAnchoredPosition;
+        private readonly ObjectPool<Button, string, Transform> _buttonObjectPool;
 
         public FloatingButtonService(UIFactory uiFactory)
         {
-            _uiFactory = uiFactory;
+            _buttonObjectPool = new ObjectPool<Button, string, Transform>(uiFactory.CreateElement<Button>, 1);
         }
 
         public Button Get() => _targetButton;
@@ -24,7 +26,7 @@ namespace CodeBase.Services.UI
             bool isFadeInCanvas, bool setInitialPosition)
         {
             if (_targetButton == null)
-                _targetButton = _uiFactory.CreateElement<Button>(path, target);
+                _targetButton = _buttonObjectPool.Pop(path, target);
 
             ConfigureButton(rotation);
             var rectTransformAnimator = _targetButton.GetComponent<RectTransformAnimator>();
@@ -58,7 +60,7 @@ namespace CodeBase.Services.UI
 
         private void HandleFadeOut(CanvasAnimator canvasAnimator)
         {
-            canvasAnimator.FadeOutCanvas(() => _targetButton.gameObject.SetActive(false));
+            canvasAnimator.FadeOutCanvas(() => _buttonObjectPool.Push(_targetButton));
         }
     }
 }

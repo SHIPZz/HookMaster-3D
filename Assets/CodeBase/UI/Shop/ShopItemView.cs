@@ -3,6 +3,7 @@ using CodeBase.Enums;
 using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.Factories.ShopItems;
 using CodeBase.Services.ShopItemData;
+using CodeBase.Services.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,11 +23,13 @@ namespace CodeBase.UI.Shop
         private ShopItemFactory _shopItemFactory;
         private WalletService _walletService;
         private ShopItemService _shopItemService;
+        private FloatingTextService _floatingTextService;
 
         [Inject]
         private void Construct(ShopItemFactory shopItemFactory, WalletService walletService,
-            ShopItemService shopItemService)
+            ShopItemService shopItemService, FloatingTextService floatingTextService)
         {
+            _floatingTextService = floatingTextService;
             _shopItemService = shopItemService;
             _walletService = walletService;
             _shopItemFactory = shopItemFactory;

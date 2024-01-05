@@ -48,7 +48,7 @@ namespace CodeBase.Installers.Game
             BindEmployeeDataService();
             BindSoundService();
             BindPlayerAnimationService();
-            BindEffectPool();
+            BindPools();
             BindRewardService();
             BindPlayerRewardService();
             BindShopItemFactory();
@@ -75,7 +75,7 @@ namespace CodeBase.Installers.Game
             Container.Bind<RewardService>().AsSingle();
         }
 
-        private void BindEffectPool()
+        private void BindPools()
         {
             Container
                 .Bind<EffectPool>()
