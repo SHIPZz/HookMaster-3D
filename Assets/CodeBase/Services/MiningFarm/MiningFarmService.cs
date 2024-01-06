@@ -49,10 +49,18 @@ namespace CodeBase.Services.MiningFarm
                 return;
 
             _workingMinutes = _worldDataService.WorldData.MiningFarmData.WorkingMinutes;
-            
+
+            var timeDifference = _worldTimeService.GetTimeDifferenceByLastMiningTimeInMinutes();
+            timeDifference = Mathf.Clamp(timeDifference, 0, TimeConstantValue.MinutesInTwoHour);
+
+            if (timeDifference == TimeConstantValue.MinutesInTwoHour)
+            {
+                createdMiningFarms.ForEach(x => _walletService.Set(ItemTypeId.Money, x.ProfitPerMinute * timeDifference));
+                return;
+            }
+
             if (_workingMinutes != TimeConstantValue.MinutesInTwoHour)
             {
-                var timeDifference = _worldTimeService.GetTimeDifferenceByLastMiningTimeInMinutes();
                 _workingMinutes = Mathf.Clamp(_workingMinutes + timeDifference, 0, TimeConstantValue.MinutesInTwoHour);
                 createdMiningFarms.ForEach(x => x.Init(_workingMinutes, this));
                 return;
@@ -63,9 +71,9 @@ namespace CodeBase.Services.MiningFarm
 
         public void SetWorkingMinutes(int minutes)
         {
-            if(minutes == TimeConstantValue.MinutesInTwoHour)
+            if (minutes == TimeConstantValue.MinutesInTwoHour)
                 Stopped?.Invoke();
-            
+
             _worldDataService.WorldData.MiningFarmData.WorkingMinutes = minutes;
         }
 
@@ -76,9 +84,9 @@ namespace CodeBase.Services.MiningFarm
 
         public void SetNeedClean(bool needClean)
         {
-            if(needClean)
+            if (needClean)
                 Stopped?.Invoke();
-            
+
             _worldDataService.WorldData.MiningFarmData.NeedClean = needClean;
         }
 
