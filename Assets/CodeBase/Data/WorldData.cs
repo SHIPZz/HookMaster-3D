@@ -14,5 +14,6 @@ namespace CodeBase.Data
         public SettingsData SettingsData = new();
         public PlayerRewardData PlayerRewardData = new();
         public ShopItemData ShopItemData = new();
+        public IReadOnlyList<UpgradeEmployeeData> Test = new List<UpgradeEmployeeData>();
     }
 }

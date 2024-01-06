@@ -40,7 +40,7 @@ namespace CodeBase.UI.Shop
 
             foreach (ShopItemView shopItemView in shopItemViews)
             {
-                if (!_walletService.HasEnough(ItemTypeId, shopItemView.Price) || _shopItemService.AlreadyPurchased(shopItemView.ShopItemTypeId))
+                if (_shopItemService.AlreadyPurchased(shopItemView.ShopItemTypeId))
                     continue;
 
                 _uiFactory.CreateElement<ShopItemView>(shopItemView, _parent);

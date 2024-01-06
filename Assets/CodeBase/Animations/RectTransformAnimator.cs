@@ -10,21 +10,21 @@ public class RectTransformAnimator : MonoBehaviour
 
     private Tween _movePositionTween;
     private Vector2 _initialAnchoredPosition;
+    private Tween _fadeTween;
 
     private void Awake()
     {
         _initialAnchoredPosition = _targetRectTransform.anchoredPosition;
     }
 
-    public void SetAnchoredPosition(Vector2 anchoredPosition) =>
-        _targetRectTransform.anchoredPosition = anchoredPosition;
-
-    public void MoveAnchoredPositionY(float positionY, float duration, [CanBeNull] Action onCompleted = null)
+    public Tween MoveAnchoredPositionY(float positionY, float duration, [CanBeNull] Action onCompleted = null)
     {
         _movePositionTween?.Kill(true);
 
         _movePositionTween = _targetRectTransform.DOAnchorPosY(_initialAnchoredPosition.y + positionY, duration)
             .OnComplete(() => onCompleted?.Invoke());
+
+        return _movePositionTween;
     }
 
     public void MoveRectTransform(Vector2 targetPosition, float duration)
@@ -34,10 +34,13 @@ public class RectTransformAnimator : MonoBehaviour
         _movePositionTween = _targetRectTransform.DOAnchorPos(targetPosition, duration);
     }
 
-    public void FadeText(TMP_Text text, float targetAlpha, float duration, [CanBeNull] Action onCompleted = null)
+    public Tween FadeText(TMP_Text text, float targetAlpha, float duration, [CanBeNull] Action onCompleted = null)
     {
-        text.DOFade(targetAlpha, duration)
+        _fadeTween?.Kill(true);
+       _fadeTween = text.DOFade(targetAlpha, duration)
             .OnComplete(() => onCompleted?.Invoke());
+
+       return _fadeTween;
     }
 
     public void SetInitialPosition()

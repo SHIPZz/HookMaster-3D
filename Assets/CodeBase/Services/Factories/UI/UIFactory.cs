@@ -10,6 +10,7 @@ using CodeBase.Services.Providers.Location;
 using CodeBase.Services.WorldData;
 using CodeBase.UI;
 using CodeBase.UI.Employee;
+using CodeBase.UI.FloatingText;
 using CodeBase.UI.Hud;
 using TMPro;
 using UnityEngine;
@@ -81,6 +82,12 @@ namespace CodeBase.Services.Factories.UI
         public T CreateElement<T>(string path, Transform parent) where T : Object
         {
             var targetElement = _assetProvider.Get<T>(path);
+            return  _diContainer.InstantiatePrefabForComponent<T>(targetElement, parent);
+        }
+        
+        public T CreateElementByResources<T>(string path, Transform parent) where T : Object
+        {
+            var targetElement = Resources.Load<T>(path);
             return  _diContainer.InstantiatePrefabForComponent<T>(targetElement, parent);
         }
     }

@@ -28,10 +28,23 @@ namespace CodeBase.Services.Factories.ShopItems
         public ShopItem Create(ShopItemTypeId shopItemTypeId)
         {
             ShopItem prefab = _shopItemPrefabs[shopItemTypeId];
+
+            Transform targetTransform = null;
+
+            switch (shopItemTypeId)
+            {
+                case ShopItemTypeId.CircleRoulette:
+                    targetTransform = _locationProvider.CircleRouletteSpawnPoint;
+                    break;
+                
+                case ShopItemTypeId.MiningFarm:
+                    targetTransform = _locationProvider.MiningFarmSpawnPoint;
+                    break;
+            }
             
             return _instantiator.InstantiatePrefabForComponent<ShopItem>(prefab,
-                _locationProvider.CircleRouletteSpawnPoint.position, prefab.transform.rotation,
-                _locationProvider.CircleRouletteSpawnPoint);
+                targetTransform.position, prefab.transform.rotation,
+                targetTransform);
         }
 
         private void InitShopItemPrefabs()

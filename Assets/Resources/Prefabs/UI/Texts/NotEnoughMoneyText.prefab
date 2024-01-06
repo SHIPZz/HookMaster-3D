@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 2201674766031794590}
   - component: {fileID: 6201777105212696648}
   - component: {fileID: 576781509361772860}
+  - component: {fileID: 6779472113650307949}
+  - component: {fileID: -2461201622330043915}
   m_Layer: 0
   m_Name: NotEnoughMoneyText
   m_TagString: Untagged
@@ -25,7 +27,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7481341339118574724}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -34,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.9769, y: 15.4474}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 449.1022, y: 99.425}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6201777105212696648
@@ -134,3 +136,36 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6779472113650307949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7481341339118574724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d29fb9f2d4874c65a97e4f7c75848877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetRectTransform: {fileID: 2201674766031794590}
+--- !u!114 &-2461201622330043915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7481341339118574724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32e9187e44cf4d07a4de991c67c2aabc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <FloatingTextType>k__BackingField: 0
+  <Text>k__BackingField: {fileID: 576781509361772860}
+  _duration: 0.2
+  _anchoredPosition: 50
+  _fadeInDuration: 0.2
+  _fadeOutDuration: 0.5
+  _minRandomAnchoredPosition: 50
+  _maxRandomAnchoredPosition: 150

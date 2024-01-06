@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CodeBase.Extensions;
 using CodeBase.Services.Employee;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
 
@@ -25,6 +26,14 @@ namespace CodeBase.Gameplay.EmployeeSystem
         private void Construct(EmployeeDataService employeeDataService)
         {
             _employeeDataService = employeeDataService;
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                _employeeDataService.OverwritePurchasedEmployeeData(this.ToEmployeeData());
+            }
         }
 
         public void StartWorking()

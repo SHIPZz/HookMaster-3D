@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Wallet;
+using CodeBase.Services.UI;
 using CodeBase.Services.Window;
 using CodeBase.UI.Hud;
 using TMPro;
@@ -21,10 +23,13 @@ namespace CodeBase.UI.Shop
 
         private WindowService _windowService;
         private WalletService _walletService;
+        private FloatingTextService _floatingTextService;
 
         [Inject]
-        private void Construct(WindowService windowService, WalletService walletService)
+        private void Construct(WindowService windowService, WalletService walletService, 
+            FloatingTextService floatingTextService)
         {
+            _floatingTextService = floatingTextService;
             _walletService = walletService;
             _windowService = windowService;
         }

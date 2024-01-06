@@ -1,4 +1,6 @@
-﻿namespace CodeBase.Constant
+﻿using CodeBase.UI.FloatingText;
+
+namespace CodeBase.Constant
 {
     public static class AssetPath
     {
@@ -16,5 +18,7 @@
         public const string EffectView = "Prefabs/Effects";
         public const string ShopItemViews = "Prefabs/UI/ShopItemViews";
         public const string ShopItems = "Prefabs/ShopItems";
+        public const string NotEnoughMoneyText = "Prefabs/UI/Texts/NotEnoughMoneyText";
+        public const string FloatingTexts = "Prefabs/UI/Texts/NotEnoughMoneyText";
     }
 }

@@ -18,11 +18,13 @@ namespace CodeBase.Services.GOPool
             _count = count;
         }
 
-        public T Pop(TPath arg2, TParent arg3)
+        public List<T> GetAll() => _objects.ToList();
+
+        public T Pop(TPath path, TParent parent)
         {
             if (_objects.Count <= 0)
             {
-                CreateObjects(_count * (_additionalSize - 1), arg2, arg3);
+                CreateObjects(_count * (_additionalSize - 1), path, parent);
             }
 
             T obj = _objects.Dequeue();
@@ -36,17 +38,17 @@ namespace CodeBase.Services.GOPool
             _objects.Enqueue(obj);
         }
 
-        private void CreateObjects(int count, TPath arg2, TParent arg3)
+        private void CreateObjects(int count, TPath path, TParent parent)
         {
             for (var i = 0; i < count; i++)
             {
-                CreateObject(arg2, arg3);
+                CreateObject(path, parent);
             }
         }
 
-        private void CreateObject(TPath arg2, TParent arg3)
+        private void CreateObject(TPath path, TParent parent)
         {
-            T obj = _objectFactory.Invoke(arg2, arg3);
+            T obj = _objectFactory.Invoke(path, parent);
             obj.gameObject.SetActive(false);
             _count++;
             _objects.Enqueue(obj);
