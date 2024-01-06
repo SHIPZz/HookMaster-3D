@@ -11,16 +11,18 @@ namespace CodeBase.Services.UI
 {
     public class FloatingTextService
     {
+        private const int TextCount = 10;
+        private readonly ObjectPool<TMP_Text, string, Transform> _textObjectPool;
+        private readonly EnumObjectPool<FloatingTextView, Transform, FloatingTextType> _enumTextPool;
+
         private Vector2 _initialTextAnchoredPosition;
         private TMP_Text _targetText;
-        private readonly ObjectPool<TMP_Text, string, Transform> _textObjectPool;
-        private Tween _fadeTween;
-        private bool _completed = true;
-        private Tween _moveTween;
 
         public FloatingTextService(UIFactory uiFactory)
         {
-            _textObjectPool = new ObjectPool<TMP_Text, string, Transform>(uiFactory.CreateElement<TMP_Text>, 10);
+            _textObjectPool = new ObjectPool<TMP_Text, string, Transform>(uiFactory.CreateElement<TMP_Text>, TextCount);
+            _enumTextPool = new EnumObjectPool<FloatingTextView, Transform, FloatingTextType>(
+                uiFactory.CreateFloatingTextView, TextCount);
         }
 
         public void Fade(float fade, float duration)
@@ -31,46 +33,39 @@ namespace CodeBase.Services.UI
             var rectTransformAnimator = _targetText.GetComponent<RectTransformAnimator>();
             rectTransformAnimator.FadeText(_targetText, fade, duration);
         }
-        
-        public void ShowFloatingText(FloatingTextView floatingTextView,  float targetAnchoredPositionY,
+
+        public void ShowFloatingText(FloatingTextType floatingTextType, Transform parent, Vector3 position)
+        {
+            FloatingTextView targetFloatingTextView = _enumTextPool.Pop(parent, floatingTextType);
+            _targetText = targetFloatingTextView.Text;
+            targetFloatingTextView.Init(position, _enumTextPool, this);
+        }
+
+        public void ShowFloatingText(FloatingTextView floatingTextView, float targetAnchoredPositionY,
             float duration,
             float fadeInDuration,
             float fadeOutDuration,
             Quaternion rotation, Vector3 position,
             Action onComplete = null)
         {
-            _completed = false;
             _targetText = floatingTextView.Text;
-            
+
             _targetText.transform.position = position;
             ConfigureText(rotation, _targetText.text);
             var rectTransformAnimator = _targetText.GetComponent<RectTransformAnimator>();
             ConfigureRectTransformAnimator(rectTransformAnimator, fadeInDuration);
 
-            _moveTween = rectTransformAnimator.MoveAnchoredPositionY(targetAnchoredPositionY, duration,
-                () =>
-                {
-                    _moveTween = null;
-                    HandleFadeOut(rectTransformAnimator, fadeOutDuration, onComplete);
-                });
+            rectTransformAnimator.MoveAnchoredPositionY(targetAnchoredPositionY, duration,
+                () => { HandleFadeOut(rectTransformAnimator, _targetText, fadeOutDuration, onComplete); });
         }
 
-        public async void ShowFloatingText(float targetAnchoredPositionY,
+        public void ShowFloatingText(float targetAnchoredPositionY,
             float duration,
             float fadeInDuration,
             float fadeOutDuration,
             Quaternion rotation,
             string path, Transform parent, Vector3 position)
         {
-            // while (!_completed)
-            // {
-            //     await UniTask.Yield();
-            // }
-
-            _completed = false;
-            // if (_moveTween != null || _fadeTween != null)
-            //     return;
-            
             _targetText = _textObjectPool.Pop(path, parent);
 
             _targetText.transform.position = position;
@@ -78,12 +73,8 @@ namespace CodeBase.Services.UI
             var rectTransformAnimator = _targetText.GetComponent<RectTransformAnimator>();
             ConfigureRectTransformAnimator(rectTransformAnimator, fadeInDuration);
 
-            _moveTween = rectTransformAnimator.MoveAnchoredPositionY(targetAnchoredPositionY, duration,
-                () =>
-                {
-                    _moveTween = null;
-                    HandleFadeOut(rectTransformAnimator, fadeOutDuration);
-                });
+            rectTransformAnimator.MoveAnchoredPositionY(targetAnchoredPositionY, duration,
+                () => { HandleFadeOut(rectTransformAnimator, _targetText, fadeOutDuration); });
         }
 
         public void ShowFloatingText(string text, float targetAnchoredPositionY,
@@ -100,13 +91,21 @@ namespace CodeBase.Services.UI
             ConfigureRectTransformAnimator(rectTransformAnimator, fadeInDuration);
 
             rectTransformAnimator.MoveAnchoredPositionY(targetAnchoredPositionY, duration,
-                () => HandleFadeOut(rectTransformAnimator, fadeOutDuration));
+                () => HandleFadeOut(rectTransformAnimator, _targetText, fadeOutDuration));
         }
 
         private void ConfigureText(Quaternion rotation, string text)
         {
             _targetText.text = text;
 
+            _targetText.gameObject.SetActive(true);
+            _targetText.rectTransform.rotation = rotation;
+        }
+
+        private void ConfigureText(Quaternion rotation, Vector3 at, string text)
+        {
+            _targetText.text = text;
+            _targetText.transform.position = at;
             _targetText.gameObject.SetActive(true);
             _targetText.rectTransform.rotation = rotation;
         }
@@ -119,17 +118,13 @@ namespace CodeBase.Services.UI
             rectTransformAnimator.FadeText(_targetText, 1f, fadeInDuration);
         }
 
-        private void HandleFadeOut(RectTransformAnimator rectTransformAnimator, float fadeOutDuration,
+        private void HandleFadeOut(RectTransformAnimator rectTransformAnimator, TMP_Text text, float fadeOutDuration,
             Action onComplete = null)
         {
-            _fadeTween = rectTransformAnimator.FadeText(_targetText, 0f, fadeOutDuration, () =>
+            rectTransformAnimator.FadeText(_targetText, 0f, fadeOutDuration, () =>
             {
                 rectTransformAnimator.SetInitialPosition();
-                _textObjectPool.Push(_targetText);
-                _fadeTween = null;
-                _completed = true;
                 onComplete?.Invoke();
-                _targetText.gameObject.SetActive(false);
             });
         }
     }

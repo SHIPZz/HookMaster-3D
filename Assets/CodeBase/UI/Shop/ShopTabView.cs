@@ -18,17 +18,12 @@ namespace CodeBase.UI.Shop
 
         private UIFactory _uiFactory;
         private IAssetProvider _assetProvider;
-        private WalletService _walletService;
         private ShopItemService _shopItemService;
 
         [Inject]
-        private void Construct(UIFactory uiFactory,
-            IAssetProvider assetProvider, 
-            WalletService walletService,
-            ShopItemService shopItemService)
+        private void Construct(UIFactory uiFactory, IAssetProvider assetProvider, ShopItemService shopItemService)
         {
             _shopItemService = shopItemService;
-            _walletService = walletService;
             _assetProvider = assetProvider;
             _uiFactory = uiFactory;
         }

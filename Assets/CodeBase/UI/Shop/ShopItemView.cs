@@ -23,20 +23,19 @@ namespace CodeBase.UI.Shop
 
         [SerializeField] private TMP_Text _priceText;
         [SerializeField] private Button _buyButton;
-        [SerializeField] private int _textCount = 10;
 
         private ShopItemFactory _shopItemFactory;
         private WalletService _walletService;
         private ShopItemService _shopItemService;
-        private EnumObjectPool<FloatingTextView, Transform, FloatingTextType> _floatingTextPool;
+        private FloatingTextService _floatingTextService;
 
         [Inject]
         private void Construct(ShopItemFactory shopItemFactory, WalletService walletService,
-            ShopItemService shopItemService, UIFactory uiFactory)
+            ShopItemService shopItemService, UIFactory uiFactory, FloatingTextService floatingTextService)
         {
+            _floatingTextService = floatingTextService;
             _shopItemService = shopItemService;
             _walletService = walletService;
-            _floatingTextPool = new EnumObjectPool<FloatingTextView, Transform, FloatingTextType>(uiFactory.CreateFloatingTextView, _textCount);
             _shopItemFactory = shopItemFactory;
         }
 
@@ -53,8 +52,7 @@ namespace CodeBase.UI.Shop
         {
             if (!_walletService.HasEnough(ItemTypeId, Price))
             {
-                FloatingTextView floatingTextView = _floatingTextPool.Pop(transform, FloatingTextType.NotEnoughMoney);
-                floatingTextView.Init(transform.position, _floatingTextPool);
+                _floatingTextService.ShowFloatingText(FloatingTextType.NotEnoughMoney, transform, transform.position);
                 return;
             }
 

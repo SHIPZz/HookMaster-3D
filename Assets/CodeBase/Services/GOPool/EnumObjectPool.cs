@@ -4,22 +4,22 @@ using UnityEngine;
 
 namespace CodeBase.Services.GOPool
 {
-    public class EnumObjectPool<T, TParent, TEnum> 
-        where T : Component 
-        where TParent : Transform 
+    public class EnumObjectPool<T, TParent, TEnum>
+        where T : Component
+        where TParent : Transform
         where TEnum : Enum
     {
         private const int AdditionalSize = 2;
-        private Dictionary<TEnum, Queue<T>> _objectQueues = new Dictionary<TEnum, Queue<T>>();
+        private readonly Func<TParent, TEnum, T> _objectFactory;
+        private Dictionary<TEnum, Queue<T>> _objectQueues = new();
         private int _count;
-        private Func<TParent, TEnum, T> _objectFactory;
 
         public EnumObjectPool(Func<TParent, TEnum, T> objectFactory, int count)
         {
             _objectFactory = objectFactory;
             _count = count;
         }
-        
+
         public T Pop(TParent parent, TEnum id)
         {
             if (!_objectQueues.ContainsKey(id))
@@ -28,18 +28,18 @@ namespace CodeBase.Services.GOPool
             }
 
             Queue<T> objectQueue = _objectQueues[id];
-            
-            if (objectQueue.Count == 0)
+
+            if (objectQueue.Count <= 0)
             {
                 CreateObjects(AdditionalSize, parent, id);
             }
 
             T obj = objectQueue.Dequeue();
-            obj.gameObject.SetActive(true);
 
+            obj.gameObject.SetActive(true);
             return obj;
         }
-        
+
         public void Push(T obj, TEnum id)
         {
             obj.gameObject.SetActive(false);
@@ -48,8 +48,8 @@ namespace CodeBase.Services.GOPool
 
         private void CreateObjects(int count, TParent parent, TEnum id)
         {
-            Queue<T> objectQueue = new Queue<T>();
-
+            Queue<T> objectQueue = !_objectQueues.ContainsKey(id) ? new Queue<T>() : _objectQueues[id];
+            
             for (var i = 0; i < count; i++)
             {
                 T obj = _objectFactory.Invoke(parent, id);

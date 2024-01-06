@@ -430,6 +430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 8368989608802005967}
   _button: {fileID: 2230605324263558447}
+  _setParent: 0
 --- !u!1 &562261343824302951
 GameObject:
   m_ObjectHideFlags: 0
@@ -1439,6 +1440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 1598094553412151519}
   _button: {fileID: 4114625006628576357}
+  _setParent: 0
 --- !u!1 &1337245218474334742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1928,6 +1930,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 283358482618929076}
   _button: {fileID: 5695812309701609538}
+  _setParent: 0
 --- !u!1 &1638017830282496993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2614,6 +2617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 7890614988478318845}
   _button: {fileID: 4090071484352448011}
+  _setParent: 0
 --- !u!1 &2836275815636526877
 GameObject:
   m_ObjectHideFlags: 0
@@ -3898,6 +3902,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 4068765594326087617}
   _button: {fileID: 1605968085741650863}
+  _setParent: 0
 --- !u!1 &4558846284612066591
 GameObject:
   m_ObjectHideFlags: 0
@@ -4542,6 +4547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 3706169009984370978}
   _button: {fileID: 1442318829572193360}
+  _setParent: 0
 --- !u!1 &5697695113775461689
 GameObject:
   m_ObjectHideFlags: 0
@@ -5479,6 +5485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 4132177871153867815}
   _button: {fileID: 5241553587213878588}
+  _setParent: 0
 --- !u!1 &7247932069362424817
 GameObject:
   m_ObjectHideFlags: 0

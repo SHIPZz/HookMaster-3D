@@ -229,6 +229,7 @@ MonoBehaviour:
   <Price>k__BackingField: 4000
   _priceText: {fileID: 4935812808109383445}
   _buyButton: {fileID: 6668688690141075040}
+  _textCount: 10
 --- !u!1 &4972481454636463550
 GameObject:
   m_ObjectHideFlags: 0
