@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Constant;
 using CodeBase.Data;
@@ -17,10 +18,10 @@ namespace CodeBase.Services.MiningFarm
     {
         private readonly IWorldDataService _worldDataService;
         private readonly WorldTimeService _worldTimeService;
+        private readonly ShopItemService _shopItemService;
+        private readonly WalletService _walletService;
 
         private int _workingMinutes;
-        private ShopItemService _shopItemService;
-        private WalletService _walletService;
 
         public bool IsWorking { get; private set; }
 
@@ -39,14 +40,17 @@ namespace CodeBase.Services.MiningFarm
 
         public void Init()
         {
-            var createdMiningFarms =
+            List<Gameplay.ShopItemSystem.MiningFarm> createdMiningFarms =
                 _shopItemService.GetAll<Gameplay.ShopItemSystem.MiningFarm>(ShopItemTypeId.MiningFarm).ToList();
 
             if (createdMiningFarms.Count == 0)
                 return;
 
             if (_worldDataService.WorldData.MiningFarmData.NeedClean)
+            {
+                Stopped?.Invoke();
                 return;
+            }
 
             _workingMinutes = _worldDataService.WorldData.MiningFarmData.WorkingMinutes;
 
@@ -55,7 +59,8 @@ namespace CodeBase.Services.MiningFarm
 
             if (timeDifference == TimeConstantValue.MinutesInTwoHour)
             {
-                createdMiningFarms.ForEach(x => _walletService.Set(ItemTypeId.Money, x.ProfitPerMinute * timeDifference));
+                createdMiningFarms.ForEach(
+                    x => _walletService.Set(ItemTypeId.Money, x.ProfitPerMinute * timeDifference));
                 return;
             }
 
@@ -77,10 +82,8 @@ namespace CodeBase.Services.MiningFarm
             _worldDataService.WorldData.MiningFarmData.WorkingMinutes = minutes;
         }
 
-        public void SetProfit(int amount)
-        {
+        public void SetProfit(int amount) => 
             _walletService.Set(ItemTypeId.Money, amount);
-        }
 
         public void SetNeedClean(bool needClean)
         {

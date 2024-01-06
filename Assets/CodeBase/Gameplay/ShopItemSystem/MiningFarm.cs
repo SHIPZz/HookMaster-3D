@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using CodeBase.Constant;
 using CodeBase.Services.MiningFarm;
 using Sirenix.OdinInspector;
