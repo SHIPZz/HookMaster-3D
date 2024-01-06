@@ -72,6 +72,26 @@ namespace CodeBase.Services.Time
             TimeUpdated = false;
         }
 
+        public void ResetLastMiningTime()
+        {
+            _worldDataService.WorldData.MiningFarmData.LastWorkingTime = 0;
+            _worldDataService.Save();
+        }
+        
+        public int GetTimeDifferenceByLastMiningTimeInMinutes()
+        {
+            if (_worldDataService.WorldData.MiningFarmData.LastWorkingTime == 0)
+            {
+                _worldDataService.WorldData.MiningFarmData.LastWorkingTime =
+                    _worldDataService.WorldData.WorldTimeData.CurrentTime;
+            }
+
+            TimeSpan timeDifference = _worldDataService.WorldData.WorldTimeData.CurrentTime.ToDateTime() -
+                                      _worldDataService.WorldData.MiningFarmData.LastWorkingTime.ToDateTime();
+
+            return (int)timeDifference.TotalMinutes;
+        }
+
         public void SaveLastSalaryPaymentTime()
         {
             _worldDataService.WorldData.WorldTimeData.LastSalaryPaymentTime =
@@ -97,7 +117,7 @@ namespace CodeBase.Services.Time
 
             return timeDifference.Days;
         }
-
+        
         public void SaveLastLazyDay()
         {
             _worldDataService.WorldData.WorldTimeData.LastLazyDay =

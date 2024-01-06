@@ -1,6 +1,7 @@
 ﻿using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Enums;
+using CodeBase.Gameplay.ShopItemSystem;
 using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.Factories.ShopItems;
 using CodeBase.Services.Factories.UI;

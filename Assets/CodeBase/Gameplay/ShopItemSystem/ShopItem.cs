@@ -1,7 +1,7 @@
 ﻿using CodeBase.Enums;
 using UnityEngine;
 
-namespace CodeBase.UI.Shop
+namespace CodeBase.Gameplay.ShopItemSystem
 {
     public class ShopItem : MonoBehaviour
     {

@@ -10,6 +10,7 @@ using CodeBase.Services.Employee;
 using CodeBase.Services.Factories.Camera;
 using CodeBase.Services.Factories.Employee;
 using CodeBase.Services.Factories.Player;
+using CodeBase.Services.MiningFarm;
 using CodeBase.Services.Profit;
 using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.Providers.EmployeeProvider;
@@ -40,6 +41,7 @@ namespace CodeBase.EntryPointSystem
         private readonly ProfitService _profitService;
         private readonly UIService _uiService;
         private readonly ShopItemService _shopItemService;
+        private readonly MiningFarmService _miningFarmService;
 
         public EntryPoint(LocationProvider locationProvider,
             IPlayerFactory playerFactory,
@@ -54,8 +56,10 @@ namespace CodeBase.EntryPointSystem
             EmployeeSalaryService employeeSalaryService,
             ProfitService profitService,
             UIService uiService,
-            ShopItemService shopItemService)
+            ShopItemService shopItemService,
+            MiningFarmService miningFarmService)
         {
+            _miningFarmService = miningFarmService;
             _shopItemService = shopItemService;
             _uiService = uiService;
             _profitService = profitService;
@@ -85,7 +89,11 @@ namespace CodeBase.EntryPointSystem
             InitUIService();
             InitPlayerProvider(player);
             InitShopItemService();
+            InitMiningFarmService();
         }
+
+        private void InitMiningFarmService() => 
+            _miningFarmService.Init();
 
         private void InitShopItemService() => 
             _shopItemService.Init();

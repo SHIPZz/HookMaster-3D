@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Constant;
 using CodeBase.Enums;
+using CodeBase.Gameplay.ShopItemSystem;
 using CodeBase.Services.Providers.Asset;
 using CodeBase.Services.Providers.Location;
 using CodeBase.UI.Shop;

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CodeBase.Enums;
+using CodeBase.Gameplay.ShopItemSystem;
 using CodeBase.Services.Factories.ShopItems;
 using CodeBase.Services.WorldData;
 using CodeBase.UI.Shop;
@@ -22,8 +24,8 @@ namespace CodeBase.Services.ShopItemData
         {
             foreach (ShopItemTypeId shopItemTypeId in _worldDataService.WorldData.ShopItemData.PurchasedShopItems)
             {
-               ShopItem shopItem = _shopItemFactory.Create(shopItemTypeId);
-               _createdShopItems[shopItem.ShopItemTypeId] = shopItem;
+                ShopItem shopItem = _shopItemFactory.Create(shopItemTypeId);
+                _createdShopItems[shopItem.ShopItemTypeId] = shopItem;
             }
         }
 
@@ -31,14 +33,18 @@ namespace CodeBase.Services.ShopItemData
         {
             return (T)_createdShopItems[shopItemTypeId];
         }
+        
+        public IEnumerable<T> GetAll<T>(ShopItemTypeId shopItemTypeId) where T : ShopItem => 
+            _createdShopItems.Values.Where(shopItem => shopItem.ShopItemTypeId == shopItemTypeId).OfType<T>();
 
-        public void Add(CodeBase.UI.Shop.ShopItem shopItem)
+
+        public void Add(ShopItem shopItem)
         {
             _worldDataService.WorldData.ShopItemData.PurchasedShopItems.Add(shopItem.ShopItemTypeId);
             _worldDataService.Save();
         }
 
-        public bool AlreadyPurchased(ShopItemTypeId shopItemTypeId) => 
+        public bool AlreadyPurchased(ShopItemTypeId shopItemTypeId) =>
             _worldDataService.WorldData.ShopItemData.PurchasedShopItems.Contains(shopItemTypeId);
     }
-}   
+}

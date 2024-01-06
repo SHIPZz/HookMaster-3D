@@ -9,6 +9,7 @@ using CodeBase.Services.Factories.Player;
 using CodeBase.Services.Factories.ShopItems;
 using CodeBase.Services.Factories.UI;
 using CodeBase.Services.GOPool;
+using CodeBase.Services.MiningFarm;
 using CodeBase.Services.Player;
 using CodeBase.Services.Profit;
 using CodeBase.Services.Providers.Asset;
@@ -51,6 +52,12 @@ namespace CodeBase.Installers.Game
             BindPlayerRewardService();
             BindShopItemFactory();
             BindShopItemService();
+            BindMiningFarmService();
+        }
+
+        private void BindMiningFarmService()
+        {
+            Container.Bind<MiningFarmService>().AsSingle();
         }
 
         private void BindShopItemService()

@@ -13,9 +13,8 @@ namespace CodeBase.UI.MiningFarm
         [SerializeField] private CanvasAnimator _canvasAnimator;
         [SerializeField] private TMP_Text _temperatureText;
         [SerializeField] private TMP_Text _perMinuteProfitText;
-        [SerializeField] private float _minTemperature = 65;
-        [SerializeField] private float _maxTemperature = 100;
-        [SerializeField] private float _midTemperature = 75;
+        [SerializeField] private TMP_Text _needCleanText;
+        
         private ShopItemService _shopItemService;
 
         [Inject]
@@ -26,7 +25,7 @@ namespace CodeBase.UI.MiningFarm
 
         private void Start()
         {
-            var miningFarm = _shopItemService.Get<Shop.MiningFarm>(ShopItemTypeId.MiningFarm);
+            var miningFarm = _shopItemService.Get<Gameplay.ShopItemSystem.MiningFarm>(ShopItemTypeId.MiningFarm);
             _perMinuteProfitText.text = $"{miningFarm.ProfitPerMinute}$";
             _temperatureText.text = $"{miningFarm.TargetTemperature} C°";
         }

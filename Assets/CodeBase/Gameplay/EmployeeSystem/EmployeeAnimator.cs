@@ -1,25 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EmployeeAnimator
+namespace CodeBase.Gameplay.EmployeeSystem
 {
-    private static readonly int _speed = Animator.StringToHash("Speed");
-    private static readonly int _isSitTyping = Animator.StringToHash("IsSitTyping");
-    private readonly Animator _animator;
-
-    public EmployeeAnimator(Animator animator)
+    public class EmployeeAnimator
     {
-        _animator = animator;
-    }
+        private static readonly int _speed = Animator.StringToHash("Speed");
+        private static readonly int _isSitTyping = Animator.StringToHash("IsSitTyping");
+        private readonly Animator _animator;
 
-    public void SetSitTyping(bool isSitTyping)
-    {
-        _animator.SetBool(_isSitTyping, isSitTyping);
-    }
+        public EmployeeAnimator(Animator animator)
+        {
+            _animator = animator;
+        }
 
-    public void SetSpeed(float speed)
-    {
-        _animator.SetFloat(_speed, speed);
+        public void SetSitTyping(bool isSitTyping)
+        {
+            _animator.SetBool(_isSitTyping, isSitTyping);
+        }
+
+        public void SetSpeed(float speed)
+        {
+            _animator.SetFloat(_speed, speed);
+        }
     }
 }
