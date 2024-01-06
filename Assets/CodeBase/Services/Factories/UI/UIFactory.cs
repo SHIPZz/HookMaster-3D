@@ -74,6 +74,12 @@ namespace CodeBase.Services.Factories.UI
             return  _diContainer.InstantiatePrefabForComponent<TMP_Text>(targetText, parent);
         }
 
+        public FloatingTextView CreateFloatingTextView(Transform parent,  FloatingTextType floatingTextType)
+        {
+            FloatingTextView targetPrefab = _uiStaticDataService.Get(floatingTextType);
+            return _diContainer.InstantiatePrefabForComponent<FloatingTextView>(targetPrefab, parent);
+        }
+
         public T CreateElement<T>(T go,  Transform parent) where T : Object
         {
             return  _diContainer.InstantiatePrefabForComponent<T>(go, parent);
@@ -85,10 +91,5 @@ namespace CodeBase.Services.Factories.UI
             return  _diContainer.InstantiatePrefabForComponent<T>(targetElement, parent);
         }
         
-        public T CreateElementByResources<T>(string path, Transform parent) where T : Object
-        {
-            var targetElement = Resources.Load<T>(path);
-            return  _diContainer.InstantiatePrefabForComponent<T>(targetElement, parent);
-        }
     }
 }

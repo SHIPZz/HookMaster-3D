@@ -23,24 +23,20 @@ namespace CodeBase.UI.Shop
 
         [SerializeField] private TMP_Text _priceText;
         [SerializeField] private Button _buyButton;
-        [SerializeField] private Vector3 _notEnoughMoneyPosition = new Vector3(162f, -150f, 0);
         [SerializeField] private int _textCount = 10;
 
         private ShopItemFactory _shopItemFactory;
         private WalletService _walletService;
         private ShopItemService _shopItemService;
-        private FloatingTextService _floatingTextService;
-        private ObjectPool<FloatingTextView, string, Transform> _floatingTextPool;
+        private EnumObjectPool<FloatingTextView, Transform, FloatingTextType> _floatingTextPool;
 
         [Inject]
         private void Construct(ShopItemFactory shopItemFactory, WalletService walletService,
-            ShopItemService shopItemService, FloatingTextService floatingTextService, UIFactory uiFactory)
+            ShopItemService shopItemService, UIFactory uiFactory)
         {
-            _floatingTextService = floatingTextService;
             _shopItemService = shopItemService;
             _walletService = walletService;
-            _floatingTextPool = new ObjectPool<FloatingTextView, string, Transform>(uiFactory
-                .CreateElementByResources<FloatingTextView>, _textCount);
+            _floatingTextPool = new EnumObjectPool<FloatingTextView, Transform, FloatingTextType>(uiFactory.CreateFloatingTextView, _textCount);
             _shopItemFactory = shopItemFactory;
         }
 
@@ -57,13 +53,8 @@ namespace CodeBase.UI.Shop
         {
             if (!_walletService.HasEnough(ItemTypeId, Price))
             {
-                FloatingTextView floatingTextView = _floatingTextPool.Pop(AssetPath.FloatingTexts, transform);
-                floatingTextView.Init(transform.position, transform, _floatingTextPool);
-                
-               //  
-               // _floatingTextService.ShowFloatingText( Random.Range(35,100), 0.5f, 0.1f,
-               //      0.5f, Quaternion.identity, AssetPath.NotEnoughMoneyText, transform, _notEnoughMoneyPosition);
-
+                FloatingTextView floatingTextView = _floatingTextPool.Pop(transform, FloatingTextType.NotEnoughMoney);
+                floatingTextView.Init(transform.position, _floatingTextPool);
                 return;
             }
 

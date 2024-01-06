@@ -19,6 +19,6 @@ namespace CodeBase.Constant
         public const string ShopItemViews = "Prefabs/UI/ShopItemViews";
         public const string ShopItems = "Prefabs/ShopItems";
         public const string NotEnoughMoneyText = "Prefabs/UI/Texts/NotEnoughMoneyText";
-        public const string FloatingTexts = "Prefabs/UI/Texts/NotEnoughMoneyText";
+        public const string FloatingTexts = "Prefabs/UI/Texts";
     }
 }

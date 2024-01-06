@@ -22,7 +22,7 @@ namespace CodeBase.UI.FloatingText
         [SerializeField] private float _maxRandomAnchoredPosition;
         
         private FloatingTextService _floatingTextService;
-        private ObjectPool<FloatingTextView, string, Transform> _floatingTextPool;
+        private EnumObjectPool<FloatingTextView, Transform, FloatingTextType> _floatingTextPool;
         private Vector3 _initialPosition;
         
         [Inject]
@@ -32,7 +32,7 @@ namespace CodeBase.UI.FloatingText
         private void Awake() => 
             _initialPosition = transform.position;
 
-        public void Init(Vector3 at, Transform parent, ObjectPool<FloatingTextView, string, Transform> floatingTextPool)
+        public void Init(Vector3 at, EnumObjectPool<FloatingTextView, Transform, FloatingTextType> floatingTextPool)
         {
             transform.position = _initialPosition;
             _floatingTextPool = floatingTextPool;
@@ -42,7 +42,7 @@ namespace CodeBase.UI.FloatingText
             targetAnchoredPosition = _minRandomAnchoredPosition != 0 ? Random.Range(_minRandomAnchoredPosition, _maxRandomAnchoredPosition) : _anchoredPosition;
             
             _floatingTextService.ShowFloatingText(this, targetAnchoredPosition, _duration, _fadeInDuration,
-                _fadeOutDuration, Quaternion.identity,  at, () => _floatingTextPool.Push(this));
+                _fadeOutDuration, Quaternion.identity,  at, () => _floatingTextPool.Push(this, FloatingTextType));
         }
     }
 }

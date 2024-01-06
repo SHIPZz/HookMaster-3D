@@ -7,24 +7,22 @@ namespace CodeBase.Services.GOPool
 {
     public class ObjectPool<T, TPath, TParent> where T : Component where TPath : class where TParent : Transform
     {
-        private readonly int _additionalSize = 2;
+        protected readonly int AdditionalSize = 2;
         private readonly Queue<T> _objects = new Queue<T>();
-        private readonly Func<TPath, TParent, T> _objectFactory;
+        protected Func<TPath, TParent, T> ObjectFactory;
         private int _count;
 
         public ObjectPool(Func<TPath, TParent, T> objectFactory, int count)
         {
-            _objectFactory = objectFactory ?? throw new ArgumentNullException(nameof(objectFactory));
+            ObjectFactory = objectFactory ?? throw new ArgumentNullException(nameof(objectFactory));
             _count = count;
         }
-
-        public List<T> GetAll() => _objects.ToList();
 
         public T Pop(TPath path, TParent parent)
         {
             if (_objects.Count <= 0)
             {
-                CreateObjects(_count * (_additionalSize - 1), path, parent);
+                CreateObjects(_count * (AdditionalSize - 1), path, parent);
             }
 
             T obj = _objects.Dequeue();
@@ -42,16 +40,11 @@ namespace CodeBase.Services.GOPool
         {
             for (var i = 0; i < count; i++)
             {
-                CreateObject(path, parent);
+                T obj = ObjectFactory.Invoke(path, parent);
+                obj.gameObject.SetActive(false);
+                _count++;
+                _objects.Enqueue(obj);
             }
-        }
-
-        private void CreateObject(TPath path, TParent parent)
-        {
-            T obj = _objectFactory.Invoke(path, parent);
-            obj.gameObject.SetActive(false);
-            _count++;
-            _objects.Enqueue(obj);
         }
     }
 }
