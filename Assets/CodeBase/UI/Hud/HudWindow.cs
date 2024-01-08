@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using CodeBase.Animations;
 using CodeBase.Extensions;
 using CodeBase.Services.WorldData;
 using TMPro;

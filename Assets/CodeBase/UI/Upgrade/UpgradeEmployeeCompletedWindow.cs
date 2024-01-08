@@ -1,4 +1,5 @@
-﻿using CodeBase.Data;
+﻿using CodeBase.Animations;
+using CodeBase.Data;
 using CodeBase.Services.Providers.EmployeeProvider;
 using TMPro;
 using UnityEngine;

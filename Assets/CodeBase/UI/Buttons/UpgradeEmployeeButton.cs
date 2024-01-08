@@ -2,7 +2,7 @@
 using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.Employee;
 using CodeBase.Services.Providers.EmployeeProvider;
-using CodeBase.UI.UpgradeEmployee;
+using CodeBase.UI.Upgrade;
 using TMPro;
 using UnityEngine;
 using Zenject;

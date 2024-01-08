@@ -15,5 +15,6 @@ namespace CodeBase.Data
         public PlayerRewardData PlayerRewardData = new();
         public ShopItemData ShopItemData = new();
         public MiningFarmData MiningFarmData = new();
+        public RandomItemData RandomItemData = new();
     }
 }

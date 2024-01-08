@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace CodeBase.Gameplay.ShopItemSystem
 {
-    public class MiningFarm : ShopItem
+    public class MiningFarm : ShopItemModel
     {
         [field: SerializeField] public int ProfitPerMinute { get; private set; }
         [SerializeField] private int _minTemperature = 65;

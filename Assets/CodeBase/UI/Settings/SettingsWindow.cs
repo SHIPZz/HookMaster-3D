@@ -1,4 +1,5 @@
-﻿using CodeBase.Services.Sound;
+﻿using CodeBase.Animations;
+using CodeBase.Services.Sound;
 using CodeBase.Services.Window;
 using CodeBase.UI.Hud;
 using UnityEngine;

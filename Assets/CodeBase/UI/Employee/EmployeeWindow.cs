@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using CodeBase.Animations;
 using CodeBase.Data;
 using CodeBase.Gameplay.TableSystem;
 using CodeBase.Services.Employee;

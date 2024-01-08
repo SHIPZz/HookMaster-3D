@@ -1,6 +1,4 @@
-﻿using CodeBase.UI.FloatingText;
-
-namespace CodeBase.Constant
+﻿namespace CodeBase.Constant
 {
     public static class AssetPath
     {
@@ -9,16 +7,14 @@ namespace CodeBase.Constant
         public const string Employee = "Prefabs/Employee/Employee";
         public const string ProfitText = "Prefabs/UI/Texts/ProfitText";
         public const string UpgradeEmployeeButton = "Prefabs/UI/Buttons/UpgradeEmployeeButton";
-        public const string FloatingTextCanvas = "Prefabs/UI/Canvases/FloatingTextCanvas";
         public const string JoystickCanvas = "Prefabs/UI/Canvases/JoystickCanvas";
         public const string InvokeEmployeeWorkButton = "Prefabs/UI/Buttons/InvokeEmployeeWorkButton";
         public const string Windows = "Prefabs/UI/Windows";
-        public const string Sounds = "Prefabs/UI/Sound";
         public const string AudioMixer = "Prefabs/UI/AudioMixers/Mixer";
         public const string EffectView = "Prefabs/Effects";
         public const string ShopItemViews = "Prefabs/UI/ShopItemViews";
         public const string ShopItems = "Prefabs/ShopItems";
-        public const string NotEnoughMoneyText = "Prefabs/UI/Texts/NotEnoughMoneyText";
         public const string FloatingTexts = "Prefabs/UI/Texts";
+        public const string RandomItems = "Prefabs/RandomItems";
     }
 }

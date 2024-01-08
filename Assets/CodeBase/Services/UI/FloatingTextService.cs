@@ -1,4 +1,5 @@
 ﻿using System;
+using CodeBase.Animations;
 using CodeBase.Services.Factories.UI;
 using CodeBase.Services.GOPool;
 using CodeBase.UI.FloatingText;

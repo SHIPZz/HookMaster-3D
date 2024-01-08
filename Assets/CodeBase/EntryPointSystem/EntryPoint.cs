@@ -17,6 +17,7 @@ using CodeBase.Services.Providers.EmployeeProvider;
 using CodeBase.Services.Providers.Location;
 using CodeBase.Services.Providers.Player;
 using CodeBase.Services.Providers.Tables;
+using CodeBase.Services.RandomItems;
 using CodeBase.Services.ShopItemData;
 using CodeBase.Services.UI;
 using CodeBase.Services.WorldData;
@@ -42,6 +43,7 @@ namespace CodeBase.EntryPointSystem
         private readonly UIService _uiService;
         private readonly ShopItemService _shopItemService;
         private readonly MiningFarmService _miningFarmService;
+        private readonly RandomItemService _randomItemService;
 
         public EntryPoint(LocationProvider locationProvider,
             IPlayerFactory playerFactory,
@@ -50,30 +52,32 @@ namespace CodeBase.EntryPointSystem
             PlayerProvider playerProvider,
             EmployeeService employeeService,
             IEmployeeFactory employeeFactory,
-            IWorldDataService worldDataService,
-            TableService tableService,
-            WalletService walletService,
+            IWorldDataService worldDataService, 
+            TableService tableService, 
+            WalletService walletService, 
             EmployeeSalaryService employeeSalaryService,
-            ProfitService profitService,
-            UIService uiService,
-            ShopItemService shopItemService,
-            MiningFarmService miningFarmService)
+            ProfitService profitService, 
+            UIService uiService, 
+            ShopItemService shopItemService, 
+            MiningFarmService miningFarmService, 
+            RandomItemService randomItemService)
         {
-            _miningFarmService = miningFarmService;
-            _shopItemService = shopItemService;
-            _uiService = uiService;
-            _profitService = profitService;
-            _employeeSalaryService = employeeSalaryService;
-            _walletService = walletService;
-            _tableService = tableService;
-            _worldDataService = worldDataService;
-            _employeeFactory = employeeFactory;
-            _employeeService = employeeService;
-            _playerProvider = playerProvider;
-            _cameraProvider = cameraProvider;
             _locationProvider = locationProvider;
             _playerFactory = playerFactory;
             _cameraFactory = cameraFactory;
+            _cameraProvider = cameraProvider;
+            _playerProvider = playerProvider;
+            _employeeService = employeeService;
+            _employeeFactory = employeeFactory;
+            _worldDataService = worldDataService;
+            _tableService = tableService;
+            _walletService = walletService;
+            _employeeSalaryService = employeeSalaryService;
+            _profitService = profitService;
+            _uiService = uiService;
+            _shopItemService = shopItemService;
+            _miningFarmService = miningFarmService;
+            _randomItemService = randomItemService;
         }
 
         public void Initialize()
@@ -90,7 +94,11 @@ namespace CodeBase.EntryPointSystem
             InitPlayerProvider(player);
             InitShopItemService();
             InitMiningFarmService();
+            InitRandomItemService();
         }
+
+        private void InitRandomItemService() => 
+            _randomItemService.Init();
 
         private void InitMiningFarmService() => 
             _miningFarmService.Init();

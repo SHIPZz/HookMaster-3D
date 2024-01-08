@@ -5,6 +5,7 @@ using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.TriggerObserve;
 using CodeBase.Services.Window;
 using CodeBase.UI;
+using CodeBase.UI.SkipProgress;
 using UnityEngine;
 using Zenject;
 

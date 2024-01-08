@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using CodeBase.Animations;
 using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Extensions;

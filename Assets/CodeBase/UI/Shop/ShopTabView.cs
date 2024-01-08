@@ -16,16 +16,14 @@ namespace CodeBase.UI.Shop
         [field: SerializeField] public ItemTypeId ItemTypeId { get; private set; }
         [SerializeField] private Transform _parent;
 
-        private UIFactory _uiFactory;
         private IAssetProvider _assetProvider;
         private ShopItemService _shopItemService;
 
         [Inject]
-        private void Construct(UIFactory uiFactory, IAssetProvider assetProvider, ShopItemService shopItemService)
+        private void Construct( IAssetProvider assetProvider, ShopItemService shopItemService)
         {
             _shopItemService = shopItemService;
             _assetProvider = assetProvider;
-            _uiFactory = uiFactory;
         }
 
         public void Init()
@@ -38,7 +36,7 @@ namespace CodeBase.UI.Shop
                 if (_shopItemService.AlreadyPurchased(shopItemView.ShopItemTypeId))
                     continue;
 
-                _uiFactory.CreateElement<ShopItemView>(shopItemView, _parent);
+                _shopItemService.CreateShopItemView(shopItemView, _parent);
             }
         }
     }

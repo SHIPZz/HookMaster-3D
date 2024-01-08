@@ -1,11 +1,7 @@
-﻿using CodeBase.Constant;
-using CodeBase.Data;
+﻿using CodeBase.Data;
 using CodeBase.Enums;
 using CodeBase.Gameplay.ShopItemSystem;
 using CodeBase.Gameplay.Wallet;
-using CodeBase.Services.Factories.ShopItems;
-using CodeBase.Services.Factories.UI;
-using CodeBase.Services.GOPool;
 using CodeBase.Services.ShopItemData;
 using CodeBase.Services.UI;
 using CodeBase.UI.FloatingText;
@@ -25,19 +21,17 @@ namespace CodeBase.UI.Shop
         [SerializeField] private TMP_Text _priceText;
         [SerializeField] private Button _buyButton;
 
-        private ShopItemFactory _shopItemFactory;
         private WalletService _walletService;
         private ShopItemService _shopItemService;
         private FloatingTextService _floatingTextService;
 
         [Inject]
-        private void Construct(ShopItemFactory shopItemFactory, WalletService walletService,
-            ShopItemService shopItemService, UIFactory uiFactory, FloatingTextService floatingTextService)
+        private void Construct(WalletService walletService, ShopItemService shopItemService,
+            FloatingTextService floatingTextService)
         {
             _floatingTextService = floatingTextService;
             _shopItemService = shopItemService;
             _walletService = walletService;
-            _shopItemFactory = shopItemFactory;
         }
 
         private void OnEnable()
@@ -57,8 +51,8 @@ namespace CodeBase.UI.Shop
                 return;
             }
 
-            ShopItem shopItem = _shopItemFactory.Create(ShopItemTypeId);
-            _shopItemService.Add(shopItem);
+            ShopItemModel shopItemModel = _shopItemService.Create<ShopItemModel>(ShopItemTypeId);
+            _shopItemService.Add(shopItemModel);
             _walletService.Set(ItemTypeId, -Price);
             Destroy(gameObject);
         }

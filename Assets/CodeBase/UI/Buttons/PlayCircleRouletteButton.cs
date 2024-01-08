@@ -1,4 +1,6 @@
-﻿namespace CodeBase.UI.Buttons
+﻿using CodeBase.UI.Roulette;
+
+namespace CodeBase.UI.Buttons
 {
     public class PlayCircleRouletteButton : ButtonOpenerBase
     {

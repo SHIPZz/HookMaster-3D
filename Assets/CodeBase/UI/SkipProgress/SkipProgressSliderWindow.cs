@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using CodeBase.Animations;
 using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Extensions;
@@ -14,7 +15,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace CodeBase.UI
+namespace CodeBase.UI.SkipProgress
 {
     public class SkipProgressSliderWindow : WindowBase
     {

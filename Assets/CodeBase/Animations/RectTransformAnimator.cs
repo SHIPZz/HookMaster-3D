@@ -4,52 +4,55 @@ using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 
-public class RectTransformAnimator : MonoBehaviour
+namespace CodeBase.Animations
 {
-    [SerializeField] private RectTransform _targetRectTransform;
-
-    private Tween _movePositionTween;
-    private Vector2 _initialAnchoredPosition;
-    private Tween _fadeTween;
-
-    private void Awake()
+    public class RectTransformAnimator : MonoBehaviour
     {
-        _initialAnchoredPosition = _targetRectTransform.anchoredPosition;
-    }
+        [SerializeField] private RectTransform _targetRectTransform;
 
-    public Tween MoveAnchoredPositionY(float positionY, float duration, [CanBeNull] Action onCompleted = null)
-    {
-        _movePositionTween?.Kill(true);
+        private Tween _movePositionTween;
+        private Vector2 _initialAnchoredPosition;
+        private Tween _fadeTween;
 
-        _movePositionTween = _targetRectTransform.DOAnchorPosY(_initialAnchoredPosition.y + positionY, duration)
-            .OnComplete(() => onCompleted?.Invoke());
+        private void Awake()
+        {
+            _initialAnchoredPosition = _targetRectTransform.anchoredPosition;
+        }
 
-        return _movePositionTween;
-    }
+        public Tween MoveAnchoredPositionY(float positionY, float duration, [CanBeNull] Action onCompleted = null)
+        {
+            _movePositionTween?.Kill(true);
 
-    public void MoveRectTransform(Vector2 targetPosition, float duration)
-    {
-        _movePositionTween?.Kill(true);
+            _movePositionTween = _targetRectTransform.DOAnchorPosY(_initialAnchoredPosition.y + positionY, duration)
+                .OnComplete(() => onCompleted?.Invoke());
 
-        _movePositionTween = _targetRectTransform.DOAnchorPos(targetPosition, duration);
-    }
+            return _movePositionTween;
+        }
 
-    public Tween FadeText(TMP_Text text, float targetAlpha, float duration, [CanBeNull] Action onCompleted = null)
-    {
-        _fadeTween?.Kill(true);
-       _fadeTween = text.DOFade(targetAlpha, duration)
-            .OnComplete(() => onCompleted?.Invoke());
+        public void MoveRectTransform(Vector2 targetPosition, float duration)
+        {
+            _movePositionTween?.Kill(true);
 
-       return _fadeTween;
-    }
+            _movePositionTween = _targetRectTransform.DOAnchorPos(targetPosition, duration);
+        }
 
-    public void SetInitialPosition()
-    {
-        _targetRectTransform.anchoredPosition = _initialAnchoredPosition;
-    }
+        public Tween FadeText(TMP_Text text, float targetAlpha, float duration, [CanBeNull] Action onCompleted = null)
+        {
+            _fadeTween?.Kill(true);
+            _fadeTween = text.DOFade(targetAlpha, duration)
+                .OnComplete(() => onCompleted?.Invoke());
 
-    public void SetRotation(Quaternion rotation)
-    {
-        _targetRectTransform.rotation = rotation;
+            return _fadeTween;
+        }
+
+        public void SetInitialPosition()
+        {
+            _targetRectTransform.anchoredPosition = _initialAnchoredPosition;
+        }
+
+        public void SetRotation(Quaternion rotation)
+        {
+            _targetRectTransform.rotation = rotation;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using CodeBase.Services.Time;
+﻿using CodeBase.Animations;
+using CodeBase.Services.Time;
 using CodeBase.Services.Window;
 using CodeBase.UI.Hud;
 using TMPro;

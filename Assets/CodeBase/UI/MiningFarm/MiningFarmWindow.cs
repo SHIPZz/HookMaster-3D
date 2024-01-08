@@ -1,4 +1,5 @@
 ﻿using System;
+using CodeBase.Animations;
 using CodeBase.Enums;
 using CodeBase.Services.ShopItemData;
 using TMPro;

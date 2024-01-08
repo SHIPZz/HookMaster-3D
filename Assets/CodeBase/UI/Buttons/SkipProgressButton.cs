@@ -1,5 +1,6 @@
 ﻿using CodeBase.Data;
 using CodeBase.Services.Employee;
+using CodeBase.UI.SkipProgress;
 using CodeBase.UI.SpeedUp;
 using UnityEngine;
 using Zenject;

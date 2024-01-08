@@ -1,4 +1,5 @@
-﻿using CodeBase.Enums;
+﻿using CodeBase.Animations;
+using CodeBase.Enums;
 using CodeBase.Services.Sound;
 using DG.Tweening;
 using UnityEngine;

@@ -75,9 +75,33 @@ namespace CodeBase.Services.Time
         public void ResetLastMiningTime()
         {
             _worldDataService.WorldData.MiningFarmData.LastWorkingTime = 0;
-            _worldDataService.Save();
+        }
+
+        public void ResetLastSpawnedRandomItemTime()
+        {
+            _worldDataService.WorldData.RandomItemData.LastSpawnedTime = 0;
+        }
+
+        public void SetLastSpawnedTime()
+        {
+            _worldDataService.WorldData.RandomItemData.LastSpawnedTime =
+                _worldDataService.WorldData.WorldTimeData.CurrentTime;
         }
         
+        public int GetTimeDifferenceByLastSpawnedRandomItemInMinutes()
+        {
+            if (_worldDataService.WorldData.RandomItemData.LastSpawnedTime == 0)
+            {
+                _worldDataService.WorldData.RandomItemData.LastSpawnedTime =
+                    _worldDataService.WorldData.WorldTimeData.CurrentTime;
+            }
+
+            TimeSpan timeDifference = _worldDataService.WorldData.WorldTimeData.CurrentTime.ToDateTime() -
+                                      _worldDataService.WorldData.RandomItemData.LastSpawnedTime.ToDateTime();
+
+            return (int)timeDifference.TotalMinutes;
+        }
+
         public int GetTimeDifferenceByLastMiningTimeInMinutes()
         {
             if (_worldDataService.WorldData.MiningFarmData.LastWorkingTime == 0)
@@ -117,7 +141,7 @@ namespace CodeBase.Services.Time
 
             return timeDifference.Days;
         }
-        
+
         public void SaveLastLazyDay()
         {
             _worldDataService.WorldData.WorldTimeData.LastLazyDay =
@@ -136,8 +160,8 @@ namespace CodeBase.Services.Time
                 worldTimeData.CurrentTime.ToDateTime() - worldTimeData.LastEarnedProfitTime.ToDateTime();
 
             int passedMinutes = (int)timeDifference.TotalMinutes;
-            
-            passedMinutes = Mathf.Clamp(passedMinutes, 0,TimeConstantValue.MinutesInTwoHour);
+
+            passedMinutes = Mathf.Clamp(passedMinutes, 0, TimeConstantValue.MinutesInTwoHour);
 
             return passedMinutes;
         }
@@ -149,7 +173,8 @@ namespace CodeBase.Services.Time
             if (worldTimeData.LastSalaryPaymentTime == 0)
                 worldTimeData.LastSalaryPaymentTime = _worldDataService.WorldData.WorldTimeData.CurrentTime;
 
-            TimeSpan timeDifference = worldTimeData.CurrentTime.ToDateTime() - worldTimeData.LastSalaryPaymentTime.ToDateTime();
+            TimeSpan timeDifference = worldTimeData.CurrentTime.ToDateTime() -
+                                      worldTimeData.LastSalaryPaymentTime.ToDateTime();
             return (int)timeDifference.TotalMinutes;
         }
 

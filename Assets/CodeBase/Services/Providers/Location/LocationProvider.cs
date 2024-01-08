@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace CodeBase.Services.Providers.Location
 {
@@ -11,5 +12,6 @@ namespace CodeBase.Services.Providers.Location
         public Transform AudioParent;
         public Transform CircleRouletteSpawnPoint;
         public Transform MiningFarmSpawnPoint;
+        public List<Transform> RandomItemSpawnPoints;
     }
 }

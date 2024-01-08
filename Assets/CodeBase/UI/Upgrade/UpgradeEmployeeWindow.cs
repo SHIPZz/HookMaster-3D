@@ -1,4 +1,5 @@
-﻿using CodeBase.Data;
+﻿using CodeBase.Animations;
+using CodeBase.Data;
 using CodeBase.Extensions;
 using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.Employee;
@@ -7,7 +8,7 @@ using TMPro;
 using UnityEngine;
 using Zenject;
 
-namespace CodeBase.UI.UpgradeEmployee
+namespace CodeBase.UI.Upgrade
 {
     public class UpgradeEmployeeWindow : WindowBase
     {

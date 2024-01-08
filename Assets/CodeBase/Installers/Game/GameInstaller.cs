@@ -6,6 +6,7 @@ using CodeBase.Services.Factories.Camera;
 using CodeBase.Services.Factories.Effect;
 using CodeBase.Services.Factories.Employee;
 using CodeBase.Services.Factories.Player;
+using CodeBase.Services.Factories.RandomItems;
 using CodeBase.Services.Factories.ShopItems;
 using CodeBase.Services.Factories.UI;
 using CodeBase.Services.GOPool;
@@ -18,6 +19,7 @@ using CodeBase.Services.Providers.EmployeeProvider;
 using CodeBase.Services.Providers.Location;
 using CodeBase.Services.Providers.Player;
 using CodeBase.Services.Providers.Tables;
+using CodeBase.Services.RandomItems;
 using CodeBase.Services.Reward;
 using CodeBase.Services.ShopItemData;
 using CodeBase.Services.Sound;
@@ -53,6 +55,18 @@ namespace CodeBase.Installers.Game
             BindShopItemFactory();
             BindShopItemService();
             BindMiningFarmService();
+            BindRandomItemFactory();
+            BindRandomItemService();
+        }
+
+        private void BindRandomItemService()
+        {
+            Container.Bind<RandomItemService>().AsSingle(); 
+        }
+
+        private void BindRandomItemFactory()
+        {
+            Container.Bind<RandomItemFactory>().AsSingle();
         }
 
         private void BindMiningFarmService()
@@ -156,6 +170,7 @@ namespace CodeBase.Installers.Game
             Container.Bind<OfficeStaticDataService>().AsSingle();
             Container.Bind<UIStaticDataService>().AsSingle();
             Container.Bind<EffectStaticDataService>().AsSingle();
+            Container.Bind<ItemStaticDataService>().AsSingle();
         }
     }
 }

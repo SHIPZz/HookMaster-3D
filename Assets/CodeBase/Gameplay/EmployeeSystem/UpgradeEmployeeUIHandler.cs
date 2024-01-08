@@ -3,7 +3,7 @@ using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.TriggerObserve;
 using CodeBase.Services.UI;
 using CodeBase.Services.Window;
-using CodeBase.UI.UpgradeEmployee;
+using CodeBase.UI.Upgrade;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;

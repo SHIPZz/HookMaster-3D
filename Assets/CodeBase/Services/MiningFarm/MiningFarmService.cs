@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Wallet;
-using CodeBase.Services.Coroutine;
 using CodeBase.Services.ShopItemData;
 using CodeBase.Services.Time;
 using CodeBase.Services.WorldData;

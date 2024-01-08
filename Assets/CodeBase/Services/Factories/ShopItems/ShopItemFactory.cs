@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CodeBase.Constant;
-using CodeBase.Enums;
+﻿using CodeBase.Enums;
 using CodeBase.Gameplay.ShopItemSystem;
-using CodeBase.Services.Providers.Asset;
-using CodeBase.Services.Providers.Location;
-using CodeBase.UI.Shop;
+using CodeBase.Services.DataService;
 using UnityEngine;
 using Zenject;
 
@@ -15,44 +9,30 @@ namespace CodeBase.Services.Factories.ShopItems
     public class ShopItemFactory
     {
         private readonly IInstantiator _instantiator;
-        private readonly LocationProvider _locationProvider;
-        private Dictionary<ShopItemTypeId, ShopItem> _shopItemPrefabs;
+        private readonly ItemStaticDataService _itemStaticDataService;
 
-        public ShopItemFactory(IInstantiator instantiator, LocationProvider locationProvider)
+        public ShopItemFactory(IInstantiator instantiator, ItemStaticDataService itemStaticDataService)
         {
-            _locationProvider = locationProvider;
+            _itemStaticDataService = itemStaticDataService;
             _instantiator = instantiator;
-
-            InitShopItemPrefabs();
         }
 
-        public ShopItem Create(ShopItemTypeId shopItemTypeId)
+        public ShopItemModel Create(ShopItemTypeId shopItemTypeId, Transform parent, Vector3 at)
         {
-            ShopItem prefab = _shopItemPrefabs[shopItemTypeId];
+            ShopItemModel prefab = _itemStaticDataService.Get(shopItemTypeId);
 
-            Transform targetTransform = null;
-
-            switch (shopItemTypeId)
-            {
-                case ShopItemTypeId.CircleRoulette:
-                    targetTransform = _locationProvider.CircleRouletteSpawnPoint;
-                    break;
-                
-                case ShopItemTypeId.MiningFarm:
-                    targetTransform = _locationProvider.MiningFarmSpawnPoint;
-                    break;
-            }
-            
-            return _instantiator.InstantiatePrefabForComponent<ShopItem>(prefab,
-                targetTransform.position, prefab.transform.rotation,
-                targetTransform);
-        }
-
-        private void InitShopItemPrefabs()
-        {
-            _shopItemPrefabs = Resources.LoadAll<ShopItem>(AssetPath.ShopItems)
-                .ToDictionary(x => x.ShopItemTypeId, x => x);
+            return _instantiator.InstantiatePrefabForComponent<ShopItemModel>(prefab,
+                at, prefab.transform.rotation,
+                parent);
         }
         
+        public ShopItemModel Create(ShopItemTypeId shopItemTypeId, Transform parent, Vector3 at, Quaternion rotation)
+        {
+            ShopItemModel prefab = _itemStaticDataService.Get(shopItemTypeId);
+
+            return _instantiator.InstantiatePrefabForComponent<ShopItemModel>(prefab,
+                at, rotation,
+                parent);
+        }
     }
 }
