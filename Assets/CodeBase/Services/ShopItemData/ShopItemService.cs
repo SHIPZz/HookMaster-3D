@@ -14,33 +14,33 @@ namespace CodeBase.Services.ShopItemData
     public class ShopItemService
     {
         private readonly IWorldDataService _worldDataService;
-        private readonly ShopItemFactory _shopItemFactory;
-        private Dictionary<ShopItemTypeId, ShopItemModel> _createdShopItems = new();
+        private readonly GameItemFactory _gameItemFactory;
         private readonly LocationProvider _locationProvider;
-        private UIFactory _uiFactory;
+        private readonly UIFactory _uiFactory;
+        private Dictionary<ShopItemTypeId, ShopItemGameModel> _createdShopItems = new();
 
-        public ShopItemService(IWorldDataService worldDataService, ShopItemFactory shopItemFactory,
+        public ShopItemService(IWorldDataService worldDataService, GameItemFactory gameItemFactory,
             LocationProvider locationProvider, UIFactory uiFactory)
         {
             _uiFactory = uiFactory;
             _locationProvider = locationProvider;
             _worldDataService = worldDataService;
-            _shopItemFactory = shopItemFactory;
+            _gameItemFactory = gameItemFactory;
         }
 
         public void Init()
         {
             foreach (ShopItemTypeId shopItemTypeId in _worldDataService.WorldData.ShopItemData.PurchasedShopItems)
             {
-                ShopItemModel shopItemModel = Create<ShopItemModel>(shopItemTypeId);
-                _createdShopItems[shopItemModel.ShopItemTypeId] = shopItemModel;
+                ShopItemGameModel shopItemGameModel = Create<ShopItemGameModel>(shopItemTypeId);
+                _createdShopItems[shopItemGameModel.ShopItemTypeId] = shopItemGameModel;
             }
         }
 
         public ShopItemView CreateShopItemView(ShopItemView shopItemView, Transform parent) =>
             _uiFactory.CreateElement<ShopItemView>(shopItemView, parent);
 
-        public T Create<T>(ShopItemTypeId shopItemTypeId) where T : ShopItemModel
+        public T Create<T>(ShopItemTypeId shopItemTypeId) where T : ShopItemGameModel
         {
             switch (shopItemTypeId)
             {
@@ -54,34 +54,37 @@ namespace CodeBase.Services.ShopItemData
             return null;
         }
 
-        public T Get<T>(ShopItemTypeId shopItemTypeId) where T : ShopItemModel
+        public T Get<T>(ShopItemTypeId shopItemTypeId) where T : ShopItemGameModel
         {
-            return (T)_createdShopItems[shopItemTypeId];
+         return (T)_createdShopItems[shopItemTypeId];
         }
 
-        public IEnumerable<T> GetAll<T>(ShopItemTypeId shopItemTypeId) where T : ShopItemModel =>
+        public IEnumerable<T> GetAll<T>(ShopItemTypeId shopItemTypeId) where T : ShopItemGameModel =>
             _createdShopItems.Values.Where(shopItem => shopItem.ShopItemTypeId == shopItemTypeId).OfType<T>();
 
 
-        public void Add(ShopItemModel shopItemModel)
+        public void Add(ShopItemGameModel shopItemGameModel)
         {
-            _worldDataService.WorldData.ShopItemData.PurchasedShopItems.Add(shopItemModel.ShopItemTypeId);
+            _worldDataService.WorldData.ShopItemData.PurchasedShopItems.Add(shopItemGameModel.ShopItemTypeId);
             _worldDataService.Save();
         }
 
         public bool AlreadyPurchased(ShopItemTypeId shopItemTypeId) =>
             _worldDataService.WorldData.ShopItemData.PurchasedShopItems.Contains(shopItemTypeId);
 
-        private T CreateMiningFarm<T>() where T : ShopItemModel
+        private T CreateMiningFarm<T>() where T : ShopItemGameModel
         {
-            return (T)_shopItemFactory.Create(ShopItemTypeId.MiningFarm, _locationProvider.MiningFarmSpawnPoint,
-                _locationProvider.MiningFarmSpawnPoint.position);
+            var target = (T)_gameItemFactory.Create(ShopItemTypeId.MiningFarm, _locationProvider.MiningFarmSpawnPoint, _locationProvider.MiningFarmSpawnPoint.position);
+            _createdShopItems[target.ShopItemTypeId] = target;
+            return target;
         }
 
-        private T CreateCircleRoulette<T>() where T : ShopItemModel
+        private T CreateCircleRoulette<T>() where T : ShopItemGameModel
         {
-            return (T)_shopItemFactory.Create(ShopItemTypeId.CircleRoulette, _locationProvider.CircleRouletteSpawnPoint,
+            var target = (T)_gameItemFactory.Create(ShopItemTypeId.CircleRoulette, _locationProvider.CircleRouletteSpawnPoint,
                 _locationProvider.CircleRouletteSpawnPoint.position);
+            _createdShopItems[target.ShopItemTypeId] = target;
+            return target;
         }
     }
 }

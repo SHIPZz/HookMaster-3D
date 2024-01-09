@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using CodeBase.Animations;
+using CodeBase.Services.DataService;
 using CodeBase.Services.Reward;
 using CodeBase.Services.TriggerObserve;
 using CodeBase.Services.Window;
+using CodeBase.SO.GameItem.CircleRoulette;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -40,10 +42,13 @@ namespace CodeBase.UI.Roulette
         private RewardService _rewardService;
         private WindowService _windowService;
         private bool _rotated;
+        private GameItemStaticDataService _gameItemStaticDataService;
 
         [Inject]
-        private void Construct(RewardService rewardService, WindowService windowService)
+        private void Construct(RewardService rewardService, WindowService windowService,
+            GameItemStaticDataService gameItemStaticDataService)
         {
+            _gameItemStaticDataService = gameItemStaticDataService;
             _windowService = windowService;
             _rewardService = rewardService;
         }
@@ -62,7 +67,9 @@ namespace CodeBase.UI.Roulette
 
         public override void Open()
         {
-            _rouletteItems.ForEach(x => x.Init());
+            var circleRouletteSO = _gameItemStaticDataService.Get<CircleRouletteSO>();
+            _rouletteItems.ForEach(x => x.Init(circleRouletteSO.MinWinValue, circleRouletteSO.MaxWinValue));
+            
             _canvasAnimator.FadeInCanvas();
         }
 
@@ -111,8 +118,8 @@ namespace CodeBase.UI.Roulette
             while (elapsedTime < _rotateDuration)
             {
                 float t = elapsedTime / _rotateDuration;
-                t = Mathf.SmoothStep(0, 1, t); 
-            
+                t = Mathf.SmoothStep(0, 1, t);
+
                 _target.localEulerAngles = Vector3.Lerp(_lastRotation, targetRotation, t);
 
                 elapsedTime += Time.deltaTime;

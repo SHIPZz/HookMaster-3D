@@ -18,7 +18,7 @@ namespace CodeBase.Services.Profit
     {
         private const int OfflineReward = 2;
         private readonly IWorldDataService _worldDataService;
-        private readonly WaitForSecondsRealtime _waitMinute = new(60f);
+        private readonly WaitForSeconds _waitMinute = new(60f);
         private readonly ICoroutineRunner _coroutineRunner;
         private readonly WalletService _walletService;
         private readonly WorldTimeService _worldTimeService;

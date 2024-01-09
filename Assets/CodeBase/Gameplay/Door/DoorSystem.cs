@@ -38,7 +38,7 @@ namespace CodeBase.Gameplay.Door
 
             var dot = Vector3.Dot(_targetTransform.forward, player.transform.forward);
 
-            if(dot is < 0 and >= -0.85f)
+            if(dot < 0 && dot >= _targetBlockOpenDot)
                 return;
 
             if (dot <= 0)

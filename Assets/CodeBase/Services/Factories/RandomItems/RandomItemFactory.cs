@@ -9,26 +9,26 @@ namespace CodeBase.Services.Factories.RandomItems
 {
     public class RandomItemFactory
     {
-        private readonly ItemStaticDataService _itemStaticDataService;
+        private readonly GameItemStaticDataService _gameItemStaticDataService;
         private readonly IInstantiator _instantiator;
         private readonly LocationProvider _locationProvider;
 
-        public RandomItemFactory(ItemStaticDataService itemStaticDataService, IInstantiator instantiator, LocationProvider locationProvider)
+        public RandomItemFactory(GameItemStaticDataService gameItemStaticDataService, IInstantiator instantiator, LocationProvider locationProvider)
         {
-            _itemStaticDataService = itemStaticDataService;
+            _gameItemStaticDataService = gameItemStaticDataService;
             _instantiator = instantiator;
             _locationProvider = locationProvider;
         }
 
-        public RandomItem Create(RandomItemTypeId randomItemTypeId)
+        public RandomItemGameModel Create(RandomItemTypeId randomItemTypeId)
         {
-            RandomItem prefab = _itemStaticDataService.Get(randomItemTypeId);
+            RandomItemGameModel prefab = _gameItemStaticDataService.Get(randomItemTypeId);
 
             var randomId = Random.Range(0, _locationProvider.RandomItemSpawnPoints.Count);
 
             Transform targetTransform = _locationProvider.RandomItemSpawnPoints[randomId];
             
-            return _instantiator.InstantiatePrefabForComponent<RandomItem>(prefab,
+            return _instantiator.InstantiatePrefabForComponent<RandomItemGameModel>(prefab,
                 targetTransform.position, prefab.transform.rotation,
                 targetTransform);
         }

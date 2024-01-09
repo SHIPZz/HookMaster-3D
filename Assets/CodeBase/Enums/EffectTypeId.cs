@@ -7,5 +7,7 @@
         HitGreen,
         HitYellow,
         DollarBlow,
+        SmokeBlow,
+        SmokeDirectional
     }
 }

@@ -51,8 +51,8 @@ namespace CodeBase.UI.Shop
                 return;
             }
 
-            ShopItemModel shopItemModel = _shopItemService.Create<ShopItemModel>(ShopItemTypeId);
-            _shopItemService.Add(shopItemModel);
+            ShopItemGameModel shopItemGameModel = _shopItemService.Create<ShopItemGameModel>(ShopItemTypeId);
+            _shopItemService.Add(shopItemGameModel);
             _walletService.Set(ItemTypeId, -Price);
             Destroy(gameObject);
         }

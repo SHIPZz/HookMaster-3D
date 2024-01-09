@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CodeBase.Gameplay.RandomItemSystem
 {
-    public class RandomItem : MonoBehaviour
+    public class RandomItemGameModel : MonoBehaviour
     {
         [field: SerializeField] public int Value { get; private set; }
         [field: SerializeField] public ItemTypeId ItemTypeId { get; private set; }

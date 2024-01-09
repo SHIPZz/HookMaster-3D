@@ -18,7 +18,7 @@ namespace CodeBase.Cheats
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                _worldDataService.WorldData.PlayerData.Money = 30000;
+                _worldDataService.WorldData.PlayerData.WalletResources[ItemTypeId.Money] = 30000;
                 _worldDataService.Save();
             }
             

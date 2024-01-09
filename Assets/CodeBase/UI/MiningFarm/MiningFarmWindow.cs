@@ -29,6 +29,7 @@ namespace CodeBase.UI.MiningFarm
             var miningFarm = _shopItemService.Get<Gameplay.ShopItemSystem.MiningFarm>(ShopItemTypeId.MiningFarm);
             _perMinuteProfitText.text = $"{miningFarm.ProfitPerMinute}$";
             _temperatureText.text = $"{miningFarm.TargetTemperature} C°";
+            _needCleanText.text = miningFarm.NeedClean.ToString();
         }
 
         public override void Open()

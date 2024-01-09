@@ -248,6 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 7958586422780806770}
   _button: {fileID: 6879982178923477557}
+  _setParent: 0
 --- !u!1 &1181801539968644651
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,6 +496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 8607737232467743606}
   _button: {fileID: 5184205386832657596}
+  _setParent: 0
 --- !u!1 &1995590276696381949
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,13 +550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05ae30128c714cdbbe7739dcba404f60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moneyText: {fileID: 181214544813917522}
-  _targetScale: 2
-  _increaseScaleDuration: 1
-  _decreaseScaleDuration: 0.4
-  _defaultScale: 1
-  _colorFadeDuration: 0.4
-  _colorDefaultFadeDuration: 0.3
+  _moneyText: {fileID: 7799505757955667292}
   _moneySound: {fileID: 7362629523100138677}
 --- !u!82 &7362629523100138677
 AudioSource:
@@ -1314,6 +1310,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7007839bb249af9f4628adcf46c735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _planeDistance: 100
+  _sortingLayerTypeId: 2
 --- !u!1 &6891575407256610811
 GameObject:
   m_ObjectHideFlags: 0
@@ -1693,6 +1691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 6971798918789241398}
   _button: {fileID: 6278570350725575337}
+  _setParent: 0
 --- !u!114 &6278570350725575337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1748,6 +1747,7 @@ GameObject:
   - component: {fileID: 628171721637883583}
   - component: {fileID: 4597231517380881633}
   - component: {fileID: 181214544813917522}
+  - component: {fileID: 7799505757955667292}
   m_Layer: 5
   m_Name: MoneyTextCount
   m_TagString: Untagged
@@ -1871,6 +1871,24 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7799505757955667292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8030707113705205056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5831d110b3d54917af9ce8f702d1a754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetScale: 2
+  _increaseScaleDuration: 0.5
+  _decreaseScaleDuration: 0.1
+  _defaultScale: 1
+  _colorFadeOutDuration: 1
+  _colorFadeDuration: 0.5
 --- !u!1 &8099498756719045712
 GameObject:
   m_ObjectHideFlags: 0

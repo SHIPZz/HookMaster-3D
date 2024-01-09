@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Animations;
 using CodeBase.Constant;
@@ -25,6 +26,12 @@ namespace CodeBase.UI.Shop
         private WindowService _windowService;
         private WalletService _walletService;
         private FloatingTextService _floatingTextService;
+        // private Dictionary<Type, Action<IWalletResource>> _handlers = new()
+        // {
+        //     { typeof(TicketWalletResource), ticketWallet => ticketWallet.ValueChanged += value => },
+        //     { typeof(MoneyWalletResource), moneyWallet => moneyWallet.ValueChanged += SetMoney },
+        //     { typeof(DiamondWalletResource), diamondWallet => diamondWallet.ValueChanged += SetDiamonds }
+        // };
 
         [Inject]
         private void Construct(WindowService windowService, WalletService walletService, 
@@ -40,12 +47,14 @@ namespace CodeBase.UI.Shop
             _shopTabViews.FirstOrDefault(x => x.ItemTypeId == ItemTypeId.Money)?.Init();
             
             _canvasAnimator.FadeInCanvas();
+
             _walletService.DiamondsChanged += SetDiamondCountText;
             _walletService.MoneyChanged += SetMoneyCountText;
             _walletService.TicketCountChanged += SetTicketCountText;
-            SetDiamondCountText(_walletService.CurrentDiamonds);
-            SetMoneyCountText(_walletService.CurrentMoney);
-            SetTicketCountText(_walletService.CurrentTickets);
+            
+            SetDiamondCountText(_walletService.GetValue(ItemTypeId.Diamond));
+            SetMoneyCountText(_walletService.GetValue(ItemTypeId.Money));
+            SetTicketCountText(_walletService.GetValue(ItemTypeId.Ticket));
         }
 
         public override void Close()

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CodeBase.Gameplay.ShopItemSystem
 {
-    public class ShopItemModel : MonoBehaviour
+    public class ShopItemGameModel : MonoBehaviour
     {
         [field: SerializeField] public ShopItemTypeId ShopItemTypeId { get; private set; }
     }

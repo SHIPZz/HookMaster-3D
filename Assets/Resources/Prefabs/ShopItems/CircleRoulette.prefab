@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 1438436280057083257}
   - component: {fileID: 878589792928117302}
   m_Layer: 16
-  m_Name: SM_Prop_ArcadeMachine_01 (1)
+  m_Name: CircleRoulette
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

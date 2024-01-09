@@ -13,12 +13,10 @@ namespace CodeBase.UI.Roulette
         [field: SerializeField] public ItemTypeId ItemTypeId { get; private set; }
         
         [SerializeField] private TMP_Text _quantityText;
-        [SerializeField] private int _minRandomValue;
-        [SerializeField] private int _maxRandomValue;
         
-        public void Init()
+        public void Init(int minValue, int maxValue)
         {
-            Quantity = Random.Range(_minRandomValue, _maxRandomValue);
+            Quantity = Random.Range(minValue, maxValue);
             _quantityText.text = Quantity.ToString(CultureInfo.InvariantCulture);
         }
     }

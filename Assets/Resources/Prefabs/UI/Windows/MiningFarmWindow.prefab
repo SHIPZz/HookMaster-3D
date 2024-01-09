@@ -1078,9 +1078,7 @@ MonoBehaviour:
   _canvasAnimator: {fileID: 7491707621105093695}
   _temperatureText: {fileID: 3628468558621047624}
   _perMinuteProfitText: {fileID: 3919474344857950660}
-  _minTemperature: 65
-  _maxTemperature: 100
-  _midTemperature: 75
+  _needCleanText: {fileID: 4383225279221958788}
 --- !u!1 &1872017135723679704
 GameObject:
   m_ObjectHideFlags: 0

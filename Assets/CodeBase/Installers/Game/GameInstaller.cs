@@ -81,7 +81,7 @@ namespace CodeBase.Installers.Game
 
         private void BindShopItemFactory()
         {
-            Container.Bind<ShopItemFactory>().AsSingle();
+            Container.Bind<GameItemFactory>().AsSingle();
         }
 
         private void BindPlayerRewardService()
@@ -170,7 +170,7 @@ namespace CodeBase.Installers.Game
             Container.Bind<OfficeStaticDataService>().AsSingle();
             Container.Bind<UIStaticDataService>().AsSingle();
             Container.Bind<EffectStaticDataService>().AsSingle();
-            Container.Bind<ItemStaticDataService>().AsSingle();
+            Container.Bind<GameItemStaticDataService>().AsSingle();
         }
     }
 }

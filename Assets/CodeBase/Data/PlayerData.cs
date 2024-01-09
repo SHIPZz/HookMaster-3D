@@ -7,10 +7,14 @@ namespace CodeBase.Data
     public class PlayerData
     {
         public int QualificationType  = 1;
-        public int Money;
-        public int Tickets;
-        public int Diamonds;
         public List<EmployeeData> PurchasedEmployees = new();
-        
+
+        public Dictionary<ItemTypeId, int> WalletResources = new()
+        {
+            { ItemTypeId.Money, 0 },
+            { ItemTypeId.Ticket, 0 },
+            { ItemTypeId.Diamond, 0 },
+        };
+
     }
 }
