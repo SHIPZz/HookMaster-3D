@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Boss
   m_EditorClassIdentifier: 
   characterTypeId: 0
-  Prefab: {fileID: 1215442077931895576, guid: d0369997e74eafc4b8d38adb412ff237, type: 3}
+  Prefab: {fileID: 2207181457750275766, guid: d0369997e74eafc4b8d38adb412ff237, type: 3}
