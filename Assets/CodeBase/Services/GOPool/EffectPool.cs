@@ -30,6 +30,9 @@ namespace CodeBase.Services.GOPool
             return obj;
         }
 
+        public T Pop<T>(EffectTypeId effectTypeId) where T : EffectView => 
+            (T)Pop(effectTypeId);
+
         public void Push(EffectView obj)
         {
             obj.gameObject.SetActive(false);

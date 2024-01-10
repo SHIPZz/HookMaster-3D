@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CodeBase.Services.TriggerObserve;
 using UnityEngine;
 
@@ -11,15 +10,11 @@ namespace CodeBase.Gameplay.Fire
         [SerializeField] private List<ParticleSystem> _fires;
         [SerializeField] private TriggerObserver _triggerObserver;
 
-        private void OnEnable()
-        {
+        private void OnEnable() => 
             _triggerObserver.TriggerEntered += OnSmoked;
-        }
 
-        private void OnDisable()
-        {
+        private void OnDisable() => 
             _triggerObserver.TriggerEntered -= OnSmoked;
-        }
 
         private void OnSmoked(Collider obj)
         {

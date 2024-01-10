@@ -1,66 +1,59 @@
+using System;
 using System.Collections;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Effects;
 using CodeBase.Services.GOPool;
+using CodeBase.Services.Providers.Player;
 using UnityEngine;
 using Zenject;
 
 public class ExtinguisherSystem : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _traceSmokeEffect;
-    [SerializeField] private float _smokeMoveDistance = 1f;
-    [SerializeField] private float _speed = 5f;
     [SerializeField] private Transform _spawnPoint;
-    [SerializeField] private float _moveTime = 1f;
     [SerializeField] private float _spawnCount = 10;
     [SerializeField] private float _spawnInterval = 0.3f;
+    [SerializeField] private AudioSource _sound;
 
-    private readonly WaitForSeconds _second = new WaitForSeconds(1f);
     private EffectPool _effectPool;
+    private PlayerProvider _playerProvider;
+    private readonly WaitForSeconds _second = new WaitForSeconds(1f);
+    private Coroutine _coroutine;
 
     [Inject]
-    private void Construct(EffectPool effectPool)
+    private void Construct(EffectPool effectPool, PlayerProvider playerProvider)
     {
+        _playerProvider = playerProvider;
         _effectPool = effectPool;
     }
 
-    private void Update()
+    public void Activate(Action onFinishedCallback = null)
     {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            StartCoroutine(SpawnSmokeEffects());
-        }
+        if (_coroutine != null)
+            StopCoroutine(_coroutine);
+
+        _coroutine = StartCoroutine(SpawnSmokeEffects(onFinishedCallback));
     }
 
-    private IEnumerator SpawnSmokeEffects()
+    private IEnumerator SpawnSmokeEffects(Action onFinishedCallback = null)
     {
+        _sound.Play();
+
         for (int i = 0; i < _spawnCount; i++)
         {
-            EffectView effectView = _effectPool.Pop(EffectTypeId.SmokeBlow);
-            effectView.transform.position = _spawnPoint.position;
+            var effectView = _effectPool.Pop<SmokeEffectView>(EffectTypeId.SmokeBlow);
+            effectView.SetPool(_effectPool);
+            effectView.transform.rotation = Quaternion.LookRotation(_playerProvider.PlayerMovement.transform.forward);
+            effectView.transform.localPosition = _spawnPoint.position;
             _traceSmokeEffect.Play();
-            effectView.Effect.Play(true);
-            effectView.transform.rotation = Quaternion.LookRotation(transform.forward);
-            StartCoroutine(MoveSmokeEffect(effectView));
+            effectView.Play();
             yield return new WaitForSeconds(_spawnInterval);
         }
-        
-        _traceSmokeEffect.Stop();
-    }
 
-    private IEnumerator MoveSmokeEffect(EffectView effectView)
-    {
-        float elapsedTime = 0f;
-        
-        while (elapsedTime < _moveTime)
-        {
-            effectView.transform.Translate(transform.forward * _smokeMoveDistance * _speed * Time.deltaTime);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
+        _traceSmokeEffect.Stop();
+        _sound.Stop();
 
         yield return _second;
-        effectView.Effect.Stop();
-        _effectPool.Push(effectView);
+        onFinishedCallback?.Invoke();
     }
 }

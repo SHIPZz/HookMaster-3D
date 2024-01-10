@@ -7,6 +7,7 @@ using CodeBase.Gameplay.PlayerSystem;
 using CodeBase.Gameplay.TableSystem;
 using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.Employee;
+using CodeBase.Services.Extinguisher;
 using CodeBase.Services.Factories.Camera;
 using CodeBase.Services.Factories.Employee;
 using CodeBase.Services.Factories.Player;
@@ -44,6 +45,7 @@ namespace CodeBase.EntryPointSystem
         private readonly ShopItemService _shopItemService;
         private readonly MiningFarmService _miningFarmService;
         private readonly RandomItemService _randomItemService;
+        private readonly ExtinguisherService _extinguisherService;
 
         public EntryPoint(LocationProvider locationProvider,
             IPlayerFactory playerFactory,
@@ -60,8 +62,10 @@ namespace CodeBase.EntryPointSystem
             UIService uiService, 
             ShopItemService shopItemService, 
             MiningFarmService miningFarmService, 
-            RandomItemService randomItemService)
+            RandomItemService randomItemService,
+            ExtinguisherService extinguisherService)
         {
+            _extinguisherService = extinguisherService;
             _locationProvider = locationProvider;
             _playerFactory = playerFactory;
             _cameraFactory = cameraFactory;
@@ -95,7 +99,11 @@ namespace CodeBase.EntryPointSystem
             InitShopItemService();
             InitMiningFarmService();
             InitRandomItemService();
+            InitExtinguisherService();
         }
+
+        private void InitExtinguisherService() => 
+            _extinguisherService.Init();
 
         private void InitRandomItemService() => 
             _randomItemService.Init();

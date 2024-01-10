@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 
 [CustomEditor(typeof(EmployeeSpawner))]
-public class EmployeeSpawnerEditor : Editor
+public class EmployeeSpawnerEditor : UnityEditor.Editor
 {
     [DrawGizmo(GizmoType.Active | GizmoType.Pickable | GizmoType.NonSelected)]
     public static void RenderCustomGizmo(EmployeeSpawner spawner, GizmoType gizmoType)

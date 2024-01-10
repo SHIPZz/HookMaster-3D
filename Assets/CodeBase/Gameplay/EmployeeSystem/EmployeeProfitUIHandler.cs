@@ -37,7 +37,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
             _profitService = profitService;
         }
 
-        private void OnEnable() =>
+        private void Start() =>
             _profitService.ProfitGot += OnProfitGot;
 
         private void OnDisable() =>

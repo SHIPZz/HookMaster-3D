@@ -34,6 +34,7 @@ namespace CodeBase.Installers.GameObjects
         public void Initialize()
         {
             _playerProvider.PlayerInput = Container.Resolve<PlayerInput>();
+            _playerProvider.PlayerMovement = Container.Resolve<PlayerMovement>();
             _playerAnimationService.SetPlayerAnimator(Container.Resolve<PlayerAnimator>());
         }
     }

@@ -18,5 +18,6 @@
         public const string RandomItems = "Prefabs/RandomItems";
         public const string ShopItemDatas = "Datas/ShopItems";
         public const string GameItemDatas = "Datas/GameItems";
+        public const string Extinguisher = "Prefabs/GameItems/Extinguisher";
     }
 }

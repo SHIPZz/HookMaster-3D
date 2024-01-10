@@ -2,6 +2,7 @@
 using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.DataService;
 using CodeBase.Services.Employee;
+using CodeBase.Services.Extinguisher;
 using CodeBase.Services.Factories.Camera;
 using CodeBase.Services.Factories.Effect;
 using CodeBase.Services.Factories.Employee;
@@ -16,6 +17,7 @@ using CodeBase.Services.Profit;
 using CodeBase.Services.Providers.Asset;
 using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.Providers.EmployeeProvider;
+using CodeBase.Services.Providers.Extinguisher;
 using CodeBase.Services.Providers.Location;
 using CodeBase.Services.Providers.Player;
 using CodeBase.Services.Providers.Tables;
@@ -33,6 +35,7 @@ namespace CodeBase.Installers.Game
     {
         [SerializeField] private LocationProvider _locationProvider;
         [SerializeField] private TableService tableService;
+        [SerializeField] private ExtinguisherProvider _extinguisherProvider;
         
         public override void InstallBindings()
         {
@@ -57,49 +60,38 @@ namespace CodeBase.Installers.Game
             BindMiningFarmService();
             BindRandomItemFactory();
             BindRandomItemService();
+            BindExtinguisherService();
         }
 
-        private void BindRandomItemService()
-        {
-            Container.Bind<RandomItemService>().AsSingle(); 
-        }
+        private void BindExtinguisherService() => 
+            Container.Bind<ExtinguisherService>().AsSingle();
 
-        private void BindRandomItemFactory()
-        {
+        private void BindRandomItemService() => 
+            Container.Bind<RandomItemService>().AsSingle();
+
+        private void BindRandomItemFactory() => 
             Container.Bind<RandomItemFactory>().AsSingle();
-        }
 
-        private void BindMiningFarmService()
-        {
+        private void BindMiningFarmService() => 
             Container.Bind<MiningFarmService>().AsSingle();
-        }
 
-        private void BindShopItemService()
-        {
-            Container.Bind<ShopItemService>().AsSingle();   
-        }
+        private void BindShopItemService() => 
+            Container.Bind<ShopItemService>().AsSingle();
 
-        private void BindShopItemFactory()
-        {
+        private void BindShopItemFactory() => 
             Container.Bind<GameItemFactory>().AsSingle();
-        }
 
-        private void BindPlayerRewardService()
-        {
-            Container.BindInterfacesAndSelfTo<PlayerRewardService>().AsSingle();   
-        }
+        private void BindPlayerRewardService() => 
+            Container.BindInterfacesAndSelfTo<PlayerRewardService>().AsSingle();
 
-        private void BindRewardService()
-        {
+        private void BindRewardService() => 
             Container.Bind<RewardService>().AsSingle();
-        }
 
-        private void BindPools()
-        {
+        private void BindPools() =>
+            
             Container
                 .Bind<EffectPool>()
                 .AsTransient();
-        }
 
         private void BindPlayerAnimationService() =>
             Container
@@ -114,12 +106,11 @@ namespace CodeBase.Installers.Game
                 .Bind<EmployeeDataService>()
                 .AsSingle();
 
-        private void BindProfitService()
-        {
+        private void BindProfitService() =>
+            
             Container
                 .BindInterfacesAndSelfTo<ProfitService>()
                 .AsSingle();
-        }
 
         private void BindEmployeeSalaryService() =>
             Container
@@ -153,6 +144,7 @@ namespace CodeBase.Installers.Game
             Container.Bind<CameraProvider>().AsSingle();
             Container.Bind<PlayerProvider>().AsSingle();
             Container.Bind<EmployeeService>().AsSingle();
+            Container.BindInstance(_extinguisherProvider);
         }
 
         private void BindFactories()

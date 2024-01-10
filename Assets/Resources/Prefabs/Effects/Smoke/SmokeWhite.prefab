@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4305689222603005898}
   - component: {fileID: 8622744228013473597}
   - component: {fileID: 1673807872581605062}
-  - component: {fileID: 8455423900146764221}
   - component: {fileID: 2905244503831109667}
-  - component: {fileID: 7917881286783604153}
+  - component: {fileID: 4956222153718651454}
+  - component: {fileID: 5782996509986386264}
   m_Layer: 19
   m_Name: SmokeWhite
   m_TagString: Untagged
@@ -50,7 +50,7 @@ ParticleSystem:
   cullingMode: 3
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  emitterVelocityMode: 0
+  emitterVelocityMode: 1
   looping: 0
   prewarm: 0
   playOnAwake: 0
@@ -120,7 +120,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 3
-      minScalar: 0.99999994
+      minScalar: 0.0001
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4762,20 +4762,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &8455423900146764221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6131092864672002305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 800df00c26d44a45b5baea8f971b0a1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <EffectTypeId>k__BackingField: 5
-  <Effect>k__BackingField: {fileID: 8622744228013473597}
 --- !u!65 &2905244503831109667
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4795,9 +4781,24 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &7917881286783604153
+  m_Size: {x: 1, y: 0.6141069, z: 1.8970895}
+  m_Center: {x: 0, y: 0.19294655, z: 0.9884752}
+--- !u!114 &4956222153718651454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6131092864672002305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5b56935e4704b1188427615053ccc9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <EffectTypeId>k__BackingField: 5
+  <Effect>k__BackingField: {fileID: 8622744228013473597}
+  _disableDelay: 5
+--- !u!54 &5782996509986386264
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
