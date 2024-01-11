@@ -10,6 +10,8 @@ namespace CodeBase.Gameplay.Wallet
     public class WalletView : MonoBehaviour
     {
         [SerializeField] private TextAnimView _moneyText;
+        [SerializeField] private TextAnimView _ticketCountText;
+        [SerializeField] private TextAnimView _diamondCountText;
         [SerializeField] private AudioSource _moneySound;
 
         private WalletService _walletService;
@@ -28,9 +30,9 @@ namespace CodeBase.Gameplay.Wallet
             _walletService.TicketCountChanged += SetTickets;
             _walletService.DiamondsChanged += SetDiamonds;
             
-            _moneyText.SetText(_walletService.GetValue(ItemTypeId.Money));
-            SetTickets(_walletService.GetValue(ItemTypeId.Ticket));
-            SetDiamonds(_walletService.GetValue(ItemTypeId.Diamond));
+            _moneyText.SetText($"{_walletService.GetValue(ItemTypeId.Money)}$");
+            _ticketCountText.SetText(_walletService.GetValue(ItemTypeId.Ticket));
+            _diamondCountText.SetText(_walletService.GetValue(ItemTypeId.Diamond));
         }
 
         private void OnDisable()
@@ -44,20 +46,24 @@ namespace CodeBase.Gameplay.Wallet
         private void SetMoney(int money)
         {
             _moneySound.Play();
-            _moneyText.SetText(money);
-            _moneyText.DoFadeInColor(Color.white, () => _moneyText.DoFadeOutColor(_moneyColor));
+            _moneyText.SetText($"{money}$");
+            _moneyText.DoFadeInColor(() => _moneyText.DoFadeOutColor());
             _moneyText.DoScale(() => _moneyText.ResetScale());
         }
 
         private void SetTickets(int amount)
         {
-            
+            _ticketCountText.SetText(amount);
+            _ticketCountText.DoFadeInColor(() => _ticketCountText.DoFadeOutColor());
+            _ticketCountText.DoScale(() => _ticketCountText.ResetScale());
         }
 
 
         private void SetDiamonds(int amount)
         {
-            
+            _diamondCountText.SetText(amount);
+            _diamondCountText.DoFadeInColor(() => _diamondCountText.DoFadeOutColor());
+            _diamondCountText.DoScale(() => _diamondCountText.ResetScale());
         }
     }
 }

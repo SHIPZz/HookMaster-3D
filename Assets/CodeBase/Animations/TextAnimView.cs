@@ -15,6 +15,8 @@ namespace CodeBase.Animations
         [SerializeField] private float _defaultScale = 1f;
         [SerializeField] private float _colorFadeOutDuration = 1f;
         [SerializeField] private float _colorFadeDuration = 0.5f;
+        [SerializeField] private Color _fadeInColor;
+        [SerializeField] private Color _fadeOutColor;
         
         private Tween _tween;
         private Tween _scaleTween;
@@ -32,16 +34,16 @@ namespace CodeBase.Animations
         public void SetColor(Color color) => 
             _text.color = color;
 
-        public void DoFadeInColor(Color color, Action onComplete = null)
+        public void DoFadeInColor(Action onComplete = null)
         {
             _tween?.Kill(true);
-            _tween = _text.DOColor(color, _colorFadeDuration).OnComplete(() => onComplete?.Invoke());
+            _tween = _text.DOColor(_fadeInColor, _colorFadeDuration).OnComplete(() => onComplete?.Invoke());
         }
         
-        public void DoFadeOutColor(Color color,Action onComplete = null)
+        public void DoFadeOutColor(Action onComplete = null)
         {
             _tween?.Kill(true);
-            _tween = _text.DOColor(color, _colorFadeOutDuration).OnComplete(() => onComplete?.Invoke());
+            _tween = _text.DOColor(_fadeOutColor, _colorFadeOutDuration).OnComplete(() => onComplete?.Invoke());
         }
 
         public void DoScale(Action onComplete = null)

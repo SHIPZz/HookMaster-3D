@@ -11,7 +11,6 @@ namespace CodeBase.Gameplay.EmployeeSystem
 {
     public class Employee : MonoBehaviour
     {
-        public SkipEmployeeProgressUIHandler SkipEmployeeProgressUIHandler;
         public Guid Guid;
         public string Id;
         public int QualificationType;
