@@ -521,6 +521,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4059986939167938723}
   - component: {fileID: 2728380277612700690}
+  - component: {fileID: 8239857241408285921}
+  - component: {fileID: 3307258030038937504}
+  - component: {fileID: 2014579034648950445}
   m_Layer: 10
   m_Name: SM_Chr_Developer_Male_02
   m_TagString: Untagged
@@ -646,6 +649,79 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.000000059604645, y: 0.8450646, z: -0.034637734}
     m_Extent: {x: 1.0245616, y: 0.95198005, z: 0.3109802}
   m_DirtyAABB: 0
+--- !u!114 &8239857241408285921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2336392107448269818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac1e01f64ee34d42a32bab59ad562196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _childMaterialChangers
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[CodeBase.MaterialChanger.IMaterialChanger,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  <Id>k__BackingField: 33a193b3-bef2-4027-b6ac-428bec092468
+  <IsBurned>k__BackingField: 0
+  _needChangeChild: 0
+--- !u!114 &3307258030038937504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2336392107448269818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcee7c53c4fb440795cf148f09116231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Duration: 1.5
+  TargetValue: 1
+  TargetMaterial: {fileID: 2100000, guid: 72004951b2a0664429e64bba9b4cd127, type: 2}
+--- !u!65 &2014579034648950445
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2336392107448269818}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.7783152, y: 1.9039601, z: 0.6219604}
+  m_Center: {x: 0.030380085, y: 0.8450646, z: -0.03463775}
 --- !u!1 &2477570618952547926
 GameObject:
   m_ObjectHideFlags: 0
@@ -1369,6 +1445,7 @@ MonoBehaviour:
   _fadeInDuration: 0.5
   _fadeOutDuration: 5
   _moveTextDuration: 1
+  _pushEffectPoolDelay: 2
 --- !u!1 &5785361659626368648
 GameObject:
   m_ObjectHideFlags: 0
@@ -2075,10 +2152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 374621cea35b46af843cd495869dbd08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meshRenderer: {fileID: 2728380277612700690}
-  _materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 2100000, guid: 8f4cc0ab4d6d85f4ea468f16219910a1, type: 2}
   SkipEmployeeProgressUIHandler: {fileID: 4058113525806600960}
   Id: 
   QualificationType: 1

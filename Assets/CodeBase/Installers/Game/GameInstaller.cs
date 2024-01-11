@@ -1,5 +1,6 @@
 ﻿using CodeBase.EntryPointSystem;
 using CodeBase.Gameplay.Wallet;
+using CodeBase.Services.BurnableObjects;
 using CodeBase.Services.DataService;
 using CodeBase.Services.Employee;
 using CodeBase.Services.Extinguisher;
@@ -10,6 +11,7 @@ using CodeBase.Services.Factories.Player;
 using CodeBase.Services.Factories.RandomItems;
 using CodeBase.Services.Factories.ShopItems;
 using CodeBase.Services.Factories.UI;
+using CodeBase.Services.Fire;
 using CodeBase.Services.GOPool;
 using CodeBase.Services.MiningFarm;
 using CodeBase.Services.Player;
@@ -18,6 +20,7 @@ using CodeBase.Services.Providers.Asset;
 using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.Providers.EmployeeProvider;
 using CodeBase.Services.Providers.Extinguisher;
+using CodeBase.Services.Providers.Fire;
 using CodeBase.Services.Providers.Location;
 using CodeBase.Services.Providers.Player;
 using CodeBase.Services.Providers.Tables;
@@ -36,7 +39,8 @@ namespace CodeBase.Installers.Game
         [SerializeField] private LocationProvider _locationProvider;
         [SerializeField] private TableService tableService;
         [SerializeField] private ExtinguisherProvider _extinguisherProvider;
-        
+        [SerializeField] private FireProvider _fireProvider;
+
         public override void InstallBindings()
         {
             BindEntryPoint();
@@ -61,34 +65,45 @@ namespace CodeBase.Installers.Game
             BindRandomItemFactory();
             BindRandomItemService();
             BindExtinguisherService();
+            BindFireService();
+            BindFireSpawnerProvider();
+            BindBurnableObjectService();
         }
 
-        private void BindExtinguisherService() => 
+        private void BindBurnableObjectService() => 
+            Container.Bind<BurnableObjectService>().AsSingle();
+
+        private void BindFireSpawnerProvider() =>
+            Container.BindInstance(_fireProvider);
+
+        private void BindFireService() =>
+            Container.Bind<FireService>().AsSingle();
+
+        private void BindExtinguisherService() =>
             Container.Bind<ExtinguisherService>().AsSingle();
 
-        private void BindRandomItemService() => 
+        private void BindRandomItemService() =>
             Container.Bind<RandomItemService>().AsSingle();
 
-        private void BindRandomItemFactory() => 
+        private void BindRandomItemFactory() =>
             Container.Bind<RandomItemFactory>().AsSingle();
 
-        private void BindMiningFarmService() => 
+        private void BindMiningFarmService() =>
             Container.Bind<MiningFarmService>().AsSingle();
 
-        private void BindShopItemService() => 
+        private void BindShopItemService() =>
             Container.Bind<ShopItemService>().AsSingle();
 
-        private void BindShopItemFactory() => 
+        private void BindShopItemFactory() =>
             Container.Bind<GameItemFactory>().AsSingle();
 
-        private void BindPlayerRewardService() => 
+        private void BindPlayerRewardService() =>
             Container.BindInterfacesAndSelfTo<PlayerRewardService>().AsSingle();
 
-        private void BindRewardService() => 
+        private void BindRewardService() =>
             Container.Bind<RewardService>().AsSingle();
 
         private void BindPools() =>
-            
             Container
                 .Bind<EffectPool>()
                 .AsTransient();
@@ -98,7 +113,7 @@ namespace CodeBase.Installers.Game
                 .Bind<PlayerAnimationService>()
                 .AsSingle();
 
-        private void BindSoundService() => 
+        private void BindSoundService() =>
             Container.Bind<SettingsService>().AsSingle();
 
         private void BindEmployeeDataService() =>
@@ -107,7 +122,6 @@ namespace CodeBase.Installers.Game
                 .AsSingle();
 
         private void BindProfitService() =>
-            
             Container
                 .BindInterfacesAndSelfTo<ProfitService>()
                 .AsSingle();
@@ -127,13 +141,13 @@ namespace CodeBase.Installers.Game
                 .BindInterfacesAndSelfTo<EmployeeLazinessService>()
                 .AsSingle();
 
-        private void BindWindowService() => 
+        private void BindWindowService() =>
             Container.Bind<WindowService>().AsSingle();
 
-        private void BindEmployeeHirerService() => 
+        private void BindEmployeeHirerService() =>
             Container.Bind<EmployeeHirerService>().AsSingle();
 
-        private void BindEntryPoint() => 
+        private void BindEntryPoint() =>
             Container.BindInterfacesAndSelfTo<EntryPoint>().AsSingle();
 
         private void BindProviders()

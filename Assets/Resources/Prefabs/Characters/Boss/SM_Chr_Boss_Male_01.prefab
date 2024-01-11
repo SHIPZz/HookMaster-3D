@@ -2143,7 +2143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7118514763517236647}
   - component: {fileID: 1766518849144715009}
-  - component: {fileID: 2192769532679002754}
+  - component: {fileID: 446501998095332190}
   m_Layer: 20
   m_Name: IKOBSERVER
   m_TagString: Untagged
@@ -2178,14 +2178,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9c8bfb97314834a597c3e19c55d3e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &2192769532679002754
-BoxCollider:
+--- !u!136 &446501998095332190
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2087242907499442664}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 55a6b4510cfcf1c47ada9c5ba2cc4a03, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2196,9 +2196,11 @@ BoxCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.1890724, y: 2.459795, z: 1}
-  m_Center: {x: 0.094536185, y: 0.7298972, z: 0}
+  serializedVersion: 2
+  m_Radius: 0.2146335
+  m_Height: 1.4259777
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.0820706, z: 0.0076231956}
 --- !u!1 &2220375831241982702
 GameObject:
   m_ObjectHideFlags: 0

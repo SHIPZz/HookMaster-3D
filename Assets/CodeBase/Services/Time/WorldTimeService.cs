@@ -87,7 +87,7 @@ namespace CodeBase.Services.Time
             _worldDataService.WorldData.RandomItemData.LastSpawnedTime =
                 _worldDataService.WorldData.WorldTimeData.CurrentTime;
         }
-        
+
         public int GetTimeDifferenceByLastSpawnedRandomItemInMinutes()
         {
             if (_worldDataService.WorldData.RandomItemData.LastSpawnedTime == 0)
@@ -140,6 +140,25 @@ namespace CodeBase.Services.Time
             TimeSpan timeDifference = worldTimeData.CurrentTime.ToDateTime() - worldTimeData.LastLazyDay.ToDateTime();
 
             return timeDifference.Days;
+        }
+
+        public int GetTimeDifferenceLastFireTimeByMinutes()
+        {
+            WorldTimeData worldTimeData = _worldDataService.WorldData.WorldTimeData;
+
+            if (worldTimeData.LastFireTime == 0)
+                worldTimeData.LastFireTime = _worldDataService.WorldData.WorldTimeData.CurrentTime;
+
+
+            TimeSpan timeDifference = worldTimeData.CurrentTime.ToDateTime() - worldTimeData.LastFireTime.ToDateTime();
+
+            return (int)timeDifference.TotalMinutes;
+        }
+
+        public void SaveLastFireTime()
+        {
+            WorldTimeData worldTimeData = _worldDataService.WorldData.WorldTimeData;
+            worldTimeData.LastFireTime = _worldDataService.WorldData.WorldTimeData.CurrentTime;
         }
 
         public void SaveLastLazyDay()

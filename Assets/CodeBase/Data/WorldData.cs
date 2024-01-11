@@ -16,5 +16,8 @@ namespace CodeBase.Data
         public ShopItemData ShopItemData = new();
         public MiningFarmData MiningFarmData = new();
         public RandomItemData RandomItemData = new();
+        public FireTimeData FireTimeData = new();
+        public BurnableItemData BurnableItemData = new();
+        public List<BurnableItemData> BurnableItemDatas = new();
     }
 }

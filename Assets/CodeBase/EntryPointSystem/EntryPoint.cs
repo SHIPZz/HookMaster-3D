@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using AmazingAssets.AdvancedDissolve;
 using CodeBase.Data;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Camera;
@@ -11,6 +12,7 @@ using CodeBase.Services.Extinguisher;
 using CodeBase.Services.Factories.Camera;
 using CodeBase.Services.Factories.Employee;
 using CodeBase.Services.Factories.Player;
+using CodeBase.Services.Fire;
 using CodeBase.Services.MiningFarm;
 using CodeBase.Services.Profit;
 using CodeBase.Services.Providers.Camera;
@@ -46,6 +48,7 @@ namespace CodeBase.EntryPointSystem
         private readonly MiningFarmService _miningFarmService;
         private readonly RandomItemService _randomItemService;
         private readonly ExtinguisherService _extinguisherService;
+        private readonly FireService _fireService;
 
         public EntryPoint(LocationProvider locationProvider,
             IPlayerFactory playerFactory,
@@ -63,8 +66,10 @@ namespace CodeBase.EntryPointSystem
             ShopItemService shopItemService, 
             MiningFarmService miningFarmService, 
             RandomItemService randomItemService,
-            ExtinguisherService extinguisherService)
+            ExtinguisherService extinguisherService,
+            FireService fireService)
         {
+            _fireService = fireService;
             _extinguisherService = extinguisherService;
             _locationProvider = locationProvider;
             _playerFactory = playerFactory;
@@ -100,7 +105,11 @@ namespace CodeBase.EntryPointSystem
             InitMiningFarmService();
             InitRandomItemService();
             InitExtinguisherService();
+            InitFireService();
         }
+
+        private void InitFireService() => 
+            _fireService.Init();
 
         private void InitExtinguisherService() => 
             _extinguisherService.Init();

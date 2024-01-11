@@ -37,14 +37,5 @@ namespace CodeBase.Services.Factories.ShopItems
                 at, prefab.transform.rotation,
                 parent);
         }
-        
-        public ShopItemGameModel Create(ShopItemTypeId shopItemTypeId, Transform parent, Vector3 at, Quaternion rotation)
-        {
-            ShopItemGameModel prefab = _gameItemStaticDataService.Get(shopItemTypeId);
-
-            return _instantiator.InstantiatePrefabForComponent<ShopItemGameModel>(prefab,
-                at, rotation,
-                parent);
-        }
     }
 }
