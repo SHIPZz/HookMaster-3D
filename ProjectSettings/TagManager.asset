@@ -13,8 +13,8 @@ TagManager:
   - UI
   - Player
   - JoystickUI
-  - Bullet
-  - Enemy
+  - 
+  - 
   - Employee
   - EmployeeWorkTrigger
   - Wall

@@ -131,6 +131,7 @@ MonoBehaviour:
   <LeftHandIK>k__BackingField: {fileID: 2565504888882319298}
   _triggerObserver: {fileID: -1797554488943992746}
   _targetPosition: {x: 0.26, y: 0.698, z: 0.557}
+  _targetRotation: {x: 0, y: 76, z: 0}
 --- !u!114 &4260742610528290928
 MonoBehaviour:
   m_ObjectHideFlags: 0

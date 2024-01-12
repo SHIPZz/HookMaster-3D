@@ -14,5 +14,6 @@ namespace CodeBase.Data
         public bool IsWorking;
         public string TableId;
         public bool IsUpgrading;
+        public bool IsBurned;
     }
 }

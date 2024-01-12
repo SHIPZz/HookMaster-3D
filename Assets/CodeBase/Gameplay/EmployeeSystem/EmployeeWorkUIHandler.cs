@@ -47,7 +47,9 @@ namespace CodeBase.Gameplay.EmployeeSystem
 
         private void OnPlayerExited(Collider obj)
         {
-            if (_employee.IsWorking || _employeeMovement.IsMovingToTable)
+            if (_employee.IsWorking || 
+                _employeeMovement.IsMovingToTable
+                || _employee.IsBurned)
                 return;
 
             _floatingButtonService.ShowFloatingButton(-_downPositionY, _downDuration, Quaternion.identity, 
@@ -56,7 +58,9 @@ namespace CodeBase.Gameplay.EmployeeSystem
 
         private void OnPlayerEntered(Collider obj)
         {
-            if (_employee.IsWorking || _employeeMovement.IsMovingToTable)
+            if (_employee.IsWorking || 
+                _employeeMovement.IsMovingToTable
+                || _employee.IsBurned)
                 return;
 
             _floatingButtonService.ShowFloatingButton(_upPositionY, _upDuration, Quaternion.identity,

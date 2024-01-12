@@ -145,7 +145,7 @@ namespace CodeBase.EntryPointSystem
         }
 
         private void InitTableService() =>
-            _tableService.Init(_worldDataService.WorldData.TableData.BusyTableIds);
+            _tableService.Init(_worldDataService.WorldData.TableDatas);
 
         private void InitEmployees()
         {
@@ -161,6 +161,7 @@ namespace CodeBase.EntryPointSystem
                 Employee targetEmployee = _employeeFactory.Create(employeeData, targetTable, true);
                 _employeeService.Employees.Add(targetEmployee);
             }
+            
         }
 
         private void InitializeCamera(Player player)

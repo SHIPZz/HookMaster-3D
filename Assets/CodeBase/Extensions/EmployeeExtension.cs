@@ -18,28 +18,26 @@ namespace CodeBase.Extensions
                 TableId = employee.TableId,
                 Id = employee.Id,
                 IsWorking = employee.IsWorking,
-                IsUpgrading = employee.IsUpgrading
+                IsUpgrading = employee.IsUpgrading,
+                IsBurned = employee.IsBurned
             };
 
             return potentialEmployeeData;
         }
 
-        public static UpgradeEmployeeData ToUpgradeEmployeeData(this EmployeeData employeeData)
-        {
-            var upgradeEmployeeData = new UpgradeEmployeeData
-            {
-                EmployeeData = employeeData
-            };
-
-            return upgradeEmployeeData;
-        }
-        
         public static Employee SetName(this Employee employee, string name)
         {
             employee.Name = name;
             return employee;
         }
-        
+
+        public static Employee SetBurn(this Employee employee, bool isBurn)
+        {
+            employee.IsBurned = isBurn;
+
+            return employee;
+        }
+
         public static Employee SetGuid(this Employee employee, Guid guid)
         {
             employee.Guid = guid;
@@ -51,7 +49,7 @@ namespace CodeBase.Extensions
             employee.Id = id;
             return employee;
         }
-        
+
         public static Employee SetIsUpgrading(this Employee employee, bool isUpgrading)
         {
             employee.IsUpgrading = isUpgrading;
@@ -63,13 +61,13 @@ namespace CodeBase.Extensions
             employee.TableId = id;
             return employee;
         }
-        
+
         public static Employee SetSalary(this Employee employee, int salary)
         {
             employee.Salary = salary;
             return employee;
         }
-        
+
         public static Employee SetProfit(this Employee employee, int profit)
         {
             employee.Profit = profit;
@@ -81,7 +79,7 @@ namespace CodeBase.Extensions
             employee.QualificationType = qualificationType;
             return employee;
         }
-        
+
         public static EmployeeData SetIsUpgrading(this EmployeeData employeeData, bool isUpgrading)
         {
             employeeData.IsUpgrading = isUpgrading;
@@ -93,7 +91,7 @@ namespace CodeBase.Extensions
             employeeData.Salary = salary;
             return employeeData;
         }
-        
+
         public static EmployeeData SetProfit(this EmployeeData employeeData, int profit)
         {
             employeeData.Profit = profit;
@@ -105,7 +103,7 @@ namespace CodeBase.Extensions
             employeeData.QualificationType = qualificationType;
             return employeeData;
         }
-        
+
         public static UpgradeEmployeeData SetUpgradeCost(this UpgradeEmployeeData upgradeEmployeeData, int price)
         {
             upgradeEmployeeData.UpgradeCost = price;
@@ -126,25 +124,29 @@ namespace CodeBase.Extensions
                 .SetLastUpgradeWindowOpenedTime(0);
         }
 
-        public static UpgradeEmployeeData SetLastUpgradeTime(this UpgradeEmployeeData upgradeEmployeeData, float lastUpgradeTime)
+        public static UpgradeEmployeeData SetLastUpgradeTime(this UpgradeEmployeeData upgradeEmployeeData,
+            float lastUpgradeTime)
         {
             upgradeEmployeeData.LastUpgradeTime = lastUpgradeTime;
             return upgradeEmployeeData;
         }
 
-        public static UpgradeEmployeeData SetUpgradeStarted(this UpgradeEmployeeData upgradeEmployeeData, bool isStarted)
+        public static UpgradeEmployeeData SetUpgradeStarted(this UpgradeEmployeeData upgradeEmployeeData,
+            bool isStarted)
         {
             upgradeEmployeeData.UpgradeStarted = isStarted;
             return upgradeEmployeeData;
         }
 
-        public static UpgradeEmployeeData SetEmployeeData(this UpgradeEmployeeData upgradeEmployeeData, EmployeeData employeeData)
+        public static UpgradeEmployeeData SetEmployeeData(this UpgradeEmployeeData upgradeEmployeeData,
+            EmployeeData employeeData)
         {
             upgradeEmployeeData.EmployeeData = employeeData;
             return upgradeEmployeeData;
         }
 
-        public static UpgradeEmployeeData SetLastUpgradeWindowOpenedTime(this UpgradeEmployeeData upgradeEmployeeData, long lastUpgradeWindowOpenedTime)
+        public static UpgradeEmployeeData SetLastUpgradeWindowOpenedTime(this UpgradeEmployeeData upgradeEmployeeData,
+            long lastUpgradeWindowOpenedTime)
         {
             upgradeEmployeeData.LastUpgradeWindowOpenedTime = lastUpgradeWindowOpenedTime;
             return upgradeEmployeeData;

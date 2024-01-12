@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CodeBase.Data;
+using CodeBase.Extensions;
 using CodeBase.Gameplay.TableSystem;
 using CodeBase.Services.WorldData;
 using UnityEngine;
@@ -12,6 +14,7 @@ namespace CodeBase.Services.Providers.Tables
     {
         public List<Table> Tables;
         private IWorldDataService _worldDataService;
+        private List<TableData> _tableDatas;
         public int AvailableTableCount { get; private set; }
         public int AllTableCount => Tables.Count;
 
@@ -24,21 +27,27 @@ namespace CodeBase.Services.Providers.Tables
             _worldDataService = worldDataService;
         }
 
-        public void Init(List<string> busyTables)
+        private void OnDisable()
         {
-            foreach (Table table in Tables)
-            {
-                bool isFree = busyTables.Contains(table.Id);
-
-                table.SetIsFree(!isFree);
-            }
-
-            AvailableTableCount = Tables.Count(x => x.IsFree);
-            Tables.ForEach(x => x.ConditionChanged += OnTableConditionChanged);
+            Tables.ForEach(x => x.Busy -= OnTableConditionChanged);
         }
 
-        private void OnDisable() =>
-            Tables.ForEach(x => x.ConditionChanged -= OnTableConditionChanged);
+        public void Init(List<TableData> tableDatas)
+        {
+            _tableDatas = tableDatas;
+
+            if (tableDatas.Count == 0)
+                tableDatas.AddRange(Tables.Select(table => table.ToData()));
+
+            SetTableValuesFromData();
+            
+            AvailableTableCount = Tables.Count(x => x.IsFree);
+            Tables.ForEach(x =>
+            {
+                x.Init();
+                x.Busy += OnTableConditionChanged;
+            });
+        }
 
         private void OnTableConditionChanged(bool isBusy, string id)
         {
@@ -47,13 +56,30 @@ namespace CodeBase.Services.Providers.Tables
             if (AvailableTableCount == 0)
                 AllTablesBusy?.Invoke();
 
-            if (!_worldDataService.WorldData.TableData.BusyTableIds.Contains(id))
+            var table = Tables.FirstOrDefault(x => x.Id == id);
+            
+            if (_tableDatas.RemoveAll(x=>x.Id == id) != 0)
             {
-                _worldDataService.WorldData.TableData.BusyTableIds.Add(id);
+                _tableDatas.Add(table.ToData());
+                _worldDataService.WorldData.TableDatas = _tableDatas;
                 _worldDataService.Save();
             }
 
             TableConditionChanged?.Invoke();
+        }
+
+        private void SetTableValuesFromData()
+        {
+            foreach (var table in Tables)
+            {
+                TableData tableData = _tableDatas.Find(data => data.Id == table.Id);
+
+                if (tableData != null)
+                {
+                    table.IsFree = tableData.IsFree;
+                    table.IsBurned = tableData.IsBurned;
+                }
+            }
         }
     }
 }

@@ -18,9 +18,6 @@ namespace CodeBase.Services.Employee
             _worldDataService = worldDataService;
         }
 
-        public EmployeeData Get(string id) =>
-            _worldDataService.WorldData.PlayerData.PurchasedEmployees.FirstOrDefault(x => x.Id == id);
-
         public void RecountUpgradePriceEmployee(UpgradeEmployeeData targetUpgradeEmployeeData)
         {
             var newUpgradeCost = targetUpgradeEmployeeData.UpgradeCost +

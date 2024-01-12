@@ -85,7 +85,8 @@ namespace CodeBase.Services.Factories.Employee
                 .SetGuid(employeeData.Guid)
                 .SetId(employeeData.Id)
                 .SetTableId(employeeData.TableId)
-                .SetIsUpgrading(employeeData.IsUpgrading);
+                .SetIsUpgrading(employeeData.IsUpgrading)
+                .SetBurn(employeeData.IsBurned);
 
             EmployeeMovement employeeMovement = employee.GetComponent<EmployeeMovement>();
             employeeMovement.SetTable(targetTable);

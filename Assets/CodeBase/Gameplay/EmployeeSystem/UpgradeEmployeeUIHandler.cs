@@ -20,17 +20,15 @@ namespace CodeBase.Gameplay.EmployeeSystem
         [SerializeField] private Employee _employee;
 
         private Button _upgradeButton;
-        private CameraProvider _cameraProvider;
         private WindowService _windowService;
         private FloatingButtonService _floatingButtonService;
 
         [Inject]
-        private void Construct(CameraProvider cameraProvider, WindowService windowService,
+        private void Construct(WindowService windowService,
             FloatingButtonService floatingButtonService)
         {
             _floatingButtonService = floatingButtonService;
             _windowService = windowService;
-            _cameraProvider = cameraProvider;
         }
 
         private void OnEnable()

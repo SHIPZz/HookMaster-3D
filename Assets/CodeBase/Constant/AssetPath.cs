@@ -2,6 +2,7 @@
 {
     public static class AssetPath
     {
+        public const string MaterialSO = "Prefabs/SO/MaterialSO";
         public const string Camera = "Prefabs/Camera";
         public const string EmployeeView = "Prefabs/UI/Views/EmployeeView";
         public const string Employee = "Prefabs/Employee/Employee";

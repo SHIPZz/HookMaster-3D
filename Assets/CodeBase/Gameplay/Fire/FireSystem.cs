@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Gameplay.BurnableObjectSystem;
-using CodeBase.MaterialChanger;
 using CodeBase.Services.TriggerObserve;
 using UnityEngine;
 
@@ -14,7 +14,7 @@ namespace CodeBase.Gameplay.Fire
         [SerializeField] private TriggerObserver _triggerObserver;
         [SerializeField] private TriggerObserver _changeMaterialTriggerObserver;
 
-        private Dictionary<int, BurnableObject> _burnableObjects = new();
+        private Dictionary<int, IBurnable> _burnableObjects = new();
 
         private void OnEnable()
         {
@@ -30,14 +30,17 @@ namespace CodeBase.Gameplay.Fire
 
         private void SetObjectToChangeMaterial(Collider obj)
         {
-            if(!obj.gameObject.TryGetComponent(out BurnableObject burnableObject))
+            if(!obj.gameObject.TryGetComponent(out IBurnable burnable))
                 return;
             
-            if(_burnableObjects.ContainsKey(obj.gameObject.GetInstanceID()))
+            if(_burnableObjects.ContainsKey(burnable.GetHashCode()))
+                return;
+
+            if(burnable.IsBurned)
                 return;
             
-            burnableObject.Burn();
-            _burnableObjects[obj.gameObject.GetInstanceID()] = burnableObject;
+            _burnableObjects[burnable.GetHashCode()] = burnable;
+            burnable.Burn();
         }
 
         private void OnSmoked(Collider obj)

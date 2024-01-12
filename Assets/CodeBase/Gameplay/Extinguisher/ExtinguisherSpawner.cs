@@ -14,11 +14,6 @@ namespace CodeBase.Gameplay.Extinguisher
         private void Construct(GameItemFactory gameItemFactory) => 
             _gameItemFactory = gameItemFactory;
 
-        private void Start()
-        {
-            Spawn();
-        }
-
         public void Spawn()
         {
             _gameItemFactory.Create<ExtinguisherSystem>(transform, transform.position, Quaternion.identity,

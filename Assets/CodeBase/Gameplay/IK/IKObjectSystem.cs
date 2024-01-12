@@ -9,6 +9,7 @@ public class IKObjectSystem : MonoBehaviour
 
     [SerializeField] private TriggerObserver _triggerObserver;
     [SerializeField] private Vector3 _targetPosition;
+    [SerializeField] private Vector3 _targetRotation;
 
     public event Action PlayerTaken;
 
@@ -31,6 +32,7 @@ public class IKObjectSystem : MonoBehaviour
         
         transform.SetParent(player.transform,true);
         transform.localPosition = _targetPosition;
+        transform.localEulerAngles = _targetRotation;
         _isTaken = true;
         PlayerTaken?.Invoke();
     }

@@ -1,5 +1,6 @@
 ﻿using CodeBase.EntryPointSystem;
 using CodeBase.Gameplay.Wallet;
+using CodeBase.MaterialChanger;
 using CodeBase.Services.BurnableObjects;
 using CodeBase.Services.DataService;
 using CodeBase.Services.Employee;
@@ -68,6 +69,13 @@ namespace CodeBase.Installers.Game
             BindFireService();
             BindFireSpawnerProvider();
             BindBurnableObjectService();
+            BindRendererMaterialChangerService();
+        }
+
+        private void BindRendererMaterialChangerService()
+        {
+            Container.Bind<RendererMaterialChangerService>().AsTransient();
+            Container.Bind<ChildRendererMaterialChangerService>().AsTransient();
         }
 
         private void BindBurnableObjectService() => 
@@ -177,6 +185,7 @@ namespace CodeBase.Installers.Game
             Container.Bind<UIStaticDataService>().AsSingle();
             Container.Bind<EffectStaticDataService>().AsSingle();
             Container.Bind<GameItemStaticDataService>().AsSingle();
+            Container.Bind<ScriptableObjectDataService>().AsSingle();
         }
     }
 }
