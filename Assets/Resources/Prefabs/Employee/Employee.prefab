@@ -521,6 +521,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4059986939167938723}
   - component: {fileID: 2728380277612700690}
+  - component: {fileID: 2192141416512536131}
   m_Layer: 10
   m_Name: SM_Chr_Developer_Male_02
   m_TagString: Untagged
@@ -646,6 +647,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.000000059604645, y: 0.8450646, z: -0.034637734}
     m_Extent: {x: 1.0245616, y: 0.95198005, z: 0.3109802}
   m_DirtyAABB: 0
+--- !u!114 &2192141416512536131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2336392107448269818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 328b9804955d482d85fbb49d6d0ca2a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartMaterials:
+  - {fileID: 2100000, guid: 2f834016e53f12c42a12baecd4450e34, type: 2}
 --- !u!1 &2477570618952547926
 GameObject:
   m_ObjectHideFlags: 0
