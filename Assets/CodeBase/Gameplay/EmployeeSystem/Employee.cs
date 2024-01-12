@@ -27,9 +27,8 @@ namespace CodeBase.Gameplay.EmployeeSystem
         public string TableId;
         public bool IsWorking;
         public bool IsUpgrading;
-
+        
         private bool _wasWorking;
-
         private EmployeeDataService _employeeDataService;
         private BurnableObjectService _burnableObjectService;
         private RendererMaterialChangerService _rendererMaterialChangerService;

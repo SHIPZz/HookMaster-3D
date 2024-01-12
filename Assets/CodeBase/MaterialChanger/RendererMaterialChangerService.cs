@@ -18,7 +18,6 @@ namespace CodeBase.MaterialChanger
         protected float TargetValue;
         protected Material TargetMaterial;
         protected ScriptableObjectDataService ScriptableObjectDataService;
-        private List<Renderer> _childRenderers;
 
         public bool IsChanging { get; private set; }
 
