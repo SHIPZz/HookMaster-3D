@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using AmazingAssets.AdvancedDissolve;
 using CodeBase.Data;
+using CodeBase.Gameplay.Renderer;
 using CodeBase.Services.DataService;
 using DG.Tweening;
 using UnityEngine;
@@ -52,7 +53,7 @@ namespace CodeBase.MaterialChanger
         {
             Material[] newMaterials = new Material[_renderer.materials.Length];
 
-            _lastMaterials ??= _renderer.materials;
+            _lastMaterials ??= _renderer.GetComponent<RendererMaterialsContainer>().StartMaterials.ToArray();
             
             for (int i = 0; i < newMaterials.Length; i++)
                 newMaterials[i] = TargetMaterial;
