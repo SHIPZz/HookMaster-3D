@@ -15,6 +15,7 @@ namespace CodeBase.Gameplay.TableSystem
         [field: SerializeField] public MaterialTypeId BurnMaterial { get; private set; }
         [field: SerializeField] public bool IsBurned { get; set; }
         [SerializeField] private List<UnityEngine.Renderer> _childRenderers;
+        [SerializeField] private MeshRenderer _meshRenderer;
 
         public bool IsFree;
         public Transform Chair;
@@ -22,7 +23,6 @@ namespace CodeBase.Gameplay.TableSystem
 
         private ChildRendererMaterialChangerService _rendererMaterialChangerService;
         private BurnableObjectService _burnableObjectService;
-        [SerializeField] private MeshRenderer _meshRenderer;
         private bool _wasFree;
 
         public event Action<bool, string> Busy;
