@@ -12,8 +12,10 @@ namespace CodeBase.Gameplay.GameItems
     {
         public string Id;
         public int WorkingMinutes;
-        
-        public int ProfitPerMinute { get; private set; }
+        public int ProfitPerMinute;
+        public int TargetTemperature;
+        public bool NeedClean;
+
         private int _minTemperature;
         private int _midTemperature;
 
@@ -21,9 +23,7 @@ namespace CodeBase.Gameplay.GameItems
         private MiningFarmService _miningFarmService;
         private int _maxTemperature;
 
-        public int TargetTemperature { get; private set; }
         public bool IsWorking { get; private set; }
-        public bool NeedClean { get; private set; }
 
         public event Action Stopped;
 
@@ -63,13 +63,13 @@ namespace CodeBase.Gameplay.GameItems
                 yield return _minute;
                 WorkingMinutes++;
                 _miningFarmService.SetProfit(ProfitPerMinute);
-                _miningFarmService.SetWorkingMinutes(WorkingMinutes);
+                _miningFarmService.SetWorkingMinutes(Id, WorkingMinutes);
             }
 
             Stopped?.Invoke();
             IsWorking = false;
-            _miningFarmService.SetWorkingMinutes(TimeConstantValue.MinutesInTwoHour);
-            _miningFarmService.SetNeedClean(true);
+            _miningFarmService.SetWorkingMinutes( Id, TimeConstantValue.MinutesInTwoHour);
+            _miningFarmService.SetNeedClean( Id,true);
             SetNeedClean(true);
             _miningFarmService.ResetLastMiningTime();
         }

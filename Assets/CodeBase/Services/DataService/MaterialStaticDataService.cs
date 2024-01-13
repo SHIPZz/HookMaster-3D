@@ -6,11 +6,11 @@ using UnityEngine;
 
 namespace CodeBase.Services.DataService
 {
-    public class ScriptableObjectDataService
+    public class MaterialStaticDataService
     {
         private readonly IReadOnlyDictionary<MaterialTypeId, Material> _materials;
 
-        public ScriptableObjectDataService()
+        public MaterialStaticDataService()
         {
             _materials = Resources.Load<MaterialSO>(AssetPath.MaterialSO).Materials;
         }

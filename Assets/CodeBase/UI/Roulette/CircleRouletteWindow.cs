@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using CodeBase.Animations;
+using CodeBase.Gameplay.GameItems;
 using CodeBase.Services.DataService;
 using CodeBase.Services.Reward;
 using CodeBase.Services.TriggerObserve;
@@ -42,13 +43,11 @@ namespace CodeBase.UI.Roulette
         private RewardService _rewardService;
         private WindowService _windowService;
         private bool _rotated;
-        private GameItemStaticDataService _gameItemStaticDataService;
+        private CircleRouletteItem _circleRouletteItem;
 
         [Inject]
-        private void Construct(RewardService rewardService, WindowService windowService,
-            GameItemStaticDataService gameItemStaticDataService)
+        private void Construct(RewardService rewardService, WindowService windowService)
         {
-            _gameItemStaticDataService = gameItemStaticDataService;
             _windowService = windowService;
             _rewardService = rewardService;
         }
@@ -65,13 +64,20 @@ namespace CodeBase.UI.Roulette
             _arrowTrigger.TriggerEntered -= SetLastDroppedObject;
         }
 
+        public void Init(CircleRouletteItem circleRouletteItem)
+        {
+            _circleRouletteItem = circleRouletteItem;
+        }
+
         public override void Open()
         {
-            var circleRouletteSO = _gameItemStaticDataService.GetSO<CircleRouletteSO>();
-            _rouletteItems.ForEach(x => x.Init(circleRouletteSO.MinWinValue, circleRouletteSO.MaxWinValue));
+            _rouletteItems.ForEach(x => x.Init(_circleRouletteItem.MinWinValue, _circleRouletteItem.MaxWinValue));
             
             _canvasAnimator.FadeInCanvas();
         }
+
+        public override void Close() =>
+            _canvasAnimator.FadeOutCanvas(base.Close);
 
         private void SetLastDroppedObject(Collider obj)
         {
@@ -82,9 +88,6 @@ namespace CodeBase.UI.Roulette
 
             _allMoneyText.text = $"{_lastDroppedRouletteItem.Quantity}$";
         }
-
-        public override void Close() =>
-            _canvasAnimator.FadeOutCanvas(base.Close);
 
         private void Rotate()
         {

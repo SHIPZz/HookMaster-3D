@@ -20,6 +20,7 @@ namespace CodeBase.UI.MiningFarm
         
         private GameItemService _gameItemService;
         private MiningFarmService _miningFarmService;
+        private MiningFarmItem _miningFarmItem;
 
         [Inject]
         private void Construct(MiningFarmService miningFarmService)
@@ -27,22 +28,22 @@ namespace CodeBase.UI.MiningFarm
             _miningFarmService = miningFarmService;
         }
 
-        private void Start()
-        {
-            MiningFarmItem miningFarm = _miningFarmService.Get();
-            _perMinuteProfitText.text = $"{miningFarm.ProfitPerMinute}$";
-            _temperatureText.text = $"{miningFarm.TargetTemperature} C°";
-            _needCleanText.text = miningFarm.NeedClean.ToString();
-        }
-
         public override void Open()
         {
             _canvasAnimator.FadeInCanvas();
+            _perMinuteProfitText.text = $"{_miningFarmItem.ProfitPerMinute}$";
+            _temperatureText.text = $"{_miningFarmItem.TargetTemperature} C°";
+            _needCleanText.text = _miningFarmItem.NeedClean.ToString();
         }
 
         public override void Close()
         {
             _canvasAnimator.FadeOutCanvas(() => base.Close());
+        }
+
+        public void Init(MiningFarmItem miningFarmItem)
+        {
+            _miningFarmItem = miningFarmItem;
         }
     }
 }

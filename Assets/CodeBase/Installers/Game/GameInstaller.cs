@@ -195,7 +195,7 @@ namespace CodeBase.Installers.Game
             Container.Bind<UIStaticDataService>().AsSingle();
             Container.Bind<EffectStaticDataService>().AsSingle();
             Container.Bind<GameItemStaticDataService>().AsSingle();
-            Container.Bind<ScriptableObjectDataService>().AsSingle();
+            Container.Bind<MaterialStaticDataService>().AsSingle();
         }
     }
 }

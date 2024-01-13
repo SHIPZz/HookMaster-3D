@@ -1233,6 +1233,9 @@ MonoBehaviour:
   <GameItemType>k__BackingField: 1
   Id: 4e57fb03-f1de-4ecd-9c64-352f12e6e329
   WorkingMinutes: 0
+  ProfitPerMinute: 0
+  TargetTemperature: 0
+  NeedClean: 0
 --- !u!114 &8214344419765821879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1505,6 +1508,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  _miningFarmItem: {fileID: 8496291626656713316}
 --- !u!114 &5045974474448273134
 MonoBehaviour:
   m_ObjectHideFlags: 0

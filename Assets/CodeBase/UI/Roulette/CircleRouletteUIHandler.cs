@@ -13,7 +13,7 @@ namespace CodeBase.UI.Roulette
         [SerializeField] private TriggerObserver _triggerObserver;
         [SerializeField] private ImageFadeAnim _rouletteImageFadeAnim;
         [SerializeField] private RectTransformScaleAnim _buttonScaleAnim;
-        [SerializeField] private PlayCircleRouletteButton _playCircleRouletteButton;
+        [SerializeField] private OpenCircleRouletteWindowButton openCircleRouletteWindowButton;
 
         private PlayerRewardService _playerRewardService;
 
@@ -27,7 +27,7 @@ namespace CodeBase.UI.Roulette
         {
             _triggerObserver.TriggerEntered += OnPlayerApproached;
             _triggerObserver.TriggerExited += OnPlayerExited;
-            _playCircleRouletteButton.onClick.AddListener(OnPlayClicked);
+            openCircleRouletteWindowButton.onClick.AddListener(OnPlayClicked);
         }
 
         private void Start()

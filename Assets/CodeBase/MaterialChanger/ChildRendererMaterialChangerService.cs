@@ -13,8 +13,8 @@ namespace CodeBase.MaterialChanger
         private List<Renderer> _childRenderers;
         private Dictionary<int, List<Material>> _lastRendererMaterials = new();
 
-        public ChildRendererMaterialChangerService(ScriptableObjectDataService scriptableObjectDataService) : base(
-            scriptableObjectDataService) { }
+        public ChildRendererMaterialChangerService(MaterialStaticDataService materialStaticDataService) : base(
+            materialStaticDataService) { }
 
         public void Init(float duration, float targetValue, MaterialTypeId materialTypeId, Renderer renderer,
             List<Renderer> childRenderers)

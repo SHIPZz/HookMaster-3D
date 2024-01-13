@@ -30,7 +30,9 @@ namespace CodeBase.Extensions
             {
                 Id = circleRouletteItem.Id,
                 PlayTime = circleRouletteItem.PlayTime,
-                Position = circleRouletteItem.transform.position.ToData()
+                Position = circleRouletteItem.transform.position.ToData(),
+                MaxWinValue = circleRouletteItem.MaxWinValue,
+                MinWinValue = circleRouletteItem.MinWinValue,
             };
 
             return circleRouletteItemData;

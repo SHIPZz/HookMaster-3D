@@ -18,20 +18,20 @@ namespace CodeBase.MaterialChanger
         protected float _duration;
         protected float TargetValue;
         protected Material TargetMaterial;
-        protected ScriptableObjectDataService ScriptableObjectDataService;
+        protected MaterialStaticDataService _materialStaticDataService;
 
         public bool IsChanging { get; private set; }
 
-        public RendererMaterialChangerService(ScriptableObjectDataService scriptableObjectDataService)
+        public RendererMaterialChangerService(MaterialStaticDataService materialStaticDataService)
         {
-            ScriptableObjectDataService = scriptableObjectDataService;
+            _materialStaticDataService = materialStaticDataService;
         }
 
         public void Init(float duration, float targetValue, MaterialTypeId materialTypeId, Renderer renderer)
         {
             _renderer = renderer;
             TargetValue = targetValue;
-            TargetMaterial = ScriptableObjectDataService.GetMaterial(materialTypeId);
+            TargetMaterial = _materialStaticDataService.GetMaterial(materialTypeId);
             _duration = duration;
             SavedTargetValue = targetValue;
         }

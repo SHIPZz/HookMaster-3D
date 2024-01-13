@@ -11,7 +11,6 @@ namespace CodeBase.UI.Buttons
         public void SetEmployeeData(EmployeeData employeeData)
         {
             _employeeData = employeeData;
-            print(_employeeData.Name);
         }
         
         protected override void Open()

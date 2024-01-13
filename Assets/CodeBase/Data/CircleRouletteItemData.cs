@@ -6,7 +6,9 @@ namespace CodeBase.Data
     public class CircleRouletteItemData
     {
         public string Id;
+        public int MaxWinValue;
+        public int MinWinValue;
         public VectorData Position;
-        public float PlayTime;
+        public int PlayTime;
     }
 }

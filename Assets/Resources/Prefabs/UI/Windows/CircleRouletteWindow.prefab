@@ -408,7 +408,7 @@ GameObject:
   - component: {fileID: 6710178597001547541}
   - component: {fileID: 769942783817579690}
   - component: {fileID: 5320333143121214598}
-  - component: {fileID: 5072901987001512691}
+  - component: {fileID: 55070120366250917}
   m_Layer: 5
   m_Name: CircleRouletteWindow
   m_TagString: Untagged
@@ -498,7 +498,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 32759
+    m_Bits: 31991
 --- !u!225 &6710178597001547541
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -567,7 +567,7 @@ MonoBehaviour:
   - {fileID: 7190238554228073796}
   _rotateSound: {fileID: 8027044638982567171}
   _winSound: {fileID: 6311183197735029377}
---- !u!114 &5072901987001512691
+--- !u!114 &55070120366250917
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -31482,7 +31482,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42.15
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -31518,7 +31518,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -127.23691, y: -59.723507, z: -135.02682, w: -64.91679}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -47052,7 +47052,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.08235294, g: 0.08235294, b: 0.08235294, a: 0.9019608}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

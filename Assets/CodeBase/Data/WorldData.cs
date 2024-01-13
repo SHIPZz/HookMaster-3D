@@ -14,8 +14,8 @@ namespace CodeBase.Data
         public SettingsData SettingsData = new();
         public PlayerRewardData PlayerRewardData = new();
         public ShopItemData ShopItemData = new();
-        public List<MiningFarmData> MiningFarmDatas = new();
-        public List<CircleRouletteItemData> CircleRouletteItemDatas = new();
+        public Dictionary<string, MiningFarmData> MiningFarmDatas = new();
+        public Dictionary<string, CircleRouletteItemData> CircleRouletteItemDatas = new();
         public RandomItemData RandomItemData = new();
         public FireTimeData FireTimeData = new();
         public BurnableItemData BurnableItemData = new();

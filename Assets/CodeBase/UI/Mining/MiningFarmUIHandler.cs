@@ -1,4 +1,5 @@
 ﻿using CodeBase.Animations;
+using CodeBase.Gameplay.GameItems;
 using CodeBase.Services.TriggerObserve;
 using CodeBase.UI.Buttons;
 using UnityEngine;
@@ -10,7 +11,7 @@ namespace CodeBase.UI.MiningFarm
         [SerializeField] private TriggerObserver _triggerObserver;
         [SerializeField] private RectTransformScaleAnim _buttonScaleAnim;
         [SerializeField] private OpenMiningFarmWindowButton _openMiningFarmWindowButton;
-        
+
         private void OnEnable()
         {
             _triggerObserver.TriggerEntered += OnPlayerApproached;

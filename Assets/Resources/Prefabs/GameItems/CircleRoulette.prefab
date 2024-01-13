@@ -280,7 +280,7 @@ MonoBehaviour:
   _triggerObserver: {fileID: 1061845569846758016}
   _rouletteImageFadeAnim: {fileID: 717166641762710709}
   _buttonScaleAnim: {fileID: 8066045894924728055}
-  _playCircleRouletteButton: {fileID: 1331583836886312979}
+  openCircleRouletteWindowButton: {fileID: 1331583836886312979}
 --- !u!114 &1438436280057083257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,6 +313,8 @@ MonoBehaviour:
   <GameItemType>k__BackingField: 0
   Id: d6138537-bf1d-4507-8405-eb4220f89b39
   PlayTime: 0
+  MinWinValue: 0
+  MaxWinValue: 0
 --- !u!1 &3123436520065688775
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,6 +573,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+  _circleRouletteItem: {fileID: 6323595852375632311}
 --- !u!114 &8066045894924728055
 MonoBehaviour:
   m_ObjectHideFlags: 0

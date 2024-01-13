@@ -6,7 +6,9 @@ namespace CodeBase.Gameplay.GameItems
     public class CircleRouletteItem : GameItemAbstract
     {
         public string Id;
-        public float PlayTime;
+        public int PlayTime;
+        public int MinWinValue;
+        public int MaxWinValue;
 
         [Button]
         private void CreateId()
