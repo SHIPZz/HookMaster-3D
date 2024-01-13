@@ -1,4 +1,5 @@
-﻿using CodeBase.Animations;
+﻿using System;
+using CodeBase.Animations;
 using CodeBase.Services.Factories.UI;
 using CodeBase.Services.GOPool;
 using UnityEngine;
@@ -19,6 +20,20 @@ namespace CodeBase.Services.UI
         }
 
         public Button Get() => _targetButton;
+
+        public void ShowFloatingButton(float additionalAnchoredPositionY,
+            float duration,
+            Quaternion rotation, bool setInitialPosition, Button targetButton, Action onComplete = null)
+        {
+            _targetButton = targetButton;
+            ConfigureButton(rotation);
+            var rectTransformAnimator = _targetButton.GetComponent<RectTransformAnimator>();
+
+            if (setInitialPosition)
+                rectTransformAnimator.SetInitialPosition();
+
+            rectTransformAnimator.MoveAnchoredPositionY(additionalAnchoredPositionY, duration, onComplete);
+        }
 
         public void ShowFloatingButton(float additionalAnchoredPositionY,
             float duration,

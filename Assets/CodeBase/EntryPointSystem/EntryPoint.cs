@@ -20,6 +20,7 @@ using CodeBase.Services.Providers.EmployeeProvider;
 using CodeBase.Services.Providers.Location;
 using CodeBase.Services.Providers.Player;
 using CodeBase.Services.Providers.Tables;
+using CodeBase.Services.PurchaseableItemServices;
 using CodeBase.Services.RandomItems;
 using CodeBase.Services.ShopItemData;
 using CodeBase.Services.Sound;
@@ -50,6 +51,7 @@ namespace CodeBase.EntryPointSystem
         private readonly ExtinguisherService _extinguisherService;
         private readonly FireService _fireService;
         private readonly SettingsService _settingsService;
+        private readonly PurchaseableItemService _purchaseableItemService;
 
         public EntryPoint(LocationProvider locationProvider,
             IPlayerFactory playerFactory,
@@ -65,12 +67,13 @@ namespace CodeBase.EntryPointSystem
             ProfitService profitService, 
             UIService uiService, 
             GameItemService gameItemService, 
-            MiningFarmService miningFarmService, 
             RandomItemService randomItemService,
             ExtinguisherService extinguisherService,
             FireService fireService,
-            SettingsService settingsService)
+            SettingsService settingsService,
+            PurchaseableItemService purchaseableItemService)
         {
+            _purchaseableItemService = purchaseableItemService;
             _settingsService = settingsService;
             _fireService = fireService;
             _extinguisherService = extinguisherService;
@@ -108,7 +111,11 @@ namespace CodeBase.EntryPointSystem
             InitExtinguisherService();
             InitFireService();
             InitSettingsService();
+            InitPurchaseableItemService();
         }
+
+        private void InitPurchaseableItemService() => 
+            _purchaseableItemService.Init();
 
         private void InitSettingsService() => 
             _settingsService.Init();

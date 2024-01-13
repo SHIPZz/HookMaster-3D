@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c5bd401298541db8e29766389921c0f, type: 3}
   m_Name: MiningFarmSO
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 4388371936232852299, guid: 1ade354531b0e46418e155e077658588, type: 3}
   ProfitPerMinute: 5
   MinTemperature: 65
   MidTemperature: 75
   MaxTemperature: 105
+  Price: 3000
+  miningFarmItem: {fileID: 0}

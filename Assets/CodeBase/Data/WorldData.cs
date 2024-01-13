@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CodeBase.Enums;
 
 namespace CodeBase.Data
 {
@@ -18,7 +19,6 @@ namespace CodeBase.Data
         public Dictionary<string, CircleRouletteItemData> CircleRouletteItemDatas = new();
         public RandomItemData RandomItemData = new();
         public FireTimeData FireTimeData = new();
-        public BurnableItemData BurnableItemData = new();
-        public List<BurnableItemData> BurnableItemDatas = new();
+        public Dictionary<GameItemType, PurchaseableItemData> PurchaseableItemDatas = new();
     }
 }

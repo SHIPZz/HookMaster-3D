@@ -1,6 +1,7 @@
 ﻿using CodeBase.Data;
 using CodeBase.Gameplay.BurnableObjectSystem;
 using CodeBase.Gameplay.GameItems;
+using CodeBase.Gameplay.PurchaseableSystem;
 using CodeBase.Gameplay.TableSystem;
 using UnityEngine;
 
@@ -36,6 +37,19 @@ namespace CodeBase.Extensions
             };
 
             return circleRouletteItemData;
+        }
+
+        public static PurchaseableItemData ToData(this PurchaseableItem purchaseableItem)
+        {
+            var purchaseableItemData = new PurchaseableItemData()
+            {
+                GameItemType = purchaseableItem.GameItemType,
+                IsAccessible = purchaseableItem.IsAсcessible,
+                Price = purchaseableItem.Price,
+                Position = purchaseableItem.transform.position.ToData()
+            };
+
+            return purchaseableItemData;
         }
 
         public static MiningFarmData ToData(this MiningFarmItem miningFarmItem)

@@ -4,6 +4,7 @@
     {
         CircleRoulette,
         MiningFarm,
-        SuitCase
+        SuitCase,
+        ClientServiceDoor
     }
 }

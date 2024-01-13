@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a782cb0b01bc4131868ff7f55b8b5d6f, type: 3}
   m_Name: CircleRouletteSO
   m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 2136445997424335942, guid: 2ecf85fa70ad00e4fbc8a901617bfa20, type: 3}
   MinWinValue: 149
   MaxWinValue: 894
+  PlayTime: 5
+  Price: 3500

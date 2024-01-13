@@ -14,10 +14,7 @@
         public const string AudioMixer = "Prefabs/UI/AudioMixers/Mixer";
         public const string EffectView = "Prefabs/Effects";
         public const string ShopItemViews = "Prefabs/UI/ShopItemViews";
-        public const string ShopItems = "Prefabs/ShopItems";
         public const string FloatingTexts = "Prefabs/UI/Texts";
-        public const string RandomItems = "Prefabs/RandomItems";
-        public const string ShopItemDatas = "Datas/ShopItems";
         public const string GameItemDatas = "Datas/GameItems";
         public const string GameItems = "Prefabs/GameItems";
         public const string Extinguisher = "Prefabs/GameItems/Extinguisher";

@@ -9,11 +9,11 @@ namespace CodeBase.Gameplay.Door
     public class DoorSystem : MonoBehaviour
     {
         [SerializeField] private TriggerObserver _triggerObserver;
-        [SerializeField] private float _openDuration;
-        [SerializeField] private float _closeDuration;
-        [SerializeField] private Vector3 _openRotation;
+        [SerializeField] private float _openDuration = 0.5f;
+        [SerializeField] private float _closeDuration = 0.5f;
+        [SerializeField] private Vector3 _openRotation = new Vector3(0, 159.6f, 0);
         [SerializeField] private Vector3 _closeRotation;
-        [SerializeField] private Vector3 _playerOffset;
+        [SerializeField] private Vector3 _playerOffset = new Vector3(0,0, 1.5f);
         [SerializeField] private float _speed = 5;
         [SerializeField] private float _closeDelay = 2f;
         [SerializeField] private float _openDistance = 0.2f;

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using CodeBase.Enums;
+using UnityEngine;
 
 namespace CodeBase.SO.GameItem
 {

@@ -25,7 +25,9 @@ using CodeBase.Services.Providers.Extinguisher;
 using CodeBase.Services.Providers.Fire;
 using CodeBase.Services.Providers.Location;
 using CodeBase.Services.Providers.Player;
+using CodeBase.Services.Providers.PurchaseableItemProviders;
 using CodeBase.Services.Providers.Tables;
+using CodeBase.Services.PurchaseableItemServices;
 using CodeBase.Services.RandomItems;
 using CodeBase.Services.Reward;
 using CodeBase.Services.ShopItemData;
@@ -43,6 +45,7 @@ namespace CodeBase.Installers.Game
         [SerializeField] private TableService tableService;
         [SerializeField] private ExtinguisherProvider _extinguisherProvider;
         [SerializeField] private FireProvider _fireProvider;
+        [SerializeField] private PurchaseableItemProvider _purchaseableItemProvider;
 
         public override void InstallBindings()
         {
@@ -74,7 +77,11 @@ namespace CodeBase.Installers.Game
             BindPlayerIKService();
             BindCircleRouletteService();
             BindShopItemDataService();
+            BindPurchaseableItemService();
         }
+
+        private void BindPurchaseableItemService() => 
+            Container.Bind<PurchaseableItemService>().AsSingle();
 
         private void BindShopItemDataService() => 
             Container.Bind<ShopItemDataService>().AsSingle();
@@ -177,6 +184,7 @@ namespace CodeBase.Installers.Game
             Container.Bind<PlayerProvider>().AsSingle();
             Container.Bind<EmployeeService>().AsSingle();
             Container.BindInstance(_extinguisherProvider);
+            Container.BindInstance(_purchaseableItemProvider);
         }
 
         private void BindFactories()
