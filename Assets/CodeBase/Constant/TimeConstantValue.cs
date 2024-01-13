@@ -10,5 +10,6 @@
         public const int MinutesInHour = 60;
         public const int TenMinutes = 10;
         public const int HalfMinutesInHour = 30;
+        public const int OneDay = 1;
     }
 }

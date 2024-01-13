@@ -21,6 +21,8 @@ namespace CodeBase.Services.Time
         private UnityEngine.Coroutine _worldTimeCoroutine;
 
         public bool GotTime { get; private set; }
+        public long CurrentTime { get; private set; }
+
         public bool TimeUpdated;
 
         public WorldTimeService(IWorldDataService worldDataService, ICoroutineRunner coroutineRunner)
@@ -116,6 +118,22 @@ namespace CodeBase.Services.Time
             _worldDataService.Save();
         }
 
+        public void SaveLastCircleRoulettePlayedTime(string id)
+        {
+            _worldDataService.WorldData.CircleRouletteItemDatas[id].LastPlayedTime =
+                _worldDataService.WorldData.WorldTimeData.CurrentTime;
+            _worldDataService.Save();
+        }
+
+
+        public int GetTimeDifferenceByLastCircleRoulettePlayTimeDays(string id)
+        {
+            TimeSpan timeSpan = _worldDataService.WorldData.WorldTimeData.CurrentTime.ToDateTime() -
+                                _worldDataService.WorldData.CircleRouletteItemDatas[id].LastPlayedTime.ToDateTime();
+
+            return (int)timeSpan.TotalDays;
+        }
+
         public int GetTimeDifferenceByLastLazinessDays()
         {
             WorldTimeData worldTimeData = _worldDataService.WorldData.WorldTimeData;
@@ -185,10 +203,10 @@ namespace CodeBase.Services.Time
 
         public int GetLastVisitedTimeByMinutes()
         {
-          var timeDifference =  _worldDataService.WorldData.WorldTimeData.CurrentTime.ToDateTime() -
-                _worldDataService.WorldData.WorldTimeData.LastVisitedTime.ToDateTime();
+            var timeDifference = _worldDataService.WorldData.WorldTimeData.CurrentTime.ToDateTime() -
+                                 _worldDataService.WorldData.WorldTimeData.LastVisitedTime.ToDateTime();
 
-          return (int)timeDifference.TotalMinutes;
+            return (int)timeDifference.TotalMinutes;
         }
 
         private void SaveLastVisitedTime()

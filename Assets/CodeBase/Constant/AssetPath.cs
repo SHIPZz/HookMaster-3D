@@ -22,5 +22,6 @@
         public const string GameItems = "Prefabs/GameItems";
         public const string Extinguisher = "Prefabs/GameItems/Extinguisher";
         public const string Fire = "Prefabs/GameItems/Fire";
+        public const string Settings = "Datas/UI/SettingSO";
     }
 }

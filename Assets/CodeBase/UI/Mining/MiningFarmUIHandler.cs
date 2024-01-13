@@ -1,8 +1,10 @@
 ﻿using CodeBase.Animations;
 using CodeBase.Gameplay.GameItems;
 using CodeBase.Services.TriggerObserve;
+using CodeBase.Services.UI;
 using CodeBase.UI.Buttons;
 using UnityEngine;
+using Zenject;
 
 namespace CodeBase.UI.MiningFarm
 {
@@ -11,7 +13,14 @@ namespace CodeBase.UI.MiningFarm
         [SerializeField] private TriggerObserver _triggerObserver;
         [SerializeField] private RectTransformScaleAnim _buttonScaleAnim;
         [SerializeField] private OpenMiningFarmWindowButton _openMiningFarmWindowButton;
+        private FloatingTextService _floatingTextService;
 
+        [Inject]
+        private void Construct(FloatingTextService floatingTextService)
+        {
+            _floatingTextService = floatingTextService;
+        }
+        
         private void OnEnable()
         {
             _triggerObserver.TriggerEntered += OnPlayerApproached;

@@ -44,7 +44,8 @@ namespace CodeBase.Extensions
             {
                 Id = miningFarmItem.Id,
                 Position = miningFarmItem.transform.position.ToData(),
-                WorkingMinutes = miningFarmItem.WorkingMinutes
+                WorkingMinutes = miningFarmItem.WorkingMinutes,
+                ProfitPerMinute =  miningFarmItem.ProfitPerMinute
             };
 
             return miningFarmData;

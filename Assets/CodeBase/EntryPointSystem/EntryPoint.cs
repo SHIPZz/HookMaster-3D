@@ -22,6 +22,7 @@ using CodeBase.Services.Providers.Player;
 using CodeBase.Services.Providers.Tables;
 using CodeBase.Services.RandomItems;
 using CodeBase.Services.ShopItemData;
+using CodeBase.Services.Sound;
 using CodeBase.Services.UI;
 using CodeBase.Services.WorldData;
 using UnityEngine;
@@ -45,10 +46,10 @@ namespace CodeBase.EntryPointSystem
         private readonly ProfitService _profitService;
         private readonly UIService _uiService;
         private readonly GameItemService _gameItemService;
-        private readonly MiningFarmService _miningFarmService;
         private readonly RandomItemService _randomItemService;
         private readonly ExtinguisherService _extinguisherService;
         private readonly FireService _fireService;
+        private readonly SettingsService _settingsService;
 
         public EntryPoint(LocationProvider locationProvider,
             IPlayerFactory playerFactory,
@@ -67,8 +68,10 @@ namespace CodeBase.EntryPointSystem
             MiningFarmService miningFarmService, 
             RandomItemService randomItemService,
             ExtinguisherService extinguisherService,
-            FireService fireService)
+            FireService fireService,
+            SettingsService settingsService)
         {
+            _settingsService = settingsService;
             _fireService = fireService;
             _extinguisherService = extinguisherService;
             _locationProvider = locationProvider;
@@ -85,7 +88,6 @@ namespace CodeBase.EntryPointSystem
             _profitService = profitService;
             _uiService = uiService;
             _gameItemService = gameItemService;
-            _miningFarmService = miningFarmService;
             _randomItemService = randomItemService;
         }
 
@@ -102,11 +104,14 @@ namespace CodeBase.EntryPointSystem
             InitUIService();
             InitPlayerProvider(player);
             InitShopItemService();
-            // InitMiningFarmService();
             InitRandomItemService();
             InitExtinguisherService();
             InitFireService();
+            InitSettingsService();
         }
+
+        private void InitSettingsService() => 
+            _settingsService.Init();
 
         private void InitFireService() => 
             _fireService.Init();
@@ -116,9 +121,6 @@ namespace CodeBase.EntryPointSystem
 
         private void InitRandomItemService() => 
             _randomItemService.Init();
-
-        private void InitMiningFarmService() => 
-            _miningFarmService.Init();
 
         private void InitShopItemService() => 
             _gameItemService.Init();

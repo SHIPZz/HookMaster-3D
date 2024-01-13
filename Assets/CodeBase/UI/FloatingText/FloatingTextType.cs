@@ -2,6 +2,7 @@
 {
     public enum FloatingTextType
     {
-        NotEnoughMoney
+        NotEnoughMoney,
+        MoneyProfit
     }
 }

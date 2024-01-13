@@ -2,8 +2,11 @@
 using System.Collections;
 using CodeBase.Constant;
 using CodeBase.Services.Mining;
+using CodeBase.Services.UI;
+using CodeBase.UI.FloatingText;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Zenject;
 using Random = UnityEngine.Random;
 
 namespace CodeBase.Gameplay.GameItems
@@ -22,10 +25,17 @@ namespace CodeBase.Gameplay.GameItems
         private readonly WaitForSecondsRealtime _minute = new WaitForSecondsRealtime(60f);
         private MiningFarmService _miningFarmService;
         private int _maxTemperature;
+        private FloatingTextService _floatingTextService;
 
         public bool IsWorking { get; private set; }
 
         public event Action Stopped;
+
+        [Inject]
+        private void Construct(FloatingTextService floatingTextService)
+        {
+            _floatingTextService = floatingTextService;
+        }
 
         public void Init(int minutes, MiningFarmService miningFarmService)
         {
@@ -46,7 +56,7 @@ namespace CodeBase.Gameplay.GameItems
         public void SetNeedClean(bool needClean)
         {
             NeedClean = needClean;
-            
+
             if (needClean)
                 TargetTemperature = _maxTemperature;
         }
@@ -56,6 +66,14 @@ namespace CodeBase.Gameplay.GameItems
             ProfitPerMinute = profitPerMinute;
         }
 
+        [Button]
+        private void Test()
+        {
+            _floatingTextService.ShowFloatingText(FloatingTextType.MoneyProfit, transform, transform.position,
+                $"{ProfitPerMinute}$");
+        }
+
+
         private IEnumerator StartIncreaseWorkingMinutes()
         {
             while (WorkingMinutes != TimeConstantValue.MinutesInTwoHour)
@@ -63,13 +81,15 @@ namespace CodeBase.Gameplay.GameItems
                 yield return _minute;
                 WorkingMinutes++;
                 _miningFarmService.SetProfit(ProfitPerMinute);
+                _floatingTextService.ShowFloatingText(FloatingTextType.MoneyProfit, transform, transform.position,
+                    $"{ProfitPerMinute}$");
                 _miningFarmService.SetWorkingMinutes(Id, WorkingMinutes);
             }
 
             Stopped?.Invoke();
             IsWorking = false;
-            _miningFarmService.SetWorkingMinutes( Id, TimeConstantValue.MinutesInTwoHour);
-            _miningFarmService.SetNeedClean( Id,true);
+            _miningFarmService.SetWorkingMinutes(Id, TimeConstantValue.MinutesInTwoHour);
+            _miningFarmService.SetNeedClean(Id, true);
             SetNeedClean(true);
             _miningFarmService.ResetLastMiningTime();
         }

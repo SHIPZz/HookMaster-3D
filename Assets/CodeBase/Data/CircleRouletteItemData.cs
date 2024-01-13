@@ -10,5 +10,6 @@ namespace CodeBase.Data
         public int MinWinValue;
         public VectorData Position;
         public int PlayTime;
+        public long LastPlayedTime;
     }
 }

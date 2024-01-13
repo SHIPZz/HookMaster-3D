@@ -7,5 +7,7 @@ namespace CodeBase.Services.Providers.Asset
     {
         T Get<T>(string path);
         List<T> GetAll<T>(string path) where T : Object;
+
+        public T GetObject<T>(string path) where T : Object;
     }
 }

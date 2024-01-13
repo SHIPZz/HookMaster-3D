@@ -47,14 +47,14 @@ namespace CodeBase.Gameplay.Wallet
         {
             _moneySound.Play();
             _moneyText.SetText($"{money}$");
-            _moneyText.DoFadeInColor(() => _moneyText.DoFadeOutColor());
+            _moneyText.DoFadeOutColor(() => _moneyText.DoFadeInColor());
             _moneyText.DoScale(() => _moneyText.ResetScale());
         }
 
         private void SetTickets(int amount)
         {
             _ticketCountText.SetText(amount);
-            _ticketCountText.DoFadeInColor(() => _ticketCountText.DoFadeOutColor());
+            _ticketCountText.DoFadeOutColor(() => _ticketCountText.DoFadeInColor());
             _ticketCountText.DoScale(() => _ticketCountText.ResetScale());
         }
 

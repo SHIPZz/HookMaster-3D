@@ -1,25 +1,18 @@
-﻿using CodeBase.Animations;
-using CodeBase.Enums;
+﻿using CodeBase.Enums;
 using CodeBase.Services.Sound;
-using DG.Tweening;
 using UnityEngine;
 using Zenject;
 
 namespace CodeBase.UI.Toggle
 {
-    [RequireComponent(typeof(UnityEngine.UI.Toggle))]
+    [RequireComponent(typeof(UnityEngine.UI.Toggle),typeof(ToggleAnimation))]
     public class ToggleSwitcher : MonoBehaviour
     {
-        [SerializeField] private Vector2 _offPosition;
-        [SerializeField] private Vector2 _initialPosition;
-        [SerializeField] private RectTransformAnimator _rectTransformAnimator;
-        [SerializeField] private float _onDuration = 0.5f;
-        [SerializeField] private float _offDuration = 0.3f;
         [SerializeField] private ToggleTypeId _toggleTypeId;
 
         private UnityEngine.UI.Toggle _toggle;
-        private Tween _tween;
         private SettingsService _settingsService;
+        private ToggleAnimation _toggleAnimation;
 
         [Inject]
         private void Construct(SettingsService settingsService)
@@ -27,13 +20,16 @@ namespace CodeBase.UI.Toggle
             _settingsService = settingsService;
         }
 
-        private void Awake() => 
+        private void Awake()
+        {
             _toggle = GetComponent<UnityEngine.UI.Toggle>();
+            _toggleAnimation = GetComponent<ToggleAnimation>();
+        }
 
         private void Start()
         {
             _toggle.isOn = _settingsService.GetTargetToggleValue(_toggleTypeId);
-            MoveHandleWithAnim(_toggle.isOn, false);
+            _toggleAnimation.Initialize(_toggle.isOn);
         }
 
         private void OnEnable() =>
@@ -44,30 +40,8 @@ namespace CodeBase.UI.Toggle
 
         private void OnValueChanged(bool isOn)
         {
-            _tween?.Kill(true);
             _settingsService.SetToggleSetting(_toggle.isOn, _toggleTypeId);
-
-            MoveHandleWithAnim(isOn, true);
-        }
-
-        private void MoveHandleWithAnim(bool isOn, bool withAnim)
-        {
-            if (!withAnim)
-            {
-                MoveHandle(isOn, 0f);
-                return;
-            }
-
-            float duration = isOn ? _onDuration : _offDuration;
-            Vector3 targetPosition = isOn ? _initialPosition : _offPosition;
-
-            _rectTransformAnimator.MoveRectTransform(targetPosition, duration);
-        }
-
-        private void MoveHandle(bool isOn, float duration)
-        {
-            Vector3 targetPosition = isOn ? _initialPosition : _offPosition;
-            _rectTransformAnimator.MoveRectTransform(targetPosition, duration);
+            _toggleAnimation.MoveHandleWithAnim(isOn);
         }
     }
 }

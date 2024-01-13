@@ -12,6 +12,9 @@ namespace CodeBase.Services.Providers.Asset
             return prefab.GetComponent<T>();
         }
 
+        public T GetObject<T>(string path) where T : Object => 
+            Resources.Load<T>(path);
+
         public List<T> GetAll<T>(string path) where T : Object
         {
             List<T> prefabs = Resources.LoadAll<T>(path).ToList();

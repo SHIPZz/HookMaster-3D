@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using CodeBase.Animations;
 using CodeBase.Gameplay.GameItems;
+using CodeBase.Services.CircleRouletteServices;
 using CodeBase.Services.DataService;
 using CodeBase.Services.Reward;
 using CodeBase.Services.TriggerObserve;
@@ -44,10 +45,12 @@ namespace CodeBase.UI.Roulette
         private WindowService _windowService;
         private bool _rotated;
         private CircleRouletteItem _circleRouletteItem;
+        private CircleRouletteService _circleRouletteService;
 
         [Inject]
-        private void Construct(RewardService rewardService, WindowService windowService)
+        private void Construct(RewardService rewardService, WindowService windowService, CircleRouletteService circleRouletteService)
         {
+            _circleRouletteService = circleRouletteService;
             _windowService = windowService;
             _rewardService = rewardService;
         }
@@ -76,8 +79,11 @@ namespace CodeBase.UI.Roulette
             _canvasAnimator.FadeInCanvas();
         }
 
-        public override void Close() =>
+        public override void Close()
+        {
+            _circleRouletteService.SetLastPlayedTime(_circleRouletteItem.Id);
             _canvasAnimator.FadeOutCanvas(base.Close);
+        }
 
         private void SetLastDroppedObject(Collider obj)
         {

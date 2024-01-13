@@ -1,12 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
+using CodeBase.Enums;
 
 namespace CodeBase.Data
 {
     [Serializable]
     public class SettingsData
     {
-        public float MusicVolume = -25f;
-        public float UIVolume = -10f;
-        public bool IsPushAlarmOn = true;
+        public Dictionary<ToggleTypeId, bool> Toggles = new()
+        {
+            { ToggleTypeId.PushAlarm, true }
+        };
+
+        public Dictionary<MixerTypeId, bool> Sounds = new()
+        {
+            { MixerTypeId.MusicVolume, true },
+            { MixerTypeId.UIVolume, true }
+        };
     }
 }

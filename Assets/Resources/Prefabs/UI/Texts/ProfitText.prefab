@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4801307834598866870}
   - component: {fileID: -2119837846890863053}
   - component: {fileID: -717083824255896625}
+  - component: {fileID: -6979858837314016804}
   m_Layer: 10
   m_Name: ProfitText
   m_TagString: Untagged
@@ -73,13 +74,13 @@ MonoBehaviour:
   m_text: 23$
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5f58c05479cb14f588efcdfcbdab347c, type: 2}
-  m_sharedMaterial: {fileID: -7146977075746465331, guid: beb6899c85f8d154c9751795e3da22d0, type: 2}
+  m_sharedMaterial: {fileID: 7423409246693961632, guid: 5f58c05479cb14f588efcdfcbdab347c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278244898
+    rgba: 4285647918
   m_fontColor: {r: 0.18039216, g: 0.8, b: 0.44313726, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -199,8 +200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7007839bb249af9f4628adcf46c735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _planeDistance: 100
-  _sortingLayerTypeId: 2
+  _planeDistance: 1
+  _sortingLayerTypeId: 1
 --- !u!114 &-717083824255896625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,3 +214,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db63e8120c1647fab41ff4aa084f6823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-6979858837314016804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5529873212971198309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32e9187e44cf4d07a4de991c67c2aabc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <FloatingTextType>k__BackingField: 1
+  <Text>k__BackingField: {fileID: 3099549938088542283}
+  _duration: 2
+  _anchoredPosition: 5
+  _fadeInDuration: 0.1
+  _fadeOutDuration: 1.5
+  _minRandomAnchoredPosition: 2
+  _maxRandomAnchoredPosition: 7

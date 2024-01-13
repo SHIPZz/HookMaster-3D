@@ -33,12 +33,12 @@ namespace CodeBase.Effects
         
         public void Play()
         {
-            _audioSource.Play();
+            // _audioSource.Play();
         }
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            // _audioSource.Play();
+            _audioSource.Play();
         }
     }
 }

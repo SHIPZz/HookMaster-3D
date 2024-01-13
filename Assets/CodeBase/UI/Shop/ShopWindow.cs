@@ -25,13 +25,10 @@ namespace CodeBase.UI.Shop
 
         private WindowService _windowService;
         private WalletService _walletService;
-        private FloatingTextService _floatingTextService;
         
         [Inject]
-        private void Construct(WindowService windowService, WalletService walletService, 
-            FloatingTextService floatingTextService)
+        private void Construct(WindowService windowService, WalletService walletService)
         {
-            _floatingTextService = floatingTextService;
             _walletService = walletService;
             _windowService = windowService;
         }

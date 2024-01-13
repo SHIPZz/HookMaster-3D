@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Enums;
 using CodeBase.Extensions;
@@ -6,6 +7,7 @@ using CodeBase.Gameplay.GameItems;
 using CodeBase.Services.DataService;
 using CodeBase.Services.Factories.ShopItems;
 using CodeBase.Services.Providers.Location;
+using CodeBase.Services.Time;
 using CodeBase.Services.WorldData;
 using CodeBase.SO.GameItem.CircleRoulette;
 using UnityEngine;
@@ -18,12 +20,15 @@ namespace CodeBase.Services.CircleRouletteServices
         private readonly LocationProvider _locationProvider;
         private readonly GameItemFactory _gameItemFactory;
         private readonly GameItemStaticDataService _gameItemStaticDataService;
+        private readonly WorldTimeService _worldTimeService;
         private List<CircleRouletteItem> _createdItems = new();
 
         public CircleRouletteService(IWorldDataService worldDataService,
             LocationProvider locationProvider,
-            GameItemFactory gameItemFactory, GameItemStaticDataService gameItemStaticDataService)
+            GameItemFactory gameItemFactory,
+            GameItemStaticDataService gameItemStaticDataService, WorldTimeService worldTimeService)
         {
+            _worldTimeService = worldTimeService;
             _gameItemStaticDataService = gameItemStaticDataService;
             _worldDataService = worldDataService;
             _locationProvider = locationProvider;
@@ -42,6 +47,12 @@ namespace CodeBase.Services.CircleRouletteServices
 
             SetValuesFromData(_createdItems, _worldDataService.WorldData.CircleRouletteItemDatas);
         }
+
+        public void SetLastPlayedTime(string id) => 
+            _worldTimeService.SaveLastCircleRoulettePlayedTime(id);
+
+        public bool CanPlay(string id) => 
+            _worldTimeService.GetTimeDifferenceByLastCircleRoulettePlayTimeDays(id) >= TimeConstantValue.OneDay;
 
         public CircleRouletteItem Create()
         {

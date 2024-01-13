@@ -1,5 +1,7 @@
 ﻿using System;
 using CodeBase.Animations;
+using CodeBase.Gameplay.GameItems;
+using CodeBase.Services.CircleRouletteServices;
 using CodeBase.Services.Player;
 using CodeBase.Services.TriggerObserve;
 using CodeBase.UI.Buttons;
@@ -14,13 +16,14 @@ namespace CodeBase.UI.Roulette
         [SerializeField] private ImageFadeAnim _rouletteImageFadeAnim;
         [SerializeField] private RectTransformScaleAnim _buttonScaleAnim;
         [SerializeField] private OpenCircleRouletteWindowButton openCircleRouletteWindowButton;
+        [SerializeField] private CircleRouletteItem _circleRouletteItem;
 
-        private PlayerRewardService _playerRewardService;
+        private CircleRouletteService _circleRouletteService;
 
         [Inject]
-        private void Construct(PlayerRewardService playerRewardService)
+        private void Construct(CircleRouletteService circleRouletteService)
         {
-            _playerRewardService = playerRewardService;
+            _circleRouletteService = circleRouletteService;
         }
 
         private void OnEnable()
@@ -34,7 +37,7 @@ namespace CodeBase.UI.Roulette
         {
             _buttonScaleAnim.UnScale();
             
-            if (!_playerRewardService.CanPlayRouletteCircle)
+            if (!_circleRouletteService.CanPlay(_circleRouletteItem.Id))
             {
                 _rouletteImageFadeAnim.FadeOut();
             }
@@ -48,7 +51,7 @@ namespace CodeBase.UI.Roulette
 
         private void OnPlayerExited(Collider obj)
         {
-            if (!_playerRewardService.CanPlayRouletteCircle)
+            if(!_circleRouletteService.CanPlay(_circleRouletteItem.Id))
                 return;
 
             _rouletteImageFadeAnim.FadeIn();
@@ -57,7 +60,7 @@ namespace CodeBase.UI.Roulette
 
         private void OnPlayerApproached(Collider obj)
         {
-            if (!_playerRewardService.CanPlayRouletteCircle)
+            if(!_circleRouletteService.CanPlay(_circleRouletteItem.Id))
                 return;
 
             _rouletteImageFadeAnim.FadeOut();
@@ -68,7 +71,6 @@ namespace CodeBase.UI.Roulette
         {
             _rouletteImageFadeAnim.FadeOut();
             _buttonScaleAnim.UnScale();
-            _playerRewardService.SetCanPlayRoulette(false);
         }
     }
 }

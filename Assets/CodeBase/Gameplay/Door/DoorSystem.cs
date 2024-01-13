@@ -19,6 +19,8 @@ namespace CodeBase.Gameplay.Door
         [SerializeField] private float _openDistance = 0.2f;
         [SerializeField] private float _targetBlockOpenDot = -0.75f;
         [SerializeField] private Transform _targetTransform;
+        [SerializeField] private AudioSource _openSound;
+        [SerializeField] private AudioSource _closeSound;
 
         private bool _isMoving;
 
@@ -47,12 +49,17 @@ namespace CodeBase.Gameplay.Door
             }
 
             _isMoving = true;
+            _openSound.Play();
             transform.DOLocalRotate(_openRotation, _openDuration).OnComplete(() => _isMoving = false);
 
             await UniTask.Delay(TimeSpan.FromSeconds(_closeDelay));
 
             _isMoving = true;
-            transform.DOLocalRotate(_closeRotation, _closeDuration).OnComplete(() => _isMoving = false);
+            transform.DOLocalRotate(_closeRotation, _closeDuration).OnComplete(() =>
+            {
+                _closeSound.Play();
+                _isMoving = false;
+            });
         }
 
         private async UniTask PushPlayerAwayToOpen(Rigidbody playerRigidBody, Vector3 targetPosition)
