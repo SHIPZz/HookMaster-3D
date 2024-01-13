@@ -47,13 +47,11 @@ namespace CodeBase.MaterialChanger
             Material[] newMaterials = new Material[_renderer.materials.Length];
 
             _lastMaterials ??= _renderer.GetComponent<RendererMaterialsContainer>().StartMaterials.ToArray();
-            
+
             for (int i = 0; i < newMaterials.Length; i++)
                 newMaterials[i] = TargetMaterial;
 
             _renderer.materials = newMaterials;
-
-            IsChanging = true;
 
             DOTween.To(() => 0, SetMaterialValue, TargetValue, _duration);
         }

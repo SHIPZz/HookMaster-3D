@@ -74,7 +74,7 @@ namespace CodeBase.Services.Time
 
         public void ResetLastMiningTime()
         {
-            _worldDataService.WorldData.MiningFarmData.LastWorkingTime = 0;
+            // _worldDataService.WorldData.MiningFarmDatas.LastWorkingTime = 0;
         }
 
         public void ResetLastSpawnedRandomItemTime()
@@ -102,19 +102,19 @@ namespace CodeBase.Services.Time
             return (int)timeDifference.TotalMinutes;
         }
 
-        public int GetTimeDifferenceByLastMiningTimeInMinutes()
-        {
-            if (_worldDataService.WorldData.MiningFarmData.LastWorkingTime == 0)
-            {
-                _worldDataService.WorldData.MiningFarmData.LastWorkingTime =
-                    _worldDataService.WorldData.WorldTimeData.CurrentTime;
-            }
-
-            TimeSpan timeDifference = _worldDataService.WorldData.WorldTimeData.CurrentTime.ToDateTime() -
-                                      _worldDataService.WorldData.MiningFarmData.LastWorkingTime.ToDateTime();
-
-            return (int)timeDifference.TotalMinutes;
-        }
+        // public int GetTimeDifferenceByLastMiningTimeInMinutes()
+        // {
+        //     if (_worldDataService.WorldData.MiningFarmDatas.LastWorkingTime == 0)
+        //     {
+        //         _worldDataService.WorldData.MiningFarmDatas.LastWorkingTime =
+        //             _worldDataService.WorldData.WorldTimeData.CurrentTime;
+        //     }
+        //
+        //     TimeSpan timeDifference = _worldDataService.WorldData.WorldTimeData.CurrentTime.ToDateTime() -
+        //                               _worldDataService.WorldData.MiningFarmDatas.LastWorkingTime.ToDateTime();
+        //
+        //     return (int)timeDifference.TotalMinutes;
+        // }
 
         public void SaveLastSalaryPaymentTime()
         {

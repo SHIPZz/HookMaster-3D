@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ItemTypeId>k__BackingField: 0
-  <ShopItemTypeId>k__BackingField: 1
+  <GameItemType>k__BackingField: 1
   <Price>k__BackingField: 4000
   _priceText: {fileID: 4935812808109383445}
   _buyButton: {fileID: 6668688690141075040}

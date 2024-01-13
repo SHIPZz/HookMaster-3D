@@ -1,4 +1,5 @@
-﻿using CodeBase.UI.Shop;
+﻿using CodeBase.Gameplay.Wallet;
+using CodeBase.UI.Shop;
 
 namespace CodeBase.UI.Buttons
 {

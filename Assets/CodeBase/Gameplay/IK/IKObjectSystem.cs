@@ -1,6 +1,8 @@
 using System;
+using CodeBase.Gameplay.PlayerSystem;
 using CodeBase.Services.TriggerObserve;
 using UnityEngine;
+using Zenject;
 
 public class IKObjectSystem : MonoBehaviour
 {
@@ -14,7 +16,12 @@ public class IKObjectSystem : MonoBehaviour
     public event Action PlayerTaken;
 
     private bool _isTaken;
-    
+    private PlayerIKService _playerIKService;
+
+    [Inject]
+    private void Construct(PlayerIKService playerIKService) => 
+        _playerIKService = playerIKService;
+
     private void OnEnable()
     {
         _triggerObserver.CollisionEntered += OnPlayerEntered;
@@ -23,6 +30,7 @@ public class IKObjectSystem : MonoBehaviour
     private void OnDisable()
     {
         _triggerObserver.CollisionEntered -= OnPlayerEntered;
+        _playerIKService.ClearIKHandTargets();
     }
 
     private void OnPlayerEntered(Collision player)
@@ -33,6 +41,8 @@ public class IKObjectSystem : MonoBehaviour
         transform.SetParent(player.transform,true);
         transform.localPosition = _targetPosition;
         transform.localEulerAngles = _targetRotation;
+        _playerIKService.SetIKHandTargets(LeftHandIK, RightHandIK);
+        
         _isTaken = true;
         PlayerTaken?.Invoke();
     }

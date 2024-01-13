@@ -13,7 +13,7 @@ using CodeBase.Services.Factories.Camera;
 using CodeBase.Services.Factories.Employee;
 using CodeBase.Services.Factories.Player;
 using CodeBase.Services.Fire;
-using CodeBase.Services.MiningFarm;
+using CodeBase.Services.Mining;
 using CodeBase.Services.Profit;
 using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.Providers.EmployeeProvider;
@@ -44,7 +44,7 @@ namespace CodeBase.EntryPointSystem
         private readonly EmployeeSalaryService _employeeSalaryService;
         private readonly ProfitService _profitService;
         private readonly UIService _uiService;
-        private readonly ShopItemService _shopItemService;
+        private readonly GameItemService _gameItemService;
         private readonly MiningFarmService _miningFarmService;
         private readonly RandomItemService _randomItemService;
         private readonly ExtinguisherService _extinguisherService;
@@ -63,7 +63,7 @@ namespace CodeBase.EntryPointSystem
             EmployeeSalaryService employeeSalaryService,
             ProfitService profitService, 
             UIService uiService, 
-            ShopItemService shopItemService, 
+            GameItemService gameItemService, 
             MiningFarmService miningFarmService, 
             RandomItemService randomItemService,
             ExtinguisherService extinguisherService,
@@ -84,7 +84,7 @@ namespace CodeBase.EntryPointSystem
             _employeeSalaryService = employeeSalaryService;
             _profitService = profitService;
             _uiService = uiService;
-            _shopItemService = shopItemService;
+            _gameItemService = gameItemService;
             _miningFarmService = miningFarmService;
             _randomItemService = randomItemService;
         }
@@ -102,7 +102,7 @@ namespace CodeBase.EntryPointSystem
             InitUIService();
             InitPlayerProvider(player);
             InitShopItemService();
-            InitMiningFarmService();
+            // InitMiningFarmService();
             InitRandomItemService();
             InitExtinguisherService();
             InitFireService();
@@ -121,7 +121,7 @@ namespace CodeBase.EntryPointSystem
             _miningFarmService.Init();
 
         private void InitShopItemService() => 
-            _shopItemService.Init();
+            _gameItemService.Init();
 
         private void InitPlayerProvider(Player player) => 
             _playerProvider.Player = player;

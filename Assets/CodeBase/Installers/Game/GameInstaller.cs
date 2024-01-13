@@ -1,7 +1,9 @@
 ﻿using CodeBase.EntryPointSystem;
+using CodeBase.Gameplay.PlayerSystem;
 using CodeBase.Gameplay.Wallet;
 using CodeBase.MaterialChanger;
 using CodeBase.Services.BurnableObjects;
+using CodeBase.Services.CircleRouletteServices;
 using CodeBase.Services.DataService;
 using CodeBase.Services.Employee;
 using CodeBase.Services.Extinguisher;
@@ -9,12 +11,11 @@ using CodeBase.Services.Factories.Camera;
 using CodeBase.Services.Factories.Effect;
 using CodeBase.Services.Factories.Employee;
 using CodeBase.Services.Factories.Player;
-using CodeBase.Services.Factories.RandomItems;
 using CodeBase.Services.Factories.ShopItems;
 using CodeBase.Services.Factories.UI;
 using CodeBase.Services.Fire;
 using CodeBase.Services.GOPool;
-using CodeBase.Services.MiningFarm;
+using CodeBase.Services.Mining;
 using CodeBase.Services.Player;
 using CodeBase.Services.Profit;
 using CodeBase.Services.Providers.Asset;
@@ -28,6 +29,7 @@ using CodeBase.Services.Providers.Tables;
 using CodeBase.Services.RandomItems;
 using CodeBase.Services.Reward;
 using CodeBase.Services.ShopItemData;
+using CodeBase.Services.ShopItemDataServices;
 using CodeBase.Services.Sound;
 using CodeBase.Services.Window;
 using UnityEngine;
@@ -63,14 +65,25 @@ namespace CodeBase.Installers.Game
             BindShopItemFactory();
             BindShopItemService();
             BindMiningFarmService();
-            BindRandomItemFactory();
             BindRandomItemService();
             BindExtinguisherService();
             BindFireService();
             BindFireSpawnerProvider();
             BindBurnableObjectService();
             BindRendererMaterialChangerService();
+            BindPlayerIKService();
+            BindCircleRouletteService();
+            BindShopItemDataService();
         }
+
+        private void BindShopItemDataService() => 
+            Container.Bind<ShopItemDataService>().AsSingle();
+
+        private void BindCircleRouletteService() => 
+            Container.Bind<CircleRouletteService>().AsSingle();
+
+        private void BindPlayerIKService() => 
+            Container.Bind<PlayerIKService>().AsSingle();
 
         private void BindRendererMaterialChangerService()
         {
@@ -93,14 +106,11 @@ namespace CodeBase.Installers.Game
         private void BindRandomItemService() =>
             Container.Bind<RandomItemService>().AsSingle();
 
-        private void BindRandomItemFactory() =>
-            Container.Bind<RandomItemFactory>().AsSingle();
-
         private void BindMiningFarmService() =>
             Container.Bind<MiningFarmService>().AsSingle();
 
         private void BindShopItemService() =>
-            Container.Bind<ShopItemService>().AsSingle();
+            Container.Bind<GameItemService>().AsSingle();
 
         private void BindShopItemFactory() =>
             Container.Bind<GameItemFactory>().AsSingle();

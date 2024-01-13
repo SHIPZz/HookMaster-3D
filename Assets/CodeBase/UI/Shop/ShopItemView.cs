@@ -1,8 +1,10 @@
-﻿using CodeBase.Data;
+﻿using System;
+using CodeBase.Data;
 using CodeBase.Enums;
-using CodeBase.Gameplay.ShopItemSystem;
+using CodeBase.Gameplay.GameItems;
 using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.ShopItemData;
+using CodeBase.Services.ShopItemDataServices;
 using CodeBase.Services.UI;
 using CodeBase.UI.FloatingText;
 using TMPro;
@@ -15,22 +17,25 @@ namespace CodeBase.UI.Shop
     public class ShopItemView : MonoBehaviour
     {
         [field: SerializeField] public ItemTypeId ItemTypeId { get; private set; }
-        [field: SerializeField] public ShopItemTypeId ShopItemTypeId { get; private set; }
+        [field: SerializeField] public GameItemType GameItemType { get; private set; }
         [field: SerializeField] public int Price { get; private set; }
 
         [SerializeField] private TMP_Text _priceText;
         [SerializeField] private Button _buyButton;
 
         private WalletService _walletService;
-        private ShopItemService _shopItemService;
+        private GameItemService _gameItemService;
         private FloatingTextService _floatingTextService;
+        private ShopItemDataService _shopItemDataService;
 
         [Inject]
-        private void Construct(WalletService walletService, ShopItemService shopItemService,
-            FloatingTextService floatingTextService)
+        private void Construct(WalletService walletService, GameItemService gameItemService,
+            FloatingTextService floatingTextService,
+            ShopItemDataService shopItemDataService)
         {
+            _shopItemDataService = shopItemDataService;
             _floatingTextService = floatingTextService;
-            _shopItemService = shopItemService;
+            _gameItemService = gameItemService;
             _walletService = walletService;
         }
 
@@ -51,8 +56,8 @@ namespace CodeBase.UI.Shop
                 return;
             }
 
-            ShopItemGameModel shopItemGameModel = _shopItemService.Create<ShopItemGameModel>(ShopItemTypeId);
-            _shopItemService.Add(shopItemGameModel);
+            _shopItemDataService.Add(GameItemType);
+            _gameItemService.Create<GameItemAbstract>(GameItemType);
             _walletService.Set(ItemTypeId, -Price);
             Destroy(gameObject);
         }

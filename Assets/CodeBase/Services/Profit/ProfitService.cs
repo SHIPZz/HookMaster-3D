@@ -15,7 +15,7 @@ using Zenject;
 
 namespace CodeBase.Services.Profit
 {
-    public class ProfitService : IInitializable, IDisposable
+    public class ProfitService : IInitializable, IDisposable, ITickable
     {
         private const int OfflineReward = 2;
         private readonly WaitForSeconds _waitMinute = new(60f);
@@ -29,10 +29,10 @@ namespace CodeBase.Services.Profit
 
         public event Action<string, float> ProfitGot;
 
-        public ProfitService(ICoroutineRunner coroutineRunner, 
+        public ProfitService(ICoroutineRunner coroutineRunner,
             WalletService walletService,
             WorldTimeService worldTimeService,
-            UIService uiService, 
+            UIService uiService,
             EmployeeService employeeService)
         {
             _employeeService = employeeService;
@@ -46,12 +46,12 @@ namespace CodeBase.Services.Profit
         {
             _coroutineRunner.StartCoroutine(GetProfitEveryMinuteCoroutine());
             int timeDifferenceByMinutes = _worldTimeService.GetTimeDifferenceByMinutesBetweenProfitAndCurrentTime();
-            
+
             ReceiveOfflineProfit(timeDifferenceByMinutes);
 
             if (_totalEarnedProfit == 0)
                 return;
-            
+
             _uiService.OpenOfflineRewardWindow(_totalEarnedProfit, timeDifferenceByMinutes);
         }
 
@@ -65,10 +65,18 @@ namespace CodeBase.Services.Profit
             Application.focusChanged -= OnFocusChanged;
         }
 
+        public void Tick()
+        {
+            if (UnityEngine.Input.GetKeyDown(KeyCode.F4))
+                _walletService.Set(ItemTypeId.Money, 500);
+        }
+
         private void ReceiveOfflineProfit(int timeDifferenceByMinutes)
         {
             foreach (var totalProfit in _employeeService.Employees
-                         .Select(employee => employee.Profit / TimeConstantValue.MinutesInDay * timeDifferenceByMinutes / OfflineReward))
+                         .Select(employee =>
+                             employee.Profit / TimeConstantValue.MinutesInDay * timeDifferenceByMinutes /
+                             OfflineReward))
             {
                 _walletService.Set(ItemTypeId.Money, totalProfit);
                 _worldTimeService.SaveLastProfitEarnedTime();
@@ -80,9 +88,9 @@ namespace CodeBase.Services.Profit
         {
             foreach (Gameplay.EmployeeSystem.Employee employee in _employeeService.Employees)
             {
-                if(!employee.IsWorking)
+                if (!employee.IsWorking)
                     continue;
-                
+
                 int totalProfit = (employee.Profit / TimeConstantValue.MinutesInDay) * timeDifferenceByMinutes;
 
                 if (totalProfit == 0)
@@ -103,9 +111,9 @@ namespace CodeBase.Services.Profit
 
                 foreach (Gameplay.EmployeeSystem.Employee employee in _employeeService.Employees)
                 {
-                    if(!employee.IsWorking)
+                    if (!employee.IsWorking)
                         continue;
-                    
+
                     int minuteProfit = employee.Profit / TimeConstantValue.MinutesInDay;
                     _walletService.Set(ItemTypeId.Money, minuteProfit);
                     ProfitGot?.Invoke(employee.Id, minuteProfit);

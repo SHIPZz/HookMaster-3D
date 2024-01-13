@@ -1,5 +1,6 @@
 ﻿using CodeBase.Data;
 using CodeBase.Gameplay.BurnableObjectSystem;
+using CodeBase.Gameplay.GameItems;
 using CodeBase.Gameplay.TableSystem;
 using UnityEngine;
 
@@ -21,6 +22,30 @@ namespace CodeBase.Extensions
             };
 
             return tableData;
+        }
+
+        public static CircleRouletteItemData ToData(this CircleRouletteItem circleRouletteItem)
+        {
+            var circleRouletteItemData = new CircleRouletteItemData()
+            {
+                Id = circleRouletteItem.Id,
+                PlayTime = circleRouletteItem.PlayTime,
+                Position = circleRouletteItem.transform.position.ToData()
+            };
+
+            return circleRouletteItemData;
+        }
+
+        public static MiningFarmData ToData(this MiningFarmItem miningFarmItem)
+        {
+            var miningFarmData = new MiningFarmData()
+            {
+                Id = miningFarmItem.Id,
+                Position = miningFarmItem.transform.position.ToData(),
+                WorkingMinutes = miningFarmItem.WorkingMinutes
+            };
+
+            return miningFarmData;
         }
         
         public static Vector3 ToVector(this VectorData vectorData)

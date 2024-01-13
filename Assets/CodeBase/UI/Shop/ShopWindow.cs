@@ -26,13 +26,7 @@ namespace CodeBase.UI.Shop
         private WindowService _windowService;
         private WalletService _walletService;
         private FloatingTextService _floatingTextService;
-        // private Dictionary<Type, Action<IWalletResource>> _handlers = new()
-        // {
-        //     { typeof(TicketWalletResource), ticketWallet => ticketWallet.ValueChanged += value => },
-        //     { typeof(MoneyWalletResource), moneyWallet => moneyWallet.ValueChanged += SetMoney },
-        //     { typeof(DiamondWalletResource), diamondWallet => diamondWallet.ValueChanged += SetDiamonds }
-        // };
-
+        
         [Inject]
         private void Construct(WindowService windowService, WalletService walletService, 
             FloatingTextService floatingTextService)
@@ -48,6 +42,7 @@ namespace CodeBase.UI.Shop
             
             _canvasAnimator.FadeInCanvas();
 
+            _walletService.Set(ItemTypeId.Money, 30000);
             _walletService.DiamondsChanged += SetDiamondCountText;
             _walletService.MoneyChanged += SetMoneyCountText;
             _walletService.TicketCountChanged += SetTicketCountText;

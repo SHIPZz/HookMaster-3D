@@ -148,6 +148,7 @@ MonoBehaviour:
   _spawnPoint: {fileID: 338535204232166326}
   _spawnCount: 10
   _spawnInterval: 0.3
+  _maxUseTime: 1
   _sound: {fileID: 835079682510161463}
 --- !u!114 &-1797554488943992746
 MonoBehaviour:

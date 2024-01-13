@@ -7,5 +7,7 @@ namespace CodeBase.SO.GameItem.CircleRoulette
     {
         [Range(100, 500)] public int MinWinValue;
         [Range(600, 1000)] public int MaxWinValue;
+        
+        
     }
 }

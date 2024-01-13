@@ -67,7 +67,7 @@ namespace CodeBase.UI.Roulette
 
         public override void Open()
         {
-            var circleRouletteSO = _gameItemStaticDataService.Get<CircleRouletteSO>();
+            var circleRouletteSO = _gameItemStaticDataService.GetSO<CircleRouletteSO>();
             _rouletteItems.ForEach(x => x.Init(circleRouletteSO.MinWinValue, circleRouletteSO.MaxWinValue));
             
             _canvasAnimator.FadeInCanvas();

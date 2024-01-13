@@ -7,7 +7,6 @@ namespace CodeBase.UI.Buttons
         protected override void Open()
         {
             WindowService.Open<MiningFarmWindow>();
-            gameObject.SetActive(false);
         }
     }
 }

@@ -9,5 +9,8 @@ namespace CodeBase.Data
         public long LastWorkingTime;
         public bool NeedClean;
         public int WorkingMinutes;
+        public int TargetTemperature;
+        public int ProfitPerMinute;
+        public VectorData Position;
     }
 }

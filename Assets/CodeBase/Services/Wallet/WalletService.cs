@@ -25,9 +25,9 @@ namespace CodeBase.Gameplay.Wallet
         public void Init()
         {
             PlayerData playerData = _worldDataService.WorldData.PlayerData;
-            _updateDataActions[ItemTypeId.Diamond] = DiamondsChanged;
-            _updateDataActions[ItemTypeId.Money] = MoneyChanged;
-            _updateDataActions[ItemTypeId.Ticket] = TicketCountChanged;
+            _updateDataActions[ItemTypeId.Diamond] = OnDiamondsChanged;
+            _updateDataActions[ItemTypeId.Money] = OnMoneyChanged;
+            _updateDataActions[ItemTypeId.Ticket] = OnTicketCountChanged;
 
             _walletResources = playerData.WalletResources;
         }
@@ -38,12 +38,16 @@ namespace CodeBase.Gameplay.Wallet
         public void Set(ItemTypeId itemTypeId, int amount)
         {
             _walletResources[itemTypeId] = Mathf.Clamp(_walletResources[itemTypeId] + amount, 0, MaxValueCount);
-            _updateDataActions[itemTypeId]?.Invoke(amount);
+            _updateDataActions[itemTypeId]?.Invoke(_walletResources[itemTypeId]);
             UpdateData();
         }
 
         public bool HasEnough(ItemTypeId itemTypeId, int amount) =>
             _walletResources[itemTypeId] - amount >= 0;
+
+        private void OnMoneyChanged(int amount) => MoneyChanged?.Invoke(amount);
+        private void OnTicketCountChanged(int amount) => TicketCountChanged?.Invoke(amount);
+        private void OnDiamondsChanged(int amount) => DiamondsChanged?.Invoke(amount);
 
         private void UpdateData()
         {

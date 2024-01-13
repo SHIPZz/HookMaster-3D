@@ -9,12 +9,13 @@ namespace CodeBase.Data
         public PlayerData PlayerData = new();
         public List<EmployeeData> PotentialEmployeeList = new();
         public WorldTimeData WorldTimeData = new();
-        public  List<TableData> TableDatas = new();
+        public List<TableData> TableDatas = new();
         public List<UpgradeEmployeeData> UpgradeEmployeeDatas = new();
         public SettingsData SettingsData = new();
         public PlayerRewardData PlayerRewardData = new();
         public ShopItemData ShopItemData = new();
-        public MiningFarmData MiningFarmData = new();
+        public List<MiningFarmData> MiningFarmDatas = new();
+        public List<CircleRouletteItemData> CircleRouletteItemDatas = new();
         public RandomItemData RandomItemData = new();
         public FireTimeData FireTimeData = new();
         public BurnableItemData BurnableItemData = new();

@@ -8,6 +8,6 @@ namespace CodeBase.Data
     [Serializable]
     public class ShopItemData
     {
-        public List<ShopItemTypeId> PurchasedShopItems = new();
+        public List<GameItemType> PurchasedShopItems = new();
     }
 }

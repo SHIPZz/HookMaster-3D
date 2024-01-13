@@ -6,6 +6,7 @@ using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.Factories.UI;
 using CodeBase.Services.Providers.Asset;
 using CodeBase.Services.ShopItemData;
+using CodeBase.Services.ShopItemDataServices;
 using UnityEngine;
 using Zenject;
 
@@ -17,12 +18,14 @@ namespace CodeBase.UI.Shop
         [SerializeField] private Transform _parent;
 
         private IAssetProvider _assetProvider;
-        private ShopItemService _shopItemService;
+        private UIFactory _uiFactory;
+        private ShopItemDataService _shopItemDataService;
 
         [Inject]
-        private void Construct( IAssetProvider assetProvider, ShopItemService shopItemService)
+        private void Construct( IAssetProvider assetProvider, UIFactory uiFactory, ShopItemDataService shopItemDataService)
         {
-            _shopItemService = shopItemService;
+            _shopItemDataService = shopItemDataService;
+            _uiFactory = uiFactory;
             _assetProvider = assetProvider;
         }
 
@@ -33,10 +36,10 @@ namespace CodeBase.UI.Shop
 
             foreach (ShopItemView shopItemView in shopItemViews)
             {
-                if (_shopItemService.AlreadyPurchased(shopItemView.ShopItemTypeId))
+                if (_shopItemDataService.AlreadyPurchased(shopItemView.GameItemType))
                     continue;
-
-                _shopItemService.CreateShopItemView(shopItemView, _parent);
+                
+                _uiFactory.CreateElement<ShopItemView>(shopItemView, _parent);
             }
         }
     }

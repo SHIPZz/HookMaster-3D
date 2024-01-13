@@ -64,7 +64,10 @@ namespace CodeBase.Services.Window
         }
 
 
-        public void CloseAll() =>
+        public void CloseAll()
+        {
+            ClearDestroyedWindows();
             _createdWindows.Values.ToList().ForEach(x => x.Close());
+        }
     }
 }

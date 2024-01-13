@@ -4,6 +4,7 @@ using CodeBase.Enums;
 using CodeBase.Gameplay.Effects;
 using CodeBase.Services.GOPool;
 using CodeBase.Services.Providers.Player;
+using CodeBase.Services.Window;
 using UnityEngine;
 using Zenject;
 
@@ -13,16 +14,21 @@ public class ExtinguisherSystem : MonoBehaviour
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private float _spawnCount = 10;
     [SerializeField] private float _spawnInterval = 0.3f;
+    [SerializeField] private float _maxUseTime = 2;
     [SerializeField] private AudioSource _sound;
 
     private EffectPool _effectPool;
     private PlayerProvider _playerProvider;
     private readonly WaitForSeconds _second = new WaitForSeconds(1f);
     private Coroutine _coroutine;
+    private WindowService _windowService;
+
+    public event Action MaxTimeUsed;
 
     [Inject]
-    private void Construct(EffectPool effectPool, PlayerProvider playerProvider)
+    private void Construct(EffectPool effectPool, PlayerProvider playerProvider, WindowService windowService)
     {
+        _windowService = windowService;
         _playerProvider = playerProvider;
         _effectPool = effectPool;
     }
@@ -31,6 +37,13 @@ public class ExtinguisherSystem : MonoBehaviour
     {
         if (_coroutine != null)
             StopCoroutine(_coroutine);
+
+        _maxUseTime--;
+
+        if (_maxUseTime == 0)
+        {
+            _windowService.Close<PutOutWindow>();
+        }
 
         _coroutine = StartCoroutine(SpawnSmokeEffects(onFinishedCallback));
     }
@@ -53,7 +66,13 @@ public class ExtinguisherSystem : MonoBehaviour
         _traceSmokeEffect.Stop();
         _sound.Stop();
 
+        if (_maxUseTime == 0)
+        {
+            Destroy(gameObject);
+        }
+
         yield return _second;
+
         onFinishedCallback?.Invoke();
     }
 }

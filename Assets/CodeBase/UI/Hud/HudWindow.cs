@@ -19,7 +19,7 @@ namespace CodeBase.UI.Hud
         private void Construct(IWorldDataService worldDataService) => 
             _worldDataService = worldDataService;
 
-        private void OnEnable()
+        private void Start()
         {
             DateTime currentTime = _worldDataService.WorldData.WorldTimeData.CurrentTime.ToDateTime();
             string formattedTime = currentTime.ToString($"{currentTime.Day}/{currentTime.Month}/{currentTime.Year}", CultureInfo.InvariantCulture);
