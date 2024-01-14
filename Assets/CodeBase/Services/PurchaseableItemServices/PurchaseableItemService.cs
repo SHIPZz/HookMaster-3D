@@ -14,15 +14,15 @@ namespace CodeBase.Services.PurchaseableItemServices
     {
         private readonly IWorldDataService _worldDataService;
         private readonly PurchaseableItemProvider _purchaseableItemProvider;
-        private readonly GameItemStaticDataService _gameItemStaticDataService;
+        private readonly GameStaticDataService _gameStaticDataService;
 
         private List<PurchaseableItem> _allPurchaseableItems = new();
 
         public PurchaseableItemService(IWorldDataService worldDataService,
             PurchaseableItemProvider purchaseableItemProvider,
-            GameItemStaticDataService gameItemStaticDataService)
+            GameStaticDataService gameStaticDataService)
         {
-            _gameItemStaticDataService = gameItemStaticDataService;
+            _gameStaticDataService = gameStaticDataService;
             _worldDataService = worldDataService;
             _purchaseableItemProvider = purchaseableItemProvider;
         }
@@ -30,7 +30,7 @@ namespace CodeBase.Services.PurchaseableItemServices
         public void Init()
         {
             IEnumerable<PurchaseableItemSO> purchaseableItemsSO =
-                _gameItemStaticDataService.GetAllSO<PurchaseableItemSO>();
+                _gameStaticDataService.GetAllSO<PurchaseableItemSO>();
 
             AddToAllItems();
 

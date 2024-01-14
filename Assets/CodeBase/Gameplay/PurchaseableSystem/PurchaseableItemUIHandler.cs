@@ -71,6 +71,7 @@ namespace CodeBase.Gameplay.PurchaseableSystem
                 return;
 
             _priceText.text = $"{_purchaseableItem.Price}$";
+            
             _floatingButtonService
                 .ShowFloatingButton(_additionalPosition, _duration, Quaternion.identity, true, _accessButton);
         }

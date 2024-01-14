@@ -19,17 +19,17 @@ namespace CodeBase.Services.CircleRouletteServices
         private readonly IWorldDataService _worldDataService;
         private readonly LocationProvider _locationProvider;
         private readonly GameItemFactory _gameItemFactory;
-        private readonly GameItemStaticDataService _gameItemStaticDataService;
+        private readonly GameStaticDataService _gameStaticDataService;
         private readonly WorldTimeService _worldTimeService;
         private List<CircleRouletteItem> _createdItems = new();
 
         public CircleRouletteService(IWorldDataService worldDataService,
             LocationProvider locationProvider,
             GameItemFactory gameItemFactory,
-            GameItemStaticDataService gameItemStaticDataService, WorldTimeService worldTimeService)
+            GameStaticDataService gameStaticDataService, WorldTimeService worldTimeService)
         {
             _worldTimeService = worldTimeService;
-            _gameItemStaticDataService = gameItemStaticDataService;
+            _gameStaticDataService = gameStaticDataService;
             _worldDataService = worldDataService;
             _locationProvider = locationProvider;
             _gameItemFactory = gameItemFactory;
@@ -59,7 +59,7 @@ namespace CodeBase.Services.CircleRouletteServices
             var item = _gameItemFactory.Create<CircleRouletteItem>(_locationProvider.CircleRouletteSpawnPoint,
                 _locationProvider.CircleRouletteSpawnPoint.position);
             _createdItems.Add(item);
-            var data = _gameItemStaticDataService.GetSO<CircleRouletteSO>();
+            var data = _gameStaticDataService.GetSO<CircleRouletteSO>();
             PrepareItem(item, data.MinWinValue, data.MaxWinValue, data.PlayTime, item.transform.position);
 
             CircleRouletteItemData targetItem = item.ToData();

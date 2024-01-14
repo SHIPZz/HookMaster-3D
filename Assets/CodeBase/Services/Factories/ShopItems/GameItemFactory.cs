@@ -12,14 +12,14 @@ namespace CodeBase.Services.Factories.ShopItems
     public class GameItemFactory
     {
         private readonly IInstantiator _instantiator;
-        private readonly GameItemStaticDataService _gameItemStaticDataService;
+        private readonly GameStaticDataService _gameStaticDataService;
         private readonly IAssetProvider _assetProvider;
 
-        public GameItemFactory(IInstantiator instantiator, GameItemStaticDataService gameItemStaticDataService,
+        public GameItemFactory(IInstantiator instantiator, GameStaticDataService gameStaticDataService,
             IAssetProvider assetProvider)
         {
             _assetProvider = assetProvider;
-            _gameItemStaticDataService = gameItemStaticDataService;
+            _gameStaticDataService = gameStaticDataService;
             _instantiator = instantiator;
         }
 
@@ -34,7 +34,7 @@ namespace CodeBase.Services.Factories.ShopItems
         
         public T Create<T>(Transform parent, Vector3 at, Quaternion rotation) where T : GameItemAbstract
         {
-            var prefab = _gameItemStaticDataService.Get<T>();
+            var prefab = _gameStaticDataService.Get<T>();
 
             return _instantiator.InstantiatePrefabForComponent<T>(prefab,
                 at, rotation,
@@ -43,7 +43,7 @@ namespace CodeBase.Services.Factories.ShopItems
         
         public T Create<T>(Transform parent, Vector3 at) where T : GameItemAbstract
         {
-            var prefab = _gameItemStaticDataService.Get<T>();
+            var prefab = _gameStaticDataService.Get<T>();
 
             return _instantiator.InstantiatePrefabForComponent<T>(prefab,
                 at, prefab.transform.rotation,
@@ -52,7 +52,7 @@ namespace CodeBase.Services.Factories.ShopItems
 
         public GameItemAbstract Create(GameItemType gameItemType, Transform parent, Vector3 at)
         {
-            GameItemAbstract prefab = _gameItemStaticDataService.Get(gameItemType);
+            GameItemAbstract prefab = _gameStaticDataService.Get(gameItemType);
 
             return _instantiator.InstantiatePrefabForComponent<GameItemAbstract>(prefab,
                 at, prefab.transform.rotation,

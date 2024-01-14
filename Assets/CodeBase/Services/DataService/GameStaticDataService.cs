@@ -10,12 +10,12 @@ using UnityEngine;
 
 namespace CodeBase.Services.DataService
 {
-    public class GameItemStaticDataService
+    public class GameStaticDataService
     {
         private readonly Dictionary<Type, GameItemAbstractSO> _gameItemDatas;
         private readonly Dictionary<Type, GameItemAbstract> _gameItemPrefabs;
 
-        public GameItemStaticDataService()
+        public GameStaticDataService()
         {
             _gameItemDatas = Resources.LoadAll<GameItemAbstractSO>(AssetPath.GameItemDatas)
                 .ToDictionary(x => x.GetType(), x => x);

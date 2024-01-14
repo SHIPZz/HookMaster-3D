@@ -1,8 +1,10 @@
 ﻿using System;
+using CodeBase.Services.GOPush;
 using CodeBase.Services.TriggerObserve;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
+using Zenject;
 
 namespace CodeBase.Gameplay.Door
 {
@@ -19,11 +21,17 @@ namespace CodeBase.Gameplay.Door
         [SerializeField] private float _openDistance = 0.2f;
         [SerializeField] private float _targetBlockOpenDot = -0.75f;
         [SerializeField] private Transform _targetTransform;
-        [SerializeField] private AudioSource _openSound;
-        [SerializeField] private AudioSource _closeSound;
+        [SerializeField] private SoundPlayerSystem _soundPlayerSystem;
 
         private bool _isMoving;
+        private GameObjectPushService _gameObjectPushService;
 
+        [Inject]
+        private void Construct(GameObjectPushService gameObjectPushService)
+        {
+            _gameObjectPushService = gameObjectPushService;
+        }
+        
         private void OnEnable() =>
             _triggerObserver.CollisionEntered += OnPlayerEntered;
 
@@ -32,6 +40,9 @@ namespace CodeBase.Gameplay.Door
 
         private async void OnPlayerEntered(Collision player)
         {
+            if(transform.localEulerAngles != _closeRotation)
+                return;
+            
             if (_isMoving)
                 return;
 
@@ -45,11 +56,11 @@ namespace CodeBase.Gameplay.Door
 
             if (dot <= 0)
             {
-                await PushPlayerAwayToOpen(playerRigidBody, targetPosition);
+                await _gameObjectPushService.PushRigidBodyAwayAsync(playerRigidBody, targetPosition, _openDistance, _speed);
             }
 
             _isMoving = true;
-            _openSound.Play();
+            _soundPlayerSystem.PlayActiveSound();
             transform.DOLocalRotate(_openRotation, _openDuration).OnComplete(() => _isMoving = false);
 
             await UniTask.Delay(TimeSpan.FromSeconds(_closeDelay));
@@ -57,19 +68,9 @@ namespace CodeBase.Gameplay.Door
             _isMoving = true;
             transform.DOLocalRotate(_closeRotation, _closeDuration).OnComplete(() =>
             {
-                _closeSound.Play();
+                _soundPlayerSystem.PlayInactiveClip();
                 _isMoving = false;
             });
-        }
-
-        private async UniTask PushPlayerAwayToOpen(Rigidbody playerRigidBody, Vector3 targetPosition)
-        {
-            while (Vector3.Distance(playerRigidBody.position, targetPosition) > _openDistance)
-            {
-                playerRigidBody.position =
-                    Vector3.Lerp(playerRigidBody.position, targetPosition, _speed * Time.fixedDeltaTime);
-                await UniTask.WaitForFixedUpdate();
-            }
         }
     }
 }

@@ -23,7 +23,7 @@ namespace CodeBase.Services.Mining
         private readonly WalletService _walletService;
         private readonly GameItemFactory _gameItemFactory;
         private readonly LocationProvider _locationProvider;
-        private readonly GameItemStaticDataService _gameItemStaticDataService;
+        private readonly GameStaticDataService _gameStaticDataService;
 
         private List<MiningFarmItem> _createdFarms = new();
 
@@ -34,9 +34,9 @@ namespace CodeBase.Services.Mining
             WalletService walletService,
             GameItemFactory gameItemFactory,
             LocationProvider locationProvider,
-            GameItemStaticDataService gameItemStaticDataService)
+            GameStaticDataService gameStaticDataService)
         {
-            _gameItemStaticDataService = gameItemStaticDataService;
+            _gameStaticDataService = gameStaticDataService;
             _locationProvider = locationProvider;
             _gameItemFactory = gameItemFactory;
             _walletService = walletService;
@@ -74,7 +74,7 @@ namespace CodeBase.Services.Mining
         {
             var item = _gameItemFactory.Create<MiningFarmItem>(_locationProvider.MiningFarmSpawnPoint,
                 _locationProvider.MiningFarmSpawnPoint.position);
-            MiningFarmSO data = _gameItemStaticDataService.GetSO<MiningFarmSO>();
+            MiningFarmSO data = _gameStaticDataService.GetSO<MiningFarmSO>();
             PrepareItem(item, 0, data.ProfitPerMinute, false,
                 data.MinTemperature, data.MidTemperature, data.MaxTemperature);
 
@@ -105,7 +105,7 @@ namespace CodeBase.Services.Mining
         private void ConfigureMiningFarms(List<MiningFarmItem> createdMiningFarms,
             Dictionary<string, MiningFarmData> miningFarmDatas)
         {
-            MiningFarmSO data = _gameItemStaticDataService.GetSO<MiningFarmSO>();
+            MiningFarmSO data = _gameStaticDataService.GetSO<MiningFarmSO>();
 
             foreach (MiningFarmItem miningFarmItem in createdMiningFarms)
             {

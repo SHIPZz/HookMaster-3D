@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Character 1
+  - Character 2
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - Player
   - JoystickUI
   - 
-  - 
+  - Client
   - Employee
   - EmployeeWorkTrigger
   - Wall
@@ -28,7 +30,7 @@ TagManager:
   - IKObserver
   - IK
   - FireObserver
-  - 
+  - ServiceTable
   - 
   - 
   - 

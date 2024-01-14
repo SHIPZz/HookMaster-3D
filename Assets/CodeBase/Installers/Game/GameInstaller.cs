@@ -4,10 +4,12 @@ using CodeBase.Gameplay.Wallet;
 using CodeBase.MaterialChanger;
 using CodeBase.Services.BurnableObjects;
 using CodeBase.Services.CircleRouletteServices;
+using CodeBase.Services.Clients;
 using CodeBase.Services.DataService;
 using CodeBase.Services.Employee;
 using CodeBase.Services.Extinguisher;
 using CodeBase.Services.Factories.Camera;
+using CodeBase.Services.Factories.Clients;
 using CodeBase.Services.Factories.Effect;
 using CodeBase.Services.Factories.Employee;
 using CodeBase.Services.Factories.Player;
@@ -15,6 +17,7 @@ using CodeBase.Services.Factories.ShopItems;
 using CodeBase.Services.Factories.UI;
 using CodeBase.Services.Fire;
 using CodeBase.Services.GOPool;
+using CodeBase.Services.GOPush;
 using CodeBase.Services.Mining;
 using CodeBase.Services.Player;
 using CodeBase.Services.Profit;
@@ -46,6 +49,7 @@ namespace CodeBase.Installers.Game
         [SerializeField] private ExtinguisherProvider _extinguisherProvider;
         [SerializeField] private FireProvider _fireProvider;
         [SerializeField] private PurchaseableItemProvider _purchaseableItemProvider;
+        [SerializeField] private ClientProvider _clientProvider;
 
         public override void InstallBindings()
         {
@@ -64,7 +68,6 @@ namespace CodeBase.Installers.Game
             BindPlayerAnimationService();
             BindPools();
             BindRewardService();
-            BindPlayerRewardService();
             BindShopItemFactory();
             BindShopItemService();
             BindMiningFarmService();
@@ -78,7 +81,20 @@ namespace CodeBase.Installers.Game
             BindCircleRouletteService();
             BindShopItemDataService();
             BindPurchaseableItemService();
+            GameObjectPushService();
+            BindClientServices();
         }
+
+        private void BindClientServices()
+        {
+            Container.Bind<ClientObjectService>().AsSingle();
+            Container.Bind<ClientServeService>().AsSingle();
+            Container.Bind<ClientFactory>().AsSingle();
+            Container.BindInstance(_clientProvider);
+        }
+
+        private void GameObjectPushService() => 
+            Container.Bind<GameObjectPushService>().AsTransient();
 
         private void BindPurchaseableItemService() => 
             Container.Bind<PurchaseableItemService>().AsSingle();
@@ -121,9 +137,6 @@ namespace CodeBase.Installers.Game
 
         private void BindShopItemFactory() =>
             Container.Bind<GameItemFactory>().AsSingle();
-
-        private void BindPlayerRewardService() =>
-            Container.BindInterfacesAndSelfTo<PlayerRewardService>().AsSingle();
 
         private void BindRewardService() =>
             Container.Bind<RewardService>().AsSingle();
@@ -202,7 +215,7 @@ namespace CodeBase.Installers.Game
             Container.Bind<OfficeStaticDataService>().AsSingle();
             Container.Bind<UIStaticDataService>().AsSingle();
             Container.Bind<EffectStaticDataService>().AsSingle();
-            Container.Bind<GameItemStaticDataService>().AsSingle();
+            Container.Bind<GameStaticDataService>().AsSingle();
             Container.Bind<MaterialStaticDataService>().AsSingle();
         }
     }

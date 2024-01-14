@@ -7,6 +7,7 @@ using CodeBase.Gameplay.EmployeeSystem;
 using CodeBase.Gameplay.PlayerSystem;
 using CodeBase.Gameplay.TableSystem;
 using CodeBase.Gameplay.Wallet;
+using CodeBase.Services.Clients;
 using CodeBase.Services.Employee;
 using CodeBase.Services.Extinguisher;
 using CodeBase.Services.Factories.Camera;
@@ -52,6 +53,7 @@ namespace CodeBase.EntryPointSystem
         private readonly FireService _fireService;
         private readonly SettingsService _settingsService;
         private readonly PurchaseableItemService _purchaseableItemService;
+        private readonly ClientObjectService _clientObjectService;
 
         public EntryPoint(LocationProvider locationProvider,
             IPlayerFactory playerFactory,
@@ -71,8 +73,10 @@ namespace CodeBase.EntryPointSystem
             ExtinguisherService extinguisherService,
             FireService fireService,
             SettingsService settingsService,
-            PurchaseableItemService purchaseableItemService)
+            PurchaseableItemService purchaseableItemService,
+            ClientObjectService clientObjectService)
         {
+            _clientObjectService = clientObjectService;
             _purchaseableItemService = purchaseableItemService;
             _settingsService = settingsService;
             _fireService = fireService;
@@ -112,7 +116,11 @@ namespace CodeBase.EntryPointSystem
             InitFireService();
             InitSettingsService();
             InitPurchaseableItemService();
+            InitClientObjectService();
         }
+
+        private void InitClientObjectService() => 
+            _clientObjectService.Init();
 
         private void InitPurchaseableItemService() => 
             _purchaseableItemService.Init();
