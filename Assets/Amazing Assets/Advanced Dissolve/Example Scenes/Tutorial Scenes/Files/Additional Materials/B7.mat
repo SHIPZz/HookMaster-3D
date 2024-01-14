@@ -75,7 +75,7 @@ Material:
     - _AdvancedDissolveCutoutSimpleMap2Invert: 0
     - _AdvancedDissolveCutoutSimpleMapsBlendType: 1
     - _AdvancedDissolveCutoutSimpleMapsScreenSpaceUVScale: 1
-    - _AdvancedDissolveCutoutStandardClip: 1
+    - _AdvancedDissolveCutoutStandardClip: 0
     - _AdvancedDissolveCutoutStandardMapsScreenSpaceUVScale: 1
     - _AdvancedDissolveEdgeBaseWidthSimple: 0.15
     - _AdvancedDissolveEdgeShape: 2

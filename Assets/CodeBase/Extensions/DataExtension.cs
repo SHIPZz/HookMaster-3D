@@ -1,5 +1,6 @@
 ﻿using CodeBase.Data;
 using CodeBase.Gameplay.BurnableObjectSystem;
+using CodeBase.Gameplay.CouchSystem;
 using CodeBase.Gameplay.GameItems;
 using CodeBase.Gameplay.PurchaseableSystem;
 using CodeBase.Gameplay.TableSystem;
@@ -23,6 +24,18 @@ namespace CodeBase.Extensions
             };
 
             return tableData;
+        }
+
+        public static CouchData ToData(this Couch couch)
+        {
+            var couchData = new CouchData()
+            {
+                Id = couch.Id,
+                SideConditions = couch.SideConditions,
+                IsFree = couch.IsFree
+            };
+
+            return couchData;
         }
 
         public static CircleRouletteItemData ToData(this CircleRouletteItem circleRouletteItem)

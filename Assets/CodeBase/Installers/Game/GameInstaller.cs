@@ -23,6 +23,7 @@ using CodeBase.Services.Player;
 using CodeBase.Services.Profit;
 using CodeBase.Services.Providers.Asset;
 using CodeBase.Services.Providers.Camera;
+using CodeBase.Services.Providers.Couchs;
 using CodeBase.Services.Providers.EmployeeProvider;
 using CodeBase.Services.Providers.Extinguisher;
 using CodeBase.Services.Providers.Fire;
@@ -50,6 +51,7 @@ namespace CodeBase.Installers.Game
         [SerializeField] private FireProvider _fireProvider;
         [SerializeField] private PurchaseableItemProvider _purchaseableItemProvider;
         [SerializeField] private ClientProvider _clientProvider;
+        [SerializeField] private CouchService _couchService;
 
         public override void InstallBindings()
         {
@@ -83,6 +85,12 @@ namespace CodeBase.Installers.Game
             BindPurchaseableItemService();
             GameObjectPushService();
             BindClientServices();
+            BindCouchService();
+        }
+
+        private void BindCouchService()
+        {
+            Container.BindInstance(_couchService);
         }
 
         private void BindClientServices()

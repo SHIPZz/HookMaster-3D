@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AmazingAssets.AdvancedDissolve;
 using CodeBase.Data;
 using CodeBase.Gameplay.Renderer;
@@ -23,7 +24,7 @@ namespace CodeBase.MaterialChanger
             base.Init(duration, targetValue, materialTypeId, renderer);
         }
 
-        public override void Change()
+        public override void Change(Action onComplete = null)
         {
             foreach (var renderer in _childRenderers)
             {

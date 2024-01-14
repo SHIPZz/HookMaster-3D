@@ -23,6 +23,11 @@ namespace CodeBase.Gameplay.Clients
             _clientMovement.SetTarget(target);
         }
 
+        public void SetSitIdle(bool isSitIdle, Transform target)
+        {
+            _clientMovement.SetSitIdle(isSitIdle, target,this);
+        }
+
         [Button]
         private void CreateId() => Id = Guid.NewGuid().ToString();
     }

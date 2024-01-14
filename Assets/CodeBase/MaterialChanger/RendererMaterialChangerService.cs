@@ -42,7 +42,7 @@ namespace CodeBase.MaterialChanger
                 0f, _duration).OnComplete(() => _renderer.materials = _lastMaterials);
         }
 
-        public virtual void Change()
+        public virtual void Change(Action onComplete = null)
         {
             Material[] newMaterials = new Material[_renderer.materials.Length];
 
@@ -53,7 +53,7 @@ namespace CodeBase.MaterialChanger
 
             _renderer.materials = newMaterials;
 
-            DOTween.To(() => 0, SetMaterialValue, TargetValue, _duration);
+            DOTween.To(() => 0, SetMaterialValue, TargetValue, _duration).OnComplete(() => onComplete?.Invoke());
         }
 
         protected void SetMaterialValue(float x)
