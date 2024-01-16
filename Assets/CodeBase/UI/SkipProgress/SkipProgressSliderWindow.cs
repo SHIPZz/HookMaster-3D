@@ -21,7 +21,7 @@ namespace CodeBase.UI.SkipProgress
     {
         private const float UpgradeCompletedMinutes = 60;
         private const float InitialSliderValue = -60f;
-        
+
         [SerializeField] private Slider _slider;
         [SerializeField] private CanvasAnimator _canvasAnimator;
         [SerializeField] private float _sliderFillSpeed = 15f;
@@ -29,14 +29,14 @@ namespace CodeBase.UI.SkipProgress
         [SerializeField] private SkipProgressButton _skipProgressButton;
         [SerializeField] private TMP_Text _upgradingText;
         [SerializeField] private ClaimUpgradeButton _claimUpgradeButton;
-        
+
         private UpgradeEmployeeData _upgradeEmployeeData;
         private EmployeeDataService _employeeDataService;
         private float _totalTime = 3600f;
         private WorldTimeService _worldTimeService;
         private IWorldDataService _worldDataService;
         private Coroutine _timeCoroutine;
-        
+
         [Inject]
         private void Construct(IWorldDataService worldDataService,
             WorldTimeService worldTimeService, EmployeeDataService employeeDataService)
@@ -45,8 +45,8 @@ namespace CodeBase.UI.SkipProgress
             _worldTimeService = worldTimeService;
             _worldDataService = worldDataService;
         }
-        
-        public override void Open() => 
+
+        public override void Open() =>
             _canvasAnimator.FadeInCanvas();
 
         public override void Close()
@@ -60,8 +60,8 @@ namespace CodeBase.UI.SkipProgress
         {
             _totalTime = time;
         }
-        
-        public async UniTaskVoid Init(UpgradeEmployeeData upgradeEmployeeData, float lastEmployeeUpgradeTime,
+
+        public void Init(UpgradeEmployeeData upgradeEmployeeData, float lastEmployeeUpgradeTime,
             long lastUpgradeWindowOpenedTime, Quaternion targetRotation)
         {
             _upgradeEmployeeData = upgradeEmployeeData;
@@ -72,18 +72,15 @@ namespace CodeBase.UI.SkipProgress
                 SetCompleted();
                 return;
             }
-            
+
             _skipProgressButton.SetEmployeeData(upgradeEmployeeData.EmployeeData);
 
             _slider.value = InitialSliderValue;
 
-            if (_upgradeEmployeeData.LastUpgradeTime != 0) 
+            if (_upgradeEmployeeData.LastUpgradeTime != 0)
                 _totalTime = lastEmployeeUpgradeTime;
 
-            await _worldTimeService.UpdateWorldTime();
-            
-            TimeSpan timePassed = _worldDataService.WorldData.WorldTimeData.CurrentTime.ToDateTime() -
-                                  lastUpgradeWindowOpenedTime.ToDateTime();
+            TimeSpan timePassed = _worldDataService.WorldData.WorldTimeData.CurrentTime.ToDateTime() - lastUpgradeWindowOpenedTime.ToDateTime();
 
             var passedSeconds = (float)timePassed.TotalSeconds;
             var passedMinutes = timePassed.TotalMinutes;
@@ -101,8 +98,9 @@ namespace CodeBase.UI.SkipProgress
         }
 
 
-        private void SaveLastUpgradeTime()
+        private async void SaveLastUpgradeTime()
         {
+            await _worldTimeService.UpdateWorldTime();
             _upgradeEmployeeData.LastUpgradeTime = Mathf.Abs(_totalTime);
             _upgradeEmployeeData.LastUpgradeWindowOpenedTime = _worldDataService.WorldData.WorldTimeData.CurrentTime;
             _employeeDataService.SaveUpgradeEmployeeData(_upgradeEmployeeData);

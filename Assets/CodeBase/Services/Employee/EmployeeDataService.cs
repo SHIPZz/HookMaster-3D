@@ -40,42 +40,33 @@ namespace CodeBase.Services.Employee
 
             var targetQualificationType = employeeData.QualificationType;
             targetQualificationType++;
-            
+
             employeeData.SetProfit(targetProfit).SetSalary(targetSalary)
                 .SetIsUpgrading(false)
                 .SetQualificationType(targetQualificationType);
-            
+
             ResetUpdatedUpgradedData(employeeData.Id);
-            
+
             OverwritePurchasedEmployeeData(employeeData);
             onCompleted?.Invoke(employeeData);
         }
 
         public UpgradeEmployeeData GetUpgradeEmployeeData(string id)
         {
-            UpgradeEmployeeData targetUpgradeEmployeeData = GetTargetUpgradeEmployeeData(id);
+            if (_worldDataService.WorldData.UpgradeEmployeeDatas.TryGetValue(id, out UpgradeEmployeeData data))
+                return data;
 
-            if (targetUpgradeEmployeeData == null)
-            {
-                EmployeeData employeeData =
-                    _worldDataService.WorldData.PlayerData.PurchasedEmployees.FirstOrDefault(x => x.Id == id);
+            EmployeeData employeeData =
+                _worldDataService.WorldData.PlayerData.PurchasedEmployees.FirstOrDefault(x => x.Id == id);
 
-                targetUpgradeEmployeeData = new()
-                {
-                    EmployeeData = employeeData
-                };
-            }
-
-            return targetUpgradeEmployeeData;
+            data = new UpgradeEmployeeData() { EmployeeData = employeeData };
+            return data;
         }
-        
+
         public void TryAddUpgradeEmployeeData(UpgradeEmployeeData upgradeEmployeeData)
         {
-            if (_worldDataService.WorldData.UpgradeEmployeeDatas
-                    .Count(x => x.EmployeeData.Id == upgradeEmployeeData.EmployeeData.Id) == 0)
-            {
-                _worldDataService.WorldData.UpgradeEmployeeDatas.Add(upgradeEmployeeData);
-            }
+            _worldDataService.WorldData.UpgradeEmployeeDatas.TryAdd(upgradeEmployeeData.EmployeeData.Id,
+                upgradeEmployeeData);
         }
 
         public void OverwritePurchasedEmployeeData(EmployeeData employeeData)
@@ -100,33 +91,15 @@ namespace CodeBase.Services.Employee
 
         public void SaveUpgradeEmployeeData(UpgradeEmployeeData upgradeEmployeeData)
         {
-            List<UpgradeEmployeeData> upgradeEmployeeDatas = _worldDataService.WorldData.UpgradeEmployeeDatas;
-
-            if (upgradeEmployeeDatas.Count(x => x.EmployeeData.Id == upgradeEmployeeData.EmployeeData.Id) > 0)
-                upgradeEmployeeDatas.RemoveAll(x =>
-                    x.EmployeeData.Id == upgradeEmployeeData.EmployeeData.Id);
-
-            _worldDataService.WorldData.UpgradeEmployeeDatas.Add(upgradeEmployeeData);
+            _worldDataService.WorldData.UpgradeEmployeeDatas[upgradeEmployeeData.EmployeeData.Id] = upgradeEmployeeData;
             _worldDataService.Save();
         }
 
         private void ResetUpdatedUpgradedData(string id)
         {
-            List<UpgradeEmployeeData> upgradeEmployeeDatas = _worldDataService.WorldData.UpgradeEmployeeDatas;
+            _worldDataService.WorldData.UpgradeEmployeeDatas[id].Reset();
 
-            var filteredList = upgradeEmployeeDatas.Where(upgradeEmployeeData => upgradeEmployeeData.EmployeeData.Id == id).ToList();
-
-            foreach (UpgradeEmployeeData upgradeEmployeeData in filteredList) 
-                upgradeEmployeeData.Reset();
-
-            _worldDataService.WorldData.UpgradeEmployeeDatas = filteredList;
             _worldDataService.Save();
         }
-        
-        private UpgradeEmployeeData GetTargetUpgradeEmployeeData(string id) =>
-            _worldDataService.WorldData
-                .UpgradeEmployeeDatas
-                .FirstOrDefault(x =>
-                    x.EmployeeData.Id == id);
     }
 }

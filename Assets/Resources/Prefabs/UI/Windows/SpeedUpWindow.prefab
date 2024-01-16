@@ -258,6 +258,7 @@ GameObject:
   - component: {fileID: 2606229019834932069}
   - component: {fileID: 5372979017164402352}
   - component: {fileID: 1881288540138739104}
+  - component: {fileID: 3569343151327376504}
   m_Layer: 5
   m_Name: SkipTicketContainer
   m_TagString: Untagged
@@ -363,6 +364,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetAnchoredScale: {x: 520, y: 180}
   _animationDuration: 0.2
+--- !u!114 &3569343151327376504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360783992787632313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c934f669bfd84432a926d47a9a3d2e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetScale: 1
+  _unScale: 0
+  _scaleDuration: 0.2
+  _unScaleDuration: 0.1
+  _rectTransform: {fileID: 3504070304116301522}
+  _scaleX: 1
+  _scaleY: 0
+  _scaleZ: 0
 --- !u!1 &1613926060250051621
 GameObject:
   m_ObjectHideFlags: 0
@@ -1005,6 +1026,7 @@ GameObject:
   - component: {fileID: 6517248642217228185}
   - component: {fileID: 4598716508263483196}
   - component: {fileID: 4528243957596073027}
+  - component: {fileID: 4748577794442728335}
   m_Layer: 5
   m_Name: SkipAdContainer
   m_TagString: Untagged
@@ -1110,6 +1132,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetAnchoredScale: {x: 520, y: 180}
   _animationDuration: 0.2
+--- !u!114 &4748577794442728335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3453409233245992565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c934f669bfd84432a926d47a9a3d2e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetScale: 1
+  _unScale: 0
+  _scaleDuration: 0.2
+  _unScaleDuration: 0.1
+  _rectTransform: {fileID: 6102517689899087182}
+  _scaleX: 1
+  _scaleY: 0
+  _scaleZ: 0
 --- !u!1 &3484083511069368306
 GameObject:
   m_ObjectHideFlags: 0
@@ -1123,6 +1165,7 @@ GameObject:
   - component: {fileID: 5684164466662167616}
   - component: {fileID: 6880153912565848807}
   - component: {fileID: 4149647926052366443}
+  - component: {fileID: 3166239155099749926}
   m_Layer: 5
   m_Name: SkipDiamondContainer
   m_TagString: Untagged
@@ -1228,6 +1271,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetAnchoredScale: {x: 520, y: 180}
   _animationDuration: 0.2
+--- !u!114 &3166239155099749926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3484083511069368306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c934f669bfd84432a926d47a9a3d2e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetScale: 1
+  _unScale: 0
+  _scaleDuration: 0.2
+  _unScaleDuration: 0.1
+  _rectTransform: {fileID: 1444266078844946316}
+  _scaleX: 1
+  _scaleY: 0
+  _scaleZ: 0
 --- !u!1 &3579672476976567884
 GameObject:
   m_ObjectHideFlags: 0
@@ -1513,10 +1576,15 @@ MonoBehaviour:
   _skipDiamondText: {fileID: 7795807104178890694}
   _remainingTimeSlider: {fileID: 7827235642959100324}
   _skipAdItem: {fileID: 3453409233245992565}
-  _skipTicketItem: {fileID: 1360783992787632313}
-  _skipDiamondItem: {fileID: 3484083511069368306}
   _completedItem: {fileID: 7099889302470877850}
+  _transformScaleAnims:
+  - {fileID: 4748577794442728335}
+  - {fileID: 3166239155099749926}
+  - {fileID: 3569343151327376504}
   _sliderFillSpeed: 15
+  _checkOutButtons:
+  - {fileID: 6505716057801819997}
+  - {fileID: 2364760462253017232}
 --- !u!223 &5053316395763514578
 Canvas:
   m_ObjectHideFlags: 0
@@ -3004,6 +3072,7 @@ GameObject:
   - component: {fileID: 2169147486906013800}
   - component: {fileID: 9103271514847340330}
   - component: {fileID: 6743914516447148856}
+  - component: {fileID: 2364760462253017232}
   m_Layer: 5
   m_Name: SkipTicketButton
   m_TagString: Untagged
@@ -3238,6 +3307,20 @@ MonoBehaviour:
   _audioSource: {fileID: 9103271514847340330}
   _button: {fileID: 2769457262679891305}
   _setParent: 0
+--- !u!114 &2364760462253017232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7637607352382541723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10f3a1b7cce942cba07ff02b301ef191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Value: 1000
+  ItemTypeId: 2
 --- !u!1 &8356932166437903104
 GameObject:
   m_ObjectHideFlags: 0
@@ -3253,6 +3336,7 @@ GameObject:
   - component: {fileID: 6144058585541850248}
   - component: {fileID: 5253050266262760035}
   - component: {fileID: 5132950770251277091}
+  - component: {fileID: 6505716057801819997}
   m_Layer: 5
   m_Name: SkipDiamondButton
   m_TagString: Untagged
@@ -3487,6 +3571,20 @@ MonoBehaviour:
   _audioSource: {fileID: 5253050266262760035}
   _button: {fileID: 3100445422777565890}
   _setParent: 0
+--- !u!114 &6505716057801819997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8356932166437903104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10f3a1b7cce942cba07ff02b301ef191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Value: 1000
+  ItemTypeId: 1
 --- !u!1 &8695199020792307659
 GameObject:
   m_ObjectHideFlags: 0

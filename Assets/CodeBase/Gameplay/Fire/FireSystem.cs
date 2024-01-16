@@ -37,6 +37,7 @@ namespace CodeBase.Gameplay.Fire
             _triggerObserver.TriggerEntered += OnSmoked;
             _changeMaterialTriggerObserver.TriggerEntered += SetObjectToChangeMaterial;
             _fire.Play();
+            _fireSound.Play();
             StartCoroutine(StartDisableTimer());
         }
 
@@ -89,6 +90,7 @@ namespace CodeBase.Gameplay.Fire
         {
             _fire.Stop();
             _fireService.Reset();
+            _fireSound.Stop();
             _destroyed = true;
             Destroy(gameObject, _destroyTime);
         }
@@ -97,8 +99,6 @@ namespace CodeBase.Gameplay.Fire
         {
             if (_destroyed)
                 return;
-            
-            _fireSound.Play();
             
             foreach (var burnable in _burnableObjects.Values)
             {

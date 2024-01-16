@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using CodeBase.Animations;
 using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Extensions;
 using CodeBase.Services.Employee;
 using CodeBase.Services.WorldData;
+using CodeBase.UI.Buttons;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,11 +27,11 @@ namespace CodeBase.UI.SpeedUp
         [SerializeField] private TMP_Text _skipDiamondText;
         [SerializeField] private Slider _remainingTimeSlider;
         [SerializeField] private GameObject _skipAdItem;
-        [SerializeField] private GameObject _skipTicketItem;
-        [SerializeField] private GameObject _skipDiamondItem;
         [SerializeField] private GameObject _completedItem;
+        [SerializeField] private List<RectTransformScaleAnim> _transformScaleAnims;
         [SerializeField] private float _sliderFillSpeed = 15f;
-
+        [SerializeField] private List<CheckOutButton> _checkOutButtons;
+        
         private float _initialSliderValue;
         private float _currentTime;
         private float _totalTime;
@@ -47,11 +50,17 @@ namespace CodeBase.UI.SpeedUp
         private void OnDestroy() =>
             SaveLastUpgradeTime();
 
-        public override void Open() =>
+        public override void Open()
+        {
+            _checkOutButtons.ForEach(x =>x.Successful += SetAnimatedFinished);
             _canvasAnimator.FadeInCanvas();
+        }
 
-        public override void Close() =>
+        public override void Close()
+        {
             _canvasAnimator.FadeOutCanvas(base.Close);
+            _checkOutButtons.ForEach(x =>x.Successful -= SetAnimatedFinished);
+        }
 
         public void Init(UpgradeEmployeeData upgradeEmployeeData)
         {
@@ -64,6 +73,13 @@ namespace CodeBase.UI.SpeedUp
                 StopCoroutine(StartDecreaseTimeCoroutine());
 
             _timeCoroutine = StartCoroutine(StartDecreaseTimeCoroutine());
+        }
+
+        private void SetAnimatedFinished()
+        {
+            _transformScaleAnims.ForEach(x => x.UnScale());
+            StopCoroutine(StartDecreaseTimeCoroutine());
+            _remainingTimeSlider.DOValue(_remainingTimeSlider.maxValue, 0.5f).OnComplete(SetCompleted);
         }
 
         private bool TryToSetCompleted(double passedMinutes, float targetCompletedValue)
@@ -79,9 +95,7 @@ namespace CodeBase.UI.SpeedUp
 
         private void SetCompleted()
         {
-            _skipAdItem.SetActive(false);
-            _skipDiamondItem.SetActive(false);
-            _skipTicketItem.SetActive(false);
+            _transformScaleAnims.ForEach(x => x.UnScale());
             _completedItem.SetActive(true);
             _upgradeEmployeeData.SetCompleted(true);
             _upgradeEmployeeData.Completed = true;

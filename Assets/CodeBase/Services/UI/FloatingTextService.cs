@@ -41,7 +41,7 @@ namespace CodeBase.Services.UI
             _targetText = targetFloatingTextView.Text;
             targetFloatingTextView.Init(position, _enumTextPool, this);
         }
-        
+
         public void ShowFloatingText(FloatingTextType floatingTextType, Transform parent, Vector3 position, string text)
         {
             FloatingTextView targetFloatingTextView = _enumTextPool.Pop(parent, floatingTextType);
@@ -49,8 +49,9 @@ namespace CodeBase.Services.UI
             _targetText = targetFloatingTextView.Text;
             targetFloatingTextView.Init(position, _enumTextPool, this);
         }
-        
-        public void ShowFloatingText(FloatingTextType floatingTextType, Transform parent, Vector3 position, string text, float anchoredPos, float duration)
+
+        public void ShowFloatingText(FloatingTextType floatingTextType, Transform parent, Vector3 position, string text,
+            float anchoredPos, float duration)
         {
             FloatingTextView targetFloatingTextView = _enumTextPool.Pop(parent, floatingTextType);
             targetFloatingTextView.Text.text = text;
@@ -118,15 +119,9 @@ namespace CodeBase.Services.UI
             _targetText.text = text;
 
             _targetText.gameObject.SetActive(true);
-            _targetText.rectTransform.rotation = rotation;
-        }
 
-        private void ConfigureText(Quaternion rotation, Vector3 at, string text)
-        {
-            _targetText.text = text;
-            _targetText.transform.position = at;
-            _targetText.gameObject.SetActive(true);
-            _targetText.rectTransform.rotation = rotation;
+            if (rotation != Quaternion.identity)
+                _targetText.rectTransform.rotation = rotation;
         }
 
         private void ConfigureRectTransformAnimator(RectTransformAnimator rectTransformAnimator, float fadeInDuration)

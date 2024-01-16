@@ -40,6 +40,8 @@ namespace CodeBase.UI.Shop
             _canvasAnimator.FadeInCanvas();
 
             _walletService.Set(ItemTypeId.Money, 30000);
+            _walletService.Set(ItemTypeId.Diamond, 30000);
+            _walletService.Set(ItemTypeId.Ticket, 30000);
             _walletService.DiamondsChanged += SetDiamondCountText;
             _walletService.MoneyChanged += SetMoneyCountText;
             _walletService.TicketCountChanged += SetTicketCountText;

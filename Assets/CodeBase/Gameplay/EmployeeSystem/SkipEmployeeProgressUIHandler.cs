@@ -67,6 +67,7 @@ namespace CodeBase.Gameplay.EmployeeSystem
             Quaternion targetRotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
             _skipProgressWindow = _windowService.Get<SkipProgressSliderWindow>();
             _skipProgressWindow.transform.SetParent(_employee.transform);
+            
             _skipProgressWindow.Init(targetUpgradeEmployeeData,
                 targetUpgradeEmployeeData.LastUpgradeTime,
                 targetUpgradeEmployeeData.LastUpgradeWindowOpenedTime, targetRotation);

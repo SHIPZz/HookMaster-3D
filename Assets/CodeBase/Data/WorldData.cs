@@ -11,9 +11,8 @@ namespace CodeBase.Data
         public List<EmployeeData> PotentialEmployeeList = new();
         public WorldTimeData WorldTimeData = new();
         public List<TableData> TableDatas = new();
-        public List<UpgradeEmployeeData> UpgradeEmployeeDatas = new();
+        public Dictionary<string, UpgradeEmployeeData> UpgradeEmployeeDatas = new();
         public SettingsData SettingsData = new();
-        public PlayerRewardData PlayerRewardData = new();
         public ShopItemData ShopItemData = new();
         public Dictionary<string, MiningFarmData> MiningFarmDatas = new();
         public Dictionary<string, CircleRouletteItemData> CircleRouletteItemDatas = new();

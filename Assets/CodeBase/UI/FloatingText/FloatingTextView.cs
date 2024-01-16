@@ -46,7 +46,7 @@ namespace CodeBase.UI.FloatingText
             targetAnchoredPosition = _minRandomAnchoredPosition != 0 ? Random.Range(_minRandomAnchoredPosition, _maxRandomAnchoredPosition) : _anchoredPosition;
             
             floatingTextService.ShowFloatingText(this, targetAnchoredPosition, _duration, _fadeInDuration,
-                _fadeOutDuration, Quaternion.LookRotation(_cameraProvider.Camera.transform.forward),  at, () => floatingTextPool.Push(this, FloatingTextType));
+                _fadeOutDuration, Quaternion.identity,  at, () => floatingTextPool.Push(this, FloatingTextType));
         }
     }
 }

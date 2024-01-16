@@ -51,7 +51,8 @@ namespace CodeBase.Gameplay.ServiceTables
         private void OnServingFinished(int reward)
         {
             _timeSliderView.Disable();
-            _floatingTextService.ShowFloatingText(FloatingTextType.MoneyProfit, transform, transform.position, $"{reward}$", 2f,0.5f);
+            _floatingTextService.ShowFloatingText(FloatingTextType.MoneyProfit, transform, transform.position,
+                $"{reward}$", 2f, 0.5f);
         }
 
         private void OnCharacterEntered(Collider obj)
@@ -70,7 +71,7 @@ namespace CodeBase.Gameplay.ServiceTables
             if (obj.gameObject.layer == LayerId.Player)
             {
                 _timeSliderView.Stop();
-
+                _clientServeService.Stop();
                 _clientServeService.SetPlayerApproached(false);
                 return;
             }

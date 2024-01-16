@@ -290,7 +290,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!225 &3006367117086988917
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -721,6 +721,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 4760072686799167396}
   _button: {fileID: 529999843343757468}
+  _setParent: 0
 --- !u!114 &529999843343757468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1015,7 +1016,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: -11.1}
-  m_SizeDelta: {x: 25, y: 8}
+  m_SizeDelta: {x: 35, y: 10}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &7764065682511128790
 CanvasRenderer:
@@ -1067,7 +1068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94f7c6babaaf436eb5e0e2a5212d7677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetAnchoredScale: {x: 20, y: 6}
+  _targetAnchoredScale: {x: 30, y: 9}
   _animationDuration: 0.2
 --- !u!114 &5738487050294559350
 MonoBehaviour:
@@ -1236,6 +1237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 137133828832247441}
   _button: {fileID: 7290521848873573689}
+  _setParent: 0
 --- !u!1 &3718111503648582133
 GameObject:
   m_ObjectHideFlags: 0

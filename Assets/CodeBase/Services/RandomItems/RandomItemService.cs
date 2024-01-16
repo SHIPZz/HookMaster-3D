@@ -15,7 +15,6 @@ namespace CodeBase.Services.RandomItems
     {
         private readonly WorldTimeService _worldTimeService;
         private readonly ICoroutineRunner _coroutineRunner;
-        private readonly WaitForSecondsRealtime _minute = new(60f);
         private readonly IWorldDataService _worldDataService;
         private readonly GameItemFactory _gameItemFactory;
         private readonly LocationProvider _locationProvider;
@@ -49,18 +48,18 @@ namespace CodeBase.Services.RandomItems
                 return;
             }
 
-            _coroutineRunner.StartCoroutine(StartSpawnTimer(spawnTime));
+            _coroutineRunner.StartCoroutine(StartSpawnTimer());
         }
 
-        private IEnumerator StartSpawnTimer(int spawnTime)
+        private IEnumerator StartSpawnTimer()
         {
             while (true)
             {
-                yield return new WaitForSeconds(TimeConstantValue.ThreeMinutes);
+                yield return new WaitForSeconds(TimeConstantValue.ThreeMinutesInSeconds);
                 Transform randomSpawnPoint = GetRandomPosition();
 
                 if (_lastItem != null)
-                    Object.Destroy(_lastItem);
+                    Object.Destroy(_lastItem.gameObject);
 
                 _lastItem = _gameItemFactory.Create(GameItemType.SuitCase, randomSpawnPoint, randomSpawnPoint.position);
                 ResetTime();
