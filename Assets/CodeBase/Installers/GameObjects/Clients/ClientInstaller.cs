@@ -12,6 +12,7 @@ namespace CodeBase.Installers.GameObjects.Clients
         {
             Container.BindInstance(GetComponent<NavMeshAgent>());
             Container.BindInstance(GetComponent<Animator>());
+            Container.BindInstance(GetComponent<Transform>());
             Container.Bind<ClientAnimator>().AsSingle();
             Container.BindInterfacesAndSelfTo<ClientAnimOnMoving>().AsSingle();
             Container.BindInterfacesAndSelfTo<ClientMovement>().AsSingle();

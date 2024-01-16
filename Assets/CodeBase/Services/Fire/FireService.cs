@@ -35,11 +35,11 @@ namespace CodeBase.Services.Fire
         {
             var timeDifference = _worldTimeService.GetTimeDifferenceLastFireTimeByMinutes();
 
-            timeDifference = Mathf.Clamp(timeDifference, 0, TimeConstantValue.TenMinutes);
+            timeDifference = Mathf.Clamp(timeDifference, 0, TimeConstantValue.TwentyMinutes);
             
             Debug.Log(timeDifference);
 
-            if (timeDifference == TimeConstantValue.TenMinutes)
+            if (timeDifference == TimeConstantValue.TwentyMinutes)
             {
                 InitRandomFire();
                 return;
@@ -47,7 +47,7 @@ namespace CodeBase.Services.Fire
 
             _fireInvokeTime = _worldDataService.WorldData.FireTimeData.TargetFireInvokeTime;
 
-            _fireInvokeTime = Mathf.Clamp(_fireInvokeTime + timeDifference, 0, TimeConstantValue.TenMinutes);
+            _fireInvokeTime = Mathf.Clamp(_fireInvokeTime + timeDifference, 0, TimeConstantValue.TwentyMinutes);
 
             _coroutineRunner.StartCoroutine(StartIncreaseFireInvokeTime());
         }

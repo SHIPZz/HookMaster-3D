@@ -20,6 +20,7 @@ namespace CodeBase.Gameplay.Fire
         [SerializeField] private TriggerObserver _changeMaterialTriggerObserver;
         [SerializeField] private float _disableTime = 15f;
         [SerializeField] private float _destroyTime = 3f;
+        [SerializeField] private AudioSource _fireSound;
 
         private Dictionary<int, IBurnable> _burnableObjects = new();
         private FireService _fireService;
@@ -96,6 +97,8 @@ namespace CodeBase.Gameplay.Fire
         {
             if (_destroyed)
                 return;
+            
+            _fireSound.Play();
             
             foreach (var burnable in _burnableObjects.Values)
             {

@@ -67,8 +67,10 @@ namespace CodeBase.Gameplay.PurchaseableSystem
             if (_purchaseableItem.IsAсcessible)
                 return;
 
+            _accessButton.interactable = true;
+            
             if (!_walletService.HasEnough(ItemTypeId.Money, _purchaseableItem.Price))
-                return;
+                _accessButton.interactable = false;
 
             _priceText.text = $"{_purchaseableItem.Price}$";
             

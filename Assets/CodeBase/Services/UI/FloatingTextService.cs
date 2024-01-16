@@ -49,6 +49,16 @@ namespace CodeBase.Services.UI
             _targetText = targetFloatingTextView.Text;
             targetFloatingTextView.Init(position, _enumTextPool, this);
         }
+        
+        public void ShowFloatingText(FloatingTextType floatingTextType, Transform parent, Vector3 position, string text, float anchoredPos, float duration)
+        {
+            FloatingTextView targetFloatingTextView = _enumTextPool.Pop(parent, floatingTextType);
+            targetFloatingTextView.Text.text = text;
+            targetFloatingTextView.SetDuration(duration);
+            targetFloatingTextView.SetAnchoredPos(anchoredPos);
+            _targetText = targetFloatingTextView.Text;
+            targetFloatingTextView.Init(position, _enumTextPool, this);
+        }
 
         public void ShowFloatingText(FloatingTextView floatingTextView, float targetAnchoredPositionY,
             float duration,

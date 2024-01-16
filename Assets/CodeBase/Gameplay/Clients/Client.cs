@@ -9,7 +9,7 @@ namespace CodeBase.Gameplay.Clients
     {
         public string Id;
         public bool IsServed;
-        
+
         private ClientMovement _clientMovement;
 
         [Inject]
@@ -18,14 +18,23 @@ namespace CodeBase.Gameplay.Clients
             _clientMovement = clientMovement;
         }
 
-        public void StartMovement(Vector3 target)
+        public void SetTarget(Transform target)
         {
             _clientMovement.SetTarget(target);
         }
 
+        public void MoveBack(Action onComplete = null)
+        {
+            _clientMovement.MoveBack(onComplete);
+        }
+
+        public bool IsMovingBack() => 
+            _clientMovement.IsMovingBack();
+
         public void SetSitIdle(bool isSitIdle, Transform target)
         {
-            _clientMovement.SetSitIdle(isSitIdle, target,this);
+            _clientMovement.SetTarget(target);
+            _clientMovement.SetSitIdle(isSitIdle);
         }
 
         [Button]

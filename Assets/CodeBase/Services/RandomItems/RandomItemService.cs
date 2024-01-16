@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using CodeBase.Constant;
 using CodeBase.Enums;
+using CodeBase.Gameplay.GameItems;
 using CodeBase.Services.Coroutine;
 using CodeBase.Services.Factories.ShopItems;
 using CodeBase.Services.Providers.Location;
@@ -18,10 +19,11 @@ namespace CodeBase.Services.RandomItems
         private readonly IWorldDataService _worldDataService;
         private readonly GameItemFactory _gameItemFactory;
         private readonly LocationProvider _locationProvider;
+        private GameItemAbstract _lastItem;
 
-        public RandomItemService(WorldTimeService worldTimeService, 
+        public RandomItemService(WorldTimeService worldTimeService,
             GameItemFactory gameItemFactory,
-            ICoroutineRunner coroutineRunner, 
+            ICoroutineRunner coroutineRunner,
             IWorldDataService worldDataService, LocationProvider locationProvider)
         {
             _locationProvider = locationProvider;
@@ -36,13 +38,13 @@ namespace CodeBase.Services.RandomItems
             var timeDifference = _worldTimeService.GetTimeDifferenceByLastSpawnedRandomItemInMinutes();
             var spawnTime = _worldDataService.WorldData.RandomItemData.SpawnMinutes;
 
-            spawnTime = Mathf.Clamp(spawnTime + timeDifference, 0, TimeConstantValue.HalfMinutesInHour);
+            spawnTime = Mathf.Clamp(spawnTime + timeDifference, 0, TimeConstantValue.ThreeMinutes);
 
-            Transform randomSpawnPoint = GetRandomPosition();
-
-            if (spawnTime >= TimeConstantValue.HalfMinutesInHour)
+            if (spawnTime >= TimeConstantValue.ThreeMinutes)
             {
-                _gameItemFactory.Create(GameItemType.SuitCase, randomSpawnPoint,randomSpawnPoint.position);
+                Transform randomSpawnPoint = GetRandomPosition();
+                _lastItem = _gameItemFactory.Create(GameItemType.SuitCase, randomSpawnPoint, randomSpawnPoint.position);
+
                 ResetTime();
                 return;
             }
@@ -52,15 +54,18 @@ namespace CodeBase.Services.RandomItems
 
         private IEnumerator StartSpawnTimer(int spawnTime)
         {
-            while (spawnTime != TimeConstantValue.HalfMinutesInHour)
+            while (true)
             {
-                yield return _minute;
-                spawnTime++;
-            }
+                yield return new WaitForSeconds(TimeConstantValue.ThreeMinutes);
+                Transform randomSpawnPoint = GetRandomPosition();
 
-            Transform randomSpawnPoint = GetRandomPosition();
-            _gameItemFactory.Create(GameItemType.SuitCase, randomSpawnPoint,randomSpawnPoint.position);
-            ResetTime();
+                if (_lastItem != null)
+                    Object.Destroy(_lastItem);
+
+                _lastItem = _gameItemFactory.Create(GameItemType.SuitCase, randomSpawnPoint, randomSpawnPoint.position);
+                ResetTime();
+                // spawnTime++;
+            }
         }
 
         private Transform GetRandomPosition()

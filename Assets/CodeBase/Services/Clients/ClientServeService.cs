@@ -1,63 +1,89 @@
-﻿using System.Collections;
+﻿using System;
+using System.Threading;
+using CodeBase.Data;
 using CodeBase.Gameplay.Clients;
-using CodeBase.Services.Coroutine;
+using CodeBase.Gameplay.Wallet;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace CodeBase.Services.Clients
 {
     public class ClientServeService
     {
-        private readonly ICoroutineRunner _coroutineRunner;
+        private const float ServeTime = 2f;
+        private const int ServeReward = 50;
         private readonly ClientObjectService _clientObjectService;
         private bool _isPlayerAroundTable;
         private bool _isClientApproached;
         private Client _currentClient;
-        private Vector3 _servePoint;
+        private Transform _servePoint;
+        private CancellationTokenSource _serveTokenSource = new CancellationTokenSource();
+        private readonly WalletService _walletService;
 
-        public ClientServeService(ClientObjectService clientObjectService,  ICoroutineRunner coroutineRunner)
+        public event Action<float> Started;
+        public event Action<int> Finished;
+
+        public ClientServeService(ClientObjectService clientObjectService, WalletService walletService)
         {
+            _walletService = walletService;
             _clientObjectService = clientObjectService;
-            _coroutineRunner = coroutineRunner;
         }
 
-        public void SetPlayerApproached(bool isApproached)
+        public async void SetPlayerApproached(bool isApproached)
         {
             _isPlayerAroundTable = isApproached;
-            TryStartServing();
+
+            try
+            {
+                await TryStartServing();
+            }
+            catch (Exception e)
+            {
+                
+            }
         }
 
-        public void SetClientApproached(bool isApproached, Client client)
+        public async void SetClientApproached(bool isApproached, Client client)
         {
             _currentClient = client;
             _isClientApproached = isApproached;
-            TryStartServing();
+
+            try
+            {
+                await TryStartServing();
+            }
+            catch (Exception e)
+            {
+                
+            }
         }
 
-        public void SetTargetServePoint(Vector3 servePoint)
-        {
+        public void SetTargetServePoint(Transform servePoint) =>
             _servePoint = servePoint;
-        }
 
-        public void TryStartServing()
+        private async UniTask TryStartServing()
         {
-            Debug.Log(_isPlayerAroundTable);
-            Debug.Log(_isClientApproached);
-            
-            _clientObjectService.ActivateNextClient(_servePoint);
-            if (_isClientApproached && _isPlayerAroundTable)
-                _coroutineRunner.StartCoroutine(StartServeCoroutine());
-        }
+            if (_currentClient == null)
+                _clientObjectService.ActivateNextClient(_servePoint);
 
-        private IEnumerator StartServeCoroutine()
-        {
-            yield return new WaitForSeconds(2f);
+            if (!_isClientApproached || !_isPlayerAroundTable)
+                return;
+
+            _serveTokenSource?.Cancel();
+            _serveTokenSource?.Dispose();
+            _serveTokenSource = new CancellationTokenSource();
+            Started?.Invoke(ServeTime);
+            await UniTask.WaitForSeconds(ServeTime).AttachExternalCancellation(_serveTokenSource.Token);
             OnServeFinished();
         }
 
         private void OnServeFinished()
         {
-            _clientObjectService.SetServed(_currentClient.Id);
-            _clientObjectService.ActivateNextClient(_servePoint);
+            _isClientApproached = false;
+            _walletService.Set(ItemTypeId.Money, ServeReward);
+            Finished?.Invoke(ServeReward);
+            _clientObjectService.SetServed(_currentClient.Id,
+                () => _clientObjectService.ActivateNextClient(_servePoint));
         }
     }
 }

@@ -229,7 +229,7 @@ MonoBehaviour:
   <FloatingTextType>k__BackingField: 1
   <Text>k__BackingField: {fileID: 3099549938088542283}
   _duration: 2
-  _anchoredPosition: 5
+  _anchoredPosition: 2
   _fadeInDuration: 0.1
   _fadeOutDuration: 1.5
   _minRandomAnchoredPosition: 2

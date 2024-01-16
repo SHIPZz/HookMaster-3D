@@ -31,7 +31,11 @@ namespace CodeBase.UI.FloatingText
         }
         
         private void Awake() => 
-            _initialPosition = transform.position; 
+            _initialPosition = transform.position;
+
+        public void SetDuration(float duration) => _duration = duration;
+        
+        public void SetAnchoredPos(float pos) => _anchoredPosition = pos;
 
         public void Init(Vector3 at, EnumObjectPool<FloatingTextView, Transform, FloatingTextType> floatingTextPool, FloatingTextService floatingTextService)
         {
@@ -42,19 +46,6 @@ namespace CodeBase.UI.FloatingText
             targetAnchoredPosition = _minRandomAnchoredPosition != 0 ? Random.Range(_minRandomAnchoredPosition, _maxRandomAnchoredPosition) : _anchoredPosition;
             
             floatingTextService.ShowFloatingText(this, targetAnchoredPosition, _duration, _fadeInDuration,
-                _fadeOutDuration, Quaternion.LookRotation(_cameraProvider.Camera.transform.forward),  at, () => floatingTextPool.Push(this, FloatingTextType));
-        }
-        
-        public void Init(Vector3 at, EnumObjectPool<FloatingTextView, Transform, FloatingTextType> floatingTextPool, 
-            FloatingTextService floatingTextService,float targetPositionY, float duration)
-        {
-            transform.position = _initialPosition;
-
-            float targetAnchoredPosition = 0;
-
-            targetAnchoredPosition = _minRandomAnchoredPosition != 0 ? Random.Range(_minRandomAnchoredPosition, _maxRandomAnchoredPosition) : _anchoredPosition;
-            
-            floatingTextService.ShowFloatingText(this, targetPositionY, duration, _fadeInDuration,
                 _fadeOutDuration, Quaternion.LookRotation(_cameraProvider.Camera.transform.forward),  at, () => floatingTextPool.Push(this, FloatingTextType));
         }
     }

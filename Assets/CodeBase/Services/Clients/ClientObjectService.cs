@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Gameplay.Clients;
 using CodeBase.Services.Providers.Couchs;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace CodeBase.Services.Clients
@@ -26,31 +28,38 @@ namespace CodeBase.Services.Clients
 
             foreach (Client client in _createdClients)
             {
-               Transform sitPlace = _couchService.GetSitPlace();
-               
-               if(sitPlace == null)
-                   return;
-               
-               client.SetSitIdle(true, sitPlace);
+                Transform sitPlace = _couchService.GetSitPlace();
+
+                if (sitPlace == null)
+                    return;
+
+                client.SetSitIdle(true, sitPlace);
             }
         }
 
-        public void SetSit(Transform target)
-        {
-            
-        }
-
-        public void ActivateNextClient(Vector3 servePoint)
+        public void ActivateNextClient(Transform servePoint)
         {
             Client targetClient = _createdClients.FirstOrDefault(x => x.IsServed == false);
-            targetClient.StartMovement(servePoint);
+
+            if (targetClient == null)
+            {
+                _createdClients.ForEach(x => x.IsServed = false);
+            }
+
+            targetClient = _createdClients.FirstOrDefault(x => x.IsServed == false);
+            
+            targetClient.SetSitIdle(false, servePoint);
+            targetClient.SetTarget(servePoint);
         }
 
-        public void SetServed(string id)
+        public void SetServed(string id, Action onComplete = null)
         {
             _lastClient = _createdClients.FirstOrDefault(x => x.Id == id);
             _lastClient.IsServed = true;
-            _lastClient.gameObject.SetActive(false);
+            _lastClient.MoveBack(onComplete);
+
+            // Transform sitPlace = _couchService.GetSitPlace();
+            // _lastClient.SetSitIdle(true, sitPlace);
         }
     }
 }

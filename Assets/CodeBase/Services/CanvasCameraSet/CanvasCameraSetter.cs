@@ -22,18 +22,10 @@ namespace CodeBase.Services.CanvasCameraSet
         {
             _canvas = GetComponent<Canvas>();
             _cameraProvider = cameraProvider;
-            _canvas.worldCamera = _cameraProvider.Camera;
         }
 
-        // private void Awake() => 
-
-        private async void OnEnable()
+        private void Start()
         {
-            while (_cameraProvider.Camera == null)
-            {
-                await UniTask.Yield();
-            }
-            
             _canvas.worldCamera = _cameraProvider.Camera;
             _canvas.sortingLayerName = Enum.GetName(typeof(SortingLayerTypeId), _sortingLayerTypeId);
             _canvas.planeDistance = _planeDistance;
