@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
 
 namespace CodeBase.Animations
@@ -16,33 +17,33 @@ namespace CodeBase.Animations
 
         private Tween _tween;
 
-        public void ToScale()
+        public void ToScale(Action onComplete = null)
         {
-            SetTween(Vector3.one * _targetScale, _scaleDuration);
+            SetTween(Vector3.one * _targetScale, _scaleDuration, onComplete);
         }
 
-        public void UnScale()
+        public void UnScale(Action onComplete = null)
         {
-            SetTween(Vector3.one * _unScale, _unScaleDuration);
+            SetTween(Vector3.one * _unScale, _unScaleDuration,onComplete);
         }
 
-        private void SetTween(Vector3 scale, float duration)
+        private void SetTween(Vector3 scale, float duration, Action onComplete = null)
         {
             _tween?.Kill(true);
 
             switch (true)
             {
                 case bool _ when _scaleX:
-                    _tween = _rectTransform.DOScaleX(scale.x, duration);
+                    _tween = _rectTransform.DOScaleX(scale.x, duration).OnComplete(()=>onComplete?.Invoke());
                     break;
                 case bool _ when _scaleY:
-                    _tween = _rectTransform.DOScaleY(scale.y, duration);
+                    _tween = _rectTransform.DOScaleY(scale.y, duration).OnComplete(()=>onComplete?.Invoke());
                     break;
                 case bool _ when _scaleZ:
-                    _tween = _rectTransform.DOScaleZ(scale.z, duration);
+                    _tween = _rectTransform.DOScaleZ(scale.z, duration).OnComplete(()=>onComplete?.Invoke());
                     break;
                 default:
-                    _tween = _rectTransform.DOScale(scale, duration);
+                    _tween = _rectTransform.DOScale(scale, duration).OnComplete(()=>onComplete?.Invoke());
                     break;
             }
         }

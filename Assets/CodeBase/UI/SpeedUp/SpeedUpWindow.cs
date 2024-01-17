@@ -6,8 +6,11 @@ using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Extensions;
 using CodeBase.Services.Employee;
+using CodeBase.Services.Window;
 using CodeBase.Services.WorldData;
 using CodeBase.UI.Buttons;
+using CodeBase.UI.Upgrade;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -31,7 +34,8 @@ namespace CodeBase.UI.SpeedUp
         [SerializeField] private List<RectTransformScaleAnim> _transformScaleAnims;
         [SerializeField] private float _sliderFillSpeed = 15f;
         [SerializeField] private List<CheckOutButton> _checkOutButtons;
-        
+        [SerializeField] private float _destroyDelayOnCompleted = 0.5f;
+
         private float _initialSliderValue;
         private float _currentTime;
         private float _totalTime;
@@ -39,27 +43,36 @@ namespace CodeBase.UI.SpeedUp
         private IWorldDataService _worldDataService;
         private Coroutine _timeCoroutine;
         private EmployeeDataService _employeeDataService;
+        private WindowService _windowService;
 
         [Inject]
-        private void Construct(IWorldDataService worldDataService, EmployeeDataService employeeDataService)
+        private void Construct(IWorldDataService worldDataService, EmployeeDataService employeeDataService,
+            WindowService windowService)
         {
+            _windowService = windowService;
             _employeeDataService = employeeDataService;
             _worldDataService = worldDataService;
         }
 
-        private void OnDestroy() =>
+        private void OnDestroy()
+        {
             SaveLastUpgradeTime();
+        }
 
         public override void Open()
         {
-            _checkOutButtons.ForEach(x =>x.Successful += SetAnimatedFinished);
+            _checkOutButtons.ForEach(x => x.Successful += SetAnimatedFinished);
             _canvasAnimator.FadeInCanvas();
         }
 
         public override void Close()
         {
-            _canvasAnimator.FadeOutCanvas(base.Close);
-            _checkOutButtons.ForEach(x =>x.Successful -= SetAnimatedFinished);
+            _canvasAnimator.FadeOutCanvas(() =>
+            {
+                OpenCompletedWindow();
+                base.Close();
+            });
+            _checkOutButtons.ForEach(x => x.Successful -= SetAnimatedFinished);
         }
 
         public void Init(UpgradeEmployeeData upgradeEmployeeData)
@@ -93,14 +106,16 @@ namespace CodeBase.UI.SpeedUp
             return false;
         }
 
-        private void SetCompleted()
+        private async void SetCompleted()
         {
-            _transformScaleAnims.ForEach(x => x.UnScale());
+            SaveLastUpgradeTime();
             _completedItem.SetActive(true);
             _upgradeEmployeeData.SetCompleted(true);
             _upgradeEmployeeData.Completed = true;
             _remainingTimeText.text = "Completed";
-            SaveLastUpgradeTime();
+            _transformScaleAnims.ForEach(x => x.UnScale());
+            await UniTask.WaitForSeconds(_destroyDelayOnCompleted);
+            Close();
         }
 
         private void SaveLastUpgradeTime()
@@ -138,6 +153,13 @@ namespace CodeBase.UI.SpeedUp
 
             _remainingTimeSlider.value = _remainingTimeSlider.maxValue;
             TryToSetCompleted(_remainingTimeSlider.value, 0);
+        }
+
+        private void OpenCompletedWindow()
+        {
+            var upgradeCompletedWindow = _windowService.Get<UpgradeEmployeeCompletedWindow>();
+            upgradeCompletedWindow.Init(_upgradeEmployeeData.EmployeeData);
+            upgradeCompletedWindow.Open();
         }
 
         private bool NeedCloseAdItem(float minutes) =>

@@ -48,10 +48,10 @@ namespace CodeBase.UI.Upgrade
         public void Init(EmployeeData employeeData)
         {
             _employeeData = employeeData;
-            _oldProfitText.text = $"Profit: {_employeeData.Profit}$";
-            _oldSalaryText.text = $"Salary: {_employeeData.Salary}$";
-            _oldQualificationTypeText.text = $"QualificationType: {_employeeData.QualificationType}";
-            _nameText.text = $"Name: {_employeeData.Name}";
+            _oldProfitText.text = $"{_employeeData.Profit}$";
+            _oldSalaryText.text = $"{_employeeData.Salary}$";
+            _oldQualificationTypeText.text = $"{_employeeData.QualificationType}";
+            _nameText.text = $"{_employeeData.Name}";
         }
     }
 }
