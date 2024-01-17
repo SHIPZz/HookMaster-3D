@@ -155,8 +155,8 @@ namespace CodeBase.Services.Mining
         {
             miningFarmItem.WorkingMinutes = workingMinutes;
             miningFarmItem.ProfitPerMinute = profitPerMinute;
-            miningFarmItem.NeedClean = needClean;
             miningFarmItem.SetTemperatures(minTemp, midTemp, maxTemp);
+            miningFarmItem.SetNeedClean(needClean);
         }
     }
 }

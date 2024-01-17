@@ -5,6 +5,8 @@ namespace CodeBase.Gameplay.PlayerSystem
 {
     public class PlayerIKService
     {
+        public bool HasItemInHands { get; private set; }
+        
         private FullBodyBipedIK _fullBodyBipedIK;
 
         public void Set(FullBodyBipedIK fullBodyBipedIK) =>
@@ -12,6 +14,7 @@ namespace CodeBase.Gameplay.PlayerSystem
         
         public void SetIKHandTargets(Transform leftHandTarget, Transform rightHandTarget)
         {
+            HasItemInHands = true;
             _fullBodyBipedIK.solver.leftHandEffector.target = leftHandTarget;
             _fullBodyBipedIK.solver.rightHandEffector.target = rightHandTarget;
             SetIKHandWeights(1);
@@ -22,6 +25,7 @@ namespace CodeBase.Gameplay.PlayerSystem
             _fullBodyBipedIK.solver.leftHandEffector.target = null;
             _fullBodyBipedIK.solver.rightHandEffector.target = null;
             SetIKHandWeights(0);
+            HasItemInHands = false;
         }
 
         private void SetIKHandWeights(float weight)

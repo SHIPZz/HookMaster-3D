@@ -1,13 +1,10 @@
-﻿using System;
-using CodeBase.Animations;
-using CodeBase.Enums;
+﻿using CodeBase.Animations;
 using CodeBase.Gameplay.GameItems;
 using CodeBase.Services.Mining;
 using CodeBase.Services.ShopItemData;
 using TMPro;
 using UnityEngine;
 using Zenject;
-using Random = UnityEngine.Random;
 
 namespace CodeBase.UI.MiningFarm
 {
@@ -17,6 +14,8 @@ namespace CodeBase.UI.MiningFarm
         [SerializeField] private TMP_Text _temperatureText;
         [SerializeField] private TMP_Text _perMinuteProfitText;
         [SerializeField] private TMP_Text _needCleanText;
+        [SerializeField] private GameObject _cleanButtonContainer;
+        [SerializeField] private CleanMiningFarmButton _cleanMiningFarmButton;
         
         private GameItemService _gameItemService;
         private MiningFarmService _miningFarmService;
@@ -34,6 +33,9 @@ namespace CodeBase.UI.MiningFarm
             _perMinuteProfitText.text = $"{_miningFarmItem.ProfitPerMinute}$";
             _temperatureText.text = $"{_miningFarmItem.TargetTemperature} C°";
             _needCleanText.text = _miningFarmItem.NeedClean.ToString();
+
+            if (_miningFarmItem.NeedClean) 
+                _cleanButtonContainer.SetActive(true);
         }
 
         public override void Close()
@@ -44,6 +46,7 @@ namespace CodeBase.UI.MiningFarm
         public void Init(MiningFarmItem miningFarmItem)
         {
             _miningFarmItem = miningFarmItem;
+            _cleanMiningFarmButton.SetMiningFarm(_miningFarmItem);
         }
     }
 }

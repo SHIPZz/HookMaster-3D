@@ -13,6 +13,7 @@ namespace CodeBase.UI.MiningFarm
         [SerializeField] private TriggerObserver _triggerObserver;
         [SerializeField] private RectTransformScaleAnim _buttonScaleAnim;
         [SerializeField] private OpenMiningFarmWindowButton _openMiningFarmWindowButton;
+        
         private FloatingTextService _floatingTextService;
 
         [Inject]

@@ -1079,6 +1079,8 @@ MonoBehaviour:
   _temperatureText: {fileID: 3628468558621047624}
   _perMinuteProfitText: {fileID: 3919474344857950660}
   _needCleanText: {fileID: 4383225279221958788}
+  _cleanButtonContainer: {fileID: 2684431829136036524}
+  _cleanMiningFarmButton: {fileID: 4220432876442609360}
 --- !u!1 &1872017135723679704
 GameObject:
   m_ObjectHideFlags: 0
@@ -1676,7 +1678,7 @@ GameObject:
   - component: {fileID: 8835882345468163469}
   - component: {fileID: 1409120801497375112}
   m_Layer: 0
-  m_Name: RepairButtonContainer
+  m_Name: CleanBtnContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1699,7 +1701,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 516.1544, y: -546.6901}
+  m_AnchoredPosition: {x: 516.1544, y: -744.1301}
   m_SizeDelta: {x: 1032.3088, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1409120801497375112
@@ -2168,8 +2170,9 @@ GameObject:
   - component: {fileID: 2840876819362603160}
   - component: {fileID: 3569629017376237953}
   - component: {fileID: 1482121519262190900}
+  - component: {fileID: 4220432876442609360}
   m_Layer: 0
-  m_Name: RepairButton
+  m_Name: CleanBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2190,11 +2193,11 @@ RectTransform:
   - {fileID: 6040690943149015034}
   m_Father: {fileID: 8835882345468163469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.4786885, y: 0.65000004}
-  m_AnchorMax: {x: 0.4786885, y: 0.65000004}
-  m_AnchoredPosition: {x: -2.4995995, y: -2.7502003}
-  m_SizeDelta: {x: 365.1, y: 116.6}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 47}
+  m_SizeDelta: {x: 365.1, y: 131.18}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &3447938952959395692
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2223,8 +2226,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1d73dca4c8cbb40f5ac1b06dc5a8dcbf, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: a78a26f1c21194ac0a932fb57a9141c9, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2289,7 +2292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94f7c6babaaf436eb5e0e2a5212d7677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetAnchoredScale: {x: 310, y: 105}
+  _targetAnchoredScale: {x: 310, y: 120}
   _animationDuration: 0.2
 --- !u!114 &3569629017376237953
 MonoBehaviour:
@@ -2402,6 +2405,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4220432876442609360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3612781672757742622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c409eeaed564dcd9f1b8bc6da2b7e25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3689915809634452473
 GameObject:
   m_ObjectHideFlags: 0
@@ -5411,7 +5426,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Repair
+  m_text: Clean
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: beb6899c85f8d154c9751795e3da22d0, type: 2}
   m_sharedMaterial: {fileID: -7146977075746465331, guid: beb6899c85f8d154c9751795e3da22d0, type: 2}

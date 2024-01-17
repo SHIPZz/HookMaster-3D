@@ -35,7 +35,7 @@ public class IKObjectSystem : MonoBehaviour
 
     private void OnPlayerEntered(Collision player)
     {
-        if (_isTaken)
+        if (_isTaken || _playerIKService.HasItemInHands)
             return;
         
         transform.SetParent(player.transform,true);

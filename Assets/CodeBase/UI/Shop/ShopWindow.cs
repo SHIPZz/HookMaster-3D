@@ -6,6 +6,7 @@ using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Wallet;
+using CodeBase.Services.Camera;
 using CodeBase.Services.UI;
 using CodeBase.Services.Window;
 using CodeBase.UI.Hud;
@@ -25,10 +26,12 @@ namespace CodeBase.UI.Shop
 
         private WindowService _windowService;
         private WalletService _walletService;
-        
+        private CameraService _cameraService;
+
         [Inject]
-        private void Construct(WindowService windowService, WalletService walletService)
+        private void Construct(WindowService windowService, WalletService walletService, CameraService cameraService)
         {
+            _cameraService = cameraService;
             _walletService = walletService;
             _windowService = windowService;
         }
@@ -60,6 +63,7 @@ namespace CodeBase.UI.Shop
             _canvasAnimator.FadeOutCanvas(() =>
             {
                 _windowService.Open<HudWindow>();
+                _cameraService.MoveTo();
                 base.Close();
             });
         }

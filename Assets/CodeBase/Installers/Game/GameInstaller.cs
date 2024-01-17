@@ -3,6 +3,7 @@ using CodeBase.Gameplay.PlayerSystem;
 using CodeBase.Gameplay.Wallet;
 using CodeBase.MaterialChanger;
 using CodeBase.Services.BurnableObjects;
+using CodeBase.Services.Camera;
 using CodeBase.Services.CircleRouletteServices;
 using CodeBase.Services.Clients;
 using CodeBase.Services.DataService;
@@ -86,6 +87,12 @@ namespace CodeBase.Installers.Game
             GameObjectPushService();
             BindClientServices();
             BindCouchService();
+            BindCameraService();
+        }
+
+        private void BindCameraService()
+        {
+            Container.Bind<CameraService>().AsSingle();
         }
 
         private void BindCouchService()

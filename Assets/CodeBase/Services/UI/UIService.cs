@@ -38,7 +38,7 @@ namespace CodeBase.Services.UI
             _windowService.Close<HudWindow>();
         }
 
-        public void Init(Camera camera)
+        public void Init(UnityEngine.Camera camera)
         {
             var joystickCanvas = _uiFactory.CreateElement<Canvas>(AssetPath.JoystickCanvas, _locationProvider.UIParent);
             joystickCanvas.worldCamera = camera;

@@ -12,7 +12,7 @@ namespace CodeBase.Services.ShopItemData
     {
         private readonly MiningFarmService _miningFarmService;
         private readonly CircleRouletteService _circleRouletteService;
-        
+
         public GameItemService(MiningFarmService miningFarmService, CircleRouletteService circleRouletteService)
         {
             _circleRouletteService = circleRouletteService;
@@ -30,26 +30,19 @@ namespace CodeBase.Services.ShopItemData
             switch (gameItemType)
             {
                 case GameItemType.MiningFarm:
-                    CreateMiningFarm();
-                    break;
+                    return CreateMiningFarm<T>();
 
                 case GameItemType.CircleRoulette:
-                     CreateCircleRoulette();
-                    break;
+                    return CreateCircleRoulette<T>();
             }
 
             return null;
         }
 
-        private void CreateMiningFarm()
-        {
-            _miningFarmService.CreateMiningFarm();
-        }
+        private T CreateMiningFarm<T>() where T : GameItemAbstract => 
+            _miningFarmService.CreateMiningFarm() as T;
 
-        private void CreateCircleRoulette()
-        {
-             _circleRouletteService.Create();
-
-        }
+        private T CreateCircleRoulette<T>()  where T : GameItemAbstract => 
+            _circleRouletteService.Create() as T;
     }
 }

@@ -10,6 +10,7 @@ namespace CodeBase.Gameplay.Extinguisher
     {
         [SerializeField] private ExtinguisherSystem _extinguisher;
         [SerializeField] private IKObjectSystem _ikObjectSystem;
+        [SerializeField] private GameObject _circle;
         private WindowService _windowService;
 
         [Inject]
@@ -30,6 +31,7 @@ namespace CodeBase.Gameplay.Extinguisher
 
         private void OnTaken()
         {
+            _circle.SetActive(false);
             var putOutWindow = _windowService.Get<PutOutWindow>();
             putOutWindow.Init(_extinguisher);
             putOutWindow.Open();

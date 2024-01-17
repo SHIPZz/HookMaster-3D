@@ -61,19 +61,6 @@ namespace CodeBase.Gameplay.GameItems
                 TargetTemperature = _maxTemperature;
         }
 
-        public void SetProfitPerMinute(int profitPerMinute)
-        {
-            ProfitPerMinute = profitPerMinute;
-        }
-
-        [Button]
-        private void Test()
-        {
-            _floatingTextService.ShowFloatingText(FloatingTextType.MoneyProfit, transform, transform.position,
-                $"{ProfitPerMinute}$");
-        }
-
-
         private IEnumerator StartIncreaseWorkingMinutes()
         {
             while (WorkingMinutes != TimeConstantValue.MinutesInTwoHour)
@@ -92,6 +79,13 @@ namespace CodeBase.Gameplay.GameItems
             _miningFarmService.SetNeedClean(Id, true);
             SetNeedClean(true);
             _miningFarmService.ResetLastMiningTime();
+        }
+
+        [Button]
+        private void Test()
+        {
+            _floatingTextService.ShowFloatingText(FloatingTextType.MoneyProfit, transform, transform.position,
+                $"{ProfitPerMinute}$");
         }
 
         [Button]

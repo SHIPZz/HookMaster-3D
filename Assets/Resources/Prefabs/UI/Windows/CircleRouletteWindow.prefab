@@ -539,7 +539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _closeButton: {fileID: 0}
-  _minRotationZ: 300
+  _minRotationZ: 600
   _maxRotationZ: 900
   _rotateDuration: 1.5
   _startDelay: 0.5
