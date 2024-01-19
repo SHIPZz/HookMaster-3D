@@ -15,6 +15,7 @@ namespace CodeBase.Gameplay.ServiceTables
     public class ServiceClientTable : MonoBehaviour
     {
         [SerializeField] private TriggerObserver _triggerObserver;
+        [SerializeField] private TriggerObserver _clientObserver;
         [SerializeField] private Transform _servePoint;
         [SerializeField] private TimeSliderView _timeSliderView;
 
@@ -33,6 +34,9 @@ namespace CodeBase.Gameplay.ServiceTables
             _clientServeService.SetTargetServePoint(_servePoint);
             _triggerObserver.TriggerEntered += OnCharacterEntered;
             _triggerObserver.TriggerExited += OnCharacterExited;
+            _clientObserver.TriggerEntered += OnCharacterEntered;
+            _clientObserver.TriggerExited += OnCharacterExited;
+            
             _clientServeService.Started += OnServingStarted;
             _clientServeService.Finished += OnServingFinished;
         }
@@ -41,6 +45,8 @@ namespace CodeBase.Gameplay.ServiceTables
         {
             _triggerObserver.TriggerEntered -= OnCharacterEntered;
             _triggerObserver.TriggerExited -= OnCharacterExited;
+            _clientObserver.TriggerEntered -= OnCharacterEntered;
+            _clientObserver.TriggerExited -= OnCharacterExited;
             _clientServeService.Started -= OnServingStarted;
             _clientServeService.Finished -= OnServingFinished;
         }

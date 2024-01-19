@@ -1,4 +1,4 @@
-﻿using CodeBase.Gameplay.EmployeeSystem;
+﻿using CodeBase.Gameplay.Employees;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;

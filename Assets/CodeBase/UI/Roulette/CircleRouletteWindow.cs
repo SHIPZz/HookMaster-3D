@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using CodeBase.Animations;
+using CodeBase.Gameplay;
 using CodeBase.Gameplay.GameItems;
 using CodeBase.Services.CircleRouletteServices;
-using CodeBase.Services.DataService;
 using CodeBase.Services.Reward;
 using CodeBase.Services.TriggerObserve;
 using CodeBase.Services.Window;
-using CodeBase.SO.GameItem.CircleRoulette;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -29,13 +28,13 @@ namespace CodeBase.UI.Roulette
         [SerializeField] private Transform _target;
         [SerializeField] private CanvasAnimator _canvasAnimator;
         [SerializeField] private Button _rotateButton;
-        [SerializeField] private TMP_Text _rotateCountText;
         [SerializeField] private List<RouletteItem> _rouletteItems;
         [SerializeField] private TriggerObserver _arrowTrigger;
         [SerializeField] private TMP_Text _allMoneyText;
         [SerializeField] private List<ParticleSystem> _effects;
-        [SerializeField] private AudioSource _rotateSound;
-        [SerializeField] private AudioSource _winSound;
+        [SerializeField] private SoundPlayerSystem _soundPlayerSystem;
+        [SerializeField] private ImageFadeAnim _circleFadeAnim;
+        [SerializeField] private TextAnimView _countTextAnim;
 
         private Vector3 _lastRotation;
 
@@ -99,7 +98,9 @@ namespace CodeBase.UI.Roulette
         {
             _rotated = true;
             _rotateCount = Mathf.Clamp(_rotateCount--, 0, _rotateCount);
-            _rotateCountText.text = _rotateCount.ToString(CultureInfo.InvariantCulture);
+            _countTextAnim.SetText(_rotateCount.ToString(CultureInfo.InvariantCulture));
+            _countTextAnim.DoFadeOut();
+            _circleFadeAnim.FadeOut();
 
             _rotateButton.interactable = false;
 
@@ -116,7 +117,7 @@ namespace CodeBase.UI.Roulette
         {
             yield return new WaitForSeconds(_startDelay);
 
-            _rotateSound.Play();
+            _soundPlayerSystem.PlayActiveSound();
             _lastRotation = _target.localEulerAngles;
 
             float randomRotationZ = Random.Range(_minRotationZ, _maxRotationZ);
@@ -145,8 +146,10 @@ namespace CodeBase.UI.Roulette
 
             _rotateButton.interactable = true;
             _effects.ForEach(x => x.Play());
-            _winSound.Play();
-            _rotateSound.Stop();
+            _circleFadeAnim.FadeIn();
+            _countTextAnim.DoFade();
+            _soundPlayerSystem.PlayInactiveSound();
+            _soundPlayerSystem.StopActiveSound();
 
             if (_rotateCount == 0)
             {

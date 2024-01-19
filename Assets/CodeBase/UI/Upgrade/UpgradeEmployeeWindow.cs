@@ -2,7 +2,7 @@
 using CodeBase.Data;
 using CodeBase.Extensions;
 using CodeBase.Gameplay.Wallet;
-using CodeBase.Services.Employee;
+using CodeBase.Services.Employees;
 using CodeBase.UI.Buttons;
 using TMPro;
 using UnityEngine;
@@ -19,7 +19,7 @@ namespace CodeBase.UI.Upgrade
         [SerializeField] private UpgradeEmployeeButton _upgradeEmployeeButton;
         [SerializeField] private CanvasAnimator _canvasAnimator;
 
-        private Gameplay.EmployeeSystem.Employee _employee;
+        private Gameplay.Employees.Employee _employee;
         private EmployeeDataService _employeeDataService;
         private WalletService _walletService;
 
@@ -39,7 +39,7 @@ namespace CodeBase.UI.Upgrade
         public override void Close() =>
             _canvasAnimator.FadeOutCanvas(base.Close);
 
-        public void Init(Gameplay.EmployeeSystem.Employee employee)
+        public void Init(Gameplay.Employees.Employee employee)
         {
             _employee = employee;
 

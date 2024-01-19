@@ -1,7 +1,6 @@
 ﻿using System;
-using CodeBase.Gameplay.EmployeeSystem;
+using CodeBase.Services.Employees;
 using CodeBase.Services.Factories.Employee;
-using CodeBase.Services.Providers.EmployeeProvider;
 using UnityEngine;
 using Zenject;
 

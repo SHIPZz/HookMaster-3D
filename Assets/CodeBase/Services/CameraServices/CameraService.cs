@@ -16,14 +16,14 @@ namespace CodeBase.Services.Camera
         private readonly CameraProvider _cameraProvider;
         private readonly GameItemService _gameItemService;
         private readonly WindowService _windowService;
-
+        private List<GameItemType> _shownObjects = new();
         private List<GameItemType> _targetCameraPans = new()
         {
             GameItemType.CircleRoulette,
             GameItemType.MiningFarm,
         };
         
-        private Transform _target;
+        private GameItemAbstract _target;
         private ShopWindow _shopWindow;
 
         public CameraService(CameraProvider cameraProvider, GameItemService gameItemService, WindowService windowService)
@@ -62,14 +62,17 @@ namespace CodeBase.Services.Camera
             if(!_targetCameraPans.Contains(gameItem.GameItemType))
                 return;
 
-            _target = gameItem.transform;
+            _target = gameItem;
         }
 
         private void MoveToLastTarget()
         {
-            Debug.Log("move");
+            if(_shownObjects.Contains(_target.GameItemType))
+                return;
+            
             _cameraProvider.CameraFollower.Block(true);
-            _cameraProvider.CameraFollower.MoveTo(_target);
+            _cameraProvider.CameraFollower.MoveTo(_target.transform);
+            _shownObjects.Add(_target.GameItemType);
         }
     }
 }

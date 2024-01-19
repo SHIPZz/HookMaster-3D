@@ -6,5 +6,6 @@ namespace CodeBase.Services.Providers.Camera
     {
         public UnityEngine.Camera Camera;
         public CameraFollower CameraFollower;
+        public bool Rotating;
     }
 }

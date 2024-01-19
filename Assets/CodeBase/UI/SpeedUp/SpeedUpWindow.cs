@@ -5,7 +5,7 @@ using CodeBase.Animations;
 using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Extensions;
-using CodeBase.Services.Employee;
+using CodeBase.Services.Employees;
 using CodeBase.Services.Window;
 using CodeBase.Services.WorldData;
 using CodeBase.UI.Buttons;
@@ -30,8 +30,8 @@ namespace CodeBase.UI.SpeedUp
         [SerializeField] private TMP_Text _skipDiamondText;
         [SerializeField] private Slider _remainingTimeSlider;
         [SerializeField] private GameObject _skipAdItem;
-        [SerializeField] private GameObject _completedItem;
         [SerializeField] private List<RectTransformScaleAnim> _transformScaleAnims;
+        [SerializeField] private List<RectTransformScaleAnim> _completedTextsAnims;
         [SerializeField] private float _sliderFillSpeed = 15f;
         [SerializeField] private List<CheckOutButton> _checkOutButtons;
         [SerializeField] private float _destroyDelayOnCompleted = 0.5f;
@@ -109,12 +109,18 @@ namespace CodeBase.UI.SpeedUp
         private async void SetCompleted()
         {
             SaveLastUpgradeTime();
-            _completedItem.SetActive(true);
             _upgradeEmployeeData.SetCompleted(true);
             _upgradeEmployeeData.Completed = true;
-            _remainingTimeText.text = "Completed";
+            CloseButton.gameObject.SetActive(false);
+
+            _remainingTimeText.gameObject.SetActive(false);
             _transformScaleAnims.ForEach(x => x.UnScale());
-            await UniTask.WaitForSeconds(_destroyDelayOnCompleted);
+            _completedTextsAnims.ForEach(x =>
+            {
+                x.gameObject.SetActive(true);
+                x.ToScale();
+            });
+            await UniTask.WaitForSeconds(5f);
             Close();
         }
 

@@ -17,29 +17,39 @@ namespace CodeBase.Animations
         [SerializeField] private float _colorFadeDuration = 0.5f;
         [SerializeField] private Color _fadeInColor;
         [SerializeField] private Color _fadeOutColor;
-        
+
         private Tween _tween;
         private Tween _scaleTween;
         private TMP_Text _text;
 
-        private void Awake() => 
+        private void Awake() =>
             _text = GetComponent<TMP_Text>();
 
-        public void SetText(int value) => 
+        public void SetText(int value) =>
             _text.text = value.ToString(CultureInfo.InvariantCulture);
 
-        public void SetText(string text) => 
+        public void SetText(string text) =>
             _text.text = text;
-        
-        public void SetColor(Color color) => 
+
+        public void SetColor(Color color) =>
             _text.color = color;
+
+        public void DoFade(Action onComplete = null)
+        {
+            _text.DOFade(1f, _colorFadeDuration);
+        }
+
+        public void DoFadeOut(Action onComplete = null)
+        {
+            _text.DOFade(0, _colorFadeDuration);
+        }
 
         public void DoFadeInColor(Action onComplete = null)
         {
             _tween?.Kill(true);
             _tween = _text.DOColor(_fadeInColor, _colorFadeDuration).OnComplete(() => onComplete?.Invoke());
         }
-        
+
         public void DoFadeOutColor(Action onComplete = null)
         {
             _tween?.Kill(true);
@@ -49,14 +59,15 @@ namespace CodeBase.Animations
         public void DoScale(Action onComplete = null)
         {
             _scaleTween?.Kill(true);
-            _scaleTween = _text.rectTransform.DOScale(_targetScale, _increaseScaleDuration).OnComplete(() => onComplete?.Invoke());
+            _scaleTween = _text.rectTransform.DOScale(_targetScale, _increaseScaleDuration)
+                .OnComplete(() => onComplete?.Invoke());
         }
 
         public void ResetScale(Action onComplete = null)
         {
             _scaleTween?.Kill(true);
-            _scaleTween = _text.rectTransform.DOScale(_defaultScale, _decreaseScaleDuration).OnComplete(() => onComplete?.Invoke());
+            _scaleTween = _text.rectTransform.DOScale(_defaultScale, _decreaseScaleDuration)
+                .OnComplete(() => onComplete?.Invoke());
         }
-        
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Extensions;
-using CodeBase.Gameplay.EmployeeSystem;
+using CodeBase.Gameplay.Employees;
 using CodeBase.Gameplay.TableSystem;
 using CodeBase.Services.DataService;
 using CodeBase.Services.Providers.Asset;
@@ -68,12 +68,12 @@ namespace CodeBase.Services.Factories.Employee
             return potentialEmployeeData;
         }
 
-        public Gameplay.EmployeeSystem.Employee Create(EmployeeData employeeData,
+        public Gameplay.Employees.Employee Create(EmployeeData employeeData,
             Table targetTable, bool isSit)
         {
-            var employeePrefab = _assetProvider.Get<Gameplay.EmployeeSystem.Employee>(AssetPath.Employee);
+            var employeePrefab = _assetProvider.Get<Gameplay.Employees.Employee>(AssetPath.Employee);
 
-            var employee = _diContainer.InstantiatePrefabForComponent<Gameplay.EmployeeSystem.Employee>(employeePrefab,
+            var employee = _diContainer.InstantiatePrefabForComponent<Gameplay.Employees.Employee>(employeePrefab,
                 _locationProvider.EmployeeSpawnPoint.position,
                 Quaternion.identity,
                 null);
@@ -108,7 +108,7 @@ namespace CodeBase.Services.Factories.Employee
 
     public interface IEmployeeFactory
     {
-        Gameplay.EmployeeSystem.Employee Create(EmployeeData employeeData, Table targetTable, bool isSit);
+        Gameplay.Employees.Employee Create(EmployeeData employeeData, Table targetTable, bool isSit);
 
         EmployeeData Create();
     }

@@ -18,11 +18,14 @@ namespace CodeBase.Constant
         public const string ShopItemViews = "Prefabs/UI/ShopItemViews";
         public const string FloatingTexts = "Prefabs/UI/Texts";
         public const string GameItemDatas = "Datas/GameItems";
+        public const string RandomItemDatas = "Datas/RandomItems";
         public const string GameItems = "Prefabs/GameItems";
+        public const string RandomItems = "Prefabs/RandomItems";
         public const string Extinguisher = "Prefabs/GameItems/Extinguisher";
         public const string Fire = "Prefabs/GameItems/Fire";
         public const string Settings = "Datas/UI/SettingSO";
         public const string Clients = "Prefabs/Clients";
         public const string TutorialHand = "Prefabs/UI/Tutorials/TutorialHand";
+        public const string Pointer3D = "Prefabs/UI/Tutorials/3DPointer";
     }
 }

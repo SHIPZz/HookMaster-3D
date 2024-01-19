@@ -5,6 +5,7 @@ using CodeBase.Constant;
 using CodeBase.Enums;
 using CodeBase.Gameplay.GameItems;
 using CodeBase.SO.GameItem;
+using CodeBase.SO.GameItem.RandomItems;
 using UnityEngine;
 
 namespace CodeBase.Services.DataService
@@ -13,6 +14,8 @@ namespace CodeBase.Services.DataService
     {
         private readonly Dictionary<Type, GameItemAbstractSO> _gameItemDatas;
         private readonly Dictionary<Type, GameItemAbstract> _gameItemPrefabs;
+        private readonly Dictionary<GameItemType, RandomItem> _randomItemPrefabs;
+        private readonly Dictionary<GameItemType, RandomItemSO> _randomItemDatas;
 
         public GameStaticDataService()
         {
@@ -21,10 +24,28 @@ namespace CodeBase.Services.DataService
 
             _gameItemPrefabs = Resources.LoadAll<GameItemAbstract>(AssetPath.GameItems)
                 .ToDictionary(x => x.GetType(), x => x);
+            
+            _randomItemPrefabs = Resources.LoadAll<RandomItem>(AssetPath.RandomItems)
+                .ToDictionary(x => x.GameItemType, x => x);
+            
+            _randomItemDatas = Resources.LoadAll<RandomItemSO>(AssetPath.RandomItemDatas)
+                .ToDictionary(x => x.GameItemType, x => x);
+
         }
+
+        public RandomItemSO GetRandomItemSO(GameItemType gameItemType) => 
+            _randomItemDatas[gameItemType];
 
         public T GetSO<T>() where T : GameItemAbstractSO =>
             (T)_gameItemDatas[typeof(T)];
+
+        public RandomItem GetRandomItem(GameItemType gameItemType) => 
+            _randomItemPrefabs[gameItemType];
+
+        public List<RandomItem> GetAll<T>() where T : RandomItem
+        {
+            return _randomItemPrefabs.Values.ToList();
+        }
 
         public List<T> GetAllSO<T>() where T : GameItemAbstractSO
         {

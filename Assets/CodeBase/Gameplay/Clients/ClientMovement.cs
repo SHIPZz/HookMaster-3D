@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
@@ -35,6 +36,7 @@ namespace CodeBase.Gameplay.Clients
                 return;
             
             _navMeshAgent.SetDestination(_target.position);
+            _clientTransform.rotation = Quaternion.LookRotation(_target.forward);
         }
 
         public void SetSitIdle(bool isSitIdle)
@@ -62,6 +64,7 @@ namespace CodeBase.Gameplay.Clients
             while (_clientTransform != null && Vector3.Distance(_clientTransform.position, _initialPosition) > 0.5f)
             {
                 _navMeshAgent.SetDestination(_initialPosition);
+                
                 await UniTask.Yield();
             }
 
@@ -73,7 +76,7 @@ namespace CodeBase.Gameplay.Clients
         {
             _target = target;
         }
-
+        
         public bool IsMovingBack() => 
             _isMovingBack;
     }

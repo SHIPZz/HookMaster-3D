@@ -1,7 +1,7 @@
 ﻿using System;
 using Abu;
 using CodeBase.Data;
-using CodeBase.Services.Employee;
+using CodeBase.Services.Employees;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

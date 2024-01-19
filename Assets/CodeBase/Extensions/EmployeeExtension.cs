@@ -1,6 +1,6 @@
 ﻿using System;
 using CodeBase.Data;
-using CodeBase.Gameplay.EmployeeSystem;
+using CodeBase.Gameplay.Employees;
 
 namespace CodeBase.Extensions
 {

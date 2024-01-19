@@ -4,7 +4,7 @@ using CodeBase.Animations;
 using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Extensions;
-using CodeBase.Services.Employee;
+using CodeBase.Services.Employees;
 using CodeBase.Services.Time;
 using CodeBase.Services.WorldData;
 using CodeBase.UI.Buttons;

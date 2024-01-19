@@ -55,7 +55,6 @@ namespace CodeBase.Services.Clients
         public void Stop()
         {
             _serveTokenSource?.Cancel();
-            _serveTokenSource?.Dispose();
         }
 
         public void SetTargetServePoint(Transform servePoint) =>
@@ -69,6 +68,7 @@ namespace CodeBase.Services.Clients
             if (!_isClientApproached || !_isPlayerAroundTable)
                 return;
 
+            _serveTokenSource?.Dispose();
             _serveTokenSource = new CancellationTokenSource();
             Started?.Invoke(ServeTime);
             await UniTask.WaitForSeconds(ServeTime).AttachExternalCancellation(_serveTokenSource.Token);

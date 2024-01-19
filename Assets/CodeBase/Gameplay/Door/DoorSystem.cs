@@ -68,7 +68,7 @@ namespace CodeBase.Gameplay.Door
             _isMoving = true;
             transform.DOLocalRotate(_closeRotation, _closeDuration).OnComplete(() =>
             {
-                _soundPlayerSystem.PlayInactiveClip();
+                _soundPlayerSystem.PlayInactiveSound();
                 _isMoving = false;
             });
         }

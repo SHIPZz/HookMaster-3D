@@ -1,4 +1,5 @@
-﻿using CodeBase.EntryPointSystem;
+﻿using CodeBase.Animations;
+using CodeBase.EntryPointSystem;
 using CodeBase.Gameplay.PlayerSystem;
 using CodeBase.Gameplay.Wallet;
 using CodeBase.MaterialChanger;
@@ -7,7 +8,7 @@ using CodeBase.Services.Camera;
 using CodeBase.Services.CircleRouletteServices;
 using CodeBase.Services.Clients;
 using CodeBase.Services.DataService;
-using CodeBase.Services.Employee;
+using CodeBase.Services.Employees;
 using CodeBase.Services.Extinguisher;
 using CodeBase.Services.Factories.Camera;
 using CodeBase.Services.Factories.Clients;
@@ -25,7 +26,6 @@ using CodeBase.Services.Profit;
 using CodeBase.Services.Providers.Asset;
 using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.Providers.Couchs;
-using CodeBase.Services.Providers.EmployeeProvider;
 using CodeBase.Services.Providers.Extinguisher;
 using CodeBase.Services.Providers.Fire;
 using CodeBase.Services.Providers.Location;
@@ -89,6 +89,18 @@ namespace CodeBase.Installers.Game
             BindCouchService();
             BindCameraService();
             BindTutorials();
+            BindNumberTextAnimService();
+            BindMaterialFadeAnimService();
+        }
+
+        private void BindMaterialFadeAnimService()
+        {
+            Container.Bind<MaterialFadeAnimService>().AsSingle();
+        }
+
+        private void BindNumberTextAnimService()
+        {
+            Container.Bind<NumberTextAnimService>().AsSingle();
         }
 
         private void BindTutorials()

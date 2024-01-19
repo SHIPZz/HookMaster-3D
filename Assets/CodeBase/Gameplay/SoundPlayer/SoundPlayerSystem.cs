@@ -7,10 +7,10 @@ namespace CodeBase.Gameplay
         [SerializeField] private AudioSource _activeClip;
         [SerializeField] private AudioSource _inactiveClip;
 
-        public void PlayActiveSound() => 
-            _activeClip.Play();
+        public void PlayActiveSound() => _activeClip.Play();
 
-        public void PlayInactiveClip() => 
-            _inactiveClip.Play();
+        public void PlayInactiveSound() => _inactiveClip.Play();
+
+        public void StopActiveSound() => _activeClip.Stop();
     }
 }

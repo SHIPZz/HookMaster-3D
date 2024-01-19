@@ -1,8 +1,9 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using CodeBase.Constant;
-using CodeBase.Enums;
 using CodeBase.Gameplay.GameItems;
 using CodeBase.Services.Coroutine;
+using CodeBase.Services.DataService;
 using CodeBase.Services.Factories.ShopItems;
 using CodeBase.Services.Providers.Location;
 using CodeBase.Services.Time;
@@ -18,13 +19,17 @@ namespace CodeBase.Services.RandomItems
         private readonly IWorldDataService _worldDataService;
         private readonly GameItemFactory _gameItemFactory;
         private readonly LocationProvider _locationProvider;
+        private readonly GameStaticDataService _gameStaticDataService;
         private GameItemAbstract _lastItem;
 
         public RandomItemService(WorldTimeService worldTimeService,
             GameItemFactory gameItemFactory,
             ICoroutineRunner coroutineRunner,
-            IWorldDataService worldDataService, LocationProvider locationProvider)
+            IWorldDataService worldDataService,
+            LocationProvider locationProvider,
+            GameStaticDataService gameStaticDataService)
         {
+            _gameStaticDataService = gameStaticDataService;
             _locationProvider = locationProvider;
             _gameItemFactory = gameItemFactory;
             _worldDataService = worldDataService;
@@ -38,11 +43,12 @@ namespace CodeBase.Services.RandomItems
             var spawnTime = _worldDataService.WorldData.RandomItemData.SpawnMinutes;
 
             spawnTime = Mathf.Clamp(spawnTime + timeDifference, 0, TimeConstantValue.ThreeMinutes);
-
+            
             if (spawnTime >= TimeConstantValue.ThreeMinutes)
             {
                 Transform randomSpawnPoint = GetRandomPosition();
-                _lastItem = _gameItemFactory.Create(GameItemType.SuitCase, randomSpawnPoint, randomSpawnPoint.position);
+
+                _lastItem = GetRandomItem(randomSpawnPoint, randomSpawnPoint.position);
 
                 ResetTime();
                 return;
@@ -61,7 +67,7 @@ namespace CodeBase.Services.RandomItems
                 if (_lastItem != null)
                     Object.Destroy(_lastItem.gameObject);
 
-                _lastItem = _gameItemFactory.Create(GameItemType.SuitCase, randomSpawnPoint, randomSpawnPoint.position);
+                _lastItem = GetRandomItem(randomSpawnPoint, randomSpawnPoint.position);
                 ResetTime();
             }
         }
@@ -70,6 +76,14 @@ namespace CodeBase.Services.RandomItems
         {
             var randomId = Random.Range(0, _locationProvider.RandomItemSpawnPoints.Count);
             return _locationProvider.RandomItemSpawnPoints[randomId];
+        }
+
+        private RandomItem GetRandomItem(Transform parent, Vector3 at)
+        {
+            List<RandomItem> randomItemPrefabs = _gameStaticDataService.GetAll<RandomItem>();
+            var randomPrefabId = Random.Range(0, randomItemPrefabs.Count);
+            RandomItem randomPrefab = randomItemPrefabs[randomPrefabId];
+            return _gameItemFactory.CreateRandomItem(randomPrefab.GameItemType, parent, at + randomPrefab.SpawnOffset);
         }
 
         private void ResetTime()

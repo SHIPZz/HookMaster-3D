@@ -1213,7 +1213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 489cfa8282d34d369518b2b73da84d1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _closeButton: {fileID: 2376770941499124054}
+  CloseButton: {fileID: 2376770941499124054}
   _canvasAnimator: {fileID: 4328016954209618802}
   _moneyText: {fileID: 3579701577924844164}
   _diamondText: {fileID: 8904400383473178359}

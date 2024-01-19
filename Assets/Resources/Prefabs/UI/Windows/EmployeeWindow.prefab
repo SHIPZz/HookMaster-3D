@@ -1866,7 +1866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fdb49a84c4349e793ff437739aec4ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _closeButton: {fileID: 4755222298387716723}
+  CloseButton: {fileID: 4755222298387716723}
   TutorialHandParent: {fileID: 0}
   TutorialFadeImage: {fileID: 6075868431338952314}
   _parent: {fileID: 7032306303600342493}

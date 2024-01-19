@@ -1,6 +1,6 @@
 ﻿using CodeBase.Animations;
 using CodeBase.Data;
-using CodeBase.Services.Providers.EmployeeProvider;
+using CodeBase.Services.Employees;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -15,29 +15,41 @@ namespace CodeBase.UI.Upgrade
         [SerializeField] private TMP_Text _oldSalaryText;
         [SerializeField] private TMP_Text _oldQualificationTypeText;
 
-        [Header("Upgraded data")]
-        [SerializeField] private TMP_Text _newProfitText;
+        [Header("Upgraded data")] [SerializeField]
+        private TMP_Text _newProfitText;
+
         [SerializeField] private TMP_Text _newSalaryText;
         [SerializeField] private TMP_Text _newQualificationTypeText;
+        [SerializeField] private RectTransformScaleAnim _buttonScaleAnim;
+        [SerializeField] private AudioSource _increaseValueSound;
 
         private EmployeeData _employeeData;
 
         private EmployeeService _employeeService;
+        private NumberTextAnimService _numberTextAnimService;
 
         [Inject]
-        private void Construct(EmployeeService employeeService) => 
+        private void Construct(EmployeeService employeeService, NumberTextAnimService numberTextAnimService)
+        {
+            _numberTextAnimService = numberTextAnimService;
             _employeeService = employeeService;
+        }
 
         public override void Open()
         {
             _canvasAnimator.FadeInCanvas();
+
+            _employeeService.Upgrade(_employeeData, OnComplete);
+        }
+
+        private async void OnComplete(EmployeeData newEmployeeData)
+        {
+            await _numberTextAnimService.AnimateNumber(0, newEmployeeData.QualificationType, 0.5f,
+                _newQualificationTypeText, _increaseValueSound);
+            await _numberTextAnimService.AnimateNumber(0, newEmployeeData.Salary, 1.5f, _newSalaryText, '$', _increaseValueSound);
+            await _numberTextAnimService.AnimateNumber(0, newEmployeeData.Profit, 1.5f, _newProfitText, '$', _increaseValueSound);
             
-            _employeeService.Upgrade(_employeeData, newEmployeeData =>
-            {
-                _newProfitText.text = $"{newEmployeeData.Profit}$";
-                _newSalaryText.text = $"{newEmployeeData.Salary}$";
-                _newQualificationTypeText.text = $"{newEmployeeData.QualificationType}";
-            });
+            _buttonScaleAnim.ToScale();
         }
 
         public override void Close()

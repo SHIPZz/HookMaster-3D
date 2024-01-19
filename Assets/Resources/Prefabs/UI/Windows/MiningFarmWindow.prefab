@@ -1074,7 +1074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66f7a255a89347d28d274bbfcf69c2f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _closeButton: {fileID: 709992401811474635}
+  CloseButton: {fileID: 709992401811474635}
   _canvasAnimator: {fileID: 7491707621105093695}
   _temperatureText: {fileID: 3628468558621047624}
   _perMinuteProfitText: {fileID: 3919474344857950660}

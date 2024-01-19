@@ -1,5 +1,7 @@
+using CodeBase.Services.Providers.Player;
 using UnityEngine;
 using DG.Tweening;
+using Zenject;
 
 namespace CodeBase.Gameplay.Camera
 {
@@ -15,16 +17,23 @@ namespace CodeBase.Gameplay.Camera
         private Transform _target;
         private bool _isBlocked;
         private Transform _lastPosition;
+        private PlayerProvider _playerProvider;
+
+        [Inject]
+        private void Construct(PlayerProvider playerProvider)
+        {
+            _playerProvider = playerProvider;
+        }
 
         private void LateUpdate()
         {
             if (_isBlocked)
                 return;
 
-            if (_target == null)
+            if (_playerProvider.Player == null)
                 return;
 
-            transform.position = _target.position + _offset * _speed;
+            transform.position = _playerProvider.Player.transform.position + _offset * _speed;
         }
 
         public void Block(bool isBlocked)
@@ -38,17 +47,22 @@ namespace CodeBase.Gameplay.Camera
                 .DOMove(target.position + CameraPanOffset, _movementDuration)
                 .OnComplete(() =>
                 {
-                    transform.DOMove(_lastPosition.position + _offset * _speed, _movementDuration).OnComplete(() => _isBlocked = false);
-                    transform.DORotate(_targetRotation, _movementDuration);
-                });
+                    // transform.DORotateQuaternion(Quaternion.LookRotation(target.up * -1), 0.5f);
 
-            transform.DORotateQuaternion(Quaternion.LookRotation(target.up * -1), 0.1f);
+                    transform
+                        .DOMove(_lastPosition.position + _offset * _speed, _movementDuration)
+                        .OnComplete(() =>
+                        {
+                            // transform.DORotate(_targetRotation, _movementDuration);
+                            _isBlocked = false;
+                        });
+                });
         }
 
         public void SetTarget(Transform target)
         {
             _lastPosition = _target == null ? target : _target;
-            
+
             _target = target;
         }
     }

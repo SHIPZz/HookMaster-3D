@@ -1,5 +1,4 @@
-﻿using System;
-using CodeBase.Services.Providers.Camera;
+﻿using CodeBase.Services.Providers.Camera;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -16,14 +15,13 @@ namespace CodeBase.Services.CameraRotation
 
         private async void OnEnable()
         {
-            while (_cameraProvider.Camera == null)
+            while (_cameraProvider.Camera == null || _cameraProvider.Rotating)
             {
                 await UniTask.Yield();
             }
-
-
+            
             transform.rotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
         }
-
+        
     }
 }

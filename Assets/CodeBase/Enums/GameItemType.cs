@@ -5,6 +5,7 @@
         CircleRoulette,
         MiningFarm,
         SuitCase,
-        ClientServiceDoor
+        ClientServiceDoor,
+        MoneyBag
     }
 }

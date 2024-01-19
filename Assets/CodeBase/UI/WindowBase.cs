@@ -6,12 +6,12 @@ namespace CodeBase.UI
 {
     public abstract class WindowBase : MonoBehaviour
     {
-        [SerializeField] protected Button _closeButton;
+        [SerializeField] protected Button CloseButton;
 
         private void Awake()
         {
-            if (_closeButton != null)
-                _closeButton.onClick.AddListener(Close);
+            if (CloseButton != null)
+                CloseButton.onClick.AddListener(Close);
         }
 
         public abstract void Open();

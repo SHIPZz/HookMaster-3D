@@ -57,9 +57,6 @@ namespace CodeBase.Services.Clients
             _lastClient = _createdClients.FirstOrDefault(x => x.Id == id);
             _lastClient.IsServed = true;
             _lastClient.MoveBack(onComplete);
-
-            // Transform sitPlace = _couchService.GetSitPlace();
-            // _lastClient.SetSitIdle(true, sitPlace);
         }
     }
 }

@@ -1,8 +1,7 @@
 ﻿using CodeBase.Data;
-using CodeBase.Gameplay.EmployeeSystem;
+using CodeBase.Gameplay.Employees;
 using CodeBase.Gameplay.Wallet;
-using CodeBase.Services.Employee;
-using CodeBase.Services.Providers.EmployeeProvider;
+using CodeBase.Services.Employees;
 using CodeBase.UI.SkipProgress;
 using CodeBase.UI.Upgrade;
 using TMPro;
@@ -45,7 +44,7 @@ namespace CodeBase.UI.Buttons
             _employeeDataService.RecountUpgradePriceEmployee(upgradeEmployeeData);
             _walletService.Set(ItemTypeId.Money, -_price);
             
-            Gameplay.EmployeeSystem.Employee targetEmployee = _employeeService.Get(_employeeData.Id);
+            Gameplay.Employees.Employee targetEmployee = _employeeService.Get(_employeeData.Id);
             var skipEmployeeProgressUIHandler = targetEmployee.GetComponentInChildren<SkipEmployeeProgressUIHandler>();
             skipEmployeeProgressUIHandler.ActivateWindow(upgradeEmployeeData);
             WindowService.Close<UpgradeEmployeeWindow>();

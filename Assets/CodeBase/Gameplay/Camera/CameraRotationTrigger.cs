@@ -44,7 +44,9 @@ namespace CodeBase.Gameplay.Camera
         {
             _tween?.Kill();
 
-            _tween = _cameraProvider.Camera.transform.DORotate(_initialRotation, _duration);
+            _cameraProvider.Rotating = true;
+            _tween = _cameraProvider.Camera.transform.DORotate(_initialRotation, _duration).OnComplete(() => _cameraProvider.Rotating = false);
+
         }
 
         private void RotateOnTrigger(Collider obj)
@@ -56,8 +58,8 @@ namespace CodeBase.Gameplay.Camera
             float z = Mathf.Approximately(_targetRotation.z, 0f) ? _cameraProvider.Camera.transform.eulerAngles.z : _targetRotation.z;
 
             Vector3 newTargetRotation = new Vector3(x, y, z);
-
-            _tween = _cameraProvider.Camera.transform.DORotate(newTargetRotation, _duration);
+            _cameraProvider.Rotating = true;
+            _tween = _cameraProvider.Camera.transform.DORotate(newTargetRotation, _duration).OnComplete(() => _cameraProvider.Rotating = false);
         }
     }
 }

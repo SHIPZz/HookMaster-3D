@@ -59,8 +59,8 @@ namespace CodeBase.UI.Shop
             _canvasAnimator.FadeOutCanvas(() =>
             {
                 _windowService.Open<HudWindow>();
-                Closed?.Invoke();
                 base.Close();
+                Closed?.Invoke();
             });
         }
 

@@ -5,7 +5,7 @@ using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.Coroutine;
-using CodeBase.Services.Providers.EmployeeProvider;
+using CodeBase.Services.Employees;
 using CodeBase.Services.Time;
 using CodeBase.Services.UI;
 using CodeBase.Services.WorldData;
@@ -86,7 +86,7 @@ namespace CodeBase.Services.Profit
 
         private void ReceiveProfit(int timeDifferenceByMinutes)
         {
-            foreach (Gameplay.EmployeeSystem.Employee employee in _employeeService.Employees)
+            foreach (Gameplay.Employees.Employee employee in _employeeService.Employees)
             {
                 if (!employee.IsWorking)
                     continue;
@@ -109,7 +109,7 @@ namespace CodeBase.Services.Profit
             {
                 yield return _waitMinute;
 
-                foreach (Gameplay.EmployeeSystem.Employee employee in _employeeService.Employees)
+                foreach (Gameplay.Employees.Employee employee in _employeeService.Employees)
                 {
                     if (!employee.IsWorking)
                         continue;

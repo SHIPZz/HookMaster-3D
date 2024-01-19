@@ -4,13 +4,12 @@ using Abu;
 using CodeBase.Animations;
 using CodeBase.Data;
 using CodeBase.Gameplay.TableSystem;
-using CodeBase.Services.Employee;
+using CodeBase.Services.Employees;
 using CodeBase.Services.Factories.UI;
 using CodeBase.Services.Providers.Tables;
 using CodeBase.Services.Window;
 using CodeBase.Services.WorldData;
 using CodeBase.UI.Hud;
-using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -19,7 +18,6 @@ namespace CodeBase.UI.Employee
 {
     public class EmployeeWindow : WindowBase
     {
-        public Transform TutorialHandParent;
         public TutorialFadeImage TutorialFadeImage;
 
         [SerializeField] private Transform _parent;
