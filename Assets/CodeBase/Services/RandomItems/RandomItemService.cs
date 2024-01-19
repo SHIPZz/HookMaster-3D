@@ -63,7 +63,6 @@ namespace CodeBase.Services.RandomItems
 
                 _lastItem = _gameItemFactory.Create(GameItemType.SuitCase, randomSpawnPoint, randomSpawnPoint.position);
                 ResetTime();
-                // spawnTime++;
             }
         }
 

@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using CodeBase.Enums;
 using CodeBase.Gameplay.GameItems;
 using CodeBase.Services.CircleRouletteServices;
-using CodeBase.Services.Factories.ShopItems;
 using CodeBase.Services.Mining;
-using CodeBase.Services.WorldData;
+using CodeBase.Services.RandomItems;
 
 namespace CodeBase.Services.ShopItemData
 {
@@ -12,9 +11,13 @@ namespace CodeBase.Services.ShopItemData
     {
         private readonly MiningFarmService _miningFarmService;
         private readonly CircleRouletteService _circleRouletteService;
+        private readonly RandomItemService _randomItemService;
 
-        public GameItemService(MiningFarmService miningFarmService, CircleRouletteService circleRouletteService)
+        public event Action<GameItemAbstract> Created;
+
+        public GameItemService(MiningFarmService miningFarmService, CircleRouletteService circleRouletteService, RandomItemService randomItemService)
         {
+            _randomItemService = randomItemService;
             _circleRouletteService = circleRouletteService;
             _miningFarmService = miningFarmService;
         }
@@ -23,18 +26,26 @@ namespace CodeBase.Services.ShopItemData
         {
             _miningFarmService.Init();
             _circleRouletteService.Init();
+            _randomItemService.Init();
         }
 
         public T Create<T>(GameItemType gameItemType) where T : GameItemAbstract
         {
+            GameItemAbstract gameItemAbstract = null;
+            
             switch (gameItemType)
             {
                 case GameItemType.MiningFarm:
-                    return CreateMiningFarm<T>();
+                    gameItemAbstract =  CreateMiningFarm<T>();
+                    Created?.Invoke(gameItemAbstract);
+                    return (T)gameItemAbstract;
 
                 case GameItemType.CircleRoulette:
-                    return CreateCircleRoulette<T>();
+                    gameItemAbstract = CreateCircleRoulette<T>();
+                    Created?.Invoke(gameItemAbstract);
+                    return (T)gameItemAbstract;
             }
+            
 
             return null;
         }

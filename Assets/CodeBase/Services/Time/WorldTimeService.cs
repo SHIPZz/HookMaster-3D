@@ -74,11 +74,6 @@ namespace CodeBase.Services.Time
             TimeUpdated = false;
         }
 
-        public void ResetLastMiningTime()
-        {
-            // _worldDataService.WorldData.MiningFarmDatas.LastWorkingTime = 0;
-        }
-
         public void ResetLastSpawnedRandomItemTime()
         {
             _worldDataService.WorldData.RandomItemData.LastSpawnedTime = 0;
@@ -189,6 +184,24 @@ namespace CodeBase.Services.Time
             return passedMinutes;
         }
 
+        public int GetMiningFarmLastCleanTime(string id)
+        {
+            MiningFarmData targetMiningFarmData = _worldDataService.WorldData.MiningFarmDatas[id];
+            WorldTimeData worldTimeData = _worldDataService.WorldData.WorldTimeData;
+
+            if (targetMiningFarmData.LastCleanTime == 0)
+                targetMiningFarmData.LastCleanTime = worldTimeData.CurrentTime;
+            
+            TimeSpan timeDifference = worldTimeData.CurrentTime.ToDateTime() - targetMiningFarmData.LastCleanTime.ToDateTime();
+            return (int)timeDifference.TotalMinutes;
+        }
+
+        public void SaveMiningFarmLastCleanTime(string id)
+        {
+            _worldDataService.WorldData.MiningFarmDatas[id].LastCleanTime =
+                _worldDataService.WorldData.WorldTimeData.CurrentTime;
+        }
+
         public int GetTimeDifferenceByMinutesBetweenSalaryPaymentAndCurrentTime()
         {
             WorldTimeData worldTimeData = _worldDataService.WorldData.WorldTimeData;
@@ -198,14 +211,6 @@ namespace CodeBase.Services.Time
 
             TimeSpan timeDifference = worldTimeData.CurrentTime.ToDateTime() -
                                       worldTimeData.LastSalaryPaymentTime.ToDateTime();
-            return (int)timeDifference.TotalMinutes;
-        }
-
-        public int GetLastVisitedTimeByMinutes()
-        {
-            var timeDifference = _worldDataService.WorldData.WorldTimeData.CurrentTime.ToDateTime() -
-                                 _worldDataService.WorldData.WorldTimeData.LastVisitedTime.ToDateTime();
-
             return (int)timeDifference.TotalMinutes;
         }
 

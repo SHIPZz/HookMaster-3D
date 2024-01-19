@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Abu;
 using CodeBase.Animations;
 using CodeBase.Data;
 using CodeBase.Gameplay.TableSystem;
@@ -8,6 +10,7 @@ using CodeBase.Services.Providers.Tables;
 using CodeBase.Services.Window;
 using CodeBase.Services.WorldData;
 using CodeBase.UI.Hud;
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -16,6 +19,9 @@ namespace CodeBase.UI.Employee
 {
     public class EmployeeWindow : WindowBase
     {
+        public Transform TutorialHandParent;
+        public TutorialFadeImage TutorialFadeImage;
+
         [SerializeField] private Transform _parent;
         [SerializeField] private TMP_Text _noAvailableEmployeesText;
         [SerializeField] private TMP_Text _tableCountText;
@@ -26,7 +32,9 @@ namespace CodeBase.UI.Employee
         private EmployeeHirerService _employeeHirerService;
         private IWorldDataService _worldDataService;
         private WindowService _windowService;
-
+        private List<EmployeeView> _employeeViews = new();
+        private bool _oneButtonHighlited;
+        
         [Inject]
         private void Construct(TableService tableService,
             UIFactory uiFactory,
@@ -39,8 +47,6 @@ namespace CodeBase.UI.Employee
             _employeeHirerService = employeeHirerService;
             _uiFactory = uiFactory;
             _tableService = tableService;
-            _tableService.AllTablesBusy += OnAllTablesBusy;
-            _tableService.TableConditionChanged += OnTableConditionChanged;
         }
 
         private void OnDisable()
@@ -51,6 +57,8 @@ namespace CodeBase.UI.Employee
 
         public override void Open()
         {
+            _tableService.AllTablesBusy += OnAllTablesBusy;
+            _tableService.TableConditionChanged += OnTableConditionChanged;
             _canvasAnimator.FadeInCanvas();
             _tableCountText.text = $"{_tableService.AvailableTableCount}/{_tableService.AllTableCount}";
 
@@ -73,6 +81,11 @@ namespace CodeBase.UI.Employee
             _canvasAnimator.FadeOutCanvas(base.Close);
         }
 
+        public EmployeeView GetFirstEmployeeView()
+        {
+            return _employeeViews.FirstOrDefault();
+        }
+
         private void OnTableConditionChanged()
         {
             _tableCountText.text = $"{_tableService.AvailableTableCount}/{_tableService.AllTableCount}";
@@ -89,20 +102,44 @@ namespace CodeBase.UI.Employee
         {
             if (_worldDataService.WorldData.PotentialEmployeeList.Count == 0)
             {
-                foreach (Table table in _tableService.Tables.Where(table => table.IsFree))
-                {
-                    _uiFactory.CreateEmployeeView(_parent);
-                }
+                CreateNewEmployeeViews();
 
                 return;
             }
 
-            print(_worldDataService.WorldData.PotentialEmployeeList.Count);
+            CreateByData();
+        }
+
+        private void CreateByData()
+        {
             foreach (EmployeeData potentialEmployeeData in _worldDataService.WorldData.PotentialEmployeeList)
             {
                 EmployeeView employeeView = _uiFactory.CreateDefaultEmployeeView(_parent);
                 employeeView.SetInfo(potentialEmployeeData);
+                SetTutorialHighlight(employeeView);
+                _employeeViews.Add(employeeView);
             }
+        }
+
+        private void CreateNewEmployeeViews()
+        {
+            foreach (Table table in _tableService.Tables.Where(table => table.IsFree))
+            {
+                EmployeeView employeeView = _uiFactory.CreateEmployeeView(_parent);
+                SetTutorialHighlight(employeeView);
+                _employeeViews.Add(employeeView);
+            }
+        }
+
+        private void SetTutorialHighlight(EmployeeView employeeView)
+        {
+            if(_oneButtonHighlited)
+                return;
+            
+            employeeView.TutorialHighlight.enabled = false;
+            employeeView.TutorialHighlight.tutorialFade = TutorialFadeImage;
+            employeeView.TutorialHighlight.enabled = true;
+            _oneButtonHighlited = true;
         }
 
         private bool HasFreeTables() =>

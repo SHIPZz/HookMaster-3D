@@ -6,7 +6,7 @@ namespace CodeBase.Data
     public class MiningFarmData
     {
         public string Id;
-        public long LastWorkingTime;
+        public long LastCleanTime;
         public bool NeedClean;
         public int WorkingMinutes;
         public int TargetTemperature;

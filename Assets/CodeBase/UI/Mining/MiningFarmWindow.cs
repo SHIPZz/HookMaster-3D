@@ -2,6 +2,7 @@
 using CodeBase.Gameplay.GameItems;
 using CodeBase.Services.Mining;
 using CodeBase.Services.ShopItemData;
+using CodeBase.UI.Mining;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -40,6 +41,7 @@ namespace CodeBase.UI.MiningFarm
 
         public override void Close()
         {
+            _miningFarmItem.Changed -= OnConditionChanged;
             _canvasAnimator.FadeOutCanvas(() => base.Close());
         }
 
@@ -47,6 +49,13 @@ namespace CodeBase.UI.MiningFarm
         {
             _miningFarmItem = miningFarmItem;
             _cleanMiningFarmButton.SetMiningFarm(_miningFarmItem);
+            _miningFarmItem.Changed += OnConditionChanged;
+        }
+
+        private void OnConditionChanged(float temperature, bool needClean)
+        {
+            _temperatureText.text = $"{temperature} C°";
+            _needCleanText.text = needClean.ToString();
         }
     }
 }

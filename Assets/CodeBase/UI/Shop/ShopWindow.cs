@@ -2,12 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Animations;
-using CodeBase.Constant;
 using CodeBase.Data;
-using CodeBase.Enums;
 using CodeBase.Gameplay.Wallet;
-using CodeBase.Services.Camera;
-using CodeBase.Services.UI;
 using CodeBase.Services.Window;
 using CodeBase.UI.Hud;
 using TMPro;
@@ -24,14 +20,14 @@ namespace CodeBase.UI.Shop
         [SerializeField] private TMP_Text _ticketText;
         [SerializeField] private List<ShopTabView> _shopTabViews;
 
+        public event Action Closed;
+        
         private WindowService _windowService;
         private WalletService _walletService;
-        private CameraService _cameraService;
 
         [Inject]
-        private void Construct(WindowService windowService, WalletService walletService, CameraService cameraService)
+        private void Construct(WindowService windowService, WalletService walletService)
         {
-            _cameraService = cameraService;
             _walletService = walletService;
             _windowService = windowService;
         }
@@ -63,7 +59,7 @@ namespace CodeBase.UI.Shop
             _canvasAnimator.FadeOutCanvas(() =>
             {
                 _windowService.Open<HudWindow>();
-                _cameraService.MoveTo();
+                Closed?.Invoke();
                 base.Close();
             });
         }

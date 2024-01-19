@@ -24,12 +24,11 @@ namespace CodeBase.InfraStructure
             _worldDataService = worldDataService;
         }
 
-        public async UniTaskVoid Enter()
+        public async void Enter()
         {
             DOTween.KillAll();
             DOTween.Clear();
             DOTween.Init();
-            
             
             await _worldDataService.Load();
 

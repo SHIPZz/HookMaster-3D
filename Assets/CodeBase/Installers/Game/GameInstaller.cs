@@ -88,6 +88,12 @@ namespace CodeBase.Installers.Game
             BindClientServices();
             BindCouchService();
             BindCameraService();
+            BindTutorials();
+        }
+
+        private void BindTutorials()
+        {
+            Container.Bind<TutorialRunner>().AsSingle();
         }
 
         private void BindCameraService()

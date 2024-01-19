@@ -37,8 +37,6 @@ namespace CodeBase.Services.Fire
 
             timeDifference = Mathf.Clamp(timeDifference, 0, TimeConstantValue.TwentyMinutes);
             
-            Debug.Log(timeDifference);
-
             if (timeDifference == TimeConstantValue.TwentyMinutes)
             {
                 InitRandomFire();

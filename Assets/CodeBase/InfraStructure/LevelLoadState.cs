@@ -13,7 +13,7 @@ namespace CodeBase.InfraStructure
             _loadingCurtain = loadingCurtain;
         }
 
-        public async UniTaskVoid Enter()
+        public async void Enter()
         {
             _loadingCurtain.Show(1f);
 

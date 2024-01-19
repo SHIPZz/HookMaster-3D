@@ -1,4 +1,6 @@
-﻿using CodeBase.Data;
+﻿using System;
+using Abu;
+using CodeBase.Data;
 using CodeBase.Services.Employee;
 using TMPro;
 using UnityEngine;
@@ -10,23 +12,28 @@ namespace CodeBase.UI.Employee
     [RequireComponent(typeof(Button))]
     public class EmployeeView : MonoBehaviour
     {
+        [field: SerializeField] public TutorialHighlight TutorialHighlight { get; private set; }
+        [field: SerializeField] public Button HireButton { get; private set; }
+        
         [SerializeField] private TMP_Text _nameText;
         [SerializeField] private TMP_Text _salaryText;
         [SerializeField] private TMP_Text _qualificationTypeText;
         [SerializeField] private TMP_Text _profitText;
-        [SerializeField] private Button _hireButton;
+        
         private EmployeeData _employeeData;
         private EmployeeHirerService _employeeHirerService;
+        
+        public event Action Closed;
 
         [Inject]
         private void Construct(EmployeeHirerService employeeHirerService) => 
             _employeeHirerService = employeeHirerService;
 
         private void OnEnable() =>
-            _hireButton.onClick.AddListener(OnButtonClicked);
+            HireButton.onClick.AddListener(OnButtonClicked);
 
         private void OnDisable() =>
-            _hireButton.onClick.RemoveListener(OnButtonClicked);
+            HireButton.onClick.RemoveListener(OnButtonClicked);
 
         public void SetInfo(EmployeeData employeeData)
         {
@@ -40,6 +47,7 @@ namespace CodeBase.UI.Employee
         private void OnButtonClicked()
         {
             _employeeHirerService.SetEmployee(_employeeData);
+            Closed?.Invoke();
             gameObject.SetActive(false);
         }
     }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Extensions;
@@ -25,9 +23,7 @@ namespace CodeBase.Services.Mining
         private readonly LocationProvider _locationProvider;
         private readonly GameStaticDataService _gameStaticDataService;
 
-        private List<MiningFarmItem> _createdFarms = new();
-
-        public event Action Stopped;
+        private Dictionary<string, MiningFarmItem> _createdFarms = new();
 
         public MiningFarmService(WorldTimeService worldTimeService,
             IWorldDataService worldDataService,
@@ -48,32 +44,21 @@ namespace CodeBase.Services.Mining
         {
             Dictionary<string, MiningFarmData> miningFarmDatas = _worldDataService.WorldData.MiningFarmDatas;
 
-            foreach (MiningFarmData miningFarmData in miningFarmDatas.Values)
-            {
-                var miningFarm = _gameItemFactory.Create<MiningFarmItem>(_locationProvider.MiningFarmSpawnPoint,
-                    miningFarmData.Position.ToVector());
+            CreateMiningFarmsFromData(miningFarmDatas);
 
-                _createdFarms.Add(miningFarm);
-            }
-
-            if (_createdFarms.Count == 0)
+            if (!HasCreatedFarms())
                 return;
 
-            ConfigureMiningFarms(_createdFarms, miningFarmDatas);
+            ConfigureMiningFarms(miningFarmDatas);
 
-            var timeDifference = _worldTimeService.GetLastVisitedTimeByMinutes();
-            timeDifference = Mathf.Clamp(timeDifference, 0, TimeConstantValue.MinutesInTwoHour);
-
-            if (HandleTimeDifference(timeDifference, _createdFarms))
-                return;
-
-            Stopped?.Invoke();
+            HandleTimeDifference();
         }
 
         public MiningFarmItem CreateMiningFarm()
         {
             var item = _gameItemFactory.Create<MiningFarmItem>(_locationProvider.MiningFarmSpawnPoint,
                 _locationProvider.MiningFarmSpawnPoint.position);
+
             MiningFarmSO data = _gameStaticDataService.GetSO<MiningFarmSO>();
             PrepareItem(item, 0, data.ProfitPerMinute, false,
                 data.MinTemperature, data.MidTemperature, data.MaxTemperature);
@@ -84,10 +69,8 @@ namespace CodeBase.Services.Mining
             return item;
         }
 
-        public void SetWorkingMinutes(string id, int minutes)
-        {
+        public void SetWorkingMinutes(string id, int minutes) =>
             _worldDataService.WorldData.MiningFarmDatas[id].WorkingMinutes = minutes;
-        }
 
         public void SetProfit(int amount) =>
             _walletService.Set(ItemTypeId.Money, amount);
@@ -95,55 +78,70 @@ namespace CodeBase.Services.Mining
         public void SetNeedClean(string id, bool needClean)
         {
             _worldDataService.WorldData.MiningFarmDatas[id].NeedClean = needClean;
+            _createdFarms[id].SetNeedClean(needClean);
         }
 
-        public void ResetLastMiningTime()
+        public void SetNeedCleanToData(string id, bool needClean)
         {
-            _worldTimeService.ResetLastMiningTime();
+            _worldDataService.WorldData.MiningFarmDatas[id].NeedClean = needClean;
+            
+            if(!needClean)
+                _worldTimeService.SaveMiningFarmLastCleanTime(id);
         }
 
-        private void ConfigureMiningFarms(List<MiningFarmItem> createdMiningFarms,
-            Dictionary<string, MiningFarmData> miningFarmDatas)
+        private void HandleTimeDifference()
         {
-            MiningFarmSO data = _gameStaticDataService.GetSO<MiningFarmSO>();
+            foreach (MiningFarmItem miningFarmItem in _createdFarms.Values)
+            {
+                var timeDifference = _worldTimeService.GetMiningFarmLastCleanTime(miningFarmItem.Id);
+                timeDifference = Mathf.Clamp(timeDifference, 0, TimeConstantValue.MinutesInTwoHour);
+                HandleTimeDifference(timeDifference, miningFarmItem.Id);
+            }
+        }
 
-            foreach (MiningFarmItem miningFarmItem in createdMiningFarms)
+        private bool HasCreatedFarms() =>
+            _createdFarms.Count != 0;
+
+        private void ConfigureMiningFarms(Dictionary<string, MiningFarmData> miningFarmDatas)
+        {
+            MiningFarmSO miningFarmSo = _gameStaticDataService.GetSO<MiningFarmSO>();
+
+            foreach (MiningFarmItem miningFarmItem in _createdFarms.Values)
             {
                 MiningFarmData targetData = miningFarmDatas[miningFarmItem.Id];
                 PrepareItem(miningFarmItem, targetData.WorkingMinutes, targetData.ProfitPerMinute, targetData.NeedClean,
-                    data.MinTemperature, data.MidTemperature, data.MaxTemperature);
+                    miningFarmSo.MinTemperature, miningFarmSo.MidTemperature, miningFarmSo.MaxTemperature);
             }
         }
 
-        private bool HandleTimeDifference(int timeDifference, List<MiningFarmItem> createdMiningFarms)
+        private void HandleTimeDifference(int timeDifference, string id)
         {
-            if (timeDifference == TimeConstantValue.MinutesInTwoHour)
-            {
-                createdMiningFarms.ForEach(x =>
-                {
-                    SetNeedClean(x.Id, true);
-                    _walletService.Set(ItemTypeId.Money, x.ProfitPerMinute * timeDifference);
-                });
+            if (TrySetNeedClean(timeDifference, id))
+                return;
 
-                Stopped?.Invoke();
-                return true;
-            }
+            SetWorkingMinutesToFarms(timeDifference, id);
+        }
 
-            foreach (MiningFarmItem miningFarmItem in createdMiningFarms)
-            {
-                if (miningFarmItem.WorkingMinutes == TimeConstantValue.MinutesInTwoHour)
-                    continue;
+        private void SetWorkingMinutesToFarms(int timeDifference, string id)
+        {
+            MiningFarmItem miningFarmItem = _createdFarms[id];
+            var workingMinutes = Mathf.Clamp(miningFarmItem.WorkingMinutes + timeDifference, 0, TimeConstantValue.MinutesInTwoHour);
+            miningFarmItem.Init(workingMinutes, this);
+        }
 
-                var workingMinutes = Mathf.Clamp(miningFarmItem.WorkingMinutes + timeDifference, 0,
-                    TimeConstantValue.MinutesInTwoHour);
-                miningFarmItem.Init(workingMinutes, this);
-            }
+        private bool TrySetNeedClean(int timeDifference, string id)
+        {
+            if (timeDifference != TimeConstantValue.MinutesInTwoHour)
+                return false;
 
+            MiningFarmItem targetFarm = _createdFarms[id];
+            SetNeedClean(id, true);
+            SetMoneyToWalletService(timeDifference, targetFarm);
             return true;
         }
 
-        public MiningFarmItem Get(string id) =>
-            _createdFarms.FirstOrDefault(x => x.Id == id);
+        private void SetMoneyToWalletService(int timeDifference, MiningFarmItem targetFarm) =>
+            _walletService.Set(ItemTypeId.Money, targetFarm.ProfitPerMinute * timeDifference);
 
         private void PrepareItem(MiningFarmItem miningFarmItem,
             int workingMinutes,
@@ -157,6 +155,17 @@ namespace CodeBase.Services.Mining
             miningFarmItem.ProfitPerMinute = profitPerMinute;
             miningFarmItem.SetTemperatures(minTemp, midTemp, maxTemp);
             miningFarmItem.SetNeedClean(needClean);
+        }
+
+        private void CreateMiningFarmsFromData(Dictionary<string, MiningFarmData> miningFarmDatas)
+        {
+            foreach (MiningFarmData miningFarmData in miningFarmDatas.Values)
+            {
+                var miningFarm = _gameItemFactory.Create<MiningFarmItem>(_locationProvider.MiningFarmSpawnPoint,
+                    miningFarmData.Position.ToVector());
+                Debug.Log(miningFarmData.LastCleanTime.ToDateTime());
+                _createdFarms[miningFarm.Id] = miningFarm;
+            }
         }
     }
 }

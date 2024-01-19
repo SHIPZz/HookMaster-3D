@@ -22,14 +22,14 @@ namespace CodeBase.Gameplay.GameItems
         private int _minTemperature;
         private int _midTemperature;
 
-        private readonly WaitForSecondsRealtime _minute = new WaitForSecondsRealtime(60f);
+        private readonly WaitForSeconds _minute = new(60f);
         private MiningFarmService _miningFarmService;
         private int _maxTemperature;
         private FloatingTextService _floatingTextService;
 
         public bool IsWorking { get; private set; }
 
-        public event Action Stopped;
+        public event Action<float, bool> Changed;
 
         [Inject]
         private void Construct(FloatingTextService floatingTextService)
@@ -58,7 +58,14 @@ namespace CodeBase.Gameplay.GameItems
             NeedClean = needClean;
 
             if (needClean)
+            {
                 TargetTemperature = _maxTemperature;
+                Changed?.Invoke(TargetTemperature, NeedClean);
+                return;
+            }
+
+            TargetTemperature = Random.Range(_minTemperature, _midTemperature);
+            Changed?.Invoke(TargetTemperature, NeedClean);
         }
 
         private IEnumerator StartIncreaseWorkingMinutes()
@@ -73,12 +80,10 @@ namespace CodeBase.Gameplay.GameItems
                 _miningFarmService.SetWorkingMinutes(Id, WorkingMinutes);
             }
 
-            Stopped?.Invoke();
             IsWorking = false;
             _miningFarmService.SetWorkingMinutes(Id, TimeConstantValue.MinutesInTwoHour);
-            _miningFarmService.SetNeedClean(Id, true);
+            _miningFarmService.SetNeedCleanToData(Id, true);
             SetNeedClean(true);
-            _miningFarmService.ResetLastMiningTime();
         }
 
         [Button]

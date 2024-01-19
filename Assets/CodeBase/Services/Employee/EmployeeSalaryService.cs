@@ -37,7 +37,6 @@ namespace CodeBase.Services.Employee
                 if (targetSalary == 0)
                     return;
 
-                Debug.Log(targetSalary + " target salary");
                 _walletService.Set(ItemTypeId.Money, -targetSalary);
             }
 

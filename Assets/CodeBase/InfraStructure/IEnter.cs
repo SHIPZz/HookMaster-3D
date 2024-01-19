@@ -4,6 +4,6 @@ namespace CodeBase.InfraStructure
 {
     public interface IEnter
     {
-        UniTaskVoid Enter();
+        void Enter();
     }
 }

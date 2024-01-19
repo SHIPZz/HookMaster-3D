@@ -1480,6 +1480,7 @@ GameObject:
   - component: {fileID: 3731497360997890973}
   - component: {fileID: 7091779351102172863}
   - component: {fileID: 275037363652044850}
+  - component: {fileID: 6696427962960457075}
   m_Layer: 5
   m_Name: EmployeeView
   m_TagString: Untagged
@@ -1591,11 +1592,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80e3611898573004894774d231266306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <TutorialHighlight>k__BackingField: {fileID: 6696427962960457075}
+  <HireButton>k__BackingField: {fileID: 1207394768351558078}
   _nameText: {fileID: 5030219842424984077}
   _salaryText: {fileID: 4677489789189931738}
   _qualificationTypeText: {fileID: 917242924160104854}
   _profitText: {fileID: 6267687131675255908}
-  _hireButton: {fileID: 1207394768351558078}
+--- !u!114 &6696427962960457075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6962622366361821963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecefd69a79c0423a9f41ca2b7a2a76fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialFade: {fileID: 0}
 --- !u!1 &7400759781805326563
 GameObject:
   m_ObjectHideFlags: 0

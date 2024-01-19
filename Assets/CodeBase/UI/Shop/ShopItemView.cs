@@ -28,14 +28,12 @@ namespace CodeBase.UI.Shop
         private GameItemService _gameItemService;
         private FloatingTextService _floatingTextService;
         private ShopItemDataService _shopItemDataService;
-        private CameraService _cameraService;
 
         [Inject]
         private void Construct(WalletService walletService, GameItemService gameItemService,
             FloatingTextService floatingTextService,
-            ShopItemDataService shopItemDataService, CameraService cameraService)
+            ShopItemDataService shopItemDataService)
         {
-            _cameraService = cameraService;
             _shopItemDataService = shopItemDataService;
             _floatingTextService = floatingTextService;
             _gameItemService = gameItemService;
@@ -60,9 +58,8 @@ namespace CodeBase.UI.Shop
             }
 
             _shopItemDataService.Add(GameItemType);
-            var targetItem = _gameItemService.Create<GameItemAbstract>(GameItemType);
+             _gameItemService.Create<GameItemAbstract>(GameItemType);
 
-            _cameraService.SetTarget(targetItem.transform);
             _walletService.Set(ItemTypeId, -Price);
             Destroy(gameObject);
         }

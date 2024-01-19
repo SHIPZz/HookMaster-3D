@@ -1,4 +1,6 @@
-﻿namespace CodeBase.Constant
+﻿using UnityEngine.UI;
+
+namespace CodeBase.Constant
 {
     public static class AssetPath
     {
@@ -21,5 +23,6 @@
         public const string Fire = "Prefabs/GameItems/Fire";
         public const string Settings = "Datas/UI/SettingSO";
         public const string Clients = "Prefabs/Clients";
+        public const string TutorialHand = "Prefabs/UI/Tutorials/TutorialHand";
     }
 }

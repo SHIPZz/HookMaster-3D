@@ -1,16 +1,24 @@
-﻿using System;
-using CodeBase.Gameplay.GameItems;
+﻿using CodeBase.Gameplay.GameItems;
+using CodeBase.Services.Mining;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
-namespace CodeBase.UI.MiningFarm
+namespace CodeBase.UI.Mining
 {
     [RequireComponent(typeof(Button))]
     public class CleanMiningFarmButton : MonoBehaviour
     {
-         private MiningFarmItem _miningFarmItem;
-        
+        private MiningFarmItem _miningFarmItem;
         private Button _button;
+        private MiningFarmService _miningFarmService;
+
+        [Inject]
+        private void Construct(MiningFarmService miningFarmService) => 
+            _miningFarmService = miningFarmService;
+
+        private void Awake() =>
+            _button = GetComponent<Button>();
 
         private void OnEnable() =>
             _button.onClick.AddListener(Clean);
@@ -23,7 +31,7 @@ namespace CodeBase.UI.MiningFarm
 
         private void Clean()
         {
-            _miningFarmItem.SetNeedClean(true);
+            _miningFarmService.SetNeedClean(_miningFarmItem.Id, false);
             transform.parent.gameObject.SetActive(false);
         }
     }

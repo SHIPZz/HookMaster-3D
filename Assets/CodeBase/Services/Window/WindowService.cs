@@ -12,6 +12,8 @@ namespace CodeBase.Services.Window
         private readonly UIFactory _uiFactory;
         private Dictionary<Type, WindowBase> _createdWindows = new();
 
+        public event Action<WindowBase> Opened; 
+
         public WindowService(UIFactory uiFactory) =>
             _uiFactory = uiFactory;
 
@@ -21,6 +23,7 @@ namespace CodeBase.Services.Window
 
             var targetWindow = Get<T>();
             targetWindow.Open();
+            Opened?.Invoke(targetWindow);
         }
 
         public T OpenAndGet<T>() where T : WindowBase
