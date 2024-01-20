@@ -17,7 +17,6 @@ namespace CodeBase.Services.Clients
         private ClientSpawner _clientSpawner;
         private Client _lastClient;
         private int _disabledClients;
-        private int _initialActiveClients;
         private Transform _servePoint;
         private bool _isFirstClientWentToServePoint;
 
@@ -30,7 +29,6 @@ namespace CodeBase.Services.Clients
         public void Init()
         {
             _clientProvider.ClientSpawners.ForEach(x => _createdClients.Add(x.Spawn()));
-            _initialActiveClients = _createdClients.Count;
 
             foreach (Client client in _createdClients)
             {
@@ -54,31 +52,21 @@ namespace CodeBase.Services.Clients
 
             if (targetClient == null)
             {
-                _createdClients.ForEach(x => x.IsServed = false);
+                _createdClients.Clear();
+                CreateNewClients();
+                SetMoveDirectionToClients();
+                return;
             }
-
-            targetClient = _createdClients.FirstOrDefault(x => x.IsServed == false);
 
             targetClient.SetSitIdle(false, _servePoint);
             targetClient.SetTarget(_servePoint);
         }
 
-        public void SetServed(string id, Action onComplete = null)
+        public void SetServed(string id)
         {
             _lastClient = _createdClients.FirstOrDefault(x => x.Id == id);
             _lastClient.IsServed = true;
-            _lastClient.MoveBack(onComplete);
-        }
-
-        public void CountDisabledClients()
-        {
-            _disabledClients++;
-
-            if (_disabledClients < _initialActiveClients) 
-                return;
-                
-            CreateNewClients();
-            SetMoveDirectionToClients();
+            _lastClient.MoveBack();
         }
 
         private void CreateNewClients()
@@ -88,18 +76,18 @@ namespace CodeBase.Services.Clients
 
         private void SetMoveDirectionToClients()
         {
+            _isFirstClientWentToServePoint = false;
+            
             foreach (Client client in _createdClients)
             {
                 if (!_isFirstClientWentToServePoint)
                 {
                     client.SetTarget(_servePoint);
                     _isFirstClientWentToServePoint = true;
+                    continue;
                 }
 
                 Transform sitPlace = _couchService.GetSitPlace();
-
-                if (sitPlace == null)
-                    return;
 
                 client.SetSitIdleByMoving(sitPlace);
             }

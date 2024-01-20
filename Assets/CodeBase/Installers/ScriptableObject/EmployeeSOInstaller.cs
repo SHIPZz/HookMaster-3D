@@ -8,10 +8,12 @@ namespace CodeBase.Installers.ScriptableObject
     public class EmployeeSOInstaller : ScriptableObjectInstaller
     {
         [SerializeField] private EmployeeNameSO _employeeNameSo;
+        [SerializeField] private EmployeeSkinSO _employeeSkinSo;
 
         public override void InstallBindings()
         {
             Container.BindInstance(_employeeNameSo);
+            Container.BindInstance(_employeeSkinSo);
         }
     }
 }

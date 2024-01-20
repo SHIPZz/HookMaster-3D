@@ -250,6 +250,7 @@ namespace CodeBase.Installers.Game
             Container.Bind<EffectStaticDataService>().AsSingle();
             Container.Bind<GameStaticDataService>().AsSingle();
             Container.Bind<MaterialStaticDataService>().AsSingle();
+            Container.Bind<EmployeeStaticDataService>().AsSingle();
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using CodeBase.Data;
+using CodeBase.Enums;
 using CodeBase.Gameplay.Employees;
+using UnityEngine;
 
 namespace CodeBase.Extensions
 {
@@ -19,7 +21,8 @@ namespace CodeBase.Extensions
                 Id = employee.Id,
                 IsWorking = employee.IsWorking,
                 IsUpgrading = employee.IsUpgrading,
-                IsBurned = employee.IsBurned
+                IsBurned = employee.IsBurned,
+                EmployeeTypeId = employee.EmployeeTypeId
             };
 
             return potentialEmployeeData;
@@ -31,6 +34,18 @@ namespace CodeBase.Extensions
             return employee;
         }
 
+        public static Employee SetSkin(this Employee employee, Mesh mesh)
+        {
+            employee.Renderer.sharedMesh = mesh;
+            return employee;
+        }
+
+        public static Employee SetId(this Employee employee, EmployeeTypeId employeeTypeId)
+        {
+            employee.EmployeeTypeId = employeeTypeId;
+            return employee;
+        }
+        
         public static Employee SetBurn(this Employee employee, bool isBurn)
         {
             employee.IsBurned = isBurn;

@@ -17,13 +17,16 @@ namespace CodeBase.Gameplay.Tutorial
         private Vector2 _tutorialHandOffset = new Vector2(32.01f, -63.29f);
         private EmployeeView _employeeView;
         private EmployeeWindow _employeeWindow;
+        private string _className;
 
         public HireEmployeeStep(UIFactory uiFactory, WindowService windowService, IWorldDataService worldDataService) 
             : base(uiFactory, windowService, worldDataService) { }
         
         public override void OnStart()
         {
-            WorldDataService.WorldData.CompletedTutorials.TryAdd(typeof(HireEmployeeStep).FullName, false);
+            _className = typeof(ApproachToEmployeeStep).FullName;
+            
+            WorldDataService.WorldData.TutorialData.CompletedTutorials.TryAdd(_className, false);
             WindowService.Opened += OnOpened;
         }
 
@@ -32,13 +35,13 @@ namespace CodeBase.Gameplay.Tutorial
             _employeeView.Closed -= OnFinished;
             _tutorialHand.gameObject.SetActive(false);
             _employeeWindow.TutorialFadeImage.gameObject.SetActive(false);
-            WorldDataService.WorldData.CompletedTutorials[typeof(HireEmployeeStep).FullName] = true;
+            WorldDataService.WorldData.TutorialData.CompletedTutorials[_className] = true;
         }
 
         public override bool IsCompleted()
         {
-            WorldDataService.WorldData.CompletedTutorials.TryAdd(typeof(HireEmployeeStep).FullName, false);
-            return WorldDataService.WorldData.CompletedTutorials[typeof(HireEmployeeStep).FullName];
+            WorldDataService.WorldData.TutorialData.CompletedTutorials.TryAdd(_className, false);
+            return WorldDataService.WorldData.TutorialData.CompletedTutorials[_className];
         }
 
         private void OnOpened(WindowBase windowBase)

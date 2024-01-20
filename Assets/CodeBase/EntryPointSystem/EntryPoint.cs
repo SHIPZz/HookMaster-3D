@@ -186,7 +186,8 @@ namespace CodeBase.EntryPointSystem
                 Employee targetEmployee = _employeeFactory.Create(employeeData, targetTable, true);
                 _employeeService.Employees.Add(targetEmployee);
             }
-            
+
+            _employeeService.Initialized = true;
         }
 
         private void InitializeCamera(Player player)

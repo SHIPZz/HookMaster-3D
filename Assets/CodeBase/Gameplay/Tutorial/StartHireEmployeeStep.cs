@@ -17,13 +17,15 @@ namespace CodeBase.Gameplay.Tutorial
         private OpenEmployeeWindowButton _targetButton;
         private TutorialFadeImage _tutorialFadeImage;
         private bool _onFinished;
+        private string _className;
 
         public StartHireEmployeeStep(UIFactory uiFactory, WindowService windowService, IWorldDataService worldDataService) 
             : base(uiFactory, windowService, worldDataService) { }
 
         public override void OnStart()
         {
-            WorldDataService.WorldData.CompletedTutorials.TryAdd(typeof(StartHireEmployeeStep).FullName, false);
+            _className = typeof(ApproachToEmployeeStep).FullName;
+            WorldDataService.WorldData.TutorialData.CompletedTutorials.TryAdd(_className, false);
             WindowService.Opened += OnOpened;
         }
 
@@ -32,13 +34,13 @@ namespace CodeBase.Gameplay.Tutorial
             _tutorialFadeImage.gameObject.SetActive(false);
             _tutorialHand.gameObject.SetActive(false);
             _targetButton.onClick.RemoveListener(OnFinished);
-            WorldDataService.WorldData.CompletedTutorials[typeof(StartHireEmployeeStep).FullName] = true;
+            WorldDataService.WorldData.TutorialData.CompletedTutorials[_className] = true;
         }
         
         public override bool IsCompleted()
         {
-            WorldDataService.WorldData.CompletedTutorials.TryAdd(typeof(StartHireEmployeeStep).FullName, false);
-            return WorldDataService.WorldData.CompletedTutorials[typeof(StartHireEmployeeStep).FullName];
+            WorldDataService.WorldData.TutorialData.CompletedTutorials.TryAdd(_className, false);
+            return WorldDataService.WorldData.TutorialData.CompletedTutorials[_className];
         }
 
         private void OnOpened(WindowBase windowBase)

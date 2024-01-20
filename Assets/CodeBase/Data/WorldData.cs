@@ -19,6 +19,6 @@ namespace CodeBase.Data
         public RandomItemData RandomItemData = new();
         public FireTimeData FireTimeData = new();
         public Dictionary<GameItemType, PurchaseableItemData> PurchaseableItemDatas = new();
-        public Dictionary<string, bool> CompletedTutorials = new();
+        public TutorialData TutorialData = new();
     }
 }

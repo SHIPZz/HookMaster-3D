@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 using CodeBase.Constant;
 using CodeBase.Gameplay.Clients;
 using CodeBase.Services.Providers.Asset;
-using CodeBase.SO.Clients;
 using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 namespace CodeBase.Services.Factories.Clients
 {
@@ -26,6 +26,7 @@ namespace CodeBase.Services.Factories.Clients
             List<Client> prefabs = _assetProvider.GetAll<Client>(AssetPath.Clients);
             var randomPrefabId = Random.Range(0, prefabs.Count);
             Client targetPrefab = prefabs[randomPrefabId];
+            targetPrefab.Id = Guid.NewGuid().ToString();
             // _createdClientsId.Add(targetPrefab.Id);
             return _instantiator.InstantiatePrefabForComponent<Client>(targetPrefab, at, Quaternion.identity, parent);
         }

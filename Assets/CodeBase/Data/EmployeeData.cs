@@ -1,4 +1,5 @@
 using System;
+using CodeBase.Enums;
 
 namespace CodeBase.Data
 {
@@ -15,5 +16,6 @@ namespace CodeBase.Data
         public string TableId;
         public bool IsUpgrading;
         public bool IsBurned;
+        public EmployeeTypeId EmployeeTypeId = EmployeeTypeId.Default;
     }
 }

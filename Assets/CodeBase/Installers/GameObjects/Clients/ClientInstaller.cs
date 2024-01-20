@@ -12,12 +12,10 @@ namespace CodeBase.Installers.GameObjects.Clients
         
         public override void InstallBindings()
         {
-            Container.BindInstance(_navMeshAgent);
             Container.BindInstance(GetComponent<Animator>());
-            Container.BindInstance(GetComponent<Transform>());
+            Container.BindInstance(_navMeshAgent);
             Container.Bind<ClientAnimator>().AsSingle();
             Container.BindInterfacesAndSelfTo<ClientAnimOnMoving>().AsSingle();
-            Container.BindInterfacesAndSelfTo<ClientMovement>().AsSingle();
         }
     }
 }

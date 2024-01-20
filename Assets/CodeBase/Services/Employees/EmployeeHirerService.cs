@@ -44,7 +44,7 @@ namespace CodeBase.Services.Employees
             Table freeTable = _tableService.Tables.FirstOrDefault(x => x.IsFree);
             freeTable.SetIsFree(false);
 
-            Gameplay.Employees.Employee employee =  _employeeFactory.Create(employeeData, freeTable, false);
+            Employee employee =  _employeeFactory.Create(employeeData, freeTable, false);
             employee.gameObject.SetActive(false);
             employee.TableId = freeTable.Id;
             _employeeService.Employees.Add(employee);

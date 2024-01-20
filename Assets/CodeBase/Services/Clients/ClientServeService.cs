@@ -36,7 +36,10 @@ namespace CodeBase.Services.Clients
             {
                 await TryStartServing();
             }
-            catch (Exception e) { }
+            catch (Exception e)
+            {
+                // ignored
+            }
         }
 
         public async void SetClientApproached(bool isApproached, Client client)
@@ -84,8 +87,8 @@ namespace CodeBase.Services.Clients
             _isClientApproached = false;
             _walletService.Set(ItemTypeId.Money, ServeReward);
             Finished?.Invoke(ServeReward);
-            _clientObjectService.SetServed(_currentClient.Id,
-                () => _clientObjectService.ActivateNextClient());
+            _clientObjectService.SetServed(_currentClient.Id);
+            _clientObjectService.ActivateNextClient();
         }
     }
 }

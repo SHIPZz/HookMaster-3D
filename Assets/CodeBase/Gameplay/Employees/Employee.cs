@@ -1,5 +1,6 @@
 ﻿using System;
 using CodeBase.Data;
+using CodeBase.Enums;
 using CodeBase.Extensions;
 using CodeBase.Gameplay.BurnableObjectSystem;
 using CodeBase.MaterialChanger;
@@ -14,9 +15,10 @@ namespace CodeBase.Gameplay.Employees
     public class Employee : MonoBehaviour, IBurnable
     {
         [field: SerializeField] public MaterialTypeId BurnMaterial { get; private set; }
-        [SerializeField] private UnityEngine.Renderer _renderer;
+        [field: SerializeField] public SkinnedMeshRenderer Renderer { get; private set; }
         [field: SerializeField] public bool IsBurned { get; set; }
 
+        public EmployeeTypeId EmployeeTypeId;
         public Guid Guid;
         public string Id;
         public int QualificationType;
@@ -44,7 +46,7 @@ namespace CodeBase.Gameplay.Employees
         private void Start()
         {
             _burnableObjectService.Add(this);
-            _rendererMaterialChangerService.Init(1.5f, 1f, BurnMaterial, _renderer);
+            _rendererMaterialChangerService.Init(1.5f, 1f, BurnMaterial, Renderer);
 
             if (IsBurned)
                 Burn();

@@ -8,36 +8,21 @@ namespace CodeBase.Gameplay.Clients
 {
     public class Client : MonoBehaviour
     {
+        [SerializeField] private ClientMovement _clientMovement;
+        
         public string Id;
         public bool IsServed;
-
-        private ClientMovement _clientMovement;
-        private ClientObjectService _clientObjectService;
-
-        [Inject]
-        private void Construct(ClientMovement clientMovement, ClientObjectService clientObjectService)
-        {
-            _clientObjectService = clientObjectService;
-            _clientMovement = clientMovement;
-        }
-
-        private void OnDisable()
-        {
-            _clientObjectService.CountDisabledClients();
-        }
 
         public void SetTarget(Transform target)
         {
             _clientMovement.SetTarget(target);
         }
 
-        public void MoveBack(Action onComplete = null)
+        public void MoveBack()
         {
-            _clientMovement.MoveBack(onComplete);
+            _clientMovement.MoveBack();
+            print("moveback" + name);
         }
-
-        public bool IsMovingBack() => 
-            _clientMovement.IsMovingBack();
 
         public void SetSitIdle(bool isSitIdle, Transform target)
         {
@@ -48,7 +33,7 @@ namespace CodeBase.Gameplay.Clients
         public void SetSitIdleByMoving(Transform target)
         {
             _clientMovement.SetTarget(target);
-            _clientMovement.SetSitIdleByMoving();
+            _clientMovement.SetSitIdleByMoving(target);
         }
 
         [Button]
