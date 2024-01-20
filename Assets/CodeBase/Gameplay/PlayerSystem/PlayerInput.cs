@@ -7,13 +7,7 @@ namespace CodeBase.Gameplay.PlayerSystem
 {
     public class PlayerInput : ITickable
     {
-        private readonly IInputService _inputService;
         public event Action<Vector3> MovementPressed;
-
-        public PlayerInput(IInputService inputService)
-        {
-            _inputService = inputService;
-        }
 
         public void Tick()
         {
@@ -21,7 +15,6 @@ namespace CodeBase.Gameplay.PlayerSystem
             var verticalInput = SimpleInput.GetAxisRaw("Vertical");
             
             MovementPressed?.Invoke(new Vector3(horizontalInput, 0, verticalInput));
-
         }
     }
 }

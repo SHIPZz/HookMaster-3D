@@ -9,7 +9,6 @@ namespace CodeBase.Services.Employees
     public class EmployeeService
     {
         public List<Gameplay.Employees.Employee> Employees = new();
-        public bool Initialized;
         private readonly EmployeeDataService _employeeDataService;
 
         public EmployeeService(EmployeeDataService employeeDataService)

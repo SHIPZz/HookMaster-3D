@@ -33,15 +33,6 @@ namespace CodeBase.Services.Factories.ShopItems
                 parent);
         }
         
-        public T Create<T>(Transform parent, Vector3 at, Quaternion rotation) where T : GameItemAbstract
-        {
-            var prefab = _gameStaticDataService.Get<T>();
-
-            return _instantiator.InstantiatePrefabForComponent<T>(prefab,
-                at, rotation,
-                parent);
-        }
-        
         public T Create<T>(Transform parent, Vector3 at) where T : GameItemAbstract
         {
             var prefab = _gameStaticDataService.Get<T>();
@@ -56,15 +47,6 @@ namespace CodeBase.Services.Factories.ShopItems
             RandomItem prefab = _gameStaticDataService.GetRandomItem(gameItemType);
 
             return _instantiator.InstantiatePrefabForComponent<RandomItem>(prefab,
-                at, prefab.transform.rotation,
-                parent);
-        }
-
-        public GameItemAbstract Create(GameItemType gameItemType, Transform parent, Vector3 at)
-        {
-            GameItemAbstract prefab = _gameStaticDataService.Get(gameItemType);
-
-            return _instantiator.InstantiatePrefabForComponent<GameItemAbstract>(prefab,
                 at, prefab.transform.rotation,
                 parent);
         }

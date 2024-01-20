@@ -4,6 +4,7 @@ using CodeBase.Enums;
 using CodeBase.Gameplay.GameItems;
 using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.ShopItemData;
+using CodeBase.Services.UI;
 using CodeBase.Services.Window;
 using CodeBase.UI;
 using CodeBase.UI.Shop;
@@ -25,9 +26,13 @@ namespace CodeBase.Services.Camera
         
         private GameItemAbstract _target;
         private ShopWindow _shopWindow;
+        private UIService _uiService;
 
-        public CameraService(CameraProvider cameraProvider, GameItemService gameItemService, WindowService windowService)
+        public CameraService(CameraProvider cameraProvider,
+            GameItemService gameItemService,
+            WindowService windowService, UIService uiService)
         {
+            _uiService = uiService;
             _windowService = windowService;
             _gameItemService = gameItemService;
             _cameraProvider = cameraProvider;
@@ -70,8 +75,9 @@ namespace CodeBase.Services.Camera
             if(_shownObjects.Contains(_target.GameItemType))
                 return;
             
+            _uiService.SetActiveUI(false);
             _cameraProvider.CameraFollower.Block(true);
-            _cameraProvider.CameraFollower.MoveTo(_target.transform);
+            _cameraProvider.CameraFollower.MoveTo(_target.transform, () => _uiService.SetActiveUI(true));
             _shownObjects.Add(_target.GameItemType);
         }
     }

@@ -11,6 +11,8 @@ namespace CodeBase.Services.Window
     {
         private readonly UIFactory _uiFactory;
         private Dictionary<Type, WindowBase> _createdWindows = new();
+        
+        public WindowBase CurrentWindow { get; private set; }
 
         public event Action<WindowBase> Opened; 
 
@@ -38,12 +40,21 @@ namespace CodeBase.Services.Window
             ClearDestroyedWindows();
             
             if (_createdWindows.ContainsKey(typeof(T)))
-                return (T)_createdWindows[typeof(T)];
+            {
+                CurrentWindow = (T)_createdWindows[typeof(T)];
+                return (T)CurrentWindow;
+            }
 
             WindowBase targetWindow = _uiFactory.CreateWindow<T>();
-
+            CurrentWindow = targetWindow;
             _createdWindows[typeof(T)] = targetWindow;
             return (T)targetWindow;
+        }
+
+        public void CloseAll()
+        {
+            ClearDestroyedWindows();
+            _createdWindows.Values.ToList().ForEach(x => x.Close());
         }
 
         public void Close<T>() where T : WindowBase
@@ -64,13 +75,6 @@ namespace CodeBase.Services.Window
 
             foreach (Type typeToRemove in windowsToRemove)
                 _createdWindows.Remove(typeToRemove);
-        }
-
-
-        public void CloseAll()
-        {
-            ClearDestroyedWindows();
-            _createdWindows.Values.ToList().ForEach(x => x.Close());
         }
     }
 }

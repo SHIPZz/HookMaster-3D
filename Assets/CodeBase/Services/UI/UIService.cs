@@ -19,6 +19,7 @@ namespace CodeBase.Services.UI
         private readonly WindowService _windowService;
 
         private bool _blockHud;
+        private Canvas _joystickCanvas;
 
         public UIService(UIFactory uiFactory, UIProvider uiProvider, LocationProvider locationProvider,
             WindowService windowService)
@@ -32,7 +33,7 @@ namespace CodeBase.Services.UI
         public void OpenOfflineRewardWindow(float totalEarnedProfit, int timeDifference)
         {
             var offlineRewardWindow = _windowService.Get<OfflineRewardWindow>();
-            offlineRewardWindow.Init(totalEarnedProfit,timeDifference);
+            offlineRewardWindow.Init(totalEarnedProfit, timeDifference);
             offlineRewardWindow.Open();
             _blockHud = true;
             _windowService.Close<HudWindow>();
@@ -40,13 +41,24 @@ namespace CodeBase.Services.UI
 
         public void Init(UnityEngine.Camera camera)
         {
-            var joystickCanvas = _uiFactory.CreateElement<Canvas>(AssetPath.JoystickCanvas, _locationProvider.UIParent);
-            joystickCanvas.worldCamera = camera;
-            joystickCanvas.planeDistance = 1;
-            joystickCanvas.sortingLayerName = Enum.GetName(typeof(SortingLayerTypeId), SortingLayerTypeId.JoystickUILayer);
-            joystickCanvas.gameObject.SetActive(true);
+            _joystickCanvas = _uiFactory.CreateElement<Canvas>(AssetPath.JoystickCanvas, _locationProvider.UIParent);
+            _joystickCanvas.worldCamera = camera;
+            _joystickCanvas.planeDistance = 1;
+            _joystickCanvas.sortingLayerName =
+                Enum.GetName(typeof(SortingLayerTypeId), SortingLayerTypeId.JoystickUILayer);
+            _joystickCanvas.gameObject.SetActive(true);
 
             if (_blockHud == false)
+                _windowService.Open<HudWindow>();
+        }
+
+        public void SetActiveUI(bool isEnabled)
+        {
+            _joystickCanvas.enabled = isEnabled;
+            
+            if (!isEnabled)
+                _windowService.CloseAll();
+            else
                 _windowService.Open<HudWindow>();
         }
     }

@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.Gameplay.GameItems;
 using CodeBase.Services.CircleRouletteServices;
 using CodeBase.Services.Mining;
 using CodeBase.Services.RandomItems;
+using UnityEngine;
 
 namespace CodeBase.Services.ShopItemData
 {
@@ -12,10 +14,12 @@ namespace CodeBase.Services.ShopItemData
         private readonly MiningFarmService _miningFarmService;
         private readonly CircleRouletteService _circleRouletteService;
         private readonly RandomItemService _randomItemService;
+        private Dictionary<GameItemType, Action> _createActions = new();
 
         public event Action<GameItemAbstract> Created;
 
-        public GameItemService(MiningFarmService miningFarmService, CircleRouletteService circleRouletteService, RandomItemService randomItemService)
+        public GameItemService(MiningFarmService miningFarmService, CircleRouletteService circleRouletteService,
+            RandomItemService randomItemService)
         {
             _randomItemService = randomItemService;
             _circleRouletteService = circleRouletteService;
@@ -27,33 +31,26 @@ namespace CodeBase.Services.ShopItemData
             _miningFarmService.Init();
             _circleRouletteService.Init();
             _randomItemService.Init();
+
+            _createActions[GameItemType.MiningFarm] = CreateMiningFarm;
+            _createActions[GameItemType.CircleRoulette] = CreateCircleRoulette;
         }
 
-        public T Create<T>(GameItemType gameItemType) where T : GameItemAbstract
+        public void Create(GameItemType gameItemType)
         {
-            GameItemAbstract gameItemAbstract = null;
-            
-            switch (gameItemType)
-            {
-                case GameItemType.MiningFarm:
-                    gameItemAbstract =  CreateMiningFarm<T>();
-                    Created?.Invoke(gameItemAbstract);
-                    return (T)gameItemAbstract;
-
-                case GameItemType.CircleRoulette:
-                    gameItemAbstract = CreateCircleRoulette<T>();
-                    Created?.Invoke(gameItemAbstract);
-                    return (T)gameItemAbstract;
-            }
-            
-
-            return null;
+            _createActions[gameItemType]?.Invoke();
         }
 
-        private T CreateMiningFarm<T>() where T : GameItemAbstract => 
-            _miningFarmService.CreateMiningFarm() as T;
+        private void CreateCircleRoulette()
+        {
+            CircleRouletteItem circleRoulette = _circleRouletteService.Create();
+            Created?.Invoke(circleRoulette);
+        }
 
-        private T CreateCircleRoulette<T>()  where T : GameItemAbstract => 
-            _circleRouletteService.Create() as T;
+        private void CreateMiningFarm()
+        {
+            MiningFarmItem miningFarm = _miningFarmService.CreateMiningFarm();
+            Created?.Invoke(miningFarm);
+        }
     }
 }

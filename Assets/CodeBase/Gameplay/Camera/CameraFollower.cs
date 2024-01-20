@@ -1,3 +1,4 @@
+using System;
 using CodeBase.Services.Providers.Player;
 using UnityEngine;
 using DG.Tweening;
@@ -41,7 +42,7 @@ namespace CodeBase.Gameplay.Camera
             _isBlocked = isBlocked;
         }
 
-        public void MoveTo(Transform target)
+        public void MoveTo(Transform target, Action onComplete = null)
         {
             transform
                 .DOMove(target.position + CameraPanOffset, _movementDuration)
@@ -54,6 +55,7 @@ namespace CodeBase.Gameplay.Camera
                         .OnComplete(() =>
                         {
                             // transform.DORotate(_targetRotation, _movementDuration);
+                            onComplete?.Invoke();
                             _isBlocked = false;
                         });
                 });

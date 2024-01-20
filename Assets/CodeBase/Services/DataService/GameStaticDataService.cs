@@ -7,6 +7,7 @@ using CodeBase.Gameplay.GameItems;
 using CodeBase.SO.GameItem;
 using CodeBase.SO.GameItem.RandomItems;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace CodeBase.Services.DataService
 {
@@ -59,9 +60,6 @@ namespace CodeBase.Services.DataService
 
             return list;
         }
-
-        public GameItemAbstract Get(GameItemType gameItemType) =>
-            _gameItemPrefabs.Values.FirstOrDefault(x => x.GameItemType == gameItemType);
 
         public T Get<T>() where T : GameItemAbstract =>
             (T)_gameItemPrefabs[typeof(T)];

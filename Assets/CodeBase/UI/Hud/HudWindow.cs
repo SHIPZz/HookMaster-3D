@@ -35,8 +35,5 @@ namespace CodeBase.UI.Hud
         
         public override void Open() => 
             _canvasAnimator.FadeInCanvas();
-
-        public override void Close() => 
-            _canvasAnimator.FadeOutCanvas(base.Close);
     }
 }

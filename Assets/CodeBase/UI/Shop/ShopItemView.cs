@@ -1,7 +1,6 @@
 ﻿using System;
 using CodeBase.Data;
 using CodeBase.Enums;
-using CodeBase.Gameplay.GameItems;
 using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.Camera;
 using CodeBase.Services.ShopItemData;
@@ -58,7 +57,7 @@ namespace CodeBase.UI.Shop
             }
 
             _shopItemDataService.Add(GameItemType);
-             _gameItemService.Create<GameItemAbstract>(GameItemType);
+             _gameItemService.Create(GameItemType);
 
             _walletService.Set(ItemTypeId, -Price);
             Destroy(gameObject);
