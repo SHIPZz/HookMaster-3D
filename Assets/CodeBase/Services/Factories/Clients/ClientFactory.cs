@@ -24,8 +24,9 @@ namespace CodeBase.Services.Factories.Clients
         public Client Create(Transform parent, Vector3 at)
         {
             List<Client> prefabs = _assetProvider.GetAll<Client>(AssetPath.Clients);
-            Client targetPrefab = prefabs.FirstOrDefault(x => !_createdClientsId.Contains(x.Id));
-            _createdClientsId.Add(targetPrefab.Id);
+            var randomPrefabId = Random.Range(0, prefabs.Count);
+            Client targetPrefab = prefabs[randomPrefabId];
+            // _createdClientsId.Add(targetPrefab.Id);
             return _instantiator.InstantiatePrefabForComponent<Client>(targetPrefab, at, Quaternion.identity, parent);
         }
     }

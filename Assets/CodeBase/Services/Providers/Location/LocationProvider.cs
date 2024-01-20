@@ -12,6 +12,7 @@ namespace CodeBase.Services.Providers.Location
         public Transform AudioParent;
         public Transform CircleRouletteSpawnPoint;
         public Transform MiningFarmSpawnPoint;
+        public Transform DisableClientZone;
         public List<Transform> RandomItemSpawnPoints;
     }
 }

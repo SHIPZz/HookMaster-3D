@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Gameplay.Clients;
+using CodeBase.Gameplay.CouchSystem;
 using CodeBase.Services.Providers.Couchs;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -15,6 +16,10 @@ namespace CodeBase.Services.Clients
         private List<Client> _createdClients = new();
         private ClientSpawner _clientSpawner;
         private Client _lastClient;
+        private int _disabledClients;
+        private int _initialActiveClients;
+        private Transform _servePoint;
+        private bool _isFirstClientWentToServePoint;
 
         public ClientObjectService(ClientProvider clientProvider, CouchService couchService)
         {
@@ -25,6 +30,7 @@ namespace CodeBase.Services.Clients
         public void Init()
         {
             _clientProvider.ClientSpawners.ForEach(x => _createdClients.Add(x.Spawn()));
+            _initialActiveClients = _createdClients.Count;
 
             foreach (Client client in _createdClients)
             {
@@ -37,7 +43,12 @@ namespace CodeBase.Services.Clients
             }
         }
 
-        public void ActivateNextClient(Transform servePoint)
+        public void SetServePoint(Transform servePoint)
+        {
+            _servePoint = servePoint;
+        }
+
+        public void ActivateNextClient()
         {
             Client targetClient = _createdClients.FirstOrDefault(x => x.IsServed == false);
 
@@ -47,9 +58,9 @@ namespace CodeBase.Services.Clients
             }
 
             targetClient = _createdClients.FirstOrDefault(x => x.IsServed == false);
-            
-            targetClient.SetSitIdle(false, servePoint);
-            targetClient.SetTarget(servePoint);
+
+            targetClient.SetSitIdle(false, _servePoint);
+            targetClient.SetTarget(_servePoint);
         }
 
         public void SetServed(string id, Action onComplete = null)
@@ -57,6 +68,41 @@ namespace CodeBase.Services.Clients
             _lastClient = _createdClients.FirstOrDefault(x => x.Id == id);
             _lastClient.IsServed = true;
             _lastClient.MoveBack(onComplete);
+        }
+
+        public void CountDisabledClients()
+        {
+            _disabledClients++;
+
+            if (_disabledClients < _initialActiveClients) 
+                return;
+                
+            CreateNewClients();
+            SetMoveDirectionToClients();
+        }
+
+        private void CreateNewClients()
+        {
+            _clientProvider.ClientSpawners.ForEach(x => _createdClients.Add(x.Spawn()));
+        }
+
+        private void SetMoveDirectionToClients()
+        {
+            foreach (Client client in _createdClients)
+            {
+                if (!_isFirstClientWentToServePoint)
+                {
+                    client.SetTarget(_servePoint);
+                    _isFirstClientWentToServePoint = true;
+                }
+
+                Transform sitPlace = _couchService.GetSitPlace();
+
+                if (sitPlace == null)
+                    return;
+
+                client.SetSitIdleByMoving(sitPlace);
+            }
         }
     }
 }

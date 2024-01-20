@@ -22,6 +22,7 @@ namespace CodeBase.Gameplay.CouchSystem
             {
                 targetTransform = Sides[keyValuePair.Key];
                 SideConditions[keyValuePair.Key] = false;
+                IsFree = false;
                 return true;
             }
 

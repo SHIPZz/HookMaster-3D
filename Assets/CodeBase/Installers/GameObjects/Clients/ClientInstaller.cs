@@ -8,9 +8,11 @@ namespace CodeBase.Installers.GameObjects.Clients
     [RequireComponent(typeof(GameObjectContext))]
     public class ClientInstaller : MonoInstaller
     {
+        [SerializeField] private NavMeshAgent _navMeshAgent;
+        
         public override void InstallBindings()
         {
-            Container.BindInstance(GetComponent<NavMeshAgent>());
+            Container.BindInstance(_navMeshAgent);
             Container.BindInstance(GetComponent<Animator>());
             Container.BindInstance(GetComponent<Transform>());
             Container.Bind<ClientAnimator>().AsSingle();

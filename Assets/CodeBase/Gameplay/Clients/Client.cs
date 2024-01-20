@@ -1,4 +1,5 @@
 ﻿using System;
+using CodeBase.Services.Clients;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
@@ -11,11 +12,18 @@ namespace CodeBase.Gameplay.Clients
         public bool IsServed;
 
         private ClientMovement _clientMovement;
+        private ClientObjectService _clientObjectService;
 
         [Inject]
-        private void Construct(ClientMovement clientMovement)
+        private void Construct(ClientMovement clientMovement, ClientObjectService clientObjectService)
         {
+            _clientObjectService = clientObjectService;
             _clientMovement = clientMovement;
+        }
+
+        private void OnDisable()
+        {
+            _clientObjectService.CountDisabledClients();
         }
 
         public void SetTarget(Transform target)
@@ -35,6 +43,12 @@ namespace CodeBase.Gameplay.Clients
         {
             _clientMovement.SetTarget(target);
             _clientMovement.SetSitIdle(isSitIdle);
+        }
+
+        public void SetSitIdleByMoving(Transform target)
+        {
+            _clientMovement.SetTarget(target);
+            _clientMovement.SetSitIdleByMoving();
         }
 
         [Button]

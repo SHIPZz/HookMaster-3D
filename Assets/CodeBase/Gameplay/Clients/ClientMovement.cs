@@ -1,42 +1,41 @@
 ﻿using System;
-using System.Threading;
+using CodeBase.Services.Providers.Location;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
 
 namespace CodeBase.Gameplay.Clients
 {
-    public class ClientMovement : IInitializable, ITickable
+    public class ClientMovement : ITickable
     {
         private readonly NavMeshAgent _navMeshAgent;
         private readonly ClientAnimator _clientAnimator;
+        private readonly LocationProvider _locationProvider;
+        private readonly Transform _clientTransform;
         private Transform _target;
         private bool _blocked;
-        private Transform _clientTransform;
-        private Vector3 _initialPosition;
         private bool _isMovingBack;
 
-        public ClientMovement(NavMeshAgent navMeshAgent, ClientAnimator clientAnimator, Transform clientTransform)
+        public ClientMovement(NavMeshAgent navMeshAgent, ClientAnimator clientAnimator, Transform clientTransform,
+            LocationProvider locationProvider)
         {
+            _locationProvider = locationProvider;
             _clientTransform = clientTransform;
             _clientAnimator = clientAnimator;
             _navMeshAgent = navMeshAgent;
-        }
-
-        public void Initialize()
-        {
-            _initialPosition = _clientTransform.position;
         }
 
         public void Tick()
         {
             if (_target == null || _blocked || _isMovingBack)
                 return;
-            
+
             _navMeshAgent.SetDestination(_target.position);
-            _clientTransform.rotation = Quaternion.LookRotation(_target.forward);
+
+            if (_navMeshAgent.remainingDistance <= 0.5f)
+                _clientTransform.rotation = Quaternion.Slerp(_clientTransform.rotation,
+                    Quaternion.LookRotation(_target.forward), 5 * Time.deltaTime);
         }
 
         public void SetSitIdle(bool isSitIdle)
@@ -56,15 +55,38 @@ namespace CodeBase.Gameplay.Clients
             _clientAnimator.SetIsSitIdle(false);
         }
 
+        public async void SetSitIdleByMoving()
+        {
+            _blocked = true;
+            Debug.Log(_navMeshAgent);
+
+            while (_clientTransform != null && Vector3.Distance(_clientTransform.position, _target.position) > 0.2f)
+            {
+                _navMeshAgent.SetDestination(_target.position);
+                Debug.Log(_navMeshAgent.remainingDistance);
+
+                await UniTask.Yield();
+            }
+
+            SetSitIdle(true);
+        }
+
         public async void MoveBack(Action onComplete = null)
         {
             _isMovingBack = true;
             SetTarget(null);
 
-            while (_clientTransform != null && Vector3.Distance(_clientTransform.position, _initialPosition) > 0.5f)
+            while (_clientTransform != null &&
+                   Vector3.Distance(_clientTransform.position, _locationProvider.DisableClientZone.position) > 0.1f)
             {
-                _navMeshAgent.SetDestination(_initialPosition);
+                if (!_navMeshAgent.gameObject.activeSelf)
+                {
+                    onComplete?.Invoke();
+                    break;
+                }
                 
+                _navMeshAgent.SetDestination(_locationProvider.DisableClientZone.position);
+
                 await UniTask.Yield();
             }
 
@@ -76,8 +98,8 @@ namespace CodeBase.Gameplay.Clients
         {
             _target = target;
         }
-        
-        public bool IsMovingBack() => 
+
+        public bool IsMovingBack() =>
             _isMovingBack;
     }
 }

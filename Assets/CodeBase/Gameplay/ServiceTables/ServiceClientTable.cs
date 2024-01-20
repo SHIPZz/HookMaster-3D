@@ -32,23 +32,33 @@ namespace CodeBase.Gameplay.ServiceTables
         private void Start()
         {
             _clientServeService.SetTargetServePoint(_servePoint);
-            _triggerObserver.TriggerEntered += OnCharacterEntered;
-            _triggerObserver.TriggerExited += OnCharacterExited;
-            _clientObserver.TriggerEntered += OnCharacterEntered;
-            _clientObserver.TriggerExited += OnCharacterExited;
-            
+            SubscribeObservers();
+
             _clientServeService.Started += OnServingStarted;
             _clientServeService.Finished += OnServingFinished;
         }
 
         private void OnDisable()
         {
+            UnsubscribeObservers();
+            _clientServeService.Started -= OnServingStarted;
+            _clientServeService.Finished -= OnServingFinished;
+        }
+
+        private void UnsubscribeObservers()
+        {
             _triggerObserver.TriggerEntered -= OnCharacterEntered;
             _triggerObserver.TriggerExited -= OnCharacterExited;
             _clientObserver.TriggerEntered -= OnCharacterEntered;
             _clientObserver.TriggerExited -= OnCharacterExited;
-            _clientServeService.Started -= OnServingStarted;
-            _clientServeService.Finished -= OnServingFinished;
+        }
+
+        private void SubscribeObservers()
+        {
+            _triggerObserver.TriggerEntered += OnCharacterEntered;
+            _triggerObserver.TriggerExited += OnCharacterExited;
+            _clientObserver.TriggerEntered += OnCharacterEntered;
+            _clientObserver.TriggerExited += OnCharacterExited;
         }
 
         private void OnServingStarted(float serveTime) =>

@@ -16,7 +16,6 @@ namespace CodeBase.Services.Clients
         private bool _isPlayerAroundTable;
         private bool _isClientApproached;
         private Client _currentClient;
-        private Transform _servePoint;
         private CancellationTokenSource _serveTokenSource = new CancellationTokenSource();
         private readonly WalletService _walletService;
 
@@ -49,7 +48,10 @@ namespace CodeBase.Services.Clients
             {
                 await TryStartServing();
             }
-            catch (Exception e) { }
+            catch (Exception e)
+            {
+                // ignored
+            }
         }
 
         public void Stop()
@@ -57,13 +59,15 @@ namespace CodeBase.Services.Clients
             _serveTokenSource?.Cancel();
         }
 
-        public void SetTargetServePoint(Transform servePoint) =>
-            _servePoint = servePoint;
+        public void SetTargetServePoint(Transform servePoint)
+        {
+            _clientObjectService.SetServePoint(servePoint);
+        }
 
         private async UniTask TryStartServing()
         {
             if (_currentClient == null)
-                _clientObjectService.ActivateNextClient(_servePoint);
+                _clientObjectService.ActivateNextClient();
 
             if (!_isClientApproached || !_isPlayerAroundTable)
                 return;
@@ -81,7 +85,7 @@ namespace CodeBase.Services.Clients
             _walletService.Set(ItemTypeId.Money, ServeReward);
             Finished?.Invoke(ServeReward);
             _clientObjectService.SetServed(_currentClient.Id,
-                () => _clientObjectService.ActivateNextClient(_servePoint));
+                () => _clientObjectService.ActivateNextClient());
         }
     }
 }
