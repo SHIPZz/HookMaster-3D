@@ -15,7 +15,6 @@ namespace CodeBase.Services.Window
         public WindowBase CurrentWindow { get; private set; }
 
         public event Action<WindowBase> Opened;
-        public event Action<WindowBase> Closed;
 
         public WindowService(UIFactory uiFactory) =>
             _uiFactory = uiFactory;
@@ -60,10 +59,11 @@ namespace CodeBase.Services.Window
 
         public void Close<T>() where T : WindowBase
         {
+            ClearDestroyedWindows();
+            
             if (!_createdWindows.TryGetValue(typeof(T), out WindowBase windowBase))
                 return;
 
-            Closed?.Invoke(windowBase);
             windowBase.Close();
             ClearDestroyedWindows();
         }

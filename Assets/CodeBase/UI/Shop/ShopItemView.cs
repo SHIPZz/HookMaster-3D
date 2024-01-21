@@ -61,10 +61,9 @@ namespace CodeBase.UI.Shop
 
             _shopItemDataService.Add(GameItemType);
             var popupWindow = _windowService.Get<PopupWindow>();
-            popupWindow.Init(GameItemType);
+            popupWindow.Init(GameItemType, _windowService);
             popupWindow.Open();
             _walletService.Set(ItemTypeId, -Price);
-            _windowService.Close<ShopWindow>();
             Destroy(gameObject);
         }
     }
