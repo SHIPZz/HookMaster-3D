@@ -120,7 +120,7 @@ namespace CodeBase.UI.SpeedUp
                 x.gameObject.SetActive(true);
                 x.ToScale();
             });
-            await UniTask.WaitForSeconds(5f);
+            await UniTask.WaitForSeconds(_destroyDelayOnCompleted);
             Close();
         }
 

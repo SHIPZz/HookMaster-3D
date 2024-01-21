@@ -193,3 +193,4 @@ MonoBehaviour:
   _targetRotation: {x: 63, y: 15.2, z: 0}
   _speed: 3
   _movementDuration: 3
+  _stopOffset: -3

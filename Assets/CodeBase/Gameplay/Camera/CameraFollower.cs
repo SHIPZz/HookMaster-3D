@@ -2,6 +2,7 @@ using System;
 using CodeBase.Services.Providers.Player;
 using UnityEngine;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using Zenject;
 
 namespace CodeBase.Gameplay.Camera
@@ -12,6 +13,7 @@ namespace CodeBase.Gameplay.Camera
         [SerializeField] private Vector3 _targetRotation = new(63, 15.2f, 0);
         [SerializeField] private float _speed = 3f;
         [SerializeField] private float _movementDuration = 1.0f;
+        [SerializeField] private float _stopOffset = 0.5f;
 
         public Vector3 CameraPanOffset => new Vector3(0, 10f, 0);
 
@@ -19,6 +21,7 @@ namespace CodeBase.Gameplay.Camera
         private bool _isBlocked;
         private Transform _lastPosition;
         private PlayerProvider _playerProvider;
+        private Vector3 _lastRotation;
 
         [Inject]
         private void Construct(PlayerProvider playerProvider)
@@ -44,20 +47,25 @@ namespace CodeBase.Gameplay.Camera
 
         public void MoveTo(Transform target, Action onComplete = null)
         {
+            _target = target;
+            Vector3 targetPosition = target.position - target.forward * _stopOffset;
+
+            _lastRotation = transform.eulerAngles;
+            transform.DODynamicLookAt(_target.position, _movementDuration);
             transform
-                .DOMove(target.position + CameraPanOffset, _movementDuration)
+                .DOMove(targetPosition + CameraPanOffset, _movementDuration)
+                .OnComplete(() => MoveAndRotateBack(onComplete));
+        }
+
+        private void MoveAndRotateBack(Action onComplete)
+        {
+            transform.DORotate(_lastRotation, _movementDuration);
+            transform
+                .DOMove(_lastPosition.position + _offset * _speed, _movementDuration)
                 .OnComplete(() =>
                 {
-                    // transform.DORotateQuaternion(Quaternion.LookRotation(target.up * -1), 0.5f);
-
-                    transform
-                        .DOMove(_lastPosition.position + _offset * _speed, _movementDuration)
-                        .OnComplete(() =>
-                        {
-                            // transform.DORotate(_targetRotation, _movementDuration);
-                            onComplete?.Invoke();
-                            _isBlocked = false;
-                        });
+                    onComplete?.Invoke();
+                    _isBlocked = false;
                 });
         }
 
