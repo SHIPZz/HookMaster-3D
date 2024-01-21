@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SettingSO
   m_EditorClassIdentifier: 
   MusicVolume: -20
-  MainVolume: -10
+  MainVolume: 0

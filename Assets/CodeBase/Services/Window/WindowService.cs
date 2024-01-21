@@ -11,10 +11,11 @@ namespace CodeBase.Services.Window
     {
         private readonly UIFactory _uiFactory;
         private Dictionary<Type, WindowBase> _createdWindows = new();
-        
+
         public WindowBase CurrentWindow { get; private set; }
 
-        public event Action<WindowBase> Opened; 
+        public event Action<WindowBase> Opened;
+        public event Action<WindowBase> Closed;
 
         public WindowService(UIFactory uiFactory) =>
             _uiFactory = uiFactory;
@@ -38,7 +39,7 @@ namespace CodeBase.Services.Window
         public T Get<T>() where T : WindowBase
         {
             ClearDestroyedWindows();
-            
+
             if (_createdWindows.ContainsKey(typeof(T)))
             {
                 CurrentWindow = (T)_createdWindows[typeof(T)];
@@ -62,6 +63,7 @@ namespace CodeBase.Services.Window
             if (!_createdWindows.TryGetValue(typeof(T), out WindowBase windowBase))
                 return;
 
+            Closed?.Invoke(windowBase);
             windowBase.Close();
             ClearDestroyedWindows();
         }

@@ -12,6 +12,7 @@ namespace CodeBase.Gameplay.Clients
         
         public string Id;
         public bool IsServed;
+        public bool LeftOffice;
 
         public void SetTarget(Transform target)
         {
@@ -21,7 +22,6 @@ namespace CodeBase.Gameplay.Clients
         public void MoveBack()
         {
             _clientMovement.MoveBack();
-            print("moveback" + name);
         }
 
         public void SetSitIdle(bool isSitIdle, Transform target)

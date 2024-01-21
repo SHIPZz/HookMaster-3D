@@ -100,7 +100,7 @@ namespace CodeBase.Installers.Game
 
         private void BindNumberTextAnimService()
         {
-            Container.Bind<NumberTextAnimService>().AsSingle();
+            Container.Bind<NumberTextAnimService>().AsTransient();
         }
 
         private void BindTutorials()

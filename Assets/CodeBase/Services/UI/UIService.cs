@@ -4,6 +4,7 @@ using CodeBase.Enums;
 using CodeBase.Services.Factories.UI;
 using CodeBase.Services.Providers.Location;
 using CodeBase.Services.Window;
+using CodeBase.UI;
 using CodeBase.UI.Hud;
 using CodeBase.UI.OfflineReward;
 using UnityEngine;
@@ -30,7 +31,7 @@ namespace CodeBase.Services.UI
             _uiProvider = uiProvider;
         }
 
-        public void OpenOfflineRewardWindow(float totalEarnedProfit, int timeDifference)
+        public void OpenOfflineRewardWindow(int totalEarnedProfit, int timeDifference)
         {
             var offlineRewardWindow = _windowService.Get<OfflineRewardWindow>();
             offlineRewardWindow.Init(totalEarnedProfit, timeDifference);
@@ -58,6 +59,16 @@ namespace CodeBase.Services.UI
             
             if (!isEnabled)
                 _windowService.CloseAll();
+            else
+                _windowService.Open<HudWindow>();
+        }
+        
+        public void SetActiveUI<T>(bool isEnabled) where T : WindowBase
+        {
+            _joystickCanvas.enabled = isEnabled;
+            
+            if (!isEnabled)
+                _windowService.Close<T>();
             else
                 _windowService.Open<HudWindow>();
         }

@@ -23,7 +23,7 @@ namespace CodeBase.Gameplay.Tutorial
 
         public override void OnStart()
         {
-            if ( IsCompleted() &&  WindowService.CurrentWindow.GetType() != typeof(HudWindow))
+            if ( IsCompleted() ||  WindowService.CurrentWindow.GetType() != typeof(HudWindow))
                 return;
             
             var hudWindow = WindowService.Get<HudWindow>();

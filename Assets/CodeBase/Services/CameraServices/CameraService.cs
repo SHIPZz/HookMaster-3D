@@ -7,6 +7,8 @@ using CodeBase.Services.ShopItemData;
 using CodeBase.Services.UI;
 using CodeBase.Services.Window;
 using CodeBase.UI;
+using CodeBase.UI.Hud;
+using CodeBase.UI.PopupWindows;
 using CodeBase.UI.Shop;
 using UnityEngine;
 
@@ -17,6 +19,7 @@ namespace CodeBase.Services.Camera
         private readonly CameraProvider _cameraProvider;
         private readonly GameItemService _gameItemService;
         private readonly WindowService _windowService;
+        private readonly UIService _uiService;
         private List<GameItemType> _shownObjects = new();
         private List<GameItemType> _targetCameraPans = new()
         {
@@ -26,7 +29,6 @@ namespace CodeBase.Services.Camera
         
         private GameItemAbstract _target;
         private ShopWindow _shopWindow;
-        private UIService _uiService;
 
         public CameraService(CameraProvider cameraProvider,
             GameItemService gameItemService,
@@ -40,29 +42,15 @@ namespace CodeBase.Services.Camera
 
         public void Init()
         {
-            _gameItemService.Created += TryCameraPan;
-            _windowService.Opened += OnWindowOpened;
+            _gameItemService.Created += SetTarget;
         }
 
         public void Dispose()
         {
-            _gameItemService.Created -= TryCameraPan;
-            _windowService.Opened -= OnWindowOpened;
-
-            if (_shopWindow != null)
-                _shopWindow.Closed -= MoveToLastTarget;
+            _gameItemService.Created -= SetTarget;
         }
 
-        private void OnWindowOpened(WindowBase window)
-        {
-            if(window.GetType() != typeof(ShopWindow))
-                return;
-
-            _shopWindow = _windowService.Get<ShopWindow>();
-            _shopWindow.Closed += MoveToLastTarget;
-        }
-
-        private void TryCameraPan(GameItemAbstract gameItem)
+        private void SetTarget(GameItemAbstract gameItem)
         {
             if(!_targetCameraPans.Contains(gameItem.GameItemType))
                 return;
@@ -70,12 +58,12 @@ namespace CodeBase.Services.Camera
             _target = gameItem;
         }
 
-        private void MoveToLastTarget()
+        public void MoveToLastTarget()
         {
             if(_shownObjects.Contains(_target.GameItemType))
                 return;
             
-            _uiService.SetActiveUI(false);
+            _uiService.SetActiveUI<HudWindow>(false);
             _cameraProvider.CameraFollower.Block(true);
             _cameraProvider.CameraFollower.MoveTo(_target.transform, () => _uiService.SetActiveUI(true));
             _shownObjects.Add(_target.GameItemType);

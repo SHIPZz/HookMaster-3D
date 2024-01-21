@@ -1319,6 +1319,7 @@ GameObject:
   - component: {fileID: 3188859252362461535}
   - component: {fileID: 1713990457391518718}
   - component: {fileID: 5587368014677091276}
+  - component: {fileID: 7967970013692474992}
   m_Layer: 5
   m_Name: OfflineRewardWindow
   m_TagString: Untagged
@@ -1453,6 +1454,106 @@ MonoBehaviour:
   _canvasAnimator: {fileID: 8793966235596266635}
   _passedTimeSlider: {fileID: 3227549136957699645}
   _rewardedMoneyText: {fileID: 2110563647354231065}
+  _increaseSound: {fileID: 7967970013692474992}
+  _buttonScaleAnims:
+  - {fileID: 3483613166784355346}
+  - {fileID: 2739886192399569641}
+--- !u!82 &7967970013692474992
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2765386845575047703}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -5271895388671865006, guid: 258f8ea29c3a15d468f0a9cfad44b3f8, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 9f8f6ae3ffb64fa4abcbe47b3502ff79, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &3127189226869986301
 GameObject:
   m_ObjectHideFlags: 0
@@ -1468,6 +1569,7 @@ GameObject:
   - component: {fileID: 7104027950842822949}
   - component: {fileID: 7242411098956468104}
   - component: {fileID: 3451922497231088123}
+  - component: {fileID: 2739886192399569641}
   m_Layer: 5
   m_Name: ButtonClose
   m_TagString: Untagged
@@ -1702,6 +1804,28 @@ MonoBehaviour:
   _audioSource: {fileID: 7104027950842822949}
   _button: {fileID: 1821033114066412154}
   _setParent: 0
+--- !u!114 &2739886192399569641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3127189226869986301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c934f669bfd84432a926d47a9a3d2e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetScale: 1
+  _unScale: 0
+  _scaleDuration: 0.2
+  _unScaleDuration: 0.1
+  _rectTransform: {fileID: 2936110049887403004}
+  _scaleX: 0
+  _scaleY: 0
+  _scaleZ: 0
+  _unscaleOnStart: 1
+  _scaleDelay: 1
 --- !u!1 &3226426239407423259
 GameObject:
   m_ObjectHideFlags: 0
@@ -2966,6 +3090,7 @@ GameObject:
   - component: {fileID: 6043439874009839734}
   - component: {fileID: 1693790394782966357}
   - component: {fileID: 8258483214778370711}
+  - component: {fileID: 3483613166784355346}
   m_Layer: 5
   m_Name: Button_x2Collect
   m_TagString: Untagged
@@ -3276,6 +3401,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetAnchoredScale: {x: 400, y: 130}
   _animationDuration: 0.2
+--- !u!114 &3483613166784355346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4621383394215757453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c934f669bfd84432a926d47a9a3d2e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetScale: 1
+  _unScale: 0
+  _scaleDuration: 0.2
+  _unScaleDuration: 0.1
+  _rectTransform: {fileID: 4326942971419758718}
+  _scaleX: 0
+  _scaleY: 0
+  _scaleZ: 0
+  _unscaleOnStart: 1
+  _scaleDelay: 1
 --- !u!1 &4655327481099183679
 GameObject:
   m_ObjectHideFlags: 0

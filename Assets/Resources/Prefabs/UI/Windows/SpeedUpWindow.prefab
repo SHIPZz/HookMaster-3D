@@ -384,6 +384,8 @@ MonoBehaviour:
   _scaleX: 1
   _scaleY: 0
   _scaleZ: 0
+  _unscaleOnStart: 0
+  _scaleDelay: 1
 --- !u!1 &1613926060250051621
 GameObject:
   m_ObjectHideFlags: 0
@@ -1152,6 +1154,8 @@ MonoBehaviour:
   _scaleX: 1
   _scaleY: 0
   _scaleZ: 0
+  _unscaleOnStart: 0
+  _scaleDelay: 1
 --- !u!1 &3484083511069368306
 GameObject:
   m_ObjectHideFlags: 0
@@ -1291,6 +1295,8 @@ MonoBehaviour:
   _scaleX: 1
   _scaleY: 0
   _scaleZ: 0
+  _unscaleOnStart: 0
+  _scaleDelay: 1
 --- !u!1 &3579672476976567884
 GameObject:
   m_ObjectHideFlags: 0
@@ -1587,7 +1593,7 @@ MonoBehaviour:
   _checkOutButtons:
   - {fileID: 6505716057801819997}
   - {fileID: 2364760462253017232}
-  _destroyDelayOnCompleted: 1
+  _destroyDelayOnCompleted: 2
 --- !u!223 &5053316395763514578
 Canvas:
   m_ObjectHideFlags: 0
@@ -2724,6 +2730,8 @@ MonoBehaviour:
   _scaleX: 1
   _scaleY: 0
   _scaleZ: 0
+  _unscaleOnStart: 0
+  _scaleDelay: 1
 --- !u!1 &6864482865778070700
 GameObject:
   m_ObjectHideFlags: 0
@@ -3164,6 +3172,8 @@ MonoBehaviour:
   _scaleX: 1
   _scaleY: 0
   _scaleZ: 0
+  _unscaleOnStart: 0
+  _scaleDelay: 1
 --- !u!1 &7383880410641601826
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,6 +19,7 @@ namespace CodeBase.Gameplay.Tutorial
         private readonly Vector3 _spawnOffset = new(0, 1.5f, 0);
         private readonly EmployeeService _employeeService;
         private SpriteRenderer _pointer;
+        private bool _pointerCreated;
 
         public ApproachToEmployeeStep(UIFactory uiFactory, WindowService windowService,
             IWorldDataService worldDataService, EmployeeHirerService employeeHirerService,
@@ -73,6 +74,9 @@ namespace CodeBase.Gameplay.Tutorial
 
         private async void OnHired(Employee employee)
         {
+            if(_pointerCreated)
+                return;
+            
             if (IsCompleted())
                 return;
 
@@ -84,6 +88,7 @@ namespace CodeBase.Gameplay.Tutorial
             WorldDataService.WorldData.TutorialData.LastPointerEmployeePosition = _pointer.transform.position.ToData();
             WorldDataService.WorldData.TutorialData.EmployeeId = employee.Id;
             _pointer.transform.up = employee.transform.up;
+            _pointerCreated = true;
         }
 
         private void CreatePointer3D()

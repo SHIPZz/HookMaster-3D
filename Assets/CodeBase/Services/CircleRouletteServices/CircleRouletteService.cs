@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Constant;
 using CodeBase.Data;
-using CodeBase.Enums;
 using CodeBase.Extensions;
 using CodeBase.Gameplay.GameItems;
 using CodeBase.Services.DataService;

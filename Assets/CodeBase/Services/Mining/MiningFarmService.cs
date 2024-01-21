@@ -64,7 +64,7 @@ namespace CodeBase.Services.Mining
                 data.MinTemperature, data.MidTemperature, data.MaxTemperature);
 
             MiningFarmData targetItemData = item.ToData();
-            _worldDataService.WorldData.MiningFarmDatas.Add(targetItemData.Id, targetItemData);
+            _worldDataService.WorldData.MiningFarmDatas.TryAdd(targetItemData.Id, targetItemData);
 
             return item;
         }

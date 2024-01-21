@@ -22,7 +22,7 @@ namespace CodeBase.Cheats
                 _worldDataService.Save();
             }
             
-            if (Input.GetKeyDown(KeyCode.F10))
+            if (Input.GetKeyDown(KeyCode.F8))
             {
                 PlayerPrefs.DeleteAll();
                 PlayerPrefs.Save();

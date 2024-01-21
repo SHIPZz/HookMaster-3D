@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c5bd401298541db8e29766389921c0f, type: 3}
   m_Name: MiningFarmSO
   m_EditorClassIdentifier: 
+  Description: Mining farm gives you profit per minute. Note, that you should clean
+    it every 2 hours!
+  Name: Mining farm
   ProfitPerMinute: 5
   MinTemperature: 65
   MidTemperature: 75
   MaxTemperature: 105
   Price: 3000
+  Icon: {fileID: 21300000, guid: 1d2863005c3064b4b8d2ed759220785b, type: 3}
   miningFarmItem: {fileID: 0}

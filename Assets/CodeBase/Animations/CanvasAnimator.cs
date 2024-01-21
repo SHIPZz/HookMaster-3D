@@ -22,7 +22,7 @@ namespace CodeBase.Animations
         {
             _fadeTween?.Kill(true);
             _canvasGroup.interactable = true;
-            _fadeTween = _canvasGroup.DOFade(1f, _fadeInDuration);
+            _fadeTween = _canvasGroup.DOFade(1f, _fadeInDuration).OnComplete(() => onCompleted?.Invoke());
         }
 
         public void FadeOutCanvas([CanBeNull] Action onCompleted = null)

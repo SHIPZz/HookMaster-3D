@@ -6,7 +6,10 @@ using CodeBase.Services.Camera;
 using CodeBase.Services.ShopItemData;
 using CodeBase.Services.ShopItemDataServices;
 using CodeBase.Services.UI;
+using CodeBase.Services.Window;
 using CodeBase.UI.FloatingText;
+using CodeBase.UI.Hud;
+using CodeBase.UI.PopupWindows;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,18 +27,18 @@ namespace CodeBase.UI.Shop
         [SerializeField] private Button _buyButton;
 
         private WalletService _walletService;
-        private GameItemService _gameItemService;
         private FloatingTextService _floatingTextService;
         private ShopItemDataService _shopItemDataService;
+        private WindowService _windowService;
 
         [Inject]
-        private void Construct(WalletService walletService, GameItemService gameItemService,
+        private void Construct(WalletService walletService,
             FloatingTextService floatingTextService,
-            ShopItemDataService shopItemDataService)
+            ShopItemDataService shopItemDataService, WindowService windowService)
         {
+            _windowService = windowService;
             _shopItemDataService = shopItemDataService;
             _floatingTextService = floatingTextService;
-            _gameItemService = gameItemService;
             _walletService = walletService;
         }
 
@@ -57,9 +60,11 @@ namespace CodeBase.UI.Shop
             }
 
             _shopItemDataService.Add(GameItemType);
-             _gameItemService.Create(GameItemType);
-
+            var popupWindow = _windowService.Get<PopupWindow>();
+            popupWindow.Init(GameItemType);
+            popupWindow.Open();
             _walletService.Set(ItemTypeId, -Price);
+            _windowService.Close<ShopWindow>();
             Destroy(gameObject);
         }
     }

@@ -15,7 +15,7 @@ using Zenject;
 
 namespace CodeBase.Services.Profit
 {
-    public class ProfitService : IInitializable, IDisposable, ITickable
+    public class ProfitService : IInitializable, IDisposable
     {
         private const int OfflineReward = 2;
         private readonly WaitForSeconds _waitMinute = new(60f);
@@ -25,7 +25,7 @@ namespace CodeBase.Services.Profit
         private readonly UIService _uiService;
         private readonly EmployeeService _employeeService;
 
-        private float _totalEarnedProfit;
+        private int _totalEarnedProfit;
 
         public event Action<string, float> ProfitGot;
 
@@ -64,12 +64,7 @@ namespace CodeBase.Services.Profit
         {
             Application.focusChanged -= OnFocusChanged;
         }
-
-        public void Tick()
-        {
-            if (UnityEngine.Input.GetKeyDown(KeyCode.F4))
-                _walletService.Set(ItemTypeId.Money, 500);
-        }
+        
 
         private void ReceiveOfflineProfit(int timeDifferenceByMinutes)
         {

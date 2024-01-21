@@ -1,6 +1,7 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,9 +9,11 @@ namespace CodeBase.InfraStructure
 {
     public class LoadingCurtain : MonoBehaviour, ILoadingCurtain
     {
-        [SerializeField] private float _closeDuration =1f;
+        [SerializeField] private float _closeDuration = 1f;
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private Slider _loadingSlider;
+        [SerializeField] private TMP_Text _loadingText;
+
         private Canvas _canvas;
 
         public event Action Closed;
@@ -22,8 +25,16 @@ namespace CodeBase.InfraStructure
             DontDestroyOnLoad(this);
         }
 
-        private void OnDisable() =>
+        private void OnEnable()
+        {
+            _loadingSlider.onValueChanged.AddListener(OnValueChanged);
+        }
+
+        private void OnDisable()
+        {
             _loadingSlider.value = 0;
+            _loadingSlider.onValueChanged.RemoveListener(OnValueChanged);
+        }
 
         public void Show(float loadSliderDuration)
         {
@@ -45,6 +56,11 @@ namespace CodeBase.InfraStructure
                     _canvas.enabled = false;
                     Closed?.Invoke();
                 });
+        }
+
+        private void OnValueChanged(float value)
+        {
+            _loadingText.text = $"Loading...{value}%";
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
@@ -14,11 +15,26 @@ namespace CodeBase.Animations
         [SerializeField] private bool _scaleX;
         [SerializeField] private bool _scaleY;
         [SerializeField] private bool _scaleZ;
+        [SerializeField] private bool _unscaleOnStart;
+        [SerializeField] private float _scaleDelay = 1f;
 
         private Tween _tween;
 
+        private void Awake()
+        {
+            if(_unscaleOnStart)
+                UnScale();
+        }
+
         public void ToScale(Action onComplete = null)
         {
+            SetTween(Vector3.one * _targetScale, _scaleDuration, onComplete);
+        }
+        
+        public async void ToScaleAsync(Action onComplete = null)
+        {
+            await UniTask.WaitForSeconds(_scaleDelay);
+            
             SetTween(Vector3.one * _targetScale, _scaleDuration, onComplete);
         }
 

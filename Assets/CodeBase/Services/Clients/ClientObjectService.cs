@@ -13,7 +13,7 @@ namespace CodeBase.Services.Clients
     {
         private readonly CouchService _couchService;
         private readonly ClientProvider _clientProvider;
-        private List<Client> _createdClients = new();
+        private Dictionary<string, Client> _createdClients = new();
         private ClientSpawner _clientSpawner;
         private Client _lastClient;
         private int _disabledClients;
@@ -28,9 +28,13 @@ namespace CodeBase.Services.Clients
 
         public void Init()
         {
-            _clientProvider.ClientSpawners.ForEach(x => _createdClients.Add(x.Spawn()));
+            _clientProvider.ClientSpawners.ForEach(x =>
+            {
+                Client client = x.Spawn();
+                _createdClients[client.Id] = client;
+            });
 
-            foreach (Client client in _createdClients)
+            foreach (Client client in _createdClients.Values)
             {
                 Transform sitPlace = _couchService.GetSitPlace();
 
@@ -46,14 +50,18 @@ namespace CodeBase.Services.Clients
             _servePoint = servePoint;
         }
 
-        public void ActivateNextClient()
+        public async void ActivateNextClient()
         {
-            Client targetClient = _createdClients.FirstOrDefault(x => x.IsServed == false);
+            if (_lastClient != null)
+                while (!_lastClient.LeftOffice)
+                    await UniTask.Yield();
+
+            Client targetClient = _createdClients.Values.FirstOrDefault(x => x.IsServed == false);
 
             if (targetClient == null)
             {
                 _createdClients.Clear();
-                CreateNewClients();
+                CreateClients();
                 SetMoveDirectionToClients();
                 return;
             }
@@ -64,21 +72,26 @@ namespace CodeBase.Services.Clients
 
         public void SetServed(string id)
         {
-            _lastClient = _createdClients.FirstOrDefault(x => x.Id == id);
+            _lastClient = _createdClients[id];
             _lastClient.IsServed = true;
             _lastClient.MoveBack();
         }
 
-        private void CreateNewClients()
+        private void CreateClients()
         {
-            _clientProvider.ClientSpawners.ForEach(x => _createdClients.Add(x.Spawn()));
+            _clientProvider.ClientSpawners.ForEach(x =>
+            {
+                Client client = x.Spawn();
+                _createdClients[client.Id] = client;
+            });
+
         }
 
         private void SetMoveDirectionToClients()
         {
             _isFirstClientWentToServePoint = false;
-            
-            foreach (Client client in _createdClients)
+
+            foreach (Client client in _createdClients.Values)
             {
                 if (!_isFirstClientWentToServePoint)
                 {

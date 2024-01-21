@@ -31,7 +31,7 @@ namespace CodeBase.UI.Roulette
         [SerializeField] private List<RouletteItem> _rouletteItems;
         [SerializeField] private TriggerObserver _arrowTrigger;
         [SerializeField] private TMP_Text _allMoneyText;
-        [SerializeField] private List<ParticleSystem> _effects;
+        [SerializeField] private AppearanceEffect _appearanceEffect;
         [SerializeField] private SoundPlayerSystem _soundPlayerSystem;
         [SerializeField] private ImageFadeAnim _circleFadeAnim;
         [SerializeField] private TextAnimView _countTextAnim;
@@ -145,7 +145,7 @@ namespace CodeBase.UI.Roulette
             _target.localEulerAngles = targetRotation;
 
             _rotateButton.interactable = true;
-            _effects.ForEach(x => x.Play());
+            _appearanceEffect.PlayTargetEffects();
             _circleFadeAnim.FadeIn();
             _countTextAnim.DoFade();
             _soundPlayerSystem.PlayInactiveSound();
