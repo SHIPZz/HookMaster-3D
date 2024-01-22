@@ -1,4 +1,5 @@
 ﻿using CodeBase.Animations;
+using CodeBase.Gameplay.SoundPlayer;
 using CodeBase.Services.Sound;
 using CodeBase.Services.Window;
 using CodeBase.UI.Hud;
@@ -10,6 +11,8 @@ namespace CodeBase.UI.Settings
     public class SettingsWindow : WindowBase
     {
         [SerializeField] private CanvasAnimator _canvasAnimator;
+        [SerializeField] private SoundPlayerSystem _soundPlayerSystem;
+        
         private WindowService _windowService;
         private SettingsService _settingsService;
 
@@ -22,6 +25,7 @@ namespace CodeBase.UI.Settings
 
         public override void Open()
         {
+            // _soundPlayerSystem.PlayActiveSound();
             _canvasAnimator.FadeInCanvas();
         }
 

@@ -21,12 +21,13 @@ namespace CodeBase.Services.Camera
         private readonly WindowService _windowService;
         private readonly UIService _uiService;
         private List<GameItemType> _shownObjects = new();
+
         private List<GameItemType> _targetCameraPans = new()
         {
             GameItemType.CircleRoulette,
             GameItemType.MiningFarm,
         };
-        
+
         private GameItemAbstract _target;
         private ShopWindow _shopWindow;
 
@@ -52,17 +53,28 @@ namespace CodeBase.Services.Camera
 
         private void SetTarget(GameItemAbstract gameItem)
         {
-            if(!_targetCameraPans.Contains(gameItem.GameItemType))
+            if (!_targetCameraPans.Contains(gameItem.GameItemType))
                 return;
 
             _target = gameItem;
         }
 
+        public void MoveToTarget(Transform target, float backDuration, Action onComplete = null)
+        {
+            _uiService.SetActiveUI<HudWindow>(false);
+            _cameraProvider.CameraFollower.Block(true);
+            _cameraProvider.CameraFollower.MoveTo(target, backDuration, () =>
+            {
+                _uiService.SetActiveUI(true);
+                onComplete?.Invoke();
+            });
+        }
+
         public void MoveToLastTarget()
         {
-            if(_shownObjects.Contains(_target.GameItemType))
+            if (_shownObjects.Contains(_target.GameItemType))
                 return;
-            
+
             _uiService.SetActiveUI<HudWindow>(false);
             _cameraProvider.CameraFollower.Block(true);
             _cameraProvider.CameraFollower.MoveTo(_target.transform, () => _uiService.SetActiveUI(true));

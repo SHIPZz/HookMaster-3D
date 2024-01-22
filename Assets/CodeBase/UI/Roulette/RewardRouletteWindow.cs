@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Animations;
 using CodeBase.Data;
-using CodeBase.Gameplay;
+using CodeBase.Gameplay.SoundPlayer;
 using CodeBase.Services.Reward;
 using CodeBase.Services.Window;
 using CodeBase.UI.Hud;
-using Cysharp.Threading.Tasks;
-using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using Zenject;

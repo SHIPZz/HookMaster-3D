@@ -1,7 +1,6 @@
-﻿using Cysharp.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace CodeBase.Gameplay
+namespace CodeBase.Gameplay.SoundPlayer
 {
     public class SoundPlayerSystem : MonoBehaviour
     {

@@ -352,7 +352,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -693,7 +693,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -746,7 +746,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -5077,9 +5077,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 73768109
+  m_SortingLayer: 2
+  m_SortingOrder: 123
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -5137,8 +5137,8 @@ Transform:
   m_GameObject: {fileID: 640232735880781589}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 576, z: -0}
-  m_LocalScale: {x: 500, y: 500, z: 500}
+  m_LocalPosition: {x: 0, y: 768, z: 0}
+  m_LocalScale: {x: 950, y: 950, z: 950}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 640232735881159217}
@@ -5162,7 +5162,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -9790,7 +9790,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 73768109
   m_SortingLayer: 2
-  m_SortingOrder: 231
+  m_SortingOrder: 124
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -9871,7 +9871,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -14614,9 +14614,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 73768109
+  m_SortingLayer: 2
+  m_SortingOrder: 123
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -15765,7 +15765,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -5271895388671865006, guid: 258f8ea29c3a15d468f0a9cfad44b3f8, type: 2}
-  m_audioClip: {fileID: 8300000, guid: b281557fa76b2a643bcd531fb6d9ff21, type: 3}
+  m_audioClip: {fileID: 8300000, guid: cfa2bbcaa621fcc41914d00304c41f8d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -16194,7 +16194,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -16535,7 +16535,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -16588,7 +16588,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -20919,9 +20919,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 73768109
+  m_SortingLayer: 2
+  m_SortingOrder: 123
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -21136,7 +21136,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -21477,7 +21477,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -21530,7 +21530,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -25861,9 +25861,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 73768109
+  m_SortingLayer: 2
+  m_SortingOrder: 123
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -26057,7 +26057,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -5271895388671865006, guid: 258f8ea29c3a15d468f0a9cfad44b3f8, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 013e7c73818e3704b8ac75a3bcbd075e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6bc201a2770ebb94283ad9b6920a19ca, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -26571,8 +26571,8 @@ Transform:
   m_GameObject: {fileID: 4515418979742398808}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -128, z: 0}
-  m_LocalScale: {x: 500, y: 500, z: 500}
+  m_LocalPosition: {x: 0, y: 22, z: -0}
+  m_LocalScale: {x: 950, y: 950, z: 950}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4065775246816994099}
@@ -26596,7 +26596,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -31224,7 +31224,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 73768109
   m_SortingLayer: 2
-  m_SortingOrder: 231
+  m_SortingOrder: 124
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -32228,7 +32228,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -36971,9 +36971,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 73768109
+  m_SortingLayer: 2
+  m_SortingOrder: 123
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -37054,7 +37054,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -41797,9 +41797,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 73768109
+  m_SortingLayer: 2
+  m_SortingOrder: 123
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -42264,8 +42264,8 @@ Transform:
   m_GameObject: {fileID: 8353848376072622324}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -535, z: 0}
-  m_LocalScale: {x: 500, y: 500, z: 500}
+  m_LocalPosition: {x: 0, y: -578, z: 0}
+  m_LocalScale: {x: 950, y: 950, z: 950}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5470719609974459851}
@@ -42289,7 +42289,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -46917,7 +46917,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 73768109
   m_SortingLayer: 2
-  m_SortingOrder: 231
+  m_SortingOrder: 124
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0

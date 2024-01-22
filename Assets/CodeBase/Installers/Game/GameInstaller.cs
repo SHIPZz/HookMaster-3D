@@ -154,7 +154,7 @@ namespace CodeBase.Installers.Game
             Container.BindInstance(_fireProvider);
 
         private void BindFireService() =>
-            Container.Bind<FireService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<FireService>().AsSingle();
 
         private void BindExtinguisherService() =>
             Container.Bind<ExtinguisherService>().AsSingle();

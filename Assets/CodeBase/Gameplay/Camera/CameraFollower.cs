@@ -2,7 +2,6 @@ using System;
 using CodeBase.Services.Providers.Player;
 using UnityEngine;
 using DG.Tweening;
-using Sirenix.OdinInspector;
 using Zenject;
 
 namespace CodeBase.Gameplay.Camera
@@ -14,9 +13,10 @@ namespace CodeBase.Gameplay.Camera
         [SerializeField] private float _speed = 3f;
         [SerializeField] private float _movementDuration = 1.0f;
         [SerializeField] private float _stopOffset = 0.5f;
+        [SerializeField] private Vector3 _cameraPanOffset = new(0, 10f, 0);
 
-        public Vector3 CameraPanOffset => new Vector3(0, 10f, 0);
-
+        public event Action Moved;
+        
         private Transform _target;
         private bool _isBlocked;
         private Transform _lastPosition;
@@ -44,6 +44,23 @@ namespace CodeBase.Gameplay.Camera
         {
             _isBlocked = isBlocked;
         }
+        
+        public void MoveTo(Transform target, float movementBackDelay, Action onComplete = null)
+        {
+            _target = target;
+            Vector3 targetPosition = target.position - target.forward * _stopOffset;
+
+            _lastRotation = transform.eulerAngles;
+            transform.DODynamicLookAt(_target.position, _movementDuration);
+            
+            Moved?.Invoke();
+            
+            transform
+                .DOMove(targetPosition + _cameraPanOffset, _movementDuration)
+                .OnComplete(() => DOTween.Sequence()
+                    .AppendInterval(movementBackDelay)
+                    .OnComplete(() => MoveAndRotateBack(onComplete)));
+        }
 
         public void MoveTo(Transform target, Action onComplete = null)
         {
@@ -51,9 +68,10 @@ namespace CodeBase.Gameplay.Camera
             Vector3 targetPosition = target.position - target.forward * _stopOffset;
 
             _lastRotation = transform.eulerAngles;
+            Moved?.Invoke();
             transform.DODynamicLookAt(_target.position, _movementDuration);
             transform
-                .DOMove(targetPosition + CameraPanOffset, _movementDuration)
+                .DOMove(targetPosition + _cameraPanOffset, _movementDuration)
                 .OnComplete(() => MoveAndRotateBack(onComplete));
         }
 

@@ -1,10 +1,13 @@
-﻿using CodeBase.Services.UI;
+﻿using CodeBase.Gameplay.SoundPlayer;
+using CodeBase.Services.UI;
+using UnityEngine;
 using Zenject;
 
 namespace CodeBase.Installers.Game
 {
     public class GameUIInstaller : MonoInstaller
     {
+        
         public override void InstallBindings()
         {
             BindFloatingServices();

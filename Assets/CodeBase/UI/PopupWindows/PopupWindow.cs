@@ -2,6 +2,7 @@
 using CodeBase.Animations;
 using CodeBase.Enums;
 using CodeBase.Gameplay;
+using CodeBase.Gameplay.SoundPlayer;
 using CodeBase.Services.Camera;
 using CodeBase.Services.DataService;
 using CodeBase.Services.ShopItemData;

@@ -14,5 +14,6 @@ namespace CodeBase.Services.Providers.Location
         public Transform MiningFarmSpawnPoint;
         public Transform DisableClientZone;
         public List<Transform> RandomItemSpawnPoints;
+        public Transform ClientServiceRoom;
     }
 }

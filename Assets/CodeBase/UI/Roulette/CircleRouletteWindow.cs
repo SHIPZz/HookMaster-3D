@@ -4,6 +4,7 @@ using System.Globalization;
 using CodeBase.Animations;
 using CodeBase.Gameplay;
 using CodeBase.Gameplay.GameItems;
+using CodeBase.Gameplay.SoundPlayer;
 using CodeBase.Services.CircleRouletteServices;
 using CodeBase.Services.Reward;
 using CodeBase.Services.TriggerObserve;
