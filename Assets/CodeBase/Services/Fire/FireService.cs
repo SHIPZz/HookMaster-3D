@@ -18,6 +18,9 @@ namespace CodeBase.Services.Fire
         private readonly IWorldDataService _worldDataService;
         private readonly WaitForSeconds _minute = new(60f);
         private readonly ICoroutineRunner _coroutineRunner;
+
+        public bool IsFired { get; private set; }
+
         private float _fireInvokeTime;
 
         public FireService(FireProvider fireProvider,
@@ -54,6 +57,7 @@ namespace CodeBase.Services.Fire
         {
             _fireInvokeTime = TimeConstantValue.TenMinutes;
             _worldDataService.WorldData.FireTimeData.TargetFireInvokeTime = _fireInvokeTime;
+            IsFired = false;
             await _worldTimeService.UpdateWorldTime();
             _worldTimeService.SaveLastFireTime();
         }
@@ -77,6 +81,7 @@ namespace CodeBase.Services.Fire
             var randomId = Random.Range(0, _fireProvider.FireSpawners.Count);
             FireSpawner randomSpawner = _fireProvider.FireSpawners[randomId];
             randomSpawner.Init();
+            IsFired = true;
         }
     }
 }

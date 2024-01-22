@@ -1,5 +1,6 @@
 using System;
 using CodeBase.Gameplay.PlayerSystem;
+using CodeBase.Services.Fire;
 using CodeBase.Services.TriggerObserve;
 using UnityEngine;
 using Zenject;
@@ -19,8 +20,10 @@ public class IKObjectSystem : MonoBehaviour
     private PlayerIKService _playerIKService;
 
     [Inject]
-    private void Construct(PlayerIKService playerIKService) => 
+    private void Construct(PlayerIKService playerIKService)
+    {
         _playerIKService = playerIKService;
+    }
 
     private void OnEnable()
     {
@@ -33,7 +36,7 @@ public class IKObjectSystem : MonoBehaviour
         _playerIKService.ClearIKHandTargets();
     }
 
-    private void OnPlayerEntered(Collision player)
+    protected virtual void OnPlayerEntered(Collision player)
     {
         if (_isTaken || _playerIKService.HasItemInHands)
             return;

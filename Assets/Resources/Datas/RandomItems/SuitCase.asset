@@ -17,4 +17,5 @@ MonoBehaviour:
   Profit: 450
   Name: SUITCASE OF MONEY
   Icon: {fileID: 21300000, guid: 992a6033bfa2eb84b8dfb28d869aa25d, type: 3}
-  IconPosition: {x: 27, y: 0}
+  IconPosition: {x: 29, y: -8}
+  Width: {x: 550, y: 350}

@@ -13,5 +13,6 @@ namespace CodeBase.SO.GameItem.RandomItems
         public string Name;
         public Sprite Icon;
         public Vector2 IconPosition;
+        public Vector2 Width;
     }
 }

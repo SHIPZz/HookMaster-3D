@@ -5,11 +5,8 @@ using CodeBase.Constant;
 using CodeBase.Enums;
 using CodeBase.Gameplay.GameItems;
 using CodeBase.SO.GameItem;
-using CodeBase.SO.GameItem.CircleRoulette;
-using CodeBase.SO.GameItem.MiningFarm;
 using CodeBase.SO.GameItem.RandomItems;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace CodeBase.Services.DataService
 {

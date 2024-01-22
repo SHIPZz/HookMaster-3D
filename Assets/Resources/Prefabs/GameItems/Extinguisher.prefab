@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 1086116215846524206}
   - component: {fileID: 3144242845122396947}
   - component: {fileID: 8456347367307324160}
-  - component: {fileID: 7071223177504055573}
   - component: {fileID: 4260742610528290928}
   - component: {fileID: -1797554488943992746}
   - component: {fileID: 835079682510161463}
+  - component: {fileID: 6403226093479650756}
   m_Layer: 21
   m_Name: Extinguisher
   m_TagString: Untagged
@@ -116,23 +116,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43114933343883532, guid: 264d9e2726c2c884cab052c4c684d3dd, type: 2}
---- !u!114 &7071223177504055573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 752721442058616064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f96e1037c2f180408b523c47db8ce8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <RightHandIK>k__BackingField: {fileID: 6318980526000142244}
-  <LeftHandIK>k__BackingField: {fileID: 2565504888882319298}
-  _triggerObserver: {fileID: -1797554488943992746}
-  _targetPosition: {x: 0.26, y: 0.698, z: 0.557}
-  _targetRotation: {x: 0, y: 76, z: 0}
 --- !u!114 &4260742610528290928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,6 +242,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6403226093479650756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752721442058616064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43d8f56076014bc98e2138dc449d3690, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <RightHandIK>k__BackingField: {fileID: 6318980526000142244}
+  <LeftHandIK>k__BackingField: {fileID: 2565504888882319298}
+  _triggerObserver: {fileID: -1797554488943992746}
+  _targetPosition: {x: 0.26, y: 0.698, z: 0.557}
+  _targetRotation: {x: 0, y: 76, z: 0}
 --- !u!1 &1602005823134521601
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,7 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _extinguisher: {fileID: 4260742610528290928}
-  _ikObjectSystem: {fileID: 7071223177504055573}
+  _ikObjectSystem: {fileID: 6403226093479650756}
   _circle: {fileID: 4060640229151816004}
 --- !u!1 &4060640229151816004
 GameObject:

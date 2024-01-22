@@ -17,4 +17,5 @@ MonoBehaviour:
   Profit: 650
   Name: MONEY BAG
   Icon: {fileID: 21300000, guid: acde16531e1691a4a9e4e07dfdd8332b, type: 3}
-  IconPosition: {x: -11, y: 17}
+  IconPosition: {x: -5, y: 16}
+  Width: {x: 550, y: 350}
