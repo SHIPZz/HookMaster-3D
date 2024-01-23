@@ -46,7 +46,7 @@ namespace CodeBase.Services.UI
             _joystickCanvas.worldCamera = camera;
             _joystickCanvas.planeDistance = 1;
             _joystickCanvas.sortingLayerName =
-                Enum.GetName(typeof(SortingLayerTypeId), SortingLayerTypeId.JoystickUILayer);
+                Enum.GetName(typeof(SortingLayerTypeId), SortingLayerTypeId.Default);
             _joystickCanvas.gameObject.SetActive(true);
 
             if (_blockHud == false)

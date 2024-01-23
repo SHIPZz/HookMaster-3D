@@ -1,6 +1,9 @@
 ﻿using CodeBase.Animations;
 using CodeBase.Data;
+using CodeBase.Gameplay.SoundPlayer;
 using CodeBase.Services.Employees;
+using CodeBase.Services.Window;
+using CodeBase.UI.Hud;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -11,32 +14,41 @@ namespace CodeBase.UI.Upgrade
     {
         [SerializeField] private TMP_Text _nameText;
         [SerializeField] private CanvasAnimator _canvasAnimator;
-        [Header("Old data")] [SerializeField] private TMP_Text _oldProfitText;
+        
+        [Header("Old data")] 
+        [SerializeField] private TMP_Text _oldProfitText;
         [SerializeField] private TMP_Text _oldSalaryText;
         [SerializeField] private TMP_Text _oldQualificationTypeText;
 
-        [Header("Upgraded data")] [SerializeField]
-        private TMP_Text _newProfitText;
-
+        [Header("Upgraded data")] 
+        [SerializeField] private TMP_Text _newProfitText;
         [SerializeField] private TMP_Text _newSalaryText;
         [SerializeField] private TMP_Text _newQualificationTypeText;
+        
         [SerializeField] private RectTransformScaleAnim _buttonScaleAnim;
         [SerializeField] private AudioSource _increaseValueSound;
+        [SerializeField] private AppearanceEffect _appearanceEffect;
+        [SerializeField] private SoundPlayerSystem _soundPlayerSystem;
 
         private EmployeeData _employeeData;
 
         private EmployeeService _employeeService;
         private NumberTextAnimService _numberTextAnimService;
+        private WindowService _windowService;
 
         [Inject]
-        private void Construct(EmployeeService employeeService, NumberTextAnimService numberTextAnimService)
+        private void Construct(EmployeeService employeeService, NumberTextAnimService numberTextAnimService, WindowService windowService)
         {
+            _windowService = windowService;
             _numberTextAnimService = numberTextAnimService;
             _employeeService = employeeService;
         }
 
         public override void Open()
         {
+            _windowService.Close<HudWindow>();
+            _appearanceEffect.PlayTargetEffects();
+            _soundPlayerSystem.PlayActiveSound();
             _canvasAnimator.FadeInCanvas();
 
             _employeeService.Upgrade(_employeeData, OnComplete);
@@ -54,6 +66,7 @@ namespace CodeBase.UI.Upgrade
 
         public override void Close()
         {
+            _windowService.Open<HudWindow>();
             _canvasAnimator.FadeOutCanvas(base.Close);
         }
 

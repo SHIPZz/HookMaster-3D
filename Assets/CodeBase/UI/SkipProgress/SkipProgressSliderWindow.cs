@@ -119,6 +119,7 @@ namespace CodeBase.UI.SkipProgress
 
         private void SetCompleted()
         {
+            _employeeDataService.SetUpgradeEmployeeData(_upgradeEmployeeData);
             _upgradeEmployeeData.SetCompleted(true);
             _remainingText.text = "Completed";
             _upgradingText.text = "I become better!";

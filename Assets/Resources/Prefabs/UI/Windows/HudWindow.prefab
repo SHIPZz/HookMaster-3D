@@ -2167,6 +2167,7 @@ GameObject:
   - component: {fileID: 5899040185540474427}
   - component: {fileID: 5020811992961267521}
   - component: {fileID: 4707663233189714427}
+  - component: {fileID: 4700756735166001385}
   m_Layer: 5
   m_Name: HudWindow
   m_TagString: Untagged
@@ -2189,9 +2190,9 @@ RectTransform:
   - {fileID: 3789481751179612145}
   - {fileID: 7044226616383396176}
   - {fileID: 912340783337694291}
-  - {fileID: 4416567330803310340}
   - {fileID: 7187735111859211313}
   - {fileID: 615763984903419016}
+  - {fileID: 4416567330803310340}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2308,6 +2309,20 @@ MonoBehaviour:
   _canvasGroup: {fileID: 5899040185540474427}
   _fadeInDuration: 0.3
   _fadeOutDuration: 0.1
+--- !u!114 &4700756735166001385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5244320276605106608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a7007839bb249af9f4628adcf46c735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _planeDistance: 1
+  _sortingLayerTypeId: 2
 --- !u!1 &5254147785846685064
 GameObject:
   m_ObjectHideFlags: 0

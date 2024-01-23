@@ -1,4 +1,5 @@
 ﻿using CodeBase.Data;
+using CodeBase.UI.Hud;
 using CodeBase.UI.SkipProgress;
 using CodeBase.UI.Upgrade;
 

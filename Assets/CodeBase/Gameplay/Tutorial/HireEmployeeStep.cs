@@ -1,4 +1,5 @@
-﻿using CodeBase.Constant;
+﻿using System;
+using CodeBase.Constant;
 using CodeBase.Services.Factories.UI;
 using CodeBase.Services.Window;
 using CodeBase.Services.WorldData;
@@ -9,21 +10,21 @@ using UnityEngine.UI;
 
 namespace CodeBase.Gameplay.Tutorial
 {
-    public class HireEmployeeStep : TutorialStep
+    public class HireEmployeeStep : TutorialStep, IDisposable
     {
         private readonly Vector2 _tutorialHandOffset = new Vector2(32.01f, -63.29f);
         private Image _tutorialHand;
         private EmployeeView _employeeView;
         private EmployeeWindow _employeeWindow;
 
-        public HireEmployeeStep(UIFactory uiFactory, WindowService windowService, IWorldDataService worldDataService) 
+        public HireEmployeeStep(UIFactory uiFactory, WindowService windowService, IWorldDataService worldDataService)
             : base(uiFactory, windowService, worldDataService) { }
-        
+
         public override void OnStart()
         {
             if (IsCompleted())
                 return;
-            
+
             WindowService.Opened += OnOpened;
         }
 
@@ -38,16 +39,25 @@ namespace CodeBase.Gameplay.Tutorial
 
         private void OnOpened(WindowBase windowBase)
         {
-            if(windowBase.GetType() != typeof(EmployeeWindow) || IsCompleted())
+            if (windowBase.GetType() != typeof(EmployeeWindow) || IsCompleted())
                 return;
 
             _employeeWindow = WindowService.Get<EmployeeWindow>();
             _employeeWindow.TutorialFadeImage.gameObject.SetActive(true);
-            
+
             _employeeView = _employeeWindow.GetFirstEmployeeView();
-            _tutorialHand = UIFactory.CreateElement<Image>(AssetPath.TutorialHand, _employeeView.HireButton.gameObject.transform);
+            _tutorialHand =
+                UIFactory.CreateElement<Image>(AssetPath.TutorialHand, _employeeView.HireButton.gameObject.transform);
             _tutorialHand.rectTransform.anchoredPosition = _tutorialHandOffset;
             _employeeView.Closed += OnFinished;
+        }
+
+        public void Dispose()
+        {
+            if (_employeeView != null)
+                _employeeView.Closed -= OnFinished;
+            
+            WindowService.Opened -= OnOpened;
         }
     }
 }

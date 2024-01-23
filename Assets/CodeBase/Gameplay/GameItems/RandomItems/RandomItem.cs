@@ -16,6 +16,7 @@ namespace CodeBase.Gameplay.GameItems
         private CancellationTokenSource _cancellationTokenSource;
 
         public event Action PlayerApproached;
+        public event Action PlayerExited;
 
         private void OnEnable()
         {
@@ -35,6 +36,7 @@ namespace CodeBase.Gameplay.GameItems
         {
             _cancellationTokenSource?.Cancel();
             _cancellationTokenSource?.Dispose();
+            PlayerExited?.Invoke();
         }
 
         private async void OnPlayerEntered(Collider obj)

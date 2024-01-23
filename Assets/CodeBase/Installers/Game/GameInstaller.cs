@@ -105,7 +105,7 @@ namespace CodeBase.Installers.Game
 
         private void BindTutorials()
         {
-            Container.Bind<TutorialRunner>().AsSingle();
+            Container.BindInterfacesAndSelfTo<TutorialRunner>().AsSingle();
         }
 
         private void BindCameraService()

@@ -68,6 +68,11 @@ namespace CodeBase.Services.Employees
                 upgradeEmployeeData);
         }
 
+        public void SetUpgradeEmployeeData(UpgradeEmployeeData upgradeEmployeeData)
+        {
+            _worldDataService.WorldData.UpgradeEmployeeDatas[upgradeEmployeeData.EmployeeData.Id] = upgradeEmployeeData;
+        }
+
         public void OverwritePurchasedEmployeeData(EmployeeData employeeData)
         {
             List<EmployeeData> purchasedEmployees = _worldDataService.WorldData.PlayerData.PurchasedEmployees.ToList();

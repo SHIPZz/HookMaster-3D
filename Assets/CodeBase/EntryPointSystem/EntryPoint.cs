@@ -105,6 +105,7 @@ namespace CodeBase.EntryPointSystem
         public void Initialize()
         {
             Player player = _playerFactory.Create(CharacterTypeId.Boss, _locationProvider.PlayerSpawnPoint);
+            InitPlayerProvider(player);
             InitializeCamera(player);
             InitCameraService();
             InitTableService();
@@ -114,14 +115,13 @@ namespace CodeBase.EntryPointSystem
             InitEmployeeSalaryService();
             InitProfitService();
             InitPurchaseableItemService();
-            InitPlayerProvider(player);
             InitShopItemService();
             InitExtinguisherService();
+            InitTutorialRunner();
             InitFireService();
+            InitUIService();
             InitSettingsService();
             InitClientObjectService();
-            InitUIService();
-            InitTutorialRunner();
         }
 
         private void InitCameraService() => 

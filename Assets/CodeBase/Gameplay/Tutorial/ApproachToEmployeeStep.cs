@@ -16,7 +16,7 @@ namespace CodeBase.Gameplay.Tutorial
     public class ApproachToEmployeeStep : TutorialStep, IDisposable
     {
         private readonly EmployeeHirerService _employeeHirerService;
-        private readonly Vector3 _spawnOffset = new(0, 1.5f, 0);
+        private readonly Vector3 _spawnOffset = new(0, 2.5f, 0);
         private readonly EmployeeService _employeeService;
         private SpriteRenderer _pointer;
         private bool _pointerCreated;
@@ -37,8 +37,7 @@ namespace CodeBase.Gameplay.Tutorial
             
             if (WorldDataService.WorldData.TutorialData.LastPointerEmployeePosition != null)
                 CreatePointer3D();
-
-
+            
             _employeeHirerService.EmployeeHired += OnHired;
             WindowService.Opened += OnWindowOpened;
         }

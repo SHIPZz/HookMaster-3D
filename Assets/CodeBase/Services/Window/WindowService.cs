@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Services.Factories.UI;
 using CodeBase.UI;
+using CodeBase.UI.Hud;
 using UnityEngine;
 
 namespace CodeBase.Services.Window
@@ -15,6 +16,7 @@ namespace CodeBase.Services.Window
         public WindowBase CurrentWindow { get; private set; }
 
         public event Action<WindowBase> Opened;
+        public event Action<WindowBase> HudOpened;
 
         public WindowService(UIFactory uiFactory) =>
             _uiFactory = uiFactory;
@@ -25,6 +27,10 @@ namespace CodeBase.Services.Window
 
             var targetWindow = Get<T>();
             targetWindow.Open();
+            
+            if(targetWindow.GetType()== typeof(HudWindow))
+                HudOpened?.Invoke(targetWindow);
+            
             Opened?.Invoke(targetWindow);
         }
 

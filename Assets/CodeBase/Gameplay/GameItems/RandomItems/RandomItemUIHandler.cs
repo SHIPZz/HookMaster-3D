@@ -13,6 +13,7 @@ namespace CodeBase.Gameplay.GameItems.RandomItems
         private RandomItem _randomItem;
         private WindowService _windowService;
         private GameStaticDataService _gameStaticDataService;
+        private bool _canOpen = true;
 
         [Inject]
         private void Construct(WindowService windowService, GameStaticDataService gameStaticDataService)
@@ -24,18 +25,33 @@ namespace CodeBase.Gameplay.GameItems.RandomItems
         private void Awake() => 
             _randomItem = GetComponent<RandomItem>();
 
-        private void OnEnable() => 
+        private void OnEnable()
+        {
             _randomItem.PlayerApproached += OpenWindow;
+            _randomItem.PlayerExited += SetCanOpen;
+        }
 
-        private void OnDisable() => 
+        private void OnDisable()
+        {
             _randomItem.PlayerApproached -= OpenWindow;
+            _randomItem.PlayerExited -= SetCanOpen;
+        }
+
+        private void SetCanOpen()
+        {
+            _canOpen = true;
+        }
 
         private void OpenWindow()
         {
+            if(!_canOpen)
+                return;
+            
             RandomItemSO targetData = _gameStaticDataService.GetRandomItemSO(_randomItem.GameItemType);
             var targetWindow = _windowService.Get<RandomItemWindow>();
             targetWindow.Init(targetData.Name, $"{targetData.Profit}$", targetData.Icon, targetData.IconPosition);
             targetWindow.Open();
+            _canOpen = false;
         }
     }
 }

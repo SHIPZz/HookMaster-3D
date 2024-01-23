@@ -2,28 +2,39 @@
 using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Gameplay.Tutorial;
-using CodeBase.Services.Window;
-using UnityEngine;
 using Zenject;
 
-public class TutorialRunner
+public class TutorialRunner : IDisposable
 {
     private readonly IInstantiator _instantiator;
 
     private Dictionary<Type, TutorialStep> _tutorialSteps = new();
 
-    public TutorialRunner(IInstantiator instantiator) => 
+    public TutorialRunner(IInstantiator instantiator) =>
         _instantiator = instantiator;
 
     public void Init()
     {
-        _tutorialSteps[typeof(StartHireEmployeeStep)] = _instantiator.Instantiate<StartHireEmployeeStep>();
-        _tutorialSteps[typeof(HireEmployeeStep)] = _instantiator.Instantiate<HireEmployeeStep>();
-        _tutorialSteps[typeof(ApproachToEmployeeStep)] = _instantiator.Instantiate<ApproachToEmployeeStep>();
+        var startHireEmployeeStep = _instantiator.Instantiate<StartHireEmployeeStep>();
+        var hireEmployeeStep = _instantiator.Instantiate<HireEmployeeStep>();
+        var approachToEmployeeStep = _instantiator.Instantiate<ApproachToEmployeeStep>();
+
+        _tutorialSteps[typeof(StartHireEmployeeStep)] = startHireEmployeeStep;
+        _tutorialSteps[typeof(HireEmployeeStep)] = hireEmployeeStep;
+        _tutorialSteps[typeof(ApproachToEmployeeStep)] = approachToEmployeeStep;
+
         _tutorialSteps.Values.ToList().ForEach(x =>
         {
             x.AddToData();
             x.OnStart();
         });
+    }
+
+    public void Dispose()
+    {
+        foreach (IDisposable disposable in _tutorialSteps.Values.Select(tutorialStep => tutorialStep as IDisposable))
+        {
+            disposable?.Dispose();
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace CodeBase.Animations
     {
         [SerializeField] private Vector2 _targetAnchoredPosition;
         [SerializeField] private Ease _ease;
-        [SerializeField] private float _targetTime = 1f;
+        [SerializeField] private float _targetTime = 1.5f;
         [SerializeField] private float _startTime = 0.5f;
         [SerializeField] private Ease _returnEase = Ease.OutQuad;
         [SerializeField] private bool _xPositionFromTransform;
