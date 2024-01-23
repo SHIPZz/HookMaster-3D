@@ -404,6 +404,8 @@ MonoBehaviour:
   _scaleX: 1
   _scaleY: 0
   _scaleZ: 0
+  _unscaleOnStart: 0
+  _scaleDelay: 1
 --- !u!1 &579253021546048677
 GameObject:
   m_ObjectHideFlags: 0
@@ -3334,7 +3336,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &5456491798596357395
 MonoBehaviour:

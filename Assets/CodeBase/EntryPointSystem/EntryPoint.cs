@@ -113,14 +113,14 @@ namespace CodeBase.EntryPointSystem
             InitWalletService();
             InitEmployeeSalaryService();
             InitProfitService();
-            InitUIService();
+            InitPurchaseableItemService();
             InitPlayerProvider(player);
             InitShopItemService();
             InitExtinguisherService();
             InitFireService();
             InitSettingsService();
-            InitPurchaseableItemService();
             InitClientObjectService();
+            InitUIService();
             InitTutorialRunner();
         }
 

@@ -69,7 +69,7 @@ namespace CodeBase.UI.SpeedUp
         {
             _canvasAnimator.FadeOutCanvas(() =>
             {
-                OpenCompletedWindow();
+                TryOpenCompletedWindow();
                 base.Close();
             });
             _checkOutButtons.ForEach(x => x.Successful -= SetAnimatedFinished);
@@ -161,8 +161,11 @@ namespace CodeBase.UI.SpeedUp
             TryToSetCompleted(_remainingTimeSlider.value, 0);
         }
 
-        private void OpenCompletedWindow()
+        private void TryOpenCompletedWindow()
         {
+            if(!_upgradeEmployeeData.Completed)
+                return;
+            
             var upgradeCompletedWindow = _windowService.Get<UpgradeEmployeeCompletedWindow>();
             upgradeCompletedWindow.Init(_upgradeEmployeeData.EmployeeData);
             upgradeCompletedWindow.Open();

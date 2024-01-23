@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Data;
+using CodeBase.Enums;
 using CodeBase.Extensions;
 using CodeBase.Gameplay.PurchaseableSystem;
 using CodeBase.Services.DataService;
@@ -16,7 +18,10 @@ namespace CodeBase.Services.PurchaseableItemServices
         private readonly PurchaseableItemProvider _purchaseableItemProvider;
         private readonly GameStaticDataService _gameStaticDataService;
 
-        private List<PurchaseableItem> _allPurchaseableItems = new();
+        private Dictionary<GameItemType, PurchaseableItem> _allPurchaseableItems = new();
+        private Dictionary<GameItemType, PurchaseableItem> _purchasedItems = new();
+
+        public event Action<PurchaseableItem> Purchased; 
 
         public PurchaseableItemService(IWorldDataService worldDataService,
             PurchaseableItemProvider purchaseableItemProvider,
@@ -34,7 +39,7 @@ namespace CodeBase.Services.PurchaseableItemServices
 
             AddToAllItems();
 
-            foreach (PurchaseableItem item in _allPurchaseableItems)
+            foreach (PurchaseableItem item in _allPurchaseableItems.Values)
             {
                 if (!_worldDataService.WorldData.PurchaseableItemDatas.ContainsKey(item.GameItemType))
                 {
@@ -47,20 +52,24 @@ namespace CodeBase.Services.PurchaseableItemServices
                 PurchaseableItemData data = _worldDataService.WorldData.PurchaseableItemDatas[item.GameItemType];
                 item.Price = data.Price;
                 item.IsAсcessible = data.IsAccessible;
+                _purchasedItems[item.GameItemType] = item;
             }
         }
 
+        public bool HasItem(GameItemType gameItemType) =>
+            _purchasedItems.ContainsKey(gameItemType);
+
         public void SaveToData(PurchaseableItem purchaseableItem)
         {
-            _worldDataService.WorldData.PurchaseableItemDatas[purchaseableItem.GameItemType] =
-                purchaseableItem.ToData();
+            _worldDataService.WorldData.PurchaseableItemDatas[purchaseableItem.GameItemType] = purchaseableItem.ToData();
+            Purchased?.Invoke(purchaseableItem);
         }
 
         private void AddToAllItems()
         {
             foreach (PurchaseableItem purchaseableItem in _purchaseableItemProvider.PurchaseableItems.Values)
             {
-                _allPurchaseableItems.Add(purchaseableItem);
+                _allPurchaseableItems[purchaseableItem.GameItemType] = purchaseableItem;
             }
         }
     }

@@ -22,6 +22,7 @@ namespace CodeBase.Gameplay.Camera
         private Transform _lastPosition;
         private PlayerProvider _playerProvider;
         private Vector3 _lastRotation;
+        private Vector3 _lastOffset;
 
         [Inject]
         private void Construct(PlayerProvider playerProvider)
@@ -38,6 +39,17 @@ namespace CodeBase.Gameplay.Camera
                 return;
 
             transform.position = _playerProvider.Player.transform.position + _offset * _speed;
+        }
+
+        private void Awake()
+        {
+            _lastOffset = _offset;
+        }
+
+        public void SetTargetOffset(Vector3 offset)
+        {
+            _offset = offset;
+            transform.DOMove(_playerProvider.Player.transform.position + _offset * _speed, 1f);
         }
 
         public void Block(bool isBlocked)

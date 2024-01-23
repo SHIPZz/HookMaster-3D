@@ -23,6 +23,7 @@ namespace CodeBase.Animations
 
         private void StartAnimation()
         {
+            print("startAnim");
             _animationTween = transform.DORotate(_targetRotation, _duration, RotateMode.FastBeyond360)
                 .SetLoops(-1, _loopType)
                 .SetEase(Ease.Linear)

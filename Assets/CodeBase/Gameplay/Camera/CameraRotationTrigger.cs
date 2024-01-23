@@ -11,7 +11,9 @@ namespace CodeBase.Gameplay.Camera
     {
         [SerializeField] private TriggerObserver _triggerObserver;
         [SerializeField] private Vector3 _targetRotation;
+        [SerializeField] private Vector3 _targetPosition;
         [SerializeField] private float _duration = 0.3f;
+        [SerializeField] private bool _needReturnOnExit;
 
         private Tween _tween;
         private CameraProvider _cameraProvider;
@@ -42,6 +44,9 @@ namespace CodeBase.Gameplay.Camera
 
         private void OnRotateBack(Collider obj)
         {
+            if(!_needReturnOnExit)
+                return;
+
             _tween?.Kill();
 
             _cameraProvider.Rotating = true;
@@ -60,6 +65,11 @@ namespace CodeBase.Gameplay.Camera
             Vector3 newTargetRotation = new Vector3(x, y, z);
             _cameraProvider.Rotating = true;
             _tween = _cameraProvider.Camera.transform.DORotate(newTargetRotation, _duration).OnComplete(() => _cameraProvider.Rotating = false);
+
+            if (_targetPosition != Vector3.zero)
+            {
+                _cameraProvider.CameraFollower.SetTargetOffset(_targetPosition);
+            }
         }
     }
 }

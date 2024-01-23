@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Animations;
 using CodeBase.Services.Time;
+using CodeBase.Services.UI;
 using CodeBase.Services.Window;
 using CodeBase.UI.Hud;
 using DG.Tweening;
@@ -23,10 +24,12 @@ namespace CodeBase.UI.OfflineReward
         private NumberTextAnimService _numberTextAnimService;
         private int _totalProfit;
         private int _timeDifference;
+        private UIService _uiService;
 
         [Inject]
-        private void Construct(WindowService windowService, NumberTextAnimService numberTextAnimService)
+        private void Construct(WindowService windowService, NumberTextAnimService numberTextAnimService, UIService uiService)
         {
+            _uiService = uiService;
             _numberTextAnimService = numberTextAnimService;
             _windowService = windowService;
         }
@@ -43,20 +46,22 @@ namespace CodeBase.UI.OfflineReward
             _canvasAnimator.FadeInCanvas(OnOpened);
         }
 
+        public override void Close()
+        {
+            _canvasAnimator.FadeOutCanvas(OnClosed);
+        }
+
+        private void OnClosed()
+        {
+            _windowService.Open<HudWindow>();
+            base.Close();
+        }
+
         private async void OnOpened()
         {
             _passedTimeSlider.DOValue(_timeDifference, 1f);
             await _numberTextAnimService.AnimateNumber(0, _totalProfit, 1.5f, _rewardedMoneyText, '$', _increaseSound);
             _buttonScaleAnims.ForEach(x=>x.ToScale());
-        }
-
-        public override void Close()
-        {
-            _canvasAnimator.FadeOutCanvas(() =>
-            {
-                _windowService.Open<HudWindow>();
-                base.Close();
-            });
         }
     }
 }

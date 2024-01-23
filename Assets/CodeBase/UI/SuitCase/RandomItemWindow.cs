@@ -1,4 +1,5 @@
 ﻿using CodeBase.Animations;
+using CodeBase.Gameplay.SoundPlayer;
 using CodeBase.Services.Window;
 using CodeBase.UI.Hud;
 using TMPro;
@@ -13,8 +14,9 @@ namespace CodeBase.UI.SuitCase
         [SerializeField] private TMP_Text _name;
         [SerializeField] private TMP_Text _profit;
         [SerializeField] private Image _image;
-        
         [SerializeField] private CanvasAnimator _canvasAnimator;
+        [SerializeField] private SoundPlayerSystem _soundPlayerSystem;
+        
         private WindowService _windowService;
 
         [Inject]
@@ -26,6 +28,7 @@ namespace CodeBase.UI.SuitCase
         public override void Open()
         {
             _windowService.Close<HudWindow>();
+            _soundPlayerSystem.PlayActiveSound();
             _canvasAnimator.FadeInCanvas();
         }
 
