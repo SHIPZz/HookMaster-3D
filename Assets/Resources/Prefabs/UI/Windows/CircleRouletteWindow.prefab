@@ -15019,7 +15019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f9f6a629ba34ab43b7dc85bf8aa50db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CloseButton: {fileID: 0}
+  CloseButton: {fileID: 5548474644849828852}
   _minRotationZ: 900
   _maxRotationZ: 2000
   _rotateDuration: 1.5
@@ -42386,7 +42386,7 @@ GameObject:
   - component: {fileID: 756561021484387333}
   - component: {fileID: 3865417542877677501}
   m_Layer: 0
-  m_Name: RotateBtn (1)
+  m_Name: ExitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

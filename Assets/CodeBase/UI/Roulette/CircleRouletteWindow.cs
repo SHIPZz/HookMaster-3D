@@ -9,6 +9,7 @@ using CodeBase.Services.CircleRouletteServices;
 using CodeBase.Services.Reward;
 using CodeBase.Services.TriggerObserve;
 using CodeBase.Services.Window;
+using CodeBase.UI.Hud;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -48,7 +49,8 @@ namespace CodeBase.UI.Roulette
         private CircleRouletteService _circleRouletteService;
 
         [Inject]
-        private void Construct(RewardService rewardService, WindowService windowService, CircleRouletteService circleRouletteService)
+        private void Construct(RewardService rewardService, WindowService windowService,
+            CircleRouletteService circleRouletteService)
         {
             _circleRouletteService = circleRouletteService;
             _windowService = windowService;
@@ -75,13 +77,17 @@ namespace CodeBase.UI.Roulette
         public override void Open()
         {
             _rouletteItems.ForEach(x => x.Init(_circleRouletteItem.MinWinValue, _circleRouletteItem.MaxWinValue));
-            
+
             _canvasAnimator.FadeInCanvas();
         }
 
         public override void Close()
         {
-            _circleRouletteService.SetLastPlayedTime(_circleRouletteItem.Id);
+            if (_rotated)
+                _circleRouletteService.SetLastPlayedTime(_circleRouletteItem.Id);
+            else
+                _windowService.Open<HudWindow>();
+
             _canvasAnimator.FadeOutCanvas(base.Close);
         }
 
@@ -97,13 +103,10 @@ namespace CodeBase.UI.Roulette
 
         private void Rotate()
         {
+            CloseButton.transform.parent.gameObject.SetActive(false);
             _rotated = true;
             _rotateCount = Mathf.Clamp(_rotateCount--, 0, _rotateCount);
-            _countTextAnim.SetText(_rotateCount.ToString(CultureInfo.InvariantCulture));
-            _countTextAnim.DoFadeOut();
-            _circleFadeAnim.FadeOut();
-
-            _rotateButton.interactable = false;
+            AnimateUI();
 
             if (_rotateCount == 0)
                 _rotateButton.gameObject.SetActive(false);
@@ -146,11 +149,7 @@ namespace CodeBase.UI.Roulette
             _target.localEulerAngles = targetRotation;
 
             _rotateButton.interactable = true;
-            _appearanceEffect.PlayTargetEffects();
-            _circleFadeAnim.FadeIn();
-            _countTextAnim.DoFade();
-            _soundPlayerSystem.PlayInactiveSound();
-            _soundPlayerSystem.StopActiveSound();
+            PlayEffects();
 
             if (_rotateCount == 0)
             {
@@ -158,6 +157,24 @@ namespace CodeBase.UI.Roulette
                 _windowService.Open<RewardRouletteWindow>();
                 Close();
             }
+        }
+
+        private void PlayEffects()
+        {
+            _appearanceEffect.PlayTargetEffects();
+            _circleFadeAnim.FadeIn();
+            _countTextAnim.DoFade();
+            _soundPlayerSystem.PlayInactiveSound();
+            _soundPlayerSystem.StopActiveSound();
+        }
+
+        private void AnimateUI()
+        {
+            _countTextAnim.SetText(_rotateCount.ToString(CultureInfo.InvariantCulture));
+            _countTextAnim.DoFadeOut();
+            _circleFadeAnim.FadeOut();
+
+            _rotateButton.interactable = false;
         }
     }
 }
