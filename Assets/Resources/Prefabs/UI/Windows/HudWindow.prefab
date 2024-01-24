@@ -1949,7 +1949,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
-  smoothness: 0
+  smoothness: 0.013
 --- !u!1 &5040487754657908237
 GameObject:
   m_ObjectHideFlags: 0
@@ -2307,7 +2307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 5899040185540474427}
-  _fadeInDuration: 0.3
+  _fadeInDuration: 0
   _fadeOutDuration: 0.1
 --- !u!114 &4700756735166001385
 MonoBehaviour:

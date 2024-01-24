@@ -47,7 +47,7 @@ namespace CodeBase.UI.Upgrade
             InitUpgradeButton(targetUpgradeEmployee);
 
             _profitText.text = $"Profit: {_employee.Profit}";
-            _qualificationTypeText.text = $"Qualification type: {_employee.QualificationType}";
+            _qualificationTypeText.text = $"Qualification Level: {_employee.QualificationType}";
             _nameText.text = $"Name: {_employee.Name}";
             _salaryText.text = $"Salary: {_employee.Salary}";
         }

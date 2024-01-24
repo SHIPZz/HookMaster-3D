@@ -308,7 +308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94f7c6babaaf436eb5e0e2a5212d7677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetAnchoredScale: {x: 0, y: 0}
+  _targetAnchoredScale: {x: 350, y: 135}
   _animationDuration: 0.2
 --- !u!114 &8674675688127092909
 MonoBehaviour:
@@ -3867,8 +3867,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetAnchoredPosition: {x: 0, y: 8.6}
   _ease: 0
-  _targetTime: 2
-  _startTime: 1.5
+  _targetTime: 1
+  _startTime: 0.5
   _returnEase: 6
   _xPositionFromTransform: 1
 --- !u!1 &9212609057368465507

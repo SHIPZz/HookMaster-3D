@@ -36,6 +36,8 @@ namespace CodeBase.Gameplay.Employees
         private RendererMaterialChangerService _rendererMaterialChangerService;
         private TableService _tableService;
 
+        public event Action<Employee> UpgradeStarted;
+
         [Inject]
         private void Construct(EmployeeDataService employeeDataService,
             BurnableObjectService burnableObjectService,
@@ -66,6 +68,7 @@ namespace CodeBase.Gameplay.Employees
         public void SetUpgrading(bool isUpgrading)
         {
             IsUpgrading = isUpgrading;
+            UpgradeStarted?.Invoke(this);
             _employeeDataService.OverwritePurchasedEmployeeData(this.ToEmployeeData());
         }
 

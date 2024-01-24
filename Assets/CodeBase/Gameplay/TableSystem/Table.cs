@@ -58,10 +58,10 @@ namespace CodeBase.Gameplay.TableSystem
         [Button]
         public void Burn()
         {
-            _wasFree = IsFree;
-            IsFree = false;
+            if(IsFree)
+                return;
+            
             IsBurned = true;
-            Busy?.Invoke(false, Id);
             _rendererMaterialChangerService.Change();
         }
 
@@ -69,7 +69,6 @@ namespace CodeBase.Gameplay.TableSystem
         public void Recover()
         {
             IsBurned = false;
-            Busy?.Invoke(_wasFree, Id);
             _rendererMaterialChangerService.SetInitialMaterial();
         }
 

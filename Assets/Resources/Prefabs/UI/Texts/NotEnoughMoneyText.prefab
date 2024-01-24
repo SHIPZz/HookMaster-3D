@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 576781509361772860}
   - component: {fileID: 6779472113650307949}
   - component: {fileID: -2461201622330043915}
+  - component: {fileID: 5262185193618436227}
   m_Layer: 0
   m_Name: NotEnoughMoneyText
   m_TagString: Untagged
@@ -61,7 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -76,8 +77,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4293204449
-  m_fontColor: {r: 0.8839673, g: 0.097232126, b: 0.8962264, a: 1}
+    rgba: 4281022912
+  m_fontColor: {r: 0.7529412, g: 0.22352941, b: 0.16862746, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -118,7 +119,7 @@ MonoBehaviour:
   m_enableKerning: 1
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
-  m_isRichText: 1
+  m_isRichText: 0
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -163,9 +164,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FloatingTextType>k__BackingField: 0
   <Text>k__BackingField: {fileID: 576781509361772860}
+  <RectTransform>k__BackingField: {fileID: 2201674766031794590}
   _duration: 0.2
   _anchoredPosition: 50
   _fadeInDuration: 0.2
   _fadeOutDuration: 0.5
   _minRandomAnchoredPosition: 50
   _maxRandomAnchoredPosition: 150
+--- !u!114 &5262185193618436227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7481341339118574724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db63e8120c1647fab41ff4aa084f6823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

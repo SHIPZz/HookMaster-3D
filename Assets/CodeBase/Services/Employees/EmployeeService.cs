@@ -12,7 +12,7 @@ namespace CodeBase.Services.Employees
         public List<Employee> Employees = new();
         private readonly EmployeeDataService _employeeDataService;
 
-        public event Action<Employee> Recovered;
+        public event Action<Employee> EmployeeUpdated;
 
         public EmployeeService(EmployeeDataService employeeDataService)
         {
@@ -37,6 +37,8 @@ namespace CodeBase.Services.Employees
                     .SetSalary(employeeData.Salary)
                     .SetQualificationType(employeeData.QualificationType)
                     .SetIsUpgrading(employeeData.IsUpgrading);
+                
+                EmployeeUpdated?.Invoke(employee);
             }
         }
 

@@ -28,6 +28,7 @@ namespace CodeBase.Animations
 
         public void ToScale(Action onComplete = null)
         {
+            _rectTransform.gameObject.SetActive(true);
             SetTween(Vector3.one * _targetScale, _scaleDuration, onComplete);
         }
         

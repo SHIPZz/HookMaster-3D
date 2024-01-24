@@ -135,7 +135,7 @@ namespace CodeBase.Extensions
         {
             upgradeEmployeeData.SetCompleted(false)
                 .SetUpgradeStarted(false)
-                .SetLastUpgradeTime(3600)
+                .SetLastUpgradeTime(3600f)
                 .SetLastUpgradeWindowOpenedTime(0);
         }
 

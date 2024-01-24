@@ -19,9 +19,8 @@ namespace CodeBase.UI.Shop
         [SerializeField] private TMP_Text _diamondText;
         [SerializeField] private TMP_Text _ticketText;
         [SerializeField] private List<ShopTabView> _shopTabViews;
+        [SerializeField] private RectTransformScaleAnim _rectTransformScale;
 
-        public event Action Closed;
-        
         private WindowService _windowService;
         private WalletService _walletService;
 
@@ -35,7 +34,7 @@ namespace CodeBase.UI.Shop
         public override void Open()
         {
             _shopTabViews.FirstOrDefault(x => x.ItemTypeId == ItemTypeId.Money)?.Init();
-            
+            _rectTransformScale.ToScale();
             _canvasAnimator.FadeInCanvas();
 
             _walletService.Set(ItemTypeId.Money, 30000);
@@ -60,7 +59,6 @@ namespace CodeBase.UI.Shop
             {
                 _windowService.Open<HudWindow>();
                 base.Close();
-                Closed?.Invoke();
             });
         }
 

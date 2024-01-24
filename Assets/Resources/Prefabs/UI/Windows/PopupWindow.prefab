@@ -29992,7 +29992,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetAnchoredPosition: {x: 0, y: 20}
   _ease: 0
-  _targetTime: 1.5
+  _targetTime: 1
   _startTime: 0.5
   _returnEase: 6
   _xPositionFromTransform: 0

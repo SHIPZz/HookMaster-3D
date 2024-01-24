@@ -4,6 +4,7 @@ using CodeBase.Gameplay.SoundPlayer;
 using CodeBase.Services.Employees;
 using CodeBase.Services.Window;
 using CodeBase.UI.Hud;
+using CodeBase.UI.SkipProgress;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -67,6 +68,7 @@ namespace CodeBase.UI.Upgrade
         public override void Close()
         {
             _windowService.Open<HudWindow>();
+            _windowService.Close<SkipProgressSliderWindow>();
             _canvasAnimator.FadeOutCanvas(base.Close);
         }
 

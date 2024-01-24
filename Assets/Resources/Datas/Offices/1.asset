@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MinSalary: 10000
   MaxSalary: 20000
-  MinProfit: 10000
-  MaxProfit: 20000
+  MinProfit: 13000
+  MaxProfit: 30000
   QualificationType: 1

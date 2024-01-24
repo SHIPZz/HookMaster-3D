@@ -12,7 +12,8 @@ namespace CodeBase.UI.Settings
     {
         [SerializeField] private CanvasAnimator _canvasAnimator;
         [SerializeField] private SoundPlayerSystem _soundPlayerSystem;
-        
+        [SerializeField] private RectTransformScaleAnim _windowScaleAnim;
+
         private WindowService _windowService;
         private SettingsService _settingsService;
 
@@ -26,13 +27,14 @@ namespace CodeBase.UI.Settings
         public override void Open()
         {
             // _soundPlayerSystem.PlayActiveSound();
+            _windowScaleAnim.ToScale();
             _canvasAnimator.FadeInCanvas();
         }
 
         public override void Close()
         {
             _settingsService.Save();
-            
+
             _canvasAnimator.FadeOutCanvas(() =>
             {
                 _windowService.Open<HudWindow>();

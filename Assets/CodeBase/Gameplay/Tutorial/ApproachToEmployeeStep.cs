@@ -36,7 +36,7 @@ namespace CodeBase.Gameplay.Tutorial
                 return;
             
             if (WorldDataService.WorldData.TutorialData.LastPointerEmployeePosition != null)
-                CreatePointer3D();
+                TryCreatePointer3D();
             
             _employeeHirerService.EmployeeHired += OnHired;
             WindowService.Opened += OnWindowOpened;
@@ -90,11 +90,15 @@ namespace CodeBase.Gameplay.Tutorial
             _pointerCreated = true;
         }
 
-        private void CreatePointer3D()
+        private void TryCreatePointer3D()
         {
             Vector3 position = WorldDataService.WorldData.TutorialData.LastPointerEmployeePosition.ToVector();
 
             Employee employee = _employeeService.Get(WorldDataService.WorldData.TutorialData.EmployeeId);
+            
+            if(employee.IsBurned)
+                return;
+            
             _pointer = UIFactory.CreateElement<SpriteRenderer>(AssetPath.Pointer3D, employee.transform);
             _pointer.transform.position = position;
         }

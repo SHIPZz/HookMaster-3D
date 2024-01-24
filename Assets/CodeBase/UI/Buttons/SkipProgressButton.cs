@@ -22,10 +22,10 @@ namespace CodeBase.UI.Buttons
         protected override void Open()
         {
             var speedUpWindow = WindowService.Get<SpeedUpWindow>();
+            var skipProgressSliderWindow = WindowService.Get<SkipProgressSliderWindow>();
             
-            WindowService.Close<SkipProgressSliderWindow>();
             UpgradeEmployeeData targetUpgradeEmployeeData = _employeeDataService.GetUpgradeEmployeeData(_employeeData.Id);
-            speedUpWindow.Init(targetUpgradeEmployeeData);
+            speedUpWindow.Init(targetUpgradeEmployeeData, skipProgressSliderWindow.TotalTime);
             speedUpWindow.Open();
         }
     }

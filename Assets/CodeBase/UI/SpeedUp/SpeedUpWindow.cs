@@ -9,6 +9,7 @@ using CodeBase.Services.Employees;
 using CodeBase.Services.Window;
 using CodeBase.Services.WorldData;
 using CodeBase.UI.Buttons;
+using CodeBase.UI.SkipProgress;
 using CodeBase.UI.Upgrade;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -46,17 +47,13 @@ namespace CodeBase.UI.SpeedUp
         private WindowService _windowService;
 
         [Inject]
-        private void Construct(IWorldDataService worldDataService, EmployeeDataService employeeDataService,
+        private void Construct(IWorldDataService worldDataService,
+            EmployeeDataService employeeDataService,
             WindowService windowService)
         {
             _windowService = windowService;
             _employeeDataService = employeeDataService;
             _worldDataService = worldDataService;
-        }
-
-        private void OnDestroy()
-        {
-            SaveLastUpgradeTime();
         }
 
         public override void Open()
@@ -70,15 +67,18 @@ namespace CodeBase.UI.SpeedUp
             _canvasAnimator.FadeOutCanvas(() =>
             {
                 TryOpenCompletedWindow();
+                var skipProgressWindow = _windowService.Get<SkipProgressSliderWindow>();
+                skipProgressWindow.Set(_upgradeEmployeeData.LastUpgradeTime);
                 base.Close();
             });
+
             _checkOutButtons.ForEach(x => x.Successful -= SetAnimatedFinished);
         }
 
-        public void Init(UpgradeEmployeeData upgradeEmployeeData)
+        public void Init(UpgradeEmployeeData upgradeEmployeeData, float totalTime)
         {
             _upgradeEmployeeData = upgradeEmployeeData;
-            _totalTime = upgradeEmployeeData.LastUpgradeTime;
+            _totalTime = totalTime;
 
             _remainingTimeSlider.value = InitialSliderValue;
 
@@ -88,48 +88,22 @@ namespace CodeBase.UI.SpeedUp
             _timeCoroutine = StartCoroutine(StartDecreaseTimeCoroutine());
         }
 
-        private void SetAnimatedFinished()
+        private void TryToSetCompleted(double passedMinutes, float targetCompletedValue)
         {
-            _transformScaleAnims.ForEach(x => x.UnScale());
-            StopCoroutine(StartDecreaseTimeCoroutine());
-            _remainingTimeSlider.DOValue(_remainingTimeSlider.maxValue, 0.5f).OnComplete(SetCompleted);
-        }
-
-        private bool TryToSetCompleted(double passedMinutes, float targetCompletedValue)
-        {
-            if (passedMinutes >= targetCompletedValue)
-            {
-                SetCompleted();
-                return true;
-            }
-
-            return false;
+            if (!(passedMinutes >= targetCompletedValue)) 
+                return;
+            
+            SetCompleted();
         }
 
         private async void SetCompleted()
         {
-            SaveLastUpgradeTime();
             _upgradeEmployeeData.SetCompleted(true);
-            _upgradeEmployeeData.Completed = true;
-            CloseButton.gameObject.SetActive(false);
+            SetCompletedUI();
 
-            _remainingTimeText.gameObject.SetActive(false);
-            _transformScaleAnims.ForEach(x => x.UnScale());
-            _completedTextsAnims.ForEach(x =>
-            {
-                x.gameObject.SetActive(true);
-                x.ToScale();
-            });
             await UniTask.WaitForSeconds(_destroyDelayOnCompleted);
-            Close();
-        }
 
-        private void SaveLastUpgradeTime()
-        {
-            _upgradeEmployeeData
-                .SetLastUpgradeTime(Mathf.Abs(_totalTime))
-                .SetLastUpgradeWindowOpenedTime(_worldDataService.WorldData.WorldTimeData.CurrentTime);
-            _employeeDataService.SaveUpgradeEmployeeData(_upgradeEmployeeData);
+            Close();
         }
 
         private IEnumerator StartDecreaseTimeCoroutine()
@@ -143,17 +117,12 @@ namespace CodeBase.UI.SpeedUp
                 int minutes = Mathf.FloorToInt(Mathf.Abs(_totalTime) % TimeConstantValue.SecondsInHour /
                                                TimeConstantValue.SecondsInMinute);
 
-                _remainingTimeSlider.value = Mathf.Lerp(_remainingTimeSlider.value, -Mathf.FloorToInt(
-                    Mathf.Abs(_totalTime) % TimeConstantValue.SecondsInHour /
-                    TimeConstantValue.SecondsInMinute), _sliderFillSpeed * Time.deltaTime);
-                int seconds = Mathf.FloorToInt(Mathf.Abs(_totalTime) % TimeConstantValue.SecondsInMinute);
+                var seconds = CalculateSliderValue();
 
                 if (NeedCloseAdItem(minutes))
                     _skipAdItem.SetActive(false);
 
-                _remainingTimeText.text = $"{minutes}m {seconds}s";
-                _skipDiamondText.text = $"{minutes}m";
-                _skipTicketText.text = $"{minutes}m";
+                SetValuesToTexts(minutes, seconds);
                 yield return null;
             }
 
@@ -161,14 +130,61 @@ namespace CodeBase.UI.SpeedUp
             TryToSetCompleted(_remainingTimeSlider.value, 0);
         }
 
+        private int CalculateSliderValue()
+        {
+            _remainingTimeSlider.value = Mathf.Lerp(_remainingTimeSlider.value, -Mathf.FloorToInt(
+                Mathf.Abs(_totalTime) % TimeConstantValue.SecondsInHour /
+                TimeConstantValue.SecondsInMinute), _sliderFillSpeed * Time.deltaTime);
+            int seconds = Mathf.FloorToInt(Mathf.Abs(_totalTime) % TimeConstantValue.SecondsInMinute);
+            return seconds;
+        }
+
         private void TryOpenCompletedWindow()
         {
-            if(!_upgradeEmployeeData.Completed)
+            if (!_upgradeEmployeeData.Completed)
+            {
+                SaveLastUpgradeTime();
                 return;
-            
+            }
+
+            _employeeDataService.UpgradeEmployeeData(_upgradeEmployeeData.EmployeeData);
+
             var upgradeCompletedWindow = _windowService.Get<UpgradeEmployeeCompletedWindow>();
             upgradeCompletedWindow.Init(_upgradeEmployeeData.EmployeeData);
             upgradeCompletedWindow.Open();
+        }
+
+        private void SaveLastUpgradeTime()
+        {
+            _upgradeEmployeeData.SetLastUpgradeTime(Mathf.Abs(_totalTime))
+                .SetLastUpgradeWindowOpenedTime(_worldDataService.WorldData.WorldTimeData.CurrentTime);
+            _employeeDataService.SaveUpgradeEmployeeData(_upgradeEmployeeData);
+        }
+
+        private void SetCompletedUI()
+        {
+            CloseButton.gameObject.SetActive(false);
+            _remainingTimeText.gameObject.SetActive(false);
+            _transformScaleAnims.ForEach(x => x.UnScale());
+            _completedTextsAnims.ForEach(x =>
+            {
+                x.gameObject.SetActive(true);
+                x.ToScale();
+            });
+        }
+
+        private void SetValuesToTexts(int minutes, int seconds)
+        {
+            _remainingTimeText.text = $"{minutes}m {seconds}s";
+            _skipDiamondText.text = $"{minutes}m";
+            _skipTicketText.text = $"{minutes}m";
+        }
+
+        private void SetAnimatedFinished()
+        {
+            _transformScaleAnims.ForEach(x => x.UnScale());
+            StopCoroutine(StartDecreaseTimeCoroutine());
+            _remainingTimeSlider.DOValue(_remainingTimeSlider.maxValue, 0.5f).OnComplete(SetCompleted);
         }
 
         private bool NeedCloseAdItem(float minutes) =>

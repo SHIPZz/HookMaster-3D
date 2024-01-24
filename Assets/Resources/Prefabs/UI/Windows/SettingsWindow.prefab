@@ -1107,6 +1107,7 @@ GameObject:
   - component: {fileID: 8451677886376868397}
   - component: {fileID: 6731807719803878130}
   - component: {fileID: 9073184937072473378}
+  - component: {fileID: 2654191927084780072}
   m_Layer: 5
   m_Name: Popup
   m_TagString: Untagged
@@ -1123,7 +1124,7 @@ RectTransform:
   m_GameObject: {fileID: 1017183168535189675}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7622099679034390057}
@@ -1176,6 +1177,28 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2654191927084780072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017183168535189675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c934f669bfd84432a926d47a9a3d2e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetScale: 1
+  _unScale: 0
+  _scaleDuration: 0.2
+  _unScaleDuration: 0.1
+  _rectTransform: {fileID: 8451677886376868397}
+  _scaleX: 1
+  _scaleY: 0
+  _scaleZ: 0
+  _unscaleOnStart: 0
+  _scaleDelay: 1
 --- !u!1 &1306804691137382491
 GameObject:
   m_ObjectHideFlags: 0
@@ -1900,6 +1923,7 @@ MonoBehaviour:
   CloseButton: {fileID: 5241553587213878588}
   _canvasAnimator: {fileID: 6381533604793932813}
   _soundPlayerSystem: {fileID: 657454633924425171}
+  _windowScaleAnim: {fileID: 2654191927084780072}
 --- !u!223 &7533796643534215497
 Canvas:
   m_ObjectHideFlags: 0
@@ -1971,7 +1995,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 3710779994737827081}
-  _fadeInDuration: 0.5
+  _fadeInDuration: 0
   _fadeOutDuration: 0.25
 --- !u!114 &6355190765349656878
 MonoBehaviour:
