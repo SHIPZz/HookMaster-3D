@@ -49,6 +49,11 @@ namespace CodeBase.Services.Providers.Tables
             });
         }
 
+        public void RecoverTableFromBurning(string id)
+        {
+            Tables.FirstOrDefault(x => x.Id == id)?.Recover();
+        }
+
         private void OnTableConditionChanged(bool isBusy, string id)
         {
             AvailableTableCount = Tables.Count(x => x.IsFree);
@@ -56,7 +61,7 @@ namespace CodeBase.Services.Providers.Tables
             if (AvailableTableCount == 0)
                 AllTablesBusy?.Invoke();
 
-            var table = Tables.FirstOrDefault(x => x.Id == id);
+            Table table = Tables.FirstOrDefault(x => x.Id == id);
             
             if (_tableDatas.RemoveAll(x=>x.Id == id) != 0)
             {

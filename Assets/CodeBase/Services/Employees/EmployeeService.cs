@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Data;
 using CodeBase.Extensions;
+using CodeBase.Gameplay.Employees;
 
 namespace CodeBase.Services.Employees
 {
     public class EmployeeService
     {
-        public List<Gameplay.Employees.Employee> Employees = new();
+        public List<Employee> Employees = new();
         private readonly EmployeeDataService _employeeDataService;
+
+        public event Action<Employee> Recovered;
 
         public EmployeeService(EmployeeDataService employeeDataService)
         {
@@ -18,7 +21,7 @@ namespace CodeBase.Services.Employees
 
         public void SetUpgrade(string id, bool isUpgrading)
         {
-            foreach (Gameplay.Employees.Employee employee in Employees.Where(employee => employee.Id == id))
+            foreach (Employee employee in Employees.Where(employee => employee.Id == id))
             {
                 employee.SetUpgrading(isUpgrading);
             }
@@ -28,7 +31,7 @@ namespace CodeBase.Services.Employees
         {
             _employeeDataService.UpgradeEmployeeData(employeeData, onComplete);
             
-            foreach (Gameplay.Employees.Employee employee in Employees.Where(employee => employee.Id == employeeData.Id))
+            foreach (Employee employee in Employees.Where(employee => employee.Id == employeeData.Id))
             {
                 employee.SetProfit(employeeData.Profit)
                     .SetSalary(employeeData.Salary)
@@ -37,7 +40,7 @@ namespace CodeBase.Services.Employees
             }
         }
 
-        public Gameplay.Employees.Employee Get(string id) =>
+        public Employee Get(string id) =>
             Employees.FirstOrDefault(x => x.Id == id);
     }
 }

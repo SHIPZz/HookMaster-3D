@@ -6,6 +6,7 @@ using CodeBase.Gameplay.BurnableObjectSystem;
 using CodeBase.MaterialChanger;
 using CodeBase.Services.BurnableObjects;
 using CodeBase.Services.Employees;
+using CodeBase.Services.Providers.Tables;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
@@ -33,11 +34,15 @@ namespace CodeBase.Gameplay.Employees
         private EmployeeDataService _employeeDataService;
         private BurnableObjectService _burnableObjectService;
         private RendererMaterialChangerService _rendererMaterialChangerService;
+        private TableService _tableService;
 
         [Inject]
-        private void Construct(EmployeeDataService employeeDataService, BurnableObjectService burnableObjectService,
-            RendererMaterialChangerService rendererMaterialChangerService)
+        private void Construct(EmployeeDataService employeeDataService,
+            BurnableObjectService burnableObjectService,
+            RendererMaterialChangerService rendererMaterialChangerService,
+            TableService tableService)
         {
+            _tableService = tableService;
             _rendererMaterialChangerService = rendererMaterialChangerService;
             _burnableObjectService = burnableObjectService;
             _employeeDataService = employeeDataService;
@@ -83,7 +88,8 @@ namespace CodeBase.Gameplay.Employees
         {
             IsBurned = false;
             _rendererMaterialChangerService.SetInitialMaterial();
-
+            _tableService.RecoverTableFromBurning(TableId);
+            
             if (_wasWorking)
                 StartWorking();
         }

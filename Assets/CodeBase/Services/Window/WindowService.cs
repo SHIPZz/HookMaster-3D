@@ -41,6 +41,16 @@ namespace CodeBase.Services.Window
             return (T)_createdWindows[typeof(T)];
         }
 
+        public T GetNew<T>() where T : WindowBase
+        {
+            ClearDestroyedWindows();
+            
+            WindowBase targetWindow = _uiFactory.CreateWindow<T>();
+            CurrentWindow = targetWindow;
+            _createdWindows[typeof(T)] = targetWindow;
+            return (T)targetWindow;
+        }
+
         public T Get<T>() where T : WindowBase
         {
             ClearDestroyedWindows();

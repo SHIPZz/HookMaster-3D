@@ -47,7 +47,7 @@ namespace CodeBase.Gameplay.Employees
 
         private void OnPlayerExited(Collider obj)
         {
-            if (!_employee.IsWorking || _employee.IsUpgrading)
+            if (!_employee.IsWorking || _employee.IsUpgrading || _employee.IsBurned)
                 return;
             
             if(_upgradeButton == null)
