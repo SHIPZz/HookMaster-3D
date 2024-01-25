@@ -20,5 +20,15 @@ namespace CodeBase.UI
         {
             Destroy(gameObject);
         }
+
+        public virtual void Show()
+        {
+            
+        }
+
+        public virtual void Hide()
+        {
+            
+        }
     }
 }

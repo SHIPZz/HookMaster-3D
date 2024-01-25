@@ -14,6 +14,7 @@ namespace CodeBase.Gameplay.Camera
         [SerializeField] private Vector3 _targetRotation;
         [SerializeField] private float _duration = 0.3f;
         [SerializeField] private bool _needReturnOnExit;
+        [SerializeField] private float _forwardDot = 0.7f;
 
         private Tween _tween;
         private CameraProvider _cameraProvider;
@@ -45,6 +46,11 @@ namespace CodeBase.Gameplay.Camera
         private void OnRotateBack(Collider obj)
         {
             if(!_needReturnOnExit)
+                return;
+
+            var dot = Vector3.Dot(transform.forward, obj.transform.forward);
+            
+            if(dot >= _forwardDot)
                 return;
 
             _tween?.Kill();

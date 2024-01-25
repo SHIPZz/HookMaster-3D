@@ -59,8 +59,11 @@ namespace CodeBase.Gameplay.Employees
             _triggerObserver.TriggerExited -= OnPlayerExited;
         }
 
-        private void DisableUpgradeButton(Employee employee) =>
-            _upgradeButton.gameObject.SetActive(false);
+        private void DisableUpgradeButton(Employee employee)
+        {
+            if (_upgradeButton.gameObject.activeSelf)
+                _upgradeButton.gameObject.SetActive(false);
+        }
 
         private void OnPlayerExited(Collider obj)
         {

@@ -88,6 +88,11 @@ namespace CodeBase.Services.Employees
             _worldDataService.Save();
         }
 
+        public void SetUpgradeEmployeeData(UpgradeEmployeeData upgradeEmployeeData)
+        {
+            _worldDataService.WorldData.UpgradeEmployeeDatas[upgradeEmployeeData.EmployeeData.Id] = upgradeEmployeeData;
+        }
+
         public void SaveUpgradeEmployeeData(UpgradeEmployeeData upgradeEmployeeData)
         {
             _worldDataService.WorldData.UpgradeEmployeeDatas[upgradeEmployeeData.EmployeeData.Id] = upgradeEmployeeData;

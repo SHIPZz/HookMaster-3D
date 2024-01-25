@@ -1,4 +1,5 @@
 ﻿using System;
+using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Enums;
 using CodeBase.Gameplay.Employees;
@@ -135,7 +136,7 @@ namespace CodeBase.Extensions
         {
             upgradeEmployeeData.SetCompleted(false)
                 .SetUpgradeStarted(false)
-                .SetLastUpgradeTime(3600f)
+                .SetLastUpgradeTime(TimeConstantValue.SecondsInHour)
                 .SetLastUpgradeWindowOpenedTime(0);
         }
 

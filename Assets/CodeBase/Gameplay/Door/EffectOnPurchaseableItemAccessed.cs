@@ -1,6 +1,8 @@
 ﻿using System;
+using CodeBase.Animations;
 using CodeBase.Data;
 using CodeBase.Gameplay.PurchaseableSystem;
+using CodeBase.Gameplay.SoundPlayer;
 using CodeBase.MaterialChanger;
 using CodeBase.Services.TriggerObserve;
 using UnityEngine;
@@ -13,6 +15,8 @@ namespace CodeBase.Gameplay.Door
     {
         [SerializeField] private float _duration = 0.5f;
         [SerializeField] private float _targetValue = 1f;
+        [SerializeField] private SoundPlayerSystem _soundPlayerSystem;
+        [SerializeField] private AppearanceEffect _appearanceEffect;
 
         private PurchaseableItem _purchaseableItem;
         private RendererMaterialChangerService _rendererMaterialChangerService;
@@ -54,6 +58,8 @@ namespace CodeBase.Gameplay.Door
 
             _isChanged = true;
             _targetCollider.enabled = false;
+            _soundPlayerSystem.PlayActiveSound();
+            _appearanceEffect.PlayAppearEffect();
             _rendererMaterialChangerService.Change(() => _purchaseableItem.gameObject.SetActive(false));
         }
     }

@@ -56,6 +56,19 @@ namespace CodeBase.UI.SpeedUp
             _worldDataService = worldDataService;
         }
 
+        public void Init(UpgradeEmployeeData upgradeEmployeeData, float totalTime)
+        {
+            _upgradeEmployeeData = upgradeEmployeeData;
+            _totalTime = totalTime;
+
+            _remainingTimeSlider.value = InitialSliderValue;
+
+            if (_timeCoroutine != null)
+                StopCoroutine(StartDecreaseTimeCoroutine());
+
+            _timeCoroutine = StartCoroutine(StartDecreaseTimeCoroutine());
+        }
+
         public override void Open()
         {
             _checkOutButtons.ForEach(x => x.Successful += SetAnimatedFinished);
@@ -73,27 +86,6 @@ namespace CodeBase.UI.SpeedUp
             });
 
             _checkOutButtons.ForEach(x => x.Successful -= SetAnimatedFinished);
-        }
-
-        public void Init(UpgradeEmployeeData upgradeEmployeeData, float totalTime)
-        {
-            _upgradeEmployeeData = upgradeEmployeeData;
-            _totalTime = totalTime;
-
-            _remainingTimeSlider.value = InitialSliderValue;
-
-            if (_timeCoroutine != null)
-                StopCoroutine(StartDecreaseTimeCoroutine());
-
-            _timeCoroutine = StartCoroutine(StartDecreaseTimeCoroutine());
-        }
-
-        private void TryToSetCompleted(double passedMinutes, float targetCompletedValue)
-        {
-            if (!(passedMinutes >= targetCompletedValue)) 
-                return;
-            
-            SetCompleted();
         }
 
         private async void SetCompleted()
@@ -126,15 +118,13 @@ namespace CodeBase.UI.SpeedUp
                 yield return null;
             }
 
-            _remainingTimeSlider.value = _remainingTimeSlider.maxValue;
-            TryToSetCompleted(_remainingTimeSlider.value, 0);
+            _remainingTimeSlider.DOValue(_remainingTimeSlider.maxValue, 0.5f);
+            SetCompleted();
         }
 
         private int CalculateSliderValue()
         {
-            _remainingTimeSlider.value = Mathf.Lerp(_remainingTimeSlider.value, -Mathf.FloorToInt(
-                Mathf.Abs(_totalTime) % TimeConstantValue.SecondsInHour /
-                TimeConstantValue.SecondsInMinute), _sliderFillSpeed * Time.deltaTime);
+            _remainingTimeSlider.value = Mathf.Lerp(_remainingTimeSlider.value, -Mathf.FloorToInt(Mathf.Abs(_totalTime) % TimeConstantValue.SecondsInHour / TimeConstantValue.SecondsInMinute), _sliderFillSpeed * Time.deltaTime);
             int seconds = Mathf.FloorToInt(Mathf.Abs(_totalTime) % TimeConstantValue.SecondsInMinute);
             return seconds;
         }
@@ -146,8 +136,6 @@ namespace CodeBase.UI.SpeedUp
                 SaveLastUpgradeTime();
                 return;
             }
-
-            _employeeDataService.UpgradeEmployeeData(_upgradeEmployeeData.EmployeeData);
 
             var upgradeCompletedWindow = _windowService.Get<UpgradeEmployeeCompletedWindow>();
             upgradeCompletedWindow.Init(_upgradeEmployeeData.EmployeeData);

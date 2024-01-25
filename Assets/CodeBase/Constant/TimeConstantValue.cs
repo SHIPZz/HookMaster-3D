@@ -14,5 +14,6 @@
         public const int TwentyMinutes = 20;
         public const int HalfMinutesInHour = 30;
         public const int OneDay = 1;
+        public const float DaysInYear = 360;
     }
 }

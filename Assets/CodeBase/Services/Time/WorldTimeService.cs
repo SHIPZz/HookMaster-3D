@@ -14,6 +14,7 @@ namespace CodeBase.Services.Time
 {
     public class WorldTimeService : IInitializable, IDisposable
     {
+        private readonly string[] BackupApiUrls = { "http://backup1.worldtimeapi.org/api/ip", "http://backup2.worldtimeapi.org/api/ip" };
         private const string ApiUrl = "http://worldtimeapi.org/api/ip";
 
         private readonly ICoroutineRunner _coroutineRunner;
@@ -34,15 +35,15 @@ namespace CodeBase.Services.Time
         public void Initialize()
         {
             _worldTimeCoroutine = _coroutineRunner.StartCoroutine(GetWorldTimeCoroutine());
-            Application.focusChanged += OnFocusCnanged;
+            Application.focusChanged += OnFocusChanged;
         }
 
         public void Dispose()
         {
-            Application.focusChanged -= OnFocusCnanged;
+            Application.focusChanged -= OnFocusChanged;
         }
 
-        private void OnFocusCnanged(bool hasFocus)
+        private void OnFocusChanged(bool hasFocus)
         {
             if (_worldTimeCoroutine != null)
                 _coroutineRunner.StopCoroutine(GetWorldTimeCoroutine());
@@ -63,6 +64,8 @@ namespace CodeBase.Services.Time
         {
             if (_worldTimeCoroutine != null)
                 _coroutineRunner.StopCoroutine(GetWorldTimeCoroutine());
+            
+            Debug.Log("update world time");
 
             _worldTimeCoroutine = _coroutineRunner.StartCoroutine(GetWorldTimeCoroutine());
 
@@ -77,12 +80,6 @@ namespace CodeBase.Services.Time
         public void ResetLastSpawnedRandomItemTime()
         {
             _worldDataService.WorldData.RandomItemData.LastSpawnedTime = 0;
-        }
-
-        public void SetLastSpawnedTime()
-        {
-            _worldDataService.WorldData.RandomItemData.LastSpawnedTime =
-                _worldDataService.WorldData.WorldTimeData.CurrentTime;
         }
 
         public int GetTimeDifferenceByLastSpawnedRandomItemInMinutes()
@@ -134,7 +131,7 @@ namespace CodeBase.Services.Time
             WorldTimeData worldTimeData = _worldDataService.WorldData.WorldTimeData;
 
             if (worldTimeData.LastLazyDay == 0)
-                worldTimeData.LastEarnedProfitTime = _worldDataService.WorldData.WorldTimeData.CurrentTime;
+                worldTimeData.LastLazyDay = _worldDataService.WorldData.WorldTimeData.CurrentTime;
 
             TimeSpan timeDifference = worldTimeData.CurrentTime.ToDateTime() - worldTimeData.LastLazyDay.ToDateTime();
 
@@ -233,7 +230,8 @@ namespace CodeBase.Services.Time
 
             if (webRequest.result is UnityWebRequest.Result.ConnectionError or UnityWebRequest.Result.ProtocolError)
             {
-                Debug.LogError("Error: " + webRequest.error);
+                Debug.LogError("Error: webrequest");
+                yield return TryBackupServers();
             }
             else
             {
@@ -254,6 +252,39 @@ namespace CodeBase.Services.Time
                     Debug.LogError("Error parsing world time response: " + e.Message);
                 }
             }
+        }
+        
+        private IEnumerator TryBackupServers()
+        {
+            foreach (string backupUrl in BackupApiUrls)
+            {
+                using UnityWebRequest backupWebRequest = UnityWebRequest.Get(backupUrl);
+                
+                yield return backupWebRequest.SendWebRequest();
+
+                if (backupWebRequest.result != UnityWebRequest.Result.Success)
+                    continue;
+                
+                try
+                {
+                    WorldTimeApiResponse response = JsonUtility.FromJson<WorldTimeApiResponse>(backupWebRequest.downloadHandler.text);
+                    DateTime worldDateTime = DateTime.Parse(response.utc_datetime);
+
+                    _worldDataService.WorldData.WorldTimeData.CurrentTime = worldDateTime.ToUnixTime();
+                    _worldDataService.Save();
+                    GotTime = true;
+                    TimeUpdated = true;
+                    Debug.Log("World Time (Backup): " + worldDateTime.ToUnixTime().ToDateTime());
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError("Error parsing backup world time response: " + e.Message);
+                }
+
+                yield break;
+            }
+
+            Debug.LogError("Failed to connect to any server.");
         }
     }
 
