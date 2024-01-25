@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb507d2e7e687843b6c0529e64a33b3, type: 3}
   m_Name: 1
   m_EditorClassIdentifier: 
-  MinSalary: 10000
-  MaxSalary: 20000
-  MinProfit: 13000
-  MaxProfit: 30000
+  MinSalary: 5000
+  MaxSalary: 14239
+  MinProfit: 15000
+  MaxProfit: 25000
   QualificationType: 1

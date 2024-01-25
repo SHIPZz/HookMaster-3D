@@ -228,7 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FloatingTextType>k__BackingField: 1
   <Text>k__BackingField: {fileID: 3099549938088542283}
-  <RectTransform>k__BackingField: {fileID: 0}
+  <RectTransform>k__BackingField: {fileID: 2824009374923020460}
   _duration: 2
   _anchoredPosition: 2
   _fadeInDuration: 0.1

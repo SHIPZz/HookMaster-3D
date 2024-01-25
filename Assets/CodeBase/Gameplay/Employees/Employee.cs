@@ -37,6 +37,7 @@ namespace CodeBase.Gameplay.Employees
         private TableService _tableService;
 
         public event Action<Employee> UpgradeStarted;
+        public event Action<Employee> Burned; 
 
         [Inject]
         private void Construct(EmployeeDataService employeeDataService,
@@ -83,6 +84,7 @@ namespace CodeBase.Gameplay.Employees
             _wasWorking = IsWorking;
             IsBurned = true;
             _rendererMaterialChangerService.Change();
+            Burned?.Invoke(this);
             StopWorking();
         }
 

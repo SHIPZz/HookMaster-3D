@@ -64,7 +64,7 @@ namespace CodeBase.Gameplay.Employees
         public void ActivateWindow(UpgradeEmployeeData targetUpgradeEmployeeData)
         {
             Quaternion targetRotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
-            _skipProgressWindow = _windowService.Get<SkipProgressSliderWindow>();
+            _skipProgressWindow = _windowService.GetNew<SkipProgressSliderWindow>();
             _skipProgressWindow.transform.SetParent(_employee.transform);
 
             _skipProgressWindow.Init(targetUpgradeEmployeeData,

@@ -36,16 +36,15 @@ namespace CodeBase.Gameplay.Employees
 
         private void Start()
         {
-            _employee.UpgradeStarted += OnEmployeeUpgradeStarted;
+            _employee.UpgradeStarted += DisableUpgradeButton;
             _employeeService.EmployeeUpdated += TryShowUpgradeButton;
+            _employee.Burned += DisableUpgradeButton;
         }
 
         private void OnEnable()
         {
             _triggerObserver.TriggerEntered += OnPlayerEntered;
             _triggerObserver.TriggerExited += OnPlayerExited;
-            _employee.UpgradeStarted -= OnEmployeeUpgradeStarted;
-            _employeeService.EmployeeUpdated -= TryShowUpgradeButton;
         }
 
         private void OnDisable()
@@ -53,11 +52,14 @@ namespace CodeBase.Gameplay.Employees
             if (_upgradeButton != null)
                 _upgradeButton.onClick.RemoveListener(OnUpgradeButtonClicked);
 
+            _employee.Burned -= DisableUpgradeButton;
+            _employee.UpgradeStarted -= DisableUpgradeButton;
+            _employeeService.EmployeeUpdated -= TryShowUpgradeButton;
             _triggerObserver.TriggerEntered -= OnPlayerEntered;
             _triggerObserver.TriggerExited -= OnPlayerExited;
         }
 
-        private void OnEmployeeUpgradeStarted(Employee employee) =>
+        private void DisableUpgradeButton(Employee employee) =>
             _upgradeButton.gameObject.SetActive(false);
 
         private void OnPlayerExited(Collider obj)
@@ -88,24 +90,24 @@ namespace CodeBase.Gameplay.Employees
             if (_upgradeButton != null)
                 return;
 
-            GetAndSubscribeUpgradeButton();
+            SetAndSubscribeUpgradeButton();
         }
 
         private void TryShowUpgradeButton(Employee employee)
         {
-            if(employee.Id != _employee.Id)
+            if (employee.Id != _employee.Id)
                 return;
-            
-            if(_upgradeButton == null)
-                GetAndSubscribeUpgradeButton();
-                
-            _upgradeButton.gameObject.SetActive(true);
+
             _floatingButtonService.ShowFloatingButton(_upPositionY, _upPositionDuration, Quaternion.identity,
                 AssetPath.UpgradeEmployeeButton,
                 _employee.transform, true, true);
+
+            SetAndSubscribeUpgradeButton();
+
+            _upgradeButton.gameObject.SetActive(true);
         }
 
-        private void GetAndSubscribeUpgradeButton()
+        private void SetAndSubscribeUpgradeButton()
         {
             _upgradeButton = _floatingButtonService.Get();
             _upgradeButton.onClick.AddListener(OnUpgradeButtonClicked);

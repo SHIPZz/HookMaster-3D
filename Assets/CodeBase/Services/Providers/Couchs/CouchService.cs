@@ -14,7 +14,7 @@ namespace CodeBase.Services.Providers.Couchs
         {
             Transform target = null;
             
-            return Couches.Any(x => x.HasFreeSide(out target)) ? target : null;
+            return Couches.Any(x => x.HasFreeSide(out target) && x.IsAccessed) ? target : null;
         }
     }
 }

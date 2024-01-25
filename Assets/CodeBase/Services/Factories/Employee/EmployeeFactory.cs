@@ -65,7 +65,7 @@ namespace CodeBase.Services.Factories.Employee
                 Name = targetName,
                 QualificationType = qualificationType,
                 Salary = Random.Range(officeSO.MinSalary, officeSO.MaxSalary),
-                Profit = Random.Range(officeSO.MinProfit, officeSO.MaxSalary),
+                Profit = Random.Range(officeSO.MinProfit, officeSO.MaxProfit),
                 EmployeeTypeId = _employeeStaticDataService.GetRandomId(),
                 Guid = Guid.NewGuid(),
             };

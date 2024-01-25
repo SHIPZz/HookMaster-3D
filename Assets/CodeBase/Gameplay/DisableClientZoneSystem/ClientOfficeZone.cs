@@ -21,8 +21,9 @@ namespace CodeBase.Gameplay.DisableClientZoneSystem
         private void OnClientEntered(Collider client)
         {
             var dot = Vector3.Dot(transform.forward, client.transform.forward);
+            print(dot);
 
-            if (dot >= _targetDot)
+            if (Mathf.Abs(dot) >= _targetDot)
                 client.GetComponent<Client>().LeftOffice = true;
         }
     }

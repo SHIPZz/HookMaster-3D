@@ -1,4 +1,5 @@
-﻿using CodeBase.Constant;
+﻿using System;
+using CodeBase.Constant;
 using CodeBase.Services.Player;
 using CodeBase.Services.TriggerObserve;
 using CodeBase.Services.UI;
@@ -23,10 +24,16 @@ namespace CodeBase.Gameplay.Employees
         private PlayerAnimationService _playerAnimationService;
 
         [Inject]
-        private void Construct(FloatingButtonService floatingButtonService, PlayerAnimationService playerAnimationService)
+        private void Construct(FloatingButtonService floatingButtonService,
+            PlayerAnimationService playerAnimationService)
         {
             _playerAnimationService = playerAnimationService;
             _floatingButtonService = floatingButtonService;
+        }
+
+        private void Start()
+        {
+            _employee.Burned += DisableButton;
         }
 
         private void OnEnable()
@@ -39,25 +46,32 @@ namespace CodeBase.Gameplay.Employees
         {
             _triggerObserver.TriggerEntered -= OnPlayerEntered;
             _triggerObserver.TriggerExited -= OnPlayerExited;
+            _employee.Burned -= DisableButton;
 
             if (_invokeWorkButton != null)
                 _invokeWorkButton.onClick.RemoveListener(OnInvokeClicked);
         }
 
+        private void DisableButton(Employee employee)
+        {
+            if (_invokeWorkButton != null)
+                _invokeWorkButton.gameObject.SetActive(false);
+        }
+
         private void OnPlayerExited(Collider obj)
         {
-            if (_employee.IsWorking || 
+            if (_employee.IsWorking ||
                 _employeeMovement.IsMovingToTable
                 || _employee.IsBurned)
                 return;
 
-            _floatingButtonService.ShowFloatingButton(-_downPositionY, _downDuration, Quaternion.identity, 
+            _floatingButtonService.ShowFloatingButton(-_downPositionY, _downDuration, Quaternion.identity,
                 AssetPath.InvokeEmployeeWorkButton, _employee.transform, false, false);
         }
 
         private void OnPlayerEntered(Collider obj)
         {
-            if (_employee.IsWorking || 
+            if (_employee.IsWorking ||
                 _employeeMovement.IsMovingToTable
                 || _employee.IsBurned)
                 return;
@@ -75,7 +89,7 @@ namespace CodeBase.Gameplay.Employees
         {
             _employee.StartWorking();
             _playerAnimationService.PlayPunchAnimation();
-            _floatingButtonService.ShowFloatingButton(-_downPositionY, _downDuration, Quaternion.identity, 
+            _floatingButtonService.ShowFloatingButton(-_downPositionY, _downDuration, Quaternion.identity,
                 AssetPath.InvokeEmployeeWorkButton, _employee.transform, false, false);
         }
     }

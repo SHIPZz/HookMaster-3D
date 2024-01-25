@@ -10,8 +10,8 @@ namespace CodeBase.Gameplay.Camera
     public class CameraRotationTrigger : MonoBehaviour
     {
         [SerializeField] private TriggerObserver _triggerObserver;
-        [SerializeField] private Vector3 _targetRotation;
         [SerializeField] private Vector3 _targetPosition;
+        [SerializeField] private Vector3 _targetRotation;
         [SerializeField] private float _duration = 0.3f;
         [SerializeField] private bool _needReturnOnExit;
 
@@ -51,7 +51,7 @@ namespace CodeBase.Gameplay.Camera
 
             _cameraProvider.Rotating = true;
             _tween = _cameraProvider.Camera.transform.DORotate(_initialRotation, _duration).OnComplete(() => _cameraProvider.Rotating = false);
-
+            _cameraProvider.CameraFollower.SetLastOffset();
         }
 
         private void RotateOnTrigger(Collider obj)

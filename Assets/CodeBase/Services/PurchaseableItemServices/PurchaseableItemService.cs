@@ -59,6 +59,9 @@ namespace CodeBase.Services.PurchaseableItemServices
         public bool HasItem(GameItemType gameItemType) =>
             _purchasedItems.ContainsKey(gameItemType);
 
+        public bool IsAccessible(GameItemType gameItemType) => 
+            _worldDataService.WorldData.PurchaseableItemDatas.ContainsKey(gameItemType) && _worldDataService.WorldData.PurchaseableItemDatas[gameItemType].IsAccessible;
+
         public void SaveToData(PurchaseableItem purchaseableItem)
         {
             _worldDataService.WorldData.PurchaseableItemDatas[purchaseableItem.GameItemType] = purchaseableItem.ToData();
