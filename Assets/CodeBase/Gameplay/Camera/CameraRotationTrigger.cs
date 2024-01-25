@@ -49,7 +49,7 @@ namespace CodeBase.Gameplay.Camera
                 return;
 
             var dot = Vector3.Dot(transform.forward, obj.transform.forward);
-            
+            print(dot);
             if(dot >= _forwardDot)
                 return;
 
