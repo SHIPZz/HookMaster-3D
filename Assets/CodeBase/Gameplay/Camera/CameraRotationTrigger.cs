@@ -15,6 +15,8 @@ namespace CodeBase.Gameplay.Camera
         [SerializeField] private float _duration = 0.3f;
         [SerializeField] private bool _needReturnOnExit;
         [SerializeField] private float _forwardDot = 0.7f;
+        [SerializeField] private float _returnDot = 0.7f;
+        [SerializeField] private AxisTypeId _axisTypeId;
 
         private Tween _tween;
         private CameraProvider _cameraProvider;
@@ -45,37 +47,67 @@ namespace CodeBase.Gameplay.Camera
 
         private void OnRotateBack(Collider obj)
         {
-            if(!_needReturnOnExit)
+            if (!_needReturnOnExit)
                 return;
 
-            var dot = Vector3.Dot(transform.forward, obj.transform.forward);
-            print(dot);
-            if(dot >= _forwardDot)
+            var dot = Vector3.Dot(GetAxisToCompare(), obj.transform.forward);
+            print(dot + " return dot");
+            if (dot > _returnDot)
                 return;
 
-            _tween?.Kill();
+            _tween?.Kill(true);
 
             _cameraProvider.Rotating = true;
-            _tween = _cameraProvider.Camera.transform.DORotate(_initialRotation, _duration).OnComplete(() => _cameraProvider.Rotating = false);
+            _tween = _cameraProvider.Camera.transform.DORotate(_initialRotation, _duration)
+                .OnComplete(() => _cameraProvider.Rotating = false);
             _cameraProvider.CameraFollower.SetLastOffset();
         }
 
         private void RotateOnTrigger(Collider obj)
         {
-            _tween?.Kill(true);
+            float x = Mathf.Approximately(_targetRotation.x, 0f)
+                ? _cameraProvider.Camera.transform.eulerAngles.x
+                : _targetRotation.x;
+            float y = Mathf.Approximately(_targetRotation.y, 0f)
+                ? _cameraProvider.Camera.transform.eulerAngles.y
+                : _targetRotation.y;
+            float z = Mathf.Approximately(_targetRotation.z, 0f)
+                ? _cameraProvider.Camera.transform.eulerAngles.z
+                : _targetRotation.z;
 
-            float x = Mathf.Approximately(_targetRotation.x, 0f) ? _cameraProvider.Camera.transform.eulerAngles.x : _targetRotation.x;
-            float y = Mathf.Approximately(_targetRotation.y, 0f) ? _cameraProvider.Camera.transform.eulerAngles.y : _targetRotation.y;
-            float z = Mathf.Approximately(_targetRotation.z, 0f) ? _cameraProvider.Camera.transform.eulerAngles.z : _targetRotation.z;
+            var dot = Vector3.Dot(GetAxisToCompare(), obj.transform.forward);
+
+            if (dot < _forwardDot)
+                return;
 
             Vector3 newTargetRotation = new Vector3(x, y, z);
+
+            if (_cameraProvider.Camera.transform.eulerAngles == newTargetRotation)
+                return;
+
             _cameraProvider.Rotating = true;
-            _tween = _cameraProvider.Camera.transform.DORotate(newTargetRotation, _duration).OnComplete(() => _cameraProvider.Rotating = false);
+            _tween?.Kill(true);
+            _tween = _cameraProvider.Camera.transform.DORotate(newTargetRotation, _duration)
+                .OnComplete(() => _cameraProvider.Rotating = false);
 
             if (_targetPosition != Vector3.zero)
             {
                 _cameraProvider.CameraFollower.SetTargetOffset(_targetPosition);
             }
+        }
+
+        private Vector3 GetAxisToCompare()
+        {
+            switch (_axisTypeId)
+            {
+                case AxisTypeId.Right:
+                    return transform.right;
+
+                case AxisTypeId.Forward:
+                    return transform.forward;
+            }
+
+            return Vector3.zero;
         }
     }
 }

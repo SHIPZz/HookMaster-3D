@@ -46,7 +46,8 @@ namespace CodeBase.Gameplay.Employees
 
         private void HideWindow(Employee employee)
         {
-            _skipProgressWindow.Hide();
+            if (_skipProgressWindow != null)
+                _skipProgressWindow.Hide();
         }
 
         private void OnPlayerExited(Collider obj)

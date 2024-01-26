@@ -61,7 +61,7 @@ namespace CodeBase.Gameplay.Employees
 
         private void DisableUpgradeButton(Employee employee)
         {
-            if (_upgradeButton.gameObject.activeSelf)
+            if (_upgradeButton.gameObject != null)
                 _upgradeButton.gameObject.SetActive(false);
         }
 

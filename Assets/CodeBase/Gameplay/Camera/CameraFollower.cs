@@ -38,7 +38,8 @@ namespace CodeBase.Gameplay.Camera
             if (_playerProvider.Player == null)
                 return;
 
-            transform.position = _playerProvider.Player.transform.position + _offset * _speed;
+            transform.position = Vector3.Lerp(transform.position, _playerProvider.Player.transform.position + _offset,
+                _speed * Time.deltaTime);
         }
 
         private void Awake()
@@ -49,13 +50,13 @@ namespace CodeBase.Gameplay.Camera
         public void SetLastOffset()
         {
             _offset = _lastOffset;
-            transform.DOMove(_playerProvider.Player.transform.position + _offset * _speed, 1f);
+            // transform.DOMove(_playerProvider.Player.transform.position + _offset * _speed, 1f);
         }
 
         public void SetTargetOffset(Vector3 offset)
         {
             _offset += offset;
-            transform.DOMove(_playerProvider.Player.transform.position + _offset * _speed, 1f);
+            // transform.DOMove(_playerProvider.Player.transform.position + _offset * _speed, 1f);
         }
 
         public void Block(bool isBlocked)

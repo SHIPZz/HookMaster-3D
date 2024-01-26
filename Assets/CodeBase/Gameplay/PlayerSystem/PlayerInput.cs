@@ -34,7 +34,7 @@ namespace CodeBase.Gameplay.PlayerSystem
             Vector3 forwardRelative = verticalInput * cameraForward;
             Vector3 rightRelative = horizontalInput * cameraRight;
 
-            Vector3 moveDirection = forwardRelative + rightRelative;
+            Vector3 moveDirection = (forwardRelative + rightRelative).normalized;
             
             MovementPressed?.Invoke(new Vector3(moveDirection.x, 0, moveDirection.z));
         }
