@@ -8,6 +8,7 @@ namespace CodeBase.Data
     {
         public int QualificationType = 1;
         public List<EmployeeData> PurchasedEmployees = new();
+        public Dictionary<string, bool> PurchasedManagers = new();
 
         public Dictionary<ItemTypeId, int> WalletResources = new()
         {

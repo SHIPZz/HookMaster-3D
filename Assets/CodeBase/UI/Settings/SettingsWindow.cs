@@ -12,7 +12,7 @@ namespace CodeBase.UI.Settings
     {
         [SerializeField] private CanvasAnimator _canvasAnimator;
         [SerializeField] private SoundPlayerSystem _soundPlayerSystem;
-        [SerializeField] private RectTransformScaleAnim _windowScaleAnim;
+        [SerializeField] private TransformScaleAnim _windowScaleAnim;
 
         private WindowService _windowService;
         private SettingsService _settingsService;

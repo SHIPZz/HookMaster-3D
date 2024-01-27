@@ -266,10 +266,12 @@ MonoBehaviour:
   _unScale: 0
   _scaleDuration: 0.2
   _unScaleDuration: 0.1
-  _rectTransform: {fileID: 7058293139590808221}
+  _transform: {fileID: 7058293139590808221}
   _scaleX: 0
   _scaleY: 1
   _scaleZ: 1
+  _unscaleOnStart: 0
+  _scaleDelay: 1
 --- !u!1 &5986676134301035310
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,7 +523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 342ff678eefbcea488447843814bcc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _closeButton: {fileID: 0}
+  CloseButton: {fileID: 0}
   _putOutButton: {fileID: 3896032580126367165}
   _canvasAnimator: {fileID: 1416429088630385617}
   _buttonScaleAnim: {fileID: 3092147126207336391}

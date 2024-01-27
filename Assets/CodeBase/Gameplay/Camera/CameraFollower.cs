@@ -50,13 +50,11 @@ namespace CodeBase.Gameplay.Camera
         public void SetLastOffset()
         {
             _offset = _lastOffset;
-            // transform.DOMove(_playerProvider.Player.transform.position + _offset * _speed, 1f);
         }
 
         public void SetTargetOffset(Vector3 offset)
         {
             _offset += offset;
-            // transform.DOMove(_playerProvider.Player.transform.position + _offset * _speed, 1f);
         }
 
         public void Block(bool isBlocked)

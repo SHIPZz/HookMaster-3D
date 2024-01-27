@@ -31,8 +31,8 @@ namespace CodeBase.UI.SpeedUp
         [SerializeField] private TMP_Text _skipDiamondText;
         [SerializeField] private Slider _remainingTimeSlider;
         [SerializeField] private GameObject _skipAdItem;
-        [SerializeField] private List<RectTransformScaleAnim> _transformScaleAnims;
-        [SerializeField] private List<RectTransformScaleAnim> _completedTextsAnims;
+        [SerializeField] private List<TransformScaleAnim> _transformScaleAnims;
+        [SerializeField] private List<TransformScaleAnim> _completedTextsAnims;
         [SerializeField] private float _sliderFillSpeed = 15f;
         [SerializeField] private List<CheckOutButton> _checkOutButtons;
         [SerializeField] private float _destroyDelayOnCompleted = 0.5f;

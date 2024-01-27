@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 56.807613, y: 0, z: 86.863594}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7761373742752797510}
@@ -76,8 +76,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.6372757, y: 2.0684037, z: 2.4011307}
-  m_Center: {x: -0.026290894, y: 0.9701965, z: -0.26881027}
+  m_Size: {x: 3.826065, y: 2.0684037, z: 2.8579695}
+  m_Center: {x: -0.07548196, y: 0.9701965, z: -0.040391345}
 --- !u!114 &3020706832291632822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +94,7 @@ MonoBehaviour:
   - {fileID: 2275276421045955257}
   - {fileID: 2747814973522918649}
   _appearEffect: {fileID: 1161420074570297195}
+  _targetEffects: []
 --- !u!114 &2374942769033423698
 MonoBehaviour:
   m_ObjectHideFlags: 0

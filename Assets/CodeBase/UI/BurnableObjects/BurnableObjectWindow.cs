@@ -16,8 +16,8 @@ namespace CodeBase.UI.BurnableObjects
     {
         [field: SerializeField] public Button RecoverButton { get; private set; }
         [SerializeField] private CanvasAnimator _canvasAnimator;
-        [SerializeField] private RectTransformScaleAnim _burnedIconScaleAnim;
-        [SerializeField] private RectTransformScaleAnim _buttonScaleAnim;
+        [SerializeField] private TransformScaleAnim _burnedIconScaleAnim;
+        [SerializeField] private TransformScaleAnim _buttonScaleAnim;
         [SerializeField] private TMP_Text _buttonText;
         
         private IBurnable _burnable;

@@ -1226,7 +1226,7 @@ MonoBehaviour:
   _noAvailableEmployeesText: {fileID: 6336531460772629390}
   _tableCountText: {fileID: 8898153780436315018}
   _canvasAnimator: {fileID: -8105156644447894440}
-  _rectTransformScale: {fileID: 7107703504826094390}
+  transformScale: {fileID: 7107703504826094390}
 --- !u!223 &91890704057552163
 Canvas:
   m_ObjectHideFlags: 0
@@ -1392,7 +1392,7 @@ MonoBehaviour:
   _unScale: 0
   _scaleDuration: 0.2
   _unScaleDuration: 0.1
-  _rectTransform: {fileID: 4803437158661077654}
+  _transform: {fileID: 4803437158661077654}
   _scaleX: 1
   _scaleY: 0
   _scaleZ: 0

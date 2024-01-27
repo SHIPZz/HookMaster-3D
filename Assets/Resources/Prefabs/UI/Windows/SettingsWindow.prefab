@@ -1193,7 +1193,7 @@ MonoBehaviour:
   _unScale: 0
   _scaleDuration: 0.2
   _unScaleDuration: 0.1
-  _rectTransform: {fileID: 8451677886376868397}
+  _transform: {fileID: 8451677886376868397}
   _scaleX: 1
   _scaleY: 0
   _scaleZ: 0

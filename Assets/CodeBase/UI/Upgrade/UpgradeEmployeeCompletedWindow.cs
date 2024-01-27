@@ -26,7 +26,7 @@ namespace CodeBase.UI.Upgrade
         [SerializeField] private TMP_Text _newSalaryText;
         [SerializeField] private TMP_Text _newQualificationTypeText;
         
-        [SerializeField] private RectTransformScaleAnim _buttonScaleAnim;
+        [SerializeField] private TransformScaleAnim _buttonScaleAnim;
         [SerializeField] private AudioSource _increaseValueSound;
         [SerializeField] private AppearanceEffect _appearanceEffect;
         [SerializeField] private SoundPlayerSystem _soundPlayerSystem;

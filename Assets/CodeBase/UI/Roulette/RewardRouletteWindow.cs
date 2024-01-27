@@ -19,7 +19,7 @@ namespace CodeBase.UI.Roulette
         [SerializeField] private TMP_Text _diamondText;
         [SerializeField] private AppearanceEffect _appearanceEffect;
         [SerializeField] private SoundPlayerSystem _soundPlayer;
-        [SerializeField] private RectTransformScaleAnim _buttonScaleAnim;
+        [SerializeField] private TransformScaleAnim _buttonScaleAnim;
         [SerializeField] private AudioSource _increaseSound;
 
         private RewardService _rewardService;

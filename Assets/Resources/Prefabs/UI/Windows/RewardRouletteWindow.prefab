@@ -46209,7 +46209,7 @@ MonoBehaviour:
   _unScale: 0
   _scaleDuration: 0.25
   _unScaleDuration: 0.1
-  _rectTransform: {fileID: 5972338857346277884}
+  _transform: {fileID: 5972338857346277884}
   _scaleX: 1
   _scaleY: 0
   _scaleZ: 0

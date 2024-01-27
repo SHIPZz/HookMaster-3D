@@ -18,7 +18,7 @@ namespace CodeBase.UI.OfflineReward
         [SerializeField] private Slider _passedTimeSlider;
         [SerializeField] private TMP_Text _rewardedMoneyText;
         [SerializeField] private AudioSource _increaseSound;
-        [SerializeField] private List<RectTransformScaleAnim> _buttonScaleAnims;
+        [SerializeField] private List<TransformScaleAnim> _buttonScaleAnims;
         
         private WindowService _windowService;
         private NumberTextAnimService _numberTextAnimService;

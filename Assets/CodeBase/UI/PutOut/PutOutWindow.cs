@@ -9,7 +9,7 @@ public class PutOutWindow : WindowBase
 {
     [SerializeField] private Button _putOutButton;
     [SerializeField] private CanvasAnimator _canvasAnimator;
-    [SerializeField] private RectTransformScaleAnim _buttonScaleAnim;
+    [SerializeField] private TransformScaleAnim _buttonScaleAnim;
 
     private ExtinguisherSystem _extinguisherSystem;
 

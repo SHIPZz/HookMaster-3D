@@ -8,6 +8,7 @@ using CodeBase.Gameplay.PurchaseableSystem;
 using CodeBase.Services.PurchaseableItemServices;
 using CodeBase.Services.WorldData;
 using CodeBase.UI.Buttons;
+using CodeBase.UI.Buttons.BuyButtons;
 using CodeBase.UI.Buttons.NavigationButtons;
 using TMPro;
 using UnityEngine;
@@ -20,6 +21,7 @@ namespace CodeBase.UI.Hud
         public OpenEmployeeWindowButton OpenEmployeeWindowButton;
         public TutorialFadeImage TutorialFadeImage;
         public Transform TutorialHandParent;
+        public BuyClientManagerButton BuyClientManagerButton;
 
         [SerializeField] private TMP_Text _timeText;
         [SerializeField] private CanvasAnimator _canvasAnimator;

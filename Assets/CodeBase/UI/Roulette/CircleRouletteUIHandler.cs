@@ -14,7 +14,7 @@ namespace CodeBase.UI.Roulette
     {
         [SerializeField] private TriggerObserver _triggerObserver;
         [SerializeField] private ImageFadeAnim _rouletteImageFadeAnim;
-        [SerializeField] private RectTransformScaleAnim _buttonScaleAnim;
+        [SerializeField] private TransformScaleAnim _buttonScaleAnim;
         [SerializeField] private OpenCircleRouletteWindowButton openCircleRouletteWindowButton;
         [SerializeField] private CircleRouletteItem _circleRouletteItem;
 

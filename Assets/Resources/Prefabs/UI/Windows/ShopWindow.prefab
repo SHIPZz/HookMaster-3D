@@ -784,7 +784,7 @@ MonoBehaviour:
   _unScale: 0
   _scaleDuration: 0.2
   _unScaleDuration: 0.1
-  _rectTransform: {fileID: 2526187857678770052}
+  _transform: {fileID: 2526187857678770052}
   _scaleX: 1
   _scaleY: 0
   _scaleZ: 0
@@ -1245,7 +1245,7 @@ MonoBehaviour:
   - {fileID: 372506858836669092}
   - {fileID: 4295879641204143576}
   - {fileID: 9092956651535347982}
-  _rectTransformScale: {fileID: 4106972356687636446}
+  transformScale: {fileID: 4106972356687636446}
 --- !u!1 &2711733371466032408
 GameObject:
   m_ObjectHideFlags: 0

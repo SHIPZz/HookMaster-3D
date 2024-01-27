@@ -12,16 +12,19 @@ namespace CodeBase.Animations
         [SerializeField] private float _fadeOutDuration = 0.25f;
 
         private Tween _fadeTween;
+        private Canvas _canvas;
 
         private void Awake()
         {
             _canvasGroup.alpha = 0f;
+            _canvas = _canvasGroup.GetComponent<Canvas>();
         }
 
         public void FadeInCanvas([CanBeNull] Action onCompleted = null)
         {
             _fadeTween?.Kill(true);
             _canvasGroup.interactable = true;
+            _canvas.enabled = true;
             _fadeTween = _canvasGroup.DOFade(1f, _fadeInDuration).OnComplete(() => onCompleted?.Invoke());
         }
 
@@ -33,6 +36,7 @@ namespace CodeBase.Animations
                 .OnComplete(() =>
                 {
                     _canvasGroup.interactable = false;
+                    _canvas.enabled = false;
                     onCompleted?.Invoke();
                 });
         }

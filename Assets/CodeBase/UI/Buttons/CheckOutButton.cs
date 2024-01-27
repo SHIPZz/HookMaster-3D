@@ -24,7 +24,7 @@ namespace CodeBase.UI.Buttons
             WalletService = walletService;
         }
 
-        private void Awake()
+        protected virtual void Awake()
         {
             _button = GetComponent<Button>();
             _button.onClick.AddListener(OnClicked);
@@ -35,7 +35,7 @@ namespace CodeBase.UI.Buttons
             _button.onClick.RemoveListener(OnClicked);
         }
 
-        private void OnClicked()
+        protected virtual void OnClicked()
         {
             if (!WalletService.HasEnough(ItemTypeId, Value))
                 return;

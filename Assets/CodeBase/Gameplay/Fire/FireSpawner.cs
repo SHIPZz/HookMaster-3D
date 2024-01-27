@@ -18,7 +18,6 @@ namespace CodeBase.Gameplay.Fire
         [Button]
         public void Init()
         {
-            print("initialize");
             _gameItemFactory.Create<FireSystem>(transform, transform.position, transform.rotation, AssetPath.Fire);
         }
     }

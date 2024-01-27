@@ -94,7 +94,7 @@ MonoBehaviour:
   _unScale: 0
   _scaleDuration: 0.2
   _unScaleDuration: 0.1
-  _rectTransform: {fileID: 2367551700349077354}
+  _transform: {fileID: 2367551700349077354}
   _scaleX: 1
   _scaleY: 0
   _scaleZ: 0
@@ -444,7 +444,7 @@ MonoBehaviour:
   _unScale: 0
   _scaleDuration: 0.2
   _unScaleDuration: 0.1
-  _rectTransform: {fileID: 3190974551919118843}
+  _transform: {fileID: 3190974551919118843}
   _scaleX: 1
   _scaleY: 0
   _scaleZ: 0

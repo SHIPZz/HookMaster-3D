@@ -1,5 +1,4 @@
-﻿using System;
-using CodeBase.Services.Providers.Camera;
+﻿using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.TriggerObserve;
 using DG.Tweening;
 using UnityEngine;
@@ -17,6 +16,7 @@ namespace CodeBase.Gameplay.Camera
         [SerializeField] private float _forwardDot = 0.7f;
         [SerializeField] private float _returnDot = 0.7f;
         [SerializeField] private AxisTypeId _axisTypeId;
+        [SerializeField] private bool _byDot = true;
 
         private Tween _tween;
         private CameraProvider _cameraProvider;
@@ -50,12 +50,15 @@ namespace CodeBase.Gameplay.Camera
             if (!_needReturnOnExit)
                 return;
 
-            var dot = Vector3.Dot(GetAxisToCompare(), obj.transform.forward);
-            print(dot + " return dot");
-            if (dot > _returnDot)
-                return;
+            if (_byDot)
+            {
+                var dot = Vector3.Dot(GetAxisToCompare(), obj.transform.forward);
 
-            _tween?.Kill(true);
+                if (dot > _returnDot)
+                    return;
+            }
+
+            _tween?.Kill();
 
             _cameraProvider.Rotating = true;
             _tween = _cameraProvider.Camera.transform.DORotate(_initialRotation, _duration)
@@ -75,18 +78,22 @@ namespace CodeBase.Gameplay.Camera
                 ? _cameraProvider.Camera.transform.eulerAngles.z
                 : _targetRotation.z;
 
-            var dot = Vector3.Dot(GetAxisToCompare(), obj.transform.forward);
+            if (_byDot)
+            {
+                var dot = Vector3.Dot(GetAxisToCompare(), obj.transform.forward);
 
-            if (dot < _forwardDot)
-                return;
-
+                if (dot < _forwardDot)
+                    return;
+            }
+            
             Vector3 newTargetRotation = new Vector3(x, y, z);
 
             if (_cameraProvider.Camera.transform.eulerAngles == newTargetRotation)
                 return;
 
+            _initialRotation = _cameraProvider.Camera.transform.eulerAngles;
             _cameraProvider.Rotating = true;
-            _tween?.Kill(true);
+            _tween?.Kill();
             _tween = _cameraProvider.Camera.transform.DORotate(newTargetRotation, _duration)
                 .OnComplete(() => _cameraProvider.Rotating = false);
 

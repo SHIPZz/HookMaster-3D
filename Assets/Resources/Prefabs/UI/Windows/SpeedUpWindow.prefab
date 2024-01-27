@@ -783,7 +783,7 @@ MonoBehaviour:
   _unScale: 0
   _scaleDuration: 0.2
   _unScaleDuration: 0.1
-  _rectTransform: {fileID: 3504070304116301522}
+  _transform: {fileID: 3504070304116301522}
   _scaleX: 1
   _scaleY: 0
   _scaleZ: 0
@@ -2522,7 +2522,7 @@ MonoBehaviour:
   _unScale: 0
   _scaleDuration: 0.2
   _unScaleDuration: 0.1
-  _rectTransform: {fileID: 6102517689899087182}
+  _transform: {fileID: 6102517689899087182}
   _scaleX: 1
   _scaleY: 0
   _scaleZ: 0
@@ -2663,7 +2663,7 @@ MonoBehaviour:
   _unScale: 0
   _scaleDuration: 0.2
   _unScaleDuration: 0.1
-  _rectTransform: {fileID: 1444266078844946316}
+  _transform: {fileID: 1444266078844946316}
   _scaleX: 1
   _scaleY: 0
   _scaleZ: 0
@@ -4156,7 +4156,7 @@ MonoBehaviour:
   _unScale: 0
   _scaleDuration: 0.5
   _unScaleDuration: 0.1
-  _rectTransform: {fileID: 5314030560524403241}
+  _transform: {fileID: 5314030560524403241}
   _scaleX: 1
   _scaleY: 0
   _scaleZ: 0
@@ -4598,7 +4598,7 @@ MonoBehaviour:
   _unScale: 0
   _scaleDuration: 0.5
   _unScaleDuration: 0.1
-  _rectTransform: {fileID: 1398668765196569301}
+  _transform: {fileID: 1398668765196569301}
   _scaleX: 1
   _scaleY: 0
   _scaleZ: 0

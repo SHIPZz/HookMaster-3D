@@ -11,7 +11,7 @@ namespace CodeBase.UI.MiningFarm
     public class MiningFarmUIHandler : MonoBehaviour
     {
         [SerializeField] private TriggerObserver _triggerObserver;
-        [SerializeField] private RectTransformScaleAnim _buttonScaleAnim;
+        [SerializeField] private TransformScaleAnim _buttonScaleAnim;
         [SerializeField] private OpenMiningFarmWindowButton _openMiningFarmWindowButton;
         
         private FloatingTextService _floatingTextService;

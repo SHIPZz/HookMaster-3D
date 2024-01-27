@@ -24,7 +24,7 @@ namespace CodeBase.UI.Employee
         [SerializeField] private TMP_Text _noAvailableEmployeesText;
         [SerializeField] private TMP_Text _tableCountText;
         [SerializeField] private CanvasAnimator _canvasAnimator;
-        [SerializeField] private RectTransformScaleAnim _rectTransformScale;
+        [SerializeField] private TransformScaleAnim transformScale;
 
         private TableService _tableService;
         private UIFactory _uiFactory;
@@ -56,7 +56,7 @@ namespace CodeBase.UI.Employee
 
         public override void Open()
         {
-            _rectTransformScale.ToScale();
+            transformScale.ToScale();
             _tableService.AllTablesBusy += OnAllTablesBusy;
             _tableService.TableConditionChanged += OnTableConditionChanged;
             _canvasAnimator.FadeInCanvas();
