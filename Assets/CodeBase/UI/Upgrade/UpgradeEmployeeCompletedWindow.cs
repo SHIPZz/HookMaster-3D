@@ -36,12 +36,10 @@ namespace CodeBase.UI.Upgrade
         private EmployeeService _employeeService;
         private NumberTextAnimService _numberTextAnimService;
         private WindowService _windowService;
-        private EmployeeDataService _employeeDataService;
 
         [Inject]
-        private void Construct(EmployeeService employeeService, NumberTextAnimService numberTextAnimService, WindowService windowService, EmployeeDataService employeeDataService)
+        private void Construct(EmployeeService employeeService, NumberTextAnimService numberTextAnimService, WindowService windowService)
         {
-            _employeeDataService = employeeDataService;
             _windowService = windowService;
             _numberTextAnimService = numberTextAnimService;
             _employeeService = employeeService;
@@ -70,8 +68,6 @@ namespace CodeBase.UI.Upgrade
         public override void Close()
         {
             _windowService.Open<HudWindow>();
-            _windowService.Close<SkipProgressSliderWindow>();
-            _employeeDataService.UpgradeEmployeeData(_employeeData);
             _canvasAnimator.FadeOutCanvas(base.Close);
         }
 

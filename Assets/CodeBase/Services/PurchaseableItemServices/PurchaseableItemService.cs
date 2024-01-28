@@ -65,6 +65,7 @@ namespace CodeBase.Services.PurchaseableItemServices
         public void SaveToData(PurchaseableItem purchaseableItem)
         {
             _worldDataService.WorldData.PurchaseableItemDatas[purchaseableItem.GameItemType] = purchaseableItem.ToData();
+            _purchasedItems[purchaseableItem.GameItemType] = purchaseableItem;
             Purchased?.Invoke(purchaseableItem);
         }
 

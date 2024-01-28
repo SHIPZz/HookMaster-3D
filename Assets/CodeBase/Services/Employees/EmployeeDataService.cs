@@ -5,12 +5,15 @@ using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Extensions;
 using CodeBase.Services.WorldData;
+using UnityEngine;
 
 namespace CodeBase.Services.Employees
 {
     public class EmployeeDataService
     {
         private readonly IWorldDataService _worldDataService;
+
+        public event Action<EmployeeData> EmployeeUpdated;
 
         public EmployeeDataService(IWorldDataService worldDataService)
         {
@@ -48,6 +51,7 @@ namespace CodeBase.Services.Employees
 
             OverwritePurchasedEmployeeData(employeeData);
             onCompleted?.Invoke(employeeData);
+            EmployeeUpdated?.Invoke(employeeData);
         }
 
         public UpgradeEmployeeData GetUpgradeEmployeeData(string id)

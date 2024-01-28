@@ -11,21 +11,23 @@ namespace CodeBase.UI.Buttons
     {
         private EmployeeData _employeeData;
         private EmployeeDataService _employeeDataService;
+        private SkipProgressSliderWindow _skipProgressSliderWindow;
 
         [Inject]
         private void Construct(EmployeeDataService employeeDataService) => 
             _employeeDataService = employeeDataService;
 
-        public void SetEmployeeData(EmployeeData employeeData) => 
+        public void SetEmployeeData(EmployeeData employeeData, SkipProgressSliderWindow skipProgressSliderWindow)
+        {
+            _skipProgressSliderWindow = skipProgressSliderWindow;
             _employeeData = employeeData;
+        }
 
         protected override void Open()
         {
             var speedUpWindow = WindowService.Get<SpeedUpWindow>();
-            var skipProgressSliderWindow = WindowService.Get<SkipProgressSliderWindow>();
-            
             UpgradeEmployeeData targetUpgradeEmployeeData = _employeeDataService.GetUpgradeEmployeeData(_employeeData.Id);
-            speedUpWindow.Init(targetUpgradeEmployeeData, skipProgressSliderWindow.TotalTime);
+            speedUpWindow.Init(targetUpgradeEmployeeData, _skipProgressSliderWindow.TotalTime);
             speedUpWindow.Open();
         }
     }

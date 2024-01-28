@@ -1,4 +1,5 @@
-﻿using CodeBase.Data;
+﻿using System;
+using CodeBase.Data;
 using CodeBase.Services.Employees;
 using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.TriggerObserve;
@@ -19,7 +20,6 @@ namespace CodeBase.Gameplay.Employees
         private SkipProgressSliderWindow _skipProgressWindow;
         private CameraProvider _cameraProvider;
         private EmployeeDataService _employeeDataService;
-        private bool _initialized;
 
         [Inject]
         private void Construct(WindowService windowService,
@@ -28,6 +28,11 @@ namespace CodeBase.Gameplay.Employees
             _employeeDataService = employeeDataService;
             _cameraProvider = cameraProvider;
             _windowService = windowService;
+        }
+
+        private void Start()
+        {
+            _employeeDataService.EmployeeUpdated += TryCloseWindow;
         }
 
         private void OnEnable()
@@ -42,6 +47,26 @@ namespace CodeBase.Gameplay.Employees
             _triggerObserver.TriggerEntered -= OnPlayerEntered;
             _triggerObserver.TriggerExited -= OnPlayerExited;
             _employee.Burned -= HideWindow;
+            _employeeDataService.EmployeeUpdated -= TryCloseWindow;
+        }
+
+        public void ActivateWindow(UpgradeEmployeeData targetUpgradeEmployeeData)
+        {
+            if (_skipProgressWindow != null)
+            {
+                _skipProgressWindow.Show();
+                return;
+            }
+
+            Quaternion targetRotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
+            _skipProgressWindow = _windowService.GetNew<SkipProgressSliderWindow>();
+            _skipProgressWindow.transform.SetParent(_employee.transform);
+
+            _skipProgressWindow.Init(targetUpgradeEmployeeData, targetRotation);
+
+            _skipProgressWindow.transform.position = transform.position + _offset;
+
+            _skipProgressWindow.Open();
         }
 
         private void HideWindow(Employee employee)
@@ -69,25 +94,13 @@ namespace CodeBase.Gameplay.Employees
             ActivateWindow(targetUpgradeEmployeeData);
         }
 
-        public void ActivateWindow(UpgradeEmployeeData targetUpgradeEmployeeData)
+        private void TryCloseWindow(EmployeeData employeeData)
         {
-            if (_skipProgressWindow != null)
-            {
-                _skipProgressWindow.Show();
+            if (employeeData.Id != _employee.Id)
                 return;
-            }
-
-            Quaternion targetRotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
-            _skipProgressWindow = _windowService.GetNew<SkipProgressSliderWindow>();
-            _skipProgressWindow.transform.SetParent(_employee.transform);
-
-            _skipProgressWindow.Init(targetUpgradeEmployeeData, targetRotation);
-
-            _skipProgressWindow.transform.position = transform.position + _offset;
-
-            _skipProgressWindow.Open();
-
-            _initialized = true;
+                
+            if (_skipProgressWindow != null)
+                _skipProgressWindow.Close();
         }
     }
 }

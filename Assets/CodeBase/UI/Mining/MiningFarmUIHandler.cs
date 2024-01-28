@@ -48,7 +48,6 @@ namespace CodeBase.UI.MiningFarm
         private void OnPlayerApproached(Collider obj)
         {
             _buttonScaleAnim.ToScale();
-            print("scale");
         }
 
         private void OnButtonClicked()

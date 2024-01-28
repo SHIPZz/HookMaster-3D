@@ -132,12 +132,13 @@ namespace CodeBase.Extensions
             return upgradeEmployeeData;
         }
 
-        public static void Reset(this UpgradeEmployeeData upgradeEmployeeData)
+        public static UpgradeEmployeeData Reset(this UpgradeEmployeeData upgradeEmployeeData)
         {
             upgradeEmployeeData.SetCompleted(false)
                 .SetUpgradeStarted(false)
                 .SetLastUpgradeTime(TimeConstantValue.SecondsInHour)
                 .SetLastUpgradeWindowOpenedTime(0);
+            return upgradeEmployeeData;
         }
 
         public static UpgradeEmployeeData SetLastUpgradeTime(this UpgradeEmployeeData upgradeEmployeeData,

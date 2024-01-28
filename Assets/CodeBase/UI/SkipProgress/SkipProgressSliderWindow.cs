@@ -27,12 +27,13 @@ namespace CodeBase.UI.SkipProgress
         [SerializeField] private TMP_Text _upgradingText;
         [SerializeField] private ClaimUpgradeButton _claimUpgradeButton;
 
-        public float TotalTime { get; private set; } = 3600f;
+        public float TotalTime { get; private set; } = -3600f;
 
         private UpgradeEmployeeData _upgradeEmployeeData;
         private EmployeeDataService _employeeDataService;
         private IWorldDataService _worldDataService;
         private Coroutine _timeCoroutine;
+        private bool _isCompleted;
 
         [Inject]
         private void Construct(IWorldDataService worldDataService, EmployeeDataService employeeDataService)
@@ -41,11 +42,21 @@ namespace CodeBase.UI.SkipProgress
             _worldDataService = worldDataService;
         }
 
-        public override void Open() =>
+        public override void Open()
+        {
             _canvasAnimator.FadeInCanvas();
+            _claimUpgradeButton.onClick.AddListener(Close);
+        }
 
         private void OnDestroy()
         {
+            if (_isCompleted)
+            {
+                _upgradeEmployeeData.Reset();
+                _employeeDataService.SaveUpgradeEmployeeData(_upgradeEmployeeData);
+                return;
+            }
+
             SaveLastUpgradeTime();
         }
 
@@ -53,6 +64,17 @@ namespace CodeBase.UI.SkipProgress
         public void Set(float time)
         {
             TotalTime = time;
+            SaveLastUpgradeTime();
+        }
+
+        public override void Show()
+        {
+            _canvasAnimator.FadeInCanvas();
+        }
+
+        public override void Hide()
+        {
+            _canvasAnimator.FadeOutCanvas();
             SaveLastUpgradeTime();
         }
 
@@ -64,7 +86,7 @@ namespace CodeBase.UI.SkipProgress
             CheckLastUpgradeWindowOpenedTime();
 
             SetEmployeeDataToButton(upgradeEmployeeData);
-            
+
             CalculateLastUpgradeTime();
 
             if (TimeFullPassed())
@@ -72,12 +94,11 @@ namespace CodeBase.UI.SkipProgress
                 _skipProgressButton.gameObject.SetActive(false);
 
                 SetMaxValueWithAnim();
-                
+
                 return;
             }
 
             TotalTime = _upgradeEmployeeData.LastUpgradeTime;
-
             InitializeSlider();
 
             LaunchCoroutine();
@@ -99,11 +120,12 @@ namespace CodeBase.UI.SkipProgress
         private void CheckLastUpgradeWindowOpenedTime()
         {
             WorldData worldData = _worldDataService.WorldData;
-            
+
             var lastUpgradeWindowOpenedTime = worldData.UpgradeEmployeeDatas[_upgradeEmployeeData.EmployeeData.Id]
                 .LastUpgradeWindowOpenedTime;
 
-            TimeSpan timeDifference = worldData.WorldTimeData.CurrentTime.ToDateTime() - lastUpgradeWindowOpenedTime.ToDateTime();
+            TimeSpan timeDifference = worldData.WorldTimeData.CurrentTime.ToDateTime() -
+                                      lastUpgradeWindowOpenedTime.ToDateTime();
 
             if (timeDifference.TotalDays >= TimeConstantValue.DaysInYear)
                 worldData.UpgradeEmployeeDatas[_upgradeEmployeeData.EmployeeData.Id].LastUpgradeWindowOpenedTime =
@@ -112,18 +134,20 @@ namespace CodeBase.UI.SkipProgress
 
         private void UpdateRemainingText()
         {
-            int minutes =
-                Mathf.FloorToInt(Mathf.Abs(TotalTime) % TimeConstantValue.SecondsInHour /
-                                 TimeConstantValue.SecondsInMinute);
+            int minutes = Mathf.FloorToInt(Mathf.Abs(TotalTime) % TimeConstantValue.SecondsInHour /
+                                           TimeConstantValue.SecondsInMinute);
             int seconds = Mathf.FloorToInt(Mathf.Abs(TotalTime) % TimeConstantValue.SecondsInMinute);
             _remainingText.text = $"{minutes}m {seconds}s";
         }
 
         private void CalculateLastUpgradeTime()
         {
+            print(_upgradeEmployeeData.LastUpgradeTime + " do");
             _upgradeEmployeeData.LastUpgradeTime =
                 Mathf.Clamp(_upgradeEmployeeData.LastUpgradeTime - GetPassedSeconds(), 0,
                     TimeConstantValue.SecondsInHour);
+
+            print(_upgradeEmployeeData.LastUpgradeTime + " posle");
         }
 
         private bool TimeFullPassed() =>
@@ -133,23 +157,17 @@ namespace CodeBase.UI.SkipProgress
         {
             WorldData worldData = _worldDataService.WorldData;
             var currentTime = worldData.WorldTimeData.CurrentTime;
+
+            if (worldData.UpgradeEmployeeDatas[_upgradeEmployeeData.EmployeeData.Id].LastUpgradeWindowOpenedTime == 0)
+                worldData.UpgradeEmployeeDatas[_upgradeEmployeeData.EmployeeData.Id].LastUpgradeWindowOpenedTime =
+                    currentTime;
+
             var lastUpgradeWindowOpenedTime = worldData.UpgradeEmployeeDatas[_upgradeEmployeeData.EmployeeData.Id]
                 .LastUpgradeWindowOpenedTime;
 
             TimeSpan timeDifference = currentTime.ToDateTime() - lastUpgradeWindowOpenedTime.ToDateTime();
 
             return (float)timeDifference.TotalSeconds;
-        }
-
-        public override void Hide()
-        {
-            _canvasAnimator.FadeOutCanvas();
-            SaveLastUpgradeTime();
-        }
-
-        public override void Show()
-        {
-            _canvasAnimator.FadeInCanvas();
         }
 
         private void LaunchCoroutine()
@@ -164,15 +182,18 @@ namespace CodeBase.UI.SkipProgress
         {
             _upgradeEmployeeData.LastUpgradeTime = Mathf.Abs(TotalTime);
             WorldData worldData = _worldDataService.WorldData;
-            worldData.UpgradeEmployeeDatas[_upgradeEmployeeData.EmployeeData.Id].LastUpgradeWindowOpenedTime = worldData.WorldTimeData.CurrentTime;
+            worldData.UpgradeEmployeeDatas[_upgradeEmployeeData.EmployeeData.Id].LastUpgradeWindowOpenedTime =
+                worldData.WorldTimeData.CurrentTime;
             _employeeDataService.SaveUpgradeEmployeeData(_upgradeEmployeeData);
         }
 
         private void SetCompleted()
         {
-            _upgradeEmployeeData.SetCompleted(true);
+            _upgradeEmployeeData.Reset();
             _employeeDataService.SaveUpgradeEmployeeData(_upgradeEmployeeData);
+            print("set completed");
             SetCompletedUI();
+            _isCompleted = true;
         }
 
         private IEnumerator StartDecreaseTimeCoroutine()
@@ -180,11 +201,11 @@ namespace CodeBase.UI.SkipProgress
             _employeeDataService.TryAddUpgradeEmployeeData(_upgradeEmployeeData);
             _upgradeEmployeeData.SetUpgradeStarted(true);
 
+            print(_slider.value + "slider value");
+
             while (Math.Abs(_slider.value - _slider.maxValue) > 0.1f)
             {
                 TotalTime -= Time.deltaTime;
-
-
                 _slider.value = Mathf.Lerp(_slider.value, -TotalTime, _sliderFillSpeed * Time.deltaTime);
 
                 UpdateRemainingText();
@@ -202,13 +223,14 @@ namespace CodeBase.UI.SkipProgress
             _upgradingText.text = "I become better!";
             _skipProgressButton.gameObject.SetActive(false);
             _claimUpgradeButton.gameObject.SetActive(true);
-            _claimUpgradeButton.SetEmployeeData(_upgradeEmployeeData.EmployeeData);
+            _claimUpgradeButton.SetEmployeeData(_upgradeEmployeeData.EmployeeData, this);
+            print(_upgradeEmployeeData.LastUpgradeTime + "saved lastUpgradeTime");
             TotalTime = _upgradeEmployeeData.LastUpgradeTime;
             _slider.value = _slider.maxValue;
         }
 
         private void SetEmployeeDataToButton(UpgradeEmployeeData upgradeEmployeeData) =>
-            _skipProgressButton.SetEmployeeData(upgradeEmployeeData.EmployeeData);
+            _skipProgressButton.SetEmployeeData(upgradeEmployeeData.EmployeeData, this);
 
         private void InitializeSlider()
         {

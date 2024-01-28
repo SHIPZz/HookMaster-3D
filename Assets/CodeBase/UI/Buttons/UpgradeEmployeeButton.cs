@@ -4,6 +4,7 @@ using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.Employees;
 using CodeBase.UI.SkipProgress;
 using CodeBase.UI.Upgrade;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using Zenject;

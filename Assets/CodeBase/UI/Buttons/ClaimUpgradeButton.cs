@@ -8,16 +8,18 @@ namespace CodeBase.UI.Buttons
     public class ClaimUpgradeButton : ButtonOpenerBase
     {
         private EmployeeData _employeeData;
+        private SkipProgressSliderWindow _skipProgressSliderWindow;
 
-        public void SetEmployeeData(EmployeeData employeeData)
+        public void SetEmployeeData(EmployeeData employeeData, SkipProgressSliderWindow skipProgressSliderWindow)
         {
+            _skipProgressSliderWindow = skipProgressSliderWindow;
             _employeeData = employeeData;
         }
         
         protected override void Open()
         {
           var targetWindow =  WindowService.Get<UpgradeEmployeeCompletedWindow>();
-          WindowService.Close<SkipProgressSliderWindow>();
+          _skipProgressSliderWindow.Hide();
           targetWindow.Init(_employeeData);
           targetWindow.Open();
         }
