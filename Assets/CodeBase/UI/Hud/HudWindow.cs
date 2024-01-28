@@ -22,6 +22,7 @@ namespace CodeBase.UI.Hud
         public TutorialFadeImage TutorialFadeImage;
         public Transform TutorialHandParent;
         public BuyClientManagerButton BuyClientManagerButton;
+        public Transform MoneyPosition;
 
         [SerializeField] private TMP_Text _timeText;
         [SerializeField] private CanvasAnimator _canvasAnimator;

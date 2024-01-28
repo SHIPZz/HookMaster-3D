@@ -6,6 +6,7 @@
         MiningFarm,
         SuitCase,
         ClientServiceDoor,
-        MoneyBag
+        MoneyBag,
+        Money
     }
 }

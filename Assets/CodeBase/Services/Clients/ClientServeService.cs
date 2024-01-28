@@ -18,6 +18,7 @@ namespace CodeBase.Services.Clients
         private Client _currentClient;
         private CancellationTokenSource _serveTokenSource = new CancellationTokenSource();
         private readonly WalletService _walletService;
+        private float _serveDelay;
 
         public event Action<float> Started;
         public event Action<int> Finished;
@@ -26,6 +27,11 @@ namespace CodeBase.Services.Clients
         {
             _walletService = walletService;
             _clientObjectService = clientObjectService;
+        }
+
+        public void SetServeDelay(float delay)
+        {
+            _serveDelay = delay;
         }
 
         public async void SetPlayerApproached(bool isApproached)
@@ -57,14 +63,14 @@ namespace CodeBase.Services.Clients
             }
         }
 
-        public void Stop()
-        {
-            _serveTokenSource?.Cancel();
-        }
-
         public void SetTargetServePoint(Transform servePoint)
         {
             _clientObjectService.SetServePoint(servePoint);
+        }
+
+        public void Stop()
+        {
+            _serveTokenSource?.Cancel();
         }
 
         private async UniTask TryStartServing()
@@ -75,8 +81,10 @@ namespace CodeBase.Services.Clients
             if (!_isClientApproached || !_isPlayerAroundTable)
                 return;
 
+            
             _serveTokenSource?.Dispose();
             _serveTokenSource = new CancellationTokenSource();
+            await UniTask.WaitForSeconds(_serveDelay);
             Started?.Invoke(ServeTime);
             await UniTask.WaitForSeconds(ServeTime).AttachExternalCancellation(_serveTokenSource.Token);
             OnServeFinished();
@@ -85,7 +93,7 @@ namespace CodeBase.Services.Clients
         private void OnServeFinished()
         {
             _isClientApproached = false;
-            _walletService.Set(ItemTypeId.Money, ServeReward);
+            // _walletService.Set(ItemTypeId.Money, ServeReward);
             Finished?.Invoke(ServeReward);
             _clientObjectService.SetServed(_currentClient.Id);
             _clientObjectService.ActivateNextClient();

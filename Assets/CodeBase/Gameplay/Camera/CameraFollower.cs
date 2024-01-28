@@ -19,10 +19,11 @@ namespace CodeBase.Gameplay.Camera
         
         private Transform _target;
         private bool _isBlocked;
-        private Transform _lastPosition;
         private PlayerProvider _playerProvider;
         private Vector3 _lastRotation;
         private Vector3 _lastOffset;
+        private Vector3 _lastPos;
+        private Vector3 _currentVelocity;
 
         [Inject]
         private void Construct(PlayerProvider playerProvider)
@@ -38,7 +39,7 @@ namespace CodeBase.Gameplay.Camera
             if (_playerProvider.Player == null)
                 return;
 
-            transform.position = Vector3.Lerp(transform.position, _playerProvider.Player.transform.position + _offset,
+            transform.position = Vector3.Slerp(transform.position, _playerProvider.Player.transform.position + _offset,
                 _speed * Time.deltaTime);
         }
 
@@ -65,7 +66,9 @@ namespace CodeBase.Gameplay.Camera
         public void MoveTo(Transform target, float movementBackDelay, Action onComplete = null)
         {
             _target = target;
+            _isBlocked = true;
             Vector3 targetPosition = target.position - target.forward * _stopOffset;
+            _lastPos = transform.position;
 
             _lastRotation = transform.eulerAngles;
             transform.DODynamicLookAt(_target.position, _movementDuration);
@@ -81,7 +84,9 @@ namespace CodeBase.Gameplay.Camera
 
         public void MoveTo(Transform target, Action onComplete = null)
         {
+            _isBlocked = true;
             _target = target;
+            _lastPos = transform.position;
             Vector3 targetPosition = target.position - target.forward * _stopOffset;
 
             _lastRotation = transform.eulerAngles;
@@ -96,7 +101,7 @@ namespace CodeBase.Gameplay.Camera
         {
             transform.DORotate(_lastRotation, _movementDuration);
             transform
-                .DOMove(_lastPosition.position + _offset * _speed, _movementDuration)
+                .DOMove(_lastPos, _movementDuration)
                 .OnComplete(() =>
                 {
                     onComplete?.Invoke();
@@ -106,8 +111,6 @@ namespace CodeBase.Gameplay.Camera
 
         public void SetTarget(Transform target)
         {
-            _lastPosition = _target == null ? target : _target;
-
             _target = target;
         }
     }

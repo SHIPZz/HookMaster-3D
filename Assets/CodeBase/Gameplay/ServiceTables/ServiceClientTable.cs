@@ -1,6 +1,7 @@
 ﻿using System;
 using CodeBase.Constant;
 using CodeBase.Gameplay.Clients;
+using CodeBase.Gameplay.Money;
 using CodeBase.Services.Clients;
 using CodeBase.Services.TriggerObserve;
 using CodeBase.Services.UI;
@@ -22,6 +23,8 @@ namespace CodeBase.Gameplay.ServiceTables
         [SerializeField] private Transform _servePoint;
         [SerializeField] private TimeSliderView _timeSliderView;
         [SerializeField] private ManagerChair _manager;
+        [SerializeField] private MoneyCreator _moneyCreator;
+        [SerializeField] private float _managerServeDelay = 2.5f;
 
         private ClientServeService _clientServeService;
         private FloatingTextService _floatingTextService;
@@ -50,6 +53,7 @@ namespace CodeBase.Gameplay.ServiceTables
                 _managerPurchased = true;
                 _manager.Enable();
                 _clientServeService.SetPlayerApproached(true);
+                _clientServeService.SetServeDelay(_managerServeDelay);
             }
 
             SubscribeObservers();
@@ -70,6 +74,7 @@ namespace CodeBase.Gameplay.ServiceTables
             _manager.Enable();
             _clientServeService.SetPlayerApproached(true);
             _managerPurchased = true;
+            _clientServeService.SetServeDelay(_managerServeDelay);
             _worldDataService.WorldData.PlayerData.PurchasedManagers[Id] = true;
             PlayerExited?.Invoke();
         }
@@ -96,8 +101,9 @@ namespace CodeBase.Gameplay.ServiceTables
         private void OnServingFinished(int reward)
         {
             _timeSliderView.Disable();
-            _floatingTextService.ShowFloatingText(FloatingTextType.MoneyProfit, transform, transform.position,
-                $"{reward}$", 2f, 0.5f);
+            _moneyCreator.Create();
+            // _floatingTextService.ShowFloatingText(FloatingTextType.MoneyProfit, transform, transform.position,
+            //     $"{reward}$", 2f, 0.5f);
         }
 
         private void OnCharacterEntered(Collider character)

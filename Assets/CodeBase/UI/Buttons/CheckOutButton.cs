@@ -7,8 +7,7 @@ using Zenject;
 
 namespace CodeBase.UI.Buttons
 {
-    [RequireComponent(typeof(Button))]
-    public class CheckOutButton : MonoBehaviour
+    public class CheckOutButton : Button
     {
         [SerializeField] protected int Value;
         [SerializeField] protected ItemTypeId ItemTypeId;
@@ -24,15 +23,14 @@ namespace CodeBase.UI.Buttons
             WalletService = walletService;
         }
 
-        protected virtual void Awake()
+        protected override void Awake()
         {
-            _button = GetComponent<Button>();
-            _button.onClick.AddListener(OnClicked);
+            onClick.AddListener(OnClicked);
         }
 
-        private void OnDisable()
+        protected override void OnDisable()
         {
-            _button.onClick.RemoveListener(OnClicked);
+            onClick.RemoveListener(OnClicked);
         }
 
         protected virtual void OnClicked()

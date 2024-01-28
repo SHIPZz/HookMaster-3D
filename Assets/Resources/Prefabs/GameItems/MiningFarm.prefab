@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2465432571303442810}
   - component: {fileID: 3760430774644252538}
   - component: {fileID: 4103882191219975825}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 1667668535604997242}
   - component: {fileID: 4874160899056029434}
   - component: {fileID: 6106516801899017596}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: SM_Prop_Computer_Tower_Modern_Glass_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 8080107064352606399}
   - component: {fileID: 1767426862443735999}
   - component: {fileID: 3840746017364082551}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: SM_Prop_Computer_Tower_Modern_01 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 8487428311106331140}
   - component: {fileID: 6113463867025305212}
   - component: {fileID: 2555118825324841824}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: SM_Prop_Computer_Tower_Modern_01 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -420,7 +420,7 @@ GameObject:
   - component: {fileID: 7785596351548705375}
   - component: {fileID: 7982331283622320703}
   - component: {fileID: 3208464617167620076}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: SM_Prop_Computer_Tower_Modern_Glass_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -503,7 +503,7 @@ GameObject:
   - component: {fileID: 807676787779972525}
   - component: {fileID: 1669949685476702181}
   - component: {fileID: 254146844964300205}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: SM_Prop_Computer_Tower_Modern_Glass_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -586,7 +586,7 @@ GameObject:
   - component: {fileID: 8537659847081178529}
   - component: {fileID: 5909726639957046131}
   - component: {fileID: 5691726580230941160}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: SM_Prop_Computer_Tower_Modern_01 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -670,7 +670,7 @@ GameObject:
   - component: {fileID: 8519518902999355361}
   - component: {fileID: 5105157255899082996}
   - component: {fileID: 8431613384041332085}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: SM_Prop_Computer_Tower_Modern_Glass_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -753,7 +753,7 @@ GameObject:
   - component: {fileID: 9107220042729279244}
   - component: {fileID: 1925837568025513642}
   - component: {fileID: 7856432494653853497}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: SM_Prop_Computer_Tower_Modern_01 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -907,7 +907,7 @@ GameObject:
   - component: {fileID: 3032760907743493719}
   - component: {fileID: 2158976482634206017}
   - component: {fileID: 856518831490793275}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: SM_Prop_Computer_Tower_Modern_Glass_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -990,7 +990,7 @@ GameObject:
   - component: {fileID: 760904092222902034}
   - component: {fileID: 5452569138773032423}
   - component: {fileID: 6133033865327760032}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: SM_Prop_Computer_Tower_Modern_Glass_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1073,7 +1073,7 @@ GameObject:
   - component: {fileID: 8485136628996749105}
   - component: {fileID: 9154579815058591227}
   - component: {fileID: 5129528606510817532}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: SM_Prop_Computer_Tower_Modern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1161,7 +1161,7 @@ GameObject:
   - component: {fileID: 4657077088856644714}
   - component: {fileID: 3182836208390336384}
   - component: {fileID: 4694750658773992667}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: MiningFarm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1299,10 +1299,12 @@ MonoBehaviour:
   _unScale: 0
   _scaleDuration: 0.2
   _unScaleDuration: 0.1
-  _rectTransform: {fileID: 6887556295810692635}
+  _transform: {fileID: 6725996394862526295}
   _scaleX: 1
   _scaleY: 0
   _scaleZ: 0
+  _unscaleOnStart: 0
+  _scaleDelay: 1
 --- !u!1 &7767125583687668352
 GameObject:
   m_ObjectHideFlags: 0
@@ -1313,7 +1315,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6725996394862526295}
   - component: {fileID: 7879413215071247083}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: ButtonSoundClick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1446,7 +1448,7 @@ GameObject:
   - component: {fileID: 8848481356000566082}
   - component: {fileID: 1804459791568725008}
   - component: {fileID: 3300187803435716386}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: SM_Prop_Computer_Tower_Modern_01 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1533,7 +1535,7 @@ GameObject:
   - component: {fileID: 8703382212632589169}
   - component: {fileID: 5045974474448273134}
   - component: {fileID: 5802821857916521859}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: OpenMiningWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
