@@ -45,7 +45,7 @@ namespace CodeBase.Gameplay.Wallet
         [Button]
         private void SetMoney(int money)
         {
-            _moneySound.Play();
+            // _moneySound.Play();
             _moneyText.SetText($"{money}$");
             _moneyText.DoFadeOutColor(() => _moneyText.DoFadeInColor());
             _moneyText.DoScale(() => _moneyText.ResetScale());

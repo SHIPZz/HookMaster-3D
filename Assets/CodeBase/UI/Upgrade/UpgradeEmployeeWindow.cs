@@ -21,12 +21,10 @@ namespace CodeBase.UI.Upgrade
 
         private Gameplay.Employees.Employee _employee;
         private EmployeeDataService _employeeDataService;
-        private WalletService _walletService;
 
         [Inject]
-        private void Construct(EmployeeDataService employeeDataService, WalletService walletService)
+        private void Construct(EmployeeDataService employeeDataService)
         {
-            _walletService = walletService;
             _employeeDataService = employeeDataService;
         }
 
@@ -54,9 +52,6 @@ namespace CodeBase.UI.Upgrade
 
         private void InitUpgradeButton(UpgradeEmployeeData targetUpgradeEmployee)
         {
-            if (!_walletService.HasEnough(ItemTypeId.Money, targetUpgradeEmployee.UpgradeCost))
-                _upgradeEmployeeButton.interactable = false;
-            
             _upgradeEmployeeButton.SetEmployeeData(_employee.ToEmployeeData());
             _upgradeEmployeeButton.SetUpgradeCost(targetUpgradeEmployee.UpgradeCost);
 

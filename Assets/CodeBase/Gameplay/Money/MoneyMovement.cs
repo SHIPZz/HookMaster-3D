@@ -37,10 +37,10 @@ namespace CodeBase.Gameplay.Money
             if (!_isMoved)
                 return;
 
-            transform.position = Vector3.Lerp(transform.position, _target + Vector3.up,
-                9 * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, _target + Vector3.up * 3,
+                13 * Time.deltaTime);
 
-            if (!(Vector3.Distance(transform.position, _target) <= 1.5f))
+            if (!(Vector3.Distance(transform.position, _target) <= 3.3f))
                 return;
             
             transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, 3 * Time.deltaTime);

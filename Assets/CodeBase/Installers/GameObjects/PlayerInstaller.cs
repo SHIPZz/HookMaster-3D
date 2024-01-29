@@ -13,10 +13,15 @@ namespace CodeBase.Installers.GameObjects
         private PlayerProvider _playerProvider;
         private PlayerAnimationService _playerAnimationService;
         private PlayerIKService _playerIKService;
+        private PlayerInputService _playerInputService;
 
         [Inject]
-        private void Construct(PlayerProvider playerProvider, PlayerAnimationService playerAnimationService, PlayerIKService playerIKService)
+        private void Construct(PlayerProvider playerProvider,
+            PlayerAnimationService playerAnimationService,
+            PlayerIKService playerIKService, 
+            PlayerInputService playerInputService)
         {
+            _playerInputService = playerInputService;
             _playerIKService = playerIKService;
             _playerAnimationService = playerAnimationService;
             _playerProvider = playerProvider;
@@ -37,10 +42,10 @@ namespace CodeBase.Installers.GameObjects
 
         public void Initialize()
         {
-            _playerProvider.PlayerInput = Container.Resolve<PlayerInput>();
             _playerProvider.PlayerMovement = Container.Resolve<PlayerMovement>();
             _playerIKService.Set(Container.Resolve<FullBodyBipedIK>());
             _playerAnimationService.SetPlayerAnimator(Container.Resolve<PlayerAnimator>());
+            _playerInputService.PlayerInput = Container.Resolve<PlayerInput>();
         }
     }
 }

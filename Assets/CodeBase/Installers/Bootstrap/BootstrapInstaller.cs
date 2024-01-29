@@ -15,7 +15,7 @@ namespace CodeBase.Installers.Bootstrap
     public class BootstrapInstaller : MonoInstaller, IInitializable
     {
         [SerializeField] private LoadingCurtain _loadingCurtain;
-        
+
         public override void InstallBindings()
         {
             BindInputService();
@@ -44,7 +44,7 @@ namespace CodeBase.Installers.Bootstrap
             gameStateMachine.ChangeState<BootstrapState>();
         }
 
-        private void BindCheats() => 
+        private void BindCheats() =>
             Container.BindInterfacesAndSelfTo<Cheat>().AsSingle();
 
         private void BindWorldTimeService() =>

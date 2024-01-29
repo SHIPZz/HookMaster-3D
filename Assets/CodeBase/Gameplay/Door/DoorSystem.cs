@@ -1,7 +1,9 @@
 ﻿using System;
+using CodeBase.Gameplay.PlayerSystem;
 using CodeBase.Gameplay.SoundPlayer;
 using CodeBase.Services.GOPush;
 using CodeBase.Services.TriggerObserve;
+using CodeBase.Services.UI;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -26,18 +28,24 @@ namespace CodeBase.Gameplay.Door
 
         private bool _isMoving;
         private GameObjectPushService _gameObjectPushService;
+        private PlayerInputService _playerInputService;
 
         [Inject]
-        private void Construct(GameObjectPushService gameObjectPushService)
+        private void Construct(GameObjectPushService gameObjectPushService, PlayerInputService playerInputService)
         {
+            _playerInputService = playerInputService;
             _gameObjectPushService = gameObjectPushService;
         }
         
-        private void OnEnable() =>
+        private void OnEnable()
+        {
             _triggerObserver.CollisionEntered += OnPlayerEntered;
+        }
 
-        private void OnDisable() =>
+        private void OnDisable()
+        {
             _triggerObserver.CollisionEntered -= OnPlayerEntered;
+        }
 
         private async void OnPlayerEntered(Collision player)
         {
@@ -57,7 +65,9 @@ namespace CodeBase.Gameplay.Door
 
             if (dot <= 0)
             {
+                _playerInputService.SetActive(false);
                 await _gameObjectPushService.PushRigidBodyAwayAsync(playerRigidBody, targetPosition, _openDistance, _speed);
+                _playerInputService.SetActive(true);
             }
 
             _isMoving = true;

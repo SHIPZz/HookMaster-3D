@@ -42,6 +42,14 @@ namespace CodeBase.Services.UI
             targetFloatingTextView.Init(position, _enumTextPool, this);
         }
         
+        public void ShowFloatingText(FloatingTextType floatingTextType, Transform parent, Vector3 position, bool cameraFacing)
+        {
+            FloatingTextView targetFloatingTextView = _enumTextPool.Pop(parent, floatingTextType);
+            _targetText = targetFloatingTextView.Text;
+            targetFloatingTextView.Init(position, _enumTextPool, this);
+            targetFloatingTextView.SetRotationToCamera(cameraFacing);
+        }
+        
         public void ShowFloatingText(FloatingTextType floatingTextType, Transform parent, 
             Vector3 position, float fontSize, float width, float height,float anchoredPos,float minRandomAnchoredPosition)
         {

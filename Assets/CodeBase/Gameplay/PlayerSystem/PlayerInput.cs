@@ -10,7 +10,8 @@ namespace CodeBase.Gameplay.PlayerSystem
     {
         public event Action<Vector3> MovementPressed;
 
-        private CameraProvider _cameraProvider;
+        private readonly CameraProvider _cameraProvider;
+        private bool _isBlocked = false;
 
         public PlayerInput(CameraProvider cameraProvider)
         {
@@ -19,7 +20,7 @@ namespace CodeBase.Gameplay.PlayerSystem
 
         public void Tick()
         {
-            if(_cameraProvider.Camera == null)
+            if(_cameraProvider.Camera == null || _isBlocked)
                 return;
             
             var horizontalInput = SimpleInput.GetAxisRaw("Horizontal");
@@ -37,6 +38,12 @@ namespace CodeBase.Gameplay.PlayerSystem
             Vector3 moveDirection = (forwardRelative + rightRelative).normalized;
             
             MovementPressed?.Invoke(new Vector3(moveDirection.x, 0, moveDirection.z));
+        }
+
+        public void SetBlocked(bool isBlocked)
+        {
+            _isBlocked = isBlocked;
+            MovementPressed?.Invoke(Vector3.zero);
         }
     }
 }

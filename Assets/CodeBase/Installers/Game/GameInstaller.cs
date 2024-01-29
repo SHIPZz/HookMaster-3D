@@ -91,7 +91,11 @@ namespace CodeBase.Installers.Game
             BindTutorials();
             BindNumberTextAnimService();
             BindMaterialFadeAnimService();
+            BindPlayerInputService();
         }
+
+        private void BindPlayerInputService() => 
+            Container.Bind<PlayerInputService>().AsSingle();
 
         private void BindMaterialFadeAnimService()
         {

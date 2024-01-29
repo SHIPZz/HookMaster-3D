@@ -53,6 +53,11 @@ namespace CodeBase.Services.UI
                 _windowService.Open<HudWindow>();
         }
 
+        public void SetActiveJoystickUI(bool setActive)
+        {
+            _joystickCanvas.enabled = setActive;
+        }
+
         public void SetActiveUI(bool isEnabled)
         {
             _joystickCanvas.enabled = isEnabled;

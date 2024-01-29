@@ -34,11 +34,6 @@ namespace CodeBase.Gameplay.Tutorial
             WorldDataService.WorldData.TutorialData.CompletedTutorials[ClassName] = isCompleted;
         }
 
-        protected bool HasInData()
-        {
-            return WorldDataService.WorldData.TutorialData.CompletedTutorials.ContainsKey(ClassName);
-        }
-
         protected virtual bool IsCompleted()
         {
             return WorldDataService.WorldData.TutorialData.CompletedTutorials[ClassName];
