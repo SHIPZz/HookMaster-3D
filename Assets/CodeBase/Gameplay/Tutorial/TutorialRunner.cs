@@ -18,10 +18,12 @@ public class TutorialRunner : IDisposable
         var startHireEmployeeStep = _instantiator.Instantiate<StartHireEmployeeStep>();
         var hireEmployeeStep = _instantiator.Instantiate<HireEmployeeStep>();
         var approachToEmployeeStep = _instantiator.Instantiate<ApproachToEmployeeStep>();
+        var upgradeEmployeeStep = _instantiator.Instantiate<UpgradeEmployeeStep>();
 
         _tutorialSteps[typeof(StartHireEmployeeStep)] = startHireEmployeeStep;
         _tutorialSteps[typeof(HireEmployeeStep)] = hireEmployeeStep;
         _tutorialSteps[typeof(ApproachToEmployeeStep)] = approachToEmployeeStep;
+        _tutorialSteps[typeof(UpgradeEmployeeStep)] = upgradeEmployeeStep;
 
         _tutorialSteps.Values.ToList().ForEach(x =>
         {

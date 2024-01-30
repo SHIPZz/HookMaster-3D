@@ -2,6 +2,7 @@
 using CodeBase.Constant;
 using CodeBase.Extensions;
 using CodeBase.Gameplay.Employees;
+using CodeBase.Services.Camera;
 using CodeBase.Services.Employees;
 using CodeBase.Services.Factories.UI;
 using CodeBase.Services.Window;
@@ -18,26 +19,30 @@ namespace CodeBase.Gameplay.Tutorial
         private readonly EmployeeHirerService _employeeHirerService;
         private readonly Vector3 _spawnOffset = new(0, 2.5f, 0);
         private readonly EmployeeService _employeeService;
+        private readonly CameraService _cameraService;
         private SpriteRenderer _pointer;
         private bool _pointerCreated;
 
-        public ApproachToEmployeeStep(UIFactory uiFactory, WindowService windowService,
-            IWorldDataService worldDataService, EmployeeHirerService employeeHirerService,
-            EmployeeService employeeService)
-            : base(uiFactory, windowService, worldDataService)
+        public ApproachToEmployeeStep(UIFactory uiFactory,
+            WindowService windowService,
+            IWorldDataService worldDataService,
+            EmployeeHirerService employeeHirerService,
+            EmployeeService employeeService,
+            CameraService cameraService) : base(uiFactory, windowService, worldDataService)
         {
+            _cameraService = cameraService;
             _employeeService = employeeService;
             _employeeHirerService = employeeHirerService;
         }
 
         public override void OnStart()
         {
-            if(IsCompleted())
+            if (IsCompleted())
                 return;
-            
+
             if (WorldDataService.WorldData.TutorialData.LastPointerEmployeePosition != null)
                 TryCreatePointer3D();
-            
+
             _employeeHirerService.EmployeeHired += OnHired;
             WindowService.Opened += OnWindowOpened;
         }
@@ -73,9 +78,9 @@ namespace CodeBase.Gameplay.Tutorial
 
         private async void OnHired(Employee employee)
         {
-            if(_pointerCreated)
+            if (_pointerCreated)
                 return;
-            
+
             if (IsCompleted())
                 return;
 
@@ -86,6 +91,7 @@ namespace CodeBase.Gameplay.Tutorial
             _pointer.transform.position += _spawnOffset;
             WorldDataService.WorldData.TutorialData.LastPointerEmployeePosition = _pointer.transform.position.ToData();
             WorldDataService.WorldData.TutorialData.EmployeeId = employee.Id;
+            _cameraService.MoveToTarget(employee.transform, 1f);
             _pointer.transform.up = employee.transform.up;
             _pointerCreated = true;
         }
@@ -95,10 +101,10 @@ namespace CodeBase.Gameplay.Tutorial
             Vector3 position = WorldDataService.WorldData.TutorialData.LastPointerEmployeePosition.ToVector();
 
             Employee employee = _employeeService.Get(WorldDataService.WorldData.TutorialData.EmployeeId);
-            
-            if(employee.IsBurned)
+
+            if (employee.IsBurned)
                 return;
-            
+
             _pointer = UIFactory.CreateElement<SpriteRenderer>(AssetPath.Pointer3D, employee.transform);
             _pointer.transform.position = position;
         }

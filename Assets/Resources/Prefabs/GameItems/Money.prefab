@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 8593800920714742440}
   - component: {fileID: 5398560617418835298}
   - component: {fileID: -4597652791677087125}
-  m_Layer: 0
+  - component: {fileID: 8406379350777122639}
+  m_Layer: 16
   m_Name: Money
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,12 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c07a74f77e714d3f83ff9e121b67d8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <GameItemType>k__BackingField: 5
-  _upwardDuration: 1
-  _diagonalDuration: 0.5
-  _jumpPower: 2
-  _ease: 16
-  _transformScaleAnim: {fileID: 5398560617418835298}
+  _speed: 5
+  _duration: 0.5
 --- !u!114 &5398560617418835298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,3 +137,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <GameItemType>k__BackingField: 5
   <Value>k__BackingField: 5
+  _triggerObserver: {fileID: 8406379350777122639}
+--- !u!114 &8406379350777122639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4246954665578208982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b9c8bfb97314834a597c3e19c55d3e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -20,7 +20,7 @@ namespace CodeBase.Gameplay.Tutorial
 
         public abstract void OnStart();
         public abstract void OnFinished();
-
+        
         public void AddToData()
         {
             ClassName = GetType().FullName;

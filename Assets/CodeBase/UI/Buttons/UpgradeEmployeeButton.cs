@@ -23,6 +23,9 @@ namespace CodeBase.UI.Buttons
         private WalletService _walletService;
         private int _price;
         private FloatingTextService _floatingTextService;
+        private bool _isTutorial;
+
+        public bool Clicked { get; private set; }
 
         [Inject]
         private void Construct(EmployeeDataService employeeDataService, EmployeeService employeeService,
@@ -39,18 +42,43 @@ namespace CodeBase.UI.Buttons
 
         public void SetUpgradeCost(int price)
         {
+            if (_isTutorial)
+            {
+                _costText.text = $"{0}$";
+                return;
+            }
+
             _price = price;
             _costText.text = $"{price}$";
         }
 
+        public void SetTutorial()
+        {
+            _isTutorial = true;
+        }
+
         protected override void Open()
         {
-            if (!_walletService.HasEnough(ItemTypeId.Money, _price))
+            Clicked = true;
+
+            if (_isTutorial)
             {
-                _floatingTextService.ShowFloatingText(FloatingTextType.NotEnoughMoney, transform, transform.position, false);
+                Upgrade();
                 return;
             }
 
+            if (!_walletService.HasEnough(ItemTypeId.Money, _price))
+            {
+                _floatingTextService.ShowFloatingText(FloatingTextType.NotEnoughMoney, transform, transform.position,
+                    false);
+                return;
+            }
+
+            Upgrade();
+        }
+
+        private void Upgrade()
+        {
             UpgradeEmployeeData upgradeEmployeeData = _employeeDataService.GetUpgradeEmployeeData(_employeeData.Id);
             _employeeService.SetUpgrade(_employeeData.Id, true);
             _employeeDataService.RecountUpgradePriceEmployee(upgradeEmployeeData);
