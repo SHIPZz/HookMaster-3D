@@ -5,7 +5,6 @@ using CodeBase.Data;
 using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.Factories.UI;
 using CodeBase.Services.Providers.Asset;
-using CodeBase.Services.ShopItemData;
 using CodeBase.Services.ShopItemDataServices;
 using UnityEngine;
 using Zenject;

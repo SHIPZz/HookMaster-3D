@@ -1,6 +1,7 @@
 ﻿using System;
 using CodeBase.Data;
 using CodeBase.Gameplay.Wallet;
+using CodeBase.Services.Wallet;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;

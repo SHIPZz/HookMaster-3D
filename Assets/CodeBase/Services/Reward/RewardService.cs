@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Data;
 using CodeBase.Gameplay.Wallet;
+using CodeBase.Services.Wallet;
 using CodeBase.UI.Roulette;
 
 namespace CodeBase.Services.Reward

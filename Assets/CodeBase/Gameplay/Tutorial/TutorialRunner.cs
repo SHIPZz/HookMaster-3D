@@ -1,42 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CodeBase.Gameplay.Tutorial;
 using Zenject;
 
-public class TutorialRunner : IDisposable
+namespace CodeBase.Gameplay.Tutorial
 {
-    private readonly IInstantiator _instantiator;
-
-    private Dictionary<Type, TutorialStep> _tutorialSteps = new();
-
-    public TutorialRunner(IInstantiator instantiator) =>
-        _instantiator = instantiator;
-
-    public void Init()
+    public class TutorialRunner : IDisposable
     {
-        var startHireEmployeeStep = _instantiator.Instantiate<StartHireEmployeeStep>();
-        var hireEmployeeStep = _instantiator.Instantiate<HireEmployeeStep>();
-        var approachToEmployeeStep = _instantiator.Instantiate<ApproachToEmployeeStep>();
-        var upgradeEmployeeStep = _instantiator.Instantiate<UpgradeEmployeeStep>();
+        private readonly IInstantiator _instantiator;
 
-        _tutorialSteps[typeof(StartHireEmployeeStep)] = startHireEmployeeStep;
-        _tutorialSteps[typeof(HireEmployeeStep)] = hireEmployeeStep;
-        _tutorialSteps[typeof(ApproachToEmployeeStep)] = approachToEmployeeStep;
-        _tutorialSteps[typeof(UpgradeEmployeeStep)] = upgradeEmployeeStep;
+        private Dictionary<Type, TutorialStep> _tutorialSteps = new();
 
-        _tutorialSteps.Values.ToList().ForEach(x =>
+        public TutorialRunner(IInstantiator instantiator) =>
+            _instantiator = instantiator;
+
+        public void Init()
         {
-            x.AddToData();
-            x.OnStart();
-        });
-    }
+            var startHireEmployeeStep = _instantiator.Instantiate<StartHireEmployeeStep>();
+            var hireEmployeeStep = _instantiator.Instantiate<HireEmployeeStep>();
+            var approachToEmployeeStep = _instantiator.Instantiate<ApproachToEmployeeStep>();
+            var upgradeEmployeeStep = _instantiator.Instantiate<UpgradeEmployeeStep>();
 
-    public void Dispose()
-    {
-        foreach (IDisposable disposable in _tutorialSteps.Values.Select(tutorialStep => tutorialStep as IDisposable))
+            _tutorialSteps[typeof(StartHireEmployeeStep)] = startHireEmployeeStep;
+            _tutorialSteps[typeof(HireEmployeeStep)] = hireEmployeeStep;
+            _tutorialSteps[typeof(ApproachToEmployeeStep)] = approachToEmployeeStep;
+            _tutorialSteps[typeof(UpgradeEmployeeStep)] = upgradeEmployeeStep;
+
+            _tutorialSteps.Values.ToList().ForEach(x =>
+            {
+                x.AddToData();
+                x.OnStart();
+            });
+        }
+
+        public void Dispose()
         {
-            disposable?.Dispose();
+            foreach (IDisposable disposable in _tutorialSteps.Values.Select(tutorialStep => tutorialStep as IDisposable))
+            {
+                disposable?.Dispose();
+            }
         }
     }
 }

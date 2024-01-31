@@ -4,6 +4,7 @@ using CodeBase.Data;
 using CodeBase.Gameplay.BurnableObjectSystem;
 using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.UI;
+using CodeBase.Services.Wallet;
 using CodeBase.UI.FloatingText;
 using TMPro;
 using UnityEngine;

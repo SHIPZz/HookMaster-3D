@@ -4,6 +4,7 @@ using System.Linq;
 using CodeBase.Constant;
 using CodeBase.Enums;
 using CodeBase.Gameplay.GameItems;
+using CodeBase.Gameplay.GameItems.RandomItems;
 using CodeBase.SO.GameItem;
 using CodeBase.SO.GameItem.RandomItems;
 using UnityEngine;

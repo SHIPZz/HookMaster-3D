@@ -5,9 +5,8 @@ using CodeBase.Gameplay.GameItems;
 using CodeBase.Services.CircleRouletteServices;
 using CodeBase.Services.Mining;
 using CodeBase.Services.RandomItems;
-using UnityEngine;
 
-namespace CodeBase.Services.ShopItemData
+namespace CodeBase.Services.GameItemServices
 {
     public class GameItemService
     {

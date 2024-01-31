@@ -1,4 +1,4 @@
-﻿using CodeBase.Services.Camera;
+﻿using CodeBase.Services.CameraServices;
 using CodeBase.Services.Providers.Location;
 using UnityEngine.UI;
 using Zenject;

@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.Gameplay.GameItems;
+using CodeBase.Services.GameItemServices;
 using CodeBase.Services.Providers.Camera;
-using CodeBase.Services.ShopItemData;
 using CodeBase.Services.UI;
 using CodeBase.Services.Window;
-using CodeBase.UI;
 using CodeBase.UI.Hud;
-using CodeBase.UI.PopupWindows;
 using CodeBase.UI.Shop;
 using UnityEngine;
 
-namespace CodeBase.Services.Camera
+namespace CodeBase.Services.CameraServices
 {
     public class CameraService : IDisposable
     {

@@ -3,6 +3,7 @@ using System.Threading;
 using CodeBase.Data;
 using CodeBase.Gameplay.Clients;
 using CodeBase.Gameplay.Wallet;
+using CodeBase.Services.Wallet;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 

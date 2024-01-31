@@ -1,5 +1,5 @@
 ﻿using CodeBase.Gameplay.GameItems;
-using CodeBase.UI.MiningFarm;
+using CodeBase.UI.Mining;
 using UnityEngine;
 
 namespace CodeBase.UI.Buttons

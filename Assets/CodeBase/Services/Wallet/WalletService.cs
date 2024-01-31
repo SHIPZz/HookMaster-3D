@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using CodeBase.Data;
-using CodeBase.Enums;
 using CodeBase.Services.WorldData;
 using UnityEngine;
 
-namespace CodeBase.Gameplay.Wallet
+namespace CodeBase.Services.Wallet
 {
     public class WalletService
     {

@@ -1,13 +1,12 @@
 ﻿using CodeBase.Animations;
 using CodeBase.Gameplay.GameItems;
+using CodeBase.Services.GameItemServices;
 using CodeBase.Services.Mining;
-using CodeBase.Services.ShopItemData;
-using CodeBase.UI.Mining;
 using TMPro;
 using UnityEngine;
 using Zenject;
 
-namespace CodeBase.UI.MiningFarm
+namespace CodeBase.UI.Mining
 {
     public class MiningFarmWindow : WindowBase
     {

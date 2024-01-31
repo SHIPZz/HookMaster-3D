@@ -2,7 +2,7 @@
 using CodeBase.Constant;
 using CodeBase.Extensions;
 using CodeBase.Gameplay.Employees;
-using CodeBase.Services.Camera;
+using CodeBase.Services.CameraServices;
 using CodeBase.Services.Employees;
 using CodeBase.Services.Factories.UI;
 using CodeBase.Services.Window;
@@ -49,7 +49,7 @@ namespace CodeBase.Gameplay.Tutorial
 
         public override void OnFinished()
         {
-            _pointer.gameObject.SetActive(false);
+            _pointer?.gameObject.SetActive(false);
             SetCompleteToData(true);
             UnSubscribe();
         }

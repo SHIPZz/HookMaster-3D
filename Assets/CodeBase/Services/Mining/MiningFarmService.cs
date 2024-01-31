@@ -5,11 +5,12 @@ using CodeBase.Extensions;
 using CodeBase.Gameplay.GameItems;
 using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.DataService;
-using CodeBase.Services.Factories.ShopItems;
+using CodeBase.Services.Factories.GameItem;
 using CodeBase.Services.Providers.Location;
 using CodeBase.Services.Time;
+using CodeBase.Services.Wallet;
 using CodeBase.Services.WorldData;
-using CodeBase.SO.GameItem.MiningFarm;
+using CodeBase.SO.GameItem.Mining;
 using UnityEngine;
 
 namespace CodeBase.Services.Mining

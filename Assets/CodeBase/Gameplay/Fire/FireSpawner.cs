@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Constant;
-using CodeBase.Services.Factories.ShopItems;
+using CodeBase.Services.Factories.GameItem;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;

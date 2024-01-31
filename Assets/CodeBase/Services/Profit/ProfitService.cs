@@ -8,6 +8,7 @@ using CodeBase.Services.Coroutine;
 using CodeBase.Services.Employees;
 using CodeBase.Services.Time;
 using CodeBase.Services.UI;
+using CodeBase.Services.Wallet;
 using CodeBase.Services.WorldData;
 using Cysharp.Threading.Tasks;
 using UnityEngine;

@@ -1,5 +1,6 @@
 ﻿using CodeBase.Enums;
 using CodeBase.Gameplay.GameItems;
+using CodeBase.Gameplay.GameItems.RandomItems;
 using UnityEngine;
 
 namespace CodeBase.SO.GameItem.RandomItems

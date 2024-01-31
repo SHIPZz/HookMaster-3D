@@ -1,6 +1,6 @@
 ﻿using System;
 using CodeBase.Constant;
-using CodeBase.Services.Factories.ShopItems;
+using CodeBase.Services.Factories.GameItem;
 using UnityEngine;
 using Zenject;
 

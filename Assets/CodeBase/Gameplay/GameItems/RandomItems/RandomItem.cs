@@ -5,8 +5,9 @@ using CodeBase.Services.TriggerObserve;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace CodeBase.Gameplay.GameItems
+namespace CodeBase.Gameplay.GameItems.RandomItems
 {
+    [RequireComponent(typeof(Collider))]
     public class RandomItem : GameItemAbstract
     {
         [SerializeField] private AppearanceEffect _appearanceEffect;
@@ -14,9 +15,15 @@ namespace CodeBase.Gameplay.GameItems
         [field: SerializeField] public Vector3 SpawnOffset { get; private set; }
 
         private CancellationTokenSource _cancellationTokenSource;
+        private Collider _collider;
 
         public event Action PlayerApproached;
         public event Action PlayerExited;
+
+        private void Awake()
+        {
+            _collider = GetComponent<Collider>();
+        }
 
         private void OnEnable()
         {
@@ -36,6 +43,7 @@ namespace CodeBase.Gameplay.GameItems
         {
             _cancellationTokenSource?.Cancel();
             _cancellationTokenSource?.Dispose();
+            _collider.enabled = true;
             PlayerExited?.Invoke();
         }
 
@@ -43,6 +51,7 @@ namespace CodeBase.Gameplay.GameItems
         {
             _cancellationTokenSource = new CancellationTokenSource();
             var playerRigidBody = obj.GetComponent<Rigidbody>();
+            print(obj.gameObject.name);
 
             try
             {
@@ -57,6 +66,7 @@ namespace CodeBase.Gameplay.GameItems
             }
             
             PlayerApproached?.Invoke();
+            _collider.enabled = false;
         }
     }
 }

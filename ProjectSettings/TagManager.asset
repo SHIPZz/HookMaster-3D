@@ -32,8 +32,8 @@ TagManager:
   - FireObserver
   - ServiceTable
   - OnlyClient
-  - 
-  - 
+  - ResourceCollector
+  - Resource
   - 
   - 
   - 

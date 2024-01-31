@@ -4,6 +4,7 @@ using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.PurchaseableItemServices;
 using CodeBase.Services.TriggerObserve;
 using CodeBase.Services.UI;
+using CodeBase.Services.Wallet;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

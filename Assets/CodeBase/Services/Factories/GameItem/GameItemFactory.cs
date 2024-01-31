@@ -1,14 +1,12 @@
-﻿using CodeBase.Constant;
-using CodeBase.Enums;
+﻿using CodeBase.Enums;
 using CodeBase.Gameplay.GameItems;
+using CodeBase.Gameplay.GameItems.RandomItems;
 using CodeBase.Services.DataService;
 using CodeBase.Services.Providers.Asset;
-using CodeBase.SO.GameItem;
-using CodeBase.SO.GameItem.RandomItems;
 using UnityEngine;
 using Zenject;
 
-namespace CodeBase.Services.Factories.ShopItems
+namespace CodeBase.Services.Factories.GameItem
 {
     public class GameItemFactory
     {

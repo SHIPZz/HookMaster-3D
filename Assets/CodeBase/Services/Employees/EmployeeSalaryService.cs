@@ -2,6 +2,7 @@
 using CodeBase.Data;
 using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.Time;
+using CodeBase.Services.Wallet;
 
 namespace CodeBase.Services.Employees
 {

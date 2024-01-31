@@ -4,6 +4,7 @@ using System.Linq;
 using CodeBase.Animations;
 using CodeBase.Data;
 using CodeBase.Gameplay.Wallet;
+using CodeBase.Services.Wallet;
 using CodeBase.Services.Window;
 using CodeBase.UI.Hud;
 using TMPro;

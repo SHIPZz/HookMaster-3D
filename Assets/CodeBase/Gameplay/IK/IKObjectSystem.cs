@@ -1,52 +1,54 @@
 using System;
 using CodeBase.Gameplay.PlayerSystem;
-using CodeBase.Services.Fire;
 using CodeBase.Services.TriggerObserve;
 using UnityEngine;
 using Zenject;
 
-public class IKObjectSystem : MonoBehaviour
+namespace CodeBase.Gameplay.IK
 {
-    [field: SerializeField] public Transform RightHandIK { get; private set; }
-    [field: SerializeField] public Transform LeftHandIK { get; private set; }
-
-    [SerializeField] private TriggerObserver _triggerObserver;
-    [SerializeField] private Vector3 _targetPosition;
-    [SerializeField] private Vector3 _targetRotation;
-
-    public event Action PlayerTaken;
-
-    private bool _isTaken;
-    private PlayerIKService _playerIKService;
-
-    [Inject]
-    private void Construct(PlayerIKService playerIKService)
+    public class IKObjectSystem : MonoBehaviour
     {
-        _playerIKService = playerIKService;
-    }
+        [field: SerializeField] public Transform RightHandIK { get; private set; }
+        [field: SerializeField] public Transform LeftHandIK { get; private set; }
 
-    private void OnEnable()
-    {
-        _triggerObserver.CollisionEntered += OnPlayerEntered;
-    }
+        [SerializeField] private TriggerObserver _triggerObserver;
+        [SerializeField] private Vector3 _targetPosition;
+        [SerializeField] private Vector3 _targetRotation;
 
-    private void OnDisable()
-    {
-        _triggerObserver.CollisionEntered -= OnPlayerEntered;
-        _playerIKService.ClearIKHandTargets();
-    }
+        public event Action PlayerTaken;
 
-    protected virtual void OnPlayerEntered(Collision player)
-    {
-        if (_isTaken || _playerIKService.HasItemInHands)
-            return;
+        private bool _isTaken;
+        private PlayerIKService _playerIKService;
+
+        [Inject]
+        private void Construct(PlayerIKService playerIKService)
+        {
+            _playerIKService = playerIKService;
+        }
+
+        private void OnEnable()
+        {
+            _triggerObserver.CollisionEntered += OnPlayerEntered;
+        }
+
+        private void OnDisable()
+        {
+            _triggerObserver.CollisionEntered -= OnPlayerEntered;
+            _playerIKService.ClearIKHandTargets();
+        }
+
+        protected virtual void OnPlayerEntered(Collision player)
+        {
+            if (_isTaken || _playerIKService.HasItemInHands)
+                return;
         
-        transform.SetParent(player.transform,true);
-        transform.localPosition = _targetPosition;
-        transform.localEulerAngles = _targetRotation;
-        _playerIKService.SetIKHandTargets(LeftHandIK, RightHandIK);
+            transform.SetParent(player.transform,true);
+            transform.localPosition = _targetPosition;
+            transform.localEulerAngles = _targetRotation;
+            _playerIKService.SetIKHandTargets(LeftHandIK, RightHandIK);
         
-        _isTaken = true;
-        PlayerTaken?.Invoke();
+            _isTaken = true;
+            PlayerTaken?.Invoke();
+        }
     }
 }

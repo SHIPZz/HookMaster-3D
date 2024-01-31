@@ -3,6 +3,7 @@ using CodeBase.Gameplay.Employees;
 using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.Employees;
 using CodeBase.Services.UI;
+using CodeBase.Services.Wallet;
 using CodeBase.UI.FloatingText;
 using CodeBase.UI.SkipProgress;
 using CodeBase.UI.Upgrade;

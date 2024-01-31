@@ -1,12 +1,11 @@
 ﻿using CodeBase.Animations;
-using CodeBase.Gameplay.GameItems;
 using CodeBase.Services.TriggerObserve;
 using CodeBase.Services.UI;
 using CodeBase.UI.Buttons;
 using UnityEngine;
 using Zenject;
 
-namespace CodeBase.UI.MiningFarm
+namespace CodeBase.UI.Mining
 {
     public class MiningFarmUIHandler : MonoBehaviour
     {

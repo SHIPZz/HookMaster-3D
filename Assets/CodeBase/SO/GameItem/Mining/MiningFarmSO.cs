@@ -1,7 +1,7 @@
 ﻿using CodeBase.Gameplay.GameItems;
 using UnityEngine;
 
-namespace CodeBase.SO.GameItem.MiningFarm
+namespace CodeBase.SO.GameItem.Mining
 {
     [CreateAssetMenu(fileName = "MiningFarmSO", menuName = "Gameplay/GameItemSO/MiningFarmSO")]
     public class MiningFarmSO :  GameItemAbstractSO

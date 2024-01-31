@@ -4,7 +4,7 @@ using CodeBase.Data;
 using CodeBase.Extensions;
 using CodeBase.Gameplay.GameItems;
 using CodeBase.Services.DataService;
-using CodeBase.Services.Factories.ShopItems;
+using CodeBase.Services.Factories.GameItem;
 using CodeBase.Services.Providers.Location;
 using CodeBase.Services.Time;
 using CodeBase.Services.WorldData;

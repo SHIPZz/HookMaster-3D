@@ -1,6 +1,7 @@
 ﻿using CodeBase.Animations;
 using CodeBase.Data;
 using CodeBase.Enums;
+using CodeBase.Services.Wallet;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;

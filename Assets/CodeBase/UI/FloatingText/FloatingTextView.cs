@@ -1,7 +1,7 @@
 ﻿using System;
-using CodeBase.Services.CameraRotation;
 using CodeBase.Services.GOPool;
 using CodeBase.Services.Providers.Camera;
+using CodeBase.Services.TransformCameraFace;
 using CodeBase.Services.UI;
 using TMPro;
 using UnityEngine;

@@ -1,10 +1,9 @@
-﻿using System;
-using CodeBase.Services.Providers.Camera;
+﻿using CodeBase.Services.Providers.Camera;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
-namespace CodeBase.Services.CameraRotation
+namespace CodeBase.Services.TransformCameraFace
 {
     public class TransformCameraFacing : MonoBehaviour
     {
