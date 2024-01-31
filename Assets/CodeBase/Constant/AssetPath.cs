@@ -19,6 +19,7 @@ namespace CodeBase.Constant
         public const string FloatingTexts = "Prefabs/UI/Texts";
         public const string GameItemDatas = "Datas/GameItems";
         public const string RandomItemDatas = "Datas/RandomItems";
+        public const string InfoItemDatas = "Datas/Info";
         public const string GameItems = "Prefabs/GameItems";
         public const string RandomItems = "Prefabs/RandomItems";
         public const string Extinguisher = "Prefabs/GameItems/Extinguisher";

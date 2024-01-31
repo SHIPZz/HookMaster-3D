@@ -35,6 +35,7 @@ namespace CodeBase.Gameplay.Tutorial
             _tutorialHand.gameObject.SetActive(false);
             WindowService.Opened -= OnWindowOpened;
             SetCompleteToData(true);
+            IsFinished = true;
         }
 
         private async void OnWindowOpened(WindowBase window)

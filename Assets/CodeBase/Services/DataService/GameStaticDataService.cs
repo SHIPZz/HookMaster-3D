@@ -7,6 +7,7 @@ using CodeBase.Gameplay.GameItems;
 using CodeBase.Gameplay.GameItems.RandomItems;
 using CodeBase.SO.GameItem;
 using CodeBase.SO.GameItem.RandomItems;
+using CodeBase.SO.InfoItems;
 using UnityEngine;
 
 namespace CodeBase.Services.DataService
@@ -17,6 +18,7 @@ namespace CodeBase.Services.DataService
         private readonly Dictionary<Type, GameItemAbstract> _gameItemPrefabs;
         private readonly Dictionary<GameItemType, RandomItem> _randomItemPrefabs;
         private readonly Dictionary<GameItemType, RandomItemSO> _randomItemDatas;
+        private readonly Dictionary<InfoItemTypeId, InfoItemSO> _infoItemDatas;
 
         public GameStaticDataService()
         {
@@ -25,22 +27,24 @@ namespace CodeBase.Services.DataService
 
             _gameItemPrefabs = Resources.LoadAll<GameItemAbstract>(AssetPath.GameItems)
                 .ToDictionary(x => x.GetType(), x => x);
-            
+
             _randomItemPrefabs = Resources.LoadAll<RandomItem>(AssetPath.RandomItems)
                 .ToDictionary(x => x.GameItemType, x => x);
-            
-            _randomItemDatas = Resources.LoadAll<RandomItemSO>(AssetPath.RandomItemDatas)
-                .ToDictionary(x => x.GameItemType, x => x);
 
+            _infoItemDatas = Resources.LoadAll<InfoItemSO>(AssetPath.InfoItemDatas)
+                .ToDictionary(x => x.InfoItemTypeId, x => x);
         }
 
-        public RandomItemSO GetRandomItemSO(GameItemType gameItemType) => 
+        public InfoItemSO Get(InfoItemTypeId itemTypeId) => 
+            _infoItemDatas[itemTypeId];
+        
+        public RandomItemSO GetRandomItemSO(GameItemType gameItemType) =>
             _randomItemDatas[gameItemType];
 
         public T GetSO<T>() where T : GameItemAbstractSO =>
             (T)_gameItemDatas[typeof(T)];
-        
-        public RandomItem GetRandomItem(GameItemType gameItemType) => 
+
+        public RandomItem GetRandomItem(GameItemType gameItemType) =>
             _randomItemPrefabs[gameItemType];
 
         public List<RandomItem> GetAll<T>() where T : RandomItem

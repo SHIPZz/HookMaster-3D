@@ -5,6 +5,7 @@ using CodeBase.Services.Window;
 using CodeBase.Services.WorldData;
 using CodeBase.UI;
 using CodeBase.UI.Employee;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,7 +21,7 @@ namespace CodeBase.Gameplay.Tutorial
         public HireEmployeeStep(UIFactory uiFactory, WindowService windowService, IWorldDataService worldDataService)
             : base(uiFactory, windowService, worldDataService) { }
 
-        public override void OnStart()
+        public override async void OnStart()
         {
             if (IsCompleted())
                 return;

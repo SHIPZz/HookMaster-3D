@@ -16,29 +16,39 @@ namespace CodeBase.Gameplay.Tutorial
 
         public void Init()
         {
-            var startHireEmployeeStep = _instantiator.Instantiate<StartHireEmployeeStep>();
-            var hireEmployeeStep = _instantiator.Instantiate<HireEmployeeStep>();
-            var approachToEmployeeStep = _instantiator.Instantiate<ApproachToEmployeeStep>();
-            var upgradeEmployeeStep = _instantiator.Instantiate<UpgradeEmployeeStep>();
-
-            _tutorialSteps[typeof(StartHireEmployeeStep)] = startHireEmployeeStep;
-            _tutorialSteps[typeof(HireEmployeeStep)] = hireEmployeeStep;
-            _tutorialSteps[typeof(ApproachToEmployeeStep)] = approachToEmployeeStep;
-            _tutorialSteps[typeof(UpgradeEmployeeStep)] = upgradeEmployeeStep;
+            CreateStep<StartHireEmployeeStep>();
+            CreateStep<HireEmployeeStep>();
+            CreateStep<ApproachToEmployeeStep>();
+            CreateStep<UpgradeEmployeeStep>();
+            CreateStep<ShowClientServeRoomStep>();
 
             _tutorialSteps.Values.ToList().ForEach(x =>
             {
+                x.SetTutorialRunner(this);
                 x.AddToData();
                 x.OnStart();
             });
+            
         }
 
         public void Dispose()
         {
-            foreach (IDisposable disposable in _tutorialSteps.Values.Select(tutorialStep => tutorialStep as IDisposable))
+            foreach (IDisposable disposable in
+                     _tutorialSteps.Values.Select(tutorialStep => tutorialStep as IDisposable))
             {
                 disposable?.Dispose();
             }
+        }
+
+        public bool IsTutorialFinished<T>() where T : TutorialStep
+        {
+            return _tutorialSteps[typeof(T)].IsFinished;
+        }
+
+        private void CreateStep<T>() where T : TutorialStep
+        {
+            var step = _instantiator.Instantiate<T>();
+            _tutorialSteps[typeof(T)] = step;
         }
     }
 }

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d5c69711d24d41aff27d0c1d21ad9b, type: 3}
   m_Name: SettingSO
   m_EditorClassIdentifier: 
-  MusicVolume: -20
+  MusicVolume: -10
   MainVolume: 0

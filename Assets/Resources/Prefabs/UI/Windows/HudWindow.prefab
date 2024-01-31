@@ -899,7 +899,7 @@ GameObject:
   - component: {fileID: 4416567330803310340}
   - component: {fileID: 3933940743529162797}
   m_Layer: 0
-  m_Name: TutorialHandParent
+  m_Name: TutorialHireHandParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1711,6 +1711,50 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.078431375}
   m_EffectDistance: {x: 0, y: -5}
   m_UseGraphicAlpha: 1
+--- !u!1 &3871264463095108731
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4707255164941496996}
+  - component: {fileID: 1965537357947167119}
+  m_Layer: 0
+  m_Name: TutorialShowClientRoom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4707255164941496996
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3871264463095108731}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4110636193854023151}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -738, y: -1725}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 1, y: 1}
+--- !u!222 &1965537357947167119
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3871264463095108731}
+  m_CullTransparentMesh: 1
 --- !u!1 &4134047752345653341
 GameObject:
   m_ObjectHideFlags: 0
@@ -2294,7 +2338,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4488511819104979730}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ecefd69a79c0423a9f41ca2b7a2a76fa, type: 3}
   m_Name: 
@@ -2624,6 +2668,7 @@ GameObject:
   - component: {fileID: 5020811992961267521}
   - component: {fileID: 4707663233189714427}
   - component: {fileID: 4700756735166001385}
+  - component: {fileID: 6369901510676874782}
   m_Layer: 5
   m_Name: HudWindow
   m_TagString: Untagged
@@ -2650,6 +2695,7 @@ RectTransform:
   - {fileID: 1505032775888141970}
   - {fileID: 615763984903419016}
   - {fileID: 4416567330803310340}
+  - {fileID: 4707255164941496996}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2671,10 +2717,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CloseButton: {fileID: 0}
   OpenEmployeeWindowButton: {fileID: 661852565856510742}
-  TutorialFadeImage: {fileID: 5042760880495165838}
-  TutorialHandParent: {fileID: 4416567330803310340}
+  TutorialContainer: {fileID: 6369901510676874782}
   BuyClientManagerButton: {fileID: 5634166213638854523}
-  MoneyPosition: {fileID: 1944367675387443845}
   _timeText: {fileID: 6499484387361049532}
   _canvasAnimator: {fileID: 4707663233189714427}
   _clientRoomNavigationButton: {fileID: 6359087644333340865}
@@ -2782,6 +2826,74 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _planeDistance: 1
   _sortingLayerTypeId: 2
+--- !u!114 &6369901510676874782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5244320276605106608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3db298d723b4f96be793c38558b1fb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 4416567330803310340}
+    - {fileID: 4707255164941496996}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _pointerTransforms
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[UnityEngine.Transform,
+        UnityEngine.CoreModule]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: StartHireEmployeeStep
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: ShowClientServeRoomStep
+    - Name: $v
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  TutorialFadeImage: {fileID: 5042760880495165838}
 --- !u!1 &5254147785846685064
 GameObject:
   m_ObjectHideFlags: 0
@@ -5637,13 +5749,14 @@ GameObject:
   - component: {fileID: 7219519859596459805}
   - component: {fileID: 3613269376427809127}
   - component: {fileID: 5425885462281919119}
+  - component: {fileID: 7860957501805885018}
   m_Layer: 5
   m_Name: ClientNavigationButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7187735111859211313
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5872,6 +5985,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7860957501805885018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8894120368680942078}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecefd69a79c0423a9f41ca2b7a2a76fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialFade: {fileID: 5042760880495165838}
 --- !u!1 &9186899369587869091
 GameObject:
   m_ObjectHideFlags: 0

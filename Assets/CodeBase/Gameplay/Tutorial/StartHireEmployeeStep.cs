@@ -7,10 +7,7 @@ using CodeBase.Services.WorldData;
 using CodeBase.UI;
 using CodeBase.UI.Buttons;
 using CodeBase.UI.Hud;
-using Cysharp.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace CodeBase.Gameplay.Tutorial
 {
@@ -39,6 +36,7 @@ namespace CodeBase.Gameplay.Tutorial
             _tutorialFadeImage.gameObject.SetActive(false);
             _tutorialHand.gameObject.SetActive(false);
             _targetButton.onClick.RemoveListener(OnFinished);
+            _targetButton.GetComponent<TutorialHighlight>().enabled = false;
             WindowService.HudOpened -= OnWindowOpened;
             SetCompleteToData(true);
         }
@@ -54,10 +52,11 @@ namespace CodeBase.Gameplay.Tutorial
                 return;
 
             var hudWindow = WindowService.Get<HudWindow>();
-            _tutorialFadeImage = hudWindow.TutorialFadeImage;
+            _tutorialFadeImage = hudWindow.TutorialContainer.TutorialFadeImage;
             _tutorialFadeImage.gameObject.SetActive(true);
-            _tutorialHand = UIFactory.CreateElement<Image>(AssetPath.TutorialHand, hudWindow.TutorialHandParent);
+            _tutorialHand = UIFactory.CreateElement<Image>(AssetPath.TutorialHand, hudWindow.TutorialContainer.Get<StartHireEmployeeStep>());
             _targetButton = hudWindow.OpenEmployeeWindowButton;
+            _targetButton.GetComponent<TutorialHighlight>().enabled = true;
             _targetButton.onClick.AddListener(OnFinished);
             _hudOpened = true;
         }

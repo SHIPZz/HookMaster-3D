@@ -9,7 +9,9 @@ namespace CodeBase.Gameplay.Tutorial
         protected UIFactory UIFactory;
         protected WindowService WindowService;
         protected IWorldDataService WorldDataService;
+        protected TutorialRunner TutorialRunner;
         protected string ClassName;
+        public bool IsFinished { get; protected set; }
 
         protected TutorialStep(UIFactory uiFactory, WindowService windowService, IWorldDataService worldDataService)
         {
@@ -18,12 +20,15 @@ namespace CodeBase.Gameplay.Tutorial
             WorldDataService = worldDataService;
         }
 
+        public void SetTutorialRunner(TutorialRunner tutorialRunner) => 
+            TutorialRunner = tutorialRunner;
+
         public abstract void OnStart();
         public abstract void OnFinished();
         
         public void AddToData()
         {
-            ClassName = GetType().FullName;
+            ClassName = GetType().Name;
 
             if (!WorldDataService.WorldData.TutorialData.CompletedTutorials.ContainsKey(ClassName))
                 WorldDataService.WorldData.TutorialData.CompletedTutorials[ClassName] = false;
