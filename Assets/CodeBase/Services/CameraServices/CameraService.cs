@@ -5,7 +5,6 @@ using CodeBase.Gameplay.GameItems;
 using CodeBase.Services.GameItemServices;
 using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.UI;
-using CodeBase.Services.Window;
 using CodeBase.UI.Hud;
 using CodeBase.UI.Shop;
 using UnityEngine;
@@ -16,7 +15,6 @@ namespace CodeBase.Services.CameraServices
     {
         private readonly CameraProvider _cameraProvider;
         private readonly GameItemService _gameItemService;
-        private readonly WindowService _windowService;
         private readonly UIService _uiService;
         private List<GameItemType> _shownObjects = new();
 
@@ -29,12 +27,9 @@ namespace CodeBase.Services.CameraServices
         private GameItemAbstract _target;
         private ShopWindow _shopWindow;
 
-        public CameraService(CameraProvider cameraProvider,
-            GameItemService gameItemService,
-            WindowService windowService, UIService uiService)
+        public CameraService(CameraProvider cameraProvider, GameItemService gameItemService, UIService uiService)
         {
             _uiService = uiService;
-            _windowService = windowService;
             _gameItemService = gameItemService;
             _cameraProvider = cameraProvider;
         }
@@ -57,7 +52,7 @@ namespace CodeBase.Services.CameraServices
             _target = gameItem;
         }
 
-        public void MoveToTarget(Transform target, float backDuration, Action onComplete = null)
+        public void MoveToTarget(Transform target, float backDuration, Action onComplete = null, Action onTargetReached = null)
         {
             _uiService.SetActiveUI<HudWindow>(false);
             _cameraProvider.CameraFollower.Block(true);
@@ -65,7 +60,7 @@ namespace CodeBase.Services.CameraServices
             {
                 _uiService.SetActiveUI(true);
                 onComplete?.Invoke();
-            });
+            }, onTargetReached);
         }
 
         public void MoveToLastTarget()

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CodeBase.Animations;
 using CodeBase.Enums;
 using CodeBase.Gameplay;
@@ -7,6 +8,7 @@ using CodeBase.Services.CameraServices;
 using CodeBase.Services.DataService;
 using CodeBase.Services.GameItemServices;
 using CodeBase.Services.Window;
+using CodeBase.SO;
 using CodeBase.SO.GameItem.CircleRoulette;
 using CodeBase.SO.GameItem.Mining;
 using CodeBase.UI.Hud;
@@ -52,22 +54,10 @@ namespace CodeBase.UI.PopupWindows
             windowService.Close<ShopWindow>();
             _gameItemType = gameItemType;
 
-            switch (gameItemType)
-            {
-                case GameItemType.CircleRoulette:
-                    var circleRouletteSO = _gameStaticDataService.GetSO<CircleRouletteSO>();
-                    _name = circleRouletteSO.Name;
-                    _description = circleRouletteSO.Description;
-                    _spriteIcon = circleRouletteSO.Icon;
-                    break;
-
-                case GameItemType.MiningFarm:
-                    var miningFarmSo = _gameStaticDataService.GetSO<MiningFarmSO>();
-                    _name = miningFarmSo.Name;
-                    _description = miningFarmSo.Description;
-                    _spriteIcon = miningFarmSo.Icon;
-                    break;
-            }
+            PopupAbstractSO targetData = _gameStaticDataService.GetSO(gameItemType);
+            _name = targetData.Name;
+            _description = targetData.Description;
+            _spriteIcon = targetData.Sprite;
 
             _nameText.text = _name;
             _descriptionText.text = _description;

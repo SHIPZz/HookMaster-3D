@@ -63,7 +63,7 @@ namespace CodeBase.Gameplay.Camera
             _isBlocked = isBlocked;
         }
         
-        public void MoveTo(Transform target, float movementBackDelay, Action onComplete = null)
+        public void MoveTo(Transform target, float movementBackDelay, Action onComplete = null, Action onTargetReached = null)
         {
             _target = target;
             _isBlocked = true;
@@ -77,9 +77,13 @@ namespace CodeBase.Gameplay.Camera
             
             transform
                 .DOMove(targetPosition + _cameraPanOffset, _movementDuration)
-                .OnComplete(() => DOTween.Sequence()
-                    .AppendInterval(movementBackDelay)
-                    .OnComplete(() => MoveAndRotateBack(onComplete)));
+                .OnComplete(() =>
+                {
+                    onTargetReached?.Invoke();
+                    DOTween.Sequence()
+                        .AppendInterval(movementBackDelay)
+                        .OnComplete(() => MoveAndRotateBack(onComplete));
+                });
         }
 
         public void MoveTo(Transform target, Action onComplete = null)

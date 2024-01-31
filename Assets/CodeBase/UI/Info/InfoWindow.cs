@@ -36,20 +36,10 @@ namespace CodeBase.UI.Info
             _icon.sprite = data.Icon;
         }
 
-        private void OnOpened()
-        {
-            _soundPlayerSystem.PlayActiveSound();
-        }
-
         public override void Open()
         {
+            _soundPlayerSystem.PlayActiveSound();
             _canvasAnimator.FadeInCanvas();
-        }
-
-        public override void Close()
-        {
-            // _windowService.Open<HudWindow>();
-            base.Close();
         }
     }
 }

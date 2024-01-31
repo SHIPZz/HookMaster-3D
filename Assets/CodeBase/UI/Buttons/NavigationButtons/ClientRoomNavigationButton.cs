@@ -17,9 +17,11 @@ namespace CodeBase.UI.Buttons.NavigationButtons
             enabled = false;
             Transform clientRoom = LocationProvider.ClientServiceRoom;
             var infoWindow = _windowService.Get<InfoWindow>();
-            infoWindow.Init(InfoItemTypeId.ClientServeRoom, _windowService);
-            infoWindow.Open();
-            CameraService.MoveToTarget(clientRoom, _returnDuration);
+            CameraService.MoveToTarget(clientRoom, _returnDuration,null, () =>
+            {
+                infoWindow.Init(InfoItemTypeId.ClientServeRoom, _windowService);
+                infoWindow.Open();
+            });
         }
     }
 }
