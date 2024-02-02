@@ -5,6 +5,8 @@ using CodeBase.Constant;
 using CodeBase.Enums;
 using CodeBase.Gameplay.GameItems;
 using CodeBase.Gameplay.GameItems.RandomItems;
+using CodeBase.Gameplay.ObjectCreatorSystem;
+using CodeBase.Gameplay.ResourceItem;
 using CodeBase.SO;
 using CodeBase.SO.GameItem;
 using CodeBase.SO.GameItem.RandomItems;
@@ -17,6 +19,7 @@ namespace CodeBase.Services.DataService
     {
         private readonly Dictionary<Type, GameItemAbstractSO> _gameItemDatas;
         private readonly Dictionary<Type, GameItemAbstract> _gameItemPrefabs;
+        private readonly Dictionary<GameItemType, Resource> _resourceItems;
         private readonly Dictionary<GameItemType, RandomItem> _randomItemPrefabs;
         private readonly Dictionary<GameItemType, RandomItemSO> _randomItemDatas;
         private readonly Dictionary<GameItemType, PopupAbstractSO> _popupDatas;
@@ -33,12 +36,15 @@ namespace CodeBase.Services.DataService
             _gameItemPrefabs = Resources.LoadAll<GameItemAbstract>(AssetPath.GameItems)
                 .ToDictionary(x => x.GetType(), x => x);
             
+            _resourceItems = Resources.LoadAll<Resource>(AssetPath.GameItems)
+                .ToDictionary(x => x.GameItemType, x => x);
+            
             _randomItemDatas = Resources.LoadAll<RandomItemSO>(AssetPath.RandomItemDatas)
                 .ToDictionary(x => x.GameItemType, x => x);
 
             _randomItemPrefabs = Resources.LoadAll<RandomItem>(AssetPath.RandomItems)
                 .ToDictionary(x => x.GameItemType, x => x);
-
+            
             _infoItemDatas = Resources.LoadAll<InfoItemSO>(AssetPath.InfoItemDatas)
                 .ToDictionary(x => x.InfoItemTypeId, x => x);
         }
@@ -75,6 +81,9 @@ namespace CodeBase.Services.DataService
 
             return list;
         }
+        
+        public Resource GetResourceItem(GameItemType id) =>
+            _resourceItems[id];
 
         public T Get<T>() where T : GameItemAbstract =>
             (T)_gameItemPrefabs[typeof(T)];

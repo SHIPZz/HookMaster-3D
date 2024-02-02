@@ -1,35 +1,48 @@
 using System;
-using CodeBase.Data;
 using CodeBase.Gameplay.GameItems;
-using CodeBase.Services.Wallet;
 using UnityEngine;
-using Zenject;
 
 namespace CodeBase.Gameplay.ResourceItem
 {
-    internal class Resource : GameItemAbstract, IResource
+    public class Resource : GameItemAbstract
     {
-        [field: SerializeField] public ItemTypeId ItemTypeId { get; private set; }
-        [field: SerializeField] public int Value { get; private set; }
+        [SerializeField] private Collider _collider;
+        [SerializeField] private bool _needDestroy = true;
+        [SerializeField] private bool _setParent;
+        [field: SerializeField] public bool NeedChangeScale { get; private set; }
+
+        public bool IsCollected { get; private set; }
         
         public event Action<Resource> Collected;
         
-        [SerializeField] private Collider _collider;
-
-        public Transform Anchor => transform;
-
-        [Inject] private WalletService _walletService;
 
         public void MarkAsDetected()
         {
             _collider.enabled = false;
         }
-
+        
         public void Collect()
         {
             Collected?.Invoke(this);
-            _walletService.Set(ItemTypeId, Value);
-            Destroy(gameObject);
+
+            if (_needDestroy)
+                Destroy(gameObject);
+        }
+        
+        public void Collect(Transform parent)
+        {
+            Collected?.Invoke(this);
+
+            if (_setParent)
+            {
+                transform.SetParent(parent);
+                transform.localRotation = Quaternion.identity;
+            }
+
+            IsCollected = true;
+            
+            if (_needDestroy)
+                Destroy(gameObject);
         }
     }
 }

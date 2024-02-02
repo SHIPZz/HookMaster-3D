@@ -41,19 +41,19 @@ namespace CodeBase.Gameplay.ResourceItem
             resourceCollector.ResourceDetected -= OnResourceDetected;
         }
 
-        private void OnResourceDetected(IResourceCollector detector, IResource detectedResource)
+        private void OnResourceDetected(IResourceCollector detector, Resource detectedResource)
         {
             CollectResource(detector, detectedResource);
         }
 
-        private async void CollectResource(IResourceCollector collector, IResource resource)
+        private async void CollectResource(IResourceCollector collector, Resource resource)
         {
             try
             {
                 resource.MarkAsDetected(); 
-                var task = new ResourceCollectionTask(resource.Anchor, collector.Anchor, collector.ControlPoint, _settings);
+                var task = new ResourceCollectionTask(resource, collector.Anchor, collector.ControlPoint, _settings);
                 await task.ExecuteAsync(_lifetimeToken.Token);
-                resource.Collect();
+                resource.Collect(collector.Anchor);
             }
             catch (OperationCanceledException)
             {

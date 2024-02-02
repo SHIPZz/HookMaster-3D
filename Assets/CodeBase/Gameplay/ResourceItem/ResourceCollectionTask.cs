@@ -7,20 +7,20 @@ namespace CodeBase.Gameplay.ResourceItem
 {
     internal class ResourceCollectionTask : IDisposable
     {
-        private readonly Transform _resource;
+        private readonly Resource _resource;
         private readonly Vector3 _startPoint;
         private readonly Transform _target;
         private readonly Transform _controlPoint;
         private readonly ResourceCollectionSettings _settings;
         private readonly CancellationTokenSource _lifetimeToken;
 
-        public ResourceCollectionTask(Transform resourcePosition,
+        public ResourceCollectionTask(Resource resource,
             Transform target,
             Transform controlPoint,
             ResourceCollectionSettings settings)
         {
-            _resource = resourcePosition;
-            _startPoint = resourcePosition.position;
+            _resource = resource;
+            _startPoint = resource.transform.position;
             _target = target;
             _controlPoint = controlPoint;
             _settings = settings;
@@ -29,7 +29,8 @@ namespace CodeBase.Gameplay.ResourceItem
 
         public async UniTask ExecuteAsync(CancellationToken cancellationToken)
         {
-            var token = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _lifetimeToken.Token).Token;
+            CancellationToken token = CancellationTokenSource
+                .CreateLinkedTokenSource(cancellationToken, _lifetimeToken.Token).Token;
 
             var timePassed = 0f;
 
@@ -41,14 +42,16 @@ namespace CodeBase.Gameplay.ResourceItem
 
                 var distanceToMove = _settings.FlySpeed * Time.deltaTime;
                 timePassed += GetTIncrement(timePassed, distanceToMove, curveLength);
-                timePassed = Mathf.Clamp01(timePassed); 
+                timePassed = Mathf.Clamp01(timePassed);
                 var position = MoveAlongCurve(timePassed);
-                _resource.position = position;
-                _resource.localScale = Vector3.Lerp(_resource.localScale, Vector3.zero, _settings.ScaleSpeed * Time.deltaTime);
+                _resource.transform.position = position;
+
+                if (_resource.NeedChangeScale)
+                    _resource.transform.localScale = Vector3.Lerp(_resource.transform.localScale, Vector3.zero,
+                        _settings.ScaleSpeed * Time.deltaTime);
 
                 await UniTask.Yield();
             }
-
         }
 
         public void Dispose()

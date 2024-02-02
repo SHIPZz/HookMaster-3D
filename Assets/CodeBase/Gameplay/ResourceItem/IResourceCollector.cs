@@ -5,7 +5,7 @@ namespace CodeBase.Gameplay.ResourceItem
 {
     public interface IResourceCollector
     {
-        event Action<IResourceCollector, IResource> ResourceDetected; 
+        event Action<IResourceCollector, Resource> ResourceDetected; 
         Transform Anchor { get; }
         Transform ControlPoint { get; }
     }

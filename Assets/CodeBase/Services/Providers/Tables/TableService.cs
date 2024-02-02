@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Data;
 using CodeBase.Extensions;
+using CodeBase.Gameplay.PaperSystem;
 using CodeBase.Gameplay.TableSystem;
 using CodeBase.Services.WorldData;
 using UnityEngine;
@@ -48,6 +49,12 @@ namespace CodeBase.Services.Providers.Tables
                 x.Busy += OnTableConditionChanged;
             });
         }
+
+        public PaperTable Get(string id)
+        {
+            var table = Tables.FirstOrDefault(x => x.Id == id);
+            return table.GetComponent<PaperTable>();
+        } 
 
         public void RecoverTableFromBurning(string id)
         {

@@ -29,24 +29,39 @@ namespace CodeBase.Gameplay.IK
         private void OnEnable()
         {
             _triggerObserver.CollisionEntered += OnPlayerEntered;
+            _triggerObserver.TriggerEntered += OnPlayerEnteredTrigger;
         }
 
         private void OnDisable()
         {
             _triggerObserver.CollisionEntered -= OnPlayerEntered;
+            _triggerObserver.TriggerEntered -= OnPlayerEnteredTrigger;
             _playerIKService.ClearIKHandTargets();
+        }
+
+        private void OnPlayerEnteredTrigger(Collider player)
+        {
+            if (_isTaken || _playerIKService.HasItemInHands)
+                return;
+
+            Activate(player.transform);
         }
 
         protected virtual void OnPlayerEntered(Collision player)
         {
             if (_isTaken || _playerIKService.HasItemInHands)
                 return;
-        
-            transform.SetParent(player.transform,true);
+
+            Activate(player.transform);
+        }
+
+        private void Activate(Transform player)
+        {
+            transform.SetParent(player.transform, true);
             transform.localPosition = _targetPosition;
             transform.localEulerAngles = _targetRotation;
             _playerIKService.SetIKHandTargets(LeftHandIK, RightHandIK);
-        
+
             _isTaken = true;
             PlayerTaken?.Invoke();
         }

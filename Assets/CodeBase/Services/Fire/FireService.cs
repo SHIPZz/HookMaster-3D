@@ -43,20 +43,20 @@ namespace CodeBase.Services.Fire
 
         public void Init()
         {
-            var timeDifference = _worldTimeService.GetTimeDifferenceLastFireTimeByMinutes();
-            _windowService.Opened += OnWindowOpened;
-
-            timeDifference = Mathf.Clamp(timeDifference, 0, TimeConstantValue.TwentyMinutes);
-
-            if (timeDifference == TimeConstantValue.TwentyMinutes)
-            {
-                InitRandomFire();
-                return;
-            }
-
-            SetFireInvokeTime(timeDifference);
-
-            _coroutineRunner.StartCoroutine(StartIncreaseFireInvokeTime());
+            // var timeDifference = _worldTimeService.GetTimeDifferenceLastFireTimeByMinutes();
+            // _windowService.Opened += OnWindowOpened;
+            //
+            // timeDifference = Mathf.Clamp(timeDifference, 0, TimeConstantValue.TwentyMinutes);
+            //
+            // if (timeDifference == TimeConstantValue.TwentyMinutes)
+            // {
+            //     InitRandomFire();
+            //     return;
+            // }
+            //
+            // SetFireInvokeTime(timeDifference);
+            //
+            // _coroutineRunner.StartCoroutine(StartIncreaseFireInvokeTime());
         }
 
         public void Dispose() => 

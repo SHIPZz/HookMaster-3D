@@ -7,6 +7,7 @@
         SuitCase,
         ClientServiceDoor,
         MoneyBag,
-        Money
+        Money,
+        Paper
     }
 }

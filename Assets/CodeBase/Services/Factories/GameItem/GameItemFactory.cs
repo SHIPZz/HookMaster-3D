@@ -1,6 +1,7 @@
 ﻿using CodeBase.Enums;
 using CodeBase.Gameplay.GameItems;
 using CodeBase.Gameplay.GameItems.RandomItems;
+using CodeBase.Gameplay.ResourceItem;
 using CodeBase.Services.DataService;
 using CodeBase.Services.Providers.Asset;
 using UnityEngine;
@@ -36,6 +37,15 @@ namespace CodeBase.Services.Factories.GameItem
             var prefab = _gameStaticDataService.Get<T>();
 
             return _instantiator.InstantiatePrefabForComponent<T>(prefab,
+                at, prefab.transform.rotation,
+                parent);
+        }
+        
+        public Resource CreateResourceItem(GameItemType gameItemType, Transform parent, Vector3 at)
+        {
+            Resource prefab = _gameStaticDataService.GetResourceItem(gameItemType);
+
+            return _instantiator.InstantiatePrefabForComponent<Resource>(prefab,
                 at, prefab.transform.rotation,
                 parent);
         }

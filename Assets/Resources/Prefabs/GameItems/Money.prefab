@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 3100210555295316223}
   - component: {fileID: 3906425745612787002}
   - component: {fileID: 2766376815097048573}
-  - component: {fileID: 6875235953554025587}
   - component: {fileID: 6702936577617502506}
   - component: {fileID: 5957297229201261128}
+  - component: {fileID: -5093984683337114997}
   m_Layer: 26
   m_Name: Money
   m_TagString: Untagged
@@ -86,22 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6875235953554025587
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4246954665578208982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b3aae9ed9854d51a1da8978c2454a31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <GameItemType>k__BackingField: 5
-  <ItemTypeId>k__BackingField: 0
-  <Value>k__BackingField: 5
-  _collider: {fileID: 6702936577617502506}
 --- !u!65 &6702936577617502506
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -150,3 +134,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-5093984683337114997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4246954665578208982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3aae9ed9854d51a1da8978c2454a31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <GameItemType>k__BackingField: 5
+  _collider: {fileID: 6702936577617502506}
+  _needDestroy: 1
+  _setParent: 0
+  <NeedChangeScale>k__BackingField: 0

@@ -1,14 +1,18 @@
-﻿using RootMotion.FinalIK;
+﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using RootMotion.FinalIK;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.PlayerSystem
 {
     public class PlayerIKService
     {
+        private const float ClearSpeed = 17f;
         public bool HasItemInHands { get; private set; }
         
         private FullBodyBipedIK _fullBodyBipedIK;
 
+        
         public void Set(FullBodyBipedIK fullBodyBipedIK) =>
             _fullBodyBipedIK = fullBodyBipedIK;
         
@@ -20,10 +24,29 @@ namespace CodeBase.Gameplay.PlayerSystem
             SetIKHandWeights(1);
         }
 
-        public void ClearIKHandTargets()
+        public async void ClearIKHandTargets()
         {
+            while (_fullBodyBipedIK.solver.leftHandEffector.positionWeight > 0)
+            {
+                _fullBodyBipedIK.solver.leftHandEffector.positionWeight =
+                    Mathf.Lerp(_fullBodyBipedIK.solver.leftHandEffector.positionWeight, 0, ClearSpeed * Time.deltaTime);
+                
+                _fullBodyBipedIK.solver.leftHandEffector.rotationWeight =
+                    Mathf.Lerp(_fullBodyBipedIK.solver.leftHandEffector.rotationWeight, 0, ClearSpeed * Time.deltaTime);
+                
+                _fullBodyBipedIK.solver.rightHandEffector.positionWeight =
+                    Mathf.Lerp(_fullBodyBipedIK.solver.leftHandEffector.positionWeight, 0, ClearSpeed * Time.deltaTime);
+                
+                _fullBodyBipedIK.solver.rightHandEffector.rotationWeight =
+                    Mathf.Lerp(_fullBodyBipedIK.solver.leftHandEffector.rotationWeight, 0, ClearSpeed * Time.deltaTime);
+                
+                await UniTask.Yield();
+            }
+            
+            
             _fullBodyBipedIK.solver.leftHandEffector.target = null;
             _fullBodyBipedIK.solver.rightHandEffector.target = null;
+
             SetIKHandWeights(0);
             HasItemInHands = false;
         }

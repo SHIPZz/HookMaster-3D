@@ -5,16 +5,17 @@ using Zenject;
 
 namespace CodeBase.Gameplay.ResourceItem
 {
-    internal class ResourceCollector : MonoBehaviour, IResourceCollector
+    public class ResourceCollector : MonoBehaviour, IResourceCollector
     {
-        public event Action<IResourceCollector, IResource> ResourceDetected;
+        public event Action<IResourceCollector, Resource> ResourceDetected;
 
         [SerializeField] private Transform _controlPoint;
         [SerializeField] private TriggerObserver _triggerObserver;
 
         [Inject] private readonly IResourceCollectionSystem _resourceCollectionSystem;
 
-        public Transform Anchor => transform;
+        [field: SerializeField] public Transform Anchor { get; private set; }
+
         public Transform ControlPoint => _controlPoint;
 
         private void OnEnable()
@@ -29,12 +30,9 @@ namespace CodeBase.Gameplay.ResourceItem
             _triggerObserver.TriggerEntered -= OnResourceEnter;
         }
 
-        private void OnResourceEnter(Collider other)
+        protected virtual void OnResourceEnter(Collider other)
         {
-            if (other.TryGetComponent(out IResource resource))
-            {
-                ResourceDetected?.Invoke(this, resource);
-            }
+            ResourceDetected?.Invoke(this, other.GetComponent<Resource>());
         }
     }
 }

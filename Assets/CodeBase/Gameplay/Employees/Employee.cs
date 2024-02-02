@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Linq;
 using CodeBase.Data;
 using CodeBase.Enums;
 using CodeBase.Extensions;
 using CodeBase.Gameplay.BurnableObjectSystem;
+using CodeBase.Gameplay.PaperSystem;
+using CodeBase.Gameplay.TableSystem;
 using CodeBase.MaterialChanger;
 using CodeBase.Services.BurnableObjects;
 using CodeBase.Services.Employees;
 using CodeBase.Services.Providers.Tables;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
@@ -29,15 +34,16 @@ namespace CodeBase.Gameplay.Employees
         public string TableId;
         public bool IsWorking;
         public bool IsUpgrading;
-        
+
         private bool _wasWorking;
         private EmployeeDataService _employeeDataService;
         private BurnableObjectService _burnableObjectService;
         private RendererMaterialChangerService _rendererMaterialChangerService;
         private TableService _tableService;
+        private PaperTable _paperTable;
 
         public event Action<Employee> UpgradeStarted;
-        public event Action<Employee> Burned; 
+        public event Action<Employee> Burned;
 
         [Inject]
         private void Construct(EmployeeDataService employeeDataService,
@@ -57,7 +63,30 @@ namespace CodeBase.Gameplay.Employees
             _rendererMaterialChangerService.Init(1.5f, 1f, BurnMaterial, Renderer);
 
             if (IsBurned)
+                
                 Burn();
+        }
+
+        public async void ProcessPaper(Paper paper, PaperTable paperTable)
+        {
+            print("process");
+            await UniTask.WaitForSeconds(2f);
+            await paper.transform.DOLocalJump(paperTable.PaperFinishedPosition.localPosition, 1, 1, 1f)
+                .AsyncWaitForCompletion().AsUniTask();
+        }
+
+        public async void StartWork()
+        {
+            await UniTask.WaitForSeconds(8f);
+            
+            _paperTable = _tableService.Get(TableId);
+            while (_paperTable.PapersOnTable.Count != 0)
+            {
+                await UniTask.WaitForSeconds(2f);
+                Paper paper = _paperTable.PapersOnTable.FirstOrDefault(x => !x.IsFinished);
+                await paper.transform.DOLocalJump(_paperTable.PaperFinishedPosition.localPosition, 1, 1, 1f)
+                    .AsyncWaitForCompletion().AsUniTask();
+            }
         }
 
         public void StartWorking()
@@ -94,7 +123,7 @@ namespace CodeBase.Gameplay.Employees
             IsBurned = false;
             _rendererMaterialChangerService.SetInitialMaterial();
             _tableService.RecoverTableFromBurning(TableId);
-            
+
             if (_wasWorking)
                 StartWorking();
         }
