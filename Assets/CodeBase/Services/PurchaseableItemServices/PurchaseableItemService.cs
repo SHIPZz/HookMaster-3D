@@ -21,7 +21,7 @@ namespace CodeBase.Services.PurchaseableItemServices
         private Dictionary<GameItemType, PurchaseableItem> _allPurchaseableItems = new();
         private Dictionary<GameItemType, PurchaseableItem> _purchasedItems = new();
 
-        public event Action<PurchaseableItem> Purchased; 
+        public event Action<PurchaseableItem> Purchased;
 
         public PurchaseableItemService(IWorldDataService worldDataService,
             PurchaseableItemProvider purchaseableItemProvider,
@@ -59,12 +59,14 @@ namespace CodeBase.Services.PurchaseableItemServices
         public bool HasItem(GameItemType gameItemType) =>
             _purchasedItems.ContainsKey(gameItemType);
 
-        public bool IsAccessible(GameItemType gameItemType) => 
-            _worldDataService.WorldData.PurchaseableItemDatas.ContainsKey(gameItemType) && _worldDataService.WorldData.PurchaseableItemDatas[gameItemType].IsAccessible;
+        public bool IsAccessible(GameItemType gameItemType) =>
+            _worldDataService.WorldData.PurchaseableItemDatas.ContainsKey(gameItemType) &&
+            _worldDataService.WorldData.PurchaseableItemDatas[gameItemType].IsAccessible;
 
         public void SaveToData(PurchaseableItem purchaseableItem)
         {
-            _worldDataService.WorldData.PurchaseableItemDatas[purchaseableItem.GameItemType] = purchaseableItem.ToData();
+            _worldDataService.WorldData.PurchaseableItemDatas[purchaseableItem.GameItemType] =
+                purchaseableItem.ToData();
             _purchasedItems[purchaseableItem.GameItemType] = purchaseableItem;
             Purchased?.Invoke(purchaseableItem);
         }
@@ -73,6 +75,9 @@ namespace CodeBase.Services.PurchaseableItemServices
         {
             foreach (PurchaseableItem purchaseableItem in _purchaseableItemProvider.PurchaseableItems.Values)
             {
+                if (purchaseableItem == null)
+                    continue;
+
                 _allPurchaseableItems[purchaseableItem.GameItemType] = purchaseableItem;
             }
         }

@@ -200,7 +200,7 @@ namespace CodeBase.Installers.Game
 
         private void BindProfitService() =>
             Container
-                .BindInterfacesAndSelfTo<ProfitService>()
+                .BindInterfacesAndSelfTo<EmployeeProfitService>()
                 .AsSingle();
 
         private void BindEmployeeSalaryService() =>
@@ -234,7 +234,7 @@ namespace CodeBase.Installers.Game
             Container.BindInstance(tableService);
             Container.Bind<CameraProvider>().AsSingle();
             Container.Bind<PlayerProvider>().AsSingle();
-            Container.Bind<EmployeeService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<EmployeeService>().AsSingle();
             Container.BindInstance(_extinguisherProvider);
             Container.BindInstance(_purchaseableItemProvider);
         }

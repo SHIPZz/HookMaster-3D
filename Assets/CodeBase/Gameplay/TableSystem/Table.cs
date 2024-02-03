@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using CodeBase.Data;
 using CodeBase.Gameplay.BurnableObjectSystem;
+using CodeBase.Gameplay.ObjectCreatorSystem;
+using CodeBase.Gameplay.PaperSystem;
 using CodeBase.MaterialChanger;
 using CodeBase.Services.BurnableObjects;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
@@ -14,18 +18,27 @@ namespace CodeBase.Gameplay.TableSystem
     {
         [field: SerializeField] public MaterialTypeId BurnMaterial { get; private set; }
         [field: SerializeField] public bool IsBurned { get; set; }
+        
+        [field: SerializeField] public Transform PaperPosition { get; private set; }
+        [field: SerializeField] public ResourceCreator ResourceCreator { get; private set; }
+        [field: SerializeField] public Transform PaperFinishedPosition { get; private set; }
+        [field: SerializeField] public Vector3 Offset { get; private set; } = new Vector3(0, 0.06f, 0);
+        
         [SerializeField] private List<UnityEngine.Renderer> _childRenderers;
         [SerializeField] private MeshRenderer _meshRenderer;
 
         public bool IsFree;
         public Transform Chair;
         public string Id;
-
+        public List<Paper> PapersOnTable = new();
+        
         private ChildRendererMaterialChangerService _rendererMaterialChangerService;
         private BurnableObjectService _burnableObjectService;
         private bool _wasFree;
 
         public event Action<bool, string> Busy;
+        public event Action<Table, Paper> PaperAdded; 
+        public event Action<Table> AllPaperProcessed; 
 
         [Inject]
         private void Construct(ChildRendererMaterialChangerService childRendererMaterial,
@@ -33,6 +46,24 @@ namespace CodeBase.Gameplay.TableSystem
         {
             _burnableObjectService = burnableObjectService;
             _rendererMaterialChangerService = childRendererMaterial;
+        }
+        
+        public async void Add(Paper paper)
+        {
+            PapersOnTable.Add(paper);
+            PaperAdded?.Invoke(this, paper);
+            await UniTask.WaitForSeconds(2f);
+            paper.transform.SetParent(PaperFinishedPosition);
+            paper.transform.DOLocalJump(Vector3.zero, 1f, 1, 1f);
+            paper.transform.DOScale(Vector3.zero, 1.5f);
+        }
+
+        public void Remove(Paper paper)
+        {
+            PapersOnTable.Remove(paper);
+            
+            if(PapersOnTable.Count == 0)
+                AllPaperProcessed?.Invoke(this);
         }
 
         public void Init()

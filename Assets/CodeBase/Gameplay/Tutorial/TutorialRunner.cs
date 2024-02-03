@@ -21,14 +21,13 @@ namespace CodeBase.Gameplay.Tutorial
             CreateStep<ApproachToEmployeeStep>();
             CreateStep<UpgradeEmployeeStep>();
             CreateStep<ShowClientServeRoomStep>();
-
+            
             _tutorialSteps.Values.ToList().ForEach(x =>
             {
                 x.SetTutorialRunner(this);
                 x.AddToData();
                 x.OnStart();
             });
-            
         }
 
         public void Dispose()

@@ -43,7 +43,7 @@ namespace CodeBase.Gameplay.ResourceItem
                 var distanceToMove = _settings.FlySpeed * Time.deltaTime;
                 timePassed += GetTIncrement(timePassed, distanceToMove, curveLength);
                 timePassed = Mathf.Clamp01(timePassed);
-                var position = MoveAlongCurve(timePassed);
+                Vector3 position = MoveAlongCurve(timePassed);
                 _resource.transform.position = position;
 
                 if (_resource.NeedChangeScale)
@@ -52,6 +52,9 @@ namespace CodeBase.Gameplay.ResourceItem
 
                 await UniTask.Yield();
             }
+
+            if (_resource.NeedChangeScale)
+                _resource.transform.localScale = Vector3.zero;
         }
 
         public void Dispose()

@@ -20,30 +20,30 @@ namespace CodeBase.Gameplay.Employees
         [SerializeField] private float _moveTextDuration = 1f;
         [SerializeField] private float _pushEffectPoolDelay = 2f;
 
-        private ProfitService _profitService;
+        private EmployeeProfitService _employeeProfitService;
         private Vector2 _initialTextAnchoredPosition;
         private FloatingTextService _floatingTextService;
         private EffectPool _effectPool;
 
         [Inject]
-        private void Construct(ProfitService profitService,
+        private void Construct(EmployeeProfitService employeeProfitService,
             [Inject(Id = ColorTypeId.Money)] Color moneyColor,
             FloatingTextService floatingTextService,
             EffectPool effectPool)
         {
             _effectPool = effectPool;
             _floatingTextService = floatingTextService;
-            _profitService = profitService;
+            _employeeProfitService = employeeProfitService;
         }
 
         private void Start() =>
-            _profitService.ProfitGot += OnProfitGot;
+            _employeeProfitService.ProfitGot += OnEmployeeProfitGot;
 
         private void OnDisable() =>
-            _profitService.ProfitGot -= OnProfitGot;
+            _employeeProfitService.ProfitGot -= OnEmployeeProfitGot;
 
         [Button]
-        private void OnProfitGot(string employeeId, float minuteProfit)
+        private void OnEmployeeProfitGot(string employeeId, int minuteProfit)
         {
             if (_employee.Id != employeeId)
                 return;
@@ -59,6 +59,8 @@ namespace CodeBase.Gameplay.Employees
                     _moveTextDuration, _fadeInDuration, _fadeOutDuration,
                     Quaternion.identity,
                     AssetPath.ProfitText, _employee.transform);
+            
+            
 
             DOTween.Sequence()
                 .AppendInterval(_pushEffectPoolDelay)

@@ -9,6 +9,7 @@ namespace CodeBase.Gameplay.ResourceItem
         [SerializeField] private Collider _collider;
         [SerializeField] private bool _needDestroy = true;
         [SerializeField] private bool _setParent;
+        [SerializeField] private float _destroyDelay = 0.2f;
         [field: SerializeField] public bool NeedChangeScale { get; private set; }
 
         public bool IsCollected { get; private set; }
@@ -29,7 +30,7 @@ namespace CodeBase.Gameplay.ResourceItem
                 Destroy(gameObject);
         }
         
-        public void Collect(Transform parent)
+        public virtual void Collect(Transform parent)
         {
             Collected?.Invoke(this);
 
@@ -42,7 +43,7 @@ namespace CodeBase.Gameplay.ResourceItem
             IsCollected = true;
             
             if (_needDestroy)
-                Destroy(gameObject);
+                Destroy(gameObject,_destroyDelay);
         }
     }
 }

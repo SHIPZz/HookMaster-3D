@@ -1,12 +1,11 @@
 ﻿using System;
 using CodeBase.Constant;
 using CodeBase.Gameplay.Clients;
-using CodeBase.Gameplay.Money;
+using CodeBase.Gameplay.ObjectCreatorSystem;
 using CodeBase.Services.Clients;
 using CodeBase.Services.TriggerObserve;
 using CodeBase.Services.UI;
 using CodeBase.Services.WorldData;
-using CodeBase.UI.FloatingText;
 using CodeBase.UI.TimeSlider;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -23,11 +22,10 @@ namespace CodeBase.Gameplay.ServiceTables
         [SerializeField] private Transform _servePoint;
         [SerializeField] private TimeSliderView _timeSliderView;
         [SerializeField] private ManagerChair _manager;
-        [SerializeField] private MoneyCreator _moneyCreator;
+        [SerializeField] private ResourceCreator _resourceCreator;
         [SerializeField] private float _managerServeDelay = 2.5f;
 
         private ClientServeService _clientServeService;
-        private FloatingTextService _floatingTextService;
         private IWorldDataService _worldDataService;
         private bool _managerPurchased;
 
@@ -35,11 +33,9 @@ namespace CodeBase.Gameplay.ServiceTables
         public event Action PlayerExited;
 
         [Inject]
-        private void Construct(ClientServeService clientServeService, FloatingTextService floatingTextService,
-            IWorldDataService worldDataService)
+        private void Construct(ClientServeService clientServeService, IWorldDataService worldDataService)
         {
             _worldDataService = worldDataService;
-            _floatingTextService = floatingTextService;
             _clientServeService = clientServeService;
         }
 
@@ -101,9 +97,7 @@ namespace CodeBase.Gameplay.ServiceTables
         private void OnServingFinished(int reward)
         {
             _timeSliderView.Disable();
-            _moneyCreator.Create();
-            // _floatingTextService.ShowFloatingText(FloatingTextType.MoneyProfit, transform, transform.position,
-            //     $"{reward}$", 2f, 0.5f);
+            _resourceCreator.Create();
         }
 
         private void OnCharacterEntered(Collider character)

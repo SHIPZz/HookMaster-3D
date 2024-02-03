@@ -40,7 +40,6 @@ namespace CodeBase.Gameplay.Employees
         private BurnableObjectService _burnableObjectService;
         private RendererMaterialChangerService _rendererMaterialChangerService;
         private TableService _tableService;
-        private PaperTable _paperTable;
 
         public event Action<Employee> UpgradeStarted;
         public event Action<Employee> Burned;
@@ -63,30 +62,17 @@ namespace CodeBase.Gameplay.Employees
             _rendererMaterialChangerService.Init(1.5f, 1f, BurnMaterial, Renderer);
 
             if (IsBurned)
-                
                 Burn();
         }
 
-        public async void ProcessPaper(Paper paper, PaperTable paperTable)
+        public async UniTaskVoid ProcessPaper(Paper paper, Table table)
         {
-            print("process");
             await UniTask.WaitForSeconds(2f);
-            await paper.transform.DOLocalJump(paperTable.PaperFinishedPosition.localPosition, 1, 1, 1f)
+            await paper.transform
+                .DOLocalJump(table.PaperFinishedPosition.localPosition, 1, 1, 1f)
                 .AsyncWaitForCompletion().AsUniTask();
-        }
-
-        public async void StartWork()
-        {
-            await UniTask.WaitForSeconds(8f);
             
-            _paperTable = _tableService.Get(TableId);
-            while (_paperTable.PapersOnTable.Count != 0)
-            {
-                await UniTask.WaitForSeconds(2f);
-                Paper paper = _paperTable.PapersOnTable.FirstOrDefault(x => !x.IsFinished);
-                await paper.transform.DOLocalJump(_paperTable.PaperFinishedPosition.localPosition, 1, 1, 1f)
-                    .AsyncWaitForCompletion().AsUniTask();
-            }
+            table.Remove(paper);
         }
 
         public void StartWorking()

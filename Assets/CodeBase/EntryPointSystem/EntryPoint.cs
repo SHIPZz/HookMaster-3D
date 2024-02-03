@@ -47,7 +47,7 @@ namespace CodeBase.EntryPointSystem
         private readonly TableService _tableService;
         private readonly WalletService _walletService;
         private readonly EmployeeSalaryService _employeeSalaryService;
-        private readonly ProfitService _profitService;
+        private readonly EmployeeProfitService _employeeProfitService;
         private readonly UIService _uiService;
         private readonly GameItemService _gameItemService;
         private readonly ExtinguisherService _extinguisherService;
@@ -69,7 +69,7 @@ namespace CodeBase.EntryPointSystem
             TableService tableService, 
             WalletService walletService, 
             EmployeeSalaryService employeeSalaryService,
-            ProfitService profitService, 
+            EmployeeProfitService employeeProfitService, 
             UIService uiService, 
             GameItemService gameItemService, 
             ExtinguisherService extinguisherService,
@@ -98,7 +98,7 @@ namespace CodeBase.EntryPointSystem
             _tableService = tableService;
             _walletService = walletService;
             _employeeSalaryService = employeeSalaryService;
-            _profitService = profitService;
+            _employeeProfitService = employeeProfitService;
             _uiService = uiService;
             _gameItemService = gameItemService;
         }
@@ -159,7 +159,7 @@ namespace CodeBase.EntryPointSystem
             _employeeSalaryService.Init();
 
         private void InitProfitService() =>
-            _profitService.Init();
+            _employeeProfitService.Init();
 
         private void InitUIService() =>
             _uiService.Init(_cameraProvider.Camera);
@@ -187,6 +187,8 @@ namespace CodeBase.EntryPointSystem
                 Employee targetEmployee = _employeeFactory.Create(employeeData, targetTable, true);
                 _employeeService.Employees.Add(targetEmployee);
             }
+            
+            _employeeService.SubscribeTableEvents();
         }
 
         private void InitializeCamera(Player player)

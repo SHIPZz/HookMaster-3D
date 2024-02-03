@@ -14,8 +14,8 @@ namespace CodeBase.Services.Time
 {
     public class WorldTimeService : IInitializable, IDisposable
     {
-        private readonly string[] BackupApiUrls = { "http://backup1.worldtimeapi.org/api/ip", "http://backup2.worldtimeapi.org/api/ip" };
         private const string ApiUrl = "http://worldtimeapi.org/api/ip";
+        private readonly string[] BackupApiUrls = { "http://backup1.worldtimeapi.org/api/ip", "http://backup2.worldtimeapi.org/api/ip" };
 
         private readonly ICoroutineRunner _coroutineRunner;
         private readonly IWorldDataService _worldDataService;

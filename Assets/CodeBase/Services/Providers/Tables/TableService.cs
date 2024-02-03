@@ -50,12 +50,6 @@ namespace CodeBase.Services.Providers.Tables
             });
         }
 
-        public PaperTable Get(string id)
-        {
-            var table = Tables.FirstOrDefault(x => x.Id == id);
-            return table.GetComponent<PaperTable>();
-        } 
-
         public void RecoverTableFromBurning(string id)
         {
             Tables.FirstOrDefault(x => x.Id == id)?.Recover();
@@ -92,6 +86,11 @@ namespace CodeBase.Services.Providers.Tables
                     table.IsBurned = tableData.IsBurned;
                 }
             }
+        }
+
+        public Table Get(string tableId)
+        {
+            return Tables.FirstOrDefault(x => x.Id == tableId);
         }
     }
 }

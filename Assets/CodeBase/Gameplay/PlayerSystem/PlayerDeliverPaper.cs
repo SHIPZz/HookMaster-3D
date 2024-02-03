@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Threading;
-using CodeBase.Gameplay.IK;
 using CodeBase.Gameplay.PaperSystem;
 using CodeBase.Gameplay.TableSystem;
 using CodeBase.Services.TriggerObserve;
@@ -9,7 +8,6 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using Zenject;
-using PaperTable = CodeBase.Gameplay.TableSystem.PaperTable;
 
 namespace CodeBase.Gameplay.PlayerSystem
 {
@@ -31,19 +29,19 @@ namespace CodeBase.Gameplay.PlayerSystem
 
         private void OnEnable()
         {
-            _triggerObserver.TriggerEntered += Deliver;
-            _triggerObserver.TriggerExited += Exited;
+            // _triggerObserver.TriggerEntered += Deliver;
+            // _triggerObserver.TriggerExited += Exited;
         }
 
         private void OnDisable()
         {
-            _triggerObserver.TriggerEntered -= Deliver;
-            _triggerObserver.TriggerExited -= Exited;
+            // _triggerObserver.TriggerEntered -= Deliver;
+            // _triggerObserver.TriggerExited -= Exited;
         }
 
         private async void Deliver(Collider collider)
         {
-            if (!collider.gameObject.TryGetComponent(out PaperTable paperTable))
+            if (!collider.gameObject.TryGetComponent(out Table table))
                 return;
 
             _cancellationToken?.Dispose();
@@ -51,7 +49,7 @@ namespace CodeBase.Gameplay.PlayerSystem
 
             try
             {
-                await Deliver(paperTable).AttachExternalCancellation(_cancellationToken.Token);
+                await Deliver(table).AttachExternalCancellation(_cancellationToken.Token);
             }
             catch (Exception e)
             {
@@ -60,21 +58,22 @@ namespace CodeBase.Gameplay.PlayerSystem
 
             _playerPaperContainer.Clear();
             _playerIKService.ClearIKHandTargets();
+            _lastPaper = null;
         }
 
-        private async UniTask Deliver(PaperTable paperTable)
+        private async UniTask Deliver(Table table)
         {
             foreach (Paper paper in _playerPaperContainer.Papers.Where(x => !x.IsOnEmployeeTable))
             {
                 paper.SetOnEmployeeTable(true);
-                paper.transform.SetParent(paperTable.PaperPosition);
+                paper.transform.SetParent(table.PaperPosition);
                 paper.transform.localRotation = Quaternion.identity;
-                paperTable.Add(paper);
+                table.Add(paper);
 
                 if (_lastPaper != null)
                 {
                     await paper.transform
-                        .DOLocalJump(_lastPaper.transform.localPosition + paperTable.Offset, 1f, 1, 0.5f)
+                        .DOLocalJump(_lastPaper.transform.localPosition + table.Offset, 1f, 1, 0.5f)
                         .AsyncWaitForCompletion().AsUniTask().AttachExternalCancellation(_cancellationToken.Token);
                 }
                 else

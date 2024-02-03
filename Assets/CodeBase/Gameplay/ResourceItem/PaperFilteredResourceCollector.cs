@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Enums;
 using CodeBase.Gameplay.PaperSystem;
 using CodeBase.Gameplay.PlayerSystem;
 using Cysharp.Threading.Tasks;
@@ -27,22 +28,24 @@ namespace CodeBase.Gameplay.ResourceItem
         protected override async void OnResourceEnter(Collider other)
         {
             base.OnResourceEnter(other);
-            var resource = other.GetComponent<Resource>();
-
-            while (!resource.IsCollected)
-            {
-                await UniTask.Yield();
-            }
-
-            _playerIKService.SetIKHandTargets(_leftHandCarring, _rightHandCarring);
-            _playerPaperContainer.Add(resource.GetComponent<Paper>());
             
-            if (_lastResource != null)
-                resource.transform.localPosition = _lastResource.transform.localPosition + _offset;
-
-            _lastResource = resource;
-
-            _collectedResources.Add(other.GetComponent<Resource>());
+            // var resource = other.GetComponent<Resource>();
+            //
+            //
+            // while (!resource.IsCollected)
+            // {
+            //     await UniTask.Yield();
+            // }
+            //
+            // _playerIKService.SetIKHandTargets(_leftHandCarring, _rightHandCarring);
+            // _playerPaperContainer.Add(resource.GetComponent<Paper>());
+            //
+            // if (_lastResource != null)
+            //     resource.transform.localPosition = _lastResource.transform.localPosition + _offset;
+            //
+            // _lastResource = resource;
+            //
+            // _collectedResources.Add(resource);
         }
     }
 }

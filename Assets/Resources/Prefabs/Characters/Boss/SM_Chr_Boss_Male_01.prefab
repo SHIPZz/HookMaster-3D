@@ -152,7 +152,7 @@ Transform:
   m_GameObject: {fileID: 479951077751662771}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.196, z: 0.477}
+  m_LocalPosition: {x: 0, y: 1.196, z: 0.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1651,7 +1651,7 @@ Transform:
   m_GameObject: {fileID: 1014232780379532247}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.413, y: 2.344, z: -0.58}
+  m_LocalPosition: {x: 0.413, y: 2.344, z: -0.534}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1882,10 +1882,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5493207
-  m_Height: 2.555376
+  m_Radius: 0.80613613
+  m_Height: 4.772221
   m_Direction: 1
-  m_Center: {x: 0, y: 0.777688, z: 0.049320698}
+  m_Center: {x: 0, y: 1.8861105, z: 0.06822562}
 --- !u!114 &7167088569956409329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3027,8 +3027,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _triggerObserver: {fileID: 8750176678824695920}
   _playerPaperContainer: {fileID: 0}
-  _leftHandCarring: {fileID: 0}
-  _rightHandCarring: {fileID: 0}
 --- !u!114 &8750176678824695920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3112,8 +3110,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _triggerObserver: {fileID: 8455194149568604372}
   _playerPaperContainer: {fileID: 5553894657283998238}
-  _leftHandCarring: {fileID: 0}
-  _rightHandCarring: {fileID: 0}
 --- !u!114 &8455194149568604372
 MonoBehaviour:
   m_ObjectHideFlags: 0
