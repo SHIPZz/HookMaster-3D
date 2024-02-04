@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using CodeBase.Gameplay.PaperSystem;
 using CodeBase.Gameplay.TableSystem;
+using CodeBase.Services.Employees;
 using CodeBase.Services.TriggerObserve;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -20,26 +22,28 @@ namespace CodeBase.Gameplay.PlayerSystem
         private Paper _lastPaper;
         private CancellationTokenSource _cancellationToken = new();
         private bool _exited;
+        private EmployeeService _employeeService;
 
         [Inject]
-        private void Construct(PlayerIKService playerIKService)
+        private void Construct(PlayerIKService playerIKService, EmployeeService employeeService)
         {
+            _employeeService = employeeService;
             _playerIKService = playerIKService;
         }
 
         private void OnEnable()
         {
-            // _triggerObserver.TriggerEntered += Deliver;
-            // _triggerObserver.TriggerExited += Exited;
+            _triggerObserver.TriggerEntered += OnPlayerApproachedToTable;
+            _triggerObserver.TriggerExited += Exited;
         }
 
         private void OnDisable()
         {
-            // _triggerObserver.TriggerEntered -= Deliver;
-            // _triggerObserver.TriggerExited -= Exited;
+            _triggerObserver.TriggerEntered -= OnPlayerApproachedToTable;
+            _triggerObserver.TriggerExited -= Exited;
         }
 
-        private async void Deliver(Collider collider)
+        private async void OnPlayerApproachedToTable(Collider collider)
         {
             if (!collider.gameObject.TryGetComponent(out Table table))
                 return;
@@ -56,40 +60,54 @@ namespace CodeBase.Gameplay.PlayerSystem
                 return;
             }
 
-            _playerPaperContainer.Clear();
-            _playerIKService.ClearIKHandTargets();
-            _lastPaper = null;
+            Reboot();
         }
 
         private async UniTask Deliver(Table table)
         {
-            foreach (Paper paper in _playerPaperContainer.Papers.Where(x => !x.IsOnEmployeeTable))
+            IReadOnlyCollection<Paper> papersToDeliver = _playerPaperContainer.Papers;
+            _employeeService.CancelProcessingPaper(table);
+
+            foreach (Paper paper in papersToDeliver)
             {
                 paper.SetOnEmployeeTable(true);
                 paper.transform.SetParent(table.PaperPosition);
                 paper.transform.localRotation = Quaternion.identity;
-                table.Add(paper);
+                _lastPaper = table.LastPaper;
 
                 if (_lastPaper != null)
                 {
                     await paper.transform
                         .DOLocalJump(_lastPaper.transform.localPosition + table.Offset, 1f, 1, 0.5f)
-                        .AsyncWaitForCompletion().AsUniTask().AttachExternalCancellation(_cancellationToken.Token);
+                        .AsyncWaitForCompletion().AsUniTask();
                 }
                 else
                 {
                     await paper.transform
                         .DOLocalJump(Vector3.zero, 1f, 1, 0.5f)
-                        .AsyncWaitForCompletion().AsUniTask().AttachExternalCancellation(_cancellationToken.Token);
+                        .AsyncWaitForCompletion().AsUniTask();
                 }
 
+                table.Add(paper);
                 _lastPaper = paper;
             }
+
+            Reboot();
         }
 
         private void Exited(Collider obj)
         {
+            if (!obj.gameObject.TryGetComponent(out Table table))
+                return;
+
             _cancellationToken?.Cancel();
+        }
+
+        private void Reboot()
+        {
+            _playerPaperContainer.Clear();
+            _playerIKService.ClearIKHandTargets();
+            _lastPaper = null;
         }
     }
 }

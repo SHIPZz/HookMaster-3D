@@ -38,6 +38,7 @@ namespace CodeBase.Gameplay.ResourceItem
             {
                 transform.SetParent(parent);
                 transform.localRotation = Quaternion.identity;
+                transform.localPosition = Vector3.zero;
             }
 
             IsCollected = true;

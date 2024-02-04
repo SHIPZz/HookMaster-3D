@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.Gameplay.PaperSystem;
 using CodeBase.Gameplay.PlayerSystem;
@@ -15,7 +16,6 @@ namespace CodeBase.Gameplay.ResourceItem
         [SerializeField] private Transform _leftHandCarring;
         [SerializeField] private Transform _rightHandCarring;
 
-        private List<Resource> _collectedResources = new();
         private Resource _lastResource;
         private PlayerIKService _playerIKService;
 
@@ -25,27 +25,44 @@ namespace CodeBase.Gameplay.ResourceItem
             _playerIKService = playerIKService;
         }
 
+        private void Start()
+        {
+            _playerPaperContainer.Cleared += Reset;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            _playerPaperContainer.Cleared -= Reset;
+        }
+
         protected override async void OnResourceEnter(Collider other)
         {
             base.OnResourceEnter(other);
             
-            // var resource = other.GetComponent<Resource>();
-            //
-            //
-            // while (!resource.IsCollected)
-            // {
-            //     await UniTask.Yield();
-            // }
-            //
-            // _playerIKService.SetIKHandTargets(_leftHandCarring, _rightHandCarring);
-            // _playerPaperContainer.Add(resource.GetComponent<Paper>());
-            //
-            // if (_lastResource != null)
-            //     resource.transform.localPosition = _lastResource.transform.localPosition + _offset;
-            //
-            // _lastResource = resource;
-            //
-            // _collectedResources.Add(resource);
+            if(!other.gameObject.TryGetComponent(out Resource resource))
+                return;
+            
+            if(resource.GameItemType != GameItemType.Paper)
+                return;
+            
+            while (!resource.IsCollected)
+            {
+                await UniTask.Yield();
+            }
+            
+            _playerIKService.SetIKHandTargets(_leftHandCarring, _rightHandCarring);
+            _playerPaperContainer.Push(resource.GetComponent<Paper>());
+            
+            if (_lastResource != null)
+                resource.transform.localPosition = _lastResource.transform.localPosition + _offset;
+            
+            _lastResource = resource;
+        }
+
+        private void Reset()
+        {
+            _lastResource = null;
         }
     }
 }

@@ -56,11 +56,11 @@ namespace CodeBase.Services.Profit
             _uiService.OpenOfflineRewardWindow(_totalEarnedProfit, timeDifferenceByMinutes);
         }
 
-        public void Initialize() => 
+        public void Initialize() =>
             Application.focusChanged += OnFocusChanged;
 
-        public void Dispose() => 
-        Application.focusChanged -= OnFocusChanged;
+        public void Dispose() =>
+            Application.focusChanged -= OnFocusChanged;
 
 
         private void ReceiveOfflineProfit(int timeDifferenceByMinutes)
@@ -88,10 +88,10 @@ namespace CodeBase.Services.Profit
                 if (totalProfit == 0)
                     return;
 
-                _walletService.Set(ItemTypeId.Money, totalProfit);
-                _worldTimeService.SaveLastProfitEarnedTime();
-                _totalEarnedProfit += totalProfit;
-                ProfitGot?.Invoke(employee.Id, totalProfit);
+                // _walletService.Set(ItemTypeId.Money, totalProfit);
+                // _worldTimeService.SaveLastProfitEarnedTime();
+                // _totalEarnedProfit += totalProfit;
+                // ProfitGot?.Invoke(employee.Id, totalProfit);
             }
         }
 
@@ -106,10 +106,10 @@ namespace CodeBase.Services.Profit
                     if (!employee.IsWorking)
                         continue;
 
-                    int minuteProfit = employee.Profit / TimeConstantValue.MinutesInDay;
-                    _walletService.Set(ItemTypeId.Money, minuteProfit);
-                    ProfitGot?.Invoke(employee.Id, minuteProfit);
-                    _worldTimeService.SaveLastProfitEarnedTime();
+                    // int minuteProfit = employee.Profit / TimeConstantValue.MinutesInDay;
+                    // _walletService.Set(ItemTypeId.Money, minuteProfit);
+                    // ProfitGot?.Invoke(employee.Id, minuteProfit);
+                    // _worldTimeService.SaveLastProfitEarnedTime();
                 }
             }
         }

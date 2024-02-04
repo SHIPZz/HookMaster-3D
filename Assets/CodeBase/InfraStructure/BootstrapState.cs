@@ -32,6 +32,7 @@ namespace CodeBase.InfraStructure
             
             await _worldDataService.Load();
 
+            _worldTimeService.Initialize();
             while (!_worldTimeService.GotTime) 
                 await UniTask.Yield();
 

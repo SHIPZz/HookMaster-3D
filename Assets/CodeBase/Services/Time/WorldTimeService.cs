@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Globalization;
 using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Extensions;
@@ -12,10 +13,12 @@ using Zenject;
 
 namespace CodeBase.Services.Time
 {
-    public class WorldTimeService : IInitializable, IDisposable
+    public class WorldTimeService :  IDisposable
     {
         private const string ApiUrl = "http://worldtimeapi.org/api/ip";
-        private readonly string[] BackupApiUrls = { "http://backup1.worldtimeapi.org/api/ip", "http://backup2.worldtimeapi.org/api/ip" };
+
+        private readonly string[] BackupApiUrls =
+            { "http://backup1.worldtimeapi.org/api/ip", "http://backup2.worldtimeapi.org/api/ip" };
 
         private readonly ICoroutineRunner _coroutineRunner;
         private readonly IWorldDataService _worldDataService;
@@ -64,7 +67,7 @@ namespace CodeBase.Services.Time
         {
             if (_worldTimeCoroutine != null)
                 _coroutineRunner.StopCoroutine(GetWorldTimeCoroutine());
-            
+
             Debug.Log("update world time");
 
             _worldTimeCoroutine = _coroutineRunner.StartCoroutine(GetWorldTimeCoroutine());
@@ -188,8 +191,9 @@ namespace CodeBase.Services.Time
 
             if (targetMiningFarmData.LastCleanTime == 0)
                 targetMiningFarmData.LastCleanTime = worldTimeData.CurrentTime;
-            
-            TimeSpan timeDifference = worldTimeData.CurrentTime.ToDateTime() - targetMiningFarmData.LastCleanTime.ToDateTime();
+
+            TimeSpan timeDifference =
+                worldTimeData.CurrentTime.ToDateTime() - targetMiningFarmData.LastCleanTime.ToDateTime();
             return (int)timeDifference.TotalMinutes;
         }
 
@@ -224,50 +228,57 @@ namespace CodeBase.Services.Time
 
         private IEnumerator GetWorldTimeCoroutine()
         {
-            using UnityWebRequest webRequest = UnityWebRequest.Get(ApiUrl);
-
-            yield return webRequest.SendWebRequest();
-
-            if (webRequest.result is UnityWebRequest.Result.ConnectionError or UnityWebRequest.Result.ProtocolError)
-            {
-                Debug.LogError("Error: webrequest");
-                yield return TryBackupServers();
-            }
-            else
-            {
-                try
-                {
-                    WorldTimeApiResponse response =
-                        JsonUtility.FromJson<WorldTimeApiResponse>(webRequest.downloadHandler.text);
-                    DateTime worldDateTime = DateTime.Parse(response.utc_datetime);
-
-                    _worldDataService.WorldData.WorldTimeData.CurrentTime = worldDateTime.ToUnixTime();
-                    _worldDataService.Save();
-                    GotTime = true;
-                    TimeUpdated = true;
-                    Debug.Log("World Time: " + worldDateTime.ToUnixTime().ToDateTime());
-                }
-                catch (Exception e)
-                {
-                    Debug.LogError("Error parsing world time response: " + e.Message);
-                }
-            }
+            _worldDataService.WorldData.WorldTimeData.CurrentTime = DateTime.Now.ToUnixTime();
+            _worldDataService.Save();
+            GotTime = true;
+            TimeUpdated = true;
+            yield return null;
+            
+            // using UnityWebRequest webRequest = UnityWebRequest.Get(ApiUrl);
+            // webRequest.SetRequestHeader("cache-control", "no-cache");
+            // yield return webRequest.SendWebRequest();
+            //
+            // if (webRequest.result is UnityWebRequest.Result.ConnectionError or UnityWebRequest.Result.ProtocolError)
+            // {
+            //     Debug.LogError("Error: webrequest");
+            //     yield return TryBackupServers();
+            // }
+            // else
+            // {
+            //     try
+            //     {
+            //         WorldTimeApiResponse response =
+            //             JsonUtility.FromJson<WorldTimeApiResponse>(webRequest.downloadHandler.text);
+            //         DateTime worldDateTime = DateTime.Parse(response.utc_datetime);
+            //
+            //         _worldDataService.WorldData.WorldTimeData.CurrentTime = worldDateTime.ToUnixTime();
+            //         _worldDataService.Save();
+            //         GotTime = true;
+            //         TimeUpdated = true;
+            //         Debug.Log("World Time: " + worldDateTime.ToUnixTime().ToDateTime());
+            //     }
+            //     catch (Exception e)
+            //     {
+            //         Debug.LogError("Error parsing world time response: " + e.Message);
+            //     }
+            // }
         }
-        
+
         private IEnumerator TryBackupServers()
         {
             foreach (string backupUrl in BackupApiUrls)
             {
-                using UnityWebRequest backupWebRequest = UnityWebRequest.Get(backupUrl);
-                
+                using UnityWebRequest backupWebRequest = UnityWebRequest.Get(ApiUrl);
+                backupWebRequest.SetRequestHeader("cache-control", "no-cache");
                 yield return backupWebRequest.SendWebRequest();
 
                 if (backupWebRequest.result != UnityWebRequest.Result.Success)
                     continue;
-                
+
                 try
                 {
-                    WorldTimeApiResponse response = JsonUtility.FromJson<WorldTimeApiResponse>(backupWebRequest.downloadHandler.text);
+                    WorldTimeApiResponse response =
+                        JsonUtility.FromJson<WorldTimeApiResponse>(backupWebRequest.downloadHandler.text);
                     DateTime worldDateTime = DateTime.Parse(response.utc_datetime);
 
                     _worldDataService.WorldData.WorldTimeData.CurrentTime = worldDateTime.ToUnixTime();

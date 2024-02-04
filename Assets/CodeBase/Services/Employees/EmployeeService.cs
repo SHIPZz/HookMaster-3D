@@ -30,8 +30,11 @@ namespace CodeBase.Services.Employees
         public void Dispose() => 
             _tableService.Tables.ForEach(x => x.PaperAdded -= OnTablePaperAdded);
 
-        private void OnTablePaperAdded(Table table, Paper paper) => 
-            Employees.FirstOrDefault(x => x.TableId == table.Id)?.ProcessPaper(paper, table);
+        public void CancelProcessingPaper(Table table)
+        {
+            Employee targetEmployee = GetEmployeeByTable(table);
+            targetEmployee?.CancelProcessPaper();
+        }
 
         public void SetUpgrade(string id, bool isUpgrading)
         {
@@ -58,5 +61,15 @@ namespace CodeBase.Services.Employees
 
         public Employee Get(string id) =>
             Employees.FirstOrDefault(x => x.Id == id);
+
+        private void OnTablePaperAdded(Table table)
+        {
+            Employee targetEmployee = GetEmployeeByTable(table);
+            targetEmployee?.CancelProcessPaper();
+            targetEmployee?.ProcessPaper(table);
+        }
+        
+        private Employee GetEmployeeByTable(Table table) =>
+            Employees.FirstOrDefault(x => x.TableId == table.Id);
     }
 }

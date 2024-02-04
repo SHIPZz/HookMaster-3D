@@ -12,6 +12,7 @@ using CodeBase.Services.WorldData;
 using CodeBase.UI.Hud;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace CodeBase.UI.Employee
@@ -19,6 +20,7 @@ namespace CodeBase.UI.Employee
     public class EmployeeWindow : WindowBase
     {
         public TutorialFadeImage TutorialFadeImage;
+        public ScrollRect ScrollRect;
 
         [SerializeField] private Transform _parent;
         [SerializeField] private TMP_Text _noAvailableEmployeesText;

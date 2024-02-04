@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6711729238171487944}
-  m_Layer: 26
+  m_Layer: 27
   m_Name: RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 615399666365585473}
   - component: {fileID: -3221916853221770364}
   - component: {fileID: 7637439069238424458}
-  m_Layer: 26
+  m_Layer: 27
   m_Name: Paper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2343c93342a74ac8b01667bb07ff90a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <GameItemType>k__BackingField: 0
+  <GameItemType>k__BackingField: 6
 --- !u!114 &-3221916853221770364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,6 +201,7 @@ MonoBehaviour:
   _collider: {fileID: 311480940300447499}
   _needDestroy: 0
   _setParent: 1
+  _destroyDelay: 0.2
   <NeedChangeScale>k__BackingField: 0
 --- !u!54 &7637439069238424458
 Rigidbody:
@@ -238,7 +239,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4279733855490782009}
-  m_Layer: 26
+  m_Layer: 27
   m_Name: LeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}

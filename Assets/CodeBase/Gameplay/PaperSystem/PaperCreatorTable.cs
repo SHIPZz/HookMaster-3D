@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CodeBase.Gameplay.ObjectCreatorSystem;
 using CodeBase.Gameplay.PlayerSystem;
 using CodeBase.Services.TriggerObserve;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.PaperSystem
@@ -14,13 +15,23 @@ namespace CodeBase.Gameplay.PaperSystem
 
         private List<Paper> _papers = new();
 
-        private void OnEnable()
+        private async void OnEnable()
         {
             for (int i = 0; i < 5; i++)
             {
                 _resourceCreator.Create();
             }
+
+            while (true)
+            {
+                await UniTask.WaitForSeconds(3f);
+                _resourceCreator.Create();
+            }
         }
+        
+        
+        
+        
         //
         // private void OnDisable()
         // {

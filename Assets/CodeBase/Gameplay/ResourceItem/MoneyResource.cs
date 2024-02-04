@@ -21,7 +21,7 @@ namespace CodeBase.Gameplay.ResourceItem
         public override void Collect(Transform parent)
         {
             base.Collect(parent);
-            _soundPlayerSystem.PlayActiveSound();
+            // _soundPlayerSystem.PlayActiveSound();
             _walletService.Set(ItemTypeId.Money, Value);
         }
     }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using CodeBase.Data;
 using CodeBase.Enums;
 using CodeBase.Extensions;
@@ -23,6 +25,7 @@ namespace CodeBase.Gameplay.Employees
         [field: SerializeField] public MaterialTypeId BurnMaterial { get; private set; }
         [field: SerializeField] public SkinnedMeshRenderer Renderer { get; private set; }
         [field: SerializeField] public bool IsBurned { get; set; }
+        [SerializeField] private float _processPaperTime = 5f;
 
         public EmployeeTypeId EmployeeTypeId;
         public Guid Guid;
@@ -40,6 +43,8 @@ namespace CodeBase.Gameplay.Employees
         private BurnableObjectService _burnableObjectService;
         private RendererMaterialChangerService _rendererMaterialChangerService;
         private TableService _tableService;
+        private CancellationTokenSource _cancellationToken = new();
+        private Stack<Paper> _papers = new();
 
         public event Action<Employee> UpgradeStarted;
         public event Action<Employee> Burned;
@@ -65,14 +70,34 @@ namespace CodeBase.Gameplay.Employees
                 Burn();
         }
 
-        public async UniTaskVoid ProcessPaper(Paper paper, Table table)
+        public async UniTaskVoid ProcessPaper(Table table)
         {
-            await UniTask.WaitForSeconds(2f);
-            await paper.transform
-                .DOLocalJump(table.PaperFinishedPosition.localPosition, 1, 1, 1f)
-                .AsyncWaitForCompletion().AsUniTask();
-            
-            table.Remove(paper);
+            _cancellationToken?.Dispose();
+            _cancellationToken = new CancellationTokenSource();
+
+            foreach (Paper paper in table.PapersOnTable.Reverse())
+            {
+                _papers.Push(paper);
+            }
+
+            foreach (Paper paper in _papers)
+            {
+                await UniTask.WaitForSeconds(_processPaperTime).AttachExternalCancellation(_cancellationToken.Token);
+                paper.transform.SetParent(table.PaperFinishedPosition);
+                await paper.transform
+                    .DOLocalJump(Vector3.zero, 1, 1, 1f)
+                    .AsyncWaitForCompletion().AsUniTask();
+                await paper.transform.DOScale(0, 0.5f).AsyncWaitForCompletion().AsUniTask();
+
+                table.ResourceCreator.Create();
+            }
+
+            table.ClearPapers();
+        }
+
+        public void CancelProcessPaper()
+        {
+            _cancellationToken?.Cancel();
         }
 
         public void StartWorking()

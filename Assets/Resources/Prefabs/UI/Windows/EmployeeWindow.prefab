@@ -1222,6 +1222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CloseButton: {fileID: 4755222298387716723}
   TutorialFadeImage: {fileID: 6075868431338952314}
+  ScrollRect: {fileID: 3423317726672354954}
   _parent: {fileID: 7032306303600342493}
   _noAvailableEmployeesText: {fileID: 6336531460772629390}
   _tableCountText: {fileID: 8898153780436315018}

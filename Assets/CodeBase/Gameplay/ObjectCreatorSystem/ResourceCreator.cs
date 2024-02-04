@@ -10,12 +10,12 @@ namespace CodeBase.Gameplay.ObjectCreatorSystem
 {
     public class ResourceCreator : MonoBehaviour
     {
-        [SerializeField] private float _spacingZ = 0.3f;
         [SerializeField] private float _spacingY = 0.1f;
         [SerializeField] private Vector3 _offset;
         [SerializeField] private Transform _parent;
         [SerializeField] private float _columnCount = 2;
         [SerializeField] private GameItemType _gameItemType;
+        [SerializeField] private Vector3 _rotation;
 
         private List<Resource> _papers = new();
         private GameItemFactory _gameItemFactory;
@@ -49,6 +49,9 @@ namespace CodeBase.Gameplay.ObjectCreatorSystem
         public Resource Create()
         {
             Resource resource = _gameItemFactory.CreateResourceItem(_gameItemType, _parent, _parent.transform.position);
+
+            if (_rotation != Vector3.zero)
+                resource.transform.localRotation = Quaternion.Euler(_rotation);
 
             _papers.Add(resource);
             _papers.RemoveAll(x => x == null);

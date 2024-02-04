@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CodeBase.Gameplay.PaperSystem;
 using UnityEngine;
 
@@ -6,17 +7,19 @@ namespace CodeBase.Gameplay.PlayerSystem
 {
     public class PlayerPaperContainer : MonoBehaviour
     {
-        private List<Paper> _papers = new();
+        private Stack<Paper> _papers = new();
 
-        public IReadOnlyList<Paper> Papers => _papers;
+        public IReadOnlyCollection<Paper> Papers => _papers;
 
-        public void Add(Paper paper) => _papers.Add(paper);
+        public event Action Cleared;
+        
+        public void Push(Paper paper) => _papers.Push(paper);
 
-        public void Remove(Paper paper) => _papers.Remove(paper);
 
         public void Clear()
         {
             _papers.Clear();
+            Cleared?.Invoke();
         }
     }
 }

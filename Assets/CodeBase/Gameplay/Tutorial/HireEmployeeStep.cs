@@ -34,6 +34,7 @@ namespace CodeBase.Gameplay.Tutorial
             _employeeView.Closed -= OnFinished;
             _tutorialHand.gameObject.SetActive(false);
             _employeeWindow.TutorialFadeImage.gameObject.SetActive(false);
+            _employeeWindow.ScrollRect.vertical = true;
             SetCompleteToData(true);
             WorldDataService.WorldData.TutorialData.CompletedTutorials[ClassName] = true;
         }
@@ -44,6 +45,7 @@ namespace CodeBase.Gameplay.Tutorial
                 return;
 
             _employeeWindow = WindowService.Get<EmployeeWindow>();
+            _employeeWindow.ScrollRect.vertical = false;
             _employeeWindow.TutorialFadeImage.gameObject.SetActive(true);
 
             _employeeView = _employeeWindow.GetFirstEmployeeView();

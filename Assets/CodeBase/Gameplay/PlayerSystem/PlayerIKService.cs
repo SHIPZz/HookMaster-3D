@@ -26,7 +26,7 @@ namespace CodeBase.Gameplay.PlayerSystem
 
         public async void ClearIKHandTargets()
         {
-            while (_fullBodyBipedIK.solver.leftHandEffector.positionWeight > 0)
+            while (_fullBodyBipedIK.solver.leftHandEffector.positionWeight > 0.1f)
             {
                 _fullBodyBipedIK.solver.leftHandEffector.positionWeight =
                     Mathf.Lerp(_fullBodyBipedIK.solver.leftHandEffector.positionWeight, 0, ClearSpeed * Time.deltaTime);
@@ -43,9 +43,8 @@ namespace CodeBase.Gameplay.PlayerSystem
                 await UniTask.Yield();
             }
             
-            
-            _fullBodyBipedIK.solver.leftHandEffector.target = null;
-            _fullBodyBipedIK.solver.rightHandEffector.target = null;
+            // _fullBodyBipedIK.solver.leftHandEffector.target = null;
+            // _fullBodyBipedIK.solver.rightHandEffector.target = null;
 
             SetIKHandWeights(0);
             HasItemInHands = false;

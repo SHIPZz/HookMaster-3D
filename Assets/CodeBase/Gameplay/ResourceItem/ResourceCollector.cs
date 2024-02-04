@@ -1,4 +1,5 @@
 using System;
+using CodeBase.Enums;
 using CodeBase.Services.TriggerObserve;
 using UnityEngine;
 using Zenject;
@@ -7,24 +8,24 @@ namespace CodeBase.Gameplay.ResourceItem
 {
     public class ResourceCollector : MonoBehaviour, IResourceCollector
     {
-        public event Action<IResourceCollector, Resource> ResourceDetected;
-
         [SerializeField] private Transform _controlPoint;
         [SerializeField] private TriggerObserver _triggerObserver;
+        [SerializeField] private GameItemType _resourceType;
 
         [Inject] private readonly IResourceCollectionSystem _resourceCollectionSystem;
 
         [field: SerializeField] public Transform Anchor { get; private set; }
 
         public Transform ControlPoint => _controlPoint;
+        public event Action<IResourceCollector, Resource> ResourceDetected;
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             _resourceCollectionSystem.Register(this);
             _triggerObserver.TriggerEntered += OnResourceEnter;
         }
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             _resourceCollectionSystem.Remove(this);
             _triggerObserver.TriggerEntered -= OnResourceEnter;
@@ -32,7 +33,13 @@ namespace CodeBase.Gameplay.ResourceItem
 
         protected virtual void OnResourceEnter(Collider other)
         {
-            ResourceDetected?.Invoke(this, other.GetComponent<Resource>());
+            if(!other.gameObject.TryGetComponent(out Resource resource))
+                return;
+            
+            if(resource.GameItemType != _resourceType)
+                return;
+            
+            ResourceDetected?.Invoke(this, resource);
         }
     }
 }
