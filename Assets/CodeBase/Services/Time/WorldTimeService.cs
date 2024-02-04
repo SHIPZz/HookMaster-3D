@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Globalization;
+using System.IO;
+using System.Net;
+using System.Net.Sockets;
 using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Extensions;
@@ -13,12 +16,12 @@ using Zenject;
 
 namespace CodeBase.Services.Time
 {
-    public class WorldTimeService :  IDisposable
+    public class WorldTimeService : IDisposable
     {
-        private const string ApiUrl = "http://worldtimeapi.org/api/ip";
+        private const string ApiUrl = "https://api.api-ninjas.com/v1/worldtime?city=london";
 
         private readonly string[] BackupApiUrls =
-            { "http://backup1.worldtimeapi.org/api/ip", "http://backup2.worldtimeapi.org/api/ip" };
+            { "https://backup1.worldtimeapi.org/api/ip", "https://backup2.worldtimeapi.org/api/ip" };
 
         private readonly ICoroutineRunner _coroutineRunner;
         private readonly IWorldDataService _worldDataService;
@@ -228,27 +231,33 @@ namespace CodeBase.Services.Time
 
         private IEnumerator GetWorldTimeCoroutine()
         {
-            _worldDataService.WorldData.WorldTimeData.CurrentTime = DateTime.Now.ToUnixTime();
+            var client = new TcpClient("time.nist.gov", 13);
+            
+            using var streamReader = new StreamReader(client.GetStream());
+            
+            var response = streamReader.ReadToEnd();
+            var utcDateTimeString = response.Substring(7, 17);
+            DateTime localDateTime = DateTime.ParseExact(utcDateTimeString, "yy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal);
+            _worldDataService.WorldData.WorldTimeData.CurrentTime = localDateTime.ToUnixTime();
             _worldDataService.Save();
             GotTime = true;
             TimeUpdated = true;
+
             yield return null;
-            
-            // using UnityWebRequest webRequest = UnityWebRequest.Get(ApiUrl);
-            // webRequest.SetRequestHeader("cache-control", "no-cache");
-            // yield return webRequest.SendWebRequest();
+
+            // using WWW www = new WWW(ApiUrl);
+            // yield return www;
             //
-            // if (webRequest.result is UnityWebRequest.Result.ConnectionError or UnityWebRequest.Result.ProtocolError)
+            // if (!string.IsNullOrEmpty(www.error))
             // {
-            //     Debug.LogError("Error: webrequest");
+            //     Debug.LogError("Error: webrequest - " + www.error);
             //     yield return TryBackupServers();
             // }
             // else
             // {
             //     try
             //     {
-            //         WorldTimeApiResponse response =
-            //             JsonUtility.FromJson<WorldTimeApiResponse>(webRequest.downloadHandler.text);
+            //         WorldTimeApiResponse response = JsonUtility.FromJson<WorldTimeApiResponse>(www.text);
             //         DateTime worldDateTime = DateTime.Parse(response.utc_datetime);
             //
             //         _worldDataService.WorldData.WorldTimeData.CurrentTime = worldDateTime.ToUnixTime();
@@ -268,17 +277,15 @@ namespace CodeBase.Services.Time
         {
             foreach (string backupUrl in BackupApiUrls)
             {
-                using UnityWebRequest backupWebRequest = UnityWebRequest.Get(ApiUrl);
-                backupWebRequest.SetRequestHeader("cache-control", "no-cache");
-                yield return backupWebRequest.SendWebRequest();
+                using WWW backupWWW = new WWW(backupUrl);
+                yield return backupWWW;
 
-                if (backupWebRequest.result != UnityWebRequest.Result.Success)
+                if (!string.IsNullOrEmpty(backupWWW.error))
                     continue;
 
                 try
                 {
-                    WorldTimeApiResponse response =
-                        JsonUtility.FromJson<WorldTimeApiResponse>(backupWebRequest.downloadHandler.text);
+                    WorldTimeApiResponse response = JsonUtility.FromJson<WorldTimeApiResponse>(backupWWW.text);
                     DateTime worldDateTime = DateTime.Parse(response.utc_datetime);
 
                     _worldDataService.WorldData.WorldTimeData.CurrentTime = worldDateTime.ToUnixTime();
