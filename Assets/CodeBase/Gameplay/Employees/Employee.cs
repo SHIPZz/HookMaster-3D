@@ -75,23 +75,28 @@ namespace CodeBase.Gameplay.Employees
             _cancellationToken?.Dispose();
             _cancellationToken = new CancellationTokenSource();
 
-            foreach (Paper paper in table.PapersOnTable.Reverse())
+            while (table.PapersOnTable.Count > 0)
             {
-                _papers.Push(paper);
+                foreach (Paper paper in table.PapersOnTable.Reverse())
+                {
+                    _papers.Push(paper);
+                }
+
+                foreach (Paper paper in _papers)
+                {
+                    await UniTask.WaitForSeconds(_processPaperTime)
+                        .AttachExternalCancellation(_cancellationToken.Token);
+                    paper.transform.SetParent(table.PaperFinishedPosition);
+                    await paper.transform
+                        .DOLocalJump(Vector3.zero, 1, 1, 1f)
+                        .AsyncWaitForCompletion().AsUniTask();
+                    await paper.transform.DOScale(0, 0.5f).AsyncWaitForCompletion().AsUniTask();
+                    table.PopPaper();
+                    table.ResourceCreator.Create();
+                }
             }
 
-            foreach (Paper paper in _papers)
-            {
-                await UniTask.WaitForSeconds(_processPaperTime).AttachExternalCancellation(_cancellationToken.Token);
-                paper.transform.SetParent(table.PaperFinishedPosition);
-                await paper.transform
-                    .DOLocalJump(Vector3.zero, 1, 1, 1f)
-                    .AsyncWaitForCompletion().AsUniTask();
-                await paper.transform.DOScale(0, 0.5f).AsyncWaitForCompletion().AsUniTask();
-
-                table.ResourceCreator.Create();
-            }
-
+            _papers.Clear();
             table.ClearPapers();
         }
 

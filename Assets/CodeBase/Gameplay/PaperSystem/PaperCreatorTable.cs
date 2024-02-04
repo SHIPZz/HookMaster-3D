@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CodeBase.Gameplay._3DPointers;
 using CodeBase.Gameplay.ObjectCreatorSystem;
 using CodeBase.Gameplay.PlayerSystem;
 using CodeBase.Services.TriggerObserve;
@@ -13,10 +14,15 @@ namespace CodeBase.Gameplay.PaperSystem
         [SerializeField] private ResourceCreator _resourceCreator;
         [SerializeField] private TriggerObserver _triggerObserver;
 
+        public GameObject Pointer;
+        public event Action PlayerApproached;
+        
         private List<Paper> _papers = new();
 
         private async void OnEnable()
         {
+            _triggerObserver.CollisionEntered += OnPlayerApproached;
+            
             for (int i = 0; i < 5; i++)
             {
                 _resourceCreator.Create();
@@ -28,10 +34,20 @@ namespace CodeBase.Gameplay.PaperSystem
                 _resourceCreator.Create();
             }
         }
-        
-        
-        
-        
+
+        private void OnDisable()
+        {
+            _triggerObserver.CollisionEntered -= OnPlayerApproached;
+            
+        }
+
+        private void OnPlayerApproached(Collision player)
+        {
+            Pointer.SetActive(false);
+            PlayerApproached?.Invoke();
+        }
+
+
         //
         // private void OnDisable()
         // {

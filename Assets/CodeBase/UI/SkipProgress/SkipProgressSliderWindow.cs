@@ -142,12 +142,9 @@ namespace CodeBase.UI.SkipProgress
 
         private void CalculateLastUpgradeTime()
         {
-            print(_upgradeEmployeeData.LastUpgradeTime + " do");
             _upgradeEmployeeData.LastUpgradeTime =
                 Mathf.Clamp(_upgradeEmployeeData.LastUpgradeTime - GetPassedSeconds(), 0,
                     TimeConstantValue.SecondsInHour);
-
-            print(_upgradeEmployeeData.LastUpgradeTime + " posle");
         }
 
         private bool TimeFullPassed() =>

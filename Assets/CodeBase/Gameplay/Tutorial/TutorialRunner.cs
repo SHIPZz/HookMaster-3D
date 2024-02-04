@@ -16,6 +16,7 @@ namespace CodeBase.Gameplay.Tutorial
 
         public void Init()
         {
+            CreateStep<ApproachToPaperTableStep>();
             CreateStep<StartHireEmployeeStep>();
             CreateStep<HireEmployeeStep>();
             CreateStep<ApproachToEmployeeStep>();
@@ -32,8 +33,7 @@ namespace CodeBase.Gameplay.Tutorial
 
         public void Dispose()
         {
-            foreach (IDisposable disposable in
-                     _tutorialSteps.Values.Select(tutorialStep => tutorialStep as IDisposable))
+            foreach (IDisposable disposable in _tutorialSteps.Values.Select(tutorialStep => tutorialStep as IDisposable))
             {
                 disposable?.Dispose();
             }

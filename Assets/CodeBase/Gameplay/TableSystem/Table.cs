@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CodeBase.Data;
 using CodeBase.Gameplay.BurnableObjectSystem;
 using CodeBase.Gameplay.ObjectCreatorSystem;
 using CodeBase.Gameplay.PaperSystem;
 using CodeBase.MaterialChanger;
 using CodeBase.Services.BurnableObjects;
-using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
@@ -49,6 +48,15 @@ namespace CodeBase.Gameplay.TableSystem
             _rendererMaterialChangerService = childRendererMaterial;
         }
 
+        public void Init()
+        {
+            _rendererMaterialChangerService.Init(1.5f, 1f, BurnMaterial, _meshRenderer, _childRenderers);
+            _burnableObjectService.Add(this);
+
+            if (IsBurned)
+                Burn();
+        }
+
         public void Add(Paper paper)
         {
             PapersOnTable.Push(paper);
@@ -71,15 +79,6 @@ namespace CodeBase.Gameplay.TableSystem
 
             LastPaper = PapersOnTable.Peek();
             return paper;
-        }
-
-        public void Init()
-        {
-            _rendererMaterialChangerService.Init(1.5f, 1f, BurnMaterial, _meshRenderer, _childRenderers);
-            _burnableObjectService.Add(this);
-
-            if (IsBurned)
-                Burn();
         }
 
         public void SetIsBurned(bool isBurned)

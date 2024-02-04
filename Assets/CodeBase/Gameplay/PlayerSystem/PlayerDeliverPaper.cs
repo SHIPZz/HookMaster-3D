@@ -23,6 +23,7 @@ namespace CodeBase.Gameplay.PlayerSystem
         private CancellationTokenSource _cancellationToken = new();
         private bool _exited;
         private EmployeeService _employeeService;
+        private Stack<Paper> _papersToDeliver = new();
 
         [Inject]
         private void Construct(PlayerIKService playerIKService, EmployeeService employeeService)
@@ -59,16 +60,18 @@ namespace CodeBase.Gameplay.PlayerSystem
             {
                 return;
             }
-
-            Reboot();
         }
 
         private async UniTask Deliver(Table table)
         {
-            IReadOnlyCollection<Paper> papersToDeliver = _playerPaperContainer.Papers;
+            foreach (Paper paper in _playerPaperContainer.Papers)
+            {
+                _papersToDeliver.Push(paper);
+            }
+
             _employeeService.CancelProcessingPaper(table);
 
-            foreach (Paper paper in papersToDeliver)
+            foreach (Paper paper in _papersToDeliver.Where(x => !x.IsOnEmployeeTable))
             {
                 paper.SetOnEmployeeTable(true);
                 paper.transform.SetParent(table.PaperPosition);
@@ -79,15 +82,16 @@ namespace CodeBase.Gameplay.PlayerSystem
                 {
                     await paper.transform
                         .DOLocalJump(_lastPaper.transform.localPosition + table.Offset, 1f, 1, 0.5f)
-                        .AsyncWaitForCompletion().AsUniTask();
+                        .AsyncWaitForCompletion().AsUniTask().AttachExternalCancellation(_cancellationToken.Token);
                 }
                 else
                 {
                     await paper.transform
                         .DOLocalJump(Vector3.zero, 1f, 1, 0.5f)
-                        .AsyncWaitForCompletion().AsUniTask();
+                        .AsyncWaitForCompletion().AsUniTask().AttachExternalCancellation(_cancellationToken.Token);
                 }
 
+                _playerPaperContainer.Pop();
                 table.Add(paper);
                 _lastPaper = paper;
             }
@@ -100,7 +104,14 @@ namespace CodeBase.Gameplay.PlayerSystem
             if (!obj.gameObject.TryGetComponent(out Table table))
                 return;
 
+            TryReboot();
             _cancellationToken?.Cancel();
+        }
+
+        private void TryReboot()
+        {
+            if (_playerPaperContainer.Papers.Count == 0)
+                Reboot();
         }
 
         private void Reboot()

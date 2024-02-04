@@ -7,6 +7,7 @@ using CodeBase.Services.WorldData;
 using CodeBase.UI;
 using CodeBase.UI.Buttons;
 using CodeBase.UI.Hud;
+using Cysharp.Threading.Tasks;
 using UnityEngine.UI;
 
 namespace CodeBase.Gameplay.Tutorial
@@ -46,7 +47,7 @@ namespace CodeBase.Gameplay.Tutorial
             WindowService.HudOpened -= OnWindowOpened;
         }
 
-        private void OnWindowOpened(WindowBase obj)
+        private async void OnWindowOpened(WindowBase obj)
         {
             if(IsCompleted())
                 return;

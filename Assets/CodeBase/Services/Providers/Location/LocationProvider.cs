@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Gameplay.PaperSystem;
 using UnityEngine;
 
 namespace CodeBase.Services.Providers.Location
@@ -15,5 +16,6 @@ namespace CodeBase.Services.Providers.Location
         public Transform DisableClientZone;
         public List<Transform> RandomItemSpawnPoints;
         public Transform ClientServiceRoom;
+        public PaperCreatorTable PaperCreatorTable;
     }
 }
