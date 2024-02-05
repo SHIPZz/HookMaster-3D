@@ -45,9 +45,13 @@ namespace CodeBase.Gameplay.Employees
         private TableService _tableService;
         private CancellationTokenSource _cancellationToken = new();
         private Stack<Paper> _papers = new();
+        
+        public bool HasPapers => _papers.Count > 0;
 
         public event Action<Employee> UpgradeStarted;
         public event Action<Employee> Burned;
+        public event Action<Employee> PaperAdded;
+        public event Action<Employee> AllPaperProcessed;
 
         [Inject]
         private void Construct(EmployeeDataService employeeDataService,
@@ -74,7 +78,8 @@ namespace CodeBase.Gameplay.Employees
         {
             _cancellationToken?.Dispose();
             _cancellationToken = new CancellationTokenSource();
-
+            PaperAdded?.Invoke(this);
+            
             while (table.PapersOnTable.Count > 0)
             {
                 foreach (Paper paper in table.PapersOnTable.Reverse())
@@ -96,6 +101,7 @@ namespace CodeBase.Gameplay.Employees
                 }
             }
 
+            AllPaperProcessed?.Invoke(this);
             _papers.Clear();
             table.ClearPapers();
         }

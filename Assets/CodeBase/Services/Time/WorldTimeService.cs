@@ -3,7 +3,10 @@ using System.Collections;
 using System.Globalization;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Net.Sockets;
+using System.Threading;
+using System.Threading.Tasks;
 using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Extensions;
@@ -11,24 +14,16 @@ using CodeBase.Services.Coroutine;
 using CodeBase.Services.WorldData;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Networking;
-using Zenject;
 
 namespace CodeBase.Services.Time
 {
     public class WorldTimeService : IDisposable
     {
-        private const string ApiUrl = "https://api.api-ninjas.com/v1/worldtime?city=london";
-
-        private readonly string[] BackupApiUrls =
-            { "https://backup1.worldtimeapi.org/api/ip", "https://backup2.worldtimeapi.org/api/ip" };
-
         private readonly ICoroutineRunner _coroutineRunner;
         private readonly IWorldDataService _worldDataService;
         private UnityEngine.Coroutine _worldTimeCoroutine;
 
         public bool GotTime { get; private set; }
-        public long CurrentTime { get; private set; }
 
         public bool TimeUpdated;
 
@@ -38,9 +33,10 @@ namespace CodeBase.Services.Time
             _worldDataService = worldDataService;
         }
 
-        public void Initialize()
+        public async void Initialize()
         {
-            _worldTimeCoroutine = _coroutineRunner.StartCoroutine(GetWorldTimeCoroutine());
+            // _worldTimeCoroutine = _coroutineRunner.StartCoroutine(GetWorldTimeCoroutine());
+            await InitializeTime();
             Application.focusChanged += OnFocusChanged;
         }
 
@@ -49,7 +45,7 @@ namespace CodeBase.Services.Time
             Application.focusChanged -= OnFocusChanged;
         }
 
-        private void OnFocusChanged(bool hasFocus)
+        private async void OnFocusChanged(bool hasFocus)
         {
             if (_worldTimeCoroutine != null)
                 _coroutineRunner.StopCoroutine(GetWorldTimeCoroutine());
@@ -57,7 +53,7 @@ namespace CodeBase.Services.Time
             switch (hasFocus)
             {
                 case true:
-                    _coroutineRunner.StartCoroutine(GetWorldTimeCoroutine());
+                    await InitializeTime();
                     break;
                 case false:
                     Debug.Log("save");
@@ -73,7 +69,8 @@ namespace CodeBase.Services.Time
 
             Debug.Log("update world time");
 
-            _worldTimeCoroutine = _coroutineRunner.StartCoroutine(GetWorldTimeCoroutine());
+            await InitializeTime();
+            // _worldTimeCoroutine = _coroutineRunner.StartCoroutine(GetWorldTimeCoroutine());
 
             while (!TimeUpdated)
             {
@@ -231,84 +228,126 @@ namespace CodeBase.Services.Time
 
         private IEnumerator GetWorldTimeCoroutine()
         {
-            var client = new TcpClient("time.nist.gov", 13);
-            
-            using var streamReader = new StreamReader(client.GetStream());
-            
-            var response = streamReader.ReadToEnd();
-            var utcDateTimeString = response.Substring(7, 17);
-            DateTime localDateTime = DateTime.ParseExact(utcDateTimeString, "yy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal);
-            _worldDataService.WorldData.WorldTimeData.CurrentTime = localDateTime.ToUnixTime();
+            // GetCurrentTime();
+            // var client = new TcpClient("time.nist.gov", 13);
+            //
+            // using var streamReader = new StreamReader(client.GetStream());
+            //
+            // var response = streamReader.ReadToEnd();
+            // var utcDateTimeString = response.Substring(7, 17);
+            // DateTime localDateTime = DateTime.ParseExact(utcDateTimeString, "yy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal);
+
+            Debug.Log(_worldDataService.WorldData.WorldTimeData.CurrentTime.ToDateTime().Minute);
+            Debug.Log(_worldDataService.WorldData.WorldTimeData.CurrentTime.ToDateTime());
+
+            yield return null;
+        }
+
+        private async UniTask InitializeTime()
+        {
+            DateTime currentTime = await GetCurrentTime();
+            _worldDataService.WorldData.WorldTimeData.CurrentTime = currentTime.ToUnixTime();
             _worldDataService.Save();
             GotTime = true;
             TimeUpdated = true;
-
-            yield return null;
-
-            // using WWW www = new WWW(ApiUrl);
-            // yield return www;
-            //
-            // if (!string.IsNullOrEmpty(www.error))
-            // {
-            //     Debug.LogError("Error: webrequest - " + www.error);
-            //     yield return TryBackupServers();
-            // }
-            // else
-            // {
-            //     try
-            //     {
-            //         WorldTimeApiResponse response = JsonUtility.FromJson<WorldTimeApiResponse>(www.text);
-            //         DateTime worldDateTime = DateTime.Parse(response.utc_datetime);
-            //
-            //         _worldDataService.WorldData.WorldTimeData.CurrentTime = worldDateTime.ToUnixTime();
-            //         _worldDataService.Save();
-            //         GotTime = true;
-            //         TimeUpdated = true;
-            //         Debug.Log("World Time: " + worldDateTime.ToUnixTime().ToDateTime());
-            //     }
-            //     catch (Exception e)
-            //     {
-            //         Debug.LogError("Error parsing world time response: " + e.Message);
-            //     }
-            // }
         }
 
-        private IEnumerator TryBackupServers()
+        private async UniTask<DateTime> GetCurrentTime()
         {
-            foreach (string backupUrl in BackupApiUrls)
+            const String ntpServer = "pool.ntp.org";
+            var ntpData = new Byte[48];
+            ntpData[0] = 0x1B; //LeapIndicator = 0 (no warning), VersionNum = 3 (IPv4 only), Mode = 3 (Client Mode)
+
+            try
             {
-                using WWW backupWWW = new WWW(backupUrl);
-                yield return backupWWW;
+                var addresses = Dns.GetHostEntry(ntpServer).AddressList;
+                var ipEndPoint = new IPEndPoint(addresses[0], 123);
+                var socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)
+                    { ReceiveTimeout = 5000, SendTimeout = 5000 };
 
-                if (!string.IsNullOrEmpty(backupWWW.error))
-                    continue;
+                // milliseconds
+                socket.Connect(ipEndPoint);
+                socket.Send(ntpData);
+                socket.Receive(ntpData);
+                socket.Close();
 
-                try
+                var intPart = (UInt64)ntpData[40] << 24 | (UInt64)ntpData[41] << 16 | (UInt64)ntpData[42] << 8 |
+                              (UInt64)ntpData[43];
+                var fractPart = (UInt64)ntpData[44] << 24 | (UInt64)ntpData[45] << 16 | (UInt64)ntpData[46] << 8 |
+                                (UInt64)ntpData[47];
+
+                var milliseconds = intPart * 1000 + (fractPart * 1000) / 0x100000000L;
+                if (milliseconds == 0) //Corrupted packet received, try again later
                 {
-                    WorldTimeApiResponse response = JsonUtility.FromJson<WorldTimeApiResponse>(backupWWW.text);
-                    DateTime worldDateTime = DateTime.Parse(response.utc_datetime);
-
-                    _worldDataService.WorldData.WorldTimeData.CurrentTime = worldDateTime.ToUnixTime();
-                    _worldDataService.Save();
-                    GotTime = true;
-                    TimeUpdated = true;
-                    Debug.Log("World Time (Backup): " + worldDateTime.ToUnixTime().ToDateTime());
-                }
-                catch (Exception e)
-                {
-                    Debug.LogError("Error parsing backup world time response: " + e.Message);
+                    Debug.LogError("Received corrupted packet");
+                    Thread.Sleep(1000);
+                    await GetCurrentTime();
+                    return DateTime.Now;
                 }
 
-                yield break;
+                DateTime networkDateTime = new DateTime(1900, 1, 1).AddMilliseconds((Int64)milliseconds);
+                Debug.Log("datetime network");
+                return networkDateTime;
+            }
+            catch
+            {
+                //Process exception
             }
 
-            Debug.LogError("Failed to connect to any server.");
+            Debug.Log("datetime now");
+            return DateTime.Now;
         }
-    }
 
-    [Serializable]
-    public class WorldTimeApiResponse
-    {
-        public string utc_datetime;
+        /*private async UniTask<DateTime> GetCurrentTime()
+        {
+            var client = new TcpClient("time.nist.gov", 13);
+
+            using var streamReader = new StreamReader(client.GetStream());
+            var response = streamReader.ReadToEnd();
+
+            while (string.IsNullOrEmpty(response))
+                await UniTask.Yield();
+
+            var utcDateTimeString = response.Substring(7, 17);
+            DateTime localDateTime = DateTime.ParseExact(utcDateTimeString, "yy-MM-dd HH:mm:ss",
+                CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal);
+            Debug.Log(localDateTime);
+            return localDateTime;
+        }
+        */
+
+        // private async UniTask<DateTime> GetCurrentTime()
+        // {
+        //     using var client = new HttpClient();
+        //     try
+        //     {
+        //         HttpResponseMessage result = client.GetAsync("https://google.com",
+        //             HttpCompletionOption.ResponseHeadersRead).Result;
+        //
+        //         Debug.Log(result.StatusCode);
+        //         
+        //         
+        //         while (result.StatusCode != HttpStatusCode.OK)
+        //         {
+        //             await UniTask.Yield();
+        //         }
+        //
+        //         Debug.Log($"RETURN DATETIME FROM INTERNET {result.Headers.Date.Value.DateTime.Date}");
+        //         NtpImpl();
+        //         GetTime();
+        //         return result.Headers.Date.Value.DateTime;
+        //     }
+        //     catch
+        //     {
+        //         Debug.Log("RETURN DATETIME.NOW");
+        //         return DateTime.Now;
+        //     }
     }
+}
+
+
+[Serializable]
+public class WorldTimeApiResponse
+{
+    public string utc_datetime;
 }

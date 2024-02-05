@@ -7,6 +7,7 @@ using CodeBase.Gameplay.ObjectCreatorSystem;
 using CodeBase.Gameplay.PaperSystem;
 using CodeBase.MaterialChanger;
 using CodeBase.Services.BurnableObjects;
+using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
@@ -70,14 +71,19 @@ namespace CodeBase.Gameplay.TableSystem
             PapersOnTable.Clear();
         }
 
-        public Paper PopPaper()
+        public async UniTask<Paper> PopPaper()
         {
+            while (PapersOnTable.Count == 0)
+                await UniTask.Yield();
+
             Paper paper = PapersOnTable.Pop();
             
             if (PapersOnTable.Count == 0)
                 AllPaperProcessed?.Invoke(this);
 
-            LastPaper = PapersOnTable.Peek();
+            if (PapersOnTable.TryPeek(out Paper peekedPaper))
+                LastPaper = peekedPaper;
+                
             return paper;
         }
 

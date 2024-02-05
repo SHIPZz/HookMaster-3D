@@ -64,7 +64,9 @@ namespace CodeBase.Gameplay.PlayerSystem
 
         private async UniTask Deliver(Table table)
         {
-            foreach (Paper paper in _playerPaperContainer.Papers)
+            IEnumerable<Paper> papers = _playerPaperContainer.Papers.Reverse();
+            
+            foreach (Paper paper in papers)
             {
                 _papersToDeliver.Push(paper);
             }

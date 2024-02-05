@@ -7,6 +7,8 @@ using CodeBase.Gameplay.Employees;
 using CodeBase.Gameplay.PaperSystem;
 using CodeBase.Gameplay.TableSystem;
 using CodeBase.Services.Providers.Tables;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace CodeBase.Services.Employees
 {
@@ -24,10 +26,10 @@ namespace CodeBase.Services.Employees
             _employeeDataService = employeeDataService;
         }
 
-        public void SubscribeTableEvents() => 
+        public void SubscribeTableEvents() =>
             _tableService.Tables.ForEach(x => x.PaperAdded += OnTablePaperAdded);
 
-        public void Dispose() => 
+        public void Dispose() =>
             _tableService.Tables.ForEach(x => x.PaperAdded -= OnTablePaperAdded);
 
         public void CancelProcessingPaper(Table table)
@@ -62,13 +64,22 @@ namespace CodeBase.Services.Employees
         public Employee Get(string id) =>
             Employees.FirstOrDefault(x => x.Id == id);
 
-        private void OnTablePaperAdded(Table table)
+        private async void OnTablePaperAdded(Table table)
         {
+            Debug.Log(GetEmployeeByTable(table));
+            
+            
+            while (GetEmployeeByTable(table) == null)
+            {
+                await UniTask.Yield();
+            }
+
             Employee targetEmployee = GetEmployeeByTable(table);
+
             targetEmployee?.CancelProcessPaper();
             targetEmployee?.ProcessPaper(table);
         }
-        
+
         private Employee GetEmployeeByTable(Table table) =>
             Employees.FirstOrDefault(x => x.TableId == table.Id);
     }

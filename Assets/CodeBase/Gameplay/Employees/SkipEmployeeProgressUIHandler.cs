@@ -39,6 +39,7 @@ namespace CodeBase.Gameplay.Employees
         {
             _triggerObserver.TriggerEntered += OnPlayerEntered;
             _triggerObserver.TriggerExited += OnPlayerExited;
+            _employee.PaperAdded += HideWindow;
             _employee.Burned += HideWindow;
         }
 
@@ -46,6 +47,7 @@ namespace CodeBase.Gameplay.Employees
         {
             _triggerObserver.TriggerEntered -= OnPlayerEntered;
             _triggerObserver.TriggerExited -= OnPlayerExited;
+            _employee.PaperAdded -= HideWindow;
             _employee.Burned -= HideWindow;
             _employeeDataService.EmployeeUpdated -= TryCloseWindow;
         }
@@ -79,6 +81,9 @@ namespace CodeBase.Gameplay.Employees
         {
             if (!_employee.IsUpgrading || !_employee.IsWorking || _employee.IsBurned)
                 return;
+            
+            if (_employee.HasPapers)
+                return;
 
             if (_skipProgressWindow != null)
                 _skipProgressWindow.Hide();
@@ -87,6 +92,9 @@ namespace CodeBase.Gameplay.Employees
         private void OnPlayerEntered(Collider obj)
         {
             if (!_employee.IsUpgrading || !_employee.IsWorking || _employee.IsBurned)
+                return;
+
+            if (_employee.HasPapers)
                 return;
 
             UpgradeEmployeeData targetUpgradeEmployeeData = _employeeDataService.GetUpgradeEmployeeData(_employee.Id);
