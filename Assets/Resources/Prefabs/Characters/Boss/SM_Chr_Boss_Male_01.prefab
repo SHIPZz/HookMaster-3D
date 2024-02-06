@@ -3110,6 +3110,7 @@ GameObject:
   - component: {fileID: 9175532786988927053}
   - component: {fileID: 8455194149568604372}
   - component: {fileID: 7028348110611418985}
+  - component: {fileID: 3932256523117236928}
   m_Layer: 27
   m_Name: PlayerDeliverPaper
   m_TagString: Untagged
@@ -3167,6 +3168,19 @@ CapsuleCollider:
   m_Height: 2.6620207
   m_Direction: 1
   m_Center: {x: 0, y: 0.83101034, z: 0.086974025}
+--- !u!114 &3932256523117236928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3279067119171829854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54c1b513c3054c8abf4f21ecabc6603d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerPaperContainer: {fileID: 5553894657283998238}
 --- !u!1 &3355561243088575235
 GameObject:
   m_ObjectHideFlags: 0

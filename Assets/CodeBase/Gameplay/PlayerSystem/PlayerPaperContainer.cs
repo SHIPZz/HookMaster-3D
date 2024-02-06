@@ -29,9 +29,9 @@ namespace CodeBase.Gameplay.PlayerSystem
             Cleared?.Invoke();
         }
 
-        public void Pop()
+        public Paper Pop()
         {
-            _papers.Pop();
+           return _papers.Pop();
         }
     }
 }

@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
+using _Project_legacy.Scripts.Papers;
 using CodeBase.Data;
 using CodeBase.Enums;
 using CodeBase.Extensions;
 using CodeBase.Gameplay.BurnableObjectSystem;
+using CodeBase.Gameplay.PaperS;
 using CodeBase.Gameplay.PaperSystem;
 using CodeBase.Gameplay.TableSystem;
 using CodeBase.MaterialChanger;
@@ -46,6 +50,9 @@ namespace CodeBase.Gameplay.Employees
         private CancellationTokenSource _cancellationToken = new();
         private Stack<Paper> _papers = new();
         private Table _table;
+        private TableHolder _tableHolder;
+        private bool _isProcessingPaper;
+        private Coroutine _coroutine;
 
         public bool HasPapers => _papers.Count > 0;
 
@@ -53,6 +60,7 @@ namespace CodeBase.Gameplay.Employees
         public event Action<Employee> Burned;
         public event Action<Employee> PaperAdded;
         public event Action<Employee> AllPaperProcessed;
+
 
         [Inject]
         private void Construct(EmployeeDataService employeeDataService,
@@ -71,9 +79,48 @@ namespace CodeBase.Gameplay.Employees
             _burnableObjectService.Add(this);
             _rendererMaterialChangerService.Init(1.5f, 1f, BurnMaterial, Renderer);
             _table = _tableService.Get(TableId);
-            
+            _tableHolder = _table.GetComponent<TableHolder>();
+            _tableHolder.ItemPut += OnPaperAdded;
+
             if (IsBurned)
                 Burn();
+        }
+
+        private void OnDisable() =>
+            _tableHolder.ItemPut -= OnPaperAdded;
+
+        private void OnDestroy()
+        {
+            _cancellationToken?.Cancel();
+            _cancellationToken?.Dispose();
+        }
+
+        private void OnPaperAdded()
+        {
+            if (_coroutine != null)
+            {
+                StopCoroutine(_coroutine);
+                _cancellationToken?.Cancel();
+            }
+
+            _coroutine = StartCoroutine(TestCoroutine());
+        }
+
+        private IEnumerator TestCoroutine()
+        {
+            _cancellationToken?.Dispose();
+            _cancellationToken = new();
+            yield return ProcessPapers().AttachExternalCancellation(_cancellationToken.Token);
+        }
+
+        private async UniTask ProcessPapers()
+        {
+            while (_tableHolder.ItemsCount > 0)
+            {
+                await Task.Delay(TimeSpan.FromSeconds(_processPaperTime), _cancellationToken.Token);
+                IHoldable paper = await _tableHolder.TakeAsync(transform, _cancellationToken.Token);
+                paper.Transform.DOScale(Vector3.zero, 0.5f).OnComplete(paper.Destroy);
+            }
         }
 
         public void StartWorking()

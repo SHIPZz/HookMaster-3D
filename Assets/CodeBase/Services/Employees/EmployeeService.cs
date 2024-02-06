@@ -5,11 +5,8 @@ using System.Threading;
 using CodeBase.Data;
 using CodeBase.Extensions;
 using CodeBase.Gameplay.Employees;
-using CodeBase.Gameplay.PaperSystem;
 using CodeBase.Gameplay.TableSystem;
 using CodeBase.Services.Providers.Tables;
-using Cysharp.Threading.Tasks;
-using UnityEngine;
 
 namespace CodeBase.Services.Employees
 {
@@ -39,7 +36,7 @@ namespace CodeBase.Services.Employees
         {
             // _tableService.Tables.ForEach(x => x.PaperAdded -= OnTablePaperAdded);
         }
-        
+
         public void SetUpgrade(string id, bool isUpgrading)
         {
             foreach (Employee employee in Employees.Where(employee => employee.Id == id))
@@ -66,7 +63,7 @@ namespace CodeBase.Services.Employees
         public Employee Get(string id) =>
             Employees.FirstOrDefault(x => x.Id == id);
 
-        private Employee GetEmployeeByTable(Table table) =>
-            Employees.FirstOrDefault(x => x.TableId == table.Id);
+        private Employee GetEmployeeByTable(string tableId) =>
+            Employees.FirstOrDefault(x => x.TableId == tableId);
     }
 }
