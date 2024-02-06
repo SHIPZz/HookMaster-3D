@@ -30,18 +30,16 @@ namespace CodeBase.Services.Employees
             _employeeDataService = employeeDataService;
         }
 
-        public void SubscribeTableEvents() =>
-            _tableService.Tables.ForEach(x => x.PaperAdded += OnTablePaperAdded);
-
-        public void Dispose() =>
-            _tableService.Tables.ForEach(x => x.PaperAdded -= OnTablePaperAdded);
-
-        public void CancelProcessingPaper(Table table)
+        public void SubscribeTableEvents()
         {
-            Employee targetEmployee = GetEmployeeByTable(table);
-            targetEmployee?.CancelProcessPaper();
+            // _tableService.Tables.ForEach(x => x.PaperAdded += OnTablePaperAdded);
         }
 
+        public void Dispose()
+        {
+            // _tableService.Tables.ForEach(x => x.PaperAdded -= OnTablePaperAdded);
+        }
+        
         public void SetUpgrade(string id, bool isUpgrading)
         {
             foreach (Employee employee in Employees.Where(employee => employee.Id == id))
@@ -67,24 +65,6 @@ namespace CodeBase.Services.Employees
 
         public Employee Get(string id) =>
             Employees.FirstOrDefault(x => x.Id == id);
-
-        private async void OnTablePaperAdded(Table table)
-        {
-            while (GetEmployeeByTable(table) == null)
-            {
-                await UniTask.Yield();
-            }
-
-            Employee targetEmployee = GetEmployeeByTable(table);
-
-            targetEmployee.CancelProcessPaper();
-
-            try
-            {
-                await targetEmployee.ProcessPaper(table).AttachExternalCancellation(_cancellationToken.Token);
-            }
-            catch (Exception e) { }
-        }
 
         private Employee GetEmployeeByTable(Table table) =>
             Employees.FirstOrDefault(x => x.TableId == table.Id);
