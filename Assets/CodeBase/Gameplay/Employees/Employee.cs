@@ -54,7 +54,7 @@ namespace CodeBase.Gameplay.Employees
         private bool _isProcessingPaper;
         private Coroutine _coroutine;
 
-        public bool HasPapers => _papers.Count > 0;
+        public bool HasPapers { get; private set; }
 
         public event Action<Employee> UpgradeStarted;
         public event Action<Employee> Burned;
@@ -103,6 +103,8 @@ namespace CodeBase.Gameplay.Employees
                 _cancellationToken?.Cancel();
             }
 
+            PaperAdded?.Invoke(this);
+            HasPapers = true;
             _coroutine = StartCoroutine(TestCoroutine());
         }
 
@@ -121,6 +123,9 @@ namespace CodeBase.Gameplay.Employees
                 IHoldable paper = await _tableHolder.TakeAsync(transform, _cancellationToken.Token);
                 paper.Transform.DOScale(Vector3.zero, 0.5f).OnComplete(paper.Destroy);
             }
+            
+            AllPaperProcessed?.Invoke(this);
+            HasPapers = false;
         }
 
         public void StartWorking()
