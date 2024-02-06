@@ -45,7 +45,8 @@ namespace CodeBase.Gameplay.Employees
         private TableService _tableService;
         private CancellationTokenSource _cancellationToken = new();
         private Stack<Paper> _papers = new();
-        
+        private Table _table;
+
         public bool HasPapers => _papers.Count > 0;
 
         public event Action<Employee> UpgradeStarted;
@@ -69,12 +70,13 @@ namespace CodeBase.Gameplay.Employees
         {
             _burnableObjectService.Add(this);
             _rendererMaterialChangerService.Init(1.5f, 1f, BurnMaterial, Renderer);
-
+            _table = _tableService.Get(TableId);
+            
             if (IsBurned)
                 Burn();
         }
 
-        public async UniTaskVoid ProcessPaper(Table table)
+        public async UniTask ProcessPaper(Table table)
         {
             _cancellationToken?.Dispose();
             _cancellationToken = new CancellationTokenSource();

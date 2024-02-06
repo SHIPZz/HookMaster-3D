@@ -1,6 +1,7 @@
 ﻿using System;
 using CodeBase.Constant;
 using CodeBase.Services.Employees;
+using CodeBase.Services.Providers.Player;
 using CodeBase.Services.TriggerObserve;
 using CodeBase.Services.UI;
 using CodeBase.Services.Window;
@@ -24,11 +25,13 @@ namespace CodeBase.Gameplay.Employees
         private WindowService _windowService;
         private FloatingButtonService _floatingButtonService;
         private EmployeeService _employeeService;
+        private PlayerProvider _playerProvider;
 
         [Inject]
         private void Construct(WindowService windowService, FloatingButtonService floatingButtonService,
-            EmployeeService employeeService)
+            EmployeeService employeeService, PlayerProvider playerProvider)
         {
+            _playerProvider = playerProvider;
             _employeeService = employeeService;
             _floatingButtonService = floatingButtonService;
             _windowService = windowService;
@@ -83,6 +86,9 @@ namespace CodeBase.Gameplay.Employees
         {
             if (!_employee.IsWorking || _employee.IsUpgrading || _employee.IsBurned)
                 return;
+            
+            if(_playerProvider.PlayerPaperContainer.HasPapers)
+                return;
 
             if (_employee.HasPapers)
                 return;
@@ -100,6 +106,9 @@ namespace CodeBase.Gameplay.Employees
 
         private void OnPlayerEntered(Collider obj)
         {
+            if(_playerProvider.PlayerPaperContainer.HasPapers)
+                return;
+            
             if (!_employee.IsWorking || _employee.IsUpgrading)
                 return;
 

@@ -7,5 +7,6 @@ namespace CodeBase.Services.Providers.Player
     {
         public Gameplay.PlayerSystem.Player Player;
         public PlayerMovement PlayerMovement;
+        public PlayerPaperContainer PlayerPaperContainer;
     }
 }

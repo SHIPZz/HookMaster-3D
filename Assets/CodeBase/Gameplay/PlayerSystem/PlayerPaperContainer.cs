@@ -11,9 +11,17 @@ namespace CodeBase.Gameplay.PlayerSystem
 
         public IReadOnlyCollection<Paper> Papers => _papers;
 
+        public bool HasPapers => _papers.Count > 0;
+
         public event Action Cleared;
+
+        public event Action Added;
         
-        public void Push(Paper paper) => _papers.Push(paper);
+        public void Push(Paper paper)
+        {
+            _papers.Push(paper);
+            Added?.Invoke();
+        }
 
         public void Clear()
         {

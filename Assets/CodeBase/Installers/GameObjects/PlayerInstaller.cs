@@ -10,6 +10,7 @@ namespace CodeBase.Installers.GameObjects
     [RequireComponent(typeof(GameObjectContext))]
     public class PlayerInstaller : MonoInstaller, IInitializable
     {
+        [SerializeField] private PlayerPaperContainer _playerPaperContainer;
         private PlayerProvider _playerProvider;
         private PlayerAnimationService _playerAnimationService;
         private PlayerIKService _playerIKService;
@@ -18,7 +19,7 @@ namespace CodeBase.Installers.GameObjects
         [Inject]
         private void Construct(PlayerProvider playerProvider,
             PlayerAnimationService playerAnimationService,
-            PlayerIKService playerIKService, 
+            PlayerIKService playerIKService,
             PlayerInputService playerInputService)
         {
             _playerInputService = playerInputService;
@@ -26,7 +27,7 @@ namespace CodeBase.Installers.GameObjects
             _playerAnimationService = playerAnimationService;
             _playerProvider = playerProvider;
         }
-        
+
         public override void InstallBindings()
         {
             Container.Bind<Animator>().FromInstance(GetComponent<Animator>());
@@ -43,6 +44,7 @@ namespace CodeBase.Installers.GameObjects
         public void Initialize()
         {
             _playerProvider.PlayerMovement = Container.Resolve<PlayerMovement>();
+            _playerProvider.PlayerPaperContainer = _playerPaperContainer;
             _playerIKService.Set(Container.Resolve<FullBodyBipedIK>());
             _playerAnimationService.SetPlayerAnimator(Container.Resolve<PlayerAnimator>());
             _playerInputService.PlayerInput = Container.Resolve<PlayerInput>();

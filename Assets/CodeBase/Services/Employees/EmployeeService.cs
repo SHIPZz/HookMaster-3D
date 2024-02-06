@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using CodeBase.Data;
 using CodeBase.Extensions;
 using CodeBase.Gameplay.Employees;
@@ -17,6 +18,9 @@ namespace CodeBase.Services.Employees
         public List<Employee> Employees = new();
         private readonly EmployeeDataService _employeeDataService;
         private readonly TableService _tableService;
+
+
+        private CancellationTokenSource _cancellationToken = new();
 
         public event Action<Employee> EmployeeUpdated;
 
@@ -66,9 +70,6 @@ namespace CodeBase.Services.Employees
 
         private async void OnTablePaperAdded(Table table)
         {
-            Debug.Log(GetEmployeeByTable(table));
-            
-            
             while (GetEmployeeByTable(table) == null)
             {
                 await UniTask.Yield();
@@ -76,8 +77,13 @@ namespace CodeBase.Services.Employees
 
             Employee targetEmployee = GetEmployeeByTable(table);
 
-            targetEmployee?.CancelProcessPaper();
-            targetEmployee?.ProcessPaper(table);
+            targetEmployee.CancelProcessPaper();
+
+            try
+            {
+                await targetEmployee.ProcessPaper(table).AttachExternalCancellation(_cancellationToken.Token);
+            }
+            catch (Exception e) { }
         }
 
         private Employee GetEmployeeByTable(Table table) =>
