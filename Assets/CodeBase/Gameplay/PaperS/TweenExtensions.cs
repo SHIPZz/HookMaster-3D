@@ -2,6 +2,7 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 
 namespace CodeBase.Gameplay.PaperS
@@ -13,7 +14,7 @@ namespace CodeBase.Gameplay.PaperS
             return new TweenAwaiter(tween);
         }
 
-        public static async Task PlayAsync(this Tween tween, CancellationToken cancellationToken)
+        public static async UniTask PlayAsync(this Tween tween, CancellationToken cancellationToken)
         {
             void Cancel()
             {

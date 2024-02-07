@@ -18,6 +18,7 @@ namespace CodeBase.Gameplay.PaperSystem
         public event Action PlayerApproached;
         
         private List<Paper> _papers = new();
+        private int _createdCount;
 
         private async void OnEnable()
         {
@@ -31,7 +32,14 @@ namespace CodeBase.Gameplay.PaperSystem
             while (true)
             {
                 await UniTask.WaitForSeconds(3f);
+
                 _resourceCreator.Create();
+                _createdCount++;
+
+                if (_createdCount >= 20)
+                {
+                    await UniTask.Yield();
+                }
             }
         }
 
@@ -44,6 +52,7 @@ namespace CodeBase.Gameplay.PaperSystem
         private void OnPlayerApproached(Collision player)
         {
             Pointer.SetActive(false);
+            _createdCount = 0;
             PlayerApproached?.Invoke();
         }
 

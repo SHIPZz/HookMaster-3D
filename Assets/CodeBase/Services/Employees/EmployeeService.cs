@@ -6,7 +6,6 @@ using CodeBase.Data;
 using CodeBase.Extensions;
 using CodeBase.Gameplay.Employees;
 using CodeBase.Gameplay.TableSystem;
-using CodeBase.Services.Providers.Tables;
 
 namespace CodeBase.Services.Employees
 {
@@ -14,16 +13,12 @@ namespace CodeBase.Services.Employees
     {
         public List<Employee> Employees = new();
         private readonly EmployeeDataService _employeeDataService;
-        private readonly TableService _tableService;
 
-
-        private CancellationTokenSource _cancellationToken = new();
 
         public event Action<Employee> EmployeeUpdated;
 
-        public EmployeeService(EmployeeDataService employeeDataService, TableService tableService)
+        public EmployeeService(EmployeeDataService employeeDataService)
         {
-            _tableService = tableService;
             _employeeDataService = employeeDataService;
         }
 

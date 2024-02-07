@@ -11,8 +11,6 @@ namespace CodeBase.Gameplay.PaperSystem
     {
         private TriggerObserver _triggerObserver;
 
-        public bool IsOnEmployeeTable { get; private set; }
-        public bool IsFinished { get; private set; }
         public Transform Transform => transform;
         public bool IsAccessed { get; set; }
 

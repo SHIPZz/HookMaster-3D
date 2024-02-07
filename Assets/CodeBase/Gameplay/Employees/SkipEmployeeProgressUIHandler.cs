@@ -1,7 +1,9 @@
 ﻿using System;
 using CodeBase.Data;
+using CodeBase.Gameplay.PlayerSystem;
 using CodeBase.Services.Employees;
 using CodeBase.Services.Providers.Camera;
+using CodeBase.Services.Providers.Player;
 using CodeBase.Services.TriggerObserve;
 using CodeBase.Services.Window;
 using CodeBase.UI.SkipProgress;
@@ -20,11 +22,15 @@ namespace CodeBase.Gameplay.Employees
         private SkipProgressSliderWindow _skipProgressWindow;
         private CameraProvider _cameraProvider;
         private EmployeeDataService _employeeDataService;
+        private PlayerPaperContainer _playerPaperContainer;
+        private PlayerProvider _playerProvider;
 
         [Inject]
         private void Construct(WindowService windowService,
-            CameraProvider cameraProvider, EmployeeDataService employeeDataService)
+            CameraProvider cameraProvider, EmployeeDataService employeeDataService,
+            PlayerProvider playerProvider)
         {
+            _playerProvider = playerProvider;
             _employeeDataService = employeeDataService;
             _cameraProvider = cameraProvider;
             _windowService = windowService;
@@ -32,6 +38,7 @@ namespace CodeBase.Gameplay.Employees
 
         private void Start()
         {
+            _playerPaperContainer = _playerProvider.PlayerPaperContainer;
             _employeeDataService.EmployeeUpdated += TryCloseWindow;
         }
 
@@ -82,7 +89,7 @@ namespace CodeBase.Gameplay.Employees
             if (!_employee.IsUpgrading || !_employee.IsWorking || _employee.IsBurned)
                 return;
             
-            if (_employee.HasPapers)
+            if (_employee.HasPapers || _playerPaperContainer.HasPapers)
                 return;
 
             if (_skipProgressWindow != null)
@@ -94,7 +101,7 @@ namespace CodeBase.Gameplay.Employees
             if (!_employee.IsUpgrading || !_employee.IsWorking || _employee.IsBurned)
                 return;
 
-            if (_employee.HasPapers)
+            if (_employee.HasPapers || _playerPaperContainer.HasPapers)
                 return;
 
             UpgradeEmployeeData targetUpgradeEmployeeData = _employeeDataService.GetUpgradeEmployeeData(_employee.Id);

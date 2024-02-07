@@ -1,9 +1,8 @@
-using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
 using CodeBase.Gameplay.PaperS;
 using CodeBase.Gameplay.PaperSystem;
 using CodeBase.Gameplay.PlayerSystem;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -16,7 +15,7 @@ namespace _Project_legacy.Scripts.Papers
         private IHolder _holder;
 
         private CancellationTokenSource _lifetimeTokenSource;
-        private Task _actionTask;
+        private UniTask _actionTask;
 
         private bool _isTaking;
         private PlayerIKService _playerIKService;
@@ -62,7 +61,7 @@ namespace _Project_legacy.Scripts.Papers
                 return;
             }
 
-            var isTaskCompleted = _actionTask?.IsCompleted ?? true;
+            var isTaskCompleted = _actionTask.Status.IsCompleted();
 
             if (!isTaskCompleted)
             {
@@ -72,11 +71,11 @@ namespace _Project_legacy.Scripts.Papers
             _actionTask = TakeAsync();
         }
 
-        private async Task TakeAsync()
+        private async UniTask TakeAsync()
         {
-            Task<IHoldable> takeTask = _holder.TakeAsync(transform, _lifetimeTokenSource.Token);
-            IHoldable holdable = await takeTask;
-            _playerPaperContainer.Push(holdable as Paper);
+            // Task<IHoldable> takeTask = _holder.TakeAsync(transform, _lifetimeTokenSource.Token);
+            // IHoldable holdable = await takeTask;
+            // _playerPaperContainer.Push(holdable as Paper);
         }
 
         private void Put()
@@ -86,7 +85,7 @@ namespace _Project_legacy.Scripts.Papers
                 return;
             }
 
-            var isTaskCompleted = _actionTask?.IsCompleted ?? true;
+            var isTaskCompleted = _actionTask.Status.IsCompleted();
 
             if (!isTaskCompleted)
             {
@@ -96,7 +95,7 @@ namespace _Project_legacy.Scripts.Papers
             _actionTask = PutAsync();
         }
 
-        private Task PutAsync()
+        private UniTask PutAsync()
         {
             Paper holdable = _playerPaperContainer.Pop();
 
