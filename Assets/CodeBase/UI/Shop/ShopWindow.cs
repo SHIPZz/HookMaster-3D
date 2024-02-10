@@ -31,16 +31,20 @@ namespace CodeBase.UI.Shop
             _walletService = walletService;
             _windowService = windowService;
         }
-        
+
+        private void OnDisable()
+        {
+            _walletService.DiamondsChanged -= SetDiamondCountText;
+            _walletService.MoneyChanged -= SetMoneyCountText;
+            _walletService.TicketCountChanged -= SetTicketCountText;
+        }
+
         public override void Open()
         {
             _shopTabViews.FirstOrDefault(x => x.ItemTypeId == ItemTypeId.Money)?.Init();
             transformScale.ToScale();
             _canvasAnimator.FadeInCanvas();
-
-            _walletService.Set(ItemTypeId.Money, 30000);
-            _walletService.Set(ItemTypeId.Diamond, 30000);
-            _walletService.Set(ItemTypeId.Ticket, 30000);
+            
             _walletService.DiamondsChanged += SetDiamondCountText;
             _walletService.MoneyChanged += SetMoneyCountText;
             _walletService.TicketCountChanged += SetTicketCountText;

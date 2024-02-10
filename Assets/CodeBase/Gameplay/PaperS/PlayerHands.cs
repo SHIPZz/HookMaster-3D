@@ -1,16 +1,17 @@
 using System.Threading;
-using CodeBase.Gameplay.PaperS;
 using CodeBase.Gameplay.PaperSystem;
 using CodeBase.Gameplay.PlayerSystem;
+using CodeBase.Services.TriggerObserve;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
-namespace _Project_legacy.Scripts.Papers
+namespace CodeBase.Gameplay.PaperS
 {
     internal class PlayerHands : MonoBehaviour
     {
         [SerializeField] private PlayerPaperContainer _playerPaperContainer;
+        [SerializeField] private TriggerObserver _triggerObserver;
 
         private IHolder _holder;
 
@@ -29,10 +30,14 @@ namespace _Project_legacy.Scripts.Papers
         private void OnEnable()
         {
             _lifetimeTokenSource = new CancellationTokenSource();
+            _triggerObserver.TriggerEntered += OnTriggerEntered;
+            _triggerObserver.TriggerExited += OnTriggerExited;
         }
 
         private void OnDisable()
         {
+            _triggerObserver.TriggerEntered -= OnTriggerEntered;
+            _triggerObserver.TriggerExited -= OnTriggerExited;
             _lifetimeTokenSource.Cancel();
             _lifetimeTokenSource.Dispose();
         }
@@ -44,38 +49,10 @@ namespace _Project_legacy.Scripts.Papers
                 return;
             }
 
-            if (_isTaking)
-            {
-                Take();
-            }
-            else
+            if (!_isTaking)
             {
                 Put();
             }
-        }
-
-        private void Take()
-        {
-            if (_holder.ItemsCount == 0)
-            {
-                return;
-            }
-
-            var isTaskCompleted = _actionTask.Status.IsCompleted();
-
-            if (!isTaskCompleted)
-            {
-                return;
-            }
-
-            _actionTask = TakeAsync();
-        }
-
-        private async UniTask TakeAsync()
-        {
-            // Task<IHoldable> takeTask = _holder.TakeAsync(transform, _lifetimeTokenSource.Token);
-            // IHoldable holdable = await takeTask;
-            // _playerPaperContainer.Push(holdable as Paper);
         }
 
         private void Put()
@@ -111,7 +88,7 @@ namespace _Project_legacy.Scripts.Papers
             return _holder.PutAsync(holdable, _lifetimeTokenSource.Token);
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEntered(Collider other)
         {
             if (other.TryGetComponent(out IHolder holder))
             {
@@ -121,7 +98,7 @@ namespace _Project_legacy.Scripts.Papers
             }
         }
 
-        private void OnTriggerExit(Collider other)
+        private void OnTriggerExited(Collider other)
         {
             if (other.TryGetComponent(out IHolder holder))
             {

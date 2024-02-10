@@ -124,6 +124,7 @@ namespace CodeBase.Gameplay.Employees
                 });
             }
 
+            _tableHolder.SetLastHoldableNull();
             AllPaperProcessed?.Invoke(this);
             HasPapers = false;
         }

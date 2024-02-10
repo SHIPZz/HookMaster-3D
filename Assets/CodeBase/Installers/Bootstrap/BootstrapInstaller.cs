@@ -7,7 +7,9 @@ using CodeBase.Services.Saves;
 using CodeBase.Services.SaveSystem;
 using CodeBase.Services.Time;
 using CodeBase.Services.WorldData;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using YG;
 using Zenject;
 
 namespace CodeBase.Installers.Bootstrap
@@ -38,9 +40,17 @@ namespace CodeBase.Installers.Bootstrap
             Container.Bind<SaveFacade>().AsSingle();
         }
 
-        public void Initialize()
+        public async void Initialize()
         {
             var gameStateMachine = Container.Resolve<IGameStateMachine>();
+            YandexGame.CallInitYG();
+            YandexGame.InitEnvirData();
+
+            while (!YandexGame.SDKEnabled)
+            {
+                await UniTask.Yield();
+            }
+            
             gameStateMachine.ChangeState<BootstrapState>();
         }
 

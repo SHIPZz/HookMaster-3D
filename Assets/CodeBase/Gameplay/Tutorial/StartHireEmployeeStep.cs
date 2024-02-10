@@ -1,6 +1,7 @@
 ﻿using System;
 using Abu;
 using CodeBase.Constant;
+using CodeBase.Gameplay.PlayerSystem;
 using CodeBase.Services.Factories.UI;
 using CodeBase.Services.Window;
 using CodeBase.Services.WorldData;
@@ -19,10 +20,14 @@ namespace CodeBase.Gameplay.Tutorial
         private TutorialFadeImage _tutorialFadeImage;
         private bool _onFinished;
         private bool _hudOpened;
+        private PlayerInputService _playerInputService;
 
         public StartHireEmployeeStep(UIFactory uiFactory, WindowService windowService,
-            IWorldDataService worldDataService)
-            : base(uiFactory, windowService, worldDataService) { }
+            IWorldDataService worldDataService, PlayerInputService playerInputService )
+            : base(uiFactory, windowService, worldDataService)
+        {
+            _playerInputService = playerInputService;
+        }
 
         public override void OnStart()
         {
@@ -38,6 +43,7 @@ namespace CodeBase.Gameplay.Tutorial
             _tutorialHand.gameObject.SetActive(false);
             _targetButton.onClick.RemoveListener(OnFinished);
             _targetButton.GetComponent<TutorialHighlight>().enabled = false;
+            _playerInputService.SetActive(true);
             WindowService.HudOpened -= OnWindowOpened;
             SetCompleteToData(true);
         }
@@ -47,7 +53,7 @@ namespace CodeBase.Gameplay.Tutorial
             WindowService.HudOpened -= OnWindowOpened;
         }
 
-        private async void OnWindowOpened(WindowBase obj)
+        private void OnWindowOpened(WindowBase obj)
         {
             if(IsCompleted())
                 return;
@@ -59,6 +65,7 @@ namespace CodeBase.Gameplay.Tutorial
             _targetButton = hudWindow.OpenEmployeeWindowButton;
             _targetButton.GetComponent<TutorialHighlight>().enabled = true;
             _targetButton.onClick.AddListener(OnFinished);
+            _playerInputService.SetActive(false);
             _hudOpened = true;
         }
     }

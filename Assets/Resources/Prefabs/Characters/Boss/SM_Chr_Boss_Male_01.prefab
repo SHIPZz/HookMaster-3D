@@ -3112,7 +3112,7 @@ GameObject:
   - component: {fileID: 7028348110611418985}
   - component: {fileID: 3932256523117236928}
   m_Layer: 27
-  m_Name: PlayerDeliverPaper
+  m_Name: PlayerHands
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3181,6 +3181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerPaperContainer: {fileID: 5553894657283998238}
+  _triggerObserver: {fileID: 8455194149568604372}
 --- !u!1 &3355561243088575235
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,6 +30,7 @@ using CodeBase.Services.UI;
 using CodeBase.Services.Wallet;
 using CodeBase.Services.WorldData;
 using UnityEngine;
+using YG;
 using Zenject;
 
 namespace CodeBase.EntryPointSystem
@@ -65,18 +66,18 @@ namespace CodeBase.EntryPointSystem
             PlayerProvider playerProvider,
             EmployeeService employeeService,
             IEmployeeFactory employeeFactory,
-            IWorldDataService worldDataService, 
-            TableService tableService, 
-            WalletService walletService, 
+            IWorldDataService worldDataService,
+            TableService tableService,
+            WalletService walletService,
             EmployeeSalaryService employeeSalaryService,
-            EmployeeProfitService employeeProfitService, 
-            UIService uiService, 
-            GameItemService gameItemService, 
+            EmployeeProfitService employeeProfitService,
+            UIService uiService,
+            GameItemService gameItemService,
             ExtinguisherService extinguisherService,
             FireService fireService,
             SettingsService settingsService,
             PurchaseableItemService purchaseableItemService,
-            ClientObjectService clientObjectService, 
+            ClientObjectService clientObjectService,
             TutorialRunner tutorialRunner,
             CameraService cameraService)
         {
@@ -125,31 +126,31 @@ namespace CodeBase.EntryPointSystem
             InitClientObjectService();
         }
 
-        private void InitCameraService() => 
+        private void InitCameraService() =>
             _cameraService.Init();
 
-        private void InitTutorialRunner() => 
+        private void InitTutorialRunner() =>
             _tutorialRunner.Init();
 
-        private void InitClientObjectService() => 
+        private void InitClientObjectService() =>
             _clientObjectService.Init();
 
-        private void InitPurchaseableItemService() => 
+        private void InitPurchaseableItemService() =>
             _purchaseableItemService.Init();
 
-        private void InitSettingsService() => 
+        private void InitSettingsService() =>
             _settingsService.Init();
 
-        private void InitFireService() => 
+        private void InitFireService() =>
             _fireService.Init();
 
-        private void InitExtinguisherService() => 
+        private void InitExtinguisherService() =>
             _extinguisherService.Init();
 
-        private void InitShopItemService() => 
+        private void InitShopItemService() =>
             _gameItemService.Init();
 
-        private void InitPlayerProvider(Player player) => 
+        private void InitPlayerProvider(Player player) =>
             _playerProvider.Player = player;
 
         private void InitWalletService() =>
@@ -161,8 +162,15 @@ namespace CodeBase.EntryPointSystem
         private void InitProfitService() =>
             _employeeProfitService.Init();
 
-        private void InitUIService() =>
-            _uiService.Init(_cameraProvider.Camera);
+        private void InitUIService()
+        {
+            if (YandexGame.EnvironmentData.isMobile || YandexGame.EnvironmentData.isTablet)
+            {
+                _uiService.CreateJoystick(_cameraProvider.Camera);
+            }
+
+            _uiService.Init();
+        }
 
         private void SetRefreshRate()
         {
@@ -187,7 +195,7 @@ namespace CodeBase.EntryPointSystem
                 Employee targetEmployee = _employeeFactory.Create(employeeData, targetTable, true);
                 _employeeService.Employees.Add(targetEmployee);
             }
-            
+
             _employeeService.SubscribeTableEvents();
         }
 

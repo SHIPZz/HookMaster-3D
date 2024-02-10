@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
 using CodeBase.Gameplay.PaperS;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -14,7 +13,6 @@ namespace _Project_legacy.Scripts.Papers
         [SerializeField] private Transform _holdablesRoot;
         [SerializeField] private float _timeToTake = 0.5f;
         [SerializeField] private Vector3 _offset = new(0, 0.06f, 0);
-        [SerializeField] private bool _onlyHold = true;
 
         private readonly Stack<IHoldable> _items = new();
         private IHoldable _lastHoldable;
@@ -24,17 +22,8 @@ namespace _Project_legacy.Scripts.Papers
 
         public int ItemsCount => _items.Count;
 
-
-        private void OnEnable()
-        {
-            IHoldable[] items = _holdablesRoot.GetComponentsInChildren<IHoldable>();
+        private void OnEnable() => 
             _cancellationToken = new();
-
-            foreach (var item in items)
-            {
-                _items.Push(item);
-            }
-        }
 
         private void OnDisable()
         {
@@ -53,11 +42,9 @@ namespace _Project_legacy.Scripts.Papers
                 _lastHoldable = targetHoldable;
 
             holdable.Transform.SetParent(parent, true);
+
             await holdable.Transform.DOLocalMove(Vector3.up, _timeToTake)
-                .SetAutoKill(true)
-                .AsyncWaitForCompletion()
-                .AsUniTask()
-                .AttachExternalCancellation(_cancellationToken.Token);
+                .PlayAsync(_cancellationToken.Token);
 
             return holdable;
         }
@@ -77,6 +64,14 @@ namespace _Project_legacy.Scripts.Papers
             ItemPut?.Invoke();
             _items.Push(holdable);
             _lastHoldable = holdable;
+        }
+
+        public void SetLastHoldableNull()
+        {
+            _lastHoldable = null;
+            _cancellationToken?.Cancel();
+            _cancellationToken?.Dispose();
+            _cancellationToken = new();
         }
     }
 }

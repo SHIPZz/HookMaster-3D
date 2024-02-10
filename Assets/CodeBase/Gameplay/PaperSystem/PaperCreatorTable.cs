@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using CodeBase.Gameplay._3DPointers;
 using CodeBase.Gameplay.ObjectCreatorSystem;
-using CodeBase.Gameplay.PlayerSystem;
 using CodeBase.Services.TriggerObserve;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -13,17 +11,19 @@ namespace CodeBase.Gameplay.PaperSystem
     {
         [SerializeField] private ResourceCreator _resourceCreator;
         [SerializeField] private TriggerObserver _triggerObserver;
+        [SerializeField] private int _maxCreatCount = 10;
+        [SerializeField] private float _createDelay = 3f;
 
         public GameObject Pointer;
         public event Action PlayerApproached;
-        
+
         private List<Paper> _papers = new();
         private int _createdCount;
 
         private async void OnEnable()
         {
             _triggerObserver.CollisionEntered += OnPlayerApproached;
-            
+
             for (int i = 0; i < 5; i++)
             {
                 _resourceCreator.Create();
@@ -31,12 +31,12 @@ namespace CodeBase.Gameplay.PaperSystem
 
             while (true)
             {
-                await UniTask.WaitForSeconds(3f);
+                await UniTask.WaitForSeconds(_createDelay);
 
                 _resourceCreator.Create();
                 _createdCount++;
 
-                if (_createdCount >= 20)
+                if (_createdCount >= _maxCreatCount)
                 {
                     await UniTask.Yield();
                 }
@@ -46,7 +46,6 @@ namespace CodeBase.Gameplay.PaperSystem
         private void OnDisable()
         {
             _triggerObserver.CollisionEntered -= OnPlayerApproached;
-            
         }
 
         private void OnPlayerApproached(Collision player)
@@ -54,32 +53,6 @@ namespace CodeBase.Gameplay.PaperSystem
             Pointer.SetActive(false);
             _createdCount = 0;
             PlayerApproached?.Invoke();
-        }
-
-
-        //
-        // private void OnDisable()
-        // {
-        //     _triggerObserver.TriggerEntered -= PlayerEntered;
-        // }
-        //
-        // private void PlayerEntered(Collider player)
-        // {
-        //    var playerPaperContainer =  player.GetComponent<PlayerPaperContainer>();
-        //
-        //    IReadOnlyList<Paper> playerPapers = playerPaperContainer.Papers;
-        //
-        //    foreach (Paper paper in playerPapers)
-        //    {
-        //        paper.do
-        //    }
-        //    
-        
-
-        private void StopMove(Collision obj)
-        {
-            
-
         }
     }
 }

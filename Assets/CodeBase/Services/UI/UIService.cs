@@ -15,20 +15,17 @@ namespace CodeBase.Services.UI
     public class UIService
     {
         private readonly UIFactory _uiFactory;
-        private readonly UIProvider _uiProvider;
         private readonly LocationProvider _locationProvider;
         private readonly WindowService _windowService;
 
         private bool _blockHud;
         private Canvas _joystickCanvas;
 
-        public UIService(UIFactory uiFactory, UIProvider uiProvider, LocationProvider locationProvider,
-            WindowService windowService)
+        public UIService(UIFactory uiFactory, LocationProvider locationProvider, WindowService windowService)
         {
             _windowService = windowService;
             _locationProvider = locationProvider;
             _uiFactory = uiFactory;
-            _uiProvider = uiProvider;
         }
 
         public void OpenOfflineRewardWindow(int totalEarnedProfit, int timeDifference)
@@ -40,7 +37,13 @@ namespace CodeBase.Services.UI
             _windowService.Close<HudWindow>();
         }
 
-        public void Init(UnityEngine.Camera camera)
+        public void Init()
+        {
+            if (_blockHud == false)
+                _windowService.Open<HudWindow>();
+        }
+
+        public void CreateJoystick(Camera camera)
         {
             _joystickCanvas = _uiFactory.CreateElement<Canvas>(AssetPath.JoystickCanvas, _locationProvider.UIParent);
             _joystickCanvas.worldCamera = camera;
@@ -48,30 +51,30 @@ namespace CodeBase.Services.UI
             _joystickCanvas.sortingLayerName =
                 Enum.GetName(typeof(SortingLayerTypeId), SortingLayerTypeId.JoystickUILayer);
             _joystickCanvas.gameObject.SetActive(true);
-
-            if (_blockHud == false)
-                _windowService.Open<HudWindow>();
         }
 
         public void SetActiveJoystickUI(bool setActive)
         {
-            _joystickCanvas.enabled = setActive;
+            if (_joystickCanvas != null)
+                _joystickCanvas.enabled = setActive;
         }
 
         public void SetActiveUI(bool isEnabled)
         {
-            _joystickCanvas.enabled = isEnabled;
-            
+            if (_joystickCanvas != null)
+                _joystickCanvas.enabled = isEnabled;
+
             if (!isEnabled)
                 _windowService.CloseAll();
             else
                 _windowService.Open<HudWindow>();
         }
-        
+
         public void SetActiveUI<T>(bool isEnabled) where T : WindowBase
         {
-            _joystickCanvas.enabled = isEnabled;
-            
+            if (_joystickCanvas != null)
+                _joystickCanvas.enabled = isEnabled;
+
             if (!isEnabled)
                 _windowService.Close<T>();
             else

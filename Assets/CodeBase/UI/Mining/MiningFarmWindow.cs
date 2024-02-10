@@ -1,10 +1,8 @@
 ﻿using CodeBase.Animations;
 using CodeBase.Gameplay.GameItems;
 using CodeBase.Services.GameItemServices;
-using CodeBase.Services.Mining;
 using TMPro;
 using UnityEngine;
-using Zenject;
 
 namespace CodeBase.UI.Mining
 {
@@ -16,26 +14,17 @@ namespace CodeBase.UI.Mining
         [SerializeField] private TMP_Text _needCleanText;
         [SerializeField] private GameObject _cleanButtonContainer;
         [SerializeField] private CleanMiningFarmButton _cleanMiningFarmButton;
-        
-        private GameItemService _gameItemService;
-        private MiningFarmService _miningFarmService;
-        private MiningFarmItem _miningFarmItem;
 
-        [Inject]
-        private void Construct(MiningFarmService miningFarmService)
-        {
-            _miningFarmService = miningFarmService;
-        }
+        private GameItemService _gameItemService;
+        private MiningFarmItem _miningFarmItem;
 
         public override void Open()
         {
             _canvasAnimator.FadeInCanvas();
             _perMinuteProfitText.text = $"{_miningFarmItem.ProfitPerMinute}$";
             _temperatureText.text = $"{_miningFarmItem.TargetTemperature} C°";
-            _needCleanText.text = _miningFarmItem.NeedClean.ToString();
 
-            if (_miningFarmItem.NeedClean) 
-                _cleanButtonContainer.SetActive(true);
+            TrySetNeedClean();
         }
 
         public override void Close()
@@ -54,7 +43,28 @@ namespace CodeBase.UI.Mining
         private void OnConditionChanged(float temperature, bool needClean)
         {
             _temperatureText.text = $"{temperature} C°";
-            _needCleanText.text = needClean.ToString();
+
+            TrySetNeedClean();
+        }
+
+        private void TrySetNeedClean()
+        {
+            string needCleanText = "-";
+
+            if (_miningFarmItem.NeedClean)
+            {
+                needCleanText = "+";
+                SetUI(true, needCleanText);
+                return;
+            }
+            
+            SetUI(false, needCleanText);
+        }
+
+        private void SetUI(bool isButtonActive, string needCleanText)
+        {
+            _cleanButtonContainer.SetActive(isButtonActive);
+            _needCleanText.text = needCleanText;
         }
     }
 }

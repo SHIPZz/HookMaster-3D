@@ -25,10 +25,5 @@ namespace CodeBase.Gameplay.PlayerSystem
             PlayerInput.SetBlocked(false);
             _uiService.SetActiveJoystickUI(true);
         }
-
-        public void SetPlayerInput(PlayerInput playerInput)
-        {
-            PlayerInput = playerInput;
-        }
     }
 }

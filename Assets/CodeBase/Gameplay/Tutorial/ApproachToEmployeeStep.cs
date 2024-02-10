@@ -37,26 +37,26 @@ namespace CodeBase.Gameplay.Tutorial
 
         public override void OnStart()
         {
-            if (IsCompleted())
-                return;
-
-            if (WorldDataService.WorldData.TutorialData.LastPointerEmployeePosition != null)
-                TryCreatePointer3D();
-
-            _employeeHirerService.EmployeeHired += OnHired;
-            WindowService.Opened += OnWindowOpened;
+            // if (IsCompleted())
+            //     return;
+            //
+            // if (WorldDataService.WorldData.TutorialData.LastPointerEmployeePosition != null)
+            //     TryCreatePointer3D();
+            //
+            // _employeeHirerService.EmployeeHired += OnHired;
+            // WindowService.Opened += OnWindowOpened;
         }
 
         public override void OnFinished()
         {
-            _pointer?.gameObject.SetActive(false);
-            SetCompleteToData(true);
-            UnSubscribe();
+            // _pointer?.gameObject.SetActive(false);
+            // SetCompleteToData(true);
+            // UnSubscribe();
         }
 
         public void Dispose()
         {
-            UnSubscribe();
+            // UnSubscribe();
         }
 
         private void UnSubscribe()
