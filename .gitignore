@@ -63,6 +63,8 @@ sysinfo.txt
 
 Assets/ImportResources/Gamemaster Audio - Pro Sound Collection
 Assets/ImportResources/Epic Toon FX
+Assets/ImportResources
+Assets/_ignore
 
 # Crashlytics generated file
 crashlytics-build.properties
