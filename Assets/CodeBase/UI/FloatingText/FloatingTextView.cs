@@ -1,12 +1,16 @@
-﻿using CodeBase.Services.GOPool;
+﻿using System;
+using CodeBase.Services.GOPool;
 using CodeBase.Services.TransformCameraFace;
 using CodeBase.Services.UI;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace CodeBase.UI.FloatingText
 {
+    [RequireComponent(typeof(CanvasGroup))]
+    [RequireComponent(typeof(TransformCameraFacing))]
     public class FloatingTextView : MonoBehaviour
     {
         [field: SerializeField] public FloatingTextType FloatingTextType { get; private set; }
@@ -15,7 +19,6 @@ namespace CodeBase.UI.FloatingText
         [field: SerializeField] public RectTransform RectTransform { get; private set; }
 
         [SerializeField] private float _duration = 0.5f;
-        [SerializeField] private float _anchoredPosition = 20;
         [SerializeField] private float _fadeInDuration = 0.1f;
         [SerializeField] private float _fadeOutDuration = 0.5f;
         [SerializeField] private float _minRandomAnchoredPosition;
@@ -23,18 +26,20 @@ namespace CodeBase.UI.FloatingText
 
         private Vector3 _initialPosition;
         private TransformCameraFacing _transformCameraFacing;
+        private CanvasGroup _canvasGroup;
+        private EnumObjectPool<FloatingTextView, Transform, FloatingTextType> _floatingTextPool;
+
+        public CanvasGroup CanvasGroup => _canvasGroup;
 
         private void Awake()
         {
             _initialPosition = transform.position;
             _transformCameraFacing = GetComponent<TransformCameraFacing>();
+            _canvasGroup = GetComponent<CanvasGroup>();
         }
 
-        public void SetDuration(float duration) => _duration = duration;
-
-        public void SetAnchoredPos(float pos) => _anchoredPosition = pos;
-
-        public void SetMinAnchoredPos(float pos) => _minRandomAnchoredPosition = pos;
+        private void OnDisable() => 
+            _floatingTextPool?.Push(this, FloatingTextType);
 
         public void SetRotationToCamera(bool cameraFacing)
         {
@@ -48,18 +53,31 @@ namespace CodeBase.UI.FloatingText
             transform.rotation = Quaternion.identity;
         }
 
-        public void Init(Vector3 at, EnumObjectPool<FloatingTextView, Transform, FloatingTextType> floatingTextPool,
-            FloatingTextService floatingTextService)
+        public void Init(Vector3 at, EnumObjectPool<FloatingTextView, Transform, FloatingTextType> floatingTextPool)
         {
+            _floatingTextPool = floatingTextPool;
             transform.position = _initialPosition;
 
-            float targetAnchoredPosition = _minRandomAnchoredPosition != 0
-                ? Random.Range(_minRandomAnchoredPosition, _maxRandomAnchoredPosition)
-                : _anchoredPosition;
+            FadeIn();
 
-            floatingTextService.ShowFloatingText(this, RectTransform.anchoredPosition.y + targetAnchoredPosition,
-                _duration, _fadeInDuration,
-                _fadeOutDuration, Quaternion.identity, at, () => floatingTextPool.Push(this, FloatingTextType));
+            float targetAnchoredPosition = Random.Range(_minRandomAnchoredPosition, _maxRandomAnchoredPosition);
+
+            RectTransform.transform.position = at;
+
+            RectTransform.DOAnchorPosY(targetAnchoredPosition, _duration)
+                .SetUpdate(true)
+                .OnComplete(FadeOut);
         }
+
+        private void FadeIn()
+        {
+            gameObject.SetActive(true);
+            _canvasGroup.DOFade(1, _fadeInDuration)
+                .SetUpdate(true);
+        }
+
+        private void FadeOut() => _canvasGroup.DOFade(0, _fadeOutDuration)
+            .OnComplete(() => gameObject.SetActive(false))
+            .SetUpdate(true);
     }
 }

@@ -2241,7 +2241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94f7c6babaaf436eb5e0e2a5212d7677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetAnchoredScale: {x: 350, y: 130}
+  _targetAnchoredScale: {x: 400, y: 130}
   _animationDuration: 0.2
 --- !u!114 &3451922497231088123
 MonoBehaviour:

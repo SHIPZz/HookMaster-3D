@@ -23,13 +23,13 @@ namespace CodeBase.Animations
         public void OnPointerDown(PointerEventData eventData)
         {
             _tween?.Kill(true);
-            _tween = _targetRectTransform.DOSizeDelta(_targetAnchoredScale, _animationDuration);
+            _tween = _targetRectTransform.DOSizeDelta(_targetAnchoredScale, _animationDuration).SetUpdate(true);
         }
 
         public void OnPointerUp(PointerEventData eventData)
         {
             _tween?.Kill(true);
-            _tween = _targetRectTransform.DOSizeDelta(_initialAnchoredScale, _animationDuration);
+            _tween = _targetRectTransform.DOSizeDelta(_initialAnchoredScale, _animationDuration).SetUpdate(true);
         }
     }
 }

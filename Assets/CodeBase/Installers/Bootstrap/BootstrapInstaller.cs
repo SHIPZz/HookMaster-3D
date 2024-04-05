@@ -65,7 +65,7 @@ namespace CodeBase.Installers.Bootstrap
         }
 
         private void BindCheats() =>
-            Container.BindInterfacesAndSelfTo<Cheat>().AsSingle();
+            Container.BindInterfacesAndSelfTo<CheatService>().AsSingle();
 
         private void BindWorldTimeService() =>
             Container.BindInterfacesAndSelfTo<WorldTimeService>()

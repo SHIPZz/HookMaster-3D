@@ -4,6 +4,7 @@ using CodeBase.Gameplay.Effects;
 using CodeBase.Services.GOPool;
 using CodeBase.Services.Profit;
 using CodeBase.Services.UI;
+using CodeBase.UI.FloatingText;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -45,26 +46,20 @@ namespace CodeBase.Gameplay.Employees
         [Button]
         private void OnEmployeeProfitGot(string employeeId, int minuteProfit)
         {
-            if (_employee.Id != employeeId)
-                return;
-
-            EffectView dollarBlowEffect = _effectPool.Pop(EffectTypeId.DollarBlow);
-
-            dollarBlowEffect.transform.position = _employee.transform.position;
-            dollarBlowEffect.Effect.Play();
-
-            _floatingTextService
-                .ShowFloatingText($"{minuteProfit}$",
-                    _additionalAnchoredPositionY,
-                    _moveTextDuration, _fadeInDuration, _fadeOutDuration,
-                    Quaternion.identity,
-                    AssetPath.ProfitText, _employee.transform);
-            
-            
-
-            DOTween.Sequence()
-                .AppendInterval(_pushEffectPoolDelay)
-                .OnComplete(() => _effectPool.Push(dollarBlowEffect));
+            // if (_employee.Id != employeeId)
+            //     return;
+            //
+            // EffectView dollarBlowEffect = _effectPool.Pop(EffectTypeId.DollarBlow);
+            //
+            // dollarBlowEffect.transform.position = _employee.transform.position;
+            // dollarBlowEffect.Effect.Play();
+            //
+            // _floatingTextService
+            //     .ShowFloatingText($"{minuteProfit}$",FloatingTextType.NotEnoughMoney, _employee.transform,);
+            //
+            // DOTween.Sequence()
+            //     .AppendInterval(_pushEffectPoolDelay)
+            //     .OnComplete(() => _effectPool.Push(dollarBlowEffect));
         }
     }
 }

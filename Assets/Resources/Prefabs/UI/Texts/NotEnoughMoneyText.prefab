@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: -2461201622330043915}
   - component: {fileID: 5262185193618436227}
   - component: {fileID: 8574522137916815472}
+  - component: {fileID: 5437470341391328906}
+  - component: {fileID: 300474321356312130}
   m_Layer: 0
   m_Name: NotEnoughMoneyText
   m_TagString: Untagged
@@ -167,11 +169,10 @@ MonoBehaviour:
   <Text>k__BackingField: {fileID: 576781509361772860}
   <RectTransform>k__BackingField: {fileID: 2201674766031794590}
   _duration: 0.2
-  _anchoredPosition: 50
   _fadeInDuration: 0.2
-  _fadeOutDuration: 0.5
+  _fadeOutDuration: 0.6
   _minRandomAnchoredPosition: 50
-  _maxRandomAnchoredPosition: 150
+  _maxRandomAnchoredPosition: 250
 --- !u!114 &5262185193618436227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,3 +208,54 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 200
   m_TargetDisplay: 0
+--- !u!225 &5437470341391328906
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7481341339118574724}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &300474321356312130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7481341339118574724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: Not enough money
+  mTermSecondary: 
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  AllowParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 0}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI

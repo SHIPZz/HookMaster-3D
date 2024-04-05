@@ -1,6 +1,4 @@
-﻿using System;
-using CodeBase.Data;
-using CodeBase.Gameplay.Wallet;
+﻿using CodeBase.Data;
 using CodeBase.Services.PurchaseableItemServices;
 using CodeBase.Services.TriggerObserve;
 using CodeBase.Services.UI;
@@ -54,13 +52,7 @@ namespace CodeBase.Gameplay.PurchaseableSystem
                 _floatingButtonService
                     .ShowFloatingButton(-_additionalPosition,
                         _duration, Quaternion.identity, false, _accessButton,
-                        () => _accessButton.gameObject.SetActive(false));
-
-            if (_purchaseableItem.IsAсcessible)
-                return;
-
-            if (!_walletService.HasEnough(ItemTypeId.Money, _purchaseableItem.Price))
-                return;
+                        null,true);
         }
 
         private void OnPlayerEntered(Collider obj)
@@ -76,7 +68,13 @@ namespace CodeBase.Gameplay.PurchaseableSystem
             _priceText.text = $"{_purchaseableItem.Price}$";
             
             _floatingButtonService
-                .ShowFloatingButton(_additionalPosition, _duration, Quaternion.identity, true, _accessButton);
+                .ShowFloatingButton(_additionalPosition, 
+                    _duration, Quaternion.identity, 
+                    true, 
+                    _accessButton,
+                    null,
+                    false
+                    ,true);
         }
 
         private void OnAccessClicked()

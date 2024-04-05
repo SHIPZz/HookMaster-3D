@@ -263,7 +263,7 @@ MonoBehaviour:
       Description: 
       Languages:
       - Money pack
-      - "\u041F\u0430\u043A\u0435\u0442 \u0434\u0435\u043D\u0435\u0433"
+      - "\u0414\u0435\u043D\u044C\u0433\u0438"
       - Para paketi
       Flags: 000000
       Languages_Touch: []
@@ -488,6 +488,16 @@ MonoBehaviour:
       - Sound
       - "\u0417\u0432\u0443\u043A"
       - Ses
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Not enough money
+      TermType: 0
+      Description: 
+      Languages:
+      - Not enough money
+      - "\u041D\u0435\u0434\u043E\u0441\u0442\u0430\u0442\u043E\u0447\u043D\u043E
+        \u0434\u0435\u043D\u0435\u0433"
+      - yetersiz para
       Flags: 000000
       Languages_Touch: []
     CaseInsensitiveTerms: 0

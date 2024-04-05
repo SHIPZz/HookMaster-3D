@@ -12,7 +12,8 @@ namespace CodeBase.Animations
         public void PlayLoopEffects() =>
             _loopEffects.ForEach(x => x.Play());
 
-        public void PlayAppearEffect() => _appearEffect.Play();
+        public void PlayAppearEffect() => 
+            _appearEffect?.Play();
 
         public void PlayTargetEffects() => _targetEffects.ForEach(x => x.Play());
     }

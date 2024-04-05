@@ -2,6 +2,7 @@
 using CodeBase.Animations;
 using CodeBase.Services.Factories.UI;
 using CodeBase.Services.GOPool;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,16 +15,20 @@ namespace CodeBase.Services.UI
         private Vector2 _initialAnchoredPosition;
         private readonly ObjectPool<Button, string, Transform> _buttonObjectPool;
 
+        public Button Get() => _targetButton;
+
         public FloatingButtonService(UIFactory uiFactory)
         {
             _buttonObjectPool = new ObjectPool<Button, string, Transform>(uiFactory.CreateElement<Button>, 1);
         }
 
-        public Button Get() => _targetButton;
-
         public void ShowFloatingButton(float additionalAnchoredPositionY,
             float duration,
-            Quaternion rotation, bool setInitialPosition, Button targetButton, Action onComplete = null)
+            Quaternion rotation,
+            bool setInitialPosition,
+            Button targetButton,
+            Action onComplete = null, bool unScaleAnim = false,
+            bool scaleAnim = false)
         {
             _targetButton = targetButton;
             ConfigureButton(rotation);
@@ -33,6 +38,12 @@ namespace CodeBase.Services.UI
                 rectTransformAnimator.SetInitialPosition();
 
             rectTransformAnimator.MoveAnchoredPositionY(additionalAnchoredPositionY, duration, onComplete);
+
+            if (unScaleAnim) 
+                _targetButton.GetComponent<TransformScaleAnim>().UnScale();
+
+            if(scaleAnim)
+                _targetButton.GetComponent<TransformScaleAnim>().ToScale();
         }
 
         public void ShowFloatingButton(float additionalAnchoredPositionY,
