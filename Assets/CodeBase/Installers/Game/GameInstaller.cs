@@ -55,6 +55,8 @@ namespace CodeBase.Installers.Game
         [SerializeField] private PurchaseableItemProvider _purchaseableItemProvider;
         [SerializeField] private ClientProvider _clientProvider;
         [SerializeField] private CouchService _couchService;
+        [SerializeField] private CameraFocus _cameraFocus;
+        [SerializeField] private CameraController _cameraController;
 
         public override void InstallBindings()
         {
@@ -95,6 +97,8 @@ namespace CodeBase.Installers.Game
             BindMaterialFadeAnimService();
             BindPlayerInputService();
             BindFocusService();
+            Container.BindInstance(_cameraFocus);
+            Container.BindInstance(_cameraController);
         }
 
         private void BindFocusService()

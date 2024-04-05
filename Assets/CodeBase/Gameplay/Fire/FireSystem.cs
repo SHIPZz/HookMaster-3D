@@ -14,7 +14,6 @@ namespace CodeBase.Gameplay.Fire
     public class FireSystem : MonoBehaviour
     {
         [SerializeField] private float _putOutHitCount = 5f;
-        [SerializeField] private List<ParticleSystem> _fires;
         [SerializeField] private ParticleSystem _fire;
         [SerializeField] private TriggerObserver _triggerObserver;
         [SerializeField] private TriggerObserver _changeMaterialTriggerObserver;
@@ -92,6 +91,7 @@ namespace CodeBase.Gameplay.Fire
             _fireService.Reset().Forget();
             _fireSound.Stop();
             _destroyed = true;
+            _fireService.NotifyFirePutOut();
             Destroy(gameObject, _destroyTime);
         }
 

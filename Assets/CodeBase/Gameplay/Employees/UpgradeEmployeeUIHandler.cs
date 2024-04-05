@@ -45,7 +45,6 @@ namespace CodeBase.Gameplay.Employees
             _triggerObserver.TriggerEntered += OnPlayerEntered;
             _triggerObserver.TriggerExited += OnPlayerExited;
             _employee.PaperAdded += DisableUpgradeButton;
-            _employee.AllPaperProcessed += EnableUpgradeButton;
         }
 
         private void OnDestroy()
@@ -55,24 +54,14 @@ namespace CodeBase.Gameplay.Employees
 
             _employee.Burned -= DisableUpgradeButton;
             _employee.UpgradeStarted -= DisableUpgradeButton;
-            _employee.AllPaperProcessed -= EnableUpgradeButton;
             _employee.PaperAdded -= DisableUpgradeButton;
             _employeeService.EmployeeUpdated -= TryShowUpgradeButton;
             _triggerObserver.TriggerEntered -= OnPlayerEntered;
             _triggerObserver.TriggerExited -= OnPlayerExited;
         }
 
-        private void EnableUpgradeButton(Employee employee) =>
-            SetActiveUpgradeButton(true);
-
         private void DisableUpgradeButton(Employee employee) =>
-            SetActiveUpgradeButton(false);
-
-        private void SetActiveUpgradeButton(bool isActive)
-        {
-            if (_upgradeButton != null)
-                _upgradeButton.gameObject.SetActive(isActive);
-        }
+            _upgradeButton?.gameObject.SetActive(false);
 
         private void OnPlayerExited(Collider obj)
         {

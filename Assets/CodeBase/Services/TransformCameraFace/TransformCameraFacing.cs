@@ -1,5 +1,4 @@
-﻿using CodeBase.Services.Providers.Camera;
-using Cysharp.Threading.Tasks;
+﻿using CodeBase.Services.CameraServices;
 using UnityEngine;
 using Zenject;
 
@@ -7,28 +6,22 @@ namespace CodeBase.Services.TransformCameraFace
 {
     public class TransformCameraFacing : MonoBehaviour
     {
-        private CameraProvider _cameraProvider;
+        private CameraController _cameraController;
 
         [Inject]
-        private void Construct(CameraProvider cameraProvider) =>
-            _cameraProvider = cameraProvider;
+        private void Construct(CameraController cameraController)
+        {
+            _cameraController = cameraController;
+        }
+
+        private void Start()
+        {
+            transform.rotation = Quaternion.LookRotation(_cameraController.Camera.transform.forward);
+        }
 
         private void Update()
         {
-            if (_cameraProvider.Camera == null)
-                return;
-            
-            transform.rotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
-        }
-
-        private async void OnEnable()
-        {
-            while (_cameraProvider.Camera == null || _cameraProvider.Rotating)
-            {
-                await UniTask.Yield();
-            }
-
-            transform.rotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
+            transform.rotation = Quaternion.LookRotation(_cameraController.Camera.transform.forward);
         }
     }
 }

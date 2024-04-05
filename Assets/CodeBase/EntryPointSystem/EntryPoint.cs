@@ -11,7 +11,6 @@ using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.CameraServices;
 using CodeBase.Services.Clients;
 using CodeBase.Services.Employees;
-using CodeBase.Services.Extinguisher;
 using CodeBase.Services.Factories.Camera;
 using CodeBase.Services.Factories.Employee;
 using CodeBase.Services.Factories.Player;
@@ -51,7 +50,6 @@ namespace CodeBase.EntryPointSystem
         private readonly EmployeeProfitService _employeeProfitService;
         private readonly UIService _uiService;
         private readonly GameItemService _gameItemService;
-        private readonly ExtinguisherService _extinguisherService;
         private readonly FireService _fireService;
         private readonly SettingsService _settingsService;
         private readonly PurchaseableItemService _purchaseableItemService;
@@ -73,7 +71,6 @@ namespace CodeBase.EntryPointSystem
             EmployeeProfitService employeeProfitService,
             UIService uiService,
             GameItemService gameItemService,
-            ExtinguisherService extinguisherService,
             FireService fireService,
             SettingsService settingsService,
             PurchaseableItemService purchaseableItemService,
@@ -87,7 +84,6 @@ namespace CodeBase.EntryPointSystem
             _purchaseableItemService = purchaseableItemService;
             _settingsService = settingsService;
             _fireService = fireService;
-            _extinguisherService = extinguisherService;
             _locationProvider = locationProvider;
             _playerFactory = playerFactory;
             _cameraFactory = cameraFactory;
@@ -108,7 +104,6 @@ namespace CodeBase.EntryPointSystem
         {
             Player player = _playerFactory.Create(CharacterTypeId.Boss, _locationProvider.PlayerSpawnPoint);
             InitPlayerProvider(player);
-            InitializeCamera(player);
             InitCameraService();
             InitTableService();
             InitEmployees();
@@ -118,7 +113,6 @@ namespace CodeBase.EntryPointSystem
             InitProfitService();
             InitPurchaseableItemService();
             InitShopItemService();
-            InitExtinguisherService();
             InitTutorialRunner();
             InitFireService();
             InitUIService();
@@ -142,10 +136,7 @@ namespace CodeBase.EntryPointSystem
             _settingsService.Init();
 
         private void InitFireService() =>
-            _fireService.Init();
-
-        private void InitExtinguisherService() =>
-            _extinguisherService.Init();
+            _fireService.Init().Forget();
 
         private void InitShopItemService() =>
             _gameItemService.Init();
@@ -197,14 +188,6 @@ namespace CodeBase.EntryPointSystem
             }
 
             _employeeService.SubscribeTableEvents();
-        }
-
-        private void InitializeCamera(Player player)
-        {
-            CameraFollower cameraFollower = _cameraFactory.Create();
-            cameraFollower.SetTarget(player.transform);
-            _cameraProvider.CameraFollower = cameraFollower;
-            _cameraProvider.Camera = cameraFollower.GetComponent<Camera>();
         }
     }
 }

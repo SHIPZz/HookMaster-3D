@@ -1,6 +1,8 @@
 ﻿using System;
 using CodeBase.Constant;
+using CodeBase.Services.CameraServices;
 using CodeBase.Services.Factories.UI;
+using CodeBase.Services.Providers.Location;
 using CodeBase.Services.Window;
 using CodeBase.Services.WorldData;
 using CodeBase.UI;
@@ -14,19 +16,32 @@ namespace CodeBase.Gameplay.Tutorial
     public class HireEmployeeStep : TutorialStep, IDisposable
     {
         private readonly Vector2 _tutorialHandOffset = new Vector2(32.01f, -63.29f);
+        private readonly CameraFocus _cameraFocus;
+        private readonly LocationProvider _locationProvider;
         private Image _tutorialHand;
         private EmployeeView _employeeView;
         private EmployeeWindow _employeeWindow;
 
-        public HireEmployeeStep(UIFactory uiFactory, WindowService windowService, IWorldDataService worldDataService)
-            : base(uiFactory, windowService, worldDataService) { }
+        public HireEmployeeStep(UIFactory uiFactory, WindowService windowService, IWorldDataService worldDataService,
+            CameraFocus cameraFocus, LocationProvider locationProvider)
+            : base(uiFactory, windowService, worldDataService)
+        {
+            _locationProvider = locationProvider;
+            _cameraFocus = cameraFocus;
+        }
 
-        public override async void OnStart()
+        public override void OnStart()
         {
             if (IsCompleted())
                 return;
 
             WindowService.Opened += OnOpened;
+        }
+
+        private async UniTask<bool> Test()
+        {
+            await UniTask.WaitForSeconds(3f);
+            return true;
         }
 
         public override void OnFinished()
@@ -37,6 +52,7 @@ namespace CodeBase.Gameplay.Tutorial
             _employeeWindow.ScrollRect.vertical = true;
             SetCompleteToData(true);
             WorldDataService.WorldData.TutorialData.CompletedTutorials[ClassName] = true;
+            _cameraFocus.AddFocusTarget(new FocusInfo {Target = _locationProvider.PaperCreatorTable.transform});
         }
 
         private void OnOpened(WindowBase windowBase)

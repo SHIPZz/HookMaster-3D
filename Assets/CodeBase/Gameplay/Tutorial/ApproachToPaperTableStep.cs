@@ -24,14 +24,12 @@ namespace CodeBase.Gameplay.Tutorial
             if (IsCompleted())
                 return;
 
-            Debug.Log(_locationProvider.PaperCreatorTable.Pointer.name);
             _locationProvider.PaperCreatorTable.Pointer.gameObject.SetActive(true);
             _locationProvider.PaperCreatorTable.PlayerApproached += OnFinished;
         }
 
         public override void OnFinished()
         {
-            _locationProvider.PaperCreatorTable.Pointer.SetActive(false);
             _locationProvider.PaperCreatorTable.PlayerApproached -= OnFinished;
             SetCompleteToData(true);
         }

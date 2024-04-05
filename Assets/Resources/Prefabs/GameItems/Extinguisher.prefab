@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -1797554488943992746}
   - component: {fileID: 835079682510161463}
   - component: {fileID: 6403226093479650756}
+  - component: {fileID: -8181178593655861459}
   m_Layer: 21
   m_Name: Extinguisher
   m_TagString: Untagged
@@ -33,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000042068727, y: -0.7144161, z: -0.000000022947289, w: -0.69972116}
   m_LocalPosition: {x: 0.26, y: 0.698, z: 0.557}
-  m_LocalScale: {x: 1.0000001, y: 1, z: 1.0000001}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2565504888882319298}
@@ -259,6 +260,28 @@ MonoBehaviour:
   _triggerObserver: {fileID: -1797554488943992746}
   _targetPosition: {x: 0.26, y: 0.698, z: 0.557}
   _targetRotation: {x: 0, y: 76, z: 0}
+--- !u!114 &-8181178593655861459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752721442058616064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c934f669bfd84432a926d47a9a3d2e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetScale: 1
+  _unScale: 0
+  _scaleDuration: 0.5
+  _unScaleDuration: 0.25
+  _transform: {fileID: 5449297593171051823}
+  _scaleX: 0
+  _scaleY: 0
+  _scaleZ: 0
+  _unscaleOnStart: 0
+  _scaleDelay: 1
 --- !u!1 &1602005823134521601
 GameObject:
   m_ObjectHideFlags: 0

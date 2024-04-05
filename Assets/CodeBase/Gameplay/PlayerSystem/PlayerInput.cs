@@ -1,4 +1,5 @@
 ﻿using System;
+using CodeBase.Services.CameraServices;
 using CodeBase.Services.Input;
 using CodeBase.Services.Providers.Camera;
 using UnityEngine;
@@ -10,24 +11,24 @@ namespace CodeBase.Gameplay.PlayerSystem
     {
         public event Action<Vector3> MovementPressed;
 
-        private readonly CameraProvider _cameraProvider;
+        private readonly CameraController _cameraController;
         private bool _isBlocked = false;
 
-        public PlayerInput(CameraProvider cameraProvider)
+        public PlayerInput(CameraController cameraController)
         {
-            _cameraProvider = cameraProvider;
+            _cameraController = cameraController;
         }
 
         public void Tick()
         {
-            if(_cameraProvider.Camera == null || _isBlocked)
+            if(_cameraController.Camera == null || _isBlocked)
                 return;
             
             var horizontalInput = SimpleInput.GetAxisRaw("Horizontal");
             var verticalInput = SimpleInput.GetAxisRaw("Vertical");
 
-            Vector3 cameraForward = _cameraProvider.Camera.transform.forward;
-            Vector3 cameraRight = _cameraProvider.Camera.transform.right;
+            Vector3 cameraForward = _cameraController.Camera.transform.forward;
+            Vector3 cameraRight = _cameraController.Camera.transform.right;
 
             cameraForward.y = 0;
             cameraRight.y = 0;

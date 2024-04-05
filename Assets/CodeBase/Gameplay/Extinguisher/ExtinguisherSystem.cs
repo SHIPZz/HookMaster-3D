@@ -26,8 +26,6 @@ namespace CodeBase.Gameplay.Extinguisher
         private Coroutine _coroutine;
         private WindowService _windowService;
 
-        public event Action MaxTimeUsed;
-
         [Inject]
         private void Construct(EffectPool effectPool, PlayerProvider playerProvider, WindowService windowService)
         {

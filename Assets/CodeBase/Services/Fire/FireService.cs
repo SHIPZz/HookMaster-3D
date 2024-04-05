@@ -4,6 +4,7 @@ using CodeBase.Constant;
 using CodeBase.Gameplay.Fire;
 using CodeBase.Services.Coroutine;
 using CodeBase.Services.Providers.Fire;
+using CodeBase.Services.Providers.Tables;
 using CodeBase.Services.Time;
 using CodeBase.Services.Window;
 using CodeBase.Services.WorldData;
@@ -17,23 +18,32 @@ namespace CodeBase.Services.Fire
 {
     public class FireService : IDisposable
     {
+        private const int MinimalBusyTableCountToInitFire = 3;
+
         private readonly FireProvider _fireProvider;
         private readonly WorldTimeService _worldTimeService;
         private readonly IWorldDataService _worldDataService;
         private readonly WaitForSeconds _minute = new(60f);
         private readonly ICoroutineRunner _coroutineRunner;
+        private readonly WindowService _windowService;
+        private readonly TableService _tableService;
 
         public bool IsFired { get; private set; }
 
         private float _fireInvokeTime;
         private bool _isHudOpened;
-        private WindowService _windowService;
+
+        public event Action FireStarted;
+        public event Action FirePutOut;
 
         public FireService(FireProvider fireProvider,
             WorldTimeService worldTimeService,
             IWorldDataService worldDataService,
-            ICoroutineRunner coroutineRunner, WindowService windowService)
+            ICoroutineRunner coroutineRunner,
+            WindowService windowService,
+            TableService tableService)
         {
+            _tableService = tableService;
             _windowService = windowService;
             _coroutineRunner = coroutineRunner;
             _worldDataService = worldDataService;
@@ -41,25 +51,27 @@ namespace CodeBase.Services.Fire
             _fireProvider = fireProvider;
         }
 
-        public void Init()
+        public async UniTaskVoid Init()
         {
             var timeDifference = _worldTimeService.GetTimeDifferenceLastFireTimeByMinutes();
             _windowService.Opened += OnWindowOpened;
+
+            await UniTask.WaitUntil(() => _tableService.AvailableTableCount == MinimalBusyTableCountToInitFire);
             
             timeDifference = Mathf.Clamp(timeDifference, 0, TimeConstantValue.TwentyMinutes);
-            
+
             if (timeDifference == TimeConstantValue.TwentyMinutes)
             {
                 InitRandomFire();
                 return;
             }
-            
+
             SetFireInvokeTime(timeDifference);
-            
+
             _coroutineRunner.StartCoroutine(StartIncreaseFireInvokeTime());
         }
 
-        public void Dispose() => 
+        public void Dispose() =>
             _windowService.Opened -= OnWindowOpened;
 
         private void OnWindowOpened(WindowBase windowBase)
@@ -91,7 +103,7 @@ namespace CodeBase.Services.Fire
                 yield return _minute;
             }
 
-            InitRandomFire().Forget();
+            InitRandomFire();
             _worldDataService.WorldData.FireTimeData.TargetFireInvokeTime = 0;
             _worldTimeService.SaveLastFireTime();
         }
@@ -103,15 +115,16 @@ namespace CodeBase.Services.Fire
             _fireInvokeTime = Mathf.Clamp(_fireInvokeTime + timeDifference, 0, TimeConstantValue.TwentyMinutes);
         }
 
-        private async UniTaskVoid InitRandomFire()
+        private void InitRandomFire()
         {
-            while (!_isHudOpened) 
-                await UniTask.Yield();
-            
             var randomId = Random.Range(0, _fireProvider.FireSpawners.Count);
             FireSpawner randomSpawner = _fireProvider.FireSpawners[randomId];
             randomSpawner.Init();
             IsFired = true;
+            FireStarted?.Invoke();
         }
+
+        public void NotifyFirePutOut() =>
+            FirePutOut?.Invoke();
     }
 }
