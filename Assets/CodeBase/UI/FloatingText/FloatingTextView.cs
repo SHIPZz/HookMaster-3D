@@ -1,11 +1,8 @@
-﻿using System;
-using CodeBase.Services.GOPool;
-using CodeBase.Services.Providers.Camera;
+﻿using CodeBase.Services.GOPool;
 using CodeBase.Services.TransformCameraFace;
 using CodeBase.Services.UI;
 using TMPro;
 using UnityEngine;
-using Zenject;
 using Random = UnityEngine.Random;
 
 namespace CodeBase.UI.FloatingText

@@ -2,6 +2,7 @@
 using CodeBase.InfraStructure;
 using CodeBase.Services.Coroutine;
 using CodeBase.Services.Input;
+using CodeBase.Services.Pause;
 using CodeBase.Services.Profit;
 using CodeBase.Services.Saves;
 using CodeBase.Services.SaveSystem;
@@ -30,8 +31,17 @@ namespace CodeBase.Installers.Bootstrap
             BindWorldTimeService();
             BindCheats();
             BindSaveEvents();
+            BindInterfacesAndSelf<PauseService>();
             Container.BindInterfacesTo<BootstrapInstaller>()
                 .FromInstance(this);
+        }
+
+        private void BindInterfacesAndSelf<T>() =>
+            Container.BindInterfacesAndSelfTo<T>().AsSingle();
+
+        private void BindAsSingle<T>()
+        {
+            Container.Bind<T>().AsSingle();
         }
 
         private void BindSaveEvents()

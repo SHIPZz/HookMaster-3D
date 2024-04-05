@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1920659012818751005}
-  - component: {fileID: 777159849193004399}
   - component: {fileID: 3020706832291632822}
   - component: {fileID: 2374942769033423698}
   - component: {fileID: 4656932886248811703}
   - component: {fileID: 4781356830632332792}
   - component: {fileID: 8462179454282556906}
+  - component: {fileID: 2149167973149721319}
   m_Layer: 16
   m_Name: suitcase of money
   m_TagString: Untagged
@@ -57,27 +57,6 @@ Transform:
   - {fileID: 4986890762340512520}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &777159849193004399
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 547075626129508700}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.826065, y: 2.0684037, z: 2.8579695}
-  m_Center: {x: -0.07548196, y: 0.9701965, z: -0.040391345}
 --- !u!114 &3020706832291632822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,6 +129,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9cd6e4e06e94c08ac45973324da4702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &2149167973149721319
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547075626129508700}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 2.1121686
+  m_Center: {x: -0.23343007, y: 0.7608263, z: 0}
 --- !u!1 &626104605092874384
 GameObject:
   m_ObjectHideFlags: 0

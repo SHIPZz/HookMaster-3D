@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Animations;
 using CodeBase.Data;
-using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.Wallet;
 using CodeBase.Services.Window;
 using CodeBase.UI.Hud;
@@ -34,9 +32,7 @@ namespace CodeBase.UI.Shop
 
         private void OnDisable()
         {
-            _walletService.DiamondsChanged -= SetDiamondCountText;
             _walletService.MoneyChanged -= SetMoneyCountText;
-            _walletService.TicketCountChanged -= SetTicketCountText;
         }
 
         public override void Open()
@@ -45,20 +41,14 @@ namespace CodeBase.UI.Shop
             transformScale.ToScale();
             _canvasAnimator.FadeInCanvas();
             
-            _walletService.DiamondsChanged += SetDiamondCountText;
             _walletService.MoneyChanged += SetMoneyCountText;
-            _walletService.TicketCountChanged += SetTicketCountText;
             
-            SetDiamondCountText(_walletService.GetValue(ItemTypeId.Diamond));
             SetMoneyCountText(_walletService.GetValue(ItemTypeId.Money));
-            SetTicketCountText(_walletService.GetValue(ItemTypeId.Ticket));
         }
 
         public override void Close()
         {
-            _walletService.DiamondsChanged -= SetDiamondCountText;
             _walletService.MoneyChanged -= SetMoneyCountText;
-            _walletService.TicketCountChanged -= SetTicketCountText;
             
             _canvasAnimator.FadeOutCanvas(() =>
             {
@@ -67,13 +57,7 @@ namespace CodeBase.UI.Shop
             });
         }
 
-        private void SetDiamondCountText(int count) => 
-            _diamondText.text = $"{count}";
-
         private void SetMoneyCountText(int count) => 
             _moneyText.text = $"{count}$";
-
-        private void SetTicketCountText(int count) => 
-            _ticketText.text = $"{count}";
     }
 }

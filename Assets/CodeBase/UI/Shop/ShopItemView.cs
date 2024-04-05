@@ -54,7 +54,7 @@ namespace CodeBase.UI.Shop
         {
             if (!_walletService.HasEnough(ItemTypeId, Price))
             {
-                _floatingTextService.ShowFloatingText(FloatingTextType.NotEnoughMoney, transform, transform.position);
+                _floatingTextService.ShowFloatingText(FloatingTextType.NotEnoughMoney, transform, transform.position, false);
                 return;
             }
 

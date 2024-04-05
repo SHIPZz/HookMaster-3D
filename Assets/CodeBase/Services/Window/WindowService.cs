@@ -4,7 +4,7 @@ using System.Linq;
 using CodeBase.Services.Factories.UI;
 using CodeBase.UI;
 using CodeBase.UI.Hud;
-using UnityEngine;
+using Sirenix.Utilities;
 
 namespace CodeBase.Services.Window
 {
@@ -18,8 +18,10 @@ namespace CodeBase.Services.Window
         public event Action<WindowBase> Opened;
         public event Action<WindowBase> HudOpened;
 
-        public WindowService(UIFactory uiFactory) =>
+        public WindowService(UIFactory uiFactory)
+        {
             _uiFactory = uiFactory;
+        }
 
         public void Open<T>() where T : WindowBase
         {
@@ -27,12 +29,20 @@ namespace CodeBase.Services.Window
 
             var targetWindow = Get<T>();
             targetWindow.Open();
-            
-            if(targetWindow.GetType()== typeof(HudWindow))
+
+            if (targetWindow.GetType() == typeof(HudWindow))
+            {
                 HudOpened?.Invoke(targetWindow);
-            
+            }
+
             Opened?.Invoke(targetWindow);
         }
+
+        public void OpenCurrentWindow()
+        {
+            CurrentWindow.Open();
+            Opened?.Invoke(CurrentWindow);
+        }   
 
         public T OpenAndGet<T>() where T : WindowBase
         {
@@ -70,7 +80,7 @@ namespace CodeBase.Services.Window
         public void CloseAll()
         {
             ClearDestroyedWindows();
-            _createdWindows.Values.ToList().ForEach(x => x.Close());
+            _createdWindows.Values.ForEach(x => x.Close());
         }
 
         public void Close<T>() where T : WindowBase
@@ -86,10 +96,10 @@ namespace CodeBase.Services.Window
 
         private void ClearDestroyedWindows()
         {
-            List<Type> windowsToRemove = _createdWindows
+            var windowsToRemove = _createdWindows
                 .Where(pair => pair.Value == null)
                 .Select(pair => pair.Key)
-                .ToList();
+                .Reverse();
 
             foreach (Type typeToRemove in windowsToRemove)
                 _createdWindows.Remove(typeToRemove);

@@ -2,7 +2,6 @@
 using CodeBase.EntryPointSystem;
 using CodeBase.Gameplay.PlayerSystem;
 using CodeBase.Gameplay.Tutorial;
-using CodeBase.Gameplay.Wallet;
 using CodeBase.MaterialChanger;
 using CodeBase.Services.BurnableObjects;
 using CodeBase.Services.CameraServices;
@@ -19,6 +18,7 @@ using CodeBase.Services.Factories.GameItem;
 using CodeBase.Services.Factories.Player;
 using CodeBase.Services.Factories.UI;
 using CodeBase.Services.Fire;
+using CodeBase.Services.Focus;
 using CodeBase.Services.GameItemServices;
 using CodeBase.Services.GOPool;
 using CodeBase.Services.GOPush;
@@ -94,6 +94,12 @@ namespace CodeBase.Installers.Game
             BindNumberTextAnimService();
             BindMaterialFadeAnimService();
             BindPlayerInputService();
+            BindFocusService();
+        }
+
+        private void BindFocusService()
+        {
+            Container.BindInterfacesAndSelfTo<FocusService>().AsSingle();
         }
 
         private void BindPlayerInputService() => 

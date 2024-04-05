@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using CodeBase.Animations;
 using CodeBase.Services.TriggerObserve;
 using Cysharp.Threading.Tasks;
@@ -7,23 +6,16 @@ using UnityEngine;
 
 namespace CodeBase.Gameplay.GameItems.RandomItems
 {
-    [RequireComponent(typeof(Collider))]
     public class RandomItem : GameItemAbstract
     {
         [SerializeField] private AppearanceEffect _appearanceEffect;
         [SerializeField] private TriggerObserver _triggerObserver;
         [field: SerializeField] public Vector3 SpawnOffset { get; private set; }
-
-        private CancellationTokenSource _cancellationTokenSource;
-        private Collider _collider;
-
+        
+        private bool _playerExited = true;
+        
         public event Action PlayerApproached;
         public event Action PlayerExited;
-
-        private void Awake()
-        {
-            _collider = GetComponent<Collider>();
-        }
 
         private void OnEnable()
         {
@@ -39,34 +31,23 @@ namespace CodeBase.Gameplay.GameItems.RandomItems
             _triggerObserver.TriggerExited -= OnPlayerExited;
         }
 
-        private void OnPlayerExited(Collider obj)
+        private void OnPlayerExited(Collider player)
         {
-            _cancellationTokenSource?.Cancel();
-            _cancellationTokenSource?.Dispose();
-            _collider.enabled = true;
+            _playerExited = true;
             PlayerExited?.Invoke();
         }
 
-        private async void OnPlayerEntered(Collider obj)
+        private async void OnPlayerEntered(Collider player)
         {
-            _cancellationTokenSource = new CancellationTokenSource();
-            var playerRigidBody = obj.GetComponent<Rigidbody>();
-            print(obj.gameObject.name);
-
-            try
-            {
-                while (playerRigidBody.velocity.sqrMagnitude > 0.1f)
-                {
-                    await UniTask.Yield(_cancellationTokenSource.Token);
-                }
-            }
-            catch (OperationCanceledException)
-            {
+            if(!_playerExited)
                 return;
-            }
+
+            _playerExited = false;
+            var playerRigidBody = player.GetComponent<Rigidbody>();
+
+            await UniTask.WaitUntil(() => playerRigidBody.velocity.sqrMagnitude > 0.1f);
             
             PlayerApproached?.Invoke();
-            _collider.enabled = false;
         }
     }
 }

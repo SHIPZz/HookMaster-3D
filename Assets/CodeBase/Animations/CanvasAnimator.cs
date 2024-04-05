@@ -25,7 +25,7 @@ namespace CodeBase.Animations
             _fadeTween?.Kill(true);
             _canvasGroup.interactable = true;
             _canvas.enabled = true;
-            _fadeTween = _canvasGroup.DOFade(1f, _fadeInDuration).OnComplete(() => onCompleted?.Invoke());
+            _fadeTween = _canvasGroup.DOFade(1f, _fadeInDuration).OnComplete(() => onCompleted?.Invoke()).SetUpdate(true);
         }
 
         public void FadeOutCanvas([CanBeNull] Action onCompleted = null)
@@ -38,7 +38,7 @@ namespace CodeBase.Animations
                     _canvasGroup.interactable = false;
                     _canvas.enabled = false;
                     onCompleted?.Invoke();
-                });
+                }).SetUpdate(true);
         }
     }
 }

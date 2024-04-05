@@ -89,7 +89,7 @@ namespace CodeBase.Gameplay.Fire
         private void Stop()
         {
             _fire.Stop();
-            _fireService.Reset();
+            _fireService.Reset().Forget();
             _fireSound.Stop();
             _destroyed = true;
             Destroy(gameObject, _destroyTime);

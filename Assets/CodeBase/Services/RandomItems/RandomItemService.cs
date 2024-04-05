@@ -44,7 +44,6 @@ namespace CodeBase.Services.RandomItems
             var spawnTime = _worldDataService.WorldData.RandomItemData.SpawnMinutes;
 
             spawnTime = Mathf.Clamp(spawnTime + timeDifference, 0, TimeConstantValue.ThreeMinutes);
-            spawnTime = 3;
             
             if (spawnTime >= TimeConstantValue.ThreeMinutes)
             {

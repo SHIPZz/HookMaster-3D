@@ -19,8 +19,8 @@ namespace CodeBase.UI.Buttons.NavigationButtons
             var infoWindow = _windowService.Get<InfoWindow>();
             CameraService.MoveToTarget(clientRoom, _returnDuration,null, () =>
             {
-                infoWindow.Init(InfoItemTypeId.ClientServeRoom, _windowService);
-                infoWindow.Open();
+                infoWindow.Init(InfoItemTypeId.ClientServeRoom);
+                _windowService.OpenCurrentWindow();
             });
         }
     }

@@ -15,8 +15,6 @@ namespace CodeBase.Services.Wallet
         private Dictionary<ItemTypeId, Action<int>> _updateDataActions = new();
 
         public event Action<int> MoneyChanged;
-        public event Action<int> DiamondsChanged;
-        public event Action<int> TicketCountChanged;
 
         public WalletService(IWorldDataService worldDataService) =>
             _worldDataService = worldDataService;
@@ -24,9 +22,7 @@ namespace CodeBase.Services.Wallet
         public void Init()
         {
             PlayerData playerData = _worldDataService.WorldData.PlayerData;
-            _updateDataActions[ItemTypeId.Diamond] = OnDiamondsChanged;
             _updateDataActions[ItemTypeId.Money] = OnMoneyChanged;
-            _updateDataActions[ItemTypeId.Ticket] = OnTicketCountChanged;
 
             _walletResources = playerData.WalletResources;
         }
@@ -45,8 +41,6 @@ namespace CodeBase.Services.Wallet
             _walletResources[itemTypeId] - amount >= 0;
 
         private void OnMoneyChanged(int amount) => MoneyChanged?.Invoke(amount);
-        private void OnTicketCountChanged(int amount) => TicketCountChanged?.Invoke(amount);
-        private void OnDiamondsChanged(int amount) => DiamondsChanged?.Invoke(amount);
 
         private void UpdateData()
         {

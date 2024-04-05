@@ -2,11 +2,11 @@
 using System.Collections;
 using System.Threading;
 using System.Threading.Tasks;
-using _Project_legacy.Scripts.Papers;
 using CodeBase.Data;
 using CodeBase.Enums;
 using CodeBase.Extensions;
 using CodeBase.Gameplay.BurnableObjectSystem;
+using CodeBase.Gameplay.PaperS;
 using CodeBase.Gameplay.TableSystem;
 using CodeBase.MaterialChanger;
 using CodeBase.Services.BurnableObjects;
@@ -80,11 +80,9 @@ namespace CodeBase.Gameplay.Employees
                 Burn();
         }
 
-        private void OnDisable() =>
-            _tableHolder.ItemPut -= OnPaperAdded;
-
         private void OnDestroy()
         {
+            _tableHolder.ItemPut -= OnPaperAdded;
             _cancellationToken?.Cancel();
             _cancellationToken?.Dispose();
         }
@@ -124,6 +122,7 @@ namespace CodeBase.Gameplay.Employees
                 });
             }
 
+            _employeeDataService.SetPaperProcessedOnce();
             _tableHolder.SetLastHoldableNull();
             AllPaperProcessed?.Invoke(this);
             HasPapers = false;

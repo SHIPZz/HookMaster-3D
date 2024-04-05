@@ -38664,11 +38664,11 @@ GameObject:
   - component: {fileID: 7028582962022057370}
   - component: {fileID: 2223726857545491952}
   - component: {fileID: 4733806192467949381}
-  - component: {fileID: 3735983727541283686}
   - component: {fileID: 4152163811434027029}
   - component: {fileID: 9109980116202520711}
   - component: {fileID: 1723116729824317677}
   - component: {fileID: 745204686285679339}
+  - component: {fileID: 2302577735922102640}
   m_Layer: 16
   m_Name: MoneyBag
   m_TagString: Untagged
@@ -38758,27 +38758,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9c8bfb97314834a597c3e19c55d3e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &3735983727541283686
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5868199068999009553}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.71300524, y: 0.26344347, z: 0.6411948}
-  m_Center: {x: 0.024667025, y: 0.09062837, z: 0.029205404}
 --- !u!114 &4152163811434027029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38839,6 +38818,27 @@ MonoBehaviour:
   _duration: 4
   _targetRotation: {x: 0, y: 360, z: 0}
   _loopType: 2
+--- !u!135 &2302577735922102640
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5868199068999009553}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.39581883
+  m_Center: {x: -0.043646455, y: 0.16838372, z: -0.019849658}
 --- !u!1 &5936217215957713536
 GameObject:
   m_ObjectHideFlags: 0

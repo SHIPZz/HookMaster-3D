@@ -1,5 +1,6 @@
 ﻿using CodeBase.Services.SaveSystem;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace CodeBase.Services.WorldData
 {
@@ -19,6 +20,8 @@ namespace CodeBase.Services.WorldData
 
         public void Reset()
         {
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
             WorldData = null;
             WorldData = new();
             Save();

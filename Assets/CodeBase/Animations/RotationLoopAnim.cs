@@ -11,24 +11,16 @@ namespace CodeBase.Animations
         
         private Tween _animationTween;
 
-        private void OnEnable()
-        {
+        private void OnEnable() => 
             StartAnimation();
-        }
 
-        private void OnDisable()
-        {
+        private void OnDisable() => 
             StopAnimation();
-        }
 
-        private void StartAnimation()
-        {
-            print("startAnim");
+        private void StartAnimation() =>
             _animationTween = transform.DORotate(_targetRotation, _duration, RotateMode.FastBeyond360)
                 .SetLoops(-1, _loopType)
-                .SetEase(Ease.Linear)
-                .SetUpdate(true);
-        }
+                .SetEase(Ease.Linear);
 
         private void StopAnimation()
         {

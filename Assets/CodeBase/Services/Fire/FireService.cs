@@ -43,20 +43,20 @@ namespace CodeBase.Services.Fire
 
         public void Init()
         {
-            // var timeDifference = _worldTimeService.GetTimeDifferenceLastFireTimeByMinutes();
-            // _windowService.Opened += OnWindowOpened;
-            //
-            // timeDifference = Mathf.Clamp(timeDifference, 0, TimeConstantValue.TwentyMinutes);
-            //
-            // if (timeDifference == TimeConstantValue.TwentyMinutes)
-            // {
-            //     InitRandomFire();
-            //     return;
-            // }
-            //
-            // SetFireInvokeTime(timeDifference);
-            //
-            // _coroutineRunner.StartCoroutine(StartIncreaseFireInvokeTime());
+            var timeDifference = _worldTimeService.GetTimeDifferenceLastFireTimeByMinutes();
+            _windowService.Opened += OnWindowOpened;
+            
+            timeDifference = Mathf.Clamp(timeDifference, 0, TimeConstantValue.TwentyMinutes);
+            
+            if (timeDifference == TimeConstantValue.TwentyMinutes)
+            {
+                InitRandomFire();
+                return;
+            }
+            
+            SetFireInvokeTime(timeDifference);
+            
+            _coroutineRunner.StartCoroutine(StartIncreaseFireInvokeTime());
         }
 
         public void Dispose() => 
@@ -73,7 +73,7 @@ namespace CodeBase.Services.Fire
             _isHudOpened = true;
         }
 
-        public async void Reset()
+        public async UniTaskVoid Reset()
         {
             _fireInvokeTime = TimeConstantValue.TenMinutes;
             _worldDataService.WorldData.FireTimeData.TargetFireInvokeTime = _fireInvokeTime;
@@ -91,7 +91,7 @@ namespace CodeBase.Services.Fire
                 yield return _minute;
             }
 
-            InitRandomFire();
+            InitRandomFire().Forget();
             _worldDataService.WorldData.FireTimeData.TargetFireInvokeTime = 0;
             _worldTimeService.SaveLastFireTime();
         }
@@ -103,7 +103,7 @@ namespace CodeBase.Services.Fire
             _fireInvokeTime = Mathf.Clamp(_fireInvokeTime + timeDifference, 0, TimeConstantValue.TwentyMinutes);
         }
 
-        private async void InitRandomFire()
+        private async UniTaskVoid InitRandomFire()
         {
             while (!_isHudOpened) 
                 await UniTask.Yield();

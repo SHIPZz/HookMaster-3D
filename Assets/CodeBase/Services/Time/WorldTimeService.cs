@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections;
-using System.Globalization;
-using System.IO;
 using System.Net;
-using System.Net.Http;
 using System.Net.Sockets;
 using System.Threading;
-using System.Threading.Tasks;
 using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Extensions;
@@ -343,11 +339,11 @@ namespace CodeBase.Services.Time
         //         return DateTime.Now;
         //     }
     }
-}
 
 
-[Serializable]
-public class WorldTimeApiResponse
-{
-    public string utc_datetime;
+    [Serializable]
+    public class WorldTimeApiResponse
+    {
+        public string utc_datetime;
+    }
 }

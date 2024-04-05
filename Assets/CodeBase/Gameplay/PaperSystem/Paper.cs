@@ -1,6 +1,6 @@
 ﻿using System;
-using _Project_legacy.Scripts.Papers;
 using CodeBase.Gameplay.GameItems;
+using CodeBase.Gameplay.PaperS;
 using CodeBase.Gameplay.PlayerSystem;
 using CodeBase.Services.TriggerObserve;
 using UnityEngine;

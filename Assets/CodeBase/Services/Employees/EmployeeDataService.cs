@@ -109,5 +109,12 @@ namespace CodeBase.Services.Employees
 
             _worldDataService.Save();
         }
+
+        public void SetPaperProcessedOnce()
+        {
+            _worldDataService.WorldData.PaperProcessedOnce = true;
+            
+            _worldDataService.Save();
+        }
     }
 }

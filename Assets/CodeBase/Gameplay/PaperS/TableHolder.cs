@@ -1,18 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using CodeBase.Gameplay.PaperS;
+using CodeBase.Gameplay.TableSystem;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
-namespace _Project_legacy.Scripts.Papers
+namespace CodeBase.Gameplay.PaperS
 {
     internal class TableHolder : MonoBehaviour, IHolder
     {
         [SerializeField] private Transform _holdablesRoot;
         [SerializeField] private float _timeToTake = 0.5f;
         [SerializeField] private Vector3 _offset = new(0, 0.06f, 0);
+        [SerializeField] private Table _table;
 
         private readonly Stack<IHoldable> _items = new();
         private IHoldable _lastHoldable;
@@ -21,6 +22,7 @@ namespace _Project_legacy.Scripts.Papers
         public event Action ItemPut;
 
         public int ItemsCount => _items.Count;
+        public bool CanPut => !_table.IsFree;
 
         private void OnEnable() => 
             _cancellationToken = new();

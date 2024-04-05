@@ -92,6 +92,9 @@ namespace CodeBase.Gameplay.PaperS
         {
             if (other.TryGetComponent(out IHolder holder))
             {
+                if(!holder.CanPut)
+                    return;
+                
                 _holder = holder;
 
                 _isTaking = _playerPaperContainer.Papers.Count == 0;

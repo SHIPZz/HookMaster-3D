@@ -25,6 +25,7 @@ namespace CodeBase.Services.Profit
         private readonly WorldTimeService _worldTimeService;
         private readonly UIService _uiService;
         private readonly EmployeeService _employeeService;
+        private readonly IWorldDataService _worldDataService;
 
         private int _totalEarnedProfit;
 
@@ -34,8 +35,10 @@ namespace CodeBase.Services.Profit
             WalletService walletService,
             WorldTimeService worldTimeService,
             UIService uiService,
-            EmployeeService employeeService)
+            EmployeeService employeeService,
+            IWorldDataService worldDataService)
         {
+            _worldDataService = worldDataService;
             _employeeService = employeeService;
             _uiService = uiService;
             _worldTimeService = worldTimeService;
@@ -48,6 +51,9 @@ namespace CodeBase.Services.Profit
             _coroutineRunner.StartCoroutine(GetProfitEveryMinuteCoroutine());
             int timeDifferenceByMinutes = _worldTimeService.GetTimeDifferenceByMinutesBetweenProfitAndCurrentTime();
 
+            if(!_worldDataService.WorldData.PaperProcessedOnce)
+                return;
+            
             ReceiveOfflineProfit(timeDifferenceByMinutes);
 
             if (_totalEarnedProfit == 0)

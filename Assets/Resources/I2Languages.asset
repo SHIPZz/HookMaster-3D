@@ -182,7 +182,7 @@ MonoBehaviour:
       Description: 
       Languages:
       - Close
-      - "\u0417\u0430\u043A\u0440\u044B\u0432\u0430\u0442\u044C"
+      - "\u0417\u0430\u043A\u0440\u044B\u0442\u044C"
       - "Kapal\u0131"
       Flags: 000000
       Languages_Touch: []
@@ -309,7 +309,7 @@ MonoBehaviour:
       Description: 
       Languages:
       - Got it!
-      - "\u041F\u043E\u043D\u044F\u0442\u043D\u043E!"
+      - "\u041F\u043E\u043B\u0443\u0447\u0438\u0442\u044C"
       - "Anlad\u0131m!"
       Flags: 000000
       Languages_Touch: []
@@ -357,6 +357,137 @@ MonoBehaviour:
       - Clean
       - "\u041F\u043E\u0447\u0438\u0441\u0442\u0438\u0442\u044C"
       - Temiz
+      Flags: 000000
+      Languages_Touch: []
+    - Term: x2 Collect
+      TermType: 0
+      Description: 
+      Languages:
+      - x2 Collect
+      - "x2 \u0421\u043E\u0431\u0440\u0430\u0442\u044C"
+      - x2 Toplama
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Offline Reward
+      TermType: 0
+      Description: 
+      Languages:
+      - Offline Reward
+      - "\u041E\u0444\u0444\u043B\u0430\u0439\u043D \u041D\u0430\u0433\u0440\u0430\u0434\u0430"
+      - "\xC7evrimd\u0131\u015F\u0131 \xD6d\xFCl"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: "2 \u0447\u0430\u0441\u0430"
+      TermType: 0
+      Description: 
+      Languages:
+      - 
+      - 
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: "5 \u043C\u0438\u043D\u0443\u0442"
+      TermType: 0
+      Description: 
+      Languages:
+      - 5 Minutes
+      - "5 \u043C\u0438\u043D\u0443\u0442"
+      - 5 Dakika
+      Flags: 000000
+      Languages_Touch: []
+    - Term: While you were away you earned
+      TermType: 0
+      Description: 
+      Languages:
+      - While you were away you earned
+      - "\u041F\u043E\u043A\u0430 \u0442\u0435\u0431\u044F \u043D\u0435 \u0431\u044B\u043B\u043E,
+        \u0442\u044B \u0437\u0430\u0440\u0430\u0431\u043E\u0442\u0430\u043B"
+      - "Uzaktayken kazand\u0131n"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Offline Earnings
+      TermType: 0
+      Description: 
+      Languages:
+      - Offline Earnings
+      - "\u041E\u0444\u0444\u043B\u0430\u0439\u043D \u0417\u0430\u0440\u0430\u0431\u043E\u0442\u043E\u043A"
+      - "\xC7evrimd\u0131\u015F\u0131 Kazan\xE7"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: There is no available employees
+      TermType: 0
+      Description: 
+      Languages:
+      - There is no available employees
+      - "\u041D\u0435\u0442 \u0441\u0432\u043E\u0431\u043E\u0434\u043D\u044B\u0445
+        \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432"
+      - "Mevcut \xE7al\u0131\u015Fan yok"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: More employees - more money
+      TermType: 0
+      Description: 
+      Languages:
+      - More employees - more money
+      - "\u0411\u043E\u043B\u044C\u0448\u0435 \u0441\u043E\u0442\u0440\u0443\u0434\u043D\u0438\u043A\u043E\u0432
+        \u2013 \u0431\u043E\u043B\u044C\u0448\u0435 \u0434\u0435\u043D\u0435\u0433"
+      - "Daha fazla \xE7al\u0131\u015Fan - daha fazla para"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Rotate
+      TermType: 0
+      Description: 
+      Languages:
+      - Rotate
+      - "\u0412\u0440\u0430\u0449\u0430\u0442\u044C"
+      - "D\xF6nd\xFCrmek"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Exit
+      TermType: 0
+      Description: 
+      Languages:
+      - Exit
+      - "\u0412\u044B\u0439\u0442\u0438"
+      - "\xC7\u0131k\u0131\u015F"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Shop
+      TermType: 0
+      Description: 
+      Languages:
+      - Shop
+      - "\u041C\u0430\u0433\u0430\u0437\u0438\u043D"
+      - "Ma\u011Faza"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Hire
+      TermType: 0
+      Description: 
+      Languages:
+      - Hire
+      - "\u041D\u0430\u043D\u0438\u043C\u0430\u0442\u044C"
+      - Kiralamak
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Music
+      TermType: 0
+      Description: 
+      Languages:
+      - 'Music
+
+'
+      - "\u041C\u0443\u0437\u044B\u043A\u0430\n"
+      - "M\xFCzik\n"
+      Flags: 000000
+      Languages_Touch: []
+    - Term: "\u0417\u0432\u0443\u043A"
+      TermType: 0
+      Description: 
+      Languages:
+      - Sound
+      - "\u0417\u0432\u0443\u043A"
+      - Ses
       Flags: 000000
       Languages_Touch: []
     CaseInsensitiveTerms: 0

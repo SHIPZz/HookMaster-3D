@@ -20,5 +20,6 @@ namespace CodeBase.Data
         public FireTimeData FireTimeData = new();
         public Dictionary<GameItemType, PurchaseableItemData> PurchaseableItemDatas = new();
         public TutorialData TutorialData = new();
+        public bool PaperProcessedOnce;
     }
 }

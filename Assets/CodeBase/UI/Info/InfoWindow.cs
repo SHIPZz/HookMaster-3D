@@ -1,11 +1,8 @@
 ﻿using CodeBase.Animations;
-using CodeBase.Enums;
 using CodeBase.Gameplay.SoundPlayer;
 using CodeBase.Services.DataService;
-using CodeBase.Services.Window;
+using CodeBase.Services.Pause;
 using CodeBase.SO.InfoItems;
-using CodeBase.UI.Hud;
-using CodeBase.UI.Shop;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,11 +22,11 @@ namespace CodeBase.UI.Info
         private string _name;
         private string _description;
         private Sprite _spriteIcon;
-        private WindowService _windowService;
 
-        public void Init(InfoItemTypeId infoItemTypeId, WindowService windowService)
+        [Inject] private IPauseService _pauseService;
+
+        public void Init(InfoItemTypeId infoItemTypeId)
         {
-            _windowService = windowService;
             InfoItemSO data = _gameStaticDataService.Get(infoItemTypeId);
             _nameText.text = data.Name;
             _descriptionText.text = data.Description;
@@ -40,6 +37,12 @@ namespace CodeBase.UI.Info
         {
             _soundPlayerSystem.PlayActiveSound();
             _canvasAnimator.FadeInCanvas();
+        }
+
+        public override void Close()
+        {
+            _pauseService.Run();
+            base.Close();
         }
     }
 }

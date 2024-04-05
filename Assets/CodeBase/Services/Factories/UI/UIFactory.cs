@@ -23,16 +23,13 @@ namespace CodeBase.Services.Factories.UI
     {
         private readonly UIStaticDataService _uiStaticDataService;
         private readonly DiContainer _diContainer;
-        private readonly LocationProvider _locationProvider;
         private readonly IAssetProvider _assetProvider;
 
         public UIFactory(UIStaticDataService uiStaticDataService,
             DiContainer diContainer,
-            LocationProvider locationProvider,
             IAssetProvider assetProvider)
         {
             _assetProvider = assetProvider;
-            _locationProvider = locationProvider;
             _diContainer = diContainer;
             _uiStaticDataService = uiStaticDataService;
         }
@@ -64,7 +61,7 @@ namespace CodeBase.Services.Factories.UI
         {
             WindowBase windowPrefab = _uiStaticDataService.Get<T>();
             var employeeWindow =
-                _diContainer.InstantiatePrefabForComponent<T>(windowPrefab, _locationProvider.UIParent);
+                _diContainer.InstantiatePrefabForComponent<T>(windowPrefab);
             return employeeWindow;
         }
         

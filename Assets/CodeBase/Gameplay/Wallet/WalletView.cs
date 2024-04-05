@@ -16,31 +16,23 @@ namespace CodeBase.Gameplay.Wallet
         [SerializeField] private AudioSource _moneySound;
 
         private WalletService _walletService;
-        private Color _moneyColor;
 
         [Inject]
-        private void Construct(WalletService walletService, [Inject(Id = ColorTypeId.Money)] Color moneyColor)
+        private void Construct(WalletService walletService)
         {
-            _moneyColor = moneyColor;
             _walletService = walletService;
         }
 
         public void Start()
         {
             _walletService.MoneyChanged += SetMoney;
-            _walletService.TicketCountChanged += SetTickets;
-            _walletService.DiamondsChanged += SetDiamonds;
-            
+
             _moneyText.SetText($"{_walletService.GetValue(ItemTypeId.Money)}$");
-            _ticketCountText.SetText(_walletService.GetValue(ItemTypeId.Ticket));
-            _diamondCountText.SetText(_walletService.GetValue(ItemTypeId.Diamond));
         }
 
         private void OnDisable()
         {
             _walletService.MoneyChanged -= SetMoney;
-            _walletService.TicketCountChanged -= SetTickets;
-            _walletService.DiamondsChanged -= SetDiamonds;
         }
 
         [Button]
@@ -50,21 +42,6 @@ namespace CodeBase.Gameplay.Wallet
             _moneyText.SetText($"{money}$");
             _moneyText.DoFadeOutColor(() => _moneyText.DoFadeInColor());
             _moneyText.DoScale(() => _moneyText.ResetScale());
-        }
-
-        private void SetTickets(int amount)
-        {
-            _ticketCountText.SetText(amount);
-            _ticketCountText.DoFadeOutColor(() => _ticketCountText.DoFadeInColor());
-            _ticketCountText.DoScale(() => _ticketCountText.ResetScale());
-        }
-
-
-        private void SetDiamonds(int amount)
-        {
-            _diamondCountText.SetText(amount);
-            _diamondCountText.DoFadeInColor(() => _diamondCountText.DoFadeOutColor());
-            _diamondCountText.DoScale(() => _diamondCountText.ResetScale());
         }
     }
 }

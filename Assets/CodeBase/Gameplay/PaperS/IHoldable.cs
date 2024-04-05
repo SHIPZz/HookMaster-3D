@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Project_legacy.Scripts.Papers
+namespace CodeBase.Gameplay.PaperS
 {
     public interface IHoldable
     {

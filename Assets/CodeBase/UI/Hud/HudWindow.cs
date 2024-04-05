@@ -47,10 +47,8 @@ namespace CodeBase.UI.Hud
             _purchaseableItemService.Purchased += TryDisableNavigationButton;
         }
 
-        private void OnDisable()
-        {
+        private void OnDestroy() => 
             _purchaseableItemService.Purchased -= TryDisableNavigationButton;
-        }
 
         public override void Open()
         {

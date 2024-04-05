@@ -42,17 +42,13 @@ namespace CodeBase.Gameplay.Employees
             _employee.UpgradeStarted += DisableUpgradeButton;
             _employeeService.EmployeeUpdated += TryShowUpgradeButton;
             _employee.Burned += DisableUpgradeButton;
-        }
-
-        private void OnEnable()
-        {
             _triggerObserver.TriggerEntered += OnPlayerEntered;
             _triggerObserver.TriggerExited += OnPlayerExited;
             _employee.PaperAdded += DisableUpgradeButton;
             _employee.AllPaperProcessed += EnableUpgradeButton;
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             if (_upgradeButton != null)
                 _upgradeButton.onClick.RemoveListener(OnUpgradeButtonClicked);
@@ -66,15 +62,11 @@ namespace CodeBase.Gameplay.Employees
             _triggerObserver.TriggerExited -= OnPlayerExited;
         }
 
-        private void EnableUpgradeButton(Employee employee)
-        {
+        private void EnableUpgradeButton(Employee employee) =>
             SetActiveUpgradeButton(true);
-        }
 
-        private void DisableUpgradeButton(Employee employee)
-        {
+        private void DisableUpgradeButton(Employee employee) =>
             SetActiveUpgradeButton(false);
-        }
 
         private void SetActiveUpgradeButton(bool isActive)
         {
@@ -84,10 +76,13 @@ namespace CodeBase.Gameplay.Employees
 
         private void OnPlayerExited(Collider obj)
         {
+            if (_upgradeButton != null)
+                _upgradeButton.gameObject.SetActive(false);
+
             if (!_employee.IsWorking || _employee.IsUpgrading || _employee.IsBurned)
                 return;
-            
-            if(_playerProvider.PlayerPaperContainer.HasPapers)
+
+            if (_playerProvider.PlayerPaperContainer.HasPapers)
                 return;
 
             if (_employee.HasPapers)
@@ -106,9 +101,12 @@ namespace CodeBase.Gameplay.Employees
 
         private void OnPlayerEntered(Collider obj)
         {
-            if(_playerProvider.PlayerPaperContainer.HasPapers)
+            if (_upgradeButton != null)
+                _upgradeButton.gameObject.SetActive(false);
+
+            if (_playerProvider.PlayerPaperContainer.HasPapers)
                 return;
-            
+
             if (!_employee.IsWorking || _employee.IsUpgrading)
                 return;
 
