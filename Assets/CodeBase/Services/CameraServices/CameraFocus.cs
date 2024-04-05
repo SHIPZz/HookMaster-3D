@@ -21,10 +21,10 @@ namespace CodeBase.Services.CameraServices
         private PlayerProvider _playerProvider;
 
         [Inject]
-        private void Construct(PlayerProvider playerProvider) => 
+        private void Construct(PlayerProvider playerProvider) =>
             _playerProvider = playerProvider;
 
-        private void Start() => 
+        private void Start() =>
             StartCoroutine(CheckForTargets());
 
         public void AddFocusTarget(FocusInfo focusInfo)
@@ -49,8 +49,12 @@ namespace CodeBase.Services.CameraServices
                     targetCamera.Priority = 15;
                     targetCamera.Follow = target.Target;
                     targetCamera.LookAt = target.Target;
-
-                    yield return new WaitUntil(() => Math.Abs(targetCamera.transform.position.x - target.Target.position.x) <= 3f);
+                    
+                    yield return new WaitUntil(() =>
+                    {
+                        print(Vector3.Distance(target.Target.position, targetCamera.transform.position));
+                        return Vector3.Distance(target.Target.position, targetCamera.transform.position) <= 9f;
+                    });
 
                     _currentCameraId = _currentCameraId == 1 ? 2 : 1;
 

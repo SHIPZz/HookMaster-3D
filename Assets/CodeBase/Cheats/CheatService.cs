@@ -25,7 +25,7 @@ namespace CodeBase.Cheats
                 _worldDataService.Save();
             }
             
-            if (Input.GetKeyDown(KeyCode.F8))
+            if (Input.GetKeyDown(KeyCode.G))
             {
                 PlayerPrefs.DeleteAll();
                 PlayerPrefs.Save();
