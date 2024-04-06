@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using CodeBase.Constant;
+using CodeBase.Enums;
 using CodeBase.Gameplay.GameItems;
 using CodeBase.Gameplay.GameItems.RandomItems;
 using CodeBase.Services.Coroutine;
@@ -56,6 +57,15 @@ namespace CodeBase.Services.RandomItems
             }
 
             _coroutineRunner.StartCoroutine(StartSpawnTimer());
+        }
+
+        public void DestroyItem(GameItemType gameItemType)
+        {
+            if (gameItemType != _lastItem.GameItemType)
+                return;
+            
+            Object.Destroy(_lastItem.gameObject);
+            _lastItem = null;
         }
 
         private IEnumerator StartSpawnTimer()

@@ -1,16 +1,16 @@
-﻿using CodeBase.Cheats;
+﻿using Agava.YandexGames;
+using CodeBase.Cheats;
 using CodeBase.InfraStructure;
+using CodeBase.Services.Ad;
 using CodeBase.Services.Coroutine;
 using CodeBase.Services.Input;
 using CodeBase.Services.Pause;
-using CodeBase.Services.Profit;
 using CodeBase.Services.Saves;
 using CodeBase.Services.SaveSystem;
 using CodeBase.Services.Time;
 using CodeBase.Services.WorldData;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using YG;
 using Zenject;
 
 namespace CodeBase.Installers.Bootstrap
@@ -32,6 +32,7 @@ namespace CodeBase.Installers.Bootstrap
             BindCheats();
             BindSaveEvents();
             BindInterfacesAndSelf<PauseService>();
+            BindAsSingle<AdService>();
             Container.BindInterfacesTo<BootstrapInstaller>()
                 .FromInstance(this);
         }
@@ -53,14 +54,13 @@ namespace CodeBase.Installers.Bootstrap
         public async void Initialize()
         {
             var gameStateMachine = Container.Resolve<IGameStateMachine>();
-            YandexGame.CallInitYG();
-            YandexGame.InitEnvirData();
 
-            while (!YandexGame.SDKEnabled)
-            {
-                await UniTask.Yield();
-            }
-            
+#if UNITY_WEBGL && !UNITY_EDITOR
+            await YandexGamesSdk.Initialize().ToUniTask();
+
+            await UniTask.WaitUntil(() => YandexGamesSdk.IsInitialized);
+#endif
+
             gameStateMachine.ChangeState<BootstrapState>();
         }
 

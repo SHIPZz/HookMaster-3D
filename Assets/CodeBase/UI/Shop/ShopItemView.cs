@@ -1,13 +1,10 @@
-﻿using System;
-using CodeBase.Data;
+﻿using CodeBase.Data;
 using CodeBase.Enums;
-using CodeBase.Gameplay.Wallet;
 using CodeBase.Services.ShopItemDataServices;
 using CodeBase.Services.UI;
 using CodeBase.Services.Wallet;
 using CodeBase.Services.Window;
 using CodeBase.UI.FloatingText;
-using CodeBase.UI.Hud;
 using CodeBase.UI.PopupWindows;
 using TMPro;
 using UnityEngine;

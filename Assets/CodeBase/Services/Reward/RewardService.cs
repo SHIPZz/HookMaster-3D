@@ -15,19 +15,25 @@ namespace CodeBase.Services.Reward
             { ItemTypeId.Diamond , 0},
         };
 
-        private WalletService _walletService;
+        private readonly WalletService _walletService;
+
+        public IReadOnlyDictionary<ItemTypeId, int> RouletteRewards => _rouletteRewards;
 
         public RewardService(WalletService walletService)
         {
             _walletService = walletService;
         }
 
-        public IReadOnlyDictionary<ItemTypeId, int> RouletteRewards => _rouletteRewards;
+        public void Add(ItemTypeId itemTypeId, int amount)
+        {
+            _rouletteRewards[itemTypeId] += amount;
+            _walletService.Set(itemTypeId, amount);
+            
+        }
 
         public void AddRouletteReward(RouletteItem rouletteItem)
         {
-            _rouletteRewards[rouletteItem.ItemTypeId] += rouletteItem.Quantity;
-            _walletService.Set(rouletteItem.ItemTypeId, rouletteItem.Quantity);
+            Add(rouletteItem.ItemTypeId, rouletteItem.Quantity);
         }
     }
 }

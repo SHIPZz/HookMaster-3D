@@ -23,13 +23,11 @@ using CodeBase.Services.Providers.Location;
 using CodeBase.Services.Providers.Player;
 using CodeBase.Services.Providers.Tables;
 using CodeBase.Services.PurchaseableItemServices;
-using CodeBase.Services.RandomItems;
 using CodeBase.Services.Sound;
 using CodeBase.Services.UI;
 using CodeBase.Services.Wallet;
 using CodeBase.Services.WorldData;
 using UnityEngine;
-using YG;
 using Zenject;
 
 namespace CodeBase.EntryPointSystem
@@ -55,7 +53,6 @@ namespace CodeBase.EntryPointSystem
         private readonly PurchaseableItemService _purchaseableItemService;
         private readonly ClientObjectService _clientObjectService;
         private readonly TutorialRunner _tutorialRunner;
-        private readonly CameraService _cameraService;
 
         public EntryPoint(LocationProvider locationProvider,
             IPlayerFactory playerFactory,
@@ -75,10 +72,8 @@ namespace CodeBase.EntryPointSystem
             SettingsService settingsService,
             PurchaseableItemService purchaseableItemService,
             ClientObjectService clientObjectService,
-            TutorialRunner tutorialRunner,
-            CameraService cameraService)
+            TutorialRunner tutorialRunner)
         {
-            _cameraService = cameraService;
             _tutorialRunner = tutorialRunner;
             _clientObjectService = clientObjectService;
             _purchaseableItemService = purchaseableItemService;
@@ -104,7 +99,6 @@ namespace CodeBase.EntryPointSystem
         {
             Player player = _playerFactory.Create(CharacterTypeId.Boss, _locationProvider.PlayerSpawnPoint);
             InitPlayerProvider(player);
-            InitCameraService();
             InitTableService();
             InitEmployees();
             SetRefreshRate();
@@ -119,9 +113,6 @@ namespace CodeBase.EntryPointSystem
             InitSettingsService();
             InitClientObjectService();
         }
-
-        private void InitCameraService() =>
-            _cameraService.Init();
 
         private void InitTutorialRunner() =>
             _tutorialRunner.Init();
@@ -155,11 +146,6 @@ namespace CodeBase.EntryPointSystem
 
         private void InitUIService()
         {
-            if (YandexGame.EnvironmentData.isMobile || YandexGame.EnvironmentData.isTablet)
-            {
-                _uiService.CreateJoystick(_cameraProvider.Camera);
-            }
-
             _uiService.Init();
         }
 

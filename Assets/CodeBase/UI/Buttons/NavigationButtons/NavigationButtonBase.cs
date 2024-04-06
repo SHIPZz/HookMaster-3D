@@ -7,13 +7,13 @@ namespace CodeBase.UI.Buttons.NavigationButtons
 {
     public abstract class NavigationButtonBase : Button
     {
-        protected CameraService CameraService;
+        protected CameraFocus CameraFocus;
         protected LocationProvider LocationProvider;
 
         [Inject]
-        private void Construct(CameraService cameraService, LocationProvider locationProvider)
+        private void Construct(LocationProvider locationProvider, CameraFocus cameraFocus)
         {
-            CameraService = cameraService;
+            CameraFocus = cameraFocus;
             LocationProvider = locationProvider;
         }
 

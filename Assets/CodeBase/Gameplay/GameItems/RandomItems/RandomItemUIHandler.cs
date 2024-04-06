@@ -22,8 +22,8 @@ namespace CodeBase.Gameplay.GameItems.RandomItems
             _gameStaticDataService = gameStaticDataService;
             _windowService = windowService;
         }
-        
-        private void Awake() => 
+
+        private void Awake() =>
             _randomItem = GetComponent<RandomItem>();
 
         private void OnEnable()
@@ -45,15 +45,15 @@ namespace CodeBase.Gameplay.GameItems.RandomItems
 
         private void OpenWindow()
         {
-            if(_targetWindow != null)
+            if (_targetWindow != null)
                 return;
-            
-            if(!_canOpen)
+
+            if (!_canOpen)
                 return;
-            
+
             RandomItemSO targetData = _gameStaticDataService.GetRandomItemSO(_randomItem.GameItemType);
-             _targetWindow = _windowService.Get<RandomItemWindow>();
-            _targetWindow.Init(targetData.Name, $"{targetData.Profit}$", targetData.Icon, targetData.IconPosition);
+            _targetWindow = _windowService.Get<RandomItemWindow>();
+            _targetWindow.Init(targetData);
             _targetWindow.Open();
             _canOpen = false;
         }

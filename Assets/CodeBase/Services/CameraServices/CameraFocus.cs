@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Cinemachine;
 using CodeBase.Services.Providers.Player;
 using Cysharp.Threading.Tasks;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
 
@@ -14,23 +13,27 @@ namespace CodeBase.Services.CameraServices
     {
         [SerializeField] private CinemachineVirtualCamera _firstCamera;
         [SerializeField] private CinemachineVirtualCamera _secondCamera;
+        [SerializeField] private CinemachineBrain _cinemachineBrain;
 
         private readonly Queue<FocusInfo> _targets = new();
 
         private int _currentCameraId = 2;
         private PlayerProvider _playerProvider;
+        
+        public bool HasFollow { get; private set; }
+
+        public event Action<FocusInfo> TargetReached;
+        public event Action Moved;
 
         [Inject]
         private void Construct(PlayerProvider playerProvider) =>
             _playerProvider = playerProvider;
 
-        private void Start() =>
+        private void Start() => 
             StartCoroutine(CheckForTargets());
 
-        public void AddFocusTarget(FocusInfo focusInfo)
-        {
+        public void AddFocusTarget(FocusInfo focusInfo) => 
             _targets.Enqueue(focusInfo);
-        }
 
         private IEnumerator CheckForTargets()
         {
@@ -41,20 +44,21 @@ namespace CodeBase.Services.CameraServices
                 if (_targets.Count > 0)
                 {
                     FocusInfo target = _targets.Dequeue();
-
+                    
                     CinemachineVirtualCamera targetCamera = _currentCameraId == 1 ? _firstCamera : _secondCamera;
                     CinemachineVirtualCamera inactiveCamera = _currentCameraId == 1 ? _secondCamera : _firstCamera;
 
-                    inactiveCamera.Priority = 0;
-                    targetCamera.Priority = 15;
-                    targetCamera.Follow = target.Target;
-                    targetCamera.LookAt = target.Target;
+                    ConfigureCamera(inactiveCamera, null, 0);
+                    ConfigureCamera(targetCamera, target.Target, 15);
+
+                    Moved?.Invoke();
+                    HasFollow = true;
                     
-                    yield return new WaitUntil(() =>
-                    {
-                        print(Vector3.Distance(target.Target.position, targetCamera.transform.position));
-                        return Vector3.Distance(target.Target.position, targetCamera.transform.position) <= 9f;
-                    });
+                    yield return new WaitForSeconds(0.2f);
+
+                    yield return new WaitUntil(() => _cinemachineBrain.IsBlending == false);
+
+                    TargetReached?.Invoke(target);
 
                     _currentCameraId = _currentCameraId == 1 ? 2 : 1;
 
@@ -68,14 +72,24 @@ namespace CodeBase.Services.CameraServices
                 }
                 else
                 {
-                    _firstCamera.Follow = _playerProvider.Player.transform;
-                    _firstCamera.LookAt = _playerProvider.Player.transform;
-                    _firstCamera.Priority = 10;
-                    _secondCamera.Priority = 0;
-                    _secondCamera.Follow = null;
-                    _secondCamera.LookAt = null;
+                    ConfigureCamera(_firstCamera, _playerProvider.Player.transform, 15);
+                    ConfigureCamera(_secondCamera, null, 0);
+                    _currentCameraId = 2;
+
+                    yield return new WaitForSeconds(0.2f);
+                    
+                    yield return new WaitUntil(() => _cinemachineBrain.IsBlending == false);
+                    
+                    HasFollow = false;
                 }
             }
+        }
+
+        private void ConfigureCamera(CinemachineVirtualCamera camera, Transform target, int priority)
+        {
+            camera.Follow = target;
+            camera.LookAt = target;
+            camera.Priority = priority;
         }
     }
 }

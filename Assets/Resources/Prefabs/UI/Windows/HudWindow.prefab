@@ -5870,6 +5870,7 @@ GameObject:
   - component: {fileID: 3613269376427809127}
   - component: {fileID: 5425885462281919119}
   - component: {fileID: 7860957501805885018}
+  - component: {fileID: 1636839806660674958}
   m_Layer: 5
   m_Name: ClientNavigationButton
   m_TagString: Untagged
@@ -5892,9 +5893,9 @@ RectTransform:
   - {fileID: 9070218482423783096}
   m_Father: {fileID: 4110636193854023151}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.16562396}
-  m_AnchorMax: {x: 0, y: 0.16562396}
-  m_AnchoredPosition: {x: 113, y: -66}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 113, y: 113}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &578004223920486384
@@ -5979,7 +5980,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
-  _returnDuration: 1.5
+  _transformScaleAnim: {fileID: 1636839806660674958}
 --- !u!114 &7219519859596459805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6118,6 +6119,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialFade: {fileID: 5042760880495165838}
+--- !u!114 &1636839806660674958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8894120368680942078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c934f669bfd84432a926d47a9a3d2e6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetScale: 1
+  _unScale: 0
+  _scaleDuration: 0.2
+  _unScaleDuration: 0.1
+  _transform: {fileID: 7187735111859211313}
+  _scaleX: 0
+  _scaleY: 0
+  _scaleZ: 0
+  _unscaleOnStart: 0
+  _scaleDelay: 1
 --- !u!1 &9186899369587869091
 GameObject:
   m_ObjectHideFlags: 0

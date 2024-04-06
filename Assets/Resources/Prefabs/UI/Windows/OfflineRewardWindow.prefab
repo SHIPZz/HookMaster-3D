@@ -1852,6 +1852,7 @@ MonoBehaviour:
   _buttonScaleAnims:
   - {fileID: 3483613166784355346}
   - {fileID: 2739886192399569641}
+  _adButton: {fileID: 6973638593785974099}
 --- !u!82 &7967970013692474992
 AudioSource:
   m_ObjectHideFlags: 0

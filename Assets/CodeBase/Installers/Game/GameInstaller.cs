@@ -91,7 +91,6 @@ namespace CodeBase.Installers.Game
             GameObjectPushService();
             BindClientServices();
             BindCouchService();
-            BindCameraService();
             BindTutorials();
             BindNumberTextAnimService();
             BindMaterialFadeAnimService();
@@ -122,11 +121,6 @@ namespace CodeBase.Installers.Game
         private void BindTutorials()
         {
             Container.BindInterfacesAndSelfTo<TutorialRunner>().AsSingle();
-        }
-
-        private void BindCameraService()
-        {
-            Container.Bind<CameraService>().AsSingle();
         }
 
         private void BindCouchService()

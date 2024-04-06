@@ -1,4 +1,5 @@
-﻿using CodeBase.Animations;
+﻿using System.Collections.Generic;
+using CodeBase.Animations;
 using CodeBase.Enums;
 using CodeBase.Gameplay.SoundPlayer;
 using CodeBase.Services.CameraServices;
@@ -8,6 +9,7 @@ using CodeBase.Services.Window;
 using CodeBase.SO;
 using CodeBase.UI.Hud;
 using CodeBase.UI.Shop;
+using I2.Loc;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +25,7 @@ namespace CodeBase.UI.PopupWindows
         [SerializeField] private Image _icon;
         [SerializeField] private SoundPlayerSystem _soundPlayerSystem;
         [SerializeField] private AppearanceEffect _appearanceEffect;
+        [SerializeField] private List<Localize> _localizations;
 
         private GameStaticDataService _gameStaticDataService;
         private string _name;
@@ -30,14 +33,12 @@ namespace CodeBase.UI.PopupWindows
         private Sprite _spriteIcon;
         private GameItemService _gameItemService;
         private GameItemType _gameItemType;
-        private CameraService _cameraService;
         private WindowService _windowService;
 
         [Inject]
         private void Construct(GameStaticDataService gameStaticDataService,
-            GameItemService gameItemService, CameraService cameraService)
+            GameItemService gameItemService)
         {
-            _cameraService = cameraService;
             _gameItemService = gameItemService;
             _gameStaticDataService = gameStaticDataService;
         }
@@ -56,6 +57,7 @@ namespace CodeBase.UI.PopupWindows
             _nameText.text = _name;
             _descriptionText.text = _description;
             _icon.sprite = _spriteIcon;
+            _localizations.ForEach(x=>x.OnLocalize(true));
         }
 
         public override void Open()
@@ -73,7 +75,6 @@ namespace CodeBase.UI.PopupWindows
         public override void Close()
         {
             _gameItemService.Create(_gameItemType);
-            _cameraService.MoveToLastTarget();
             base.Close();
         }
     }

@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Threading;
+using System.Collections;
 using CodeBase.Gameplay.ObjectCreatorSystem;
 using CodeBase.Services.TriggerObserve;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.PaperSystem
@@ -13,14 +12,15 @@ namespace CodeBase.Gameplay.PaperSystem
         [SerializeField] private int _maxCreatCount = 10;
         [SerializeField] private float _createDelay = 3f;
         [SerializeField] private int _initialCreateCount = 5;
+        [SerializeField] private TriggerObserver _triggerObserver;
 
         public GameObject Pointer;
+        
         public event Action PlayerApproached;
 
         private int _createdCount;
-        private CancellationTokenSource _cancellationToken;
 
-        private async void OnEnable()
+        private void OnEnable()
         {
             for (int i = 0; i < _initialCreateCount; i++)
             {
@@ -28,19 +28,28 @@ namespace CodeBase.Gameplay.PaperSystem
                 _resourceCreator.Create();
             }
 
+            _triggerObserver.TriggerEntered += DisablePointer;
+            StartCoroutine(CreateResourceCoroutine());
+        }
+
+        private void OnDisable() => 
+            _triggerObserver.TriggerEntered -= DisablePointer;
+
+        private IEnumerator CreateResourceCoroutine()
+        {
             while (true)
             {
-                await UniTask.WaitForSeconds(_createDelay);
+                yield return new WaitForSeconds(_createDelay);
 
                 _resourceCreator.Create();
                 _createdCount++;
 
-                if (_createdCount >= _maxCreatCount) 
-                    await UniTask.WaitUntil(() => _createdCount < _maxCreatCount);
+                if (_createdCount >= _maxCreatCount)
+                    yield return new WaitUntil(() => _createdCount < _maxCreatCount);
             }
         }
 
-        private void OnCollisionEnter(Collision player)
+        private void DisablePointer(Collider obj)
         {
             Pointer.SetActive(false);
             _createdCount = 0;
