@@ -42,7 +42,16 @@ namespace CodeBase.Services.Window
         {
             CurrentWindow.Open();
             Opened?.Invoke(CurrentWindow);
-        }   
+        }
+
+        public void OpenCreatedWindow<T>() where T : WindowBase
+        {
+            if (!_createdWindows.TryGetValue(typeof(T), out WindowBase window))
+                return;
+            
+            window.Open();
+            Opened?.Invoke(window);
+        }
 
         public T OpenAndGet<T>() where T : WindowBase
         {
@@ -54,7 +63,7 @@ namespace CodeBase.Services.Window
         public T GetNew<T>() where T : WindowBase
         {
             ClearDestroyedWindows();
-            
+
             WindowBase targetWindow = _uiFactory.CreateWindow<T>();
             CurrentWindow = targetWindow;
             _createdWindows[typeof(T)] = targetWindow;
@@ -77,6 +86,12 @@ namespace CodeBase.Services.Window
             return (T)targetWindow;
         }
 
+        public T GetWithoutSettingToCurrentWindowAndCaching<T>() where T : WindowBase
+        {
+            WindowBase targetWindow = _uiFactory.CreateWindow<T>();
+            return (T)targetWindow;
+        }
+
         public void CloseAll()
         {
             ClearDestroyedWindows();
@@ -86,13 +101,16 @@ namespace CodeBase.Services.Window
         public void Close<T>() where T : WindowBase
         {
             ClearDestroyedWindows();
-            
+
             if (!_createdWindows.TryGetValue(typeof(T), out WindowBase windowBase))
                 return;
 
             windowBase.Close();
             ClearDestroyedWindows();
         }
+
+        public bool IsWindowOfType<T>() where T : WindowBase =>
+            CurrentWindow.GetType() == typeof(T);
 
         private void ClearDestroyedWindows()
         {

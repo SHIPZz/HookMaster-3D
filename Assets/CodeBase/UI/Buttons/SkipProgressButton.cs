@@ -28,7 +28,7 @@ namespace CodeBase.UI.Buttons
             var speedUpWindow = WindowService.Get<SpeedUpWindow>();
             UpgradeEmployeeData targetUpgradeEmployeeData = _employeeDataService.GetUpgradeEmployeeData(_employeeData.Id);
             speedUpWindow.Init(targetUpgradeEmployeeData, _skipProgressSliderWindow.TotalTime);
-            speedUpWindow.Open();
+            WindowService.OpenCurrentWindow();
         }
     }
 }

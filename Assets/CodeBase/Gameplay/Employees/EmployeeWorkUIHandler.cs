@@ -1,5 +1,6 @@
 ﻿using System;
 using CodeBase.Constant;
+using CodeBase.Gameplay.BurnableObjectSystem;
 using CodeBase.Services.Player;
 using CodeBase.Services.TriggerObserve;
 using CodeBase.Services.UI;
@@ -52,7 +53,7 @@ namespace CodeBase.Gameplay.Employees
                 _invokeWorkButton.onClick.RemoveListener(OnInvokeClicked);
         }
 
-        private void DisableButton(Employee employee)
+        private void DisableButton(IBurnable burnable)
         {
             if (_invokeWorkButton != null)
                 _invokeWorkButton.gameObject.SetActive(false);

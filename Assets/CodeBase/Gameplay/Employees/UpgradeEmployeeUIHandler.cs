@@ -1,5 +1,6 @@
 ﻿using System;
 using CodeBase.Constant;
+using CodeBase.Gameplay.BurnableObjectSystem;
 using CodeBase.Services.Employees;
 using CodeBase.Services.Providers.Player;
 using CodeBase.Services.TriggerObserve;
@@ -60,11 +61,14 @@ namespace CodeBase.Gameplay.Employees
             _triggerObserver.TriggerExited -= OnPlayerExited;
         }
 
-        private void DisableUpgradeButton(Employee employee) =>
+        private void DisableUpgradeButton(IBurnable burnable) =>
             _upgradeButton?.gameObject.SetActive(false);
 
         private void OnPlayerExited(Collider obj)
         {
+            if(_employeeService.UpdateMaxReached(_employee.Id))
+                return;
+            
             if (!_employee.IsWorking || _employee.IsUpgrading || _employee.IsBurned)
                 return;
 
@@ -87,6 +91,9 @@ namespace CodeBase.Gameplay.Employees
 
         private void OnPlayerEntered(Collider obj)
         {
+            if(_employeeService.UpdateMaxReached(_employee.Id))
+                return;
+            
             if (_upgradeButton != null)
                 _upgradeButton.gameObject.SetActive(false);
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using CodeBase.Gameplay.BurnableObjectSystem;
 using CodeBase.Gameplay.TableSystem;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -24,13 +25,27 @@ namespace CodeBase.Gameplay.PaperS
         public int ItemsCount => _items.Count;
         public bool CanPut => !_table.IsFree;
 
-        private void OnEnable() => 
+        private void OnEnable()
+        {
             _cancellationToken = new();
+            _table.Burned += DestroyItems;
+        }
 
         private void OnDisable()
         {
             _cancellationToken?.Cancel();
             _cancellationToken?.Dispose();
+            _table.Burned -= DestroyItems;
+        }
+
+        private void DestroyItems(IBurnable burnable)
+        {
+            foreach (IHoldable holdable in _items)
+            {
+                Destroy(holdable.Transform.gameObject);
+            }
+            
+            _items.Clear();
         }
 
         public async UniTask<IHoldable> TakeAsync(Transform parent, CancellationToken cancellationToken)

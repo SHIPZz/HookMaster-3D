@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections;
 using CodeBase.Constant;
+using CodeBase.Data;
 using CodeBase.Gameplay.Fire;
 using CodeBase.Services.Coroutine;
 using CodeBase.Services.Providers.Fire;
 using CodeBase.Services.Providers.Tables;
 using CodeBase.Services.Time;
+using CodeBase.Services.Wallet;
 using CodeBase.Services.Window;
 using CodeBase.Services.WorldData;
 using CodeBase.UI;
@@ -18,7 +20,8 @@ namespace CodeBase.Services.Fire
 {
     public class FireService : IDisposable
     {
-        private const int MinimalBusyTableCountToInitFire = 3;
+        private const int MinimalBusyTableCountToInitFire = 0;
+        private const int MinimalMoneyCountForFire = 1000;
 
         private readonly FireProvider _fireProvider;
         private readonly WorldTimeService _worldTimeService;
@@ -27,6 +30,7 @@ namespace CodeBase.Services.Fire
         private readonly ICoroutineRunner _coroutineRunner;
         private readonly WindowService _windowService;
         private readonly TableService _tableService;
+        private readonly WalletService _walletService;
 
         public bool IsFired { get; private set; }
 
@@ -41,8 +45,10 @@ namespace CodeBase.Services.Fire
             IWorldDataService worldDataService,
             ICoroutineRunner coroutineRunner,
             WindowService windowService,
-            TableService tableService)
+            TableService tableService,
+            WalletService walletService)
         {
+            _walletService = walletService;
             _tableService = tableService;
             _windowService = windowService;
             _coroutineRunner = coroutineRunner;
@@ -55,10 +61,15 @@ namespace CodeBase.Services.Fire
         {
             var timeDifference = _worldTimeService.GetTimeDifferenceLastFireTimeByMinutes();
             _windowService.Opened += OnWindowOpened;
-
+            
             await UniTask.WaitUntil(() => _tableService.AvailableTableCount == MinimalBusyTableCountToInitFire);
             
+            await UniTask.WaitUntil(() => _walletService.GetValue(ItemTypeId.Money) == MinimalMoneyCountForFire);
+            
+            await UniTask.WaitUntil(() => _windowService.CurrentWindow.GetType() == typeof(HudWindow));
+            
             timeDifference = Mathf.Clamp(timeDifference, 0, TimeConstantValue.TwentyMinutes);
+            timeDifference = 20;
 
             if (timeDifference == TimeConstantValue.TwentyMinutes)
             {

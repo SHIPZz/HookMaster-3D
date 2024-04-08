@@ -65,9 +65,9 @@ namespace CodeBase.Gameplay.Door
 
             if (dot <= 0)
             {
-                _playerInputService.SetActive(false);
+                _playerInputService.SetInputActive(false);
                 await _gameObjectPushService.PushRigidBodyAwayAsync(playerRigidBody, targetPosition, _openDistance, _speed);
-                _playerInputService.SetActive(true);
+                _playerInputService.SetInputActive(true);
             }
 
             _isMoving = true;

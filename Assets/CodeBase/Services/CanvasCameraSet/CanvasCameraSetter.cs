@@ -1,9 +1,7 @@
 ﻿using System;
 using CodeBase.Enums;
-using CodeBase.Services.Providers.Camera;
-using Cysharp.Threading.Tasks;
+using CodeBase.Services.CameraServices;
 using UnityEngine;
-using UnityEngine.Rendering;
 using Zenject;
 
 namespace CodeBase.Services.CanvasCameraSet
@@ -15,18 +13,18 @@ namespace CodeBase.Services.CanvasCameraSet
         [SerializeField] private SortingLayerTypeId _sortingLayerTypeId = SortingLayerTypeId.Default;
         
         private Canvas _canvas;
-        private CameraProvider _cameraProvider;
+        private CameraController _cameraController;
 
         [Inject]
-        private void Construct(CameraProvider cameraProvider)
+        private void Construct(CameraController cameraController)
         {
             _canvas = GetComponent<Canvas>();
-            _cameraProvider = cameraProvider;
+            _cameraController = cameraController;
         }
 
         private void Start()
         {
-            _canvas.worldCamera = _cameraProvider.Camera;
+            _canvas.worldCamera = _cameraController.Camera.GetComponent<Camera>();
             _canvas.sortingLayerName = Enum.GetName(typeof(SortingLayerTypeId), _sortingLayerTypeId);
             _canvas.planeDistance = _planeDistance;
         }

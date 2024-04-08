@@ -1,24 +1,16 @@
-﻿using System.Linq;
-using AmazingAssets.AdvancedDissolve;
-using CodeBase.Data;
+﻿using CodeBase.Data;
 using CodeBase.Enums;
-using CodeBase.Gameplay.Camera;
-using CodeBase.Gameplay.Employees;
 using CodeBase.Gameplay.PlayerSystem;
-using CodeBase.Gameplay.TableSystem;
 using CodeBase.Gameplay.Tutorial;
-using CodeBase.Gameplay.Wallet;
-using CodeBase.Services.CameraServices;
 using CodeBase.Services.Clients;
 using CodeBase.Services.Employees;
+using CodeBase.Services.Extinguisher;
 using CodeBase.Services.Factories.Camera;
 using CodeBase.Services.Factories.Employee;
 using CodeBase.Services.Factories.Player;
 using CodeBase.Services.Fire;
 using CodeBase.Services.GameItemServices;
-using CodeBase.Services.Mining;
 using CodeBase.Services.Profit;
-using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.Providers.Location;
 using CodeBase.Services.Providers.Player;
 using CodeBase.Services.Providers.Tables;
@@ -37,14 +29,12 @@ namespace CodeBase.EntryPointSystem
         private readonly LocationProvider _locationProvider;
         private readonly IPlayerFactory _playerFactory;
         private readonly ICameraFactory _cameraFactory;
-        private readonly CameraProvider _cameraProvider;
         private readonly PlayerProvider _playerProvider;
         private readonly EmployeeService _employeeService;
         private readonly IEmployeeFactory _employeeFactory;
         private readonly IWorldDataService _worldDataService;
         private readonly TableService _tableService;
         private readonly WalletService _walletService;
-        private readonly EmployeeSalaryService _employeeSalaryService;
         private readonly EmployeeProfitService _employeeProfitService;
         private readonly UIService _uiService;
         private readonly GameItemService _gameItemService;
@@ -53,18 +43,17 @@ namespace CodeBase.EntryPointSystem
         private readonly PurchaseableItemService _purchaseableItemService;
         private readonly ClientObjectService _clientObjectService;
         private readonly TutorialRunner _tutorialRunner;
+        private ExtinguisherService _extinguisherService;
 
         public EntryPoint(LocationProvider locationProvider,
             IPlayerFactory playerFactory,
             ICameraFactory cameraFactory,
-            CameraProvider cameraProvider,
             PlayerProvider playerProvider,
             EmployeeService employeeService,
             IEmployeeFactory employeeFactory,
             IWorldDataService worldDataService,
             TableService tableService,
             WalletService walletService,
-            EmployeeSalaryService employeeSalaryService,
             EmployeeProfitService employeeProfitService,
             UIService uiService,
             GameItemService gameItemService,
@@ -72,8 +61,10 @@ namespace CodeBase.EntryPointSystem
             SettingsService settingsService,
             PurchaseableItemService purchaseableItemService,
             ClientObjectService clientObjectService,
-            TutorialRunner tutorialRunner)
+            TutorialRunner tutorialRunner,
+            ExtinguisherService extinguisherService)
         {
+            _extinguisherService = extinguisherService;
             _tutorialRunner = tutorialRunner;
             _clientObjectService = clientObjectService;
             _purchaseableItemService = purchaseableItemService;
@@ -82,14 +73,12 @@ namespace CodeBase.EntryPointSystem
             _locationProvider = locationProvider;
             _playerFactory = playerFactory;
             _cameraFactory = cameraFactory;
-            _cameraProvider = cameraProvider;
             _playerProvider = playerProvider;
             _employeeService = employeeService;
             _employeeFactory = employeeFactory;
             _worldDataService = worldDataService;
             _tableService = tableService;
             _walletService = walletService;
-            _employeeSalaryService = employeeSalaryService;
             _employeeProfitService = employeeProfitService;
             _uiService = uiService;
             _gameItemService = gameItemService;
@@ -103,16 +92,19 @@ namespace CodeBase.EntryPointSystem
             InitEmployees();
             SetRefreshRate();
             InitWalletService();
-            InitEmployeeSalaryService();
             InitProfitService();
             InitPurchaseableItemService();
             InitShopItemService();
             InitTutorialRunner();
+            InitExtinguisherService();
             InitFireService();
             InitUIService();
             InitSettingsService();
             InitClientObjectService();
         }
+
+        private void InitExtinguisherService() => 
+            _extinguisherService.Initialize();
 
         private void InitTutorialRunner() =>
             _tutorialRunner.Init();
@@ -138,9 +130,6 @@ namespace CodeBase.EntryPointSystem
         private void InitWalletService() =>
             _walletService.Init();
 
-        private void InitEmployeeSalaryService() =>
-            _employeeSalaryService.Init();
-
         private void InitProfitService() =>
             _employeeProfitService.Init();
 
@@ -162,18 +151,7 @@ namespace CodeBase.EntryPointSystem
         {
             PlayerData playerData = _worldDataService.WorldData.PlayerData;
 
-            foreach (EmployeeData employeeData in playerData.PurchasedEmployees)
-            {
-                Table targetTable = _tableService.Tables.FirstOrDefault(x => x.Id == employeeData.TableId);
-
-                if (targetTable == null)
-                    continue;
-
-                Employee targetEmployee = _employeeFactory.Create(employeeData, targetTable, true);
-                _employeeService.Employees.Add(targetEmployee);
-            }
-
-            _employeeService.SubscribeTableEvents();
+            _employeeService.Init(playerData.PurchasedEmployees);
         }
     }
 }

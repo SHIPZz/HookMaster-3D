@@ -21,7 +21,7 @@ namespace CodeBase.UI.Buttons
           var targetWindow =  WindowService.Get<UpgradeEmployeeCompletedWindow>();
           _skipProgressSliderWindow.Hide();
           targetWindow.Init(_employeeData);
-          targetWindow.Open();
+          WindowService.OpenCreatedWindow<UpgradeEmployeeCompletedWindow>();
         }
     }
 }

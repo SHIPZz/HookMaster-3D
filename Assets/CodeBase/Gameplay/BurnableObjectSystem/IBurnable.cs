@@ -1,4 +1,5 @@
-﻿using CodeBase.Data;
+﻿using System;
+using CodeBase.Data;
 
 namespace CodeBase.Gameplay.BurnableObjectSystem
 {
@@ -6,6 +7,7 @@ namespace CodeBase.Gameplay.BurnableObjectSystem
     {
         MaterialTypeId BurnMaterial { get; }
         bool IsBurned { get; }
+        event Action<IBurnable> Burned;
         void Burn();
         void Recover();
     }

@@ -18,11 +18,11 @@ namespace CodeBase.Services.Employees
 
         public void Initialize()
         {
-            if (_worldTimeService.GetTimeDifferenceByLastLazinessDays() < LazinessInvokeDay)
-                return;
-
-            _employeeService.Employees.ForEach(x => x.StopWorking());
-            _worldTimeService.SaveLastLazyDay();
+            // if (_worldTimeService.GetTimeDifferenceByLastLazinessDays() < LazinessInvokeDay)
+            //     return;
+            //
+            // _employeeService.Employees.ForEach(x => x.StopWorking());
+            // _worldTimeService.SaveLastLazyDay();
         }
     }
 }

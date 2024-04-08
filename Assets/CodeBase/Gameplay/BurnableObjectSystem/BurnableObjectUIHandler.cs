@@ -2,7 +2,6 @@
 using CodeBase.Services.Window;
 using CodeBase.UI.BurnableObjects;
 using Sirenix.OdinInspector;
-using Sirenix.Serialization;
 using UnityEngine;
 using Zenject;
 
@@ -10,11 +9,11 @@ namespace CodeBase.Gameplay.BurnableObjectSystem
 {
     public class BurnableObjectUIHandler : SerializedMonoBehaviour
     {
-        [OdinSerialize] private IBurnable _burnable;
         [SerializeField] private TriggerObserver _triggerObserver;
         [SerializeField] private Transform _windowParent;
         [SerializeField] private Vector3 _offset;
 
+        private IBurnable _burnable;
         private WindowService _windowService;
         private BurnableObjectWindow _burnableObjectWindow;
 
@@ -24,17 +23,22 @@ namespace CodeBase.Gameplay.BurnableObjectSystem
             _windowService = windowService;
         }
 
+        private void Awake()
+        {
+            _burnable = GetComponent<IBurnable>();
+        }
+
         private void Start()
         {
             if (!_burnable.IsBurned)
                 return;
 
             InitializeWindow();
-            _burnableObjectWindow.ShowIcon();
         }
 
         private void OnEnable()
         {
+            _burnable.Burned += Show;
             _triggerObserver.TriggerEntered += OnPlayerEntered;
             _triggerObserver.TriggerExited += OnPlayerExited;
         }
@@ -43,17 +47,15 @@ namespace CodeBase.Gameplay.BurnableObjectSystem
         {
             _triggerObserver.TriggerEntered -= OnPlayerEntered;
             _triggerObserver.TriggerExited -= OnPlayerExited;
+            _burnable.Burned -= Show;
         }
 
         private void OnPlayerExited(Collider obj)
         {
             if (!_burnable.IsBurned)
                 return;
-            
-            if (_burnableObjectWindow == null)
-                InitializeWindow();
-            
-            _burnableObjectWindow.ShowIcon();
+
+            _burnableObjectWindow?.Show();
         }
 
         private void OnPlayerEntered(Collider obj)
@@ -67,9 +69,15 @@ namespace CodeBase.Gameplay.BurnableObjectSystem
             _burnableObjectWindow.ShowButton();
         }
 
+        private void Show(IBurnable burnable)
+        {
+            if (_burnableObjectWindow == null)
+                InitializeWindow();
+        }
+
         private void InitializeWindow()
         {
-            _burnableObjectWindow = _windowService.GetNew<BurnableObjectWindow>();
+            _burnableObjectWindow = _windowService.GetWithoutSettingToCurrentWindowAndCaching<BurnableObjectWindow>();
             _burnableObjectWindow.transform.SetParent(_windowParent);
             _burnableObjectWindow.transform.position = _windowParent.position + _offset;
             _burnableObjectWindow.Init(_burnable);

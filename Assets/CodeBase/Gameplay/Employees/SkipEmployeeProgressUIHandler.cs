@@ -1,14 +1,15 @@
-﻿using System;
-using CodeBase.Data;
+﻿using CodeBase.Data;
+using CodeBase.Gameplay.BurnableObjectSystem;
 using CodeBase.Gameplay.PlayerSystem;
 using CodeBase.Services.Employees;
-using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.Providers.Player;
 using CodeBase.Services.TriggerObserve;
 using CodeBase.Services.Window;
 using CodeBase.UI.SkipProgress;
+using RootMotion;
 using UnityEngine;
 using Zenject;
+using CameraController = CodeBase.Services.CameraServices.CameraController;
 
 namespace CodeBase.Gameplay.Employees
 {
@@ -20,19 +21,19 @@ namespace CodeBase.Gameplay.Employees
 
         private WindowService _windowService;
         private SkipProgressSliderWindow _skipProgressWindow;
-        private CameraProvider _cameraProvider;
         private EmployeeDataService _employeeDataService;
         private PlayerPaperContainer _playerPaperContainer;
         private PlayerProvider _playerProvider;
+        private CameraController _cameraController;
 
         [Inject]
         private void Construct(WindowService windowService,
-            CameraProvider cameraProvider, EmployeeDataService employeeDataService,
+            CameraController cameraController, EmployeeDataService employeeDataService,
             PlayerProvider playerProvider)
         {
+            _cameraController = cameraController;
             _playerProvider = playerProvider;
             _employeeDataService = employeeDataService;
-            _cameraProvider = cameraProvider;
             _windowService = windowService;
         }
 
@@ -67,7 +68,7 @@ namespace CodeBase.Gameplay.Employees
                 return;
             }
 
-            Quaternion targetRotation = Quaternion.LookRotation(_cameraProvider.Camera.transform.forward);
+            Quaternion targetRotation = Quaternion.LookRotation(_cameraController.Camera.transform.forward);
             _skipProgressWindow = _windowService.GetNew<SkipProgressSliderWindow>();
             _skipProgressWindow.transform.SetParent(_employee.transform);
 
@@ -78,7 +79,7 @@ namespace CodeBase.Gameplay.Employees
             _skipProgressWindow.Open();
         }
 
-        private void HideWindow(Employee employee)
+        private void HideWindow(IBurnable burnable)
         {
             if (_skipProgressWindow != null)
                 _skipProgressWindow.Hide();

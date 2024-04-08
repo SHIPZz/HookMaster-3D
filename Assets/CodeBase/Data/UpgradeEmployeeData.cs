@@ -10,6 +10,6 @@ namespace CodeBase.Data
         public long LastUpgradeWindowOpenedTime;
         public bool Completed;
         public bool UpgradeStarted;
-        public int UpgradeCost = 500;
+        public int UpgradeCost;
     }
 }

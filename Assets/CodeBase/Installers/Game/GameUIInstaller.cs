@@ -1,5 +1,6 @@
 ﻿using CodeBase.Gameplay.SoundPlayer;
 using CodeBase.Services.UI;
+using CodeBase.UI.Pause;
 using UnityEngine;
 using Zenject;
 
@@ -13,6 +14,12 @@ namespace CodeBase.Installers.Game
             BindFloatingServices();
             BindUIService();
             BindUIProvider();
+            BindPauseWindowController();
+        }
+
+        private void BindPauseWindowController()
+        {
+            Container.BindInterfacesAndSelfTo<PauseWindowController>().AsSingle();
         }
 
         private void BindFloatingServices()

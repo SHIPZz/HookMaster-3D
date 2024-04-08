@@ -9,11 +9,13 @@ namespace CodeBase.Installers.ScriptableObject
     {
         [SerializeField] private EmployeeNameSO _employeeNameSo;
         [SerializeField] private EmployeeSkinSO _employeeSkinSo;
+        [SerializeField] private EmployeeStatsSO _employeeStats;
 
         public override void InstallBindings()
         {
             Container.BindInstance(_employeeNameSo);
             Container.BindInstance(_employeeSkinSo);
+            Container.BindInstance(_employeeStats);
         }
     }
 }

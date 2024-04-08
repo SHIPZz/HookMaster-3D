@@ -26,7 +26,6 @@ using CodeBase.Services.Mining;
 using CodeBase.Services.Player;
 using CodeBase.Services.Profit;
 using CodeBase.Services.Providers.Asset;
-using CodeBase.Services.Providers.Camera;
 using CodeBase.Services.Providers.Couchs;
 using CodeBase.Services.Providers.Extinguisher;
 using CodeBase.Services.Providers.Fire;
@@ -68,7 +67,6 @@ namespace CodeBase.Installers.Game
             BindWindowService();
             BindEmployeeLazinessService();
             BindWalletService();
-            BindEmployeeSalaryService();
             BindProfitService();
             BindEmployeeDataService();
             BindSoundService();
@@ -96,9 +94,19 @@ namespace CodeBase.Installers.Game
             BindMaterialFadeAnimService();
             BindPlayerInputService();
             BindFocusService();
-            Container.BindInstance(_cameraFocus);
-            Container.BindInstance(_cameraController);
+            BindEmployeeService();
+            BindCameraFocus();
+            BindCameraController();
         }
+
+        private void BindCameraController() => 
+            Container.BindInstance(_cameraController);
+
+        private void BindCameraFocus() => 
+            Container.BindInstance(_cameraFocus);
+
+        private void BindEmployeeService() => 
+            Container.Bind<EmployeeService>().AsSingle();
 
         private void BindFocusService()
         {
@@ -106,7 +114,7 @@ namespace CodeBase.Installers.Game
         }
 
         private void BindPlayerInputService() => 
-            Container.Bind<PlayerInputService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerInputService>().AsSingle();
 
         private void BindMaterialFadeAnimService()
         {
@@ -204,12 +212,7 @@ namespace CodeBase.Installers.Game
 
         private void BindProfitService() =>
             Container
-                .BindInterfacesAndSelfTo<EmployeeProfitService>()
-                .AsSingle();
-
-        private void BindEmployeeSalaryService() =>
-            Container
-                .Bind<EmployeeSalaryService>()
+                .Bind<EmployeeProfitService>()
                 .AsSingle();
 
         private void BindWalletService() =>
@@ -236,9 +239,7 @@ namespace CodeBase.Installers.Game
             Container.Bind<IAssetProvider>().To<AssetProvider>().AsSingle();
             Container.BindInstance(_locationProvider);
             Container.BindInstance(tableService);
-            Container.Bind<CameraProvider>().AsSingle();
             Container.Bind<PlayerProvider>().AsSingle();
-            Container.BindInterfacesAndSelfTo<EmployeeService>().AsSingle();
             Container.BindInstance(_extinguisherProvider);
             Container.BindInstance(_purchaseableItemProvider);
         }

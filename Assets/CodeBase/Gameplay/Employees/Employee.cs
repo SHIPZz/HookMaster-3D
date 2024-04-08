@@ -25,18 +25,16 @@ namespace CodeBase.Gameplay.Employees
         [field: SerializeField] public MaterialTypeId BurnMaterial { get; private set; }
         [field: SerializeField] public SkinnedMeshRenderer Renderer { get; private set; }
         [field: SerializeField] public bool IsBurned { get; set; }
-        [SerializeField] private float _processPaperTime = 5f;
+        [field: SerializeField] public float ProcessPaperTime { get; set; }
 
         public EmployeeTypeId EmployeeTypeId;
-        public Guid Guid;
-        public string Id;
-        public int QualificationType;
-        public int Salary;
-        public int Profit;
-        public string Name;
-        public string TableId;
-        public bool IsWorking;
-        public bool IsUpgrading;
+
+        public Guid Guid { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string TableId { get; set; }
+        public bool IsWorking { get; set; }
+        public bool IsUpgrading { get; set; }
 
         private bool _wasWorking;
         private EmployeeDataService _employeeDataService;
@@ -52,10 +50,9 @@ namespace CodeBase.Gameplay.Employees
         public bool HasPapers { get; private set; }
 
         public event Action<Employee> UpgradeStarted;
-        public event Action<Employee> Burned;
+        public event Action<IBurnable> Burned;
         public event Action<Employee> PaperAdded;
-        public event Action<Employee> AllPaperProcessed;
-        
+
         [Inject]
         private void Construct(EmployeeDataService employeeDataService,
             BurnableObjectService burnableObjectService,
@@ -73,6 +70,7 @@ namespace CodeBase.Gameplay.Employees
             _burnableObjectService.Add(this);
             _rendererMaterialChangerService.Init(1.5f, 1f, BurnMaterial, Renderer);
             _table = _tableService.Get(TableId);
+            _table.Burned += Burn;
             _tableHolder = _table.GetComponent<TableHolder>();
             _tableHolder.ItemPut += OnPaperAdded;
 
@@ -83,6 +81,7 @@ namespace CodeBase.Gameplay.Employees
         private void OnDestroy()
         {
             _tableHolder.ItemPut -= OnPaperAdded;
+            _table.Burned -= Burn;
             _cancellationToken?.Cancel();
             _cancellationToken?.Dispose();
         }
@@ -94,7 +93,7 @@ namespace CodeBase.Gameplay.Employees
                 StopCoroutine(_coroutine);
                 _cancellationToken?.Cancel();
             }
-            
+
             PaperAdded?.Invoke(this);
             HasPapers = true;
             _coroutine = StartCoroutine(StartProcessPapersCoroutine());
@@ -110,10 +109,11 @@ namespace CodeBase.Gameplay.Employees
         private async UniTask ProcessPapers()
         {
             _cancellationToken.Token.ThrowIfCancellationRequested();
-            
+
             while (_tableHolder.ItemsCount > 0)
             {
-                await UniTask.Delay(TimeSpan.FromSeconds(_processPaperTime)).AttachExternalCancellation(_cancellationToken.Token);
+                await UniTask.Delay(TimeSpan.FromSeconds(ProcessPaperTime))
+                    .AttachExternalCancellation(_cancellationToken.Token);
                 IHoldable paper = await _tableHolder.TakeAsync(transform, _cancellationToken.Token);
                 paper.Transform.DOScale(Vector3.zero, 0.5f).OnComplete(() =>
                 {
@@ -124,7 +124,6 @@ namespace CodeBase.Gameplay.Employees
 
             _employeeDataService.SetPaperProcessedOnce();
             _tableHolder.SetLastHoldableNull();
-            AllPaperProcessed?.Invoke(this);
             HasPapers = false;
         }
 
@@ -147,6 +146,7 @@ namespace CodeBase.Gameplay.Employees
             _employeeDataService.OverwritePurchasedEmployeeData(this.ToEmployeeData());
         }
 
+        [Button]
         public void Burn()
         {
             _wasWorking = IsWorking;
@@ -165,6 +165,12 @@ namespace CodeBase.Gameplay.Employees
 
             if (_wasWorking)
                 StartWorking();
+        }
+
+        private void Burn(IBurnable obj)
+        {
+            if (!IsBurned)
+                Burn();
         }
     }
 }

@@ -51,16 +51,16 @@ namespace CodeBase.Animations
             switch (true)
             {
                 case bool _ when _scaleX:
-                    _tween = _transform.DOScaleX(scale.x, duration).OnComplete(()=>onComplete?.Invoke());
+                    _tween = _transform.DOScaleX(scale.x, duration).OnComplete(()=>onComplete?.Invoke()).SetUpdate(true);
                     break;
                 case bool _ when _scaleY:
-                    _tween = _transform.DOScaleY(scale.y, duration).OnComplete(()=>onComplete?.Invoke());
+                    _tween = _transform.DOScaleY(scale.y, duration).OnComplete(()=>onComplete?.Invoke()).SetUpdate(true);
                     break;
                 case bool _ when _scaleZ:
-                    _tween = _transform.DOScaleZ(scale.z, duration).OnComplete(()=>onComplete?.Invoke());
+                    _tween = _transform.DOScaleZ(scale.z, duration).OnComplete(()=>onComplete?.Invoke()).SetUpdate(true);
                     break;
                 default:
-                    _tween = _transform.DOScale(scale, duration).OnComplete(()=>onComplete?.Invoke());
+                    _tween = _transform.DOScale(scale, duration).OnComplete(()=>onComplete?.Invoke()).SetUpdate(true);
                     break;
             }
         }

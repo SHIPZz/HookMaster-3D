@@ -1,7 +1,5 @@
 ﻿using System;
 using CodeBase.Services.CameraServices;
-using CodeBase.Services.Input;
-using CodeBase.Services.Providers.Camera;
 using UnityEngine;
 using Zenject;
 

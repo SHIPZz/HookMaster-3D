@@ -47,7 +47,7 @@ namespace CodeBase.Services.Employees
             Employee employee =  _employeeFactory.Create(employeeData, freeTable, false);
             employee.gameObject.SetActive(false);
             employee.TableId = freeTable.Id;
-            _employeeService.Employees.Add(employee);
+            _employeeService.Add(employee);
             
             _employeeDataService.SavePurchasedEmployee(employee.ToEmployeeData());
         }

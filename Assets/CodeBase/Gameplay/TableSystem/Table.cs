@@ -7,7 +7,6 @@ using CodeBase.Gameplay.ObjectCreatorSystem;
 using CodeBase.Gameplay.PaperSystem;
 using CodeBase.MaterialChanger;
 using CodeBase.Services.BurnableObjects;
-using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
@@ -19,27 +18,20 @@ namespace CodeBase.Gameplay.TableSystem
         [field: SerializeField] public MaterialTypeId BurnMaterial { get; private set; }
         [field: SerializeField] public bool IsBurned { get; set; }
 
-        [field: SerializeField] public Transform PaperPosition { get; private set; }
-        [field: SerializeField] public ResourceCreator ResourceCreator { get; private set; }
-        [field: SerializeField] public Transform PaperFinishedPosition { get; private set; }
-        [field: SerializeField] public Vector3 Offset { get; private set; } = new Vector3(0, 0.06f, 0);
-
         [SerializeField] private List<UnityEngine.Renderer> _childRenderers;
         [SerializeField] private MeshRenderer _meshRenderer;
+        [field: SerializeField] public ResourceCreator ResourceCreator { get; private set; }
 
         public bool IsFree;
         public Transform Chair;
         public string Id;
-        public Stack<Paper> PapersOnTable = new();
-        public Paper LastPaper { get; private set; }
 
         private ChildRendererMaterialChangerService _rendererMaterialChangerService;
         private BurnableObjectService _burnableObjectService;
         private bool _wasFree;
 
         public event Action<bool, string> Busy;
-        public event Action<Table> PaperAdded;
-        public event Action<Table> AllPaperProcessed;
+        public event Action<IBurnable> Burned;
 
         [Inject]
         private void Construct(ChildRendererMaterialChangerService childRendererMaterial,
@@ -58,40 +50,6 @@ namespace CodeBase.Gameplay.TableSystem
                 Burn();
         }
 
-        public void Add(Paper paper)
-        {
-            PapersOnTable.Push(paper);
-            LastPaper = PapersOnTable.Peek();
-            PaperAdded?.Invoke(this);
-        }
-
-        public void ClearPapers()
-        {
-            LastPaper = null;
-            PapersOnTable.Clear();
-        }
-
-        public async UniTask<Paper> PopPaper()
-        {
-            while (PapersOnTable.Count == 0)
-                await UniTask.Yield();
-
-            Paper paper = PapersOnTable.Pop();
-            
-            if (PapersOnTable.Count == 0)
-                AllPaperProcessed?.Invoke(this);
-
-            if (PapersOnTable.TryPeek(out Paper peekedPaper))
-                LastPaper = peekedPaper;
-                
-            return paper;
-        }
-
-        public void SetIsBurned(bool isBurned)
-        {
-            IsBurned = isBurned;
-        }
-
         public void SetIsFree(bool isFree)
         {
             IsFree = isFree;
@@ -106,6 +64,7 @@ namespace CodeBase.Gameplay.TableSystem
 
             IsBurned = true;
             _rendererMaterialChangerService.Change();
+            Burned?.Invoke(this);
         }
 
         [Button]

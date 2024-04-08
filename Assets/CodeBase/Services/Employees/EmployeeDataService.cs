@@ -5,6 +5,7 @@ using CodeBase.Constant;
 using CodeBase.Data;
 using CodeBase.Extensions;
 using CodeBase.Services.WorldData;
+using CodeBase.SO.Employee;
 using UnityEngine;
 
 namespace CodeBase.Services.Employees
@@ -12,11 +13,13 @@ namespace CodeBase.Services.Employees
     public class EmployeeDataService
     {
         private readonly IWorldDataService _worldDataService;
+        private readonly EmployeeStatsSO _employeeStatsSo;
 
         public event Action<EmployeeData> EmployeeUpdated;
 
-        public EmployeeDataService(IWorldDataService worldDataService)
+        public EmployeeDataService(IWorldDataService worldDataService, EmployeeStatsSO employeeStatsSo)
         {
+            _employeeStatsSo = employeeStatsSo;
             _worldDataService = worldDataService;
         }
 
@@ -24,7 +27,7 @@ namespace CodeBase.Services.Employees
         {
             var newUpgradeCost = targetUpgradeEmployeeData.UpgradeCost +
                                  _worldDataService.WorldData.PlayerData.QualificationType
-                                 * MultiplyValueConstants.AdditionalUpgradeCost;
+                                 * _employeeStatsSo.AdditionalUpgradeCost;
 
             targetUpgradeEmployeeData.SetUpgradeCost(newUpgradeCost);
             SaveUpgradeEmployeeData(targetUpgradeEmployeeData);
@@ -32,22 +35,15 @@ namespace CodeBase.Services.Employees
 
         public void UpgradeEmployeeData(EmployeeData employeeData, Action<EmployeeData> onCompleted = null)
         {
-            var targetSalary = employeeData.Salary +
-                               _worldDataService.WorldData.PlayerData.QualificationType
-                               * MultiplyValueConstants.AdditionalSalary;
 
-            var targetProfit = employeeData.Profit +
-                               _worldDataService.WorldData.PlayerData.QualificationType
-                               * MultiplyValueConstants.AdditionalProfit;
+            var targetProcessTime =
+                Mathf.Clamp(employeeData.PaperProcessTime - _employeeStatsSo.DecreasePaperProcessTime, _employeeStatsSo.MinPaperProcessTime, _employeeStatsSo.PaperProcessTime);
 
-            var targetQualificationType = employeeData.QualificationType;
-            targetQualificationType++;
-
-            employeeData.SetProfit(targetProfit).SetSalary(targetSalary)
+            employeeData
                 .SetIsUpgrading(false)
-                .SetQualificationType(targetQualificationType);
+                .SetProcessPaperTime(targetProcessTime);
 
-            ResetUpdatedUpgradedData(employeeData.Id);
+            ResetUpdatedData(employeeData.Id);
 
             OverwritePurchasedEmployeeData(employeeData);
             onCompleted?.Invoke(employeeData);
@@ -103,7 +99,7 @@ namespace CodeBase.Services.Employees
             _worldDataService.Save();
         }
 
-        private void ResetUpdatedUpgradedData(string id)
+        private void ResetUpdatedData(string id)
         {
             _worldDataService.WorldData.UpgradeEmployeeDatas[id].Reset();
 

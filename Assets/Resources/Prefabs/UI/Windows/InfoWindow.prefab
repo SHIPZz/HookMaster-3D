@@ -60105,6 +60105,10 @@ MonoBehaviour:
   _descriptionText: {fileID: 2604672911357118337}
   _icon: {fileID: 5135083847205999914}
   _soundPlayerSystem: {fileID: 2582117159224306599}
+  _localizes:
+  - {fileID: 6947332715145837609}
+  - {fileID: 1327318956399504045}
+  - {fileID: 5817291415887074812}
 --- !u!1 &6514999802991858570
 GameObject:
   m_ObjectHideFlags: 0

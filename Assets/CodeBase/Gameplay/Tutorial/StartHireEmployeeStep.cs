@@ -52,7 +52,7 @@ namespace CodeBase.Gameplay.Tutorial
             _tutorialHand.gameObject.SetActive(false);
             _targetButton.onClick.RemoveListener(OnFinished);
             _targetButton.GetComponent<TutorialHighlight>().enabled = false;
-            _playerInputService.SetActive(true);
+            _playerInputService.SetInputActive(true);
             WindowService.HudOpened -= OnWindowOpened;
             SetCompleteToData(true);
         }
@@ -75,7 +75,7 @@ namespace CodeBase.Gameplay.Tutorial
             _targetButton = hudWindow.OpenEmployeeWindowButton;
             _targetButton.GetComponent<TutorialHighlight>().enabled = true;
             _targetButton.onClick.AddListener(OnFinished);
-            _playerInputService.SetActive(false);
+            _playerInputService.SetInputActive(false);
             _hudOpened = true;
         }
     }

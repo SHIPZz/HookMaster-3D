@@ -45,6 +45,7 @@ namespace CodeBase.UI.BurnableObjects
         public void Init(IBurnable burnable)
         {
             _burnable = burnable;
+            Show();
         }
 
         public override void Open()
@@ -52,7 +53,7 @@ namespace CodeBase.UI.BurnableObjects
             _canvasAnimator.FadeInCanvas();
         }
 
-        public void ShowIcon()
+        public override void Show()
         {
             _buttonScaleAnim.UnScale();
             _burnedIconScaleAnim.ToScale();
@@ -62,7 +63,7 @@ namespace CodeBase.UI.BurnableObjects
         {
             _burnedIconScaleAnim.UnScale();
             _buttonScaleAnim.ToScale();
-            _buttonText.text = $"RECOVER {GameConstantValue.RecoverCost}$\n";
+            _buttonText.text = $"{GameConstantValue.RecoverCost}$\n";
         }
 
         private void OnRecoverButtonClicked()

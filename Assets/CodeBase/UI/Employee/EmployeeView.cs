@@ -16,9 +16,6 @@ namespace CodeBase.UI.Employee
         [field: SerializeField] public Button HireButton { get; private set; }
         
         [SerializeField] private TMP_Text _nameText;
-        [SerializeField] private TMP_Text _salaryText;
-        [SerializeField] private TMP_Text _qualificationTypeText;
-        [SerializeField] private TMP_Text _profitText;
         
         private EmployeeData _employeeData;
         private EmployeeHirerService _employeeHirerService;
@@ -39,9 +36,6 @@ namespace CodeBase.UI.Employee
         {
             _employeeData = employeeData;
             _nameText.text = employeeData.Name;
-            _salaryText.text = $"Salary: {employeeData.Salary}";
-            _qualificationTypeText.text = $"Qualification: {employeeData.QualificationType}";
-            _profitText.text = $"Profit: {employeeData.Profit}";
         }
 
         private void OnButtonClicked()

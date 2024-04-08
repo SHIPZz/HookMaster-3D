@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _employeeNameSo: {fileID: 11400000, guid: af94e759c0c6209498a18d828ce6fb0d, type: 2}
   _employeeSkinSo: {fileID: 11400000, guid: 0eb25b08b19ceb54fb33604b0a9687d8, type: 2}
+  _employeeStats: {fileID: 11400000, guid: cb847962735173f4d8fa5d68dc8f1ba0, type: 2}

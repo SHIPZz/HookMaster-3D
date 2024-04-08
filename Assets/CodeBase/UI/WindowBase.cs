@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace CodeBase.UI
 {
-    public abstract class WindowBase : MonoBehaviour
+    public abstract class WindowBase : SerializedMonoBehaviour
     {
         [SerializeField] protected Button CloseButton;
 

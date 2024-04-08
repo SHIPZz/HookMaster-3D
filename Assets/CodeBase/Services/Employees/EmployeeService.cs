@@ -6,30 +6,52 @@ using CodeBase.Data;
 using CodeBase.Extensions;
 using CodeBase.Gameplay.Employees;
 using CodeBase.Gameplay.TableSystem;
+using CodeBase.Services.Factories.Employee;
+using CodeBase.Services.Providers.Tables;
+using CodeBase.SO.Employee;
 
 namespace CodeBase.Services.Employees
 {
-    public class EmployeeService : IDisposable
+    public class EmployeeService
     {
-        public List<Employee> Employees = new();
         private readonly EmployeeDataService _employeeDataService;
+        private readonly TableService _tableService;
+        private readonly IEmployeeFactory _employeeFactory;
 
+        private List<Employee> _employees = new();
+        private EmployeeStatsSO _employeeStatsSo;
+
+        public IReadOnlyList<Employee> Employees => _employees;
 
         public event Action<Employee> EmployeeUpdated;
 
-        public EmployeeService(EmployeeDataService employeeDataService)
+        public EmployeeService(EmployeeDataService employeeDataService, TableService tableService, IEmployeeFactory employeeFactory, EmployeeStatsSO employeeStatsSo)
         {
+            _employeeStatsSo = employeeStatsSo;
+            _employeeFactory = employeeFactory;
+            _tableService = tableService;
             _employeeDataService = employeeDataService;
         }
 
-        public void SubscribeTableEvents()
+        public void Init(List<EmployeeData> playerDataPurchasedEmployees)
         {
-            // _tableService.Tables.ForEach(x => x.PaperAdded += OnTablePaperAdded);
+            foreach (EmployeeData employeeData in playerDataPurchasedEmployees)
+            {
+                Table targetTable = _tableService.Tables.FirstOrDefault(x => x.Id == employeeData.TableId);
+
+                if (targetTable == null)
+                    continue;
+
+                Employee targetEmployee = _employeeFactory.Create(employeeData, targetTable, true);
+                _employees.Add(targetEmployee);
+            }
         }
 
-        public void Dispose()
+        public bool UpdateMaxReached(string id)
         {
-            // _tableService.Tables.ForEach(x => x.PaperAdded -= OnTablePaperAdded);
+            var employee = Employees.FirstOrDefault(x => x.Id == id);
+
+            return employee.ProcessPaperTime == _employeeStatsSo.MinPaperProcessTime;
         }
 
         public void SetUpgrade(string id, bool isUpgrading)
@@ -46,19 +68,17 @@ namespace CodeBase.Services.Employees
 
             foreach (Employee employee in Employees.Where(employee => employee.Id == employeeData.Id))
             {
-                employee.SetProfit(employeeData.Profit)
-                    .SetSalary(employeeData.Salary)
-                    .SetQualificationType(employeeData.QualificationType)
-                    .SetIsUpgrading(employeeData.IsUpgrading);
+                employee.SetIsUpgrading(employeeData.IsUpgrading)
+                    .SetProcessPaperTime(employeeData.PaperProcessTime);
 
                 EmployeeUpdated?.Invoke(employee);
             }
         }
 
+        public void Add(Employee employee) =>
+            _employees.Add(employee);
+
         public Employee Get(string id) =>
             Employees.FirstOrDefault(x => x.Id == id);
-
-        private Employee GetEmployeeByTable(string tableId) =>
-            Employees.FirstOrDefault(x => x.TableId == tableId);
     }
 }

@@ -82,6 +82,7 @@ namespace CodeBase.Gameplay.Fire
             {
                 Stop();
                 _burnableObjects.Values.ToList().ForEach(x => x.Recover());
+                _fireService.NotifyFirePutOut();
             }
         }
 
@@ -91,7 +92,6 @@ namespace CodeBase.Gameplay.Fire
             _fireService.Reset().Forget();
             _fireSound.Stop();
             _destroyed = true;
-            _fireService.NotifyFirePutOut();
             Destroy(gameObject, _destroyTime);
         }
 
@@ -99,7 +99,7 @@ namespace CodeBase.Gameplay.Fire
         {
             if (_destroyed)
                 return;
-            
+
             foreach (var burnable in _burnableObjects.Values)
             {
                 burnable.Burn();

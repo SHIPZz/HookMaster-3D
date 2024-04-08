@@ -6,8 +6,10 @@ using CodeBase.Data;
 using CodeBase.Extensions;
 using CodeBase.Services.Employees;
 using CodeBase.Services.Time;
+using CodeBase.Services.Window;
 using CodeBase.Services.WorldData;
 using CodeBase.UI.Buttons;
+using CodeBase.UI.Hud;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using TMPro;
@@ -197,8 +199,6 @@ namespace CodeBase.UI.SkipProgress
         {
             _employeeDataService.TryAddUpgradeEmployeeData(_upgradeEmployeeData);
             _upgradeEmployeeData.SetUpgradeStarted(true);
-
-            print(_slider.value + "slider value");
 
             while (Math.Abs(_slider.value - _slider.maxValue) > 0.1f)
             {

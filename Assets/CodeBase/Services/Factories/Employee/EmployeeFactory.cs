@@ -28,6 +28,7 @@ namespace CodeBase.Services.Factories.Employee
         private readonly IWorldDataService _worldDataService;
         private readonly EmployeeSkinSO _employeeSkinSo;
         private readonly EmployeeStaticDataService _employeeStaticDataService;
+        private readonly EmployeeStatsSO _employeeStatsSo;
 
         private readonly List<string> _employeeNames = new();
 
@@ -38,8 +39,10 @@ namespace CodeBase.Services.Factories.Employee
             EmployeeSkinSO employeeSkinSo,
             LocationProvider locationProvider,
             IWorldDataService worldDataService,
-            EmployeeStaticDataService employeeStaticDataService)
+            EmployeeStaticDataService employeeStaticDataService,
+            EmployeeStatsSO employeeStatsSo)
         {
+            _employeeStatsSo = employeeStatsSo;
             _employeeStaticDataService = employeeStaticDataService;
             _employeeSkinSo = employeeSkinSo;
             _worldDataService = worldDataService;
@@ -63,11 +66,9 @@ namespace CodeBase.Services.Factories.Employee
             var potentialEmployeeData = new EmployeeData
             {
                 Name = targetName,
-                QualificationType = qualificationType,
-                Salary = Random.Range(officeSO.MinSalary, officeSO.MaxSalary),
-                Profit = Random.Range(officeSO.MinProfit, officeSO.MaxProfit),
                 EmployeeTypeId = _employeeStaticDataService.GetRandomId(),
                 Guid = Guid.NewGuid(),
+                PaperProcessTime = _employeeStatsSo.PaperProcessTime
             };
 
             _employeeNames.Remove(targetName);
@@ -94,9 +95,7 @@ namespace CodeBase.Services.Factories.Employee
             employee.SetName(employeeData.Name)
                 .SetSkin(targetMesh)
                 .SetId(employeeData.EmployeeTypeId)
-                .SetQualificationType(employeeData.QualificationType)
-                .SetProfit(employeeData.Profit)
-                .SetSalary(employeeData.Salary)
+                .SetProcessPaperTime(employeeData.PaperProcessTime)
                 .SetGuid(employeeData.Guid)
                 .SetId(employeeData.Id)
                 .SetTableId(employeeData.TableId)

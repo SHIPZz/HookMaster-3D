@@ -1,10 +1,12 @@
-﻿using CodeBase.Animations;
+﻿using System.Globalization;
+using CodeBase.Animations;
 using CodeBase.Data;
 using CodeBase.Gameplay.SoundPlayer;
 using CodeBase.Services.Employees;
 using CodeBase.Services.Window;
 using CodeBase.UI.Hud;
-using CodeBase.UI.SkipProgress;
+using Cysharp.Threading.Tasks;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -14,31 +16,27 @@ namespace CodeBase.UI.Upgrade
     public class UpgradeEmployeeCompletedWindow : WindowBase
     {
         [SerializeField] private TMP_Text _nameText;
-        [SerializeField] private CanvasAnimator _canvasAnimator;
-        
-        [Header("Old data")] 
-        [SerializeField] private TMP_Text _oldProfitText;
-        [SerializeField] private TMP_Text _oldSalaryText;
-        [SerializeField] private TMP_Text _oldQualificationTypeText;
+        [SerializeField] private TMP_Text _oldTextSpeed;
+        [SerializeField] private TMP_Text _upgradedTextSpeed;
 
-        [Header("Upgraded data")] 
-        [SerializeField] private TMP_Text _newProfitText;
-        [SerializeField] private TMP_Text _newSalaryText;
-        [SerializeField] private TMP_Text _newQualificationTypeText;
-        
+        [SerializeField] private CanvasAnimator _canvasAnimator;
+        [SerializeField] private AudioSource _increaseSound;
+
         [SerializeField] private TransformScaleAnim _buttonScaleAnim;
-        [SerializeField] private AudioSource _increaseValueSound;
         [SerializeField] private AppearanceEffect _appearanceEffect;
         [SerializeField] private SoundPlayerSystem _soundPlayerSystem;
+        [SerializeField] private float _showGotItButtonDelay =1f;
 
         private EmployeeData _employeeData;
 
         private EmployeeService _employeeService;
         private NumberTextAnimService _numberTextAnimService;
         private WindowService _windowService;
+        private float _oldProcessPaperSpeed;
 
         [Inject]
-        private void Construct(EmployeeService employeeService, NumberTextAnimService numberTextAnimService, WindowService windowService)
+        private void Construct(EmployeeService employeeService, NumberTextAnimService numberTextAnimService,
+            WindowService windowService)
         {
             _windowService = windowService;
             _numberTextAnimService = numberTextAnimService;
@@ -47,21 +45,18 @@ namespace CodeBase.UI.Upgrade
 
         public override void Open()
         {
-            _windowService.Close<HudWindow>();
             _appearanceEffect.PlayTargetEffects();
             _soundPlayerSystem.PlayActiveSound();
             _canvasAnimator.FadeInCanvas();
 
-            _employeeService.Upgrade(_employeeData, OnComplete);
+            _employeeService.Upgrade(_employeeData, OnEmployeeUpgradeComplete);
         }
 
-        private async void OnComplete(EmployeeData newEmployeeData)
+        [Button]
+        private async void OnEmployeeUpgradeComplete(EmployeeData newEmployeeData)
         {
-            await _numberTextAnimService.AnimateNumber(0, newEmployeeData.QualificationType, 0.5f,
-                _newQualificationTypeText, _increaseValueSound);
-            await _numberTextAnimService.AnimateNumber(0, newEmployeeData.Salary, 1.5f, _newSalaryText, '$', _increaseValueSound);
-            await _numberTextAnimService.AnimateNumber(0, newEmployeeData.Profit, 1.5f, _newProfitText, '$', _increaseValueSound);
-            
+            await _numberTextAnimService.AnimateNumber(0, newEmployeeData.PaperProcessTime, 1.5f, _upgradedTextSpeed);
+            await UniTask.WaitForSeconds(_showGotItButtonDelay);
             _buttonScaleAnim.ToScale();
         }
 
@@ -73,11 +68,10 @@ namespace CodeBase.UI.Upgrade
 
         public void Init(EmployeeData employeeData)
         {
+            _oldProcessPaperSpeed = employeeData.PaperProcessTime;
             _employeeData = employeeData;
-            _oldProfitText.text = $"{_employeeData.Profit}$";
-            _oldSalaryText.text = $"{_employeeData.Salary}$";
-            _oldQualificationTypeText.text = $"{_employeeData.QualificationType}";
             _nameText.text = $"{_employeeData.Name}";
+            _oldTextSpeed.text = _oldProcessPaperSpeed.ToString(CultureInfo.InvariantCulture);
         }
     }
 }

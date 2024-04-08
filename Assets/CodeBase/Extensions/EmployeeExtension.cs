@@ -14,10 +14,7 @@ namespace CodeBase.Extensions
             var potentialEmployeeData = new EmployeeData
             {
                 Guid = employee.Guid,
-                Profit = employee.Profit,
                 Name = employee.Name,
-                Salary = employee.Salary,
-                QualificationType = employee.QualificationType,
                 TableId = employee.TableId,
                 Id = employee.Id,
                 IsWorking = employee.IsWorking,
@@ -72,27 +69,15 @@ namespace CodeBase.Extensions
             return employee;
         }
 
+        public static Employee SetProcessPaperTime(this Employee employee, float time)
+        {
+            employee.ProcessPaperTime = time;
+            return employee;
+        }
+
         public static Employee SetTableId(this Employee employee, string id)
         {
             employee.TableId = id;
-            return employee;
-        }
-
-        public static Employee SetSalary(this Employee employee, int salary)
-        {
-            employee.Salary = salary;
-            return employee;
-        }
-
-        public static Employee SetProfit(this Employee employee, int profit)
-        {
-            employee.Profit = profit;
-            return employee;
-        }
-
-        public static Employee SetQualificationType(this Employee employee, int qualificationType)
-        {
-            employee.QualificationType = qualificationType;
             return employee;
         }
 
@@ -101,22 +86,10 @@ namespace CodeBase.Extensions
             employeeData.IsUpgrading = isUpgrading;
             return employeeData;
         }
-
-        public static EmployeeData SetSalary(this EmployeeData employeeData, int salary)
+        
+        public static EmployeeData SetProcessPaperTime(this EmployeeData employeeData, float time)
         {
-            employeeData.Salary = salary;
-            return employeeData;
-        }
-
-        public static EmployeeData SetProfit(this EmployeeData employeeData, int profit)
-        {
-            employeeData.Profit = profit;
-            return employeeData;
-        }
-
-        public static EmployeeData SetQualificationType(this EmployeeData employeeData, int qualificationType)
-        {
-            employeeData.QualificationType = qualificationType;
+            employeeData.PaperProcessTime = time;
             return employeeData;
         }
 
@@ -174,10 +147,7 @@ namespace CodeBase.Extensions
             var employeeData = new EmployeeData
             {
                 Guid = upgradeEmployeeData.EmployeeData.Guid,
-                Profit = upgradeEmployeeData.EmployeeData.Profit,
                 Name = upgradeEmployeeData.EmployeeData.Name,
-                Salary = upgradeEmployeeData.EmployeeData.Salary,
-                QualificationType = upgradeEmployeeData.EmployeeData.QualificationType,
                 TableId = upgradeEmployeeData.EmployeeData.TableId,
                 Id = upgradeEmployeeData.EmployeeData.Id,
                 IsWorking = upgradeEmployeeData.EmployeeData.IsWorking,

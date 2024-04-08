@@ -65,7 +65,7 @@ namespace CodeBase.UI.Buttons.NavigationButtons
 
         private void ShowUp()
         {
-            if(enabled)
+            if(gameObject != null && enabled)
                 return;
             
             enabled = true;
@@ -74,7 +74,7 @@ namespace CodeBase.UI.Buttons.NavigationButtons
 
         private async void Hide()
         {
-            if(!enabled)
+            if(gameObject != null && !enabled)
                 return;
             
             enabled = false;
