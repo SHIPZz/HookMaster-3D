@@ -103,7 +103,7 @@ namespace CodeBase.Gameplay.Employees
         {
             _cancellationToken?.Dispose();
             _cancellationToken = new();
-            yield return ProcessPapers();
+            yield return ProcessPapers().ToCoroutine();
         }
 
         private async UniTask ProcessPapers()
@@ -112,14 +112,13 @@ namespace CodeBase.Gameplay.Employees
 
             while (_tableHolder.ItemsCount > 0)
             {
-                await UniTask.Delay(TimeSpan.FromSeconds(ProcessPaperTime))
-                    .AttachExternalCancellation(_cancellationToken.Token);
+                await UniTask.Delay(TimeSpan.FromSeconds(ProcessPaperTime)).AttachExternalCancellation(_cancellationToken.Token);
                 IHoldable paper = await _tableHolder.TakeAsync(transform, _cancellationToken.Token);
-                paper.Transform.DOScale(Vector3.zero, 0.5f).OnComplete(() =>
+                await paper.Transform.DOScale(Vector3.zero, 0.5f).OnComplete(() =>
                 {
                     paper.Destroy();
                     _table.ResourceCreator.Create();
-                });
+                }).AsyncWaitForCompletion().AsUniTask();
             }
 
             _employeeDataService.SetPaperProcessedOnce();
