@@ -11,7 +11,6 @@ namespace CodeBase.Gameplay.PlayerSystem
         public bool HasItemInHands { get; private set; }
         
         private FullBodyBipedIK _fullBodyBipedIK;
-
         
         public void Set(FullBodyBipedIK fullBodyBipedIK) =>
             _fullBodyBipedIK = fullBodyBipedIK;
@@ -24,7 +23,7 @@ namespace CodeBase.Gameplay.PlayerSystem
             SetIKHandWeights(1);
         }
 
-        public async void ClearIKHandTargets()
+        public async UniTaskVoid ClearIKHandTargets()
         {
             while (_fullBodyBipedIK.solver.leftHandEffector.positionWeight > 0.1f)
             {
@@ -43,9 +42,6 @@ namespace CodeBase.Gameplay.PlayerSystem
                 await UniTask.Yield();
             }
             
-            // _fullBodyBipedIK.solver.leftHandEffector.target = null;
-            // _fullBodyBipedIK.solver.rightHandEffector.target = null;
-
             SetIKHandWeights(0);
             HasItemInHands = false;
         }

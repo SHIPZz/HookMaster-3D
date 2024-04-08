@@ -52,7 +52,8 @@ namespace CodeBase.Gameplay.ResourceItem
             {
                 resource.MarkAsDetected(); 
                 var task = new ResourceCollectionTask(resource, collector.Anchor, collector.ControlPoint, _settings);
-                await task.ExecuteAsync(_lifetimeToken.Token);
+                await task.CompleteAsync();
+                // await task.ExecuteAsync(_lifetimeToken.Token);
                 resource.Collect(collector.Anchor);
             }
             catch (OperationCanceledException)

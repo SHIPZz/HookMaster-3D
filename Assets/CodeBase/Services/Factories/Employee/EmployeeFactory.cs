@@ -23,9 +23,7 @@ namespace CodeBase.Services.Factories.Employee
     {
         private readonly IAssetProvider _assetProvider;
         private readonly IInstantiator _instantiator;
-        private readonly OfficeStaticDataService _officeStaticDataService;
         private readonly LocationProvider _locationProvider;
-        private readonly IWorldDataService _worldDataService;
         private readonly EmployeeSkinSO _employeeSkinSo;
         private readonly EmployeeStaticDataService _employeeStaticDataService;
         private readonly EmployeeStatsSO _employeeStatsSo;
@@ -35,19 +33,15 @@ namespace CodeBase.Services.Factories.Employee
         public EmployeeFactory(IAssetProvider assetProvider,
             IInstantiator instantiator,
             EmployeeNameSO employeeNameSo,
-            OfficeStaticDataService officeStaticDataService,
             EmployeeSkinSO employeeSkinSo,
             LocationProvider locationProvider,
-            IWorldDataService worldDataService,
             EmployeeStaticDataService employeeStaticDataService,
             EmployeeStatsSO employeeStatsSo)
         {
             _employeeStatsSo = employeeStatsSo;
             _employeeStaticDataService = employeeStaticDataService;
             _employeeSkinSo = employeeSkinSo;
-            _worldDataService = worldDataService;
             _locationProvider = locationProvider;
-            _officeStaticDataService = officeStaticDataService;
             _instantiator = instantiator;
             _assetProvider = assetProvider;
 
@@ -56,11 +50,6 @@ namespace CodeBase.Services.Factories.Employee
 
         public EmployeeData Create()
         {
-            CodeBase.Data.WorldData worldData = _worldDataService.WorldData;
-
-            int qualificationType = worldData.PlayerData.QualificationType;
-            OfficeSO officeSO = _officeStaticDataService.Get(qualificationType);
-
             var targetName = _employeeNames[Random.Range(0, _employeeNames.Count)];
 
             var potentialEmployeeData = new EmployeeData
@@ -92,6 +81,8 @@ namespace CodeBase.Services.Factories.Employee
                 Quaternion.identity,
                 null);
 
+            Debug.Log(employeeData.PaperProcessTime);
+            
             employee.SetName(employeeData.Name)
                 .SetSkin(targetMesh)
                 .SetId(employeeData.EmployeeTypeId)

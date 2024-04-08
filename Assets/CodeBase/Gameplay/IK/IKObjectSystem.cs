@@ -36,7 +36,7 @@ namespace CodeBase.Gameplay.IK
         {
             _triggerObserver.CollisionEntered -= OnPlayerEntered;
             _triggerObserver.TriggerEntered -= OnPlayerEnteredTrigger;
-            _playerIKService.ClearIKHandTargets();
+            _playerIKService.ClearIKHandTargets().Forget();
         }
 
         private void OnPlayerEnteredTrigger(Collider player)

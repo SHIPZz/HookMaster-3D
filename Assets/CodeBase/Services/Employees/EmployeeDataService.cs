@@ -35,7 +35,6 @@ namespace CodeBase.Services.Employees
 
         public void UpgradeEmployeeData(EmployeeData employeeData, Action<EmployeeData> onCompleted = null)
         {
-
             var targetProcessTime =
                 Mathf.Clamp(employeeData.PaperProcessTime - _employeeStatsSo.DecreasePaperProcessTime, _employeeStatsSo.MinPaperProcessTime, _employeeStatsSo.PaperProcessTime);
 
@@ -86,11 +85,6 @@ namespace CodeBase.Services.Employees
             _worldDataService.WorldData.PlayerData.PurchasedEmployees.Add(purchasedEmployee);
             _worldDataService.WorldData.PotentialEmployeeList.RemoveAll(x => x.Id == purchasedEmployee.Id);
             _worldDataService.Save();
-        }
-
-        public void SetUpgradeEmployeeData(UpgradeEmployeeData upgradeEmployeeData)
-        {
-            _worldDataService.WorldData.UpgradeEmployeeDatas[upgradeEmployeeData.EmployeeData.Id] = upgradeEmployeeData;
         }
 
         public void SaveUpgradeEmployeeData(UpgradeEmployeeData upgradeEmployeeData)

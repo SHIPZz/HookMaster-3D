@@ -20,7 +20,8 @@ namespace CodeBase.Extensions
                 IsWorking = employee.IsWorking,
                 IsUpgrading = employee.IsUpgrading,
                 IsBurned = employee.IsBurned,
-                EmployeeTypeId = employee.EmployeeTypeId
+                EmployeeTypeId = employee.EmployeeTypeId,
+                PaperProcessTime = employee.ProcessPaperTime
             };
 
             return potentialEmployeeData;
@@ -127,34 +128,12 @@ namespace CodeBase.Extensions
             upgradeEmployeeData.UpgradeStarted = isStarted;
             return upgradeEmployeeData;
         }
-
-        public static UpgradeEmployeeData SetEmployeeData(this UpgradeEmployeeData upgradeEmployeeData,
-            EmployeeData employeeData)
-        {
-            upgradeEmployeeData.EmployeeData = employeeData;
-            return upgradeEmployeeData;
-        }
-
+        
         public static UpgradeEmployeeData SetLastUpgradeWindowOpenedTime(this UpgradeEmployeeData upgradeEmployeeData,
             long lastUpgradeWindowOpenedTime)
         {
             upgradeEmployeeData.LastUpgradeWindowOpenedTime = lastUpgradeWindowOpenedTime;
             return upgradeEmployeeData;
-        }
-
-        public static EmployeeData ToEmployeeData(this UpgradeEmployeeData upgradeEmployeeData)
-        {
-            var employeeData = new EmployeeData
-            {
-                Guid = upgradeEmployeeData.EmployeeData.Guid,
-                Name = upgradeEmployeeData.EmployeeData.Name,
-                TableId = upgradeEmployeeData.EmployeeData.TableId,
-                Id = upgradeEmployeeData.EmployeeData.Id,
-                IsWorking = upgradeEmployeeData.EmployeeData.IsWorking,
-                IsUpgrading = upgradeEmployeeData.EmployeeData.IsUpgrading
-            };
-
-            return employeeData;
         }
     }
 }

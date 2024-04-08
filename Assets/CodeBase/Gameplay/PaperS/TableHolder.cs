@@ -1,6 +1,6 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using CodeBase.Gameplay.BurnableObjectSystem;
 using CodeBase.Gameplay.TableSystem;
 using Cysharp.Threading.Tasks;
@@ -9,32 +9,28 @@ using UnityEngine;
 
 namespace CodeBase.Gameplay.PaperS
 {
-    internal class TableHolder : MonoBehaviour, IHolder
+    internal class TableHolder : MonoBehaviour
     {
         [SerializeField] private Transform _holdablesRoot;
-        [SerializeField] private float _timeToTake = 0.5f;
+        [SerializeField] private float _moveHoldableDuration = 0.5f;
         [SerializeField] private Vector3 _offset = new(0, 0.06f, 0);
         [SerializeField] private Table _table;
 
         private readonly Stack<IHoldable> _items = new();
         private IHoldable _lastHoldable;
-        private CancellationTokenSource _cancellationToken;
 
         public event Action ItemPut;
 
         public int ItemsCount => _items.Count;
-        public bool CanPut => !_table.IsFree;
+        public bool IsItemAdding { get; set; }
 
         private void OnEnable()
         {
-            _cancellationToken = new();
             _table.Burned += DestroyItems;
         }
 
         private void OnDisable()
         {
-            _cancellationToken?.Cancel();
-            _cancellationToken?.Dispose();
             _table.Burned -= DestroyItems;
         }
 
@@ -44,51 +40,47 @@ namespace CodeBase.Gameplay.PaperS
             {
                 Destroy(holdable.Transform.gameObject);
             }
-            
+
             _items.Clear();
         }
 
-        public async UniTask<IHoldable> TakeAsync(Transform parent, CancellationToken cancellationToken)
+        public IHoldable Take(Transform parent)
         {
-            if (ItemsCount == 0)
-                throw new Exception("No items to take");
-
             IHoldable holdable = _items.Pop();
-            
+
             if (_items.TryPeek(out IHoldable targetHoldable))
                 _lastHoldable = targetHoldable;
 
-            holdable.Transform.SetParent(parent, true);
-
-            await holdable.Transform.DOLocalMove(Vector3.up, _timeToTake)
-                .PlayAsync(_cancellationToken.Token);
-
+            holdable.Transform.SetParent(parent);
             return holdable;
         }
 
-        public async UniTask PutAsync(IHoldable holdable, CancellationToken cancellationToken)
+        public IEnumerator PutAsync(IHoldable holdable)
         {
             holdable.Transform.SetParent(_holdablesRoot, true);
             holdable.Transform.localRotation = Quaternion.identity;
+            _items.Push(holdable);
 
             if (_lastHoldable != null)
-                await holdable.Transform.DOLocalMove(_lastHoldable.Transform.localPosition + _offset, _timeToTake)
-                    .PlayAsync(cancellationToken);
+                yield return holdable.Transform
+                    .DOLocalMove(_lastHoldable.Transform.localPosition + _offset, _moveHoldableDuration)
+                    .SetEase(Ease.InOutQuint)
+                    .AsyncWaitForCompletion()
+                    .AsUniTask().ToCoroutine();
             else
-                await holdable.Transform.DOLocalMove(Vector3.zero, _timeToTake)
-                    .PlayAsync(cancellationToken);
+                yield return holdable.Transform.DOLocalMove(Vector3.zero, _moveHoldableDuration)
+                    .SetEase(Ease.InOutQuint)
+                    .AsyncWaitForCompletion()
+                    .AsUniTask()
+                    .ToCoroutine();
 
             ItemPut?.Invoke();
-            _items.Push(holdable);
             _lastHoldable = holdable;
         }
 
         public void SetLastHoldableNull()
         {
             _lastHoldable = null;
-            _cancellationToken?.Cancel();
-            _cancellationToken?.Dispose();
-            _cancellationToken = new();
         }
     }
 }

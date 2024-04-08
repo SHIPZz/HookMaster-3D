@@ -1,7 +1,9 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace CodeBase.Gameplay.ResourceItem
 {
@@ -13,6 +15,7 @@ namespace CodeBase.Gameplay.ResourceItem
         private readonly Transform _controlPoint;
         private readonly ResourceCollectionSettings _settings;
         private readonly CancellationTokenSource _lifetimeToken;
+        
 
         public ResourceCollectionTask(Resource resource,
             Transform target,
@@ -25,6 +28,37 @@ namespace CodeBase.Gameplay.ResourceItem
             _controlPoint = controlPoint;
             _settings = settings;
             _lifetimeToken = new CancellationTokenSource();
+        }
+
+        public async UniTask CompleteAsync()
+        {
+            float elapsedTime = 0f;
+            float timeSlider = 0f;
+
+            while (timeSlider < 1)
+            {
+                Vector3 pos = Vector3.Lerp(_resource.transform.position, _target.position, timeSlider);
+
+                pos.y += Mathf.Sin(timeSlider * Mathf.PI);
+                
+                _resource.transform.position = pos;
+                
+                if (_resource.NeedChangeScale)
+                {
+                    var sinScale = Mathf.Sin(timeSlider * Mathf.PI);
+                    _resource.transform.localScale =
+                        Vector3.Lerp(_resource.transform.localScale, _settings.TargetScale, sinScale);
+                }
+
+                timeSlider += Time.deltaTime * _settings.FlySpeed;
+
+                await UniTask.Yield();
+            }
+
+            _resource.transform.position = _target.position;
+
+            if (_resource.NeedChangeScale)
+                _resource.transform.DOScale(0, 0.2f);
         }
 
         public async UniTask ExecuteAsync(CancellationToken cancellationToken)
@@ -44,6 +78,7 @@ namespace CodeBase.Gameplay.ResourceItem
                 timePassed += GetTIncrement(timePassed, distanceToMove, curveLength);
                 timePassed = Mathf.Clamp01(timePassed);
                 Vector3 position = MoveAlongCurve(timePassed);
+
                 _resource.transform.position = position;
 
                 if (_resource.NeedChangeScale)

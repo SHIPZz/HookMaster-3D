@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 295453005bf84edba6e23a41d3d01bf1, type: 3}
   m_Name: ResourceCollectionSettings
   m_EditorClassIdentifier: 
-  _flyRadius: 4
-  _flySpeed: 5
-  _spawnRadius: 0.5
-  _spawnInterval: 0.02
-  _resourcePrefab: {fileID: 6875235953554025587, guid: 6cdc0a279076f0f4893ee8328af11296, type: 3}
+  FlySpeed: 3.5
+  ScaleSpeed: 5
+  Duration: 0.5
+  TargetScale: {x: 1, y: 1, z: 1}

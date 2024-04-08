@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections;
 using CodeBase.Gameplay.ObjectCreatorSystem;
+using CodeBase.Gameplay.PlayerSystem;
+using CodeBase.Services.Providers.Player;
 using CodeBase.Services.TriggerObserve;
 using UnityEngine;
+using Zenject;
 
 namespace CodeBase.Gameplay.PaperSystem
 {
