@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CodeBase.Enums;
 using CodeBase.Gameplay.ResourceItem;
 using CodeBase.Services.Factories.GameItem;
+using CodeBase.Services.Providers.Player;
 using UnityEngine;
 using Zenject;
 
@@ -15,16 +17,19 @@ namespace CodeBase.Gameplay.ObjectCreatorSystem
         [SerializeField] private float _columnCount = 2;
         [SerializeField] private GameItemType _gameItemType;
         [SerializeField] private Vector3 _rotation;
+        [SerializeField] private Stacker _stacker;
 
         private List<Resource> _resources = new();
         private GameItemFactory _gameItemFactory;
         private int _spawnedCount;
         private Vector3 _firstSpawnedPos = Vector3.zero;
         private Vector3 _lastSpawnedPos;
+        private PlayerProvider _playerProvider;
 
         [Inject]
-        private void Construct(GameItemFactory gameItemFactory)
+        private void Construct(GameItemFactory gameItemFactory, PlayerProvider playerProvider)
         {
+            _playerProvider = playerProvider;
             _gameItemFactory = gameItemFactory;
         }
 
@@ -42,11 +47,13 @@ namespace CodeBase.Gameplay.ObjectCreatorSystem
             if (_rotation != Vector3.zero)
                 resource.transform.localRotation = Quaternion.Euler(_rotation);
 
-            _resources.Add(resource);
-            _resources.RemoveAll(x => x == null);
+            _stacker.AddToStack(resource.gameObject);
+
+            // _resources.Add(resource);
+            // _resources.RemoveAll(x => x == null);
             _spawnedCount++;
 
-            SetResourcePosition(resource);
+            // SetResourcePosition(resource);
 
             resource.Collected += Reset;
 
@@ -78,5 +85,8 @@ namespace CodeBase.Gameplay.ObjectCreatorSystem
             _lastSpawnedPos = Vector3.zero;
             resource.Collected -= Reset;
         }
+
+        public void SetCreatedCountZero() => 
+            _stacker.SetCurrentIndexZero();
     }
 }

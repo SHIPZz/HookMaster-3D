@@ -2,6 +2,7 @@
 using System.Collections;
 using CodeBase.Gameplay.ObjectCreatorSystem;
 using CodeBase.Services.TriggerObserve;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.PaperSystem
@@ -20,7 +21,8 @@ namespace CodeBase.Gameplay.PaperSystem
 
         private int _createdCount;
 
-        private void OnEnable()
+        [Button]
+        private void Start()
         {
             for (int i = 0; i < _initialCreateCount; i++)
             {
@@ -32,7 +34,7 @@ namespace CodeBase.Gameplay.PaperSystem
             StartCoroutine(CreateResourceCoroutine());
         }
 
-        private void OnDisable() =>
+        private void OnDestroy() =>
             _triggerObserver.TriggerEntered -= DisablePointer;
 
         private IEnumerator CreateResourceCoroutine()
@@ -53,6 +55,7 @@ namespace CodeBase.Gameplay.PaperSystem
         {
             Pointer.SetActive(false);
             _createdCount = 0;
+            _resourceCreator.SetCreatedCountZero();
             PlayerApproached?.Invoke();
         }
     }

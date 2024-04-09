@@ -30,11 +30,11 @@ namespace CodeBase.Gameplay.AnimMovement
 
         private IEnumerator MoveObject(Vector3 startPosition, Vector3 finalPosition)
         {
-            transform.position = startPosition;
+            transform.localPosition = startPosition;
 
             var elapsedTime = 0f;
 
-            while (elapsedTime < _animationDuration)
+            while (Vector3.Distance(transform.localPosition, finalPosition) > 0.1f)
             {
                 float evalTime = elapsedTime / _animationDuration;
                 evalTime = Mathf.Clamp01(evalTime);
