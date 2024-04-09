@@ -1,5 +1,6 @@
 using System;
 using CodeBase.Gameplay.GameItems;
+using DG.Tweening;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.ResourceItem
@@ -14,22 +15,23 @@ namespace CodeBase.Gameplay.ResourceItem
 
         public bool IsCollected { get; private set; }
         
-        public event Action<Resource> Collected;
+        public bool CanCollect { get; private set; }
         
+        public bool MovementCompleted { get; private set; }
+        
+        public event Action<Resource> Collected;
 
         public void MarkAsDetected()
         {
             _collider.enabled = false;
         }
-        
-        public void Collect()
-        {
-            Collected?.Invoke(this);
 
-            if (_needDestroy)
-                Destroy(gameObject);
+        public void MoveTo(Vector3 target)
+        {
+            transform.DOLocalMove(target, 0.5f).SetEase(Ease.InOutQuint)
+                .OnComplete(() => MovementCompleted = true);
         }
-        
+
         public virtual void Collect(Transform parent)
         {
             Collected?.Invoke(this);

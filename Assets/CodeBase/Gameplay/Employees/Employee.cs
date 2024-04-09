@@ -5,6 +5,7 @@ using CodeBase.Enums;
 using CodeBase.Extensions;
 using CodeBase.Gameplay.BurnableObjectSystem;
 using CodeBase.Gameplay.PaperS;
+using CodeBase.Gameplay.PaperSystem;
 using CodeBase.Gameplay.TableSystem;
 using CodeBase.MaterialChanger;
 using CodeBase.Services.BurnableObjects;
@@ -78,9 +79,9 @@ namespace CodeBase.Gameplay.Employees
 
         private void OnDestroy()
         {
-            if(_paperProcessed)
+            if (_paperProcessed)
                 _employeeDataService.SetPaperProcessedOnce();
-            
+
             _tableHolder.ItemPut -= OnPaperAdded;
             _table.Burned -= Burn;
         }
@@ -94,36 +95,37 @@ namespace CodeBase.Gameplay.Employees
         private IEnumerator ProcessPapers()
         {
             var littleDelay = new WaitForSeconds(0.1f);
-            
+
             while (true)
             {
                 yield return littleDelay;
-                
+
                 if (_tableHolder.ItemsCount > 0)
                 {
-                    yield return new WaitUntil(() => !_tableHolder.IsItemAdding);
-                    yield return new WaitForSeconds(ProcessPaperTime);
-                    yield return new WaitUntil(() => !_tableHolder.IsItemAdding);
-                    
-                    HasPapers = true;
-                    
-                    IHoldable paper = _tableHolder.Take(transform);
+                    if (!_tableHolder.IsItemAdding)
+                    {
+                        HasPapers = true;
+                        
+                        yield return new WaitForSeconds(ProcessPaperTime);
 
-                    yield return paper.Transform.DOLocalJump(Vector3.zero, 1, 1, 0.5f)
-                        .AsyncWaitForCompletion().AsUniTask().ToCoroutine();
+                        yield return new WaitUntil(() => _tableHolder.CanTakePapers);
+                        
+                        Paper paper = _tableHolder.Take(transform);
 
-                    yield return paper.Transform.DOScale(Vector3.zero, 0.2f).AsyncWaitForCompletion().AsUniTask()
-                        .ToCoroutine();
+                        yield return paper?.transform.DOLocalJump(Vector3.zero, 1, 1, 0.5f)
+                            .AsyncWaitForCompletion().AsUniTask().ToCoroutine();
 
-                    paper.Destroy();
-                    _table.ResourceCreator.Create();
-                    _paperProcessed = true;
-                    
+                        yield return paper?.transform.DOScale(Vector3.zero, 0.2f).AsyncWaitForCompletion().AsUniTask()
+                            .ToCoroutine();
+
+                        paper?.Destroy();
+                        _table.ResourceCreator.Create();
+                        _paperProcessed = true;
+                    }
                 }
                 else
                 {
                     HasPapers = false;
-                    _tableHolder.SetLastHoldableNull();
                 }
             }
         }

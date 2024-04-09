@@ -1820,13 +1820,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4110636193854023151}
+  m_Father: {fileID: 7187735111859211313}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.16562396}
-  m_AnchorMax: {x: 0, y: 0.16562396}
-  m_AnchoredPosition: {x: 231, y: 10.053955}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -16.857952, y: 0}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &1965537357947167119
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2775,7 +2775,6 @@ RectTransform:
   - {fileID: 1505032775888141970}
   - {fileID: 615763984903419016}
   - {fileID: 4416567330803310340}
-  - {fileID: 4707255164941496996}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2795,10 +2794,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d27aa1d0fafd49309bbabbfc63ff1603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   CloseButton: {fileID: 0}
-  OpenEmployeeWindowButton: {fileID: 661852565856510742}
-  TutorialContainer: {fileID: 6369901510676874782}
-  BuyClientManagerButton: {fileID: 5634166213638854523}
+  <OpenEmployeeWindowButton>k__BackingField: {fileID: 661852565856510742}
+  <TutorialContainer>k__BackingField: {fileID: 6369901510676874782}
+  <BuyClientManagerButton>k__BackingField: {fileID: 5634166213638854523}
   _timeText: {fileID: 6499484387361049532}
   _canvasAnimator: {fileID: 4707663233189714427}
   _clientRoomNavigationButton: {fileID: 6359087644333340865}
@@ -5891,6 +5899,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9070218482423783096}
+  - {fileID: 4707255164941496996}
   m_Father: {fileID: 4110636193854023151}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}

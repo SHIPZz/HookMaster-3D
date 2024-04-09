@@ -1,5 +1,4 @@
-﻿using System;
-using Cinemachine;
+﻿using Cinemachine;
 using CodeBase.Services.Providers.Player;
 using UnityEngine;
 using Zenject;

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using Abu;
 using CodeBase.Animations;
 using CodeBase.Enums;
 using CodeBase.Extensions;
@@ -19,9 +18,9 @@ namespace CodeBase.UI.Hud
 {
     public class HudWindow : WindowBase
     {
-        public OpenEmployeeWindowButton OpenEmployeeWindowButton;
-        public TutorialContainer TutorialContainer;
-        public BuyClientManagerButton BuyClientManagerButton;
+        [field: SerializeField] public OpenEmployeeWindowButton OpenEmployeeWindowButton { get; private set; }
+        [field: SerializeField] public TutorialContainer TutorialContainer { get; private set; }
+        [field: SerializeField] public BuyClientManagerButton BuyClientManagerButton { get; private set; }
 
         [SerializeField] private TMP_Text _timeText;
         [SerializeField] private CanvasAnimator _canvasAnimator;
@@ -42,12 +41,13 @@ namespace CodeBase.UI.Hud
         private void Start()
         {
             DateTime currentTime = _worldDataService.WorldData.WorldTimeData.CurrentTime.ToDateTime();
-            string formattedTime = currentTime.ToString($"{currentTime.Day}/{currentTime.Month}/{currentTime.Year}", CultureInfo.InvariantCulture);
+            string formattedTime = currentTime.ToString($"{currentTime.Day}/{currentTime.Month}/{currentTime.Year}",
+                CultureInfo.InvariantCulture);
             _timeText.text = formattedTime;
             _purchaseableItemService.Purchased += TryDisableNavigationButton;
         }
 
-        private void OnDestroy() => 
+        private void OnDestroy() =>
             _purchaseableItemService.Purchased -= TryDisableNavigationButton;
 
         public override void Open()

@@ -81,12 +81,10 @@ namespace CodeBase.Services.Factories.Employee
                 Quaternion.identity,
                 null);
 
-            Debug.Log(employeeData.PaperProcessTime);
-            
             employee.SetName(employeeData.Name)
                 .SetSkin(targetMesh)
                 .SetId(employeeData.EmployeeTypeId)
-                .SetProcessPaperTime(employeeData.PaperProcessTime)
+                .SetProcessPaperTime(3)
                 .SetGuid(employeeData.Guid)
                 .SetId(employeeData.Id)
                 .SetTableId(employeeData.TableId)

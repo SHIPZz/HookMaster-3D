@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections;
 using CodeBase.Gameplay.ObjectCreatorSystem;
-using CodeBase.Gameplay.PlayerSystem;
-using CodeBase.Services.Providers.Player;
 using CodeBase.Services.TriggerObserve;
 using UnityEngine;
-using Zenject;
 
 namespace CodeBase.Gameplay.PaperSystem
 {
@@ -17,8 +14,8 @@ namespace CodeBase.Gameplay.PaperSystem
         [SerializeField] private int _initialCreateCount = 5;
         [SerializeField] private TriggerObserver _triggerObserver;
 
-        public GameObject Pointer;
-        
+        [field: SerializeField] public GameObject Pointer { get; private set; }
+
         public event Action PlayerApproached;
 
         private int _createdCount;
@@ -35,7 +32,7 @@ namespace CodeBase.Gameplay.PaperSystem
             StartCoroutine(CreateResourceCoroutine());
         }
 
-        private void OnDisable() => 
+        private void OnDisable() =>
             _triggerObserver.TriggerEntered -= DisablePointer;
 
         private IEnumerator CreateResourceCoroutine()

@@ -1,18 +1,15 @@
-﻿using System;
-using CodeBase.Gameplay.GameItems;
-using CodeBase.Gameplay.PaperS;
+﻿using CodeBase.Gameplay.GameItems;
 using CodeBase.Gameplay.PlayerSystem;
 using CodeBase.Services.TriggerObserve;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.PaperSystem
 {
-    public class Paper : GameItemAbstract, IHoldable
+    public class Paper : GameItemAbstract
     {
+      [field: SerializeField]  public bool ReadyToTransfer { get; set; }
+        
         private TriggerObserver _triggerObserver;
-
-        public Transform Transform => transform;
-        public bool IsAccessed { get; set; }
 
         private void Awake() =>
             _triggerObserver = GetComponent<TriggerObserver>();
@@ -30,8 +27,6 @@ namespace CodeBase.Gameplay.PaperSystem
         {
             if (!collider.gameObject.TryGetComponent(out PlayerPaperContainer playerPaperContainer))
                 return;
-
-            IsAccessed = false;
 
             transform.SetParent(collider.transform);
         }

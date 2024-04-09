@@ -27,6 +27,7 @@ namespace CodeBase.Gameplay.Employees
         private FloatingButtonService _floatingButtonService;
         private EmployeeService _employeeService;
         private PlayerProvider _playerProvider;
+        private bool _playerEntered;
 
         [Inject]
         private void Construct(WindowService windowService, FloatingButtonService floatingButtonService,
@@ -45,7 +46,7 @@ namespace CodeBase.Gameplay.Employees
             _employee.Burned += DisableUpgradeButton;
             _triggerObserver.TriggerEntered += OnPlayerEntered;
             _triggerObserver.TriggerExited += OnPlayerExited;
-            _employee.PaperAdded += DisableUpgradeButton;
+            _playerProvider.PlayerPaperContainer.Cleared += OnPlayerPaperGiven;
         }
 
         private void OnDestroy()
@@ -54,8 +55,8 @@ namespace CodeBase.Gameplay.Employees
                 _upgradeButton.onClick.RemoveListener(OnUpgradeButtonClicked);
 
             _employee.Burned -= DisableUpgradeButton;
+            _playerProvider.PlayerPaperContainer.Cleared -= OnPlayerPaperGiven;
             _employee.UpgradeStarted -= DisableUpgradeButton;
-            _employee.PaperAdded -= DisableUpgradeButton;
             _employeeService.EmployeeUpdated -= TryShowUpgradeButton;
             _triggerObserver.TriggerEntered -= OnPlayerEntered;
             _triggerObserver.TriggerExited -= OnPlayerExited;
@@ -66,6 +67,16 @@ namespace CodeBase.Gameplay.Employees
 
         private void OnPlayerExited(Collider obj)
         {
+            _playerEntered = false;
+
+            if (_upgradeButton != null && _upgradeButton.gameObject.activeSelf)
+            {
+                _floatingButtonService.ShowFloatingButton(-_downPositionY, _downPositionDuration, Quaternion.identity,
+                    AssetPath.UpgradeEmployeeButton,
+                    _employee.transform, false, false);
+                return;
+            }
+
             if(_employeeService.UpdateMaxReached(_employee.Id))
                 return;
             
@@ -73,9 +84,6 @@ namespace CodeBase.Gameplay.Employees
                 return;
 
             if (_playerProvider.PlayerPaperContainer.HasPapers)
-                return;
-
-            if (_employee.HasPapers)
                 return;
 
             if (_upgradeButton == null)
@@ -91,19 +99,9 @@ namespace CodeBase.Gameplay.Employees
 
         private void OnPlayerEntered(Collider obj)
         {
-            if(_employeeService.UpdateMaxReached(_employee.Id))
-                return;
+            _playerEntered = true;
             
-            if (_upgradeButton != null)
-                _upgradeButton.gameObject.SetActive(false);
-
-            if (_playerProvider.PlayerPaperContainer.HasPapers)
-                return;
-
-            if (!_employee.IsWorking || _employee.IsUpgrading)
-                return;
-
-            if (_employee.HasPapers)
+            if (UnacceptableConditionsToShowButtonMatch())
                 return;
 
             _floatingButtonService.ShowFloatingButton(_upPositionY, _upPositionDuration, Quaternion.identity,
@@ -114,6 +112,38 @@ namespace CodeBase.Gameplay.Employees
                 return;
 
             SetAndSubscribeUpgradeButton();
+        }
+
+        private void OnPlayerPaperGiven()
+        {
+            if(!_playerEntered)
+                return;
+            
+            if(UnacceptableConditionsToShowButtonMatch())
+                return;
+            
+            _floatingButtonService.ShowFloatingButton(_upPositionY, _upPositionDuration, Quaternion.identity,
+                AssetPath.UpgradeEmployeeButton,
+                _employee.transform, true, true);
+            
+            SetAndSubscribeUpgradeButton();
+        }
+
+        private bool UnacceptableConditionsToShowButtonMatch()
+        {
+            if (_employeeService.UpdateMaxReached(_employee.Id))
+                return true;
+
+            if (_upgradeButton != null)
+                _upgradeButton.gameObject.SetActive(false);
+
+            if (_playerProvider.PlayerPaperContainer.HasPapers)
+                return true;
+
+            if (!_employee.IsWorking || _employee.IsUpgrading)
+                return true;
+            
+            return false;
         }
 
         private void TryShowUpgradeButton(Employee employee)

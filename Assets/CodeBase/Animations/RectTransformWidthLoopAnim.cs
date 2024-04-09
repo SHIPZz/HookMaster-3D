@@ -23,7 +23,8 @@ namespace CodeBase.Animations
                 .OnComplete(() => _rectTransform.DOSizeDelta(_initialAnchoredPosition, _startTime)
                     .SetEase(_returnEase))
                 .SetEase(_ease)
-                .SetLoops(-1, LoopType.Yoyo);
+                .SetLoops(-1, LoopType.Yoyo)
+                .SetUpdate(true);
         }
     }
 }

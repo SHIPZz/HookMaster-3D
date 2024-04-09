@@ -54,7 +54,7 @@ namespace CodeBase.UI.Upgrade
             UpgradeEmployeeData targetUpgradeEmployee = _employeeDataService.GetUpgradeEmployeeData(employee.Id);
             InitUpgradeButton(targetUpgradeEmployee);
 
-            _nameText.text = $"Name: {_employee.Name}";
+            _nameText.text = $"{_employee.Name}";
         }
 
         private void InitUpgradeButton(UpgradeEmployeeData targetUpgradeEmployee)

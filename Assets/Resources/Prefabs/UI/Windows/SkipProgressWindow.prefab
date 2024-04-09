@@ -509,6 +509,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ace8bb9cb674f3caea781793c9bf43e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   CloseButton: {fileID: 0}
   _slider: {fileID: 5153248318551362579}
   _canvasAnimator: {fileID: 847979396232062512}
@@ -1977,7 +1986,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.010991452, g: 0.10031146, b: 0.122641504, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

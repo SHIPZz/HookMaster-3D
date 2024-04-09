@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Enums;
-using CodeBase.Gameplay.AnimMovement;
 using CodeBase.Gameplay.ResourceItem;
 using CodeBase.Services.Factories.GameItem;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
 
@@ -37,16 +35,6 @@ namespace CodeBase.Gameplay.ObjectCreatorSystem
                     x.Collected -= Reset;
             });
 
-        [Button]
-        public void Create(int count)
-        {
-            for (int i = 0; i < count; i++)
-            {
-                Create();
-            }
-        }
-
-        [Button]
         public Resource Create()
         {
             Resource resource = _gameItemFactory.CreateResourceItem(_gameItemType, _parent, _parent.transform.position);
@@ -58,13 +46,21 @@ namespace CodeBase.Gameplay.ObjectCreatorSystem
             _resources.RemoveAll(x => x == null);
             _spawnedCount++;
 
+            SetResourcePosition(resource);
+
+            resource.Collected += Reset;
+
+            return resource;
+        }
+
+        private void SetResourcePosition(Resource resource)
+        {
             if (_spawnedCount > 0)
                 resource.transform.localPosition = _lastSpawnedPos + _offset;
 
             if (_firstSpawnedPos == Vector3.zero)
                 _firstSpawnedPos = resource.transform.localPosition;
 
-            resource.Collected += Reset;
             _lastSpawnedPos = resource.transform.localPosition;
 
             if (_spawnedCount != 1 && _spawnedCount % _columnCount == 1)
@@ -73,11 +69,8 @@ namespace CodeBase.Gameplay.ObjectCreatorSystem
                 _lastSpawnedPos = resource.transform.localPosition;
                 _firstSpawnedPos = resource.transform.localPosition;
             }
-
-            return resource;
         }
 
-        [Button]
         private void Reset(Resource resource)
         {
             _firstSpawnedPos = Vector3.zero;

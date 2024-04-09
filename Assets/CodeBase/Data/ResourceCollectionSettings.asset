@@ -15,4 +15,6 @@ MonoBehaviour:
   FlySpeed: 3.5
   ScaleSpeed: 5
   Duration: 0.5
+  PutTime: 0.15
+  PutEase: 1
   TargetScale: {x: 1, y: 1, z: 1}

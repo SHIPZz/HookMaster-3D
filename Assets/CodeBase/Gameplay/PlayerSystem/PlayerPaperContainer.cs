@@ -31,7 +31,12 @@ namespace CodeBase.Gameplay.PlayerSystem
 
         public Paper Pop()
         {
-           return _papers.Pop();
+            var paper = _papers.Pop();
+            
+            if(_papers.Count == 0)
+                Clear();
+
+            return paper;
         }
     }
 }

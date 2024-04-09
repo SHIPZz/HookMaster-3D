@@ -20,7 +20,6 @@ namespace CodeBase.UI.Upgrade
         [SerializeField] private TMP_Text _upgradedTextSpeed;
 
         [SerializeField] private CanvasAnimator _canvasAnimator;
-        [SerializeField] private AudioSource _increaseSound;
 
         [SerializeField] private TransformScaleAnim _buttonScaleAnim;
         [SerializeField] private AppearanceEffect _appearanceEffect;

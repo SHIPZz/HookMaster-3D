@@ -21,7 +21,6 @@ namespace CodeBase.Gameplay.Tutorial
             CreateStep<HireEmployeeStep>();
             CreateStep<ApproachToEmployeeStep>();
             CreateStep<UpgradeEmployeeStep>();
-            CreateStep<ShowClientServeRoomStep>();
             
             _tutorialSteps.Values.ToList().ForEach(x =>
             {
