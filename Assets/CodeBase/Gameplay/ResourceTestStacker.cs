@@ -8,27 +8,27 @@ public class ResourceTestStacker : MonoBehaviour
     [SerializeField] private float _horizontalSpacing = 1f;
     [SerializeField] private float _verticalSpacing = 1f;
     [SerializeField] private Transform _startPosition;
-    [SerializeField] private Transform _startAnimPosition;
-    [SerializeField] private AfterResourceCreateMovementBehaviour _resourceCurveMovement;
-    [SerializeField] private float _stackAnimSpeed = 0.65f;
 
     private int _itemsInRow;
 
     private Vector3 _lastLeftPosition;
     private Vector3 _lastRightPosition;
 
-    public void StackItems(Resource prefab)
+    public void CalculateTargetPosition(Resource prefab, out Vector3 position)
     {
-        if (TrySetFirstPosition(prefab))
+        if (TrySetFirstPosition(prefab, out Vector3 targetPosition))
+        {
+            position = targetPosition;
             return;
+        }
 
         if (_itemsInRow != 0 && _itemsInRow % _itemsPerRow == 0)
         {
-            SetItemToLeftPosition(prefab);
+            position = SetItemToLeftPosition(prefab);
         }
         else
         {
-            SetItemToRightPosition(prefab);
+            position = SetItemToRightPosition(prefab);
         }
 
         _itemsInRow++;
@@ -41,39 +41,41 @@ public class ResourceTestStacker : MonoBehaviour
         _lastRightPosition = Vector3.zero;
     }
 
-    private void SetItemToRightPosition(Resource prefab)
+    private Vector3 SetItemToRightPosition(Resource prefab)
     {
         if (_lastRightPosition != Vector3.zero)
         {
             Vector3 lastRightPosition = _lastRightPosition;
             lastRightPosition.y += _verticalSpacing;
 
-            _resourceCurveMovement.Move(prefab, _startAnimPosition.position, () => lastRightPosition, _stackAnimSpeed);
             _lastRightPosition = lastRightPosition;
         }
         else
         {
             var targetPosition = _startPosition.position + new Vector3(_horizontalSpacing, 0, 0);
-            _resourceCurveMovement.Move(prefab, _startAnimPosition.position, () => targetPosition, _stackAnimSpeed);
             _lastRightPosition = targetPosition;
         }
+
+        return _lastRightPosition;
     }
 
-    private void SetItemToLeftPosition(Resource prefab)
+    private Vector3 SetItemToLeftPosition(Resource prefab)
     {
         Vector3 lastLeftPosition = _lastLeftPosition;
         lastLeftPosition.y += _verticalSpacing;
 
-        _resourceCurveMovement.Move(prefab, _startAnimPosition.position, () => lastLeftPosition, _stackAnimSpeed);
         _lastLeftPosition = lastLeftPosition;
+        return _lastLeftPosition;
     }
 
-    private bool TrySetFirstPosition(Resource prefab)
+    private bool TrySetFirstPosition(Resource prefab, out Vector3 targetPosition)
     {
+        targetPosition = Vector3.zero;
+
         if (_itemsInRow == 0)
         {
             _lastLeftPosition = _startPosition.position;
-            _resourceCurveMovement.Move(prefab, _startAnimPosition.position, () => _lastLeftPosition, _stackAnimSpeed);
+            targetPosition = _lastLeftPosition;
             _itemsInRow++;
             return true;
         }

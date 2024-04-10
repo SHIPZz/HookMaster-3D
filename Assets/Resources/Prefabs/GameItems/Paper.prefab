@@ -170,8 +170,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
-  m_Center: {x: 0.0025648512, y: 0.009111421, z: 0.0037719756}
+  m_Size: {x: 0.29799324, y: 0.07094239, z: 0.38764876}
+  m_Center: {x: -0.0012794733, y: 0.017396756, z: 0.014841954}
 --- !u!114 &615399666365585473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,6 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <GameItemType>k__BackingField: 6
+  <ReadyToTransfer>k__BackingField: 0
 --- !u!114 &-3221916853221770364
 MonoBehaviour:
   m_ObjectHideFlags: 0

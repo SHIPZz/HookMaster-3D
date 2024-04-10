@@ -46,7 +46,6 @@ namespace CodeBase.Gameplay.Employees
             _employee.Burned += DisableUpgradeButton;
             _triggerObserver.TriggerEntered += OnPlayerEntered;
             _triggerObserver.TriggerExited += OnPlayerExited;
-            _playerProvider.PlayerPaperContainer.Cleared += OnPlayerPaperGiven;
         }
 
         private void OnDestroy()
@@ -55,7 +54,6 @@ namespace CodeBase.Gameplay.Employees
                 _upgradeButton.onClick.RemoveListener(OnUpgradeButtonClicked);
 
             _employee.Burned -= DisableUpgradeButton;
-            _playerProvider.PlayerPaperContainer.Cleared -= OnPlayerPaperGiven;
             _employee.UpgradeStarted -= DisableUpgradeButton;
             _employeeService.EmployeeUpdated -= TryShowUpgradeButton;
             _triggerObserver.TriggerEntered -= OnPlayerEntered;
@@ -111,21 +109,6 @@ namespace CodeBase.Gameplay.Employees
             if (_upgradeButton != null)
                 return;
 
-            SetAndSubscribeUpgradeButton();
-        }
-
-        private void OnPlayerPaperGiven()
-        {
-            if(!_playerEntered)
-                return;
-            
-            if(UnacceptableConditionsToShowButtonMatch())
-                return;
-            
-            _floatingButtonService.ShowFloatingButton(_upPositionY, _upPositionDuration, Quaternion.identity,
-                AssetPath.UpgradeEmployeeButton,
-                _employee.transform, true, true);
-            
             SetAndSubscribeUpgradeButton();
         }
 

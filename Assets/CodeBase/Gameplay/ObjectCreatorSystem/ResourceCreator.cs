@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Enums;
+using CodeBase.Gameplay.AnimMovement;
 using CodeBase.Gameplay.ResourceItem;
 using CodeBase.Services.Factories.GameItem;
 using UnityEngine;
@@ -15,6 +16,9 @@ namespace CodeBase.Gameplay.ObjectCreatorSystem
         [SerializeField] private ResourceTestStacker _resourceTestStacker;
         [SerializeField] private bool _localRotation;
         [SerializeField] private bool _clearOnResourceCollect;
+        [SerializeField] private AfterResourceCreateMovementBehaviour _afterResourceCreateMovement;
+        [SerializeField] private Transform _startAnimPosition;
+        [SerializeField] private float _stackAnimSpeed = 0.65f;
 
         private List<Resource> _resources = new();
         private GameItemFactory _gameItemFactory;
@@ -38,7 +42,9 @@ namespace CodeBase.Gameplay.ObjectCreatorSystem
             Resource resource = _gameItemFactory.CreateResourceItem(_gameItemType, _parent, 
                 _parent.transform.position, targetRotation,_localRotation);
             
-            _resourceTestStacker.StackItems(resource);
+            _resourceTestStacker.CalculateTargetPosition(resource, out Vector3 targetPosition);
+            _afterResourceCreateMovement.Move(resource,_startAnimPosition.position, ()=> targetPosition, _stackAnimSpeed);
+
             resource.Collected += ResourceCollectedHandler;
 
             return resource;
