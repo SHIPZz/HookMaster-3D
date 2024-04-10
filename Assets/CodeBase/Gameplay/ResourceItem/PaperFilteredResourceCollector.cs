@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using CodeBase.Enums;
+﻿using CodeBase.Enums;
 using CodeBase.Gameplay.PaperSystem;
 using CodeBase.Gameplay.PlayerSystem;
 using Cysharp.Threading.Tasks;
@@ -16,7 +14,7 @@ namespace CodeBase.Gameplay.ResourceItem
         [SerializeField] private Transform _leftHandCarring;
         [SerializeField] private Transform _rightHandCarring;
 
-        private Resource _lastResource;
+        private Transform _lastResourcePosition;
         private PlayerIKService _playerIKService;
 
         [Inject]
@@ -25,9 +23,11 @@ namespace CodeBase.Gameplay.ResourceItem
             _playerIKService = playerIKService;
         }
 
-        private void Start()
+        protected override void OnEnable()
         {
+            base.OnEnable();
             _playerPaperContainer.Cleared += Reset;
+            _playerPaperContainer.Removed += SetNewLastResource;
         }
 
         protected override void OnDisable()
@@ -39,30 +39,35 @@ namespace CodeBase.Gameplay.ResourceItem
         protected override async void OnResourceEnter(Collider other)
         {
             base.OnResourceEnter(other);
-            
-            if(!other.gameObject.TryGetComponent(out Resource resource))
+
+            if (!other.gameObject.TryGetComponent(out Resource resource))
                 return;
-            
-            if(resource.GameItemType != GameItemType.Paper)
+
+            if (resource.GameItemType != GameItemType.Paper)
                 return;
-            
-            while (!resource.IsCollected)
-            {
-                await UniTask.Yield();
-            }
+
+            await UniTask.WaitUntil(() => resource.IsCollected);
             
             _playerIKService.SetIKHandTargets(_leftHandCarring, _rightHandCarring);
             _playerPaperContainer.Push(resource.GetComponent<Paper>());
-            
-            if (_lastResource != null)
-                resource.transform.localPosition = _lastResource.transform.localPosition + _offset;
-            
-            _lastResource = resource;
+
+            if (_lastResourcePosition != null)
+                resource.transform.localPosition = _lastResourcePosition.transform.localPosition + _offset;
+
+            _lastResourcePosition = resource.transform;
         }
 
         private void Reset()
         {
-            _lastResource = null;
+            _lastResourcePosition = null;
+        }
+
+        private void SetNewLastResource()
+        {
+            var lastResource = _playerPaperContainer.Peek();
+            
+            if (lastResource != null)
+                _lastResourcePosition = lastResource.transform;
         }
     }
 }

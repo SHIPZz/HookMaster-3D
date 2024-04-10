@@ -55,7 +55,7 @@ namespace CodeBase.Gameplay.PaperSystem
         {
             Pointer.SetActive(false);
             _createdCount = 0;
-            _resourceCreator.SetCreatedCountZero();
+            _resourceCreator.Clear();
             PlayerApproached?.Invoke();
         }
     }

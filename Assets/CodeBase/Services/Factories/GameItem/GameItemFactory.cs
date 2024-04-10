@@ -4,6 +4,7 @@ using CodeBase.Gameplay.GameItems.RandomItems;
 using CodeBase.Gameplay.ResourceItem;
 using CodeBase.Services.DataService;
 using CodeBase.Services.Providers.Asset;
+using JetBrains.Annotations;
 using UnityEngine;
 using Zenject;
 
@@ -41,13 +42,18 @@ namespace CodeBase.Services.Factories.GameItem
                 parent);
         }
         
-        public Resource CreateResourceItem(GameItemType gameItemType, Transform parent, Vector3 at)
+        [CanBeNull]
+        public Resource CreateResourceItem(GameItemType gameItemType, Transform parent, Vector3 at, Quaternion rotation, bool localRotation = false)
         {
             Resource prefab = _gameStaticDataService.GetResourceItem(gameItemType);
 
-            return _instantiator.InstantiatePrefabForComponent<Resource>(prefab,
-                at, prefab.transform.rotation,
-                parent);
+            var createdPrefab = _instantiator.InstantiatePrefabForComponent<Resource>(prefab,
+                at, rotation, parent);
+
+            if (localRotation)
+                createdPrefab.transform.localRotation = rotation;
+
+            return createdPrefab;
         }
 
         public RandomItem CreateRandomItem(GameItemType gameItemType, Transform parent, Vector3 at)

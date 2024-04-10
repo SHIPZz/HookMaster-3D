@@ -13,6 +13,8 @@ namespace CodeBase.Gameplay.AnimMovement
         private bool _destroyOnReachTarget;
         private Action _onTargetReached;
 
+        public event Action<AnimationCurveMovement> MovementCompleted;
+
         public void Initialize(AnimationCurve animationCurve, Action onTargetReached = null)
         {
             _onTargetReached = onTargetReached;
@@ -30,11 +32,11 @@ namespace CodeBase.Gameplay.AnimMovement
 
         private IEnumerator MoveObject(Vector3 startPosition, Vector3 finalPosition)
         {
-            transform.localPosition = startPosition;
+            transform.position = startPosition;
 
             var elapsedTime = 0f;
 
-            while (Vector3.Distance(transform.localPosition, finalPosition) > 0.1f)
+            while (Vector3.Distance(transform.position, finalPosition) > 0.1f)
             {
                 float evalTime = elapsedTime / _animationDuration;
                 evalTime = Mathf.Clamp01(evalTime);
@@ -43,7 +45,7 @@ namespace CodeBase.Gameplay.AnimMovement
                 var newPosition = Vector3.Lerp(startPosition, finalPosition, evalTime);
                 newPosition.y += height;
 
-                transform.localPosition = newPosition;
+                transform.position = newPosition;
 
                 elapsedTime += Time.deltaTime;
                 yield return null;
@@ -51,6 +53,7 @@ namespace CodeBase.Gameplay.AnimMovement
             
             _moveCoroutine = null;
             _onTargetReached?.Invoke();
+            MovementCompleted?.Invoke(this);
         }
     }
 }

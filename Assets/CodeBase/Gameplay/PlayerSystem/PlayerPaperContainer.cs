@@ -14,9 +14,9 @@ namespace CodeBase.Gameplay.PlayerSystem
         public bool HasPapers => _papers.Count > 0;
 
         public event Action Cleared;
-
+        public event Action Removed;
         public event Action Added;
-        
+
         public void Push(Paper paper)
         {
             _papers.Push(paper);
@@ -32,11 +32,20 @@ namespace CodeBase.Gameplay.PlayerSystem
         public Paper Pop()
         {
             var paper = _papers.Pop();
-            
-            if(_papers.Count == 0)
+
+            if (_papers.Count == 0)
                 Clear();
 
+            Removed?.Invoke();
             return paper;
+        }
+
+        public Paper Peek()
+        {
+            if (_papers.TryPeek(out Paper paper))
+                return paper;
+
+            return null;
         }
     }
 }

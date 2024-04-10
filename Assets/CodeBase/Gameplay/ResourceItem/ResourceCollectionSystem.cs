@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.ResourceItem
@@ -50,10 +51,10 @@ namespace CodeBase.Gameplay.ResourceItem
         {
             try
             {
+                await UniTask.WaitUntil(() => resource.MovementCompleted);
                 resource.MarkAsDetected(); 
                 var task = new ResourceCollectionTask(resource, collector.Anchor, collector.ControlPoint, _settings);
                 await task.CompleteAsync();
-                // await task.ExecuteAsync(_lifetimeToken.Token);
                 resource.Collect(collector.Anchor);
             }
             catch (OperationCanceledException)

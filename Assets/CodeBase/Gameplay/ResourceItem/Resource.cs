@@ -1,4 +1,5 @@
 using System;
+using CodeBase.Gameplay.AnimMovement;
 using CodeBase.Gameplay.GameItems;
 using DG.Tweening;
 using UnityEngine;
@@ -15,10 +16,8 @@ namespace CodeBase.Gameplay.ResourceItem
 
         public bool IsCollected { get; private set; }
         
-        public bool CanCollect { get; private set; }
-        
-        public bool MovementCompleted { get; private set; }
-        
+        public bool MovementCompleted { get; set; }
+
         public event Action<Resource> Collected;
 
         public void MarkAsDetected()
@@ -47,6 +46,17 @@ namespace CodeBase.Gameplay.ResourceItem
             
             if (_needDestroy)
                 Destroy(gameObject,_destroyDelay);
+        }
+
+        public void TrackMovementFinish(AnimationCurveMovement movement)
+        {
+            movement.MovementCompleted += SetMovementCompletedHandler;
+        }
+
+        private void SetMovementCompletedHandler(AnimationCurveMovement animationCurveMovement)
+        {
+            MovementCompleted = true;
+            animationCurveMovement.MovementCompleted -= SetMovementCompletedHandler;
         }
     }
 }
