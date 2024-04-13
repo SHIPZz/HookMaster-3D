@@ -1,11 +1,11 @@
-﻿using CodeBase.Gameplay.GameItems;
-using CodeBase.Gameplay.PlayerSystem;
+﻿using CodeBase.Gameplay.PlayerSystem;
+using CodeBase.Gameplay.ResourceItem;
 using CodeBase.Services.TriggerObserve;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.PaperSystem
 {
-    public class Paper : GameItemAbstract
+    public class Paper : Resource
     {
       [field: SerializeField]  public bool ReadyToTransfer { get; set; }
         
@@ -21,7 +21,7 @@ namespace CodeBase.Gameplay.PaperSystem
             _triggerObserver.TriggerEntered -= OnPlayerEntered;
 
         public void Destroy() => 
-            DestroyImmediate(gameObject);
+            Destroy(gameObject);
 
         private void OnPlayerEntered(Collider collider)
         {

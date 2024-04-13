@@ -1968,6 +1968,7 @@ GameObject:
   - component: {fileID: 7503765843997741613}
   - component: {fileID: 8433862462970287869}
   - component: {fileID: 8515419100558474483}
+  - component: {fileID: 3119783627718324376}
   m_Layer: 10
   m_Name: Employee_male_01
   m_TagString: Untagged
@@ -2033,15 +2034,9 @@ MonoBehaviour:
   <BurnMaterial>k__BackingField: 0
   <Renderer>k__BackingField: {fileID: 3050034239342180502}
   <IsBurned>k__BackingField: 0
+  <ProcessPaperTime>k__BackingField: 0
+  _resourceCurveMovement: {fileID: 3119783627718324376}
   EmployeeTypeId: 1
-  Id: 
-  QualificationType: 1
-  Salary: 10174
-  Profit: 10490
-  Name: John
-  TableId: 
-  IsWorking: 0
-  IsUpgrading: 0
 --- !u!114 &659485969695874406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2186,19 +2181,60 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 234972022675176202}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: _burnable
-      Entry: 10
-      Data: 0
+    SerializationNodes: []
   _triggerObserver: {fileID: 8940505505073794186}
   _windowParent: {fileID: 3304105901375250860}
   _offset: {x: 0, y: 0, z: 0}
+--- !u!114 &3119783627718324376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8960944975358859983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a70f9bb1e9a4f0184e33b5a1bdc3b79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 4
+      outSlope: 4
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 2
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -4
+      outSlope: -4
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &9010590627079709614
 GameObject:
   m_ObjectHideFlags: 0

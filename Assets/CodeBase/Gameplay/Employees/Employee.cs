@@ -3,6 +3,7 @@ using System.Collections;
 using CodeBase.Data;
 using CodeBase.Enums;
 using CodeBase.Extensions;
+using CodeBase.Gameplay.AnimMovement;
 using CodeBase.Gameplay.BurnableObjectSystem;
 using CodeBase.Gameplay.PaperS;
 using CodeBase.Gameplay.PaperSystem;
@@ -25,6 +26,7 @@ namespace CodeBase.Gameplay.Employees
         [field: SerializeField] public SkinnedMeshRenderer Renderer { get; private set; }
         [field: SerializeField] public bool IsBurned { get; set; }
         [field: SerializeField] public float ProcessPaperTime { get; set; }
+        [SerializeField] private ResourceCurveMovement _resourceCurveMovement;
 
         public EmployeeTypeId EmployeeTypeId;
 
@@ -112,11 +114,9 @@ namespace CodeBase.Gameplay.Employees
                         
                         Paper paper = _tableHolder.Take(transform);
 
-                        yield return paper?.transform.DOLocalJump(Vector3.zero, 1, 1, 0.5f)
-                            .AsyncWaitForCompletion().AsUniTask().ToCoroutine();
+                        _resourceCurveMovement.Move(paper,paper.transform.position, () => transform.position, 1f);
 
-                        yield return paper?.transform.DOScale(Vector3.zero, 0.2f).AsyncWaitForCompletion().AsUniTask()
-                            .ToCoroutine();
+                        yield return new WaitUntil(() => paper.MovementCompleted);
 
                         paper?.Destroy();
                         _table.ResourceCreator.Create();

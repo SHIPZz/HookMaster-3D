@@ -25,12 +25,6 @@ namespace CodeBase.Gameplay.ResourceItem
             _collider.enabled = false;
         }
 
-        public void MoveTo(Vector3 target)
-        {
-            transform.DOLocalMove(target, 0.5f).SetEase(Ease.InOutQuint)
-                .OnComplete(() => MovementCompleted = true);
-        }
-
         public virtual void Collect(Transform parent)
         {
             Collected?.Invoke(this);
@@ -57,6 +51,7 @@ namespace CodeBase.Gameplay.ResourceItem
         {
             MovementCompleted = true;
             animationCurveMovement.MovementCompleted -= SetMovementCompletedHandler;
+            Destroy(animationCurveMovement);
         }
     }
 }

@@ -10,6 +10,7 @@ namespace CodeBase.Gameplay.AnimMovement
         
         public override void Move(Resource target, Vector3 startPosition, Func<Vector3> finalPositionProvider, float speed, Action onComplete = null)
         {
+            target.MovementCompleted = false;
             var movement = target.gameObject.AddComponent<AnimationCurveMovement>();
             target.TrackMovementFinish(movement);
             Vector3 finalPosition = finalPositionProvider.Invoke();
